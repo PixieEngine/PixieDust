@@ -13,6 +13,17 @@ Array.prototype.copy = function() {
 };
 
 /**
+* Empties the array of it's contents. It is modified in place.
+*
+* @type Array
+* @returns this, now emptied.
+*/
+Array.prototype.clear = function() {
+  this.length = 0;
+  return this;
+};
+
+/**
 * Invoke the named method on each element in the array
 * and return a new array containing the results of the invocation.
 *
@@ -62,6 +73,17 @@ Array.prototype.remove = function(object) {
   } else {
     return undefined;
   }
+};
+
+/**
+* Returns true if the element is present in the array.
+*
+* @param {Object} element The element to check if present.
+* @returns true if the element is in the array, false otherwise.
+* @type Boolean
+*/
+Array.prototype.include = function(element) {
+  return this.indexOf(element) != -1;
 };
 
 /**
@@ -185,6 +207,20 @@ Array.prototype.partition = function(iterator, context) {
  */
 Array.prototype.select = function(iterator, context) {
   return this.partition(iterator, context)[0];
+};
+
+/**
+ * Return the group of elements that are not in the passed in set.
+ * 
+ * @param {Array} values List of elements to exclude.
+ *
+ * @type Array
+ * @returns An array containing the elements that are not passed in.
+ */
+Array.prototype.without = function(values) {
+  return this.reject(function(element) {
+    return values.include(element);
+  });
 };
 
 /**
@@ -370,6 +406,7 @@ Core = function(I) {
   var self;
   I || (I = {});
   return (self = {
+    I: I,
     /**
     Generates a public jQuery style getter / setter method for each
     String argument.
@@ -432,6 +469,9 @@ Core = function(I) {
         });
       }
       return self;
+    },
+    include: function(Module) {
+      return self.extend(Module(I, self));
     }
   });
 };;
