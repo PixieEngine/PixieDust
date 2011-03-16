@@ -1675,15 +1675,6 @@ function rand(n) {
   }
 }
 ;
-var Random = {
-  often: function(fn) {
-    return rand(3);
-  },
-  
-  sometimes: function() {
-    return !rand(3);
-  }
-};
 
 ;
 String.prototype.constantize = function() {
@@ -1701,6 +1692,19 @@ String.prototype.parse = function() {
     return this;
   }
 };;
+(function($) {
+  return (window.Random = $.extend(window.Random, {
+    angle: function() {
+      return rand() * Math.TAU;
+    },
+    often: function() {
+      return rand(3);
+    },
+    sometimes: function() {
+      return !rand(3);
+    }
+  }));
+})(jQuery);;
 ;
 (function() {
   var Animation, fromPixieId;
@@ -1806,14 +1810,15 @@ String.prototype.parse = function() {
       * @methodOf Bindable#
       *
       * @param {String} event The event to trigger.
+      * @param {Array} [extraParameters] Additional parameters to pass to the event listener.
       */
-      trigger: function(event) {
+      trigger: function(event, extraParameters) {
         var callbacks = eventCallbacks[event];
         
         if(callbacks && callbacks.length) {
           var self = this;
           $.each(callbacks, function(i, callback) {
-            callback(self);
+            callback.apply(self, [self].concat(extraParameters));
           });
         }
       },
