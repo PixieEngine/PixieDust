@@ -41,14 +41,15 @@
       * @methodOf Bindable#
       *
       * @param {String} event The event to trigger.
+      * @param {Array} [extraParameters] Additional parameters to pass to the event listener.
       */
-      trigger: function(event) {
+      trigger: function(event, extraParameters) {
         var callbacks = eventCallbacks[event];
         
         if(callbacks && callbacks.length) {
           var self = this;
           $.each(callbacks, function(i, callback) {
-            callback(self);
+            callback.apply(self, [self].concat(extraParameters));
           });
         }
       },
