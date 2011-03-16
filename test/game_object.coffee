@@ -1,3 +1,3 @@
-test "GameObject", ->
-  ok(GameObject)
+test "GameObject()", ->
+  gameObject = GameObject()
 
