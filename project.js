@@ -857,10 +857,22 @@ $(function() {
   /**
    * @param {Point} p1
    * @param {Point} p2
+   * @type Number
    * @returns The Euclidean distance between two points.
    */
   Point.distance = function(p1, p2) {
     return Math.sqrt(Math.pow(p2.x - p1.x, 2) + Math.pow(p2.y - p1.y, 2));
+  };
+
+  /**
+   * Construct a point on the unit circle for the given angle.
+   *
+   * @param {Number} angle The angle in radians
+   * @type Point
+   * @returns The point on the unit circle.
+   */
+  Point.fromAngle = function(angle) {
+    return Point(Math.cos(angle), Math.sin(angle));
   };
 
   /**
@@ -876,7 +888,7 @@ $(function() {
       p2.y - p1.y,
       p2.x - p1.x
     );
-  }
+  };
 
   /**
    * <pre>
