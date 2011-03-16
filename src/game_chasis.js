@@ -185,8 +185,6 @@
     
     var canvas = $("canvas").powerCanvas();
     
-    canvas.font("bold 1em consolas, 'Courier New', 'andale mono', 'lucida console', monospace");
-    
     Game.canvas = canvas;
   });
 }(jQuery));
