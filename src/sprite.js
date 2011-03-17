@@ -69,11 +69,16 @@
   };
   
   window.Sprite = function(name, callback) {
-    var id = App.Sprites[name];
-    if(id) {
-      return fromPixieId(id, callback);
+    if(App.Sprites) {
+      var id = App.Sprites[name];
+      if(id) {
+        return fromPixieId(id, callback);
+      } else {
+        warn("Could not find sprite named: '" + name + "' in App.");
+      }
     } else {
-      warn("Could not find sprite named: '" + name + "' in App.");
+      // Treat name as URL
+      return Sprite.fromURL(name, callback);
     }
   };
   window.Sprite.EMPTY = window.Sprite.NONE = LoaderProxy();
