@@ -2628,7 +2628,7 @@ Movable = function(I) {
     velocity: Point(0, 0)
   });
   I.acceleration = Point(I.acceleration.x, I.acceleration.y);
-  I.velocity = Point(I.acceleration.x, I.acceleration.y);
+  I.velocity = Point(I.velocity.x, I.velocity.y);
   return {
     before: {
       update: function() {
