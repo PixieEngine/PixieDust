@@ -2151,6 +2151,16 @@ object.
 */
 Drawable = function(I) {
   I || (I = {});
+  $.reverseMerge(I, {
+    color: "#196",
+    spriteName: null
+  });
+  if (I.spriteName) {
+    I.sprite = Sprite(I.spriteName, function(sprite) {
+      I.width = sprite.width;
+      return (I.height = sprite.height);
+    });
+  }
   return {
     /**
     Draw this object on the canvas. It uses the x and y instance attributes to position
@@ -2460,10 +2470,8 @@ GameObject = function(I) {
   $.reverseMerge(I, {
     age: 0,
     active: true,
-    color: "#880",
     created: false,
     destroyed: false,
-    spriteName: null,
     x: 0,
     y: 0,
     width: 8,
@@ -2472,12 +2480,6 @@ GameObject = function(I) {
     includedModules: [],
     excludedModules: []
   });
-  if (I.spriteName) {
-    I.sprite = Sprite(I.spriteName, function(sprite) {
-      I.width = sprite.width;
-      return (I.height = sprite.height);
-    });
-  }
   self = Core(I).extend({
     update: function() {
       I.age += 1;
@@ -2791,11 +2793,16 @@ SpeechBox = function(I) {
   };
   
   window.Sprite = function(name, callback) {
-    var id = App.Sprites[name];
-    if(id) {
-      return fromPixieId(id, callback);
+    if(App.Sprites) {
+      var id = App.Sprites[name];
+      if(id) {
+        return fromPixieId(id, callback);
+      } else {
+        warn("Could not find sprite named: '" + name + "' in App.");
+      }
     } else {
-      warn("Could not find sprite named: '" + name + "' in App.");
+      // Treat name as URL
+      return Sprite.fromURL(name, callback);
     }
   };
   window.Sprite.EMPTY = window.Sprite.NONE = LoaderProxy();
