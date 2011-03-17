@@ -78,7 +78,7 @@
       }
     } else {
       // Treat name as URL
-      return Sprite.load(name, callback);
+      return window.Sprite.fromURL(name, callback);
     }
   };
   window.Sprite.EMPTY = window.Sprite.NONE = LoaderProxy();
