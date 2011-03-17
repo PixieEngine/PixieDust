@@ -8,6 +8,16 @@ object.
 ###
 Drawable = (I) ->
   I ||= {}
+  
+  $.reverseMerge I,
+    color: "#196"
+    spriteName: null
+  
+  if I.spriteName
+    I.sprite = Sprite(I.spriteName, (sprite) ->
+      I.width = sprite.width
+      I.height = sprite.height
+    )
 
   ###
   Draw this object on the canvas. It uses the x and y instance attributes to position
