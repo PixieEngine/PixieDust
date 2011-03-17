@@ -6,7 +6,7 @@ Movable = (I) ->
   # Force acceleration and velocity to be Points
   # Useful when reloading data from JSON
   I.acceleration = Point(I.acceleration.x, I.acceleration.y)
-  I.velocity = Point(I.acceleration.x, I.acceleration.y)
+  I.velocity = Point(I.velocity.x, I.velocity.y)
 
   before:
     update: () ->
