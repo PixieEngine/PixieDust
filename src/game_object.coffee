@@ -4,10 +4,8 @@ GameObject = (I) ->
   $.reverseMerge I,
     age: 0
     active: true
-    color: "#880"
     created: false
     destroyed: false
-    spriteName: null
     x: 0
     y: 0
     width: 8
@@ -15,14 +13,7 @@ GameObject = (I) ->
     solid: false
     includedModules: []
     excludedModules: []
-    
-    
-  if I.spriteName
-    I.sprite = Sprite(I.spriteName, (sprite) ->
-      I.width = sprite.width
-      I.height = sprite.height
-    )
-    
+
   self = Core(I).extend
     update: ->
       I.age += 1
