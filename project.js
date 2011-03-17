@@ -2519,6 +2519,9 @@ GameObject = function(I) {
     return ((I.x <= event.offsetX) && (event.offsetX <= I.x + I.width)) && ((I.y <= event.offsetY) && (event.offsetY <= I.y + I.height)) ? self.trigger('click') : null;
   });
   return self;
+};
+GameObject.construct = function(entityData) {
+  return entityData["class"] ? entityData["class"].constantize()(entityData) : GameObject(entityData);
 };;
 var GameUtil;
 GameUtil = {
@@ -2624,6 +2627,8 @@ Movable = function(I) {
     acceleration: Point(0, 0),
     velocity: Point(0, 0)
   });
+  I.acceleration = Point(I.acceleration.x, I.acceleration.y);
+  I.velocity = Point(I.acceleration.x, I.acceleration.y);
   return {
     before: {
       update: function() {
