@@ -73,3 +73,9 @@ GameObject = (I) ->
   
   self
 
+GameObject.construct = (entityData) ->
+  if entityData.class
+    entityData.class.constantize()(entityData)
+  else
+    GameObject(entityData)
+
