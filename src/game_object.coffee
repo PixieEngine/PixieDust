@@ -16,10 +16,9 @@ GameObject = (I) ->
 
   self = Core(I).extend
     update: ->
-      I.age += 1
-      
       self.trigger('step')
-      
+      I.age += 1
+
       I.active
       
     draw: $.noop
