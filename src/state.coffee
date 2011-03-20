@@ -1,9 +1,4 @@
-StateMachine = (I, self) ->
-  I ||= {}
-      
-  transition: (state) ->
-     
-   
+StateMachine = (name, object, options, block) ->
   return Machine(name, object, options, block)
  
 Callback = (options, machine, block) ->
