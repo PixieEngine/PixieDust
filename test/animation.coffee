@@ -5,6 +5,7 @@ asyncTest "Animation should default to first frame", ->
   
   setTimeout ->
     equals animation.currentSprite(), 0
+    
     animation.update()
     
     equals animation.currentSprite(), 1
