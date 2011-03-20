@@ -4,7 +4,7 @@ asyncTest "Animation should default to first frame", ->
   milliseconds = 300
   
   setTimeout ->
-    equals animation.active(), 0
+    equals animation.active().frames[0], 0
 
     start()
   , milliseconds
