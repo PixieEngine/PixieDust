@@ -14,9 +14,7 @@
     $.extend data,
       draw: (canvas, x, y) ->
         canvas.withTransform Matrix.translation(x, y), () ->
-          data.animations.each (animation) ->
-            if activeAnimation == animation
-              spriteLookup[currentSprite].draw(canvas, 0, 0)
+          spriteLookup[currentSprite].draw(canvas, 0, 0)
                     
       update: ->
         advanceFrame(activeAnimation)
