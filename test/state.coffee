@@ -11,9 +11,8 @@ test "States transition method should change the current state", ->
   
 test "State should transition to a different state after current state finishes", ->
   animation = GameObject
-    initialState: 'stand'
+    initialState: 'run'
     
-  animation.transition('run')
   animation.update()
   animation.update()
   animation.update()
