@@ -10,7 +10,7 @@ test "States transition method should change the current state", ->
   
 test "State should transition to a different state after current state finishes", ->
   animation = GameObject
-    initialState: 'run'
+    initialState: 'stand'
     
   animation.include(StateMachine)
     
