@@ -1,4 +1,4 @@
-asyncTest "Animation should default to first frame", ->
+asyncTest "Animation should set proper frame", ->
   animation = Animation.fromPixieId 45
   
   milliseconds = 300
