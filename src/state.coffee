@@ -2,8 +2,7 @@ StateMachine = () ->
   currentState = null
   initialState = null
         
-  self = GameObject().extend      
-            
+  self = GameObject().extend  
     defaultState: () ->
       return initialState    
         
