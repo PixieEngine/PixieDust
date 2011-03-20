@@ -1,5 +1,12 @@
 test "Animation should default to first frame", ->
-  animation = GameObject
+  data = 
+    "animations": [
+      "name": "first animation"
+      "speed": "110"
+      "frames": [0,1,2]
+    ]
+
+  animation = Animation
     initialState: 'stand'
   
   animation.include(StateMachine)
