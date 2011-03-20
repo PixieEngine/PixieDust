@@ -31,6 +31,8 @@ test "State should repeat default state", ->
     
   equals animation.currentState(), 'stand'
   
+
+  
 ###
     
   
