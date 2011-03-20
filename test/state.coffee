@@ -23,6 +23,8 @@ test "State should transition to a different state after current state finishes"
 test "State should repeat default state", ->
   animation = GameObject
     defaultState: 'stand'
+    
+  animation.include(StateMachine)
   
   equals animation.currentState(), animation.defaultState()
   
