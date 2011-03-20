@@ -11,9 +11,7 @@ asyncTest "Active Animation", ->
   milliseconds = 2000
   
   setTimeout ->
-    engine.pause()
-    age = engine.age()
-    ok(64 <= age <= 68, "Engine ran #{age} steps in #{milliseconds}ms")
+    ok(animation.active(), "")
 
     start()
   , milliseconds
