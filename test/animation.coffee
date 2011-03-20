@@ -6,7 +6,7 @@ test "Animation should default to first frame", ->
       "frames": [0,1,2]
     ]
 
-  animation = Animation
+  animation = Animation(data)
     initialState: 'stand'
   
   animation.include(StateMachine)
