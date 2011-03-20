@@ -24,12 +24,12 @@ test "State should repeat default state", ->
   animation = GameObject
     defaultState: 'stand'
   
-  equals animation.currentState(), 'stand'
+  equals animation.currentState(), animation.defaultState()
   
   100.times ->  
     animation.update()
     
-  equals animation.currentState(), 'stand' 
+  equals animation.currentState(), animation.defaultState() 
 ###
     
   
