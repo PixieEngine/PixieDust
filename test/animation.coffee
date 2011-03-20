@@ -11,7 +11,7 @@ asyncTest "Active Animation", ->
   milliseconds = 300
   
   setTimeout ->
-    ok(animation.active(), "")
+    ok(animation.active, "")
 
     start()
   , milliseconds
