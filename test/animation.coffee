@@ -1,6 +1,6 @@
-data = `{"version":"1.3","tileset":[{"id":8838,"src":"http://dev.pixie.strd6.com/sprites/8838/original.png?1290379938","title":"2x4","circles":[{"x":8,"y":2,"radius":7},{"x":-9,"y":4,"radius":7}]},{"id":8837,"src":"http://dev.pixie.strd6.com/sprites/8837/original.png?1290379639","title":"broken wood","circles":[{"x":0,"y":0,"radius":15}]},{"id":8834,"src":"http://dev.pixie.strd6.com/sprites/8834/original.png?1290378653","title":"barrel","circles":[{"x":-1,"y":1,"radius":13}]},{"id":8836,"src":"http://dev.pixie.strd6.com/sprites/8836/original.png?1290379210","title":"brick","circles":[{"x":0,"y":0,"radius":4}]},{"id":8835,"src":"http://dev.pixie.strd6.com/sprites/8835/original.png?1290379155","title":"brick pile","circles":[{"x":0,"y":2,"radius":8}]},{"id":7223,"src":"http://dev.pixie.strd6.com/sprites/7223/original.png?1280973125","title":"Sprite 7223","circles":[{"x":-2,"y":-2,"radius":9}]},{"id":7224,"src":"http://dev.pixie.strd6.com/sprites/7224/original.png?1280973124","title":"Sprite 7224","circles":[{"x":-1,"y":-2,"radius":7}]},{"id":7225,"src":"http://dev.pixie.strd6.com/sprites/7225/original.png?1280973123","title":"Sprite 7225","circles":[{"x":-2,"y":-2,"radius":7}]},{"id":7228,"src":"http://dev.pixie.strd6.com/sprites/7228/original.png?1280973118","title":"Sprite 7228","circles":[{"x":-3,"y":-2,"radius":7}]},{"id":7229,"src":"http://dev.pixie.strd6.com/sprites/7229/original.png?1280973117","title":"Sprite 7229","circles":[{"x":-2,"y":-1,"radius":10}]},{"id":7231,"src":"http://dev.pixie.strd6.com/sprites/7231/original.png?1280973115","title":"Sprite 7231","circles":[{"x":-2,"y":-1,"radius":10}]},{"id":7233,"src":"http://dev.pixie.strd6.com/sprites/7233/original.png?1280973109","title":"Sprite 7233","circles":[{"x":-2,"y":-2,"radius":10}]}],"animations":[{"name":"Barrel","speed":"110","frames":[0,1,2]},{"name":"Brick","speed":"110","frames":[3,4]},{"name":"Poison","speed":"110","frames":[5,6,7,8,9,10,11]}]}`
- 
 test "Animation should default to first frame", ->
-  animation = Animation(data)
+  animation = Animation.fromPixieId 45
   
-  equals animation.active(), 5
+  log animation
+  
+  equals animation.active(), 0
