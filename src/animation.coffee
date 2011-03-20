@@ -12,6 +12,7 @@
       spriteLookup[i] = Sprite.fromURL(spriteData.src)
     
     $.extend data,
+      currentSprite: return currentSprite
       draw: (canvas, x, y) ->
         canvas.withTransform Matrix.translation(x, y), () ->
           spriteLookup[currentSprite].draw(canvas, 0, 0)
