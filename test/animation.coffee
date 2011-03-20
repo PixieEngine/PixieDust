@@ -5,7 +5,7 @@ asyncTest "Animation should default to first frame", ->
   milliseconds = 300
   
   setTimeout ->
-    equals animation.active().frames[0], 0
+    equals animation.active().currentSprite(), 0
 
     start()
   , milliseconds
@@ -19,7 +19,7 @@ asyncTest "Animation should increment frame on update", ->
   setTimeout ->
     animation.update()
     
-    equals animation.active().frames[0], 1
+    equals animation.active().currentSprite(), 1
 
     start()
   , milliseconds
