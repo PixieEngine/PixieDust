@@ -12,3 +12,6 @@ StateMachine = (I, self) ->
       return self
     else
       return I.currentState   
+      
+  transition: (toState) ->
+    currentState = toState
