@@ -1,5 +1,5 @@
 ###
-test "State events should transition properly", ->
+test "States transition method should change the current state", ->
   animation = GameObject
     initialState: 'stand'
   
@@ -19,6 +19,8 @@ test "State should transition to a different state after current state finishes"
   animation.update()
   
   equals animation.currentState(), "stand"
+  
+test ""
 ###
     
   
