@@ -3,9 +3,9 @@ test "Animation should default to first frame", ->
     "animations": [
       "name": "first animation"
       "speed": "110"
-      "frames": [0,1,2]
+      "frames": [5,1,2]
     ]
 
   animation = Animation(data)
   
-  equals animation.currentState(), "run"
+  equals animation.active(), 5
