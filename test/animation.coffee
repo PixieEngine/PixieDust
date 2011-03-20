@@ -17,8 +17,6 @@ asyncTest "Animation should increment frame on update", ->
   milliseconds = 300
   
   setTimeout ->
-    animation.update()
-    
     equals animation.frames[0], 1
 
     start()
