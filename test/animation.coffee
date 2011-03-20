@@ -5,7 +5,7 @@ test "Animation should default to first frame", ->
   equals animation.active(), 0      
 ### 
 
-asyncTest "Active Animation", ->
+asyncTest "Animation has active property", ->
   animation = Animation.fromPixieId 45
   
   milliseconds = 300
