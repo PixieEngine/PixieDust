@@ -8,3 +8,14 @@ asyncTest "Animation should default to first frame", ->
 
     start()
   , milliseconds
+  
+asyncTest "Animation should increment frame on update", ->
+  animation = Animation.fromPixieId 45
+  
+  milliseconds = 300
+  
+  setTimeout ->
+    equals animation.update().frames[0], 1
+
+    start()
+  , milliseconds
