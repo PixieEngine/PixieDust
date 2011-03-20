@@ -29,10 +29,7 @@ test "State should repeat default state", ->
   100.times ->  
     animation.update()
     
-  equals animation.currentState(), 'stand'
-  
-
-  
+  equals animation.currentState(), 'stand' 
 ###
     
   
