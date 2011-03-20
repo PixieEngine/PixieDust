@@ -23,10 +23,8 @@
             
       active: (name) ->
         if (name != undefined)
-          data.animations.each (animation) ->
-            if (name == animation.name)
-              currentSprite = animation.frames[0]
-              activeAnimation = animation
+          if data.animations[name]
+            currentSprite = data.animations[name].frames[0]
         else
           return activeAnimation
         
