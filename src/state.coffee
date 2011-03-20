@@ -9,6 +9,12 @@ StateMachine = (I, self)
     defaultState: I.initialState
     
   self = GameObject.extend
-    currentState =    
+    currentState = (val) ->
+      if val != undefined
+        I.currentState = val
+        
+        return self
+      else
+        return I.currentState   
   
   self
