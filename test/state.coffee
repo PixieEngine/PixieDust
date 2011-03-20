@@ -8,7 +8,7 @@ test "State events should transition properly", ->
     
   equals animation.currentState(), "run"
   
-test "", ->
+test "State should transition to a different state after current state finishes", ->
   animation = GameObject
     initialState: 'stand'
     
