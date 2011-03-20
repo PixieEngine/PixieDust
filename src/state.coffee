@@ -1,4 +1,4 @@
-StateMachine = (I, self)
+StateMachine = (I, self) ->
   I ||= {}
   
   $.reverseMerge I,
