@@ -8,7 +8,7 @@ test "Animation should default to first frame", ->
 asyncTest "Active Animation", ->
   animation = Animation.fromPixieId 45
   
-  milliseconds = 2000
+  milliseconds = 200
   
   setTimeout ->
     ok(animation.active(), "")
