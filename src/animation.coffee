@@ -22,7 +22,7 @@
       active: (name) ->
         if (name != undefined)
           if data.animations[name]
-            currentSprite = data.animations[name].frames[0]
+            currentSprite = data.animations[name].frames[0] 
         else
           return activeAnimation
         
