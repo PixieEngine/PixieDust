@@ -4,3 +4,8 @@ StateMachine = (I, self)
   $.reverseMerge I,
     initialState: null
     defaultState: null
+    
+  self = GameObject.extend
+        
+  
+  self
