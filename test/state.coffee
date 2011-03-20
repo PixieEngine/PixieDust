@@ -9,6 +9,14 @@ test "State events should transition properly", ->
   equals animation.currentState(), "run"
   
 test "", ->
-  animation = Core
+  animation = GameObject
+    initialState: 'stand'
+    
+  animation.transition('run')
+  animation.update()
+  animation.update()
+  animation.update()
+  
+  equals animation.currentState(), "stand"
     
   
