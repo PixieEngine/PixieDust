@@ -14,7 +14,7 @@ test "State should transition to a different state after current state finishes"
     
   animation.include(StateMachine)
   
-  log animation
+  log animation()
     
   animation.update()
   animation.update()
