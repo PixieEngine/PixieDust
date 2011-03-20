@@ -1,4 +1,4 @@
-test "State events should check if event can be fired", ->
+test "State events should transition properly", ->
   animation = Core
     initialState: 'stand'
     
