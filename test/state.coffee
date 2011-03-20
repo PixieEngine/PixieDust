@@ -20,7 +20,17 @@ test "State should transition to a different state after current state finishes"
   
   equals animation.currentState(), "stand"
   
-test ""
+test "State should repeat default state", ->
+  animation = GameObject
+    defaultState: 'stand'
+  
+  equals animation.currentState(), 'stand'
+  
+  100.times ->  
+    animation.update()
+    
+  equals animation.currentState(), 'stand'
+  
 ###
     
   
