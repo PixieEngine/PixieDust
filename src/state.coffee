@@ -7,7 +7,7 @@ StateMachine = () ->
       return initialState    
         
     transition: (toState) ->
-      return currentState = toState
+      currentState.trigger(toState)
     
   self.attrAccessor('currentState') 
     
