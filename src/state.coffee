@@ -5,7 +5,7 @@ StateMachine = (I, self) ->
     currentState: null
     initialState: null
         
-  self = GameObject.extend
+  self = GameObject(I).extend
     currentState = (val) ->
       if val != undefined
         I.currentState = val
