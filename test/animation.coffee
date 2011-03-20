@@ -4,6 +4,8 @@ test "Animation should default to first frame", ->
   timeoutId = setTimeout(checkActiveProperty, 5)
   
   checkActiveProperty = (animation) ->
-    clearTimeout(timeoutId) if animation.active
-  
-  equals animation.active(), 0
+    if animation.active
+      equals animation.active(), 0      
+      clearTimeout(timeoutId) 
+    
+
