@@ -4,11 +4,11 @@ StateMachine = () ->
         
   self = GameObject().extend      
             
-  defaultState: () ->
-    return I.initialState    
-      
-  transition: (toState) ->
-    return currentState = toState
+    defaultState: () ->
+      return I.initialState    
+        
+    transition: (toState) ->
+      return currentState = toState
     
   self.attrAccessor('currentState') 
     
