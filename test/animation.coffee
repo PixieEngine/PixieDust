@@ -3,13 +3,13 @@ test "Animation should default to first frame", ->
    
   equals animation.active(), 0      
 
-asyncTest "Animation has active property", ->
+asyncTest "Animation should default to first frame", ->
   animation = Animation.fromPixieId 45
   
   milliseconds = 300
   
   setTimeout ->
-    ok(animation.active, "Animation has active property")
+    equals(animation.active(), 0)
 
     start()
   , milliseconds
