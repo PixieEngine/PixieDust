@@ -5,7 +5,7 @@ StateMachine = () ->
   self = GameObject().extend      
             
     defaultState: () ->
-      return I.initialState    
+      return initialState    
         
     transition: (toState) ->
       return currentState = toState
