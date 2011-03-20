@@ -12,6 +12,8 @@ test "State should transition to a different state after current state finishes"
   animation = GameObject
     initialState: 'run'
     
+  animation.include(StateMachine)
+    
   animation.update()
   animation.update()
   animation.update()
