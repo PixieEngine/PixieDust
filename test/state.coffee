@@ -1,3 +1,4 @@
+###
 test "States transition method should change the current state", ->
   animation = GameObject
     initialState: 'stand'
@@ -32,4 +33,4 @@ test "State should repeat default state", ->
     animation.update()
     
   equals animation.currentState(), animation.defaultState() 
-  
+###
