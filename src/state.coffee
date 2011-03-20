@@ -1,20 +1,15 @@
-StateMachine = (I, self) ->
-  I ||= {}
-  
-  $.reverseMerge I,
-    currentState: null
-    initialState: null
+StateMachine = () ->
+  currentState = null
+  initialState = null
         
-  currentState: (val) ->
-    if val != undefined
-      I.currentState = val
-      
-      return self
-    else
-      return I.currentState 
-    
+  self = GameObject().extend      
+            
   defaultState: () ->
     return I.initialState    
       
   transition: (toState) ->
     return currentState = toState
+    
+  self.attrAccessor('currentState') 
+    
+  return self
