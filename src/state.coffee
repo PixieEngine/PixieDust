@@ -5,7 +5,6 @@ StateMachine = (I, self) ->
     currentState: null
     initialState: null
         
-
   currentState: (val) ->
     if val != undefined
       I.currentState = val
