@@ -11,7 +11,10 @@ StateMachine = (I, self) ->
       
       return self
     else
-      return I.currentState   
+      return I.currentState 
+    
+  defaultState: () ->
+    return I.initialState    
       
   transition: (toState) ->
-    currentState = toState
+    return currentState = toState
