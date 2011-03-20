@@ -8,3 +8,5 @@ test "State events should transition properly", ->
   animation.transition('run')
     
   equals animation.currentState(), "run"
+  
+  
