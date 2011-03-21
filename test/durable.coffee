@@ -9,9 +9,9 @@ test "Durable objects become inactive after their duration", ->
   5.times ->
     active = obj.update()
     
-  equals active, true, "object is active until duration is exceeded"
+  equals obj.I.active, true, "object is active until duration is exceeded"
   
   6.times ->
     active = obj.update()
 
-  equals active, false, "object is inactive after duration"
+  equals obj.I.active, false, "object is inactive after duration"
