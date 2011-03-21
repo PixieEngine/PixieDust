@@ -6,7 +6,7 @@ test "Durable objects become inactive after their duration", ->
   
   active = null
   
-  5.times ->
+  6.times ->
     active = obj.update()
 
   equals active, false
