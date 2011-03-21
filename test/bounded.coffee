@@ -48,7 +48,6 @@ test "Bounds correct center point", ->
   obj.include(Bounded)
   bounds = obj.center()
 
-  equals bounds.x, 0
-  equals bounds.y, 30
+  ok bounds.equal(Point(-5 + (10 / 2), 20 + (60 / 2)))
 
 
