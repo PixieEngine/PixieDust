@@ -1,6 +1,6 @@
 test "Rotatable objects update their rotation", ->
   obj = GameObject
-    duration: 5
+    rotationalVelocity: Math.TAU / 4
   
   obj.include(Durable)
    
