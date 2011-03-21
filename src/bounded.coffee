@@ -11,8 +11,8 @@ Bounded = (I) ->
   I ||= {}
 
   ###*
-  The bounds method returns infomation about
-  the location of the object and its dimensions
+  The bounds method returns infomation about the location 
+  of the object, its dimensions with optional offsets
   
   @name bounds
   @methodOf Bounded#
