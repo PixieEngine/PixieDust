@@ -22,7 +22,7 @@ test "Bounds returns correct centered x, y, width, height", ->
   obj.include(Bounded)
   bounds = obj.centeredBounds()
 
-  equals bounds.x, 0
+  equals bounds.x, (-5 / 2) + (100 / 2)
   equals bounds.y, 30
 
 test "Bounds returns correct x, y when called with offset", ->
