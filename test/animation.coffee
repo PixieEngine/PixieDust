@@ -1,7 +1,7 @@
 asyncTest "Animation should set proper frame", ->
   animation = Animation.fromPixieId 45
   
-  milliseconds = 600
+  milliseconds = 300
   
   setTimeout ->
     equals animation.currentSprite(), animation.frames()[0], "Animation should default to initial sprite"
