@@ -46,8 +46,4 @@
     return proxy
     
   window.Animation.fromPixieId = fromPixieId
-  
-  window.Animation.load = (options) ->
-    if options.pixieId
-      fromPixieId options.pixieId, options.complete
 )()
