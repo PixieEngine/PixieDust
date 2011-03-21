@@ -13,8 +13,8 @@ Bounded = (I) ->
   ###*
   The bind method adds a function as an event listener.
   
-  @name bind
-  @methodOf Bindable#
+  @name bounds
+  @methodOf Bounded#
   
   @param {String} event The event to listen to.
   @param {Function} callback The function to be called when the specified event
