@@ -11,7 +11,8 @@ Bounded = (I) ->
   I ||= {}
 
   ###*
-  The bind method adds a function as an event listener.
+  The bounds method returns infomation about
+  the location of the object and its dimensions
   
   @name bounds
   @methodOf Bounded#
