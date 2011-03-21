@@ -7,4 +7,5 @@ test "Bounds should give correct offset position", ->
   
   obj.include(Bounded)
 
+  equals obj.bounds().x, 5
 
