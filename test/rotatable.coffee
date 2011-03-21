@@ -5,7 +5,7 @@ test "Rotatable objects update their rotation", ->
   
   obj.include(Rotatable)
   
-  equals obj.I.rotation, Math.PI / 6, "Default rotation value is Math.PI / 6"
+  equals obj.I.rotation, Math.PI / 6, "Respects default rotation value"
    
   2.times ->
     obj.update()
