@@ -16,6 +16,8 @@
       draw: (canvas, x, y) ->
         canvas.withTransform Matrix.translation(x, y), () ->
           spriteLookup[currentSprite].draw(canvas, 0, 0)
+          
+      frames: -> return data.activeAnimation.frames
                     
       update: ->
         advanceFrame(activeAnimation)
