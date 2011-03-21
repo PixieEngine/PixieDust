@@ -10,6 +10,16 @@ Bounded module
 Bounded = (I) ->
   I ||= {}
 
+  ###*
+  The bind method adds a function as an event listener.
+  
+  @name bind
+  @methodOf Bindable#
+  
+  @param {String} event The event to listen to.
+  @param {Function} callback The function to be called when the specified event
+  is triggered.
+  ### 
   bounds: (xOffset, yOffset) ->
     x: I.x + (xOffset || 0)
     y: I.y + (yOffset || 0)
