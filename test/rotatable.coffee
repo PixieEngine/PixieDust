@@ -10,9 +10,9 @@ test "Rotatable objects update their rotation", ->
   2.times ->
     obj.update()
     
-  equals obj.I.rotation, Math.PI / 2
+  equals obj.I.rotation, Math.PI / 2 + Math.PI / 6
   
   4.times ->
     obj.update()
 
-  equals obj.I.rotation, (3 / 2) * Math.PI
+  equals obj.I.rotation, (3 / 2) * Math.PI + Math.PI / 6
