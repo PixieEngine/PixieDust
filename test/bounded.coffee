@@ -1,4 +1,4 @@
-test "Bounds returns correct x, y, width, height", ->
+test "Bounds#bounds returns correct x, y, width, height", ->
   obj = GameObject
     x: 5
     y: 10
