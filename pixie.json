@@ -2,7 +2,7 @@
   "author": "STRd6",
   "name": "gamelib",
   "libs": {
-    "corelib.js": "https://github.com/STRd6/corelib/raw/v0.0.3/corelib.js"
+    "corelib.js": "https://github.com/STRd6/corelib/raw/v0.0.4/corelib.js"
   },
   "directories": {
     "lib": "lib",
