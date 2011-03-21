@@ -1,4 +1,4 @@
-test "Bounds should give correct offset position", ->
+test "Bounds", ->
   obj = GameObject
     x: 5
     y: 10
@@ -7,5 +7,8 @@ test "Bounds should give correct offset position", ->
   
   obj.include(Bounded)
 
-  equals obj.bounds().x, 5
+  equals obj.bounds().x, 5, "returns correct x, y, width, height"
+  equals obj.bounds().y, 10
+  equals obj.bounds().width, 50
+  equals obj.bounds().height, 100
 
