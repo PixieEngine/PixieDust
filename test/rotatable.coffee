@@ -4,12 +4,12 @@ test "Rotatable objects update their rotation", ->
   
   obj.include(Durable)
    
-  5.times ->
+  2.times ->
     obj.update()
     
-  equals obj.I.active, true, "object is active until duration is exceeded"
+  equals obj.I.rotation, Math.TAU / 2
   
-  6.times ->
+  4.times ->
     obj.update()
 
-  equals obj.I.active, false, "object is inactive after duration"
+  equals obj.I.rotation, (3 / 2) * Math.TAU
