@@ -16,7 +16,8 @@ Bounded = (I) ->
   @name bounds
   @methodOf Bounded#
   
-  @param {String} event The event to listen to.
+  @param {number} xOffset the amount 
+  @param {number} yOffset 
   @param {Function} callback The function to be called when the specified event
   is triggered.
   ### 
