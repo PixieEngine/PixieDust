@@ -19,8 +19,7 @@
           
       frames: -> return activeAnimation.frames
                     
-      update: ->
-        advanceFrame(activeAnimation)
+      update: -> return advanceFrame(activeAnimation)
             
       active: (name) ->
         if (name != undefined)
