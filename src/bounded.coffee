@@ -12,7 +12,7 @@ Bounded = (I) ->
 
   ###*
   The bounds method returns infomation about the location 
-  of the object, its dimensions with optional offsets
+  of the object and its dimensions with optional offsets
   
   @name bounds
   @methodOf Bounded#
@@ -26,12 +26,26 @@ Bounded = (I) ->
     width: I.width
     height: I.height
 
+  ###*
+  The centeredBounds method returns infomation about the center
+  of the object along with the midpoint of the width and height
+  
+  @name centeredBounds
+  @methodOf Bounded#
+  ###  
   centeredBounds: () ->
     x: I.x + I.width/2
     y: I.y + I.height/2
     xw: I.width/2
     yw: I.height/2
 
+  ###*
+  The center method returns the {@link Point} that is
+  the center of the object
+  
+  @name center
+  @methodOf Bounded#
+  ###  
   center: () ->
     Point(I.x + I.width/2, I.y + I.height/2)
 
