@@ -16,10 +16,8 @@ Bounded = (I) ->
   @name bounds
   @methodOf Bounded#
   
-  @param {number} xOffset the amount 
-  @param {number} yOffset 
-  @param {Function} callback The function to be called when the specified event
-  is triggered.
+  @param {number} xOffset the amount to shift the x position 
+  @param {number} yOffset the amount to shift the y position
   ### 
   bounds: (xOffset, yOffset) ->
     x: I.x + (xOffset || 0)
