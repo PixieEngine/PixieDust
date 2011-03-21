@@ -3,7 +3,8 @@ test "Durable objects become inactive after their duration", ->
     duration: 5
   
   obj.include(Durable)
-  bounds = obj.bounds(5, 10)
+  
+  5.times ->
+    obj.update()
 
-  equals bounds.x, 0
-  equals bounds.y, 30
+  equals obj.active(), false
