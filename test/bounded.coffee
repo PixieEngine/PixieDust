@@ -18,7 +18,8 @@ test "Bounds returns correct x, y when called with offset", ->
     y: 20
   
   obj.include(Bounded)
+  bounds = obj.bounds(5, 10)
 
-  equals obj.bounds(2, 5).x, 5
-  equals obj.bounds().y, 10
+  equals bounds.x, 0
+  equals bounds.y, 30
 
