@@ -4,7 +4,9 @@ test "Durable objects become inactive after their duration", ->
   
   obj.include(Durable)
   
+  active = null
+  
   5.times ->
-    obj.update()
+    active = obj.update()
 
-  equals obj.active(), false
+  equals active, false
