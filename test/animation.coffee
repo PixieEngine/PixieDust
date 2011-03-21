@@ -4,6 +4,8 @@ asyncTest "Animation should set proper frame", ->
   milliseconds = 300
   
   setTimeout ->
+    log animation
+  
     equals animation.currentSprite(), animation.frames()[0], "Animation should default to initial sprite"
     
     animation.update()
