@@ -3,6 +3,8 @@ test "Rotatable objects update their rotation", ->
     rotationalVelocity: Math.PI / 4
   
   obj.include(Rotatable)
+  
+  equals obj.I.rotation, 0, "Default rotation value is 0"
    
   2.times ->
     obj.update()
