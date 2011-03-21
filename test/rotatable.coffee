@@ -1,15 +1,15 @@
 test "Rotatable objects update their rotation", ->
   obj = GameObject
-    rotationalVelocity: Math.TAU / 4
+    rotationalVelocity: Math.PI / 4
   
-  obj.include(Durable)
+  obj.include(Rotatable)
    
   2.times ->
     obj.update()
     
-  equals obj.I.rotation, Math.TAU / 2
+  equals obj.I.rotation, Math.PI / 2
   
   4.times ->
     obj.update()
 
-  equals obj.I.rotation, (3 / 2) * Math.TAU
+  equals obj.I.rotation, (3 / 2) * Math.PI
