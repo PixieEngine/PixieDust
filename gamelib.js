@@ -1849,7 +1849,8 @@ Bounded = function(I) {
   I || (I = {});
   return {
     /***
-    The bind method adds a function as an event listener.
+    The bounds method returns infomation about the location
+    of the object and its dimensions with optional offsets
 
     @name bounds
     @methodOf Bounded#
@@ -1865,6 +1866,13 @@ Bounded = function(I) {
         height: I.height
       };
     },
+    /***
+    The centeredBounds method returns infomation about the center
+    of the object along with the midpoint of the width and height
+
+    @name centeredBounds
+    @methodOf Bounded#
+    */
     centeredBounds: function() {
       return {
         x: I.x + I.width / 2,
@@ -1873,6 +1881,13 @@ Bounded = function(I) {
         yw: I.height / 2
       };
     },
+    /***
+    The center method returns the {@link Point} that is
+    the center of the object
+
+    @name center
+    @methodOf Bounded#
+    */
     center: function() {
       return Point(I.x + I.width / 2, I.y + I.height / 2);
     }
