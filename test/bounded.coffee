@@ -22,8 +22,8 @@ test "Bounds returns correct centered x, y, width, height", ->
   obj.include(Bounded)
   bounds = obj.centeredBounds()
 
-  equals bounds.x, (-5 / 2) + (100 / 2)
-  equals bounds.y, (20 / 2) + (200 / 2)
+  equals bounds.x, -5 + (100 / 2)
+  equals bounds.y, 20 + (200 / 2)
 
 test "Bounds returns correct x, y when called with offset", ->
   obj = GameObject
