@@ -9,6 +9,11 @@ asyncTest "Animation should set proper frame", ->
     animation.update()
     
     equals animation.currentSprite(), 1, "After an update the currentSprite has advanced"
+    
+    9.times ->
+      animation.update()
+      
+    equals animation.currentSprite(), 0, "Animation should loop after it reaches the end"
 
     start()
   , milliseconds
