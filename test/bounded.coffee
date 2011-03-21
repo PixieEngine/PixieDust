@@ -27,7 +27,7 @@ test "Bounds returns correct centered x, y, xw, yx", ->
   equals bounds.xw, 100 / 2
   equals bounds.yw, 200 / 2
 
-test "Bounds returns correct x, y when called with offset", ->
+test "Bounds#bounds(width, height) returns correct x, y", ->
   obj = GameObject
     x: -5
     y: 20
