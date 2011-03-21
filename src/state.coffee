@@ -1,3 +1,4 @@
+###
 StateMachine = () ->
   currentState = null
   initialState = null
@@ -12,3 +13,4 @@ StateMachine = () ->
   self.attrAccessor('currentState') 
     
   return self
+###
