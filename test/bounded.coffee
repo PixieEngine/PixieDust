@@ -12,7 +12,7 @@ test "Bounds returns correct x, y, width, height", ->
   equals obj.bounds().width, 50
   equals obj.bounds().height, 100
   
-test "Bounds returns correct centered x, y, width, height", ->
+test "Bounds returns correct centered x, y, xw, yx", ->
   obj = GameObject
     x: -5
     y: 20
