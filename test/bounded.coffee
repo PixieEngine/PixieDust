@@ -11,6 +11,19 @@ test "Bounds returns correct x, y, width, height", ->
   equals obj.bounds().y, 10
   equals obj.bounds().width, 50
   equals obj.bounds().height, 100
+  
+test "Bounds returns correct centered x, y, width, height", ->
+  obj = GameObject
+    x: -5
+    y: 20
+    width: 100,
+    height: 200
+  
+  obj.include(Bounded)
+  bounds = obj.centeredBounds()
+
+  equals bounds.x, 0
+  equals bounds.y, 30
 
 test "Bounds returns correct x, y when called with offset", ->
   obj = GameObject
