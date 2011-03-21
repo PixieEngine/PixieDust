@@ -1,6 +1,239 @@
 var App;
 App = {};var App;
 App = {};;
+var Callback, Event, Guard, GuardsCollection, Machine, StateMachine, Transition;
+StateMachine = function(name, object, options, block) {
+  return Machine(name, object, options, block);
+};
+Callback = function(options, machine, block) {
+  var self;
+  self = {
+    match: function(from_state, to_state, event) {
+      if (options.to && options.from) {
+        if (options.to === to_state && options.from === from_state) {
+          return true;
+        }
+        return false;
+      }
+      if ((options.to === to_state) || (options.from === from_state) || (options.on === event.name)) {
+        return true;
+      }
+    },
+    run: function(params) {
+      (typeof block === "undefined" || block === null) ? undefined : block.apply(machine.object, params);
+      return options.run ? options.run.apply(machine.object, params) : null;
+    }
+  };
+  return self;
+};
+Event = function(name, machine) {
+  var guards, self, transition_for;
+  guards = GuardsCollection();
+  transition_for = function(params) {
+    var from, to;
+    if (can_fire(params)) {
+      from = machine.state();
+      to = guards.find_to_state(name, from, params);
+      return Transition(machine, self, from, to, params);
+    } else {
+      return false;
+    }
+  };
+  self = {
+    transition: function(options) {
+      guards.add(name, machine.object, options);
+      machine.states.push(options.from);
+      machine.states.push(options.to);
+      return self;
+    },
+    can_fire: function(params) {
+      if (guards.match(name, machine.state(), params)) {
+        return true;
+      }
+      return false;
+    },
+    fire: function(params) {
+      var transition;
+      transition = transition_for(params);
+      if (transition) {
+        return transition.perform();
+      }
+      return false;
+    }
+  };
+  return self;
+};
+Guard = function(name, object, options) {
+  var I, self;
+  I = {
+    from: options.from,
+    to: options.to,
+    except: options.except,
+    options: options,
+    name: name,
+    object: object
+  };
+  self = {
+    match: function(name, from, params) {
+      if (name === I.name && match_from_state(I.from)) {
+        if (run_callbacks(params)) {
+          return true;
+        }
+      }
+      return false;
+    },
+    match_from_state: function(from) {
+      if (typeof I.from === 'string') {
+        if (I.from === 'any') {
+          return check_exceptions(from);
+        } else {
+          return from === I.from;
+        }
+      } else {
+        return I.from.each(function(from_item) {
+          if (from === from_item) {
+            return true;
+          }
+          return false;
+        });
+      }
+    },
+    check_exceptions: function(from) {
+      return from !== I.except;
+    },
+    run_callbacks: function(params) {
+      var success;
+      success = true;
+      if (I.options.when) {
+        success = I.options.when.apply(I.object, params);
+      }
+      if (I.options.unless && success) {
+        success = !I.options.unless.apply(I.object, params);
+      }
+      return success;
+    }
+  };
+  return self;
+};
+GuardsCollection = function() {
+  var guards, last_match, self;
+  guards = [];
+  last_match = null;
+  self = {
+    add: function(name, object, options) {
+      var guard;
+      guard = Guard(name, object, options);
+      guards.push(guard);
+      return guard;
+    },
+    all: function() {
+      return guards;
+    },
+    match: function(name, from, params) {
+      guards.each(function(guard) {
+        var match;
+        match = guard.match(name, from, params);
+        if (match) {
+          last_match = match;
+          return guard;
+        }
+      });
+      return false;
+    },
+    find_to_state: function(name, from, params) {
+      var local_match;
+      local_match = match(name, from, params);
+      if (local_match) {
+        return match.to;
+      }
+    }
+  };
+  return self;
+};
+Machine = function(name, object, options, block) {
+  var add_event_methods, add_methods_to_object, callbacks, events, internal_state, machine_name, self, set_state, states;
+  events = [];
+  states = [];
+  callbacks = {
+    before: [],
+    after: []
+  };
+  machine_name = name;
+  internal_state = options && (options.initial ? options.initial : '');
+  add_methods_to_object(name, object);
+  if (block) {
+    block(self);
+  }
+  return self;
+  add_methods_to_object = function(name, object) {
+    object[name] = self.state();
+    object[name + '_events'] = events;
+    return (object[name + '_states'] = states);
+  };
+  add_event_methods = function(name, object, event) {
+    object[name] = function() {
+      return event.fire(arguments);
+    };
+    return (object['can_' + name] = function() {
+      return event.can_fire();
+    });
+  };
+  set_state = function(state) {
+    internal_state = state;
+    return (object[machine_name] = state);
+  };
+  return (self = {
+    event: function(name, block) {
+      var event;
+      event = Event(name, self);
+      events.push(event);
+      add_event_methods(name, object, event);
+      if (block) {
+        block(event);
+      }
+      return event;
+    },
+    before_transition: function(options, block) {
+      var callback;
+      callback = Callback(options, self, block);
+      callbacks["before"].push(callback);
+      return callback;
+    },
+    after_transition: function(options, block) {
+      var callback;
+      callback = Callback(options, self, block);
+      callbacks["after"].push(callback);
+      return callback;
+    },
+    state: function() {
+      return internal_state;
+    }
+  });
+};
+Transition = function(machine, event, from, to, params) {
+  var self;
+  return (self = {
+    perform: function() {
+      self.before();
+      machine.set_state(to);
+      self.after();
+      return true;
+    },
+    before: function() {
+      return machine.callbacks['before'].each(function(callback) {
+        return callback.match(from, to, event) ? callback.run(params) : null;
+      });
+    },
+    after: function() {
+      return machine.callbacks['after'].each(function(callback) {
+        return callback.match(from, to, event) ? callback.run(params) : null;
+      });
+    },
+    rollback: function() {
+      return machine.set_state(from);
+    }
+  });
+};;
 /**
 * Creates and returns a copy of the array. The copy contains
 * the same objects.
@@ -13,7 +246,7 @@ Array.prototype.copy = function() {
 };
 
 /**
-* Empties the array of it's contents. It is modified in place.
+* Empties the array of its contents. It is modified in place.
 *
 * @type Array
 * @returns this, now emptied.
@@ -158,15 +391,32 @@ Array.prototype.last = function() {
   return this[this.length - 1];
 };
 
+/**
+ * Pretend the array is a circle and grab a new array containing length elements. 
+ * If length is not given return the element at start, again assuming the array 
+ * is a circle.
+ *
+ * @param {Number} start The index to start wrapping at, or the index of the 
+ * sole element to return if no length is given.
+ * @param {Number} [length] Optional length determines how long result 
+ * array should be.
+ * @returns The element at start mod array.length, or an array of length elements, 
+ * starting from start and wrapping.
+ * @type Object or Array
+ */
 Array.prototype.wrap = function(start, length) {
-  var end = start + length;
-  var result = [];
-
-  for(var i = start; i < end; i++) {
-    result.push(this[i.mod(this.length)]);
+  if(length != null) {
+    var end = start + length;
+    var result = [];
+  
+    for(var i = start; i < end; i++) {
+      result.push(this[i.mod(this.length)]);
+    }
+  
+    return result;
+  } else {
+    return this[start.mod(this.length)];
   }
-
-  return result;
 };
 
 /**
@@ -662,6 +912,17 @@ jQuery.extend({
 ;
 $(function() {
   var keyName;
+  /***
+  The global keydown property lets your query the status of keys.
+
+  <pre>
+  if keydown.left
+    moveLeft()
+  </pre>
+
+  @name keydown
+  @namespace
+  */
   window.keydown = {};
   keyName = function(event) {
     return jQuery.hotkeys.specialKeys[event.which] || String.fromCharCode(event.which).toLowerCase();
@@ -1493,7 +1754,7 @@ Math.TAU = 2 * Math.PI;
       },
 
       fill: function(color) {
-        context.fillStyle = color;
+        $canvas.fillColor(color);
         context.fillRect(0, 0, canvas.width, canvas.height);
 
         return this;
@@ -1514,7 +1775,7 @@ Math.TAU = 2 * Math.PI;
        * @returns this
        */
       fillCircle: function(x, y, radius, color) {
-        context.fillStyle = color;
+        $canvas.fillColor(color);
         context.beginPath();
         context.arc(x, y, radius, 0, Math.PI*2, true);
         context.closePath();
@@ -1608,7 +1869,7 @@ Math.TAU = 2 * Math.PI;
 
       fillColor: function(color) {
         if(color) {
-          context.fillStyle = color;
+          context.fillStyle = color.toString();
           return this;
         } else {
           return context.fillStyle;
@@ -1631,7 +1892,7 @@ Math.TAU = 2 * Math.PI;
 
       strokeColor: function(color) {
         if(color) {
-          context.strokeStyle = color;
+          context.strokeStyle = color.toString();
           return this;
         } else {
           return context.strokeStyle;
@@ -1673,22 +1934,70 @@ Math.TAU = 2 * Math.PI;
   };
 })(jQuery);
 ;
-/**
- * Returns random integers from [0, n) if n is given.
- * Otherwise returns random float between 0 and 1.
- *
- * @param {Number} n
- */
-function rand(n) {
-  if(n) {
-    return Math.floor(n * Math.random());
-  } else {
-    return Math.random();
-  }
-}
-;
+(function($) {
+  window.Random = $.extend(window.Random, {
+    angle: function() {
+      return rand() * Math.TAU;
+    },
+    often: function() {
+      return rand(3);
+    },
+    sometimes: function() {
+      return !rand(3);
+    }
+  });
+  /***
+  Returns random integers from [0, n) if n is given.
+  Otherwise returns random float between 0 and 1.
 
-;
+  @param {Number} n
+  */
+  return (window.rand = function(n) {
+    return n ? Math.floor(n * Math.random()) : Math.random();
+  });
+})(jQuery);;
+(function($) {
+  var retrieve, store;
+  /***
+  @name Local
+  @namespace
+  */
+  /***
+  Store an object in local storage.
+
+  @name set
+  @methodOf Local
+
+  @param {String} key
+  @param {Object} value
+  @type Object
+  @returns value
+  */
+  store = function(key, value) {
+    localStorage[key] = JSON.stringify(value);
+    return value;
+  };
+  /***
+  Retrieve an object from local storage.
+
+  @name get
+  @methodOf Local
+
+  @param {String} key
+  @type Object
+  @returns The object that was stored or undefined if no object was stored.
+  */
+  retrieve = function(key) {
+    var value;
+    value = localStorage[key];
+    return (typeof value !== "undefined" && value !== null) ? JSON.parse(value) : null;
+  };
+  return (window.Local = $.extend(window.Local, {
+    get: retrieve,
+    set: store,
+    put: store
+  }));
+})(jQuery);;
 String.prototype.constantize = function() {
   if (this.match(/[A-Z][A-Za-z0-9]*/)) {
     eval("var that = " + (this));
@@ -1704,19 +2013,6 @@ String.prototype.parse = function() {
     return this;
   }
 };;
-(function($) {
-  return (window.Random = $.extend(window.Random, {
-    angle: function() {
-      return rand() * Math.TAU;
-    },
-    often: function() {
-      return rand(3);
-    },
-    sometimes: function() {
-      return !rand(3);
-    }
-  }));
-})(jQuery);;
 ;
 (function() {
   var Animation, fromPixieId;
