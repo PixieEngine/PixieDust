@@ -1,4 +1,4 @@
-test "Rotatable objects update their rotationalVelocity", ->
+test "Rotatable objects update their rotation", ->
   obj = GameObject
     duration: 5
   
