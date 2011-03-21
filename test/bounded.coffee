@@ -38,3 +38,17 @@ test "Bounds returns correct x, y when called with offset", ->
   equals bounds.x, 0
   equals bounds.y, 30
 
+test "Bounds correct center point", ->
+  obj = GameObject
+    x: -5
+    y: 20
+    width: 10
+    height: 60
+  
+  obj.include(Bounded)
+  bounds = obj.center()
+
+  equals bounds.x, 0
+  equals bounds.y, 30
+
+
