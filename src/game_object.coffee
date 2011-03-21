@@ -16,8 +16,9 @@ GameObject = (I) ->
 
   self = Core(I).extend
     update: ->
-      self.trigger('step')
-      I.age += 1
+      if I.active
+        self.trigger('step')
+        I.age += 1
 
       I.active
       
