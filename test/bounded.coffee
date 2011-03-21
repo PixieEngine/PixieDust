@@ -1,5 +1,5 @@
 test "Bounds should give correct offset position", ->
-  obj = 
+  obj = GameObject
     x: 5
     y: 10
     width: 50
