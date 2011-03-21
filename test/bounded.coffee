@@ -38,7 +38,7 @@ test "Bounds returns correct x, y when called with offset", ->
   equals bounds.x, 0
   equals bounds.y, 30
 
-test "Bounds correct center point", ->
+test "Bounds#center returns correct center point", ->
   obj = GameObject
     x: -5
     y: 20
