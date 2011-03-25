@@ -4,7 +4,14 @@ Collision =
     a.x + a.width > b.x &&
     a.y < b.y + b.height &&
     a.y + a.height > b.y
-    
+
+  circular: (a, b) ->
+    r = a.radius + b.radius
+    dx = b.x - a.x
+    dy = b.y - a.y
+
+    r * r >= dx * dx + dy * dy
+
   rayRectangle: (source, direction, target) ->
     xw = target.xw
     yw = target.yw
