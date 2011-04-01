@@ -11,6 +11,31 @@ Collision =
     dy = b.y - a.y
 
     r * r >= dx * dx + dy * dy
+    
+  rayCircle: (source, direction, target) ->
+    radius = target.radius()
+    target = target.position()
+
+    laserToTarget = target.subtract(source)
+
+    projectionLength = direction.dot(laserToTarget)
+
+    if projectionLength < 0
+      return false # object is behind
+
+    projection = direction.scale(projectionLength)
+
+    intersection = source.add(projection)
+    intersectionToTarget = target.subtract(intersection)
+    intersectionToTargetLength = intersectionToTarget.length()
+
+    if intersectionToTargetLength < radius
+      hit = true
+
+    if hit
+      dt = Math.sqrt(radius * radius - intersectionToTargetLength * intersectionToTargetLength)
+
+      hit = direction.scale(projectionLength - dt).add(source)
 
   rayRectangle: (source, direction, target) ->
     xw = target.xw
