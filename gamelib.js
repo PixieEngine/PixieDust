@@ -1,240 +1,8 @@
 var App;
 App = {};var App;
 App = {};;
-var Callback, Event, Guard, GuardsCollection, Machine, StateMachine, Transition;
-StateMachine = function(name, object, options, block) {
-  return Machine(name, object, options, block);
-};
-Callback = function(options, machine, block) {
-  var self;
-  self = {
-    match: function(from_state, to_state, event) {
-      if (options.to && options.from) {
-        if (options.to === to_state && options.from === from_state) {
-          return true;
-        }
-        return false;
-      }
-      if ((options.to === to_state) || (options.from === from_state) || (options.on === event.name)) {
-        return true;
-      }
-    },
-    run: function(params) {
-      (typeof block === "undefined" || block === null) ? undefined : block.apply(machine.object, params);
-      return options.run ? options.run.apply(machine.object, params) : null;
-    }
-  };
-  return self;
-};
-Event = function(name, machine) {
-  var guards, self, transition_for;
-  guards = GuardsCollection();
-  transition_for = function(params) {
-    var from, to;
-    if (can_fire(params)) {
-      from = machine.state();
-      to = guards.find_to_state(name, from, params);
-      return Transition(machine, self, from, to, params);
-    } else {
-      return false;
-    }
-  };
-  self = {
-    transition: function(options) {
-      guards.add(name, machine.object, options);
-      machine.states.push(options.from);
-      machine.states.push(options.to);
-      return self;
-    },
-    can_fire: function(params) {
-      if (guards.match(name, machine.state(), params)) {
-        return true;
-      }
-      return false;
-    },
-    fire: function(params) {
-      var transition;
-      transition = transition_for(params);
-      if (transition) {
-        return transition.perform();
-      }
-      return false;
-    }
-  };
-  return self;
-};
-Guard = function(name, object, options) {
-  var I, self;
-  I = {
-    from: options.from,
-    to: options.to,
-    except: options.except,
-    options: options,
-    name: name,
-    object: object
-  };
-  self = {
-    match: function(name, from, params) {
-      if (name === I.name && match_from_state(I.from)) {
-        if (run_callbacks(params)) {
-          return true;
-        }
-      }
-      return false;
-    },
-    match_from_state: function(from) {
-      if (typeof I.from === 'string') {
-        if (I.from === 'any') {
-          return check_exceptions(from);
-        } else {
-          return from === I.from;
-        }
-      } else {
-        return I.from.each(function(from_item) {
-          if (from === from_item) {
-            return true;
-          }
-          return false;
-        });
-      }
-    },
-    check_exceptions: function(from) {
-      return from !== I.except;
-    },
-    run_callbacks: function(params) {
-      var success;
-      success = true;
-      if (I.options.when) {
-        success = I.options.when.apply(I.object, params);
-      }
-      if (I.options.unless && success) {
-        success = !I.options.unless.apply(I.object, params);
-      }
-      return success;
-    }
-  };
-  return self;
-};
-GuardsCollection = function() {
-  var guards, last_match, self;
-  guards = [];
-  last_match = null;
-  self = {
-    add: function(name, object, options) {
-      var guard;
-      guard = Guard(name, object, options);
-      guards.push(guard);
-      return guard;
-    },
-    all: function() {
-      return guards;
-    },
-    match: function(name, from, params) {
-      guards.each(function(guard) {
-        var match;
-        match = guard.match(name, from, params);
-        if (match) {
-          last_match = match;
-          return guard;
-        }
-      });
-      return false;
-    },
-    find_to_state: function(name, from, params) {
-      var local_match;
-      local_match = match(name, from, params);
-      if (local_match) {
-        return match.to;
-      }
-    }
-  };
-  return self;
-};
-Machine = function(name, object, options, block) {
-  var add_event_methods, add_methods_to_object, callbacks, events, internal_state, machine_name, self, set_state, states;
-  events = [];
-  states = [];
-  callbacks = {
-    before: [],
-    after: []
-  };
-  machine_name = name;
-  internal_state = options && (options.initial ? options.initial : '');
-  add_methods_to_object(name, object);
-  if (block) {
-    block(self);
-  }
-  return self;
-  add_methods_to_object = function(name, object) {
-    object[name] = self.state();
-    object[name + '_events'] = events;
-    return (object[name + '_states'] = states);
-  };
-  add_event_methods = function(name, object, event) {
-    object[name] = function() {
-      return event.fire(arguments);
-    };
-    return (object['can_' + name] = function() {
-      return event.can_fire();
-    });
-  };
-  set_state = function(state) {
-    internal_state = state;
-    return (object[machine_name] = state);
-  };
-  return (self = {
-    event: function(name, block) {
-      var event;
-      event = Event(name, self);
-      events.push(event);
-      add_event_methods(name, object, event);
-      if (block) {
-        block(event);
-      }
-      return event;
-    },
-    before_transition: function(options, block) {
-      var callback;
-      callback = Callback(options, self, block);
-      callbacks["before"].push(callback);
-      return callback;
-    },
-    after_transition: function(options, block) {
-      var callback;
-      callback = Callback(options, self, block);
-      callbacks["after"].push(callback);
-      return callback;
-    },
-    state: function() {
-      return internal_state;
-    }
-  });
-};
-Transition = function(machine, event, from, to, params) {
-  var self;
-  return (self = {
-    perform: function() {
-      self.before();
-      machine.set_state(to);
-      self.after();
-      return true;
-    },
-    before: function() {
-      return machine.callbacks['before'].each(function(callback) {
-        return callback.match(from, to, event) ? callback.run(params) : null;
-      });
-    },
-    after: function() {
-      return machine.callbacks['after'].each(function(callback) {
-        return callback.match(from, to, event) ? callback.run(params) : null;
-      });
-    },
-    rollback: function() {
-      return machine.set_state(from);
-    }
-  });
-};;
-/**
+;
+/***
 * Creates and returns a copy of the array. The copy contains
 * the same objects.
 *
@@ -242,10 +10,9 @@ Transition = function(machine, event, from, to, params) {
 * @returns A new array that is a copy of the array
 */
 Array.prototype.copy = function() {
-  return this.concat();  
+  return this.concat();
 };
-
-/**
+/***
 * Empties the array of its contents. It is modified in place.
 *
 * @type Array
@@ -255,8 +22,7 @@ Array.prototype.clear = function() {
   this.length = 0;
   return this;
 };
-
-/**
+/***
 * Invoke the named method on each element in the array
 * and return a new array containing the results of the invocation.
 *
@@ -272,18 +38,17 @@ Array.prototype.clear = function() {
 * @param [arg...] Optional arguments to pass to the method being invoked.
 *
 * @type Array
-* @returns A new array containing the results of invoking the 
+* @returns A new array containing the results of invoking the
 * named method on each element.
 */
 Array.prototype.invoke = function(method) {
-  var args = Array.prototype.slice.call(arguments, 1);
-  
+  var args;
+  args = Array.prototype.slice.call(arguments, 1);
   return this.map(function(element) {
     return element[method].apply(element, args);
   });
 };
-
-/**
+/***
 * Randomly select an element from the array.
 *
 * @returns A random element from an array
@@ -291,8 +56,7 @@ Array.prototype.invoke = function(method) {
 Array.prototype.rand = function() {
   return this[rand(this.length)];
 };
-
-/**
+/***
 * Remove the first occurance of the given object from the array if it is
 * present.
 *
@@ -300,15 +64,11 @@ Array.prototype.rand = function() {
 * @returns The removed object if present otherwise undefined.
 */
 Array.prototype.remove = function(object) {
-  var index = this.indexOf(object);
-  if(index >= 0) {
-    return this.splice(index, 1)[0];
-  } else {
-    return undefined;
-  }
+  var index;
+  index = this.indexOf(object);
+  return index >= 0 ? this.splice(index, 1)[0] : undefined;
 };
-
-/**
+/***
 * Returns true if the element is present in the array.
 *
 * @param {Object} element The element to check if present.
@@ -316,110 +76,149 @@ Array.prototype.remove = function(object) {
 * @type Boolean
 */
 Array.prototype.include = function(element) {
-  return this.indexOf(element) != -1;
+  return this.indexOf(element) !== -1;
 };
-
-/**
+/***
  * Call the given iterator once for each element in the array,
- * passing in the element as the first argument, the index of 
+ * passing in the element as the first argument, the index of
  * the element as the second argument, and this array as the
  * third argument.
  *
- * @param {Function} iterator Function to be called once for 
+ * @param {Function} iterator Function to be called once for
  * each element in the array.
- * @param {Object} [context] Optional context parameter to be 
+ * @param {Object} [context] Optional context parameter to be
  * used as `this` when calling the iterator function.
  *
  * @returns `this` to enable method chaining.
- */
+*/
 Array.prototype.each = function(iterator, context) {
-  if(this.forEach) {
+  var _len, _ref, element, i;
+  if (this.forEach) {
     this.forEach(iterator, context);
   } else {
-    var len = this.length;
-    for(var i = 0; i < len; i++) {
-      iterator.call(context, this[i], i, this);
+    _ref = this;
+    for (i = 0, _len = _ref.length; i < _len; i++) {
+      element = _ref[i];
+      iterator.call(context, element, i, this);
     }
   }
-
   return this;
 };
-
 Array.prototype.eachSlice = function(n, iterator, context) {
-  var len = Math.floor(this.length / n);
-  
-  for(var i = 0; i < len; i++) {
-    iterator.call(context, this.slice(i*n, (i+1)*n), i*n, this);
+  var i, len;
+  if (n > 0) {
+    len = (this.length / n).floor();
+    i = -1;
+    while (++i < len) {
+      iterator.call(context, this.slice(i * n, (i + 1) * n), i * n, this);
+    }
   }
-  
   return this;
 };
-
-/**
+/***
  * Returns a new array with the elements all shuffled up.
  *
  * @returns A new array that is randomly shuffled.
  * @type Array
- */
+*/
 Array.prototype.shuffle = function() {
-  var shuffledArray = [];
-  
+  var shuffledArray;
+  shuffledArray = [];
   this.each(function(element) {
-    shuffledArray.splice(rand(shuffledArray.length + 1), 0, element);
+    return shuffledArray.splice(rand(shuffledArray.length + 1), 0, element);
   });
-  
   return shuffledArray;
 };
-
-/**
+/***
  * Returns the first element of the array, undefined if the array is empty.
  *
  * @returns The first element, or undefined if the array is empty.
  * @type Object
- */
+*/
 Array.prototype.first = function() {
   return this[0];
 };
-
-/**
+/***
  * Returns the last element of the array, undefined if the array is empty.
  *
  * @returns The last element, or undefined if the array is empty.
  * @type Object
- */
+*/
 Array.prototype.last = function() {
   return this[this.length - 1];
 };
-
-/**
- * Pretend the array is a circle and grab a new array containing length elements. 
- * If length is not given return the element at start, again assuming the array 
+/***
+ * Returns an object containing the extremes of this array.
+ * <pre>
+ * [-1, 3, 0].extremes() # => {min: -1, max: 3}
+ * </pre>
+ * @param {Function} [fn] An optional funtion used to evaluate
+ * each element to calculate its value for determining extremes.
+ * @returns {min: minElement, max: maxElement}
+ * @type Object
+*/
+Array.prototype.extremes = function(fn) {
+  var max, maxResult, min, minResult;
+  fn || (fn = function(n) {
+    return n;
+  });
+  min = (max = undefined);
+  minResult = (maxResult = undefined);
+  this.each(function(object) {
+    var result;
+    result = fn(object);
+    if (typeof min !== "undefined" && min !== null) {
+      if (result < minResult) {
+        min = object;
+        minResult = result;
+      }
+    } else {
+      min = object;
+      minResult = result;
+    }
+    if (typeof max !== "undefined" && max !== null) {
+      if (result > maxResult) {
+        max = object;
+        return (maxResult = result);
+      }
+    } else {
+      max = object;
+      return (maxResult = result);
+    }
+  });
+  return {
+    min: min,
+    max: max
+  };
+};
+/***
+ * Pretend the array is a circle and grab a new array containing length elements.
+ * If length is not given return the element at start, again assuming the array
  * is a circle.
  *
- * @param {Number} start The index to start wrapping at, or the index of the 
+ * @param {Number} start The index to start wrapping at, or the index of the
  * sole element to return if no length is given.
- * @param {Number} [length] Optional length determines how long result 
+ * @param {Number} [length] Optional length determines how long result
  * array should be.
- * @returns The element at start mod array.length, or an array of length elements, 
+ * @returns The element at start mod array.length, or an array of length elements,
  * starting from start and wrapping.
  * @type Object or Array
- */
+*/
 Array.prototype.wrap = function(start, length) {
-  if(length != null) {
-    var end = start + length;
-    var result = [];
-  
-    for(var i = start; i < end; i++) {
+  var end, i, result;
+  if (typeof length !== "undefined" && length !== null) {
+    end = start + length;
+    i = start;
+    result = [];
+    while (i++ < end) {
       result.push(this[i.mod(this.length)]);
     }
-  
     return result;
   } else {
     return this[start.mod(this.length)];
   }
 };
-
-/**
+/***
  * Partitions the elements into two groups: those for which the iterator returns
  * true, and those for which it returns false.
  * @param {Function} iterator
@@ -428,81 +227,68 @@ Array.prototype.wrap = function(start, length) {
  *
  * @type Array
  * @returns An array in the form of [trueCollection, falseCollection]
- */
+*/
 Array.prototype.partition = function(iterator, context) {
-  var trueCollection = [];
-  var falseCollection = [];
-
+  var falseCollection, trueCollection;
+  trueCollection = [];
+  falseCollection = [];
   this.each(function(element) {
-    if(iterator.call(context, element)) {
-      trueCollection.push(element);
-    } else {
-      falseCollection.push(element);
-    }
+    return iterator.call(context, element) ? trueCollection.push(element) : falseCollection.push(element);
   });
-
   return [trueCollection, falseCollection];
 };
-
-/**
- * Return the group of elements for which the iterator's return value is true.
- * 
- * @param {Function} iterator The iterator receives each element in turn as 
+/***
+ * Return the group of elements for which the return value of the iterator is true.
+ *
+ * @param {Function} iterator The iterator receives each element in turn as
  * the first agument.
  * @param {Object} [context] Optional context parameter to be
  * used as `this` when calling the iterator function.
  *
  * @type Array
  * @returns An array containing the elements for which the iterator returned true.
- */
+*/
 Array.prototype.select = function(iterator, context) {
   return this.partition(iterator, context)[0];
 };
-
-/**
+/***
  * Return the group of elements that are not in the passed in set.
- * 
+ *
  * @param {Array} values List of elements to exclude.
  *
  * @type Array
  * @returns An array containing the elements that are not passed in.
- */
+*/
 Array.prototype.without = function(values) {
   return this.reject(function(element) {
     return values.include(element);
   });
 };
-
-/**
- * Return the group of elements for which the iterator's return value is false.
- * 
- * @param {Function} iterator The iterator receives each element in turn as 
+/***
+ * Return the group of elements for which the return value of the iterator is false.
+ *
+ * @param {Function} iterator The iterator receives each element in turn as
  * the first agument.
  * @param {Object} [context] Optional context parameter to be
  * used as `this` when calling the iterator function.
  *
  * @type Array
  * @returns An array containing the elements for which the iterator returned false.
- */
+*/
 Array.prototype.reject = function(iterator, context) {
   return this.partition(iterator, context)[1];
 };
-
 Array.prototype.inject = function(initial, iterator) {
   this.each(function(element) {
-    initial = iterator(initial, element);
+    return (initial = iterator(initial, element));
   });
-  
   return initial;
 };
-
 Array.prototype.sum = function() {
   return this.inject(0, function(sum, n) {
     return sum + n;
   });
-};
-
-;
+};;
 /**
  * CoffeeScript Compiler v1.0.1
  * http://coffeescript.org
@@ -811,7 +597,7 @@ Function.prototype.withAfter = function(interception) {
       96: "0", 97: "1", 98: "2", 99: "3", 100: "4", 101: "5", 102: "6", 103: "7",
       104: "8", 105: "9", 106: "*", 107: "+", 109: "-", 110: ".", 111 : "/", 
       112: "f1", 113: "f2", 114: "f3", 115: "f4", 116: "f5", 117: "f6", 118: "f7", 119: "f8", 
-      120: "f9", 121: "f10", 122: "f11", 123: "f12", 144: "numlock", 145: "scroll", 191: "/", 224: "meta"
+      120: "f9", 121: "f10", 122: "f11", 123: "f12", 144: "numlock", 145: "scroll", 188: ",", 191: "/", 224: "meta"
     },
   
     shiftNums: {
@@ -941,9 +727,9 @@ $(function() {
     }) : (window[name] = $.noop);
   });
 });;
-/**
+/***
 * Matrix.js v1.3.0pre
-* 
+*
 * Copyright (c) 2010 STRd6
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -968,29 +754,30 @@ $(function() {
 * http://www.adobe.com/livedocs/flash/9.0/ActionScriptLangRefV3/flash/geom/Matrix.html
 */
 (function() {
-  /**
+  var Matrix, Point;
+  /***
    * Create a new point with given x and y coordinates. If no arguments are given
    * defaults to (0, 0).
    * @name Point
    * @param {Number} [x]
    * @param {Number} [y]
    * @constructor
-   */
-  function Point(x, y) {
+  */
+  Point = function(x, y) {
     return {
-      /**
+      /***
        * The x coordinate of this point.
        * @name x
        * @fieldOf Point#
-       */
+      */
       x: x || 0,
-      /**
+      /***
        * The y coordinate of this point.
        * @name y
        * @fieldOf Point#
-       */
+      */
       y: y || 0,
-      /**
+      /***
        * Adds a point to this one and returns the new point.
        * @name add
        * @methodOf Point#
@@ -998,11 +785,11 @@ $(function() {
        * @param {Point} other The point to add this point to.
        * @returns A new point, the sum of both.
        * @type Point
-       */
+      */
       add: function(other) {
         return Point(this.x + other.x, this.y + other.y);
       },
-      /**
+      /***
        * Subtracts a point to this one and returns the new point.
        * @name subtract
        * @methodOf Point#
@@ -1010,11 +797,11 @@ $(function() {
        * @param {Point} other The point to subtract from this point.
        * @returns A new point, this - other.
        * @type Point
-       */
+      */
       subtract: function(other) {
         return Point(this.x - other.x, this.y - other.y);
       },
-      /**
+      /***
        * Scale this Point (Vector) by a constant amount.
        * @name scale
        * @methodOf Point#
@@ -1022,11 +809,11 @@ $(function() {
        * @param {Number} scalar The amount to scale this point by.
        * @returns A new point, this * scalar.
        * @type Point
-       */
+      */
       scale: function(scalar) {
         return Point(this.x * scalar, this.y * scalar);
       },
-      /**
+      /***
        * Determine whether this point is equal to another point.
        * @name equal
        * @methodOf Point#
@@ -1034,22 +821,22 @@ $(function() {
        * @param {Point} other The point to check for equality.
        * @returns true if the other point has the same x, y coordinates, false otherwise.
        * @type Boolean
-       */
+      */
       equal: function(other) {
         return this.x === other.x && this.y === other.y;
       },
-      /**
+      /***
        * Calculate the magnitude of this Point (Vector).
        * @name magnitude
        * @methodOf Point#
        *
        * @returns The magnitude of this point as if it were a vector from (0, 0) -> (x, y).
        * @type Number
-       */
+      */
       magnitude: function() {
         return Point.distance(Point(0, 0), this);
       },
-      /**
+      /***
        * Calculate the dot product of this point and another point (Vector).
        * @name dot
        * @methodOf Point#
@@ -1057,14 +844,14 @@ $(function() {
        * @param {Point} other The point to dot with this point.
        * @returns The dot product of this point dot other as a scalar value.
        * @type Number
-       */
+      */
       dot: function(other) {
         return this.x * other.x + this.y * other.y;
       },
-      /**
-       * Calculate the cross product of this point and another point (Vector). 
+      /***
+       * Calculate the cross product of this point and another point (Vector).
        * Usually cross products are thought of as only applying to three dimensional vectors,
-       * but z can be treated as zero. The result of this method is interpreted as the magnitude 
+       * but z can be treated as zero. The result of this method is interpreted as the magnitude
        * of the vector result of the cross product between [x1, y1, 0] x [x2, y2, 0]
        * perpendicular to the xy plane.
        * @name cross
@@ -1073,11 +860,11 @@ $(function() {
        * @param {Point} other The point to cross with this point.
        * @returns The cross product of this point with the other point as scalar value.
        * @type Number
-       */
+      */
       cross: function(other) {
         return this.x * other.y - other.x * this.y;
       },
-      /**
+      /***
        * The norm of a vector is the unit vector pointing in the same direction. This method
        * treats the point as though it is a vector from the origin to (x, y).
        * @name norm
@@ -1085,22 +872,22 @@ $(function() {
        *
        * @returns The unit vector pointing in the same direction as this vector.
        * @type Point
-       */
+      */
       norm: function() {
-        return this.scale(1.0/this.length());
+        return this.scale(1.0 / this.length());
       },
-      /**
+      /***
        * Computed the length of this point as though it were a vector from (0,0) to (x,y)
        * @name length
        * @methodOf Point#
        *
        * @returns The length of the vector from the origin to this point.
        * @type Number
-       */
+      */
       length: function() {
         return Math.sqrt(this.dot(this));
       },
-      /**
+      /***
        * Computed the Euclidean between this point and another point.
        * @name distance
        * @methodOf Point#
@@ -1108,50 +895,43 @@ $(function() {
        * @param {Point} other The point to compute the distance to.
        * @returns The distance between this point and another point.
        * @type Number
-       */
+      */
       distance: function(other) {
         return Point.distance(this, other);
       }
-    }
-  }
-
-  /**
+    };
+  };
+  /***
    * @param {Point} p1
    * @param {Point} p2
    * @type Number
    * @returns The Euclidean distance between two points.
-   */
+  */
   Point.distance = function(p1, p2) {
     return Math.sqrt(Math.pow(p2.x - p1.x, 2) + Math.pow(p2.y - p1.y, 2));
   };
-
-  /**
+  /***
    * Construct a point on the unit circle for the given angle.
    *
    * @param {Number} angle The angle in radians
    * @type Point
    * @returns The point on the unit circle.
-   */
+  */
   Point.fromAngle = function(angle) {
     return Point(Math.cos(angle), Math.sin(angle));
   };
-
-  /**
+  /***
    * If you have two dudes, one standing at point p1, and the other
    * standing at point p2, then this method will return the direction
    * that the dude standing at p1 will need to face to look at p2.
    * @param {Point} p1 The starting point.
    * @param {Point} p2 The ending point.
    * @returns The direction from p1 to p2 in radians.
-   */
+  */
   Point.direction = function(p1, p2) {
-    return Math.atan2(
-      p2.y - p1.y,
-      p2.x - p1.x
-    );
+    return Math.atan2(p2.y - p1.y, p2.x - p1.x);
   };
-
-  /**
+  /***
    * <pre>
    *  _        _
    * | a  c tx  |
@@ -1172,46 +952,44 @@ $(function() {
    * @param {Number} [tx]
    * @param {Number} [ty]
    * @constructor
-   */
-  function Matrix(a, b, c, d, tx, ty) {
-    a = a !== undefined ? a : 1;
-    d = d !== undefined ? d : 1;
-
+  */
+  Matrix = function(a, b, c, d, tx, ty) {
+    a = (typeof a !== "undefined" && a !== null) ? a : 1;
+    d = (typeof d !== "undefined" && d !== null) ? d : 1;
     return {
-      /**
+      /***
        * @name a
        * @fieldOf Matrix#
-       */
+      */
       a: a,
-      /**
+      /***
        * @name b
        * @fieldOf Matrix#
-       */
+      */
       b: b || 0,
-      /**
+      /***
        * @name c
        * @fieldOf Matrix#
-       */
+      */
       c: c || 0,
-      /**
+      /***
        * @name d
        * @fieldOf Matrix#
-       */
+      */
       d: d,
-      /**
+      /***
        * @name tx
        * @fieldOf Matrix#
-       */
+      */
       tx: tx || 0,
-      /**
+      /***
        * @name ty
        * @fieldOf Matrix#
-       */
+      */
       ty: ty || 0,
-
-      /**
+      /***
        * Returns the result of this matrix multiplied by another matrix
-       * combining the geometric effects of the two. In mathematical terms, 
+       * combining the geometric effects of the two. In mathematical terms,
        * concatenating two matrixes is the same as combining them using matrix multiplication.
        * If this matrix is A and the matrix passed in is B, the resulting matrix is A x B
        * http://mathworld.wolfram.com/MatrixMultiplication.html
@@ -1221,38 +999,26 @@ $(function() {
        * @param {Matrix} matrix The matrix to multiply this matrix by.
        * @returns The result of the matrix multiplication, a new matrix.
        * @type Matrix
-       */
+      */
       concat: function(matrix) {
-        return Matrix(
-          this.a * matrix.a + this.c * matrix.b,
-          this.b * matrix.a + this.d * matrix.b,
-          this.a * matrix.c + this.c * matrix.d,
-          this.b * matrix.c + this.d * matrix.d,
-          this.a * matrix.tx + this.c * matrix.ty + this.tx,
-          this.b * matrix.tx + this.d * matrix.ty + this.ty
-        );
+        return Matrix(this.a * matrix.a + this.c * matrix.b, this.b * matrix.a + this.d * matrix.b, this.a * matrix.c + this.c * matrix.d, this.b * matrix.c + this.d * matrix.d, this.a * matrix.tx + this.c * matrix.ty + this.tx, this.b * matrix.tx + this.d * matrix.ty + this.ty);
       },
-
-      /**
-       * Given a point in the pretransform coordinate space, returns the coordinates of 
-       * that point after the transformation occurs. Unlike the standard transformation 
-       * applied using the transformPoint() method, the deltaTransformPoint() method's 
-       * transformation does not consider the translation parameters tx and ty.
+      /***
+       * Given a point in the pretransform coordinate space, returns the coordinates of
+       * that point after the transformation occurs. Unlike the standard transformation
+       * applied using the transformPoint() method, the deltaTransformPoint() method
+       * does not consider the translation parameters tx and ty.
        * @name deltaTransformPoint
        * @methodOf Matrix#
        * @see #transformPoint
        *
        * @return A new point transformed by this matrix ignoring tx and ty.
        * @type Point
-       */
+      */
       deltaTransformPoint: function(point) {
-        return Point(
-          this.a * point.x + this.c * point.y,
-          this.b * point.x + this.d * point.y
-        );
+        return Point(this.a * point.x + this.c * point.y, this.b * point.x + this.d * point.y);
       },
-
-      /**
+      /***
        * Returns the inverse of the matrix.
        * http://mathworld.wolfram.com/MatrixInverse.html
        * @name inverse
@@ -1260,20 +1026,13 @@ $(function() {
        *
        * @returns A new matrix that is the inverse of this matrix.
        * @type Matrix
-       */
+      */
       inverse: function() {
-        var determinant = this.a * this.d - this.b * this.c;
-        return Matrix(
-          this.d / determinant,
-          -this.b / determinant,
-          -this.c / determinant,
-          this.a / determinant,
-          (this.c * this.ty - this.d * this.tx) / determinant,
-          (this.b * this.tx - this.a * this.ty) / determinant
-        );
+        var determinant;
+        determinant = this.a * this.d - this.b * this.c;
+        return Matrix(this.d / determinant, -this.b / determinant, -this.c / determinant, this.a / determinant, (this.c * this.ty - this.d * this.tx) / determinant, (this.b * this.tx - this.a * this.ty) / determinant);
       },
-
-      /**
+      /***
        * Returns a new matrix that corresponds this matrix multiplied by a
        * a rotation matrix.
        * @name rotate
@@ -1284,12 +1043,11 @@ $(function() {
        * @param {Point} [aboutPoint] The point about which this rotation occurs. Defaults to (0,0).
        * @returns A new matrix, rotated by the specified amount.
        * @type Matrix
-       */
+      */
       rotate: function(theta, aboutPoint) {
         return this.concat(Matrix.rotation(theta, aboutPoint));
       },
-
-      /**
+      /***
        * Returns a new matrix that corresponds this matrix multiplied by a
        * a scaling matrix.
        * @name scale
@@ -1300,13 +1058,12 @@ $(function() {
        * @param {Number} [sy]
        * @param {Point} [aboutPoint] The point that remains fixed during the scaling
        * @type Matrix
-       */
+      */
       scale: function(sx, sy, aboutPoint) {
         return this.concat(Matrix.scale(sx, sy, aboutPoint));
       },
-
-      /**
-       * Returns the result of applying the geometric transformation represented by the 
+      /***
+       * Returns the result of applying the geometric transformation represented by the
        * Matrix object to the specified point.
        * @name transformPoint
        * @methodOf Matrix#
@@ -1314,15 +1071,11 @@ $(function() {
        *
        * @returns A new point with the transformation applied.
        * @type Point
-       */
+      */
       transformPoint: function(point) {
-        return Point(
-          this.a * point.x + this.c * point.y + this.tx,
-          this.b * point.x + this.d * point.y + this.ty
-        );
+        return Point(this.a * point.x + this.c * point.y + this.tx, this.b * point.x + this.d * point.y + this.ty);
       },
-
-      /**
+      /***
        * Translates the matrix along the x and y axes, as specified by the tx and ty parameters.
        * @name translate
        * @methodOf Matrix#
@@ -1332,44 +1085,31 @@ $(function() {
        * @param {Number} ty The translation along the y axis.
        * @returns A new matrix with the translation applied.
        * @type Matrix
-       */
+      */
       translate: function(tx, ty) {
         return this.concat(Matrix.translation(tx, ty));
       }
-    }
-  }
-
-  /**
+    };
+  };
+  /***
    * Creates a matrix transformation that corresponds to the given rotation,
    * around (0,0) or the specified point.
    * @see Matrix#rotate
    *
    * @param {Number} theta Rotation in radians.
    * @param {Point} [aboutPoint] The point about which this rotation occurs. Defaults to (0,0).
-   * @returns 
+   * @returns
    * @type Matrix
-   */
+  */
   Matrix.rotation = function(theta, aboutPoint) {
-    var rotationMatrix = Matrix(
-      Math.cos(theta),
-      Math.sin(theta),
-      -Math.sin(theta),
-      Math.cos(theta)
-    );
-
-    if(aboutPoint) {
-      rotationMatrix =
-        Matrix.translation(aboutPoint.x, aboutPoint.y).concat(
-          rotationMatrix
-        ).concat(
-          Matrix.translation(-aboutPoint.x, -aboutPoint.y)
-        );
+    var rotationMatrix;
+    rotationMatrix = Matrix(Math.cos(theta), Math.sin(theta), -Math.sin(theta), Math.cos(theta));
+    if (typeof aboutPoint !== "undefined" && aboutPoint !== null) {
+      rotationMatrix = Matrix.translation(aboutPoint.x, aboutPoint.y).concat(rotationMatrix).concat(Matrix.translation(-aboutPoint.x, -aboutPoint.y));
     }
-
     return rotationMatrix;
   };
-
-  /**
+  /***
    * Returns a matrix that corresponds to scaling by factors of sx, sy along
    * the x and y axis respectively.
    * If only one parameter is given the matrix is scaled uniformly along both axis.
@@ -1382,25 +1122,17 @@ $(function() {
    * @param {Point} [aboutPoint] The point about which the scaling occurs. Defaults to (0,0).
    * @returns A matrix transformation representing scaling by sx and sy.
    * @type Matrix
-   */
+  */
   Matrix.scale = function(sx, sy, aboutPoint) {
+    var scaleMatrix;
     sy = sy || sx;
-
-    var scaleMatrix = Matrix(sx, 0, 0, sy);
-
-    if(aboutPoint) {
-      scaleMatrix =
-        Matrix.translation(aboutPoint.x, aboutPoint.y).concat(
-          scaleMatrix
-        ).concat(
-          Matrix.translation(-aboutPoint.x, -aboutPoint.y)
-        );
+    scaleMatrix = Matrix(sx, 0, 0, sy);
+    if (aboutPoint) {
+      scaleMatrix = Matrix.translation(aboutPoint.x, aboutPoint.y).concat(scaleMatrix).concat(Matrix.translation(-aboutPoint.x, -aboutPoint.y));
     }
-
     return scaleMatrix;
   };
-
-  /**
+  /***
    * Returns a matrix that corresponds to a translation of tx, ty.
    * @see Matrix#translate
    *
@@ -1408,35 +1140,31 @@ $(function() {
    * @param {Number} ty The amount to translate in the y direction.
    * @return A matrix transformation representing a translation by tx and ty.
    * @type Matrix
-   */
+  */
   Matrix.translation = function(tx, ty) {
     return Matrix(1, 0, 0, 1, tx, ty);
   };
-
-  /**
+  /***
    * A constant representing the identity matrix.
    * @name IDENTITY
    * @fieldOf Matrix
-   */
+  */
   Matrix.IDENTITY = Matrix();
-  /**
+  /***
    * A constant representing the horizontal flip transformation matrix.
    * @name HORIZONTAL_FLIP
    * @fieldOf Matrix
-   */
+  */
   Matrix.HORIZONTAL_FLIP = Matrix(-1, 0, 0, 1);
-  /**
+  /***
    * A constant representing the vertical flip transformation matrix.
    * @name VERTICAL_FLIP
    * @fieldOf Matrix
-   */
+  */
   Matrix.VERTICAL_FLIP = Matrix(1, 0, 0, -1);
-  
-  // Export to window
   window["Point"] = Point;
-  window["Matrix"] = Matrix;
-}());
-;
+  return (window["Matrix"] = Matrix);
+})();;
 window.Mouse = (function() {
   var Mouse, buttons, set_button;
   Mouse = {
@@ -1467,25 +1195,50 @@ window.Mouse = (function() {
   });
   return Mouse;
 })();;
-/**
+/***
+ * Returns the absolute value of this number.
+ * @type Number
  * @returns The absolute value of the number.
- */
+*/
 Number.prototype.abs = function() {
   return Math.abs(this);
 };
-
-/**
+/***
+ * Returns the mathematical ceiling of this number.
+ * @type Number
  * @returns The number truncated to the nearest integer of greater than or equal value.
- * 
+ *
  * (4.9).ceil(); // => 5
  * (4.2).ceil(); // => 5
  * (-1.2).ceil(); // => -1
- */
+*/
 Number.prototype.ceil = function() {
   return Math.ceil(this);
 };
-
-/**
+/***
+ * Returns the mathematical floor of this number.
+ * @type Number
+ * @returns The number truncated to the nearest integer of less than or equal value.
+ *
+ * (4.9).floor(); // => 4
+ * (4.2).floor(); // => 4
+ * (-1.2).floor(); // => -2
+*/
+Number.prototype.floor = function() {
+  return Math.floor(this);
+};
+/***
+ * Returns this number rounded to the nearest integer.
+ * @type Number
+ * @returns The number rounded to the nearest integer.
+ *
+ * (4.5).round(); // => 5
+ * (4.4).round(); // => 4
+*/
+Number.prototype.round = function() {
+  return Math.round(this);
+};
+/***
  * Returns a number whose value is limited to the given range.
  *
  * Example: limit the output of this computation to between 0 and 255
@@ -1497,23 +1250,11 @@ Number.prototype.ceil = function() {
  * @param {Number} max The upper boundary of the output range
  * @returns A number in the range [min, max]
  * @type Number
- */
+*/
 Number.prototype.clamp = function(min, max) {
   return Math.min(Math.max(this, min), max);
 };
-
-/**
- * @returns The number truncated to the nearest integer of less than or equal value.
- * 
- * (4.9).floor(); // => 4
- * (4.2).floor(); // => 4
- * (-1.2).floor(); // => -2
- */
-Number.prototype.floor = function() {
-  return Math.floor(this);
-};
-
-/**
+/***
  * A mod method useful for array wrapping. The range of the function is
  * constrained to remain in bounds of array indices.
  *
@@ -1525,32 +1266,22 @@ Number.prototype.floor = function() {
  * @param {Number} base
  * @returns An integer between 0 and (base - 1) if base is positive.
  * @type Number
- */
+*/
 Number.prototype.mod = function(base) {
-  var result = this % base;
-
-  if(result < 0 && base > 0) {
+  var result;
+  result = this % base;
+  if (result < 0 && base > 0) {
     result += base;
   }
-
   return result;
 };
-
-/**
- * @returns The number rounded to the nearest integer.
- * 
- * (4.5).round(); // => 5
- * (4.4).round(); // => 4
- */
-Number.prototype.round = function() {
-  return Math.round(this);
-};
-
-/**
+/***
+ * Get the sign of this number as an integer (1, -1, or 0).
+ * @type Number
  * @returns The sign of this number, 0 if the number is 0.
- */
+*/
 Number.prototype.sign = function() {
-  if(this > 0) {
+  if (this > 0) {
     return 1;
   } else if (this < 0) {
     return -1;
@@ -1558,31 +1289,30 @@ Number.prototype.sign = function() {
     return 0;
   }
 };
-
-/**
- * Calls iterator the specified number of times, passing in the number of the 
- * current iteration as a parameter: 0 on first call, 1 on the second call, etc. 
- * 
- * @param {Function} iterator The iterator takes a single parameter, the number 
+/***
+ * Calls iterator the specified number of times, passing in the number of the
+ * current iteration as a parameter: 0 on first call, 1 on the second call, etc.
+ *
+ * @param {Function} iterator The iterator takes a single parameter, the number
  * of the current iteration.
  * @param {Object} [context] The optional context parameter specifies an object
  * to treat as <code>this</code> in the iterator block.
- * 
+ *
  * @returns The number of times the iterator was called.
  * @type Number
- */
+*/
 Number.prototype.times = function(iterator, context) {
-  for(var i = 0; i < this; i++) {
+  var i;
+  i = -1;
+  while (++i < this) {
     iterator.call(context, i);
   }
-
   return i;
 };
-
-/**
- * Returns the the nearest grid resolution less than or equal to the number. 
+/***
+ * Returns the the nearest grid resolution less than or equal to the number.
  *
- *   EX: 
+ *   EX:
  *    (7).snap(8) => 0
  *    (4).snap(8) => 0
  *    (12).snap(8) => 8
@@ -1590,93 +1320,77 @@ Number.prototype.times = function(iterator, context) {
  * @param {Number} resolution The grid resolution to snap to.
  * @returns The nearest multiple of resolution lower than the number.
  * @type Number
- */
+*/
 Number.prototype.snap = function(resolution) {
-  return (this / resolution).floor() * resolution;
+  var n;
+  n = this / resolution;
+  1 / 1;
+  return n.floor() * resolution;
 };
-
 Number.prototype.toColorPart = function() {
-  var s = parseInt(this.clamp(0, 255), 10).toString(16);
-  if(s.length == 1) {
+  var s;
+  s = parseInt(this.clamp(0, 255), 10).toString(16);
+  if (s.length === 1) {
     s = '0' + s;
   }
-
   return s;
 };
-
 Number.prototype.approach = function(target, maxDelta) {
   return (target - this).clamp(-maxDelta, maxDelta) + this;
 };
-
 Number.prototype.approachByRatio = function(target, ratio) {
   return this.approach(target, this * ratio);
 };
-
 Number.prototype.approachRotation = function(target, maxDelta) {
-  var twoPi = 2 * Math.PI;
-
-  while(target > this + Math.PI) {
-    target -= twoPi
+  while (target > this + Math.PI) {
+    target -= Math.TAU;
   }
-
-  while(target < this - Math.PI) {
-    target += twoPi
+  while (target < this - Math.PI) {
+    target += Math.TAU;
   }
-
   return (target - this).clamp(-maxDelta, maxDelta) + this;
 };
-
-/**
- * @returns This number constrained between -PI and PI.
- */
+/***
+* @returns This number constrained between -PI and PI.
+*/
 Number.prototype.constrainRotation = function() {
-  var twoPi = 2 * Math.PI;
-  
-  var target = this;
-
-  while(target > Math.PI) {
-    target -= twoPi
+  var target;
+  target = this;
+  while (target > Math.PI) {
+    target -= Math.TAU;
   }
-
-  while(target < -Math.PI) {
-    target += twoPi
+  while (target < -Math.PI) {
+    target += MATH.TAU;
   }
-      
   return target;
 };
-
 Number.prototype.d = function(sides) {
-  var sum = 0;
-
+  var sum;
+  sum = 0;
   this.times(function() {
-    sum += rand(sides) + 1;
+    return sum += rand(sides) + 1;
   });
-
   return sum;
 };
-
-/** The mathematical circle constant of 1 turn. */
-Math.TAU = 2 * Math.PI;
-
-;
-(function($){
-  $.fn.powerCanvas = function(options) {
-    options = options || {};
-
-    var canvas = this.get(0);
-
-    if(!canvas) {
-      return this;
-    }
-
-    var context;
-
-    /**
-     * @name PowerCanvas
-     * @constructor
-     */
-    var $canvas = $(canvas).extend({
-      /**
+/***
+* The mathematical circle constant of 1 turn.
+* @name TAU
+* @fieldOf Math
+*/
+Math.TAU = 2 * Math.PI;;
+(function($) {
+  return ($.fn.powerCanvas = function(options) {
+    var $canvas, canvas, context;
+    options || (options = {});
+    canvas = this.get(0);
+    context = undefined;
+    /***
+    * PowerCanvas provides a convenient wrapper for working with Context2d.
+    * @name PowerCanvas
+    * @constructor
+    */
+    $canvas = $(canvas).extend({
+      /***
        * Passes this canvas to the block with the given matrix transformation
        * applied. All drawing methods called within the block will draw
        * into the canvas with the transformation applied. The transformation
@@ -1688,79 +1402,63 @@ Math.TAU = 2 * Math.PI;
        * @param {Matrix} matrix
        * @param {Function} block
        * @returns this
-       */
+      */
       withTransform: function(matrix, block) {
         context.save();
-
-        context.transform(
-          matrix.a,
-          matrix.b,
-          matrix.c,
-          matrix.d,
-          matrix.tx,
-          matrix.ty
-        );
-
+        context.transform(matrix.a, matrix.b, matrix.c, matrix.d, matrix.tx, matrix.ty);
         try {
           block(this);
         } finally {
           context.restore();
         }
-
         return this;
       },
-
       clear: function() {
         context.clearRect(0, 0, canvas.width, canvas.height);
-
         return this;
       },
-      
       context: function() {
         return context;
       },
-      
       element: function() {
         return canvas;
       },
-      
       createLinearGradient: function(x0, y0, x1, y1) {
         return context.createLinearGradient(x0, y0, x1, y1);
       },
-      
       createRadialGradient: function(x0, y0, r0, x1, y1, r1) {
         return context.createRadialGradient(x0, y0, r0, x1, y1, r1);
       },
-      
       createPattern: function(image, repitition) {
         return context.createPattern(image, repitition);
       },
-
       drawImage: function(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight) {
         context.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
-
         return this;
       },
-      
       drawLine: function(x1, y1, x2, y2, width) {
-        width = width || 3;
-
+        if (arguments.length === 3) {
+          width = x2;
+          x2 = y1.x;
+          y2 = y1.y;
+          y1 = x1.y;
+          x1 = x1.x;
+        }
+        width || (width = 3);
         context.lineWidth = width;
         context.beginPath();
         context.moveTo(x1, y1);
         context.lineTo(x2, y2);
         context.closePath();
         context.stroke();
+        return this;
       },
-
       fill: function(color) {
         $canvas.fillColor(color);
         context.fillRect(0, 0, canvas.width, canvas.height);
-
         return this;
       },
-
-      /**
+      /***
        * Fills a circle at the specified position with the specified
        * radius and color.
        *
@@ -1771,24 +1469,22 @@ Math.TAU = 2 * Math.PI;
        * @param {Number} y
        * @param {Number} radius
        * @param {Number} color
-       * @see PowerCanvas#fillColor 
+       * @see PowerCanvas#fillColor
        * @returns this
-       */
+      */
       fillCircle: function(x, y, radius, color) {
         $canvas.fillColor(color);
         context.beginPath();
-        context.arc(x, y, radius, 0, Math.PI*2, true);
+        context.arc(x, y, radius, 0, Math.TAU, true);
         context.closePath();
         context.fill();
-
         return this;
       },
-
-      /**
+      /***
        * Fills a rectangle with the current fillColor
        * at the specified position with the specified
-       * width and height 
-      
+       * width and height
+
        * @name fillRect
        * @methodOf PowerCanvas#
        *
@@ -1796,25 +1492,18 @@ Math.TAU = 2 * Math.PI;
        * @param {Number} y
        * @param {Number} width
        * @param {Number} height
-       * @see PowerCanvas#fillColor 
+       * @see PowerCanvas#fillColor
        * @returns this
-       */      
-      
+      */
       fillRect: function(x, y, width, height) {
         context.fillRect(x, y, width, height);
-
         return this;
       },
-
-      /**
+      /***
       * Adapted from http://js-bits.blogspot.com/2010/07/canvas-rounded-corner-rectangles.html
       */
-      
       fillRoundRect: function(x, y, width, height, radius, strokeWidth) {
-        if (!radius) {
-          radius = 5;
-        }
-        
+        radius || (radius = 5);
         context.beginPath();
         context.moveTo(x + radius, y);
         context.lineTo(x + width - radius, y);
@@ -1824,116 +1513,105 @@ Math.TAU = 2 * Math.PI;
         context.lineTo(x + radius, y + height);
         context.quadraticCurveTo(x, y + height, x, y + height - radius);
         context.lineTo(x, y + radius);
-        context.quadraticCurveTo(x, y, x + radius, y);        
+        context.quadraticCurveTo(x, y, x + radius, y);
         context.closePath();
-                  
         if (strokeWidth) {
-          context.lineWidth = strokeWidth;  
+          context.lineWidth = strokeWidth;
           context.stroke();
         }
-        
-        context.fill();  
-    
-        return this;    
-      },       
-
-      fillText: function(text, x, y) {
-        context.fillText(text, x, y);
-
+        context.fill();
         return this;
       },
-
-      centerText: function(text, y) {
-        var textWidth = $canvas.measureText(text);
-
-        $canvas.fillText(text, (canvas.width - textWidth) / 2, y);
+      fillText: function(text, x, y) {
+        context.fillText(text, x, y);
+        return this;
       },
-
+      centerText: function(text, y) {
+        var textWidth;
+        textWidth = $canvas.measureText(text);
+        return $canvas.fillText(text, (canvas.width - textWidth) / 2, y);
+      },
       fillWrappedText: function(text, x, y, width) {
-        var tokens = text.split(" ");
-        var tokens2 = text.split(" ");
-        var lineHeight = 16;
-
+        var lineHeight, tokens, tokens2;
+        tokens = text.split(" ");
+        tokens2 = text.split(" ");
+        lineHeight = 16;
         if ($canvas.measureText(text) > width) {
-          if (tokens.length % 2 == 0) {
-            tokens2 = tokens.splice(tokens.length / 2, (tokens.length / 2), "");
+          if (tokens.length % 2 === 0) {
+            tokens2 = tokens.splice(tokens.length / 2, tokens.length / 2, "");
           } else {
             tokens2 = tokens.splice(tokens.length / 2 + 1, (tokens.length / 2) + 1, "");
           }
           context.fillText(tokens.join(" "), x, y);
-          context.fillText(tokens2.join(" "), x, y + lineHeight);
+          return context.fillText(tokens2.join(" "), x, y + lineHeight);
         } else {
-          context.fillText(tokens.join(" "), x, y + lineHeight);
+          return context.fillText(tokens.join(" "), x, y + lineHeight);
         }
       },
-
       fillColor: function(color) {
-        if(color) {
-          context.fillStyle = color.toString();
+        if (color) {
+          if (color.channels) {
+            context.fillStyle = color.toString();
+            log(color);
+          } else {
+            context.fillStyle = color;
+          }
           return this;
         } else {
           return context.fillStyle;
         }
       },
-
       font: function(font) {
-        context.font = font;
+        if (typeof font !== "undefined" && font !== null) {
+          context.font = font;
+          return this;
+        } else {
+          return context.font;
+        }
       },
-
       measureText: function(text) {
         return context.measureText(text).width;
       },
-
       putImageData: function(imageData, x, y) {
         context.putImageData(imageData, x, y);
-
         return this;
       },
-
       strokeColor: function(color) {
-        if(color) {
-          context.strokeStyle = color.toString();
+        if (color) {
+          if (color.channels) {
+            context.strokeStyle = color.toString();
+          } else {
+            context.strokeStyle = color;
+          }
           return this;
         } else {
           return context.strokeStyle;
         }
       },
-      
       strokeRect: function(x, y, width, height) {
         context.strokeRect(x, y, width, height);
-
         return this;
       },
-
       textAlign: function(textAlign) {
         context.textAlign = textAlign;
         return this;
       },
-
       height: function() {
         return canvas.height;
       },
-
       width: function() {
         return canvas.width;
       }
     });
-
-    if(canvas.getContext) {
+    if ((typeof canvas === "undefined" || canvas === null) ? undefined : canvas.getContext) {
       context = canvas.getContext('2d');
-
-      if(options.init) {
+      if (options.init) {
         options.init($canvas);
       }
-
       return $canvas;
-    } else {
-      return false;
     }
-
-  };
-})(jQuery);
-;
+  });
+})(jQuery);;
 (function($) {
   window.Random = $.extend(window.Random, {
     angle: function() {
@@ -1995,7 +1673,31 @@ Math.TAU = 2 * Math.PI;
   return (window.Local = $.extend(window.Local, {
     get: retrieve,
     set: store,
-    put: store
+    put: store,
+    /***
+    Access an instance of Local with a specified prefix.
+
+    @name new
+    @methodOf Local
+
+    @param {String} prefix
+    @type Local
+    @returns An interface to local storage with the given prefix applied.
+    */
+    "new": function(prefix) {
+      prefix || (prefix = "");
+      return {
+        get: function(key) {
+          return retrieve("" + (prefix) + "_key");
+        },
+        set: function(key, value) {
+          return store("" + (prefix) + "_key", value);
+        },
+        put: function(key, value) {
+          return store("" + (prefix) + "_key", value);
+        }
+      };
+    }
   }));
 })(jQuery);;
 String.prototype.constantize = function() {
@@ -2012,6 +1714,9 @@ String.prototype.parse = function() {
   } catch (e) {
     return this;
   }
+};
+String.prototype.blank = function() {
+  return /^\s*$/.test(this);
 };;
 ;
 (function() {
@@ -2263,6 +1968,13 @@ var Collision;
 Collision = {
   rectangular: function(a, b) {
     return a.x < b.x + b.width && a.x + a.width > b.x && a.y < b.y + b.height && a.y + a.height > b.y;
+  },
+  circular: function(a, b) {
+    var dx, dy, r;
+    r = a.radius + b.radius;
+    dx = b.x - a.x;
+    dy = b.y - a.y;
+    return r * r >= dx * dx + dy * dy;
   },
   rayRectangle: function(source, direction, target) {
     var areaPQ0, areaPQ1, hit, p0, p1, t, tX, tY, xval, xw, yval, yw;
