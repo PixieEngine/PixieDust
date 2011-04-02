@@ -3,6 +3,14 @@ App = {};var App;
 App = {};;
 ;
 /***
+* Joins all elements of an array into a string.
+* @name join
+* @param [separator] Specifies a string to separate each element of the array.
+* The separator is converted to a string if necessary. If omitted, the array
+* elements are separated with a comma.
+* @methodOf Array#
+*/
+/***
 * Creates and returns a copy of the array. The copy contains
 * the same objects.
 *
@@ -573,7 +581,7 @@ Function.prototype.withAfter = function(interception) {
     return result;
   };
 };;
-/*
+/***
  * jQuery Hotkeys Plugin
  * Copyright 2010, John Resig
  * Dual licensed under the MIT or GPL Version 2 licenses.
@@ -584,118 +592,174 @@ Function.prototype.withAfter = function(interception) {
  * Original idea by:
  * Binny V A, http://www.openjs.com/scripts/events/keyboard_shortcuts/
 */
-
-(function(jQuery){
-  
+(function(jQuery) {
+  var keyHandler;
   jQuery.hotkeys = {
     version: "0.8",
-
     specialKeys: {
-      8: "backspace", 9: "tab", 13: "return", 16: "shift", 17: "ctrl", 18: "alt", 19: "pause",
-      20: "capslock", 27: "esc", 32: "space", 33: "pageup", 34: "pagedown", 35: "end", 36: "home",
-      37: "left", 38: "up", 39: "right", 40: "down", 45: "insert", 46: "del", 
-      96: "0", 97: "1", 98: "2", 99: "3", 100: "4", 101: "5", 102: "6", 103: "7",
-      104: "8", 105: "9", 106: "*", 107: "+", 109: "-", 110: ".", 111 : "/", 
-      112: "f1", 113: "f2", 114: "f3", 115: "f4", 116: "f5", 117: "f6", 118: "f7", 119: "f8", 
-      120: "f9", 121: "f10", 122: "f11", 123: "f12", 144: "numlock", 145: "scroll", 188: ",", 191: "/", 224: "meta"
+      8: "backspace",
+      9: "tab",
+      13: "return",
+      16: "shift",
+      17: "ctrl",
+      18: "alt",
+      19: "pause",
+      20: "capslock",
+      27: "esc",
+      32: "space",
+      33: "pageup",
+      34: "pagedown",
+      35: "end",
+      36: "home",
+      37: "left",
+      38: "up",
+      39: "right",
+      40: "down",
+      45: "insert",
+      46: "del",
+      96: "0",
+      97: "1",
+      98: "2",
+      99: "3",
+      100: "4",
+      101: "5",
+      102: "6",
+      103: "7",
+      104: "8",
+      105: "9",
+      106: "*",
+      107: "+",
+      109: "-",
+      110: ".",
+      111: "/",
+      112: "f1",
+      113: "f2",
+      114: "f3",
+      115: "f4",
+      116: "f5",
+      117: "f6",
+      118: "f7",
+      119: "f8",
+      120: "f9",
+      121: "f10",
+      122: "f11",
+      123: "f12",
+      144: "numlock",
+      145: "scroll",
+      186: ";",
+      187: "=",
+      188: ",",
+      189: "-",
+      190: ".",
+      191: "/",
+      219: "[",
+      220: "\\",
+      221: "]",
+      222: "'",
+      224: "meta"
     },
-  
     shiftNums: {
-      "`": "~", "1": "!", "2": "@", "3": "#", "4": "$", "5": "%", "6": "^", "7": "&", 
-      "8": "*", "9": "(", "0": ")", "-": "_", "=": "+", ";": ": ", "'": "\"", ",": "<", 
-      ".": ">",  "/": "?",  "\\": "|"
+      "`": "~",
+      "1": "!",
+      "2": "@",
+      "3": "#",
+      "4": "$",
+      "5": "%",
+      "6": "^",
+      "7": "&",
+      "8": "*",
+      "9": "(",
+      "0": ")",
+      "-": "_",
+      "=": "+",
+      ";": ":",
+      "'": "\"",
+      ",": "<",
+      ".": ">",
+      "/": "?",
+      "\\": "|"
     }
   };
-
-  function keyHandler( handleObj ) {
-    // Only care when a possible input has been specified
-    if ( typeof handleObj.data !== "string" ) {
-      return;
+  keyHandler = function(handleObj) {
+    var keys, origHandler;
+    if (typeof handleObj.data !== "string") {
+      return null;
     }
-    
-    var origHandler = handleObj.handler,
-      keys = handleObj.data.toLowerCase().split(" ");
-  
-    handleObj.handler = function( event ) {
-      // Don't fire in text-accepting inputs that we didn't directly bind to
-      if ( this !== event.target && (/textarea|select/i.test( event.target.nodeName ) ||
-         event.target.type === "text" || event.target.type === "password") ) {
-        return;
+    origHandler = handleObj.handler;
+    keys = handleObj.data.toLowerCase().split(" ");
+    return (handleObj.handler = function(event) {
+      var _i, _len, _ref, _result, character, key, modif, possible, special;
+      if (this !== event.target && (/textarea|select/i.test(event.target.nodeName) || event.target.type === "text" || event.target.type === "password")) {
+        return null;
       }
-      
-      // Keypress represents characters, not special keys
-      var special = event.type !== "keypress" && jQuery.hotkeys.specialKeys[ event.which ],
-        character = String.fromCharCode( event.which ).toLowerCase(),
-        key, modif = "", possible = {};
-
-      // check combinations (alt|ctrl|shift+anything)
-      if ( event.altKey && special !== "alt" ) {
+      special = event.type !== "keypress" && jQuery.hotkeys.specialKeys[event.which];
+      character = String.fromCharCode(event.which).toLowerCase();
+      modif = "";
+      possible = {};
+      if (event.altKey && special !== "alt") {
         modif += "alt+";
       }
-
-      if ( event.ctrlKey && special !== "ctrl" ) {
+      if (event.ctrlKey && special !== "ctrl") {
         modif += "ctrl+";
       }
-      
-      // TODO: Need to make sure this works consistently across platforms
-      if ( event.metaKey && !event.ctrlKey && special !== "meta" ) {
+      if (event.metaKey && !event.ctrlKey && special !== "meta") {
         modif += "meta+";
       }
-
-      if ( event.shiftKey && special !== "shift" ) {
+      if (event.shiftKey && special !== "shift") {
         modif += "shift+";
       }
-
-      if ( special ) {
-        possible[ modif + special ] = true;
-
+      if (special) {
+        possible[modif + special] = true;
       } else {
-        possible[ modif + character ] = true;
-        possible[ modif + jQuery.hotkeys.shiftNums[ character ] ] = true;
-
-        // "$" can be triggered as "Shift+4" or "Shift+$" or just "$"
-        if ( modif === "shift+" ) {
-          possible[ jQuery.hotkeys.shiftNums[ character ] ] = true;
+        possible[modif + character] = true;
+        possible[modif + jQuery.hotkeys.shiftNums[character]] = true;
+        if (modif === "shift+") {
+          possible[jQuery.hotkeys.shiftNums[character]] = true;
         }
       }
-
-      for ( var i = 0, l = keys.length; i < l; i++ ) {
-        if ( possible[ keys[i] ] ) {
-          return origHandler.apply( this, arguments );
+      _result = []; _ref = keys;
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        key = _ref[_i];
+        if (possible[key]) {
+          return origHandler.apply(this, arguments);
         }
       }
-    };
-  }
-
-  jQuery.each([ "keydown", "keyup", "keypress" ], function() {
-    jQuery.event.special[ this ] = { add: keyHandler };
+      return _result;
+    });
+  };
+  return jQuery.each(["keydown", "keyup", "keypress"], function() {
+    return (jQuery.event.special[this] = {
+      add: keyHandler
+    });
   });
-
-})( jQuery );;
-/**
+})(jQuery);;
+var __hasProp = Object.prototype.hasOwnProperty;
+/***
  * Merges properties from objects into target without overiding.
  * First come, first served.
  * @return target
- */
+*/
 jQuery.extend({
   reverseMerge: function(target) {
-    var i = 1, length = arguments.length;
-
-    for( ; i < length; i++) {
-      var object = arguments[i];
-
-      for(var name in object) {
-        if(!target.hasOwnProperty(name)) {
+    var _i, _len, _ref, _ref2, i, name, object;
+    _ref = arguments;
+    for (i = 0, _len = _ref.length; i < _len; i++) {
+      object = _ref[i];
+      if (i === 0) {
+        continue;
+      }
+      _ref2 = object;
+      for (name in _ref2) {
+        if (!__hasProp.call(_ref2, name)) continue;
+        _i = _ref2[name];
+        if (!(target.hasOwnProperty(name))) {
           target[name] = object[name];
         }
       }
     }
-
     return target;
   }
-});
-
-;
+});;
 $(function() {
   var keyName;
   /***
@@ -2016,6 +2080,27 @@ Collision = {
     dx = b.x - a.x;
     dy = b.y - a.y;
     return r * r >= dx * dx + dy * dy;
+  },
+  rayCircle: function(source, direction, target) {
+    var dt, hit, intersection, intersectionToTarget, intersectionToTargetLength, laserToTarget, projection, projectionLength, radius;
+    radius = target.radius();
+    target = target.position();
+    laserToTarget = target.subtract(source);
+    projectionLength = direction.dot(laserToTarget);
+    if (projectionLength < 0) {
+      return false;
+    }
+    projection = direction.scale(projectionLength);
+    intersection = source.add(projection);
+    intersectionToTarget = target.subtract(intersection);
+    intersectionToTargetLength = intersectionToTarget.length();
+    if (intersectionToTargetLength < radius) {
+      hit = true;
+    }
+    if (hit) {
+      dt = Math.sqrt(radius * radius - intersectionToTargetLength * intersectionToTargetLength);
+      return (hit = direction.scale(projectionLength - dt).add(source));
+    }
   },
   rayRectangle: function(source, direction, target) {
     var areaPQ0, areaPQ1, hit, p0, p1, t, tX, tY, xval, xw, yval, yw;
