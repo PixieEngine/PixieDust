@@ -22,6 +22,16 @@
       
       eventCallbacks[event].push(callback)
 
+    ###*
+    * The unbind method removes a specific event listener, or all event listeners if
+    * no specific listener is given.
+    *
+    * @name unbind
+    * @methodOf Bindable#
+    *
+    * @param {String} event The event to remove the listener from.
+    * @param {Function} [callback] The listener to remove.
+    ###
     unbind: (event, callback) ->
       eventCallbacks[event] = eventCallbacks[event] || []
       
