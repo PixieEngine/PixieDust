@@ -1,11 +1,13 @@
-test "Bindable#bind and Bindable#trigger", 1, ->
+module "Bindable"
+
+test "#bind and #trigger", 1, ->
   o = $.extend({}, Bindable())
 
   o.bind("test", ok)
   
   o.trigger("test")
 
-test "Bindable multiple methods", 2, ->
+test "Multiple bindings", 2, ->
   o = $.extend({}, Bindable())
 
   o.bind("test", ok)
@@ -13,7 +15,7 @@ test "Bindable multiple methods", 2, ->
   
   o.trigger("test")
  
-test "Bindable#trigger arguments", ->
+test "#trigger arguments", ->
   o = $.extend({}, Bindable())
   
   param = 3
@@ -24,4 +26,6 @@ test "Bindable#trigger arguments", ->
     equal(p3, param)
     
   o.trigger "test", ["the message", 3]
+
+module()
 
