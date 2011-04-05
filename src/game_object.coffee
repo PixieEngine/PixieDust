@@ -55,13 +55,7 @@ GameObject = (I) ->
   
   self.trigger('create') unless I.created
   I.created = true
-  
-  #TODO: Move this
-  $(document).bind 'mousedown', (event) ->    
-    if (I.x <= event.offsetX <= I.x + I.width) && 
-    (I.y <= event.offsetY <= I.y + I.height)
-      self.trigger('click')
-  
+
   self
 
 GameObject.construct = (entityData) ->
