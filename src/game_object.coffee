@@ -51,7 +51,7 @@ GameObject = (I) ->
       if typeof event == "function"
         self.bind(eventName, event)
       else
-        self.bind(eventName, eval( "(function(self) {#{event}})" ))
+        self.bind(eventName, eval( "(function() {#{event}})" ))
   
   self.trigger('create') unless I.created
   I.created = true
