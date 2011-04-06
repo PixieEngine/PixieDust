@@ -4061,6 +4061,91 @@ Emitterable = function(I, self) {
     return self;
   });
 })(jQuery);;
+Engine.Collision = function(I, self) {
+  return {
+    collides: function(bounds, sourceObject) {
+      return I.objects.inject(false, function(collided, object) {
+        return collided || (object.solid() && (object !== sourceObject) && object.collides(bounds));
+      });
+    },
+    rayCollides: function(source, direction, sourceObject) {
+      var hits, nearestDistance, nearestHit;
+      hits = I.objects.map(function(object) {
+        var hit;
+        hit = object.solid() && (object !== sourceObject) && Collision.rayRectangle(source, direction, object.centeredBounds());
+        if (hit) {
+          hit.object = object;
+        }
+        return hit;
+      });
+      nearestDistance = Infinity;
+      nearestHit = null;
+      hits.each(function(hit) {
+        var d;
+        if (hit && (d = hit.distance(source)) < nearestDistance) {
+          nearestDistance = d;
+          return (nearestHit = hit);
+        }
+      });
+      return nearestHit;
+    }
+  };
+};;
+Engine.Developer = function(I, self) {
+  self.bind("draw", function(canvas) {
+    if (I.paused) {
+      canvas.withTransform(I.cameraTransform, function(canvas) {
+        return I.objects.each(function(object) {
+          canvas.fillColor('rgba(255, 0, 0, 0.5)');
+          return canvas.fillRect(object.bounds().x, object.bounds().y, object.bounds().width, object.bounds().height);
+        });
+      });
+      canvas.fillColor('rgba(0, 0, 0, 0.5)');
+      canvas.fillRect(430, 10, 200, 60);
+      canvas.fillColor('#fff');
+      canvas.fillText("Developer Mode. Press Esc to resume", 440, 25);
+      canvas.fillText("Shift+Left click to add boxes", 440, 43);
+      return canvas.fillText("Right click red boxes to edit properties", 440, 60);
+    }
+  });
+  return {};
+};;
+Engine.HUD = function(I, self) {
+  var hudCanvas;
+  hudCanvas = $("<canvas width=640 height=480 />").powerCanvas();
+  hudCanvas.font("bold 9pt consolas, 'Courier New', 'andale mono', 'lucida console', monospace");
+  self.bind("draw", function(canvas) {
+    var hud;
+    I.objects.each(function(object) {
+      return (typeof object.drawHUD === "function" ? object.drawHUD(hudCanvas) : undefined);
+    });
+    hud = hudCanvas.element();
+    return canvas.drawImage(hud, 0, 0, hud.width, hud.height, 0, 0, hud.width, hud.height);
+  });
+  return {};
+};;
+Engine.SaveState = function(I, self) {
+  var savedState;
+  savedState = null;
+  return {
+    rewind: function() {},
+    saveState: function() {
+      return (savedState = I.objects.map(function(object) {
+        return $.extend({}, object.I);
+      }));
+    },
+    loadState: function(newState) {
+      return newState || (newState = savedState) ? (I.objects = newState.map(function(objectData) {
+        return GameObject.construct($.extend({}, objectData));
+      })) : null;
+    },
+    reload: function() {
+      return (I.objects = I.objects.map(function(object) {
+        return GameObject.construct(object.I);
+      }));
+    }
+  };
+};;
 Engine.Selector = function(I, self) {
   var instanceMethods;
   instanceMethods = {
@@ -4135,6 +4220,30 @@ $.extend(Engine.Selector, {
     };
   }
 });;
+Engine.Shadows = function(I, self) {
+  var shadowCanvas;
+  shadowCanvas = $("<canvas width=640 height=480 />").powerCanvas();
+  self.bind("draw", function(canvas) {
+    var shadows;
+    if (I.ambientLight < 1) {
+      shadowCanvas.compositeOperation("source-over");
+      shadowCanvas.clear();
+      shadowCanvas.fill("rgba(0, 0, 0, " + (1 - I.ambientLight) + ")");
+      shadowCanvas.compositeOperation("destination-out");
+      shadowCanvas.withTransform(I.cameraTransform, function(shadowCanvas) {
+        return I.objects.each(function(object, i) {
+          if (object.illuminate) {
+            shadowCanvas.globalAlpha(1);
+            return object.illuminate(shadowCanvas);
+          }
+        });
+      });
+      shadows = shadowCanvas.element();
+      return canvas.drawImage(shadows, 0, 0, shadows.width, shadows.height, 0, 0, shadows.width, shadows.height);
+    }
+  });
+  return {};
+};;
 var GameObject;
 GameObject = function(I) {
   var autobindEvents, defaultModules, modules, self;
@@ -4516,113 +4625,4 @@ SpeechBox = function(I) {
     return options.pixieId ? fromPixieId(options.pixieId, options.complete, options.entity) : null;
   });
 })();;
-Engine.HUD = function(I, self) {
-  var hudCanvas;
-  hudCanvas = $("<canvas width=640 height=480 />").powerCanvas();
-  hudCanvas.font("bold 9pt consolas, 'Courier New', 'andale mono', 'lucida console', monospace");
-  self.bind("draw", function(canvas) {
-    var hud;
-    I.objects.each(function(object) {
-      return (typeof object.drawHUD === "function" ? object.drawHUD(hudCanvas) : undefined);
-    });
-    hud = hudCanvas.element();
-    return canvas.drawImage(hud, 0, 0, hud.width, hud.height, 0, 0, hud.width, hud.height);
-  });
-  return {};
-};;
-Engine.Developer = function(I, self) {
-  self.bind("draw", function(canvas) {
-    if (I.paused) {
-      canvas.withTransform(I.cameraTransform, function(canvas) {
-        return I.objects.each(function(object) {
-          canvas.fillColor('rgba(255, 0, 0, 0.5)');
-          return canvas.fillRect(object.bounds().x, object.bounds().y, object.bounds().width, object.bounds().height);
-        });
-      });
-      canvas.fillColor('rgba(0, 0, 0, 0.5)');
-      canvas.fillRect(430, 10, 200, 60);
-      canvas.fillColor('#fff');
-      canvas.fillText("Developer Mode. Press Esc to resume", 440, 25);
-      canvas.fillText("Shift+Left click to add boxes", 440, 43);
-      return canvas.fillText("Right click red boxes to edit properties", 440, 60);
-    }
-  });
-  return {};
-};;
-Engine.Shadows = function(I, self) {
-  var shadowCanvas;
-  shadowCanvas = $("<canvas width=640 height=480 />").powerCanvas();
-  self.bind("draw", function(canvas) {
-    var shadows;
-    if (I.ambientLight < 1) {
-      shadowCanvas.compositeOperation("source-over");
-      shadowCanvas.clear();
-      shadowCanvas.fill("rgba(0, 0, 0, " + (1 - I.ambientLight) + ")");
-      shadowCanvas.compositeOperation("destination-out");
-      shadowCanvas.withTransform(I.cameraTransform, function(shadowCanvas) {
-        return I.objects.each(function(object, i) {
-          if (object.illuminate) {
-            shadowCanvas.globalAlpha(1);
-            return object.illuminate(shadowCanvas);
-          }
-        });
-      });
-      shadows = shadowCanvas.element();
-      return canvas.drawImage(shadows, 0, 0, shadows.width, shadows.height, 0, 0, shadows.width, shadows.height);
-    }
-  });
-  return {};
-};;
-Engine.SaveState = function(I, self) {
-  var savedState;
-  savedState = null;
-  return {
-    rewind: function() {},
-    saveState: function() {
-      return (savedState = I.objects.map(function(object) {
-        return $.extend({}, object.I);
-      }));
-    },
-    loadState: function(newState) {
-      return newState || (newState = savedState) ? (I.objects = newState.map(function(objectData) {
-        return GameObject.construct($.extend({}, objectData));
-      })) : null;
-    },
-    reload: function() {
-      return (I.objects = I.objects.map(function(object) {
-        return GameObject.construct(object.I);
-      }));
-    }
-  };
-};;
-Engine.Collision = function(I, self) {
-  return {
-    collides: function(bounds, sourceObject) {
-      return I.objects.inject(false, function(collided, object) {
-        return collided || (object.solid() && (object !== sourceObject) && object.collides(bounds));
-      });
-    },
-    rayCollides: function(source, direction, sourceObject) {
-      var hits, nearestDistance, nearestHit;
-      hits = I.objects.map(function(object) {
-        var hit;
-        hit = object.solid() && (object !== sourceObject) && Collision.rayRectangle(source, direction, object.centeredBounds());
-        if (hit) {
-          hit.object = object;
-        }
-        return hit;
-      });
-      nearestDistance = Infinity;
-      nearestHit = null;
-      hits.each(function(hit) {
-        var d;
-        if (hit && (d = hit.distance(source)) < nearestDistance) {
-          nearestDistance = d;
-          return (nearestHit = hit);
-        }
-      });
-      return nearestHit;
-    }
-  };
-};;
 ;$(function(){ undefined });
