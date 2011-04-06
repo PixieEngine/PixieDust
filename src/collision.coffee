@@ -1,3 +1,9 @@
+###*
+Collision holds many methods useful for checking geometric overlap of various objects.
+
+@name Collision
+@namespace
+###
 Collision =
   rectangular: (a, b) ->
     a.x < b.x + b.width &&
