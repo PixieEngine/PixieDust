@@ -85,7 +85,7 @@ asyncTest "Running Engine", ->
   
   setTimeout ->
     engine.pause()
-    age = engine.age()
+    age = engine.I.age
     ok(62 <= age <= 68, "Engine ran #{age} steps in #{milliseconds}ms")
 
     start()
