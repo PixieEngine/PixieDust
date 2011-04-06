@@ -3222,8 +3222,68 @@ valueOf()
   };
   return (window.Animation.fromPixieId = fromPixieId);
 })();;
-
-;
+(function($) {
+  var Bindable;
+  /***
+  * Bindable module
+  * @name Bindable
+  * @constructor
+  */
+  Bindable = function() {
+    var eventCallbacks;
+    eventCallbacks = {};
+    return {
+      /***
+      * The bind method adds a function as an event listener.
+      *
+      * @name bind
+      * @methodOf Bindable#
+      *
+      * @param {String} event The event to listen to.
+      * @param {Function} callback The function to be called when the specified event
+      * is triggered.
+      */
+      bind: function(event, callback) {
+        eventCallbacks[event] = eventCallbacks[event] || [];
+        return eventCallbacks[event].push(callback);
+      },
+      /***
+      * The unbind method removes a specific event listener, or all event listeners if
+      * no specific listener is given.
+      *
+      * @name unbind
+      * @methodOf Bindable#
+      *
+      * @param {String} event The event to remove the listener from.
+      * @param {Function} [callback] The listener to remove.
+      */
+      unbind: function(event, callback) {
+        eventCallbacks[event] = eventCallbacks[event] || [];
+        return callback ? eventCallbacks.remove(callback) : (eventCallbacks[event] = []);
+      },
+      /***
+      * The trigger method calls all listeners attached to the specified event.
+      *
+      * @name trigger
+      * @methodOf Bindable#
+      *
+      * @param {String} event The event to trigger.
+      * @param {Array} [extraParameters] Additional parameters to pass to the event listener.
+      */
+      trigger: function(event, extraParameters) {
+        var callbacks, self;
+        callbacks = eventCallbacks[event];
+        if (callbacks && callbacks.length) {
+          self = this;
+          return callbacks.each(function(callback) {
+            return callback.apply(self, [self].concat(extraParameters));
+          });
+        }
+      }
+    };
+  };
+  return (window.Bindable = Bindable);
+})(jQuery);;
 var Bounded;
 /***
 The Bounded module is used to provide basic data about the
@@ -3715,198 +3775,275 @@ Emitterable = function(I, self) {
   };
 };;
 (function($) {
-  var specialKeys = {
-    8: "backspace", 9: "tab", 13: "return", 16: "shift", 17: "ctrl", 18: "alt", 
-    19: "pause", 20: "capslock", 27: "esc", 32: "space", 
-    33: "pageup", 34: "pagedown", 35: "end", 36: "home", 
-    37: "left", 38: "up", 39: "right", 40: "down", 45: "insert", 46: "del", 
-    96: "0", 97: "1", 98: "2", 99: "3", 100: "4", 101: "5", 102: "6", 103: "7",
-    104: "8", 105: "9", 106: "*", 107: "+", 109: "-", 110: ".", 111 : "/", 
-    112: "f1", 113: "f2", 114: "f3", 115: "f4", 116: "f5", 117: "f6", 
-    118: "f7", 119: "f8", 120: "f9", 121: "f10", 122: "f11", 123: "f12", 
-    144: "numlock", 145: "scroll", 188: ",", 191: "/", 224: "meta"
+  var defaults, hudCanvas, shadowCanvas;
+  defaults = {
+    FPS: 33.3333,
+    ambientLight: 1,
+    backgroundColor: "#FFFFFF",
+    cameraTransform: Matrix.IDENTITY
   };
-  
-  $(function() {
-    /**
-    * @name Game
-    */
-    window.Game = (function () {
-      var keydownListeners = {};
-      var keyheldListeners = {};
-      var keyupListeners = {};
-      
-      var prevKeysDown = {};
-      var keysDown = {};
-      var keysUp = {};
-      
-      var step = 0;
-      var score = 0;
-      
-      var drawCallback = $.noop;
-      
-      var self = {
-        draw: function(fn) {
-          drawCallback = fn;
-        },
-        
-        exec: function(command) {
-          var result = '';
+  shadowCanvas = $("<canvas width=640 height=480 />").powerCanvas();
+  hudCanvas = $("<canvas width=640 height=480 />").powerCanvas();
+  hudCanvas.font("bold 9pt consolas, 'Courier New', 'andale mono', 'lucida console', monospace");
+  /***
+  The engine holds a bunch of game objects and fires off cool events.
 
-          try {
-            result = eval(command);
-          } catch(e) {
-            result = e.message;
-          }
-          
-          return result;
-        },
-        
-        keydown: function(key, fn) {
-          if(fn) {
-            keydownListeners[key] = keydownListeners[key] || [];
-            
-            keydownListeners[key].push(fn);
-          } else {
-            return prevKeysDown[key];
-          }
-        },
-        
-        keyheld: function(key, fn) {
-          keyheldListeners[key] = keyheldListeners[key] || [];
-          
-          keyheldListeners[key].push(fn);
-        },
-        
-        keyup: function(key, fn) {
-          keyupListeners[key] = keyupListeners[key] || [];
-          
-          keyupListeners[key].push(fn);
-        },
-        
-        score: function(val) {
-          if (val !== undefined) {
-            score += val;      
-            return self;
-          } else {
-            return score;
-          }    
-        },
-        
-        setFramerate: function(newValue) {
-          self.stop();
-          
-          setInterval(function() {
-            checkInputs();
-            self.trigger('update');
-          
-            drawCallback(canvas);
-          
-            step += 1;
-          }, 1000 / newValue);
-        },        
-        
-        step: function() {
-          return step;
-        },
-        
-        stop: function() {
-          clearInterval(loopInterval);
-        },
-        
-        update: function(fn) {
-          self.unbind('update');
-          self.bind('update', fn);
-        },
-        
-        width: App.width,
-        height: App.height
-      };
-      
-      $.extend(self, Bindable());
-      
-      function triggerListener(listener) {
-        listener();
-      }
-      
-      function checkInputs() {
-        var listeners;
-        
-        $.each(keysDown, function(key, down) {
-          listeners = null;
-          if(prevKeysDown[key] && !keysUp[key]) {
-            listeners = keyheldListeners[key];
-          } else if(down || (keysUp[key] && !prevKeysDown[key])) {
-            listeners = keydownListeners[key];
-          }
-          
-          if(listeners) {
-            listeners.each(triggerListener);
-          }
-        });
-        
-        $.each(keysUp, function(key, up) {
-          listeners = null;
-          listeners = keyupListeners[key];
-          
-          if(listeners) {
-            listeners.each(triggerListener);
-          }
-        });
-        
-        prevKeysDown = {};
-        $.each(keysDown, function(key, down) {
-          if(down) {
-            prevKeysDown[key] = true;
-          }
-        });
-        keysUp = {};
-      }
-      
-      var loopInterval = setInterval(function() {
-        checkInputs();
-        self.trigger('update');
-        
-        drawCallback(canvas);
-        
-        step += 1;
-      }, 33.3333);
-      
-      function keyName(event) {
-        return specialKeys[event.which] ||
-          String.fromCharCode(event.which).toLowerCase();
-      }
-      
-      $(document).bind("keydown", function(event) {
-        keysDown[keyName(event)] = true;
-        if(/textarea|select/i.test( event.target.nodeName ) || event.target.type === "text" || event.target.type === "password") {
-          // Don't prevent default
-        } else {
-          event.preventDefault();
-        }
+  @name Engine
+  @constructor
+  */
+  return (window.Engine = function(I) {
+    var age, canvas, construct, draw, drawDeveloperOverlay, intervalId, objects, paused, queuedObjects, savedState, self, step, update;
+    I || (I = {});
+    $.reverseMerge(I, defaults);
+    intervalId = null;
+    savedState = null;
+    age = 0;
+    paused = false;
+    queuedObjects = [];
+    objects = [];
+    update = function() {
+      objects = objects.select(function(object) {
+        return object.update();
       });
-      
-      $(document).bind("keyup", function(event) {
-        keysDown[keyName(event)] = false;
-        keysUp[keyName(event)] = true;
-        if(/textarea|select/i.test( event.target.nodeName ) || event.target.type === "text" || event.target.type === "password") {
-          // Don't prevent default
-        } else {
-          event.preventDefault();
-        }
+      objects = objects.concat(queuedObjects);
+      queuedObjects = [];
+      return self.trigger("update");
+    };
+    drawDeveloperOverlay = function(canvas) {
+      canvas.withTransform(I.cameraTransform, function(canvas) {
+        return objects.each(function(object) {
+          canvas.fillColor('rgba(255, 0, 0, 0.5)');
+          return canvas.fillRect(object.bounds().x, object.bounds().y, object.bounds().width, object.bounds().height);
+        });
       });
-      
-      return self;
-    }());
-    
-    var canvas = $("canvas").powerCanvas();
-    
-    Game.canvas = canvas;
+      canvas.fillColor('rgba(0, 0, 0, 0.5)');
+      canvas.fillRect(430, 10, 200, 60);
+      canvas.fillColor('#fff');
+      canvas.fillText("Developer Mode. Press Esc to resume", 440, 25);
+      canvas.fillText("Left click to add boxes", 440, 43);
+      return canvas.fillText("Right click red boxes to edit properties", 440, 60);
+    };
+    draw = function() {
+      var hud, shadowContext, shadows;
+      if (I.ambientLight < 1) {
+        shadowContext = shadowCanvas.context();
+        shadowContext.globalCompositeOperation = "source-over";
+        shadowCanvas.clear();
+        shadowCanvas.fill("rgba(0, 0, 0, " + (1 - I.ambientLight) + ")");
+        shadowContext.globalCompositeOperation = "destination-out";
+        shadowCanvas.withTransform(I.cameraTransform, function(shadowCanvas) {
+          return objects.each(function(object, i) {
+            if (object.illuminate) {
+              shadowContext.globalAlpha = 1;
+              return object.illuminate(shadowCanvas);
+            }
+          });
+        });
+      }
+      canvas.withTransform(I.cameraTransform, function(canvas) {
+        if (I.backgroundColor) {
+          canvas.fill(I.backgroundColor);
+        }
+        return objects.invoke("draw", canvas, hudCanvas);
+      });
+      if (I.ambientLight < 1) {
+        shadows = shadowCanvas.element();
+        canvas.drawImage(shadows, 0, 0, shadows.width, shadows.height, 0, 0, shadows.width, shadows.height);
+      }
+      hud = hudCanvas.element();
+      canvas.drawImage(hud, 0, 0, hud.width, hud.height, 0, 0, hud.width, hud.height);
+      if (paused) {
+        return drawDeveloperOverlay(canvas);
+      }
+    };
+    step = function() {
+      if (!(paused)) {
+        update();
+        age += 1;
+      }
+      return draw();
+    };
+    canvas = I.canvas || $("<canvas />").powerCanvas();
+    construct = function(entityData) {
+      return entityData["class"] ? entityData["class"].constantize()(entityData) : GameObject(entityData);
+    };
+    self = Core(I).extend({
+      add: function(entityData) {
+        var obj;
+        obj = construct(entityData);
+        return intervalId && !paused ? queuedObjects.push(obj) : objects.push(obj);
+      },
+      construct: construct,
+      age: function() {
+        return age;
+      },
+      objects: function() {
+        return objects;
+      },
+      objectAt: function(x, y) {
+        var bounds, targetObject;
+        targetObject = null;
+        bounds = {
+          x: x,
+          y: y,
+          width: 1,
+          height: 1
+        };
+        self.eachObject(function(object) {
+          if (object.collides(bounds)) {
+            return (targetObject = object);
+          }
+        });
+        return targetObject;
+      },
+      eachObject: function(iterator) {
+        return objects.each(iterator);
+      },
+      find: function(selector) {
+        var matcher, results;
+        results = [];
+        matcher = EngineSelector.generate(selector);
+        objects.each(function(object) {
+          if (matcher.match(object)) {
+            return results.push(object);
+          }
+        });
+        return $.extend(results, EngineSelector.instanceMethods);
+      },
+      collides: function(bounds, sourceObject) {
+        return objects.inject(false, function(collided, object) {
+          return collided || (object.solid() && (object !== sourceObject) && object.collides(bounds));
+        });
+      },
+      rayCollides: function(source, direction, sourceObject) {
+        var hits, nearestDistance, nearestHit;
+        hits = objects.map(function(object) {
+          var hit;
+          hit = object.solid() && (object !== sourceObject) && Collision.rayRectangle(source, direction, object.centeredBounds());
+          if (hit) {
+            hit.object = object;
+          }
+          return hit;
+        });
+        nearestDistance = Infinity;
+        nearestHit = null;
+        hits.each(function(hit) {
+          var d;
+          if (hit && (d = hit.distance(source)) < nearestDistance) {
+            nearestDistance = d;
+            return (nearestHit = hit);
+          }
+        });
+        return nearestHit;
+      },
+      rewind: function() {},
+      saveState: function() {
+        return (savedState = objects.map(function(object) {
+          return $.extend({}, object.I);
+        }));
+      },
+      loadState: function(newState) {
+        return newState || (newState = savedState) ? (objects = newState.map(function(objectData) {
+          return construct($.extend({}, objectData));
+        })) : null;
+      },
+      reload: function() {
+        return (objects = objects.map(function(object) {
+          return construct(object.I);
+        }));
+      },
+      start: function() {
+        return !(intervalId) ? (intervalId = setInterval(function() {
+          return step();
+        }, 1000 / I.FPS)) : null;
+      },
+      stop: function() {
+        clearInterval(intervalId);
+        return (intervalId = null);
+      },
+      play: function() {
+        return (paused = false);
+      },
+      pause: function() {
+        return (paused = true);
+      },
+      paused: function() {
+        return paused;
+      },
+      setFramerate: function(newFPS) {
+        I.FPS = newFPS;
+        self.stop();
+        return self.start();
+      }
+    });
+    self.attrAccessor("ambientLight");
+    self.attrAccessor("backgroundColor");
+    self.attrAccessor("cameraTransform");
+    self.include(Bindable);
+    return self;
   });
-}(jQuery));
-
-
-;
+})(jQuery);;
+var EngineSelector;
+EngineSelector = {
+  parse: function(selector) {
+    return selector.split(",").map(function(result) {
+      return result.trim();
+    });
+  },
+  process: function(item) {
+    var result;
+    result = /^(\w+)?#?([\w\-]+)?\.?([\w\-]+)?=?([\w\-]+)?/.exec(item);
+    if (result) {
+      if (result[4]) {
+        result[4] = result[4].parse();
+      }
+      return result.splice(1);
+    } else {
+      return [];
+    }
+  },
+  instanceMethods: {
+    set: function(attr, value) {
+      return this.each(function(item) {
+        return (item.I[attr] = value);
+      });
+    }
+  },
+  generate: function(selector) {
+    var ATTR, ATTR_VALUE, ID, TYPE, components;
+    components = EngineSelector.parse(selector).map(function(piece) {
+      return EngineSelector.process(piece);
+    });
+    TYPE = 0;
+    ID = 1;
+    ATTR = 2;
+    ATTR_VALUE = 3;
+    return {
+      match: function(object) {
+        var _i, _len, _ref, _ref2, attr, attrMatch, component, idMatch, typeMatch, value;
+        _ref = components;
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          component = _ref[_i];
+          idMatch = (component[ID] === object.I.id) || !component[ID];
+          typeMatch = (component[TYPE] === object.I["class"]) || !component[TYPE];
+          if (attr = component[ATTR]) {
+            if (typeof (_ref2 = (value = component[ATTR_VALUE])) !== "undefined" && _ref2 !== null) {
+              attrMatch = (object.I[attr] === value);
+            } else {
+              attrMatch = object.I[attr];
+            }
+          } else {
+            attrMatch = true;
+          }
+          if (idMatch && typeMatch && attrMatch) {
+            return true;
+          }
+        }
+        return false;
+      }
+    };
+  }
+};;
 var GameObject;
 GameObject = function(I) {
   var autobindEvents, defaultModules, modules, self;
@@ -3963,9 +4100,6 @@ GameObject = function(I) {
     self.trigger('create');
   }
   I.created = true;
-  $(document).bind('mousedown', function(event) {
-    return ((I.x <= event.offsetX) && (event.offsetX <= I.x + I.width)) && ((I.y <= event.offsetY) && (event.offsetY <= I.y + I.height)) ? self.trigger('click') : null;
-  });
   return self;
 };
 GameObject.construct = function(entityData) {
@@ -4031,44 +4165,6 @@ Hittable = function(I, self) {
     }
   };
 };;
-function KeyHandler(I) {
-  I = I || {};
-  
-  $.reverseMerge(I, {
-    keydown: {},
-    keyheld: {},
-    keyup: {},
-  });
-  
-  return {
-    /**
-    * @returns true if event should be passed on to other handlers.
-    */
-    keydown: function(key) {
-      if(I.keydown[key]) {
-        return I.keydown[key]();
-      } else {
-        return true;
-      }
-    },
-    
-    keyheld: function(key) {
-      if(I.keyheld[key]) {
-        return I.keyheld[key]();
-      } else {
-        return true;
-      }
-    },
-    
-    keyup: function(key) {
-      if(I.keyup[key]) {
-        return I.keyup[key]();
-      } else {
-        return true;
-      }
-    }
-  };
-};
 var Movable;
 Movable = function(I) {
   $.reverseMerge(I, {
@@ -4255,22 +4351,6 @@ SpeechBox = function(I) {
   window.Sprite.fromPixieId = fromPixieId;
   window.Sprite.fromURL = Sprite.load;
 }());;
-/**
-StateMachine = () ->
-  currentState = null
-  initialState = null
-
-  self = GameObject().extend
-    defaultState: () ->
-      return initialState
-
-    transition: (toState) ->
-      currentState.trigger(toState)
-
-  self.attrAccessor('currentState')
-
-  return self
-*/;
 (function() {
   var Map, fromPixieId;
   Map = function(data, entityCallback) {
@@ -4345,56 +4425,4 @@ StateMachine = () ->
     return options.pixieId ? fromPixieId(options.pixieId, options.complete, options.entity) : null;
   });
 })();;
-(function($) {
-  var Bindable;
-  /***
-  * Bindable module
-  * @name Bindable
-  * @constructor
-  */
-  Bindable = function() {
-    var eventCallbacks;
-    eventCallbacks = {};
-    return {
-      /***
-      * The bind method adds a function as an event listener.
-      *
-      * @name bind
-      * @methodOf Bindable#
-      *
-      * @param {String} event The event to listen to.
-      * @param {Function} callback The function to be called when the specified event
-      * is triggered.
-      */
-      bind: function(event, callback) {
-        eventCallbacks[event] = eventCallbacks[event] || [];
-        return eventCallbacks[event].push(callback);
-      },
-      unbind: function(event, callback) {
-        eventCallbacks[event] = eventCallbacks[event] || [];
-        return callback ? eventCallbacks.remove(callback) : (eventCallbacks[event] = []);
-      },
-      /***
-      * The trigger method calls all listeners attached to the specified event.
-      *
-      * @name trigger
-      * @methodOf Bindable#
-      *
-      * @param {String} event The event to trigger.
-      * @param {Array} [extraParameters] Additional parameters to pass to the event listener.
-      */
-      trigger: function(event, extraParameters) {
-        var callbacks, self;
-        callbacks = eventCallbacks[event];
-        if (callbacks && callbacks.length) {
-          self = this;
-          return callbacks.each(function(callback) {
-            return callback.apply(self, [self].concat(extraParameters));
-          });
-        }
-      }
-    };
-  };
-  return (window.Bindable = Bindable);
-})(jQuery);;
 ;$(function(){ undefined });
