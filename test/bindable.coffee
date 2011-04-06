@@ -18,13 +18,14 @@ test "Multiple bindings", 2, ->
 test "#trigger arguments", ->
   o = $.extend({}, Bindable())
   
-  param = 3
+  param1 = "the message"
+  param2 = 3
 
   o.bind "test", (p1, p2) ->
-    equal(p1, "the message")
-    equal(p2, param)
+    equal(p1, param1)
+    equal(p2, param2)
     
-  o.trigger "test", ["the message", param]
+  o.trigger "test", param1, param2
 
 module()
 

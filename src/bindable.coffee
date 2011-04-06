@@ -49,7 +49,7 @@
     * @param {String} event The event to trigger.
     * @param {Array} [parameters] Additional parameters to pass to the event listener.
     ###
-    trigger: (event, parameters) ->
+    trigger: (event, parameters...) ->
       callbacks = eventCallbacks[event]
 
       if callbacks && callbacks.length
