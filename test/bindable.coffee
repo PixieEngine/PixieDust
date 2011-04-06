@@ -24,7 +24,7 @@ test "#trigger arguments", ->
     equal(p1, "the message")
     equal(p2, param)
     
-  o.trigger "test", ["the message", 3]
+  o.trigger "test", ["the message", param]
 
 module()
 
