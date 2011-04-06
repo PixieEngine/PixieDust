@@ -47,16 +47,16 @@
     * @methodOf Bindable#
     *
     * @param {String} event The event to trigger.
-    * @param {Array} [extraParameters] Additional parameters to pass to the event listener.
+    * @param {Array} [parameters] Additional parameters to pass to the event listener.
     ###
-    trigger: (event, extraParameters) ->
+    trigger: (event, parameters) ->
       callbacks = eventCallbacks[event]
 
       if callbacks && callbacks.length
         self = this
 
         callbacks.each (callback) ->
-          callback.apply(self, [self].concat(extraParameters))
+          callback.apply(self, parameters)
 
   window.Bindable = Bindable
 )(jQuery)
