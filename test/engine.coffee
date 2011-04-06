@@ -46,38 +46,38 @@ test "#find", ->
   equal engine.find(".solid=true").length, 1
   equal engine.find(".opaque=false").length, 1
 
-test "EngineSelector.parse", ->
-  a = EngineSelector.parse("#foo")
+test "Selector.parse", ->
+  a = Engine.Selector.parse("#foo")
   equal a.length, 1
   equal a.first(), "#foo"
 
-  a = EngineSelector.parse("#boo, baz")
+  a = Engine.Selector.parse("#boo, baz")
   equal a.length, 2
   equal a.first(), "#boo"
   equal a.last(), "baz"
 
-  a = EngineSelector.parse("#boo,Light.flicker,baz")
+  a = Engine.Selector.parse("#boo,Light.flicker,baz")
   equal a.length, 3
   equal a.first(), "#boo"
   equal a[1], "Light.flicker"
   equal a.last(), "baz"
 
-test "EngineSelector.process", ->
-  [type, id, attr, value] = EngineSelector.process("Foo#test.cool=1")
+test "Selector.process", ->
+  [type, id, attr, value] = Engine.Selector.process("Foo#test.cool=1")
 
   equal type, "Foo"
   equal id, "test"
   equal attr, "cool"
   equal value, 1
 
-  [type, id, attr, value] = EngineSelector.process(".baz=false")
+  [type, id, attr, value] = Engine.Selector.process(".baz=false")
 
   equal type, undefined
   equal id, undefined
   equal attr, "baz"
   equal value, false
 
-asyncTest "Running Engine", ->
+asyncTest "Running", ->
   engine = Engine()
   engine.start()
   

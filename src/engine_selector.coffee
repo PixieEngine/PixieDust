@@ -1,7 +1,23 @@
-EngineSelector = 
+Engine.Selector = (I, self) ->
+
+  instanceMethods =
+    set: (attr, value) ->
+      this.each (item) ->
+        item.I[attr] = value
+
+  find: (selector) ->
+    results = []
+
+    matcher = Engine.Selector.generate(selector)
+
+    I.objects.each (object) ->
+      results.push object if matcher.match object
+
+    $.extend results, instanceMethods
+
+$.extend Engine.Selector,
   parse: (selector) ->
-    selector.split(",").map (result) ->
-      result.trim()
+    selector.split(",").invoke("trim")
 
   process: (item) ->
     result = /^(\w+)?#?([\w\-]+)?\.?([\w\-]+)?=?([\w\-]+)?/.exec(item)
@@ -12,15 +28,10 @@ EngineSelector =
       result.splice(1)
     else
       []
-      
-  instanceMethods:
-    set: (attr, value) ->
-      this.each (item) ->
-        item.I[attr] = value
 
   generate: (selector) ->
-    components = EngineSelector.parse(selector).map (piece) ->
-      EngineSelector.process(piece)
+    components = Engine.Selector.parse(selector).map (piece) ->
+      Engine.Selector.process(piece)
 
     TYPE = 0
     ID = 1
