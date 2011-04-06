@@ -75,37 +75,6 @@
       eachObject: (iterator) ->
         I.objects.each iterator
 
-      find: (selector) ->
-        results = []
-
-        matcher = EngineSelector.generate(selector)
-
-        I.objects.each (object) ->
-          results.push object if matcher.match object
-
-        $.extend results, EngineSelector.instanceMethods
-
-      collides: (bounds, sourceObject) ->
-        I.objects.inject false, (collided, object) ->
-          collided || (object.solid() && (object != sourceObject) && object.collides(bounds))
-          
-      rayCollides: (source, direction, sourceObject) ->
-        hits = I.objects.map (object) ->
-          hit = object.solid() && (object != sourceObject) && Collision.rayRectangle(source, direction, object.centeredBounds())
-          hit.object = object if hit
-          
-          hit
-          
-        nearestDistance = Infinity
-        nearestHit = null
-    
-        hits.each (hit) ->
-          if hit && (d = hit.distance(source)) < nearestDistance
-            nearestDistance = d
-            nearestHit = hit
-            
-        nearestHit
-  
       start: () ->
         unless intervalId
           intervalId = setInterval(() ->
@@ -135,7 +104,7 @@
     self.attrAccessor "cameraTransform"
     self.include Bindable
 
-    defaultModules = ["Shadows", "HUD", "Developer", "SaveState"]
+    defaultModules = ["Shadows", "HUD", "Developer", "SaveState", "Selector", "Collision"]
     modules = defaultModules.concat(I.includedModules)
     modules = modules.without(I.excludedModules)
 
