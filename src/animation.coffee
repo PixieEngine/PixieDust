@@ -41,7 +41,7 @@
     $.getJSON url, (data) ->
       $.extend(proxy, Animation(data))
       
-      callback proxy
+      callback? proxy
       
     return proxy
     

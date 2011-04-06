@@ -13,6 +13,7 @@ Collidable = (I) ->
     if other.solid && other.bounds
       if Object.isArray(other)
         #TODO check for existing quad tree and clear it instead of making a new one
+        #TODO build quad tree based on game parameters. ie Game.width, Game.height
       
         quadTree = QuadTree()
         
