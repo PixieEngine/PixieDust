@@ -1,7 +1,7 @@
 var App;
 App = {};var App;
 App = {};;
-;
+var __slice = Array.prototype.slice;
 /***
 * Joins all elements of an array into a string.
 * @name join
@@ -51,7 +51,7 @@ Array.prototype.clear = function() {
 */
 Array.prototype.invoke = function(method) {
   var args;
-  args = Array.prototype.slice.call(arguments, 1);
+  args = __slice.call(arguments, 1);
   return this.map(function(element) {
     return element[method].apply(element, args);
   });
@@ -111,6 +111,12 @@ Array.prototype.each = function(iterator, context) {
     }
   }
   return this;
+};
+Array.prototype.eachWithObject = function(object, iterator, context) {
+  this.each(function(element) {
+    return iterator.call(context, object, element);
+  });
+  return object;
 };
 Array.prototype.eachSlice = function(n, iterator, context) {
   var i, len;
@@ -340,7 +346,7 @@ this.CoffeeScript=function(){function require(a){return require[a]}require["./he
     parsedColor = null;
     if (arguments.length === 0) {
       parsedColor = [0, 0, 0, 0];
-    } else if (arguments.length === 1 && Object.prototype.toString.call(arguments[0]) === '[object Array]') {
+    } else if (arguments.length === 1 && Object.isArray(arguments[0])) {
       alpha = (typeof (_ref = arguments[0][3]) !== "undefined" && _ref !== null) ? arguments[0][3] : 1;
       parsedColor = [parseInt(arguments[0][0]), parseInt(arguments[0][1]), parseInt(arguments[0][2]), parseFloat(alpha)];
     } else if (arguments.length === 2) {
@@ -810,7 +816,7 @@ Function.prototype.withAfter = function(interception) {
     });
   });
 })(jQuery);;
-var __hasProp = Object.prototype.hasOwnProperty;
+var __slice = Array.prototype.slice, __hasProp = Object.prototype.hasOwnProperty;
 /***
  * Merges properties from objects into target without overiding.
  * First come, first served.
@@ -818,17 +824,15 @@ var __hasProp = Object.prototype.hasOwnProperty;
 */
 jQuery.extend({
   reverseMerge: function(target) {
-    var _i, _len, _ref, _ref2, i, name, object;
-    _ref = arguments;
-    for (i = 0, _len = _ref.length; i < _len; i++) {
-      object = _ref[i];
-      if (i === 0) {
-        continue;
-      }
+    var _i, _j, _len, _ref, _ref2, name, object, objects;
+    objects = __slice.call(arguments, 1);
+    _ref = objects;
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      object = _ref[_i];
       _ref2 = object;
       for (name in _ref2) {
         if (!__hasProp.call(_ref2, name)) continue;
-        _i = _ref2[name];
+        _j = _ref2[name];
         if (!(target.hasOwnProperty(name))) {
           target[name] = object[name];
         }
@@ -1519,6 +1523,15 @@ Number.prototype.d = function(sides) {
 * @fieldOf Math
 */
 Math.TAU = 2 * Math.PI;;
+/***
+* Checks whether an object is an array.
+*
+* @type Object
+* @returns A boolean expressing whether the object is an instance of Array
+*/
+Object.isArray = function(object) {
+  return Object.prototype.toString.call(object) === '[object Array]';
+};;
 var __hasProp = Object.prototype.hasOwnProperty, __slice = Array.prototype.slice;
 (function($) {
   return ($.fn.powerCanvas = function(options) {
@@ -1794,6 +1807,146 @@ var __hasProp = Object.prototype.hasOwnProperty, __slice = Array.prototype.slice
     }
   });
 })(jQuery);;
+(function(window) {
+  var Node, QuadTree;
+  QuadTree = function(I) {
+    var root, self;
+    I || (I = {});
+    $.reverseMerge(I, {
+      bounds: {
+        x: 0,
+        y: 0,
+        width: 480,
+        height: 320
+      },
+      maxChildren: 5,
+      maxDepth: 4
+    });
+    root = Node({
+      bounds: I.bounds,
+      maxDepth: I.maxDepth,
+      maxChildren: I.maxChildren
+    });
+    self = {
+      I: I,
+      root: function() {
+        return root;
+      },
+      clear: function() {
+        return root.clear();
+      },
+      insert: function(obj) {
+        return Object.isArray(obj) ? obj.each(function(item) {
+          return root.insert(item);
+        }) : root.insert(obj);
+      },
+      retrieve: function(item) {
+        return root.retrieve(item).copy();
+      }
+    };
+    return self;
+  };
+  Node = function(I) {
+    var BOTTOM_LEFT, BOTTOM_RIGHT, TOP_LEFT, TOP_RIGHT, findIndex, halfHeight, halfWidth, self, subdivide;
+    I || (I = {});
+    $.reverseMerge(I, {
+      bounds: {
+        x: 0,
+        y: 0,
+        width: 120,
+        height: 80
+      },
+      children: [],
+      depth: 0,
+      maxChildren: 5,
+      maxDepth: 4,
+      nodes: []
+    });
+    TOP_LEFT = 0;
+    TOP_RIGHT = 1;
+    BOTTOM_LEFT = 2;
+    BOTTOM_RIGHT = 3;
+    findIndex = function(item) {
+      var bounds, index, left, top, x, x_midpoint, y, y_midpoint;
+      bounds = I.bounds;
+      x = bounds.x;
+      y = bounds.y;
+      x_midpoint = x + halfWidth();
+      y_midpoint = y + halfHeight();
+      left = item.x <= x_midpoint;
+      top = item.y <= y_midpoint;
+      index = TOP_LEFT;
+      if (left) {
+        if (!top) {
+          index = BOTTOM_LEFT;
+        }
+      } else {
+        if (top) {
+          index = TOP_RIGHT;
+        } else {
+          index = BOTTOM_RIGHT;
+        }
+      }
+      return index;
+    };
+    halfWidth = function() {
+      return (I.bounds.width / 2).floor();
+    };
+    halfHeight = function() {
+      return (I.bounds.height / 2).floor();
+    };
+    subdivide = function() {
+      var half_height, half_width, increased_depth;
+      increased_depth = I.depth + 1;
+      half_width = halfWidth();
+      half_height = halfHeight();
+      return (4).times(function(n) {
+        return (I.nodes[n] = Node({
+          bounds: {
+            x: half_width * (n % 2),
+            y: half_height * (n < 2 ? 0 : 1),
+            width: half_width,
+            height: half_height
+          },
+          depth: increased_depth,
+          maxChildren: I.maxChildren,
+          maxDepth: I.maxDepth
+        }));
+      });
+    };
+    self = {
+      I: I,
+      clear: function() {
+        I.children.clear();
+        I.nodes.invoke('clear');
+        return I.nodes.clear();
+      },
+      insert: function(item) {
+        var index;
+        if (I.nodes.length) {
+          index = findIndex(item);
+          I.nodes[index].insert(item);
+          return true;
+        }
+        I.children.push(item);
+        if ((I.depth < I.maxDepth) && (I.children.length > I.maxChildren)) {
+          subdivide();
+          I.children.each(function(child) {
+            return self.insert(child);
+          });
+          return I.children.clear();
+        }
+      },
+      retrieve: function(item) {
+        var index;
+        index = findIndex(item);
+        return (I.nodes[index] == null ? undefined : I.nodes[index].retrieve(item)) || I.children;
+      }
+    };
+    return self;
+  };
+  return (window.QuadTree = QuadTree);
+})(window);;
 (function($) {
   window.Random = $.extend(window.Random, {
     angle: function() {
@@ -3216,12 +3369,13 @@ valueOf()
     };
     $.getJSON(url, function(data) {
       $.extend(proxy, Animation(data));
-      return callback(proxy);
+      return (typeof callback === "function" ? callback(proxy) : undefined);
     });
     return proxy;
   };
   return (window.Animation.fromPixieId = fromPixieId);
 })();;
+var __slice = Array.prototype.slice;
 (function($) {
   var Bindable;
   /***
@@ -3268,15 +3422,16 @@ valueOf()
       * @methodOf Bindable#
       *
       * @param {String} event The event to trigger.
-      * @param {Array} [extraParameters] Additional parameters to pass to the event listener.
+      * @param {Array} [parameters] Additional parameters to pass to the event listener.
       */
-      trigger: function(event, extraParameters) {
-        var callbacks, self;
+      trigger: function(event) {
+        var callbacks, parameters, self;
+        parameters = __slice.call(arguments, 1);
         callbacks = eventCallbacks[event];
         if (callbacks && callbacks.length) {
           self = this;
           return callbacks.each(function(callback) {
-            return callback.apply(self, [self].concat(extraParameters));
+            return callback.apply(self, parameters);
           });
         }
       }
@@ -3408,10 +3563,33 @@ Collidable = function(I) {
           return other.trigger('collision');
         }
       }
+    },
+    collides_with: function(other) {
+      var nearby, quadTree;
+      if (other.solid && other.bounds) {
+        if (Object.isArray(other)) {
+          quadTree = QuadTree();
+          other.each(function(collidable) {
+            return quadTree.insert(collidable);
+          });
+          nearby = quadTree.retrieve(self);
+          return nearby.each(function(close_collider) {
+            return self.solid_collision(close_collider);
+          });
+        } else {
+          return solid_collision(other);
+        }
+      }
     }
   };
 };;
 var Collision;
+/***
+Collision holds many methods useful for checking geometric overlap of various objects.
+
+@name Collision
+@namespace
+*/
 Collision = {
   rectangular: function(a, b) {
     return a.x < b.x + b.width && a.x + a.width > b.x && a.y < b.y + b.height && a.y + a.height > b.y;
@@ -4094,7 +4272,7 @@ GameObject = function(I) {
   autobindEvents = ['create', 'destroy', 'step'];
   autobindEvents.each(function(eventName) {
     var event;
-    return (event = I[eventName]) ? (typeof event === "function" ? self.bind(eventName, event) : self.bind(eventName, eval("(function(self) {" + (event) + "})"))) : null;
+    return (event = I[eventName]) ? (typeof event === "function" ? self.bind(eventName, event) : self.bind(eventName, eval("(function() {" + (event) + "})"))) : null;
   });
   if (!(I.created)) {
     self.trigger('create');
