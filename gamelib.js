@@ -3953,110 +3953,57 @@ Emitterable = function(I, self) {
   };
 };;
 (function($) {
-  var defaults, hudCanvas, shadowCanvas;
+  var defaults;
   defaults = {
     FPS: 33.3333,
+    age: 0,
     ambientLight: 1,
     backgroundColor: "#FFFFFF",
-    cameraTransform: Matrix.IDENTITY
+    cameraTransform: Matrix.IDENTITY,
+    excludedModules: [],
+    includedModules: [],
+    objects: [],
+    paused: false
   };
-  shadowCanvas = $("<canvas width=640 height=480 />").powerCanvas();
-  hudCanvas = $("<canvas width=640 height=480 />").powerCanvas();
-  hudCanvas.font("bold 9pt consolas, 'Courier New', 'andale mono', 'lucida console', monospace");
-  /***
-  The engine holds a bunch of game objects and fires off cool events.
-
-  @name Engine
-  @constructor
-  */
   return (window.Engine = function(I) {
-    var age, canvas, construct, draw, drawDeveloperOverlay, intervalId, objects, paused, queuedObjects, savedState, self, step, update;
+    var canvas, defaultModules, draw, intervalId, modules, queuedObjects, self, step, update;
     I || (I = {});
     $.reverseMerge(I, defaults);
     intervalId = null;
-    savedState = null;
-    age = 0;
-    paused = false;
     queuedObjects = [];
-    objects = [];
     update = function() {
-      objects = objects.select(function(object) {
+      I.objects = I.objects.select(function(object) {
         return object.update();
       });
-      objects = objects.concat(queuedObjects);
+      I.objects = I.objects.concat(queuedObjects);
       queuedObjects = [];
       return self.trigger("update");
     };
-    drawDeveloperOverlay = function(canvas) {
-      canvas.withTransform(I.cameraTransform, function(canvas) {
-        return objects.each(function(object) {
-          canvas.fillColor('rgba(255, 0, 0, 0.5)');
-          return canvas.fillRect(object.bounds().x, object.bounds().y, object.bounds().width, object.bounds().height);
-        });
-      });
-      canvas.fillColor('rgba(0, 0, 0, 0.5)');
-      canvas.fillRect(430, 10, 200, 60);
-      canvas.fillColor('#fff');
-      canvas.fillText("Developer Mode. Press Esc to resume", 440, 25);
-      canvas.fillText("Left click to add boxes", 440, 43);
-      return canvas.fillText("Right click red boxes to edit properties", 440, 60);
-    };
     draw = function() {
-      var hud, shadowContext, shadows;
-      if (I.ambientLight < 1) {
-        shadowContext = shadowCanvas.context();
-        shadowContext.globalCompositeOperation = "source-over";
-        shadowCanvas.clear();
-        shadowCanvas.fill("rgba(0, 0, 0, " + (1 - I.ambientLight) + ")");
-        shadowContext.globalCompositeOperation = "destination-out";
-        shadowCanvas.withTransform(I.cameraTransform, function(shadowCanvas) {
-          return objects.each(function(object, i) {
-            if (object.illuminate) {
-              shadowContext.globalAlpha = 1;
-              return object.illuminate(shadowCanvas);
-            }
-          });
-        });
-      }
       canvas.withTransform(I.cameraTransform, function(canvas) {
         if (I.backgroundColor) {
           canvas.fill(I.backgroundColor);
         }
-        return objects.invoke("draw", canvas, hudCanvas);
+        return I.objects.invoke("draw", canvas);
       });
-      if (I.ambientLight < 1) {
-        shadows = shadowCanvas.element();
-        canvas.drawImage(shadows, 0, 0, shadows.width, shadows.height, 0, 0, shadows.width, shadows.height);
-      }
-      hud = hudCanvas.element();
-      canvas.drawImage(hud, 0, 0, hud.width, hud.height, 0, 0, hud.width, hud.height);
-      if (paused) {
-        return drawDeveloperOverlay(canvas);
-      }
+      return self.trigger("draw", canvas);
     };
     step = function() {
-      if (!(paused)) {
+      if (!(I.paused)) {
         update();
-        age += 1;
+        I.age += 1;
       }
       return draw();
     };
     canvas = I.canvas || $("<canvas />").powerCanvas();
-    construct = function(entityData) {
-      return entityData["class"] ? entityData["class"].constantize()(entityData) : GameObject(entityData);
-    };
     self = Core(I).extend({
       add: function(entityData) {
         var obj;
-        obj = construct(entityData);
-        return intervalId && !paused ? queuedObjects.push(obj) : objects.push(obj);
-      },
-      construct: construct,
-      age: function() {
-        return age;
+        obj = GameObject.construct(entityData);
+        return intervalId && !I.paused ? queuedObjects.push(obj) : I.objects.push(obj);
       },
       objects: function() {
-        return objects;
+        return I.objects;
       },
       objectAt: function(x, y) {
         var bounds, targetObject;
@@ -4075,60 +4022,7 @@ Emitterable = function(I, self) {
         return targetObject;
       },
       eachObject: function(iterator) {
-        return objects.each(iterator);
-      },
-      find: function(selector) {
-        var matcher, results;
-        results = [];
-        matcher = EngineSelector.generate(selector);
-        objects.each(function(object) {
-          if (matcher.match(object)) {
-            return results.push(object);
-          }
-        });
-        return $.extend(results, EngineSelector.instanceMethods);
-      },
-      collides: function(bounds, sourceObject) {
-        return objects.inject(false, function(collided, object) {
-          return collided || (object.solid() && (object !== sourceObject) && object.collides(bounds));
-        });
-      },
-      rayCollides: function(source, direction, sourceObject) {
-        var hits, nearestDistance, nearestHit;
-        hits = objects.map(function(object) {
-          var hit;
-          hit = object.solid() && (object !== sourceObject) && Collision.rayRectangle(source, direction, object.centeredBounds());
-          if (hit) {
-            hit.object = object;
-          }
-          return hit;
-        });
-        nearestDistance = Infinity;
-        nearestHit = null;
-        hits.each(function(hit) {
-          var d;
-          if (hit && (d = hit.distance(source)) < nearestDistance) {
-            nearestDistance = d;
-            return (nearestHit = hit);
-          }
-        });
-        return nearestHit;
-      },
-      rewind: function() {},
-      saveState: function() {
-        return (savedState = objects.map(function(object) {
-          return $.extend({}, object.I);
-        }));
-      },
-      loadState: function(newState) {
-        return newState || (newState = savedState) ? (objects = newState.map(function(objectData) {
-          return construct($.extend({}, objectData));
-        })) : null;
-      },
-      reload: function() {
-        return (objects = objects.map(function(object) {
-          return construct(object.I);
-        }));
+        return I.objects.each(iterator);
       },
       start: function() {
         return !(intervalId) ? (intervalId = setInterval(function() {
@@ -4140,13 +4034,13 @@ Emitterable = function(I, self) {
         return (intervalId = null);
       },
       play: function() {
-        return (paused = false);
+        return (I.paused = false);
       },
       pause: function() {
-        return (paused = true);
+        return (I.paused = true);
       },
       paused: function() {
-        return paused;
+        return I.paused;
       },
       setFramerate: function(newFPS) {
         I.FPS = newFPS;
@@ -4158,15 +4052,41 @@ Emitterable = function(I, self) {
     self.attrAccessor("backgroundColor");
     self.attrAccessor("cameraTransform");
     self.include(Bindable);
+    defaultModules = ["Shadows", "HUD", "Developer", "SaveState", "Selector", "Collision"];
+    modules = defaultModules.concat(I.includedModules);
+    modules = modules.without(I.excludedModules);
+    modules.each(function(moduleName) {
+      return self.include(Engine[moduleName]);
+    });
     return self;
   });
 })(jQuery);;
-var EngineSelector;
-EngineSelector = {
+Engine.Selector = function(I, self) {
+  var instanceMethods;
+  instanceMethods = {
+    set: function(attr, value) {
+      return this.each(function(item) {
+        return (item.I[attr] = value);
+      });
+    }
+  };
+  return {
+    find: function(selector) {
+      var matcher, results;
+      results = [];
+      matcher = Engine.Selector.generate(selector);
+      I.objects.each(function(object) {
+        if (matcher.match(object)) {
+          return results.push(object);
+        }
+      });
+      return $.extend(results, instanceMethods);
+    }
+  };
+};
+$.extend(Engine.Selector, {
   parse: function(selector) {
-    return selector.split(",").map(function(result) {
-      return result.trim();
-    });
+    return selector.split(",").invoke("trim");
   },
   process: function(item) {
     var result;
@@ -4180,17 +4100,10 @@ EngineSelector = {
       return [];
     }
   },
-  instanceMethods: {
-    set: function(attr, value) {
-      return this.each(function(item) {
-        return (item.I[attr] = value);
-      });
-    }
-  },
   generate: function(selector) {
     var ATTR, ATTR_VALUE, ID, TYPE, components;
-    components = EngineSelector.parse(selector).map(function(piece) {
-      return EngineSelector.process(piece);
+    components = Engine.Selector.parse(selector).map(function(piece) {
+      return Engine.Selector.process(piece);
     });
     TYPE = 0;
     ID = 1;
@@ -4221,7 +4134,7 @@ EngineSelector = {
       }
     };
   }
-};;
+});;
 var GameObject;
 GameObject = function(I) {
   var autobindEvents, defaultModules, modules, self;
@@ -4603,4 +4516,113 @@ SpeechBox = function(I) {
     return options.pixieId ? fromPixieId(options.pixieId, options.complete, options.entity) : null;
   });
 })();;
+Engine.HUD = function(I, self) {
+  var hudCanvas;
+  hudCanvas = $("<canvas width=640 height=480 />").powerCanvas();
+  hudCanvas.font("bold 9pt consolas, 'Courier New', 'andale mono', 'lucida console', monospace");
+  self.bind("draw", function(canvas) {
+    var hud;
+    I.objects.each(function(object) {
+      return (typeof object.drawHUD === "function" ? object.drawHUD(hudCanvas) : undefined);
+    });
+    hud = hudCanvas.element();
+    return canvas.drawImage(hud, 0, 0, hud.width, hud.height, 0, 0, hud.width, hud.height);
+  });
+  return {};
+};;
+Engine.Developer = function(I, self) {
+  self.bind("draw", function(canvas) {
+    if (I.paused) {
+      canvas.withTransform(I.cameraTransform, function(canvas) {
+        return I.objects.each(function(object) {
+          canvas.fillColor('rgba(255, 0, 0, 0.5)');
+          return canvas.fillRect(object.bounds().x, object.bounds().y, object.bounds().width, object.bounds().height);
+        });
+      });
+      canvas.fillColor('rgba(0, 0, 0, 0.5)');
+      canvas.fillRect(430, 10, 200, 60);
+      canvas.fillColor('#fff');
+      canvas.fillText("Developer Mode. Press Esc to resume", 440, 25);
+      canvas.fillText("Shift+Left click to add boxes", 440, 43);
+      return canvas.fillText("Right click red boxes to edit properties", 440, 60);
+    }
+  });
+  return {};
+};;
+Engine.Shadows = function(I, self) {
+  var shadowCanvas;
+  shadowCanvas = $("<canvas width=640 height=480 />").powerCanvas();
+  self.bind("draw", function(canvas) {
+    var shadows;
+    if (I.ambientLight < 1) {
+      shadowCanvas.compositeOperation("source-over");
+      shadowCanvas.clear();
+      shadowCanvas.fill("rgba(0, 0, 0, " + (1 - I.ambientLight) + ")");
+      shadowCanvas.compositeOperation("destination-out");
+      shadowCanvas.withTransform(I.cameraTransform, function(shadowCanvas) {
+        return I.objects.each(function(object, i) {
+          if (object.illuminate) {
+            shadowCanvas.globalAlpha(1);
+            return object.illuminate(shadowCanvas);
+          }
+        });
+      });
+      shadows = shadowCanvas.element();
+      return canvas.drawImage(shadows, 0, 0, shadows.width, shadows.height, 0, 0, shadows.width, shadows.height);
+    }
+  });
+  return {};
+};;
+Engine.SaveState = function(I, self) {
+  var savedState;
+  savedState = null;
+  return {
+    rewind: function() {},
+    saveState: function() {
+      return (savedState = I.objects.map(function(object) {
+        return $.extend({}, object.I);
+      }));
+    },
+    loadState: function(newState) {
+      return newState || (newState = savedState) ? (I.objects = newState.map(function(objectData) {
+        return GameObject.construct($.extend({}, objectData));
+      })) : null;
+    },
+    reload: function() {
+      return (I.objects = I.objects.map(function(object) {
+        return GameObject.construct(object.I);
+      }));
+    }
+  };
+};;
+Engine.Collision = function(I, self) {
+  return {
+    collides: function(bounds, sourceObject) {
+      return I.objects.inject(false, function(collided, object) {
+        return collided || (object.solid() && (object !== sourceObject) && object.collides(bounds));
+      });
+    },
+    rayCollides: function(source, direction, sourceObject) {
+      var hits, nearestDistance, nearestHit;
+      hits = I.objects.map(function(object) {
+        var hit;
+        hit = object.solid() && (object !== sourceObject) && Collision.rayRectangle(source, direction, object.centeredBounds());
+        if (hit) {
+          hit.object = object;
+        }
+        return hit;
+      });
+      nearestDistance = Infinity;
+      nearestHit = null;
+      hits.each(function(hit) {
+        var d;
+        if (hit && (d = hit.distance(source)) < nearestDistance) {
+          nearestDistance = d;
+          return (nearestHit = hit);
+        }
+      });
+      return nearestHit;
+    }
+  };
+};;
 ;$(function(){ undefined });
