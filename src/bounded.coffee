@@ -6,17 +6,17 @@ Bounded module
 @name Bounded
 @constructor
 ###
- 
+
 Bounded = (I) ->
   I ||= {}
 
   ###*
   The bounds method returns infomation about the location 
   of the object and its dimensions with optional offsets
-  
+
   @name bounds
   @methodOf Bounded#
-  
+
   @param {number} xOffset the amount to shift the x position 
   @param {number} yOffset the amount to shift the y position
   ### 
@@ -29,7 +29,7 @@ Bounded = (I) ->
   ###*
   The centeredBounds method returns infomation about the center
   of the object along with the midpoint of the width and height
-  
+
   @name centeredBounds
   @methodOf Bounded#
   ###  
@@ -42,7 +42,7 @@ Bounded = (I) ->
   ###*
   The center method returns the {@link Point} that is
   the center of the object
-  
+
   @name center
   @methodOf Bounded#
   ###  
