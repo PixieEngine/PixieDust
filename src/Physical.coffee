@@ -8,6 +8,7 @@
   window.Physical = (I, self) ->
     $.reverseMerge I,
       dynamic: false
+      rotatable: false
 
     fixDef = new b2FixtureDef()
     fixDef.density = 1.0
@@ -20,7 +21,7 @@
 
     if I.dynamic
       bodyDef.type = b2Body.b2_dynamicBody
-      bodyDef.fixedRotation = true
+      bodyDef.fixedRotation = !I.rotatable
     else
       bodyDef.type = b2Body.b2_staticBody
 
@@ -37,6 +38,7 @@
     self.bind "step", ->
       I.x = (body.GetPosition().x / SCALE) - (I.width / 2)
       I.y = (body.GetPosition().y / SCALE) - (I.height / 2)
+      I.rotation = body.GetAngle()
 
     applyImpulse: (vector) ->
       body.ApplyImpulse(new b2Vec2(vector.x, vector.y), body.GetPosition())
