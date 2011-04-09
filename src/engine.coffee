@@ -7,13 +7,14 @@
     cameraTransform: Matrix.IDENTITY
     excludedModules: []
     includedModules: []
-    objects: []
     paused: false
 
   window.Engine = (I) ->
     I ||= {}
 
-    $.reverseMerge I, defaults
+    $.reverseMerge I, {
+      objects: []
+    }, defaults
 
     intervalId = null
 
