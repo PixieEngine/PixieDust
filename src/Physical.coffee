@@ -1,12 +1,12 @@
 ( ($) ->
   SCALE = 0.1
 
-  {b2Vec} = Box2D.Common.Math
+  {b2Vec2} = Box2D.Common.Math
   {b2BodyDef, b2Body, b2FixtureDef, b2Fixture, b2World} = Box2D.Dynamics
   {b2PolygonShape, b2CircleShape, b2MassData} = Box2D.Collision.Shapes
 
   window.Physical = (I, self) ->
-    $.reverseMerge I
+    $.reverseMerge I,
       dynamic: false
 
     fixDef = new b2FixtureDef()
@@ -24,19 +24,22 @@
     else
       bodyDef.type = b2Body.b2_staticBody
 
-    bodyDef.position = new b2Vec(
-      (entityData.x + (entityData.width / 2)) * SCALE, 
-      (entityData.y + (entityData.height / 2)) * SCALE
+    center = self.center().scale(SCALE)
+
+    bodyDef.position = new b2Vec2(
+      center.x, 
+      center.y
     )
 
     body = I.world.CreateBody(bodyDef)        
     body.CreateFixture(fixDef)
 
     self.bind "step", ->
-      I.x = (I.bodyData.GetPosition().x / SCALE) - (I.width / 2)
-      I.y = (I.bodyData.GetPosition().y / SCALE) - (I.height / 2)
+      I.x = (body.GetPosition().x / SCALE) - (I.width / 2)
+      I.y = (body.GetPosition().y / SCALE) - (I.height / 2)
 
-    return {}
+    applyImpulse: (vector) ->
+      body.ApplyImpulse(new b2Vec2(vector.x, vector.y), body.GetPosition())
 
 )(jQuery)
 
