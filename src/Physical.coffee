@@ -7,13 +7,16 @@
 
   window.Physical = (I, self) ->
     $.reverseMerge I,
+      density: 1.0
       dynamic: false
+      friction: 0.1
+      restitution: 0.5
       rotatable: false
 
     fixDef = new b2FixtureDef()
-    fixDef.density = 1.0
-    fixDef.friction = 0.3
-    fixDef.restitution = 0.2
+    fixDef.density = I.density
+    fixDef.friction = I.friction
+    fixDef.restitution = I.restitution
     fixDef.shape = new b2PolygonShape()
     fixDef.shape.SetAsBox(I.width / 2 * SCALE, I.height / 2 * SCALE)
 
@@ -34,6 +37,8 @@
 
     body = I.world.CreateBody(bodyDef)        
     body.CreateFixture(fixDef)
+
+    body.SetUserData(self)
 
     self.bind "step", ->
       I.x = (body.GetPosition().x / SCALE) - (I.width / 2)
