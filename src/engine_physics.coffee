@@ -2,6 +2,7 @@ Engine.Box2D = (I, self) ->
   $.reverseMerge I,
     scale: 0.1
     gravity: Point(0, 98)
+    PHYSICS_DEBUG_DRAW: true
 
   world = new Box2D.Dynamics.b2World(new Box2D.Common.Math.b2Vec2(I.gravity.x, I.gravity.y), true)
 
@@ -40,6 +41,19 @@ Engine.Box2D = (I, self) ->
 
     fireCollisionEvents()
     destroyPhysicsBodies()
+
+  self.bind "draw", (canvas) ->
+    if I.PHYSICS_DEBUG_DRAW
+      unless debugDraw
+        debugDraw = new b2DebugDraw()
+        debugDraw.SetSprite(canvas.context())
+        debugDraw.SetDrawScale(10)
+        debugDraw.SetFillAlpha(0.3)
+        debugDraw.SetLineThickness(1.0)
+        debugDraw.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit)
+        world.SetDebugDraw(debugDraw)
+
+      world.DrawDebugData()
 
   self.bind "beforeAdd", (entityData) ->
     entityData.world = world
