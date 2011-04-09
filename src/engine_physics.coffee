@@ -2,7 +2,7 @@ Engine.Box2D = (I, self) ->
   $.reverseMerge I,
     scale: 0.1
     gravity: Point(0, 98)
-    PHYSICS_DEBUG_DRAW: true
+    PHYSICS_DEBUG_DRAW: false
 
   world = new Box2D.Dynamics.b2World(new Box2D.Common.Math.b2Vec2(I.gravity.x, I.gravity.y), true)
 
