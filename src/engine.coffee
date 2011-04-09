@@ -53,6 +53,8 @@
 
         obj = GameObject.construct entityData
 
+        self.trigger "afterAdd", obj
+
         if intervalId && !I.paused
           queuedObjects.push obj
         else
