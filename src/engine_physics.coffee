@@ -6,6 +6,7 @@ Engine.Box2D = (I, self) ->
   world = new Box2D.Dynamics.b2World(new Box2D.Common.Math.b2Vec2(I.gravity.x, I.gravity.y), true)
 
   pendingCollisions = []
+  pendingDestructions = []
 
   world.SetContactListener
     BeginContact: (contact) ->
@@ -27,14 +28,25 @@ Engine.Box2D = (I, self) ->
 
     pendingCollisions = []
 
+  destroyPhysicsBodies = () ->
+    pendingDestructions.each (body) ->
+      world.DestroyBody(body)
+
+    pendingDestructions = []
+
   self.bind "update", ->
     world.Step(1 / I.FPS, 10, 10)
     world.ClearForces()
 
     fireCollisionEvents()
+    destroyPhysicsBodies()
 
   self.bind "beforeAdd", (entityData) ->
     entityData.world = world
+
+  self.bind "afterAdd", (object) ->
+    object.bind "destroy", ->
+      pendingDestructions.push object.body()
 
   return {}
 
