@@ -16014,13 +16014,14 @@ Emitterable = function(I, self) {
     cameraTransform: Matrix.IDENTITY,
     excludedModules: [],
     includedModules: [],
-    objects: [],
     paused: false
   };
   return (window.Engine = function(I) {
     var canvas, defaultModules, draw, intervalId, modules, queuedObjects, self, step, update;
     I || (I = {});
-    $.reverseMerge(I, defaults);
+    $.reverseMerge(I, {
+      objects: []
+    }, defaults);
     intervalId = null;
     queuedObjects = [];
     update = function() {
@@ -16051,6 +16052,7 @@ Emitterable = function(I, self) {
     self = Core(I).extend({
       add: function(entityData) {
         var obj;
+        self.trigger("beforeAdd", entityData);
         obj = GameObject.construct(entityData);
         return intervalId && !I.paused ? queuedObjects.push(obj) : I.objects.push(obj);
       },
