@@ -16065,6 +16065,7 @@ Emitterable = function(I, self) {
         var obj;
         self.trigger("beforeAdd", entityData);
         obj = GameObject.construct(entityData);
+        self.trigger("afterAdd", obj);
         return intervalId && !I.paused ? queuedObjects.push(obj) : I.objects.push(obj);
       },
       objects: function() {
