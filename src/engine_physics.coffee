@@ -9,5 +9,8 @@ Engine.Box2D = (I, self) ->
     world.Step(1 / I.FPS, 10, 10)
     world.ClearForces()
 
+  self.bind "beforeAdd", (entityData) ->
+    entityData.world = world
+
   return {}
 
