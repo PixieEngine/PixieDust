@@ -1,8 +1,8 @@
 module "Engine"
-  
+
 test "#play, #pause, and #paused", ->
   engine = Engine()
-  
+
   equal engine.paused(), false
   engine.pause()
   equal engine.paused(), true
@@ -11,35 +11,44 @@ test "#play, #pause, and #paused", ->
 
 test "#save and #restore", ->
   engine = Engine()
-  
+
   engine.add {}
   engine.add {}
-  
+
   equals(engine.objects().length, 2)
-  
+
   engine.saveState()
-  
+
   engine.add {}
-  
+
   equals(engine.objects().length, 3)
-  
+
   engine.loadState()
-  
+
   equals(engine.objects().length, 2)
-  
+
+test "befare add event", 1, ->
+  engine = Engine()
+
+  engine.bind "beforeAdd", (data) ->
+    equals data.test, "test"
+
+  engine.add
+    test: "test"
+
 test "#find", ->
   engine = Engine()
-  
+
   engine.add
     id: "testy"
-    
+
   engine.add
     test: true
-    
+
   engine.add
     solid: true
     opaque: false
-    
+
   equal engine.find("#no_testy").length, 0
   equal engine.find("#testy").length, 1
   equal engine.find(".test").length, 1
@@ -80,9 +89,9 @@ test "Selector.process", ->
 asyncTest "Running", ->
   engine = Engine()
   engine.start()
-  
+
   milliseconds = 2000
-  
+
   setTimeout ->
     engine.pause()
     age = engine.I.age
@@ -90,6 +99,6 @@ asyncTest "Running", ->
 
     start()
   , milliseconds
-  
+
 module()
 
