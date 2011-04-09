@@ -15327,60 +15327,6 @@ valueOf()
 @methodOf Date#
 */;
 ;
-(function($) {
-  var SCALE, _ref, b2Body, b2BodyDef, b2CircleShape, b2Fixture, b2FixtureDef, b2MassData, b2PolygonShape, b2Vec2, b2World;
-  SCALE = 0.1;
-  _ref = Box2D.Common.Math;
-  b2Vec2 = _ref.b2Vec2;
-  _ref = Box2D.Dynamics;
-  b2BodyDef = _ref.b2BodyDef;
-  b2Body = _ref.b2Body;
-  b2FixtureDef = _ref.b2FixtureDef;
-  b2Fixture = _ref.b2Fixture;
-  b2World = _ref.b2World;
-  _ref = Box2D.Collision.Shapes;
-  b2PolygonShape = _ref.b2PolygonShape;
-  b2CircleShape = _ref.b2CircleShape;
-  b2MassData = _ref.b2MassData;
-  return (window.Physical = function(I, self) {
-    var body, bodyDef, center, fixDef;
-    $.reverseMerge(I, {
-      density: 1.0,
-      dynamic: false,
-      friction: 0.1,
-      restitution: 0.5,
-      rotatable: false
-    });
-    fixDef = new b2FixtureDef();
-    fixDef.density = I.density;
-    fixDef.friction = I.friction;
-    fixDef.restitution = I.restitution;
-    fixDef.shape = new b2PolygonShape();
-    fixDef.shape.SetAsBox(I.width / 2 * SCALE, I.height / 2 * SCALE);
-    bodyDef = new b2BodyDef();
-    if (I.dynamic) {
-      bodyDef.type = b2Body.b2_dynamicBody;
-      bodyDef.fixedRotation = !I.rotatable;
-    } else {
-      bodyDef.type = b2Body.b2_staticBody;
-    }
-    center = self.center().scale(SCALE);
-    bodyDef.position = new b2Vec2(center.x, center.y);
-    body = I.world.CreateBody(bodyDef);
-    body.CreateFixture(fixDef);
-    body.SetUserData(self);
-    self.bind("step", function() {
-      I.x = (body.GetPosition().x / SCALE) - (I.width / 2);
-      I.y = (body.GetPosition().y / SCALE) - (I.height / 2);
-      return (I.rotation = body.GetAngle());
-    });
-    return {
-      applyImpulse: function(vector) {
-        return body.ApplyImpulse(new b2Vec2(vector.x, vector.y), body.GetPosition());
-      }
-    };
-  });
-})(jQuery);;
 (function() {
   var Animation, fromPixieId;
   Animation = function(data) {
@@ -16191,13 +16137,14 @@ Engine.HUD = function(I, self) {
   return {};
 };;
 Engine.Box2D = function(I, self) {
-  var fireCollisionEvents, pendingCollisions, world;
+  var destroyPhysicsBodies, fireCollisionEvents, pendingCollisions, pendingDestructions, world;
   $.reverseMerge(I, {
     scale: 0.1,
     gravity: Point(0, 98)
   });
   world = new Box2D.Dynamics.b2World(new Box2D.Common.Math.b2Vec2(I.gravity.x, I.gravity.y), true);
   pendingCollisions = [];
+  pendingDestructions = [];
   world.SetContactListener({
     BeginContact: function(contact) {
       var a, b;
@@ -16220,13 +16167,25 @@ Engine.Box2D = function(I, self) {
     });
     return (pendingCollisions = []);
   };
+  destroyPhysicsBodies = function() {
+    pendingDestructions.each(function(body) {
+      return world.DestroyBody(body);
+    });
+    return (pendingDestructions = []);
+  };
   self.bind("update", function() {
     world.Step(1 / I.FPS, 10, 10);
     world.ClearForces();
-    return fireCollisionEvents();
+    fireCollisionEvents();
+    return destroyPhysicsBodies();
   });
   self.bind("beforeAdd", function(entityData) {
     return (entityData.world = world);
+  });
+  self.bind("afterAdd", function(object) {
+    return object.bind("destroy", function() {
+      return pendingDestructions.push(object.body());
+    });
   });
   return {};
 };;
@@ -16496,6 +16455,63 @@ Movable = function(I) {
     }
   };
 };;
+(function($) {
+  var SCALE, _ref, b2Body, b2BodyDef, b2CircleShape, b2Fixture, b2FixtureDef, b2MassData, b2PolygonShape, b2Vec2, b2World;
+  SCALE = 0.1;
+  _ref = Box2D.Common.Math;
+  b2Vec2 = _ref.b2Vec2;
+  _ref = Box2D.Dynamics;
+  b2BodyDef = _ref.b2BodyDef;
+  b2Body = _ref.b2Body;
+  b2FixtureDef = _ref.b2FixtureDef;
+  b2Fixture = _ref.b2Fixture;
+  b2World = _ref.b2World;
+  _ref = Box2D.Collision.Shapes;
+  b2PolygonShape = _ref.b2PolygonShape;
+  b2CircleShape = _ref.b2CircleShape;
+  b2MassData = _ref.b2MassData;
+  return (window.Physical = function(I, self) {
+    var body, bodyDef, center, fixDef;
+    $.reverseMerge(I, {
+      density: 1.0,
+      dynamic: false,
+      friction: 0.1,
+      restitution: 0.5,
+      rotatable: false
+    });
+    fixDef = new b2FixtureDef();
+    fixDef.density = I.density;
+    fixDef.friction = I.friction;
+    fixDef.restitution = I.restitution;
+    fixDef.shape = new b2PolygonShape();
+    fixDef.shape.SetAsBox(I.width / 2 * SCALE, I.height / 2 * SCALE);
+    bodyDef = new b2BodyDef();
+    if (I.dynamic) {
+      bodyDef.type = b2Body.b2_dynamicBody;
+      bodyDef.fixedRotation = !I.rotatable;
+    } else {
+      bodyDef.type = b2Body.b2_staticBody;
+    }
+    center = self.center().scale(SCALE);
+    bodyDef.position = new b2Vec2(center.x, center.y);
+    body = I.world.CreateBody(bodyDef);
+    body.CreateFixture(fixDef);
+    body.SetUserData(self);
+    self.bind("step", function() {
+      I.x = (body.GetPosition().x / SCALE) - (I.width / 2);
+      I.y = (body.GetPosition().y / SCALE) - (I.height / 2);
+      return (I.rotation = body.GetAngle());
+    });
+    return {
+      applyImpulse: function(vector) {
+        return body.ApplyImpulse(new b2Vec2(vector.x, vector.y), body.GetPosition());
+      },
+      body: function() {
+        return body;
+      }
+    };
+  });
+})(jQuery);;
 var Rotatable;
 Rotatable = function(I) {
   I || (I = {});
