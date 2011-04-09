@@ -16181,18 +16181,21 @@ Engine.Box2D = function(I, self) {
     return destroyPhysicsBodies();
   });
   self.bind("draw", function(canvas) {
-    var debugDraw;
+    var debugCanvas, debugDraw, debugElement;
     if (I.PHYSICS_DEBUG_DRAW) {
       if (!(debugDraw)) {
+        debugElement = $("<canvas width=640 height=480 />").get(0);
+        debugCanvas = debugElement.getContext("2d");
         debugDraw = new b2DebugDraw();
-        debugDraw.SetSprite(canvas.context());
+        debugDraw.SetSprite($("<canvas width=640 height=480 />").get(0).getContext("2d"));
         debugDraw.SetDrawScale(10);
         debugDraw.SetFillAlpha(0.3);
         debugDraw.SetLineThickness(1.0);
         debugDraw.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit);
         world.SetDebugDraw(debugDraw);
       }
-      return world.DrawDebugData();
+      world.DrawDebugData();
+      return canvas.drawImage(debugElement, 0, 0, debugElement.width, debugElement.height, 0, 0, debugElement.width, debugElement.height);
     }
   });
   self.bind("beforeAdd", function(entityData) {
