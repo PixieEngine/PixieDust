@@ -48,5 +48,8 @@
     applyImpulse: (vector) ->
       body.ApplyImpulse(new b2Vec2(vector.x, vector.y), body.GetPosition())
 
+    body: ->
+      body
+
 )(jQuery)
 
