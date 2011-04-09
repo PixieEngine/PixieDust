@@ -45,8 +45,10 @@ Engine.Box2D = (I, self) ->
   self.bind "draw", (canvas) ->
     if I.PHYSICS_DEBUG_DRAW
       unless debugDraw
+        debugElement = $("<canvas width=640 height=480 />").get(0)
+        debugCanvas = debugElement.getContext("2d")
         debugDraw = new b2DebugDraw()
-        debugDraw.SetSprite(canvas.context())
+        debugDraw.SetSprite($("<canvas width=640 height=480 />").get(0).getContext("2d"))
         debugDraw.SetDrawScale(10)
         debugDraw.SetFillAlpha(0.3)
         debugDraw.SetLineThickness(1.0)
@@ -54,6 +56,7 @@ Engine.Box2D = (I, self) ->
         world.SetDebugDraw(debugDraw)
 
       world.DrawDebugData()
+      canvas.drawImage(debugElement, 0, 0, debugElement.width, debugElement.height, 0, 0, debugElement.width, debugElement.height)
 
   self.bind "beforeAdd", (entityData) ->
     entityData.world = world
