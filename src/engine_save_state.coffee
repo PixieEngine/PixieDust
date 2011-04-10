@@ -3,17 +3,25 @@ Engine.SaveState = (I, self) ->
 
   #TODO      
   rewind: () ->
-    
+
   saveState: () ->
     savedState = I.objects.map (object) ->
       $.extend({}, object.I)
 
   loadState: (newState) ->
     if newState ||= savedState
-      I.objects = newState.map (objectData) ->
-        GameObject.construct $.extend({}, objectData)
+      I.objects.invoke "trigger", "remove"
+      I.objects = []
+
+      newState.each (objectData) ->
+        self.add $.extend({}, objectData)
 
   reload: () ->
-    I.objects = I.objects.map (object) ->
-      GameObject.construct object.I
+    oldObjects = I.objects
+    I.objects = []
+
+    oldObjects.each (object) ->
+      object.trigger "remove"
+
+      self.add object.I
 
