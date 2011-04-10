@@ -36,6 +36,17 @@ test "befare add event", 1, ->
   engine.add
     test: "test"
 
+test "Remove event", 1, ->
+  engine = Engine()
+
+  object = engine.add
+    active: false
+
+  object.bind "remove", ->
+    ok true, "remove called"
+
+  engine.frameAdvance()
+
 test "#find", ->
   engine = Engine()
 
