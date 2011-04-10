@@ -20,7 +20,7 @@
         a = contact.GetFixtureA().GetBody().GetUserData()
         b = contact.GetFixtureB().GetBody().GetUserData()
 
-        pendingCollisions.push([a, b])
+        pendingCollisions.push([a, b, contact])
 
       EndContact: (contact) ->
       PreSolve: (contact, oldManifold) ->
@@ -28,10 +28,10 @@
 
     fireCollisionEvents = () ->
       pendingCollisions.each (event) ->
-        [a, b] = event
+        [a, b, contact] = event
 
-        a.trigger "collision", b
-        b.trigger "collision", a
+        a.trigger "collision", b, contact
+        b.trigger "collision", a, contact
 
       pendingCollisions = []
 
@@ -68,7 +68,7 @@
       entityData.world = world
 
     self.bind "afterAdd", (object) ->
-      object.bind "destroy", ->
+      object.bind "remove", ->
         pendingDestructions.push object.body()
 
     return {}
