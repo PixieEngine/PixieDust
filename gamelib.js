@@ -15974,17 +15974,22 @@ Emitterable = function(I, self) {
     paused: false
   };
   return (window.Engine = function(I) {
-    var canvas, defaultModules, draw, intervalId, modules, queuedObjects, self, step, update;
+    var canvas, defaultModules, draw, frameAdvance, intervalId, modules, queuedObjects, self, step, update;
     I || (I = {});
     $.reverseMerge(I, {
       objects: []
     }, defaults);
     intervalId = null;
+    frameAdvance = false;
     queuedObjects = [];
     update = function() {
-      I.objects = I.objects.select(function(object) {
+      var _ref, toRemove;
+      _ref = I.objects.partition(function(object) {
         return object.update();
       });
+      I.objects = _ref[0];
+      toRemove = _ref[1];
+      toRemove.invoke("trigger", "remove");
       I.objects = I.objects.concat(queuedObjects);
       queuedObjects = [];
       return self.trigger("update");
@@ -15999,7 +16004,7 @@ Emitterable = function(I, self) {
       return self.trigger("draw", canvas);
     };
     step = function() {
-      if (!(I.paused)) {
+      if (!I.paused || frameAdvance) {
         update();
         I.age += 1;
       }
@@ -16012,7 +16017,12 @@ Emitterable = function(I, self) {
         self.trigger("beforeAdd", entityData);
         obj = GameObject.construct(entityData);
         self.trigger("afterAdd", obj);
-        return intervalId && !I.paused ? queuedObjects.push(obj) : I.objects.push(obj);
+        if (intervalId && !I.paused) {
+          queuedObjects.push(obj);
+        } else {
+          I.objects.push(obj);
+        }
+        return obj;
       },
       objects: function() {
         return I.objects;
@@ -16044,6 +16054,12 @@ Emitterable = function(I, self) {
       stop: function() {
         clearInterval(intervalId);
         return (intervalId = null);
+      },
+      frameAdvance: function() {
+        I.paused = true;
+        frameAdvance = true;
+        step();
+        return (frameAdvance = false);
       },
       play: function() {
         return (I.paused = false);
@@ -16136,78 +16152,86 @@ Engine.HUD = function(I, self) {
   });
   return {};
 };;
-Engine.Box2D = function(I, self) {
-  var destroyPhysicsBodies, fireCollisionEvents, pendingCollisions, pendingDestructions, world;
-  $.reverseMerge(I, {
-    scale: 0.1,
-    gravity: Point(0, 98),
-    PHYSICS_DEBUG_DRAW: false
-  });
-  world = new Box2D.Dynamics.b2World(new Box2D.Common.Math.b2Vec2(I.gravity.x, I.gravity.y), true);
-  pendingCollisions = [];
-  pendingDestructions = [];
-  world.SetContactListener({
-    BeginContact: function(contact) {
-      var a, b;
-      a = contact.GetFixtureA().GetBody().GetUserData();
-      b = contact.GetFixtureB().GetBody().GetUserData();
-      return pendingCollisions.push([a, b]);
-    },
-    EndContact: function(contact) {},
-    PreSolve: function(contact, oldManifold) {},
-    PostSolve: function(contact, impulse) {}
-  });
-  fireCollisionEvents = function() {
-    pendingCollisions.each(function(event) {
-      var _ref, a, b;
-      _ref = event;
-      a = _ref[0];
-      b = _ref[1];
-      a.trigger("collision", b);
-      return b.trigger("collision", a);
+(function($) {
+  var _ref, b2DebugDraw, b2World;
+  _ref = Box2D.Dynamics;
+  b2World = _ref.b2World;
+  b2DebugDraw = _ref.b2DebugDraw;
+  return (Engine.Box2D = function(I, self) {
+    var debugCanvas, debugDraw, debugElement, destroyPhysicsBodies, fireCollisionEvents, pendingCollisions, pendingDestructions, world;
+    $.reverseMerge(I, {
+      scale: 0.1,
+      gravity: Point(0, 98),
+      PHYSICS_DEBUG_DRAW: false
     });
-    return (pendingCollisions = []);
-  };
-  destroyPhysicsBodies = function() {
-    pendingDestructions.each(function(body) {
-      return world.DestroyBody(body);
+    world = new b2World(new Box2D.Common.Math.b2Vec2(I.gravity.x, I.gravity.y), true);
+    debugDraw = null;
+    debugElement = null;
+    debugCanvas = null;
+    pendingCollisions = [];
+    pendingDestructions = [];
+    world.SetContactListener({
+      BeginContact: function(contact) {
+        var a, b;
+        a = contact.GetFixtureA().GetBody().GetUserData();
+        b = contact.GetFixtureB().GetBody().GetUserData();
+        return pendingCollisions.push([a, b]);
+      },
+      EndContact: function(contact) {},
+      PreSolve: function(contact, oldManifold) {},
+      PostSolve: function(contact, impulse) {}
     });
-    return (pendingDestructions = []);
-  };
-  self.bind("update", function() {
-    world.Step(1 / I.FPS, 10, 10);
-    world.ClearForces();
-    fireCollisionEvents();
-    return destroyPhysicsBodies();
-  });
-  self.bind("draw", function(canvas) {
-    var debugCanvas, debugDraw, debugElement;
-    if (I.PHYSICS_DEBUG_DRAW) {
-      if (!(debugDraw)) {
-        debugElement = $("<canvas width=640 height=480 />").get(0);
-        debugCanvas = debugElement.getContext("2d");
-        debugDraw = new b2DebugDraw();
-        debugDraw.SetSprite($("<canvas width=640 height=480 />").get(0).getContext("2d"));
-        debugDraw.SetDrawScale(10);
-        debugDraw.SetFillAlpha(0.3);
-        debugDraw.SetLineThickness(1.0);
-        debugDraw.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit);
-        world.SetDebugDraw(debugDraw);
+    fireCollisionEvents = function() {
+      pendingCollisions.each(function(event) {
+        var _ref2, a, b;
+        _ref2 = event;
+        a = _ref2[0];
+        b = _ref2[1];
+        a.trigger("collision", b);
+        return b.trigger("collision", a);
+      });
+      return (pendingCollisions = []);
+    };
+    destroyPhysicsBodies = function() {
+      pendingDestructions.each(function(body) {
+        return world.DestroyBody(body);
+      });
+      return (pendingDestructions = []);
+    };
+    self.bind("update", function() {
+      world.Step(1 / I.FPS, 10, 10);
+      world.ClearForces();
+      fireCollisionEvents();
+      return destroyPhysicsBodies();
+    });
+    self.bind("draw", function(canvas) {
+      if (I.PHYSICS_DEBUG_DRAW) {
+        if (!(debugDraw)) {
+          debugElement = $("<canvas width=640 height=480 />").get(0);
+          debugCanvas = debugElement.getContext("2d");
+          debugDraw = new b2DebugDraw();
+          debugDraw.SetSprite(debugCanvas);
+          debugDraw.SetDrawScale(10);
+          debugDraw.SetFillAlpha(0.3);
+          debugDraw.SetLineThickness(1.0);
+          debugDraw.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit);
+          world.SetDebugDraw(debugDraw);
+        }
+        world.DrawDebugData();
+        return canvas.drawImage(debugElement, 0, 0, debugElement.width, debugElement.height, 0, 0, debugElement.width, debugElement.height);
       }
-      world.DrawDebugData();
-      return canvas.drawImage(debugElement, 0, 0, debugElement.width, debugElement.height, 0, 0, debugElement.width, debugElement.height);
-    }
-  });
-  self.bind("beforeAdd", function(entityData) {
-    return (entityData.world = world);
-  });
-  self.bind("afterAdd", function(object) {
-    return object.bind("destroy", function() {
-      return pendingDestructions.push(object.body());
     });
+    self.bind("beforeAdd", function(entityData) {
+      return (entityData.world = world);
+    });
+    self.bind("afterAdd", function(object) {
+      return object.bind("destroy", function() {
+        return pendingDestructions.push(object.body());
+      });
+    });
+    return {};
   });
-  return {};
-};;
+})(jQuery);;
 Engine.SaveState = function(I, self) {
   var savedState;
   savedState = null;
@@ -16219,14 +16243,22 @@ Engine.SaveState = function(I, self) {
       }));
     },
     loadState: function(newState) {
-      return newState || (newState = savedState) ? (I.objects = newState.map(function(objectData) {
-        return GameObject.construct($.extend({}, objectData));
-      })) : null;
+      if (newState || (newState = savedState)) {
+        I.objects.invoke("trigger", "remove");
+        I.objects = [];
+        return newState.each(function(objectData) {
+          return self.add($.extend({}, objectData));
+        });
+      }
     },
     reload: function() {
-      return (I.objects = I.objects.map(function(object) {
-        return GameObject.construct(object.I);
-      }));
+      var oldObjects;
+      oldObjects = I.objects;
+      I.objects = [];
+      return oldObjects.each(function(object) {
+        object.trigger("remove");
+        return self.add(object.I);
+      });
     }
   };
 };;
