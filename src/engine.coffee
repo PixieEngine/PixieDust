@@ -17,12 +17,15 @@
     }, defaults
 
     intervalId = null
+    frameAdvance = false
 
     queuedObjects = []
 
     update = ->
-      I.objects = I.objects.select (object) ->
+      [I.objects, toRemove] = I.objects.partition (object) ->
         object.update()
+
+      toRemove.invoke "trigger", "remove"
 
       I.objects = I.objects.concat(queuedObjects)
       queuedObjects = []
@@ -39,7 +42,7 @@
       self.trigger "draw", canvas
 
     step = ->
-      unless I.paused
+      if !I.paused || frameAdvance
         update()
         I.age += 1
 
@@ -59,6 +62,8 @@
           queuedObjects.push obj
         else
           I.objects.push obj
+
+        return obj
 
       #TODO: This is a bad idea in case access is attempted during update
       objects: ->
@@ -86,9 +91,15 @@
             step()
           , 1000 / I.FPS)
 
-      stop: () ->
+      stop: ->
         clearInterval(intervalId)
         intervalId = null
+
+      frameAdvance: ->
+        I.paused = true
+        frameAdvance = true
+        step()
+        frameAdvance = false
 
       play: ->
         I.paused = false
