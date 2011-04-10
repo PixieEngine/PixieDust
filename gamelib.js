@@ -16175,7 +16175,7 @@ Engine.HUD = function(I, self) {
         var a, b;
         a = contact.GetFixtureA().GetBody().GetUserData();
         b = contact.GetFixtureB().GetBody().GetUserData();
-        return pendingCollisions.push([a, b]);
+        return pendingCollisions.push([a, b, contact]);
       },
       EndContact: function(contact) {},
       PreSolve: function(contact, oldManifold) {},
@@ -16183,12 +16183,13 @@ Engine.HUD = function(I, self) {
     });
     fireCollisionEvents = function() {
       pendingCollisions.each(function(event) {
-        var _ref2, a, b;
+        var _ref2, a, b, contact;
         _ref2 = event;
         a = _ref2[0];
         b = _ref2[1];
-        a.trigger("collision", b);
-        return b.trigger("collision", a);
+        contact = _ref2[2];
+        a.trigger("collision", b, contact);
+        return b.trigger("collision", a, contact);
       });
       return (pendingCollisions = []);
     };
@@ -16225,7 +16226,7 @@ Engine.HUD = function(I, self) {
       return (entityData.world = world);
     });
     self.bind("afterAdd", function(object) {
-      return object.bind("destroy", function() {
+      return object.bind("remove", function() {
         return pendingDestructions.push(object.body());
       });
     });
