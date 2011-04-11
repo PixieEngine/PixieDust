@@ -1,3 +1,9 @@
+###*
+(Module) The <code>Developer</code> module provides some simple collision detection methods to engine.
+
+@name Collision
+@fieldOf Engine
+###
 Engine.Developer = (I, self) ->
   self.bind "draw", (canvas) ->
     if I.paused
@@ -6,13 +12,13 @@ Engine.Developer = (I, self) ->
         I.objects.each (object) ->
           canvas.fillColor 'rgba(255, 0, 0, 0.5)'
           canvas.fillRect(object.bounds().x, object.bounds().y, object.bounds().width, object.bounds().height)
-          
+
       canvas.fillColor 'rgba(0, 0, 0, 0.5)'
       canvas.fillRect(430, 10, 200, 60)
       canvas.fillColor '#fff'
       canvas.fillText("Developer Mode. Press Esc to resume", 440, 25)
       canvas.fillText("Shift+Left click to add boxes", 440, 43)
       canvas.fillText("Right click red boxes to edit properties", 440, 60)
-    
+
   return {}
 
