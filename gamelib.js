@@ -15327,63 +15327,6 @@ valueOf()
 @methodOf Date#
 */;
 ;
-(function() {
-  var Animation, fromPixieId;
-  Animation = function(data) {
-    var activeAnimation, advanceFrame, currentSprite, spriteLookup;
-    spriteLookup = {};
-    activeAnimation = data.animations[0];
-    currentSprite = data.animations[0].frames[0];
-    advanceFrame = function(animation) {
-      var frames;
-      frames = animation.frames;
-      return (currentSprite = frames[(frames.indexOf(currentSprite) + 1) % frames.length]);
-    };
-    data.tileset.each(function(spriteData, i) {
-      return (spriteLookup[i] = Sprite.fromURL(spriteData.src));
-    });
-    return $.extend(data, {
-      currentSprite: function() {
-        return currentSprite;
-      },
-      draw: function(canvas, x, y) {
-        return canvas.withTransform(Matrix.translation(x, y), function() {
-          return spriteLookup[currentSprite].draw(canvas, 0, 0);
-        });
-      },
-      frames: function() {
-        return activeAnimation.frames;
-      },
-      update: function() {
-        return advanceFrame(activeAnimation);
-      },
-      active: function(name) {
-        if (name !== undefined) {
-          return data.animations[name] ? (currentSprite = data.animations[name].frames[0]) : null;
-        } else {
-          return activeAnimation;
-        }
-      }
-    });
-  };
-  window.Animation = function(name, callback) {
-    return fromPixieId(App.Animations[name], callback);
-  };
-  fromPixieId = function(id, callback) {
-    var proxy, url;
-    url = ("http://pixie.strd6.com/s3/animations/" + (id) + "/data.json");
-    proxy = {
-      active: $.noop,
-      draw: $.noop
-    };
-    $.getJSON(url, function(data) {
-      $.extend(proxy, Animation(data));
-      return (typeof callback === "function" ? callback(proxy) : undefined);
-    });
-    return proxy;
-  };
-  return (window.Animation.fromPixieId = fromPixieId);
-})();;
 var __slice = Array.prototype.slice;
 (function($) {
   var Bindable;
@@ -15997,6 +15940,7 @@ Emitterable = function(I, self) {
   <code>update</code> Called after the engine updates all the game objects.
   @name Engine
   @constructor
+  @param I
   */
   return (window.Engine = function(I) {
     var canvas, defaultModules, draw, frameAdvance, intervalId, modules, queuedObjects, self, step, update;
@@ -16413,6 +16357,29 @@ Engine.Shadows = function(I, self) {
   return {};
 };;
 var GameObject;
+/***
+The default base class for all objects you can add to the engine.
+
+Events:
+
+<code>create</code> When object is created for the first time.
+
+<code>step</code> Triggered every update step.
+
+<code>destroy</code> Triggered when object is destroyed. Use
+the destroy event to add particle effects, play sounds, etc.
+
+<code>remove</code> Triggered when the object is removed from
+the engine. Use the remove event to handle any clean up.
+
+@name GameObject
+@constructor
+@param I
+*/
+/***
+@name I
+@memberOf GameObject#
+*/
 GameObject = function(I) {
   var autobindEvents, defaultModules, modules, self;
   I || (I = {});
@@ -16430,6 +16397,12 @@ GameObject = function(I) {
     excludedModules: []
   });
   self = Core(I).extend({
+    /***
+    Update the game object. This is generally called by the engine.
+
+    @name update
+    @methodOf GameObject#
+    */
     update: function() {
       if (I.active) {
         self.trigger('step');
@@ -16444,6 +16417,12 @@ GameObject = function(I) {
     collides: function(bounds) {
       return Collision.rectangular(I, bounds);
     },
+    /***
+    Destroys the object and triggers the destroyed callback.
+
+    @name destroy
+    @methodOf GameObject#
+    */
     destroy: function() {
       if (!(I.destroyed)) {
         self.trigger('destroy');
