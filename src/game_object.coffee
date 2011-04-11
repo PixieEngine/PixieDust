@@ -14,18 +14,18 @@ the destroy event to add particle effects, play sounds, etc.
 the engine. Use the remove event to handle any clean up.
 
 @name GameObject
+@extends Core
 @constructor
 @param I
-###
-
-###*
-@name I
-@memberOf GameObject#
 ###
 
 GameObject = (I) ->
   I ||= {}
 
+  ###*
+  @name I
+  @memberOf GameObject#
+  ###
   $.reverseMerge I,
     age: 0
     active: true
@@ -95,6 +95,12 @@ GameObject = (I) ->
 
   self
 
+###*
+Construct an object instance from the given entity data.
+@name construct
+@memberOf GameObject
+@param {Object} entityData
+###
 GameObject.construct = (entityData) ->
   if entityData.class
     entityData.class.constantize()(entityData)
