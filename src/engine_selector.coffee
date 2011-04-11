@@ -1,3 +1,9 @@
+###*
+(Module) The <code>Selector</code> module provides methods to query the engine to find game objects.
+
+@name Selector
+@fieldOf Engine
+###
 Engine.Selector = (I, self) ->
 
   instanceMethods =
@@ -5,6 +11,23 @@ Engine.Selector = (I, self) ->
       this.each (item) ->
         item.I[attr] = value
 
+  ###*
+  Get a selection of GameObjects that match the specified selector criteria. The selector language
+  can select objects by id, class, or attributes.
+
+  To select an object by id use "#anId"
+
+  To select objects by class use "MyClass"
+
+  To select objects by properties use ".someProperty" or ".someProperty=someValue"
+
+  You may mix and match selectors. "Wall.x=0" to select all objects of class Wall with an x property of 0.
+
+  @name find
+  @methodOf Engine.Selector#
+  @param {String} selector
+  @type Array
+  ###
   find: (selector) ->
     results = []
 
