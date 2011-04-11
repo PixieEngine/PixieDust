@@ -16085,7 +16085,7 @@ Emitterable = function(I, self) {
   });
 })(jQuery);;
 /***
-The collision module provides some simple collision detection methods to engine.
+(Module) The <code>Collision</code> module provides some simple collision detection methods to engine.
 
 @name Collision
 @fieldOf Engine
@@ -16137,6 +16137,12 @@ Engine.Collision = function(I, self) {
     }
   };
 };;
+/***
+(Module) The <code>Developer</code> module provides a debug overlay and methods for debugging and live coding.
+
+@name Developer
+@fieldOf Engine
+*/
 Engine.Developer = function(I, self) {
   self.bind("draw", function(canvas) {
     if (I.paused) {
@@ -16156,6 +16162,14 @@ Engine.Developer = function(I, self) {
   });
   return {};
 };;
+/***
+(Module) The <code>HUD</code> module provides an extra canvas to draw to. GameObjects that respond to the
+<code>drawHUD</code> method will draw to the HUD canvas. The HUD canvas is not cleared each frame, it is
+the responsibility of the objects drawing on it to manage that themselves.
+
+@name HUD
+@fieldOf Engine
+*/
 Engine.HUD = function(I, self) {
   var hudCanvas;
   hudCanvas = $("<canvas width=640 height=480 />").powerCanvas();
@@ -16175,6 +16189,12 @@ Engine.HUD = function(I, self) {
   _ref = Box2D.Dynamics;
   b2World = _ref.b2World;
   b2DebugDraw = _ref.b2DebugDraw;
+  /***
+  (Module) The <code>Box2D</code> module provides physics integration via Box2D.
+
+  @name Box2D
+  @fieldOf Engine
+  */
   return (Engine.Box2D = function(I, self) {
     var debugCanvas, debugDraw, debugElement, destroyPhysicsBodies, fireCollisionEvents, pendingCollisions, pendingDestructions, world;
     $.reverseMerge(I, {
@@ -16251,16 +16271,35 @@ Engine.HUD = function(I, self) {
     return {};
   });
 })(jQuery);;
+/***
+(Module) The <code>SaveState</code> module provides methods to save and restore the current engine state.
+
+@name SaveState
+@fieldOf Engine
+*/
 Engine.SaveState = function(I, self) {
   var savedState;
   savedState = null;
   return {
     rewind: function() {},
+    /***
+    Save the current game state and returns a JSON object representing that state.
+
+    @name saveState
+    @methodOf Engine.SaveState#
+    */
     saveState: function() {
       return (savedState = I.objects.map(function(object) {
         return $.extend({}, object.I);
       }));
     },
+    /***
+    Loads the game state passed in, or the last saved state, if any.
+
+    @name loadState
+    @methodOf Engine.SaveState#
+    @param [newState] The game state to load.
+    */
     loadState: function(newState) {
       if (newState || (newState = savedState)) {
         I.objects.invoke("trigger", "remove");
@@ -16270,6 +16309,12 @@ Engine.SaveState = function(I, self) {
         });
       }
     },
+    /***
+    Reloads the current engine state, useful for hotswapping code.
+
+    @name reload
+    @methodOf Engine.SaveState#
+    */
     reload: function() {
       var oldObjects;
       oldObjects = I.objects;
@@ -16281,6 +16326,12 @@ Engine.SaveState = function(I, self) {
     }
   };
 };;
+/***
+(Module) The <code>Selector</code> module provides methods to query the engine to find game objects.
+
+@name Selector
+@fieldOf Engine
+*/
 Engine.Selector = function(I, self) {
   var instanceMethods;
   instanceMethods = {
@@ -16291,6 +16342,23 @@ Engine.Selector = function(I, self) {
     }
   };
   return {
+    /***
+    Get a selection of GameObjects that match the specified selector criteria. The selector language
+    can select objects by id, class, or attributes.
+
+    To select an object by id use "#anId"
+
+    To select objects by class use "MyClass"
+
+    To select objects by properties use ".someProperty" or ".someProperty=someValue"
+
+    You may mix and match selectors. "Wall.x=0" to select all objects of class Wall with an x property of 0.
+
+    @name find
+    @methodOf Engine.Selector#
+    @param {String} selector
+    @type Array
+    */
     find: function(selector) {
       var matcher, results;
       results = [];
@@ -16355,6 +16423,14 @@ $.extend(Engine.Selector, {
     };
   }
 });;
+/***
+(Module) The <code>Shadows</code> module provides a lighting extension to the Engine. Objects that have
+an illuminate method will add light to the scene. Objects that have an true opaque attribute will cast
+shadows.
+
+@name Shadows
+@fieldOf Engine
+*/
 Engine.Shadows = function(I, self) {
   var shadowCanvas;
   shadowCanvas = $("<canvas width=640 height=480 />").powerCanvas();
