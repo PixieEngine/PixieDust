@@ -1,5 +1,5 @@
 ###*
-(Module) The collision module provides some simple collision detection methods to engine.
+(Module) The <code>Collision</code> module provides some simple collision detection methods to engine.
 
 @name Collision
 @fieldOf Engine
