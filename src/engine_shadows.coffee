@@ -1,3 +1,11 @@
+###*
+(Module) The <code>Shadows</code> module provides a lighting extension to the Engine. Objects that have
+an illuminate method will add light to the scene. Objects that have an true opaque attribute will cast
+shadows.
+
+@name Shadows
+@fieldOf Engine
+###
 Engine.Shadows = (I, self) ->
   shadowCanvas = $("<canvas width=640 height=480 />").powerCanvas()
 
@@ -18,6 +26,6 @@ Engine.Shadows = (I, self) ->
 
       shadows = shadowCanvas.element()
       canvas.drawImage(shadows, 0, 0, shadows.width, shadows.height, 0, 0, shadows.width, shadows.height)
-  
+
   return {}
 
