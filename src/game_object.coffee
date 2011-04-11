@@ -1,6 +1,30 @@
+###*
+The default base class for all objects you can add to the engine.
+
+Events:
+
+<code>create</code> When object is created for the first time.
+
+<code>step</code> Triggered every update step.
+
+<code>destroy</code> Triggered when object is destroyed. Use 
+the destroy event to add particle effects, play sounds, etc.
+
+<code>remove</code> Triggered when the object is removed from
+the engine. Use the remove event to handle any clean up.
+
+@name GameObject
+@constructor
+###
+
+###*
+@name I
+@memberOf GameObject#
+###
+
 GameObject = (I) ->
   I ||= {}
-  
+
   $.reverseMerge I,
     age: 0
     active: true
@@ -15,22 +39,34 @@ GameObject = (I) ->
     excludedModules: []
 
   self = Core(I).extend
+    ###*
+    Destroys the object and triggers the destroyed callback.
+
+    @name destroy
+    @methodOf GameObject#
+    ###
     update: ->
       if I.active
         self.trigger('step')
         I.age += 1
 
       I.active
-      
+
     draw: $.noop
-      
+
     position: ->
       Point(I.x, I.y)
-      
+
     collides: (bounds) ->
       Collision.rectangular(I, bounds)
-      
-    destroy: () ->
+
+    ###*
+    Destroys the object and triggers the destroyed callback.
+
+    @name destroy
+    @methodOf GameObject#
+    ###
+    destroy: ->
       self.trigger('destroy') unless I.destroyed
 
       I.destroyed = true
@@ -42,9 +78,9 @@ GameObject = (I) ->
 
   modules.each (Module) ->
     self.include Module
-  
+
   self.attrAccessor "solid"
-  
+
   autobindEvents = ['create', 'destroy', 'step']
   autobindEvents.each (eventName) ->
     if event = I[eventName]
@@ -52,7 +88,7 @@ GameObject = (I) ->
         self.bind(eventName, event)
       else
         self.bind(eventName, eval( "(function() {#{event}})" ))
-  
+
   self.trigger('create') unless I.created
   I.created = true
 
