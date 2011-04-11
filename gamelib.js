@@ -16084,13 +16084,36 @@ Emitterable = function(I, self) {
     return self;
   });
 })(jQuery);;
+/***
+The collision module provides some simple collision detection methods to engine.
+
+@name Collision
+@fieldOf Engine
+*/
 Engine.Collision = function(I, self) {
   return {
+    /***
+    Detects collisions between a bounds and the game objects.
+
+    @name collides
+    @methodOf Engine.Collision#
+    @param bounds The bounds to check collisions with.
+    @param [sourceObject] An object to exclude from the results.
+    */
     collides: function(bounds, sourceObject) {
       return I.objects.inject(false, function(collided, object) {
         return collided || (object.solid() && (object !== sourceObject) && object.collides(bounds));
       });
     },
+    /***
+    Detects collisions between a ray and the game objects.
+
+    @name rayCollides
+    @methodOf Engine.Collision#
+    @param source The origin point
+    @param direction A point representing the direction of the ray
+    @param [sourceObject] An object to exclude from the results.
+    */
     rayCollides: function(source, direction, sourceObject) {
       var hits, nearestDistance, nearestHit;
       hits = I.objects.map(function(object) {
@@ -16373,16 +16396,17 @@ the destroy event to add particle effects, play sounds, etc.
 the engine. Use the remove event to handle any clean up.
 
 @name GameObject
+@extends Core
 @constructor
 @param I
-*/
-/***
-@name I
-@memberOf GameObject#
 */
 GameObject = function(I) {
   var autobindEvents, defaultModules, modules, self;
   I || (I = {});
+  /***
+  @name I
+  @memberOf GameObject#
+  */
   $.reverseMerge(I, {
     age: 0,
     active: true,
@@ -16449,6 +16473,12 @@ GameObject = function(I) {
   I.created = true;
   return self;
 };
+/***
+Construct an object instance from the given entity data.
+@name construct
+@memberOf GameObject
+@param {Object} entityData
+*/
 GameObject.construct = function(entityData) {
   return entityData["class"] ? entityData["class"].constantize()(entityData) : GameObject(entityData);
 };;
