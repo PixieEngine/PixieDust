@@ -15973,6 +15973,31 @@ Emitterable = function(I, self) {
     includedModules: [],
     paused: false
   };
+  /***
+  The Engine controls the game world and manages game state. Once you
+  set it up and let it run it pretty much takes care of itself.
+
+  You can use the engine to add or remove objects from the game world.
+
+  There are several modules that can include to add additional capabilities
+  to the engine.
+
+  The engine fires events that you  may bind listeners to. Event listeners
+  may be bound with <code>engine.bind(eventName, callback)</code>
+
+  <code>beforeAdd(entityData)</code> Observer or modify the
+  entity data before it is added to the engine.
+
+  <code>afterAdd(gameObject)</code> Observe or
+  configure a <code>gameObject</code> that has been added to the engine.
+
+  <code>draw(canvas)</code> Called after the engine draws on the canvas, you
+  wish to draw additional things to the canvas.
+
+  <code>update</code> Called after the engine updates all the game objects.
+  @name Engine
+  @constructor
+  */
   return (window.Engine = function(I) {
     var canvas, defaultModules, draw, frameAdvance, intervalId, modules, queuedObjects, self, step, update;
     I || (I = {});
@@ -16012,6 +16037,17 @@ Emitterable = function(I, self) {
     };
     canvas = I.canvas || $("<canvas />").powerCanvas();
     self = Core(I).extend({
+      /***
+      The add method creates and adds an object to the game world.
+
+      Events triggered:
+      <code>beforeAdd(entityData)</code>
+      <code>afterAdd(gameObject)</code>
+
+      @name add
+      @methodOf Engine#
+      @param entityData The data used to create the game object.
+      */
       add: function(entityData) {
         var obj;
         self.trigger("beforeAdd", entityData);
@@ -16046,11 +16082,21 @@ Emitterable = function(I, self) {
       eachObject: function(iterator) {
         return I.objects.each(iterator);
       },
+      /***
+      Start the game simulation.
+      @methodOf Engine#
+      @name start
+      */
       start: function() {
         return !(intervalId) ? (intervalId = setInterval(function() {
           return step();
         }, 1000 / I.FPS)) : null;
       },
+      /***
+      Stop the simulation.
+      @methodOf Engine#
+      @name stop
+      */
       stop: function() {
         clearInterval(intervalId);
         return (intervalId = null);
@@ -16064,6 +16110,11 @@ Emitterable = function(I, self) {
       play: function() {
         return (I.paused = false);
       },
+      /***
+      Pause the simulation
+      @methodOf Engine#
+      @name pause
+      */
       pause: function() {
         return (I.paused = true);
       },
