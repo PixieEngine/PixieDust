@@ -31,7 +31,7 @@
   wish to draw additional things to the canvas.
 
   <code>update</code> Called after the engine updates all the game objects.
-
+  @name Engine
   @constructor
   ###
   window.Engine = (I) ->
