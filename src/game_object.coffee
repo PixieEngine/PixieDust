@@ -43,7 +43,7 @@ GameObject = (I) ->
     ###*
     Destroys the object and triggers the destroyed callback.
 
-    @name destroy
+    @name update
     @methodOf GameObject#
     ###
     update: ->
