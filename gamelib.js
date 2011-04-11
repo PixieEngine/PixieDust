@@ -15940,6 +15940,7 @@ Emitterable = function(I, self) {
   <code>update</code> Called after the engine updates all the game objects.
   @name Engine
   @constructor
+  @param I
   */
   return (window.Engine = function(I) {
     var canvas, defaultModules, draw, frameAdvance, intervalId, modules, queuedObjects, self, step, update;
@@ -16373,6 +16374,7 @@ the engine. Use the remove event to handle any clean up.
 
 @name GameObject
 @constructor
+@param I
 */
 /***
 @name I
