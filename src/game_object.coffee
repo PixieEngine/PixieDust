@@ -41,7 +41,7 @@ GameObject = (I) ->
 
   self = Core(I).extend
     ###*
-    Destroys the object and triggers the destroyed callback.
+    Update the game object. This is generally called by the engine.
 
     @name update
     @methodOf GameObject#
