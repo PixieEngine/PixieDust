@@ -3,7 +3,7 @@
 <code>drawHUD</code> method will draw to the HUD canvas. The HUD canvas is not cleared each frame, it is
 the responsibility of the objects drawing on it to manage that themselves.
 
-@name Developer
+@name HUD
 @fieldOf Engine
 ###
 Engine.HUD = (I, self) ->
