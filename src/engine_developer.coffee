@@ -1,7 +1,7 @@
 ###*
-(Module) The <code>Developer</code> module provides some simple collision detection methods to engine.
+(Module) The <code>Developer</code> module provides a debug overlay and methods for debugging and live coding.
 
-@name Collision
+@name Developer
 @fieldOf Engine
 ###
 Engine.Developer = (I, self) ->
