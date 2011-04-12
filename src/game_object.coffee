@@ -31,10 +31,6 @@ GameObject = (I) ->
     active: true
     created: false
     destroyed: false
-    x: 0
-    y: 0
-    width: 8
-    height: 8
     solid: false
     includedModules: []
     excludedModules: []
@@ -54,12 +50,6 @@ GameObject = (I) ->
       I.active
 
     draw: $.noop
-
-    position: ->
-      Point(I.x, I.y)
-
-    collides: (bounds) ->
-      Collision.rectangular(I, bounds)
 
     ###*
     Destroys the object and triggers the destroyed callback.
