@@ -2,7 +2,6 @@
 (Module) The <code>Selector</code> module provides methods to query the engine to find game objects.
 
 @name Selector
-@constructor
 @fieldOf Engine
 ###
 Engine.Selector = (I, self) ->
@@ -25,7 +24,7 @@ Engine.Selector = (I, self) ->
   You may mix and match selectors. "Wall.x=0" to select all objects of class Wall with an x property of 0.
 
   @name find
-  @methodOf Engine.Selector#
+  @methodOf Engine#
   @param {String} selector
   @type Array
   ###
