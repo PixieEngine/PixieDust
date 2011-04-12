@@ -15408,7 +15408,25 @@ Bounded module
 */
 Bounded = function(I) {
   I || (I = {});
+  $.reverseMerge(I, {
+    x: 0,
+    y: 0,
+    width: 8,
+    height: 8
+  });
   return {
+    /***
+    The position of this game object, the top left point in the local transform.
+
+    @returns The position of this object
+    @type Point
+    */
+    position: function() {
+      return Point(I.x, I.y);
+    },
+    collides: function(bounds) {
+      return Collision.rectangular(I, bounds);
+    },
     /***
     The bounds method returns infomation about the location
     of the object and its dimensions with optional offsets
@@ -16494,10 +16512,6 @@ GameObject = function(I) {
     active: true,
     created: false,
     destroyed: false,
-    x: 0,
-    y: 0,
-    width: 8,
-    height: 8,
     solid: false,
     includedModules: [],
     excludedModules: []
@@ -16517,12 +16531,6 @@ GameObject = function(I) {
       return I.active;
     },
     draw: $.noop,
-    position: function() {
-      return Point(I.x, I.y);
-    },
-    collides: function(bounds) {
-      return Collision.rectangular(I, bounds);
-    },
     /***
     Destroys the object and triggers the destroyed callback.
 
