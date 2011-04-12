@@ -10,6 +10,24 @@ Bounded module
 Bounded = (I) ->
   I ||= {}
 
+  $.reverseMerge, I
+    x: 0
+    y: 0
+    width: 8
+    height: 8
+
+  ###*
+  The position of this game object, the top left point in the local transform.
+
+  @returns The position of this object
+  @type Point
+  ###
+  position: ->
+    Point(I.x, I.y)
+
+  collides: (bounds) ->
+    Collision.rectangular(I, bounds)
+
   ###*
   The bounds method returns infomation about the location 
   of the object and its dimensions with optional offsets
