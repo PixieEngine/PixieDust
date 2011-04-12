@@ -2,6 +2,7 @@
 (Module) The <code>Selector</code> module provides methods to query the engine to find game objects.
 
 @name Selector
+@constructor
 @fieldOf Engine
 ###
 Engine.Selector = (I, self) ->
