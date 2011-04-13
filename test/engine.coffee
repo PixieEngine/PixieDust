@@ -36,6 +36,11 @@ test "befare add event", 1, ->
   engine.add
     test: "test"
 
+test "invalid module throws error", ->
+  raises ->
+    engine = Engine
+      includedModules: ["HellaInvalidModule"]
+
 test "Remove event", 1, ->
   engine = Engine()
 
