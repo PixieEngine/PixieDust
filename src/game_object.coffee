@@ -49,7 +49,13 @@ GameObject = (I) ->
 
       I.active
 
-    draw: $.noop
+    draw: (canvas) ->
+      if I.transform
+        canvas.withTransform I.transform, (canvas) ->
+          self.trigger 'draw', canvas
+      else
+        canvas.withTransform Matrix.translation(I.x, I.y), (canvas) ->
+          self.trigger 'draw', canvas
 
     ###*
     Destroys the object and triggers the destroyed callback.
