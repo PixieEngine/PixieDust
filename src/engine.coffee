@@ -177,6 +177,8 @@
     modules = modules.without(I.excludedModules)
 
     modules.each (moduleName) ->
+      throw "#Engine.{moduleName} is not a valid engine module" unless Engine[moduleName]
+
       self.include Engine[moduleName]
 
     return self
