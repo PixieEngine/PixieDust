@@ -30,7 +30,7 @@ Drawable = (I, self) ->
 
     if I.rotation
       I.transform = Matrix.translation(center.x, center.y)
-        .concat(Matrix.rotation(I.rotation)) if I.rotation
+        .concat(Matrix.rotation(I.rotation))
         .concat(Matrix.translation(-I.width/2, -I.height/2))
     else
       # Assumes I.x and I.y are top-left
