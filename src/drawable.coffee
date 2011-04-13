@@ -4,6 +4,8 @@ object.
 
 Binds a default draw listener to draw a rectangle or a sprite, if one exists.
 
+Binds a step listener to update the transform of the object.
+
 Autoloads the sprite specified in I.spriteName, if any.
 
 @name Drawable
@@ -25,9 +27,14 @@ Drawable = (I, self) ->
 
   self.bind 'step', ->
     center = self.center()
-    I.transform = Matrix.translation(center.x, center.y)
-      .concat(Matrix.rotation(I.rotation))
-      .concat(Matrix.translation(-I.width/2, -I.height/2)) 
+
+    if I.rotation
+      I.transform = Matrix.translation(center.x, center.y)
+        .concat(Matrix.rotation(I.rotation)) if I.rotation
+        .concat(Matrix.translation(-I.width/2, -I.height/2))
+    else
+      # Assumes I.x and I.y are top-left
+      I.transform = Matrix.translation(I.x, I.y)
 
   self.bind 'draw', (canvas) ->
     if I.sprite
@@ -35,4 +42,6 @@ Drawable = (I, self) ->
     else
       canvas.fillColor(I.color)
       canvas.fillRect(0, 0, I.width, I.height)
+
+  return {}
 
