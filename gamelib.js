@@ -15333,6 +15333,63 @@ valueOf()
 @methodOf Date#
 */;
 ;
+(function() {
+  var Animation, fromPixieId;
+  Animation = function(data) {
+    var activeAnimation, advanceFrame, currentSprite, spriteLookup;
+    spriteLookup = {};
+    activeAnimation = data.animations[0];
+    currentSprite = data.animations[0].frames[0];
+    advanceFrame = function(animation) {
+      var frames;
+      frames = animation.frames;
+      return (currentSprite = frames[(frames.indexOf(currentSprite) + 1) % frames.length]);
+    };
+    data.tileset.each(function(spriteData, i) {
+      return (spriteLookup[i] = Sprite.fromURL(spriteData.src));
+    });
+    return $.extend(data, {
+      currentSprite: function() {
+        return currentSprite;
+      },
+      draw: function(canvas, x, y) {
+        return canvas.withTransform(Matrix.translation(x, y), function() {
+          return spriteLookup[currentSprite].draw(canvas, 0, 0);
+        });
+      },
+      frames: function() {
+        return activeAnimation.frames;
+      },
+      update: function() {
+        return advanceFrame(activeAnimation);
+      },
+      active: function(name) {
+        if (name !== undefined) {
+          return data.animations[name] ? (currentSprite = data.animations[name].frames[0]) : null;
+        } else {
+          return activeAnimation;
+        }
+      }
+    });
+  };
+  window.Animation = function(name, callback) {
+    return fromPixieId(App.Animations[name], callback);
+  };
+  fromPixieId = function(id, callback) {
+    var proxy, url;
+    url = ("http://pixie.strd6.com/s3/animations/" + (id) + "/data.json");
+    proxy = {
+      active: $.noop,
+      draw: $.noop
+    };
+    $.getJSON(url, function(data) {
+      $.extend(proxy, Animation(data));
+      return (typeof callback === "function" ? callback(proxy) : undefined);
+    });
+    return proxy;
+  };
+  return (window.Animation.fromPixieId = fromPixieId);
+})();;
 var __slice = Array.prototype.slice;
 (function($) {
   var Bindable;
