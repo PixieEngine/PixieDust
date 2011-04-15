@@ -16933,6 +16933,9 @@ Movable = function(I) {
     }
     center = self.center().scale(SCALE);
     bodyDef.position = new b2Vec2(center.x, center.y);
+    if (I.rotation) {
+      bodyDef.angle = I.rotation;
+    }
     body = I.world.CreateBody(bodyDef);
     body.CreateFixture(fixDef);
     body.SetUserData(self);
