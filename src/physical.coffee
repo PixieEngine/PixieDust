@@ -34,6 +34,7 @@
       center.x, 
       center.y
     )
+    bodyDef.angle = I.rotation if I.rotation
 
     body = I.world.CreateBody(bodyDef)        
     body.CreateFixture(fixDef)
