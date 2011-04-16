@@ -16205,6 +16205,7 @@ Emitterable = function(I, self) {
     queuedObjects = [];
     update = function() {
       var _ref, toRemove;
+      self.trigger("update");
       _ref = I.objects.partition(function(object) {
         return object.update();
       });
@@ -16212,8 +16213,7 @@ Emitterable = function(I, self) {
       toRemove = _ref[1];
       toRemove.invoke("trigger", "remove");
       I.objects = I.objects.concat(queuedObjects);
-      queuedObjects = [];
-      return self.trigger("update");
+      return (queuedObjects = []);
     };
     draw = function() {
       canvas.withTransform(I.cameraTransform, function(canvas) {
