@@ -87,6 +87,7 @@
       @name add
       @methodOf Engine#
       @param entityData The data used to create the game object.
+      @type GameObject
       ###
       add: (entityData) ->
         self.trigger "beforeAdd", entityData
@@ -101,6 +102,15 @@
           I.objects.push obj
 
         return obj
+
+      ###*
+      Returns a reference to the canvas.
+
+      @name canvas
+      @methodOf Engine#
+      ###
+      canvas: ->
+        canvas
 
       #TODO: This is a bad idea in case access is attempted during update
       objects: ->
