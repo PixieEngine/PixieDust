@@ -16243,6 +16243,7 @@ Emitterable = function(I, self) {
       @name add
       @methodOf Engine#
       @param entityData The data used to create the game object.
+      @type GameObject
       */
       add: function(entityData) {
         var obj;
@@ -16255,6 +16256,15 @@ Emitterable = function(I, self) {
           I.objects.push(obj);
         }
         return obj;
+      },
+      /***
+      Returns a reference to the canvas.
+
+      @name canvas
+      @methodOf Engine#
+      */
+      canvas: function() {
+        return canvas;
       },
       objects: function() {
         return I.objects;
