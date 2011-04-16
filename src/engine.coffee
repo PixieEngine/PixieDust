@@ -48,6 +48,8 @@
     queuedObjects = []
 
     update = ->
+      self.trigger "update"
+
       [I.objects, toRemove] = I.objects.partition (object) ->
         object.update()
 
@@ -55,8 +57,6 @@
 
       I.objects = I.objects.concat(queuedObjects)
       queuedObjects = []
-
-      self.trigger "update"
 
     draw = ->
       canvas.withTransform I.cameraTransform, (canvas) ->
