@@ -16229,7 +16229,7 @@ Emitterable = function(I, self) {
       self.trigger("draw", canvas);
       if (I.showFPS) {
         canvas.fillColor("#FFF");
-        canvas.fillText("fps: " + framerate.fps);
+        canvas.fillText("fps: " + framerate.fps, 5, 12);
       }
       return framerate.rendered();
     };
