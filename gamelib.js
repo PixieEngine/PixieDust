@@ -16228,8 +16228,9 @@ Emitterable = function(I, self) {
       });
       self.trigger("draw", canvas);
       if (I.showFPS) {
+        canvas.font("bold 9pt consolas, 'Courier New', 'andale mono', 'lucida console', monospace");
         canvas.fillColor("#FFF");
-        canvas.fillText("fps: " + framerate.fps, 5, 12);
+        canvas.fillText("fps: " + framerate.fps, 6, 18);
       }
       return framerate.rendered();
     };
