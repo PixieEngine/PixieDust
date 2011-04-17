@@ -73,7 +73,7 @@
 
       if I.showFPS
         canvas.fillColor("#FFF")
-        canvas.fillText("fps: " + framerate.fps, 0, 0)
+        canvas.fillText("fps: " + framerate.fps, 5, 12)
 
       framerate.rendered()
 
