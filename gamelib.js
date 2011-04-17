@@ -16166,7 +16166,8 @@ Emitterable = function(I, self) {
     cameraTransform: Matrix.IDENTITY,
     excludedModules: [],
     includedModules: [],
-    paused: false
+    paused: false,
+    showFPS: false
   };
   /***
   The Engine controls the game world and manages game state. Once you
@@ -16195,7 +16196,7 @@ Emitterable = function(I, self) {
   @param I
   */
   return (window.Engine = function(I) {
-    var canvas, defaultModules, draw, frameAdvance, intervalId, modules, queuedObjects, self, step, update;
+    var canvas, defaultModules, draw, frameAdvance, framerate, intervalId, modules, queuedObjects, self, step, update;
     I || (I = {});
     $.reverseMerge(I, {
       objects: []
@@ -16203,6 +16204,9 @@ Emitterable = function(I, self) {
     intervalId = null;
     frameAdvance = false;
     queuedObjects = [];
+    framerate = Framerate({
+      noDOM: true
+    });
     update = function() {
       var _ref, toRemove;
       self.trigger("update");
@@ -16222,7 +16226,12 @@ Emitterable = function(I, self) {
         }
         return I.objects.invoke("draw", canvas);
       });
-      return self.trigger("draw", canvas);
+      self.trigger("draw", canvas);
+      if (I.showFPS) {
+        canvas.fillColor("#FFF");
+        canvas.fillText("fps: " + framerate.fps);
+      }
+      return framerate.rendered();
     };
     step = function() {
       if (!I.paused || frameAdvance) {
@@ -16719,6 +16728,75 @@ Engine.Shadows = function(I, self) {
     }
   });
   return {};
+};;
+var Framerate;
+/***
+@name Framerate
+@constructor
+
+This object keeps track of framerate and displays it by creating and appending an
+html element to the DOM.
+
+Once created you call snapshot at the end of every rendering cycle.
+*/
+Framerate = function(options) {
+  var element, framerateUpdateInterval, framerates, numFramerates, renderTime, self, updateFramerate;
+  options || (options = {});
+  if (!(options.noDOM)) {
+    element = $("<div>", {
+      css: {
+        color: "#FFF",
+        fontFamily: "consolas, 'Courier New', 'andale mono', 'lucida console', monospace",
+        fontWeight: "bold",
+        paddingLeft: 4,
+        position: "fixed",
+        top: 0,
+        left: 0
+      }
+    }).appendTo('body').get(0);
+  }
+  numFramerates = 15;
+  framerateUpdateInterval = 250;
+  renderTime = -1;
+  framerates = [];
+  updateFramerate = function() {
+    var _i, _len, _ref, framerate, rate, tot;
+    tot = 0;
+    _ref = framerates;
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      rate = _ref[_i];
+      tot += rate;
+    }
+    framerate = (tot / framerates.length).round();
+    self.fps = framerate;
+    if (element) {
+      return (element.innerHTML = "fps: " + framerate);
+    }
+  };
+  setInterval(updateFramerate, framerateUpdateInterval);
+  /***
+  @name rendered
+  @methodOf Framerate#
+
+  Call this method everytime you render.
+  */
+  return (self = {
+    rendered: function() {
+      var framerate, newTime, t;
+      if (renderTime < 0) {
+        return (renderTime = new Date().getTime());
+      } else {
+        newTime = new Date().getTime();
+        t = newTime - renderTime;
+        framerate = 1000 / t;
+        framerates.push(framerate);
+        while ((framerates.length > numFramerates)) {
+          framerates.shift();
+        }
+        return (renderTime = newTime);
+      }
+    }
+  });
 };;
 var GameObject;
 /***
