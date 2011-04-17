@@ -8,6 +8,7 @@
     excludedModules: []
     includedModules: []
     paused: false
+    showFPS: false
 
   ###*
   The Engine controls the game world and manages game state. Once you 
@@ -47,6 +48,9 @@
 
     queuedObjects = []
 
+    framerate = Framerate
+      noDOM: true
+
     update = ->
       self.trigger "update"
 
@@ -66,6 +70,12 @@
         I.objects.invoke("draw", canvas)
 
       self.trigger "draw", canvas
+
+      if I.showFPS
+        canvas.fillColor("#FFF")
+        canvas.fillText("fps: " + framerate.fps)
+
+      framerate.rendered()
 
     step = ->
       if !I.paused || frameAdvance
