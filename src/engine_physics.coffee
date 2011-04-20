@@ -67,7 +67,8 @@
           world.SetDebugDraw(debugDraw)
 
         world.DrawDebugData()
-        canvas.drawImage(debugElement, 0, 0, debugElement.width, debugElement.height, 0, 0, debugElement.width, debugElement.height)
+        canvas.withTransform I.cameraTransform, (canvas) ->
+          canvas.drawImage(debugElement, 0, 0, debugElement.width, debugElement.height, 0, 0, debugElement.width, debugElement.height)
 
     self.bind "beforeAdd", (entityData) ->
       entityData.world = world
