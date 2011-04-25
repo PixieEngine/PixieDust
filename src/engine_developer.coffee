@@ -1,8 +1,9 @@
 ###*
-(Module) The <code>Developer</code> module provides a debug overlay and methods for debugging and live coding.
+The <code>Developer</code> module provides a debug overlay and methods for debugging and live coding.
 
 @name Developer
 @fieldOf Engine
+@module
 ###
 Engine.Developer = (I, self) ->
   self.bind "draw", (canvas) ->
