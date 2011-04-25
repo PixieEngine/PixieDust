@@ -1,8 +1,9 @@
 ###*
-(Module) The <code>Collision</code> module provides some simple collision detection methods to engine.
+The <code>Collision</code> module provides some simple collision detection methods to engine.
 
 @name Collision
 @fieldOf Engine
+@module
 ###
 Engine.Collision = (I, self) ->
   ###*
