@@ -1,8 +1,12 @@
 ###*
-(Module) The <code>SaveState</code> module provides methods to save and restore the current engine state.
+The <code>SaveState</code> module provides methods to save and restore the current engine state.
 
 @name SaveState
 @fieldOf Engine
+@module
+
+@param {Object} I Instance variables
+@param {Object} self Reference to the engine
 ###
 Engine.SaveState = (I, self) ->
   savedState = null
