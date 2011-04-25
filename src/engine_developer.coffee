@@ -4,6 +4,9 @@ The <code>Developer</code> module provides a debug overlay and methods for debug
 @name Developer
 @fieldOf Engine
 @module
+
+@param {Object} I Instance variables
+@param {Object} self Reference to the engine
 ###
 Engine.Developer = (I, self) ->
   self.bind "draw", (canvas) ->

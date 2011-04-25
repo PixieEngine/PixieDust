@@ -4,6 +4,9 @@ The <code>Collision</code> module provides some simple collision detection metho
 @name Collision
 @fieldOf Engine
 @module
+
+@param {Object} I Instance variables
+@param {Object} self Reference to the engine
 ###
 Engine.Collision = (I, self) ->
   ###*
