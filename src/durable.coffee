@@ -4,8 +4,9 @@ If a duration is specified the object will update that many times. If -1 is
 specified the object will have an unlimited duration.
 
 @name Durable
-@constructor
-@param I instanceVariables
+@module
+
+@param {Object} I Instance variables
 ###
 Durable = (I) ->
   $.reverseMerge I,
