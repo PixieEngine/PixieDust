@@ -1,10 +1,14 @@
 ( ($)->
   {b2World, b2DebugDraw} = Box2D.Dynamics
+
   ###*
   (Module) The <code>Box2D</code> module provides physics integration via Box2D.
 
   @name Box2D
   @fieldOf Engine
+
+  @param {Object} I Instance variables
+  @param {Object} self Reference to the engine
   ###
   Engine.Box2D = (I, self) ->
     $.reverseMerge I,
