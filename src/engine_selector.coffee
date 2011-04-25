@@ -1,8 +1,9 @@
 ###*
-(Module) The <code>Selector</code> module provides methods to query the engine to find game objects.
+The <code>Selector</code> module provides methods to query the engine to find game objects.
 
 @name Selector
 @fieldOf Engine
+@module
 ###
 Engine.Selector = (I, self) ->
 
