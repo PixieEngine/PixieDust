@@ -1,10 +1,11 @@
 ###*
-(Module) The <code>HUD</code> module provides an extra canvas to draw to. GameObjects that respond to the
+The <code>HUD</code> module provides an extra canvas to draw to. GameObjects that respond to the
 <code>drawHUD</code> method will draw to the HUD canvas. The HUD canvas is not cleared each frame, it is
 the responsibility of the objects drawing on it to manage that themselves.
 
 @name HUD
 @fieldOf Engine
+@module
 ###
 Engine.HUD = (I, self) ->
   hudCanvas = $("<canvas width=640 height=480 />").powerCanvas()
