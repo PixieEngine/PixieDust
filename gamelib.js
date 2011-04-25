@@ -15566,50 +15566,50 @@ var __slice = Array.prototype.slice;
 (function($) {
   var Bindable;
   /***
-  * Bindable module
-  * @name Bindable
-  * @constructor
+  Bindable module
+  @name Bindable
+  @module
   */
   Bindable = function() {
     var eventCallbacks;
     eventCallbacks = {};
     return {
       /***
-      * The bind method adds a function as an event listener.
-      *
-      * @name bind
-      * @methodOf Bindable#
-      *
-      * @param {String} event The event to listen to.
-      * @param {Function} callback The function to be called when the specified event
-      * is triggered.
+      The bind method adds a function as an event listener.
+
+      @name bind
+      @methodOf Bindable#
+
+      @param {String} event The event to listen to.
+      @param {Function} callback The function to be called when the specified event
+      is triggered.
       */
       bind: function(event, callback) {
         eventCallbacks[event] = eventCallbacks[event] || [];
         return eventCallbacks[event].push(callback);
       },
       /***
-      * The unbind method removes a specific event listener, or all event listeners if
-      * no specific listener is given.
-      *
-      * @name unbind
-      * @methodOf Bindable#
-      *
-      * @param {String} event The event to remove the listener from.
-      * @param {Function} [callback] The listener to remove.
+      The unbind method removes a specific event listener, or all event listeners if
+      no specific listener is given.
+
+      @name unbind
+      @methodOf Bindable#
+
+      @param {String} event The event to remove the listener from.
+      @param {Function} [callback] The listener to remove.
       */
       unbind: function(event, callback) {
         eventCallbacks[event] = eventCallbacks[event] || [];
         return callback ? eventCallbacks.remove(callback) : (eventCallbacks[event] = []);
       },
       /***
-      * The trigger method calls all listeners attached to the specified event.
-      *
-      * @name trigger
-      * @methodOf Bindable#
-      *
-      * @param {String} event The event to trigger.
-      * @param {Array} [parameters] Additional parameters to pass to the event listener.
+      The trigger method calls all listeners attached to the specified event.
+
+      @name trigger
+      @methodOf Bindable#
+
+      @param {String} event The event to trigger.
+      @param {Array} [parameters] Additional parameters to pass to the event listener.
       */
       trigger: function(event) {
         var callbacks, parameters, self;
@@ -15633,7 +15633,10 @@ location and dimensions of the including object
 
 Bounded module
 @name Bounded
-@constructor
+@module
+
+@param {Object} I Instance variables
+@param {Object} self Reference to including object
 */
 Bounded = function(I) {
   I || (I = {});
@@ -16039,8 +16042,9 @@ Binds a step listener to update the transform of the object.
 Autoloads the sprite specified in I.spriteName, if any.
 
 @name Drawable
-@constructor
+@module
 @param {Object} I Instance variables
+@param {Object} self Reference to including object
 */
 Drawable = function(I, self) {
   I || (I = {});
@@ -16076,8 +16080,9 @@ If a duration is specified the object will update that many times. If -1 is
 specified the object will have an unlimited duration.
 
 @name Durable
-@constructor
-@param I instanceVariables
+@module
+
+@param {Object} I Instance variables
 */
 Durable = function(I) {
   $.reverseMerge(I, {
@@ -16181,19 +16186,43 @@ Emitterable = function(I, self) {
   The engine fires events that you  may bind listeners to. Event listeners
   may be bound with <code>engine.bind(eventName, callback)</code>
 
-  <code>beforeAdd(entityData)</code> Observer or modify the
-  entity data before it is added to the engine.
-
-  <code>afterAdd(gameObject)</code> Observe or
-  configure a <code>gameObject</code> that has been added to the engine.
-
-  <code>draw(canvas)</code> Called after the engine draws on the canvas, you
-  wish to draw additional things to the canvas.
-
-  <code>update</code> Called after the engine updates all the game objects.
   @name Engine
   @constructor
   @param I
+  */
+  /***
+  Observe or modify the
+  entity data before it is added to the engine.
+  @name beforeAdd
+  @methodOf Engine#
+  @event
+
+  @param {Object} entityData
+  */
+  /***
+  Observe or configure a <code>gameObject</code> that has been added
+  to the engine.
+  @name afterAdd
+  @methodOf Engine#
+  @event
+
+  @param {GameObject} object The object that has just been added to the
+  engine.
+  */
+  /***
+  Called when the engine updates all the game objects.
+
+  @name update
+  @methodOf Engine#
+  @event
+  */
+  /***
+  Called after the engine draws on the canvas, you
+  wish to draw additional things to the canvas.
+
+  @name draw
+  @methodOf Engine#
+  @event
   */
   return (window.Engine = function(I) {
     var canvas, defaultModules, draw, frameAdvance, framerate, intervalId, modules, queuedObjects, self, step, update;
@@ -16360,10 +16389,14 @@ Emitterable = function(I, self) {
   });
 })(jQuery);;
 /***
-(Module) The <code>Collision</code> module provides some simple collision detection methods to engine.
+The <code>Collision</code> module provides some simple collision detection methods to engine.
 
 @name Collision
 @fieldOf Engine
+@module
+
+@param {Object} I Instance variables
+@param {Object} self Reference to the engine
 */
 Engine.Collision = function(I, self) {
   return {
@@ -16415,10 +16448,14 @@ Engine.Collision = function(I, self) {
 var _i, _ref, developerMode, fn, key, objectToUpdate;
 var __hasProp = Object.prototype.hasOwnProperty;
 /***
-(Module) The <code>Developer</code> module provides a debug overlay and methods for debugging and live coding.
+The <code>Developer</code> module provides a debug overlay and methods for debugging and live coding.
 
 @name Developer
 @fieldOf Engine
+@module
+
+@param {Object} I Instance variables
+@param {Object} self Reference to the engine
 */
 Engine.Developer = function(I, self) {
   self.bind("draw", function(canvas) {
@@ -16505,12 +16542,16 @@ for (key in _ref) {
   $(document).bind("keydown", key, fn);
 };
 /***
-(Module) The <code>HUD</code> module provides an extra canvas to draw to. GameObjects that respond to the
+The <code>HUD</code> module provides an extra canvas to draw to. GameObjects that respond to the
 <code>drawHUD</code> method will draw to the HUD canvas. The HUD canvas is not cleared each frame, it is
 the responsibility of the objects drawing on it to manage that themselves.
 
 @name HUD
 @fieldOf Engine
+@module
+
+@param {Object} I Instance variables
+@param {Object} self Reference to the engine
 */
 Engine.HUD = function(I, self) {
   var hudCanvas;
@@ -16536,6 +16577,9 @@ Engine.HUD = function(I, self) {
 
   @name Box2D
   @fieldOf Engine
+
+  @param {Object} I Instance variables
+  @param {Object} self Reference to the engine
   */
   return (Engine.Box2D = function(I, self) {
     var debugCanvas, debugDraw, debugElement, destroyPhysicsBodies, fireCollisionEvents, pendingCollisions, pendingDestructions, world;
@@ -16616,10 +16660,14 @@ Engine.HUD = function(I, self) {
   });
 })(jQuery);;
 /***
-(Module) The <code>SaveState</code> module provides methods to save and restore the current engine state.
+The <code>SaveState</code> module provides methods to save and restore the current engine state.
 
 @name SaveState
 @fieldOf Engine
+@module
+
+@param {Object} I Instance variables
+@param {Object} self Reference to the engine
 */
 Engine.SaveState = function(I, self) {
   var savedState;
@@ -16671,10 +16719,14 @@ Engine.SaveState = function(I, self) {
   };
 };;
 /***
-(Module) The <code>Selector</code> module provides methods to query the engine to find game objects.
+The <code>Selector</code> module provides methods to query the engine to find game objects.
 
 @name Selector
 @fieldOf Engine
+@module
+
+@param {Object} I Instance variables
+@param {Object} self Reference to the engine
 */
 Engine.Selector = function(I, self) {
   var instanceMethods;
@@ -16768,12 +16820,16 @@ $.extend(Engine.Selector, {
   }
 });;
 /***
-(Module) The <code>Shadows</code> module provides a lighting extension to the Engine. Objects that have
+The <code>Shadows</code> module provides a lighting extension to the Engine. Objects that have
 an illuminate method will add light to the scene. Objects that have an true opaque attribute will cast
 shadows.
 
 @name Shadows
 @fieldOf Engine
+@module
+
+@param {Object} I Instance variables
+@param {Object} self Reference to the engine
 */
 Engine.Shadows = function(I, self) {
   var shadowCanvas;
@@ -16872,22 +16928,42 @@ var GameObject;
 /***
 The default base class for all objects you can add to the engine.
 
-Events:
-
-<code>create</code> When object is created for the first time.
-
-<code>step</code> Triggered every update step.
-
-<code>destroy</code> Triggered when object is destroyed. Use
-the destroy event to add particle effects, play sounds, etc.
-
-<code>remove</code> Triggered when the object is removed from
-the engine. Use the remove event to handle any clean up.
+GameObjects fire events that you may bind listeners to. Event listeners
+may be bound with <code>object.bind(eventName, callback)</code>
 
 @name GameObject
 @extends Core
 @constructor
-@param I
+@param {Object} I Instance variables
+*/
+/***
+Triggered when the object is created.
+@name create
+@methodOf GameObject#
+@event
+*/
+/***
+Triggered when object is destroyed. Use
+the destroy event to add particle effects, play sounds, etc.
+
+@name destroy
+@methodOf GameObject#
+@event
+*/
+/***
+Triggered every update step.
+
+@name step
+@methodOf GameObject#
+@event
+*/
+/***
+Triggered when the object is removed from
+the engine. Use the remove event to handle any clean up.
+
+@name remove
+@methodOf GameObject#
+@event
 */
 GameObject = function(I) {
   var autobindEvents, defaultModules, modules, self;
@@ -17067,6 +17143,16 @@ Movable = function(I) {
   b2PolygonShape = _ref.b2PolygonShape;
   b2CircleShape = _ref.b2CircleShape;
   b2MassData = _ref.b2MassData;
+  /***
+  The Physical module, when included in a GameObject, gives the object a
+  physical presence in the Box2D physics simulation of the engine.
+
+  @name Physical
+  @module
+
+  @param {Object} I Instance variables
+  @param {Object} self Reference to including object
+  */
   return (window.Physical = function(I, self) {
     var body, bodyDef, center, fixDef;
     $.reverseMerge(I, {
