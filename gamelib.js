@@ -16412,6 +16412,8 @@ Engine.Collision = function(I, self) {
     }
   };
 };;
+var _i, _ref, developerMode, fn, key, objectToUpdate;
+var __hasProp = Object.prototype.hasOwnProperty;
 /***
 (Module) The <code>Developer</code> module provides a debug overlay and methods for debugging and live coding.
 
@@ -16436,7 +16438,72 @@ Engine.Developer = function(I, self) {
     }
   });
   return {};
-};;
+};
+developerMode = false;
+objectToUpdate = null;
+window.updateObjectProperties = function(newProperties) {
+  return objectToUpdate ? $.extend(objectToUpdate, GameObject.construct(newProperties)) : null;
+};
+if (window.developerModeMousedown) {
+  $(document).unbind(window.developerModeMousedown);
+}
+if (window.developerHotkeys) {
+  _ref = developerHotkeys;
+  for (key in _ref) {
+    if (!__hasProp.call(_ref, key)) continue;
+    fn = _ref[key];
+    $(document).unbind("keydown", key, fn);
+  }
+}
+window.developerModeMousedown = function(event) {
+  var object;
+  if (developerMode) {
+    console.log(event.which);
+    if (event.which === 3) {
+      if (object = engine.objectAt(event.pageX, event.pageY)) {
+        parent.editProperties(object.I);
+        objectToUpdate = object;
+      }
+      return console.log(object);
+    } else if (event.which === 2 || keydown.shift) {
+      return (typeof window.developerAddObject === "function" ? window.developerAddObject(event) : undefined);
+    }
+  }
+};
+$(document).mousedown(window.developerModeMousedown);
+window.developerHotkeys = {
+  esc: function() {
+    developerMode = !developerMode;
+    return developerMode ? engine.pause() : engine.play();
+  },
+  f3: function() {
+    return Local.set("level", engine.saveState());
+  },
+  f4: function() {
+    return engine.loadState(Local.get("level"));
+  },
+  f5: function() {
+    return engine.reload();
+  }
+};
+_ref = window.developerHotkeys;
+for (_i in _ref) {
+  if (!__hasProp.call(_ref, _i)) continue;
+  (function() {
+    var key = _i;
+    var fn = _ref[_i];
+    return (window.developerHotkeys[key] = function(event) {
+      event.preventDefault();
+      return fn();
+    });
+  })();
+}
+_ref = window.developerHotkeys;
+for (key in _ref) {
+  if (!__hasProp.call(_ref, key)) continue;
+  fn = _ref[key];
+  $(document).bind("keydown", key, fn);
+};
 /***
 (Module) The <code>HUD</code> module provides an extra canvas to draw to. GameObjects that respond to the
 <code>drawHUD</code> method will draw to the HUD canvas. The HUD canvas is not cleared each frame, it is
@@ -16532,7 +16599,9 @@ Engine.HUD = function(I, self) {
           world.SetDebugDraw(debugDraw);
         }
         world.DrawDebugData();
-        return canvas.drawImage(debugElement, 0, 0, debugElement.width, debugElement.height, 0, 0, debugElement.width, debugElement.height);
+        return canvas.withTransform(I.cameraTransform, function(canvas) {
+          return canvas.drawImage(debugElement, 0, 0, debugElement.width, debugElement.height, 0, 0, debugElement.width, debugElement.height);
+        });
       }
     });
     self.bind("beforeAdd", function(entityData) {
