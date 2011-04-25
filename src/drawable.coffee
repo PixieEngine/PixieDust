@@ -9,7 +9,7 @@ Binds a step listener to update the transform of the object.
 Autoloads the sprite specified in I.spriteName, if any.
 
 @name Drawable
-@constructor
+@module
 @param {Object} I Instance variables
 ###
 Drawable = (I, self) ->
