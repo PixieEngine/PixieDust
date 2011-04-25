@@ -1,10 +1,14 @@
 ###*
-(Module) The <code>Shadows</code> module provides a lighting extension to the Engine. Objects that have
+The <code>Shadows</code> module provides a lighting extension to the Engine. Objects that have
 an illuminate method will add light to the scene. Objects that have an true opaque attribute will cast
 shadows.
 
 @name Shadows
 @fieldOf Engine
+@module
+
+@param {Object} I Instance variables
+@param {Object} self Reference to the engine
 ###
 Engine.Shadows = (I, self) ->
   shadowCanvas = $("<canvas width=640 height=480 />").powerCanvas()
