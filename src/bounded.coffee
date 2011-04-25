@@ -4,7 +4,7 @@ location and dimensions of the including object
 
 Bounded module
 @name Bounded
-@constructor
+@module
 ###
 
 Bounded = (I) ->
