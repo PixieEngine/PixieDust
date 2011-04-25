@@ -11,6 +11,7 @@ Autoloads the sprite specified in I.spriteName, if any.
 @name Drawable
 @module
 @param {Object} I Instance variables
+@param {Object} self Reference to including object
 ###
 Drawable = (I, self) ->
   I ||= {}
