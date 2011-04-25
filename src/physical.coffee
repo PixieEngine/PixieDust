@@ -5,6 +5,16 @@
   {b2BodyDef, b2Body, b2FixtureDef, b2Fixture, b2World} = Box2D.Dynamics
   {b2PolygonShape, b2CircleShape, b2MassData} = Box2D.Collision.Shapes
 
+  ###*
+  The Physical module, when included in a GameObject, gives the object a 
+  physical presence in the Box2D physics simulation of the engine.
+
+  @name Physical
+  @module
+
+  @param {Object} I Instance variables
+  @param {Object} self Reference to including object
+  ###
   window.Physical = (I, self) ->
     $.reverseMerge I,
       density: 1.0
