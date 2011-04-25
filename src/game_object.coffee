@@ -1,22 +1,43 @@
 ###*
 The default base class for all objects you can add to the engine.
 
-Events:
-
-<code>create</code> When object is created for the first time.
-
-<code>step</code> Triggered every update step.
-
-<code>destroy</code> Triggered when object is destroyed. Use 
-the destroy event to add particle effects, play sounds, etc.
-
-<code>remove</code> Triggered when the object is removed from
-the engine. Use the remove event to handle any clean up.
-
 @name GameObject
 @extends Core
 @constructor
-@param I
+@param {Object} I Instance variables
+###
+
+###*
+Triggered when the object is created.
+@name create
+@methodOf GameObject#
+@event
+###
+
+###*
+Triggered when object is destroyed. Use 
+the destroy event to add particle effects, play sounds, etc.
+
+@name destroy
+@methodOf GameObject#
+@event
+###
+
+###*
+Triggered every update step.
+
+@name step
+@methodOf GameObject#
+@event
+###
+
+###*
+Triggered when the object is removed from
+the engine. Use the remove event to handle any clean up.
+
+@name remove
+@methodOf GameObject#
+@event
 ###
 
 GameObject = (I) ->
