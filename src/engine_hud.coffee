@@ -6,6 +6,9 @@ the responsibility of the objects drawing on it to manage that themselves.
 @name HUD
 @fieldOf Engine
 @module
+
+@param {Object} I Instance variables
+@param {Object} self Reference to the engine
 ###
 Engine.HUD = (I, self) ->
   hudCanvas = $("<canvas width=640 height=480 />").powerCanvas()
