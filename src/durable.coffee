@@ -1,5 +1,5 @@
 ###*
-(Module) The Durable module deactives GameObjects after a specified duration.
+The Durable module deactives GameObjects after a specified duration.
 If a duration is specified the object will update that many times. If -1 is
 specified the object will have an unlimited duration.
 
