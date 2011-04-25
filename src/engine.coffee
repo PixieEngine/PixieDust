@@ -22,20 +22,49 @@
   The engine fires events that you  may bind listeners to. Event listeners 
   may be bound with <code>engine.bind(eventName, callback)</code>
 
-  <code>beforeAdd(entityData)</code> Observer or modify the 
-  entity data before it is added to the engine.
-
-  <code>afterAdd(gameObject)</code> Observe or
-  configure a <code>gameObject</code> that has been added to the engine.
-
-  <code>draw(canvas)</code> Called after the engine draws on the canvas, you 
-  wish to draw additional things to the canvas.
-
-  <code>update</code> Called after the engine updates all the game objects.
   @name Engine
   @constructor
   @param I
   ###
+
+  ###*
+  Observe or modify the 
+  entity data before it is added to the engine.
+  @name beforeAdd
+  @methodOf Engine#
+  @event
+
+  @param {Object} entityData
+  ###
+
+  ###*
+  Observe or configure a <code>gameObject</code> that has been added 
+  to the engine.
+  @name afterAdd
+  @methodOf Engine#
+  @event
+
+  @param {GameObject} object The object that has just been added to the
+  engine.
+  ###
+
+  ###*
+  Called when the engine updates all the game objects.
+
+  @name update
+  @methodOf Engine#
+  @event
+  ###
+
+  ###*
+  Called after the engine draws on the canvas, you 
+  wish to draw additional things to the canvas.
+
+  @name draw
+  @methodOf Engine#
+  @event
+  ###
+
   window.Engine = (I) ->
     I ||= {}
 

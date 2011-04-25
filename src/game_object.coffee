@@ -1,6 +1,9 @@
 ###*
 The default base class for all objects you can add to the engine.
 
+GameObjects fire events that you may bind listeners to. Event listeners 
+may be bound with <code>object.bind(eventName, callback)</code>
+
 @name GameObject
 @extends Core
 @constructor
