@@ -5,6 +5,7 @@ location and dimensions of the including object
 Bounded module
 @name Bounded
 @module
+@constructor
 
 @param {Object} I Instance variables
 @param {Object} self Reference to including object
