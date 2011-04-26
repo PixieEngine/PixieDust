@@ -5,6 +5,7 @@ specified the object will have an unlimited duration.
 
 @name Durable
 @module
+@constructor
 
 @param {Object} I Instance variables
 ###
