@@ -11,6 +11,7 @@
 
   @name Physical
   @module
+  @constructor
 
   @param {Object} I Instance variables
   @param {Object} self Reference to including object
