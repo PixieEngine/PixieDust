@@ -3,6 +3,7 @@
   Bindable module
   @name Bindable
   @module
+  @constructor
   ###
   Bindable = -> 
     eventCallbacks = {}
