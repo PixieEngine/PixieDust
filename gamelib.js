@@ -17046,7 +17046,7 @@ may be bound with <code>object.bind(eventName, callback)</code>
 @name GameObject
 @extends Core
 @constructor
-@param {Object} I Instance variables
+@instanceVariables age, active, created, destroyed, solid, includedModules, excludedModules
 */
 /***
 Triggered when the object is created.
