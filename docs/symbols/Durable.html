@@ -4,7 +4,7 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="generator" content="JsDoc Toolkit" />
     
-    <title>JsDoc Reference - Drawable</title>
+    <title>JsDoc Reference - Durable</title>
     <link href="/stylesheets/docs.css" type="text/css" rel="stylesheet" media="all" />
   </head>
 
@@ -78,7 +78,7 @@
       <div class="innerContent">
         <h1 class="classTitle">
           
-          Module <span>Drawable</span>
+          Module <span>Durable</span>
         </h1>
 
         <p class="description summary">
@@ -91,17 +91,16 @@
 
         
           <div class="props">
-            <table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class Drawable.">
+            <table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class Durable.">
               <caption>Module Summary</caption>
               <tbody>
                 <tr>
                   <td class="attributes">&nbsp;</td>
                   <td class="nameDescription" >
                     <div class="fixedFont">
-                      <b><a href="../symbols/Drawable.html#constructor">Drawable</a></b>(I, self)
+                      <b><a href="../symbols/Durable.html#constructor">Durable</a></b>(I)
                     </div>
-                    <div class="description">The Drawable module is used to provide a simple draw method to the including
-object.</div>
+                    <div class="description">The Durable module deactives GameObjects after a specified duration.</div>
                   </td>
                 </tr>
               </tbody>
@@ -134,18 +133,13 @@ object.</div>
               </div>
 
               <div class="fixedFont">
-                <b>Drawable</b>(I, self)
+                <b>Durable</b>(I)
               </div>
 
               <div class="description">
-                The Drawable module is used to provide a simple draw method to the including
-object.
-
-Binds a default draw listener to draw a rectangle or a sprite, if one exists.
-
-Binds a step listener to update the transform of the object.
-
-Autoloads the sprite specified in I.spriteName, if any.
+                The Durable module deactives GameObjects after a specified duration.
+If a duration is specified the object will update that many times. If -1 is
+specified the object will have an unlimited duration.
                 
               </div>
 
@@ -160,12 +154,6 @@ Autoloads the sprite specified in I.spriteName, if any.
                       
                     </dt>
                     <dd>Instance variables</dd>
-                  
-                    <dt>
-                      <span class="light fixedFont">{<a href="../symbols/Object.html">Object</a>}</span>  <b>self</b>
-                      
-                    </dt>
-                    <dd>Reference to including object</dd>
                   
                 </dl>
               
