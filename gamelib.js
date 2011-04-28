@@ -1,5 +1,4 @@
-var App;
-App = {};/*
+/*
 * Copyright (c) 2006-2007 Erin Catto http://www.gphysics.com
 *
 * This software is provided 'as-is', without any express or implied
@@ -12008,8 +12007,7 @@ _A2J_postDefs = [];
 
 //post-definitions
 for (var i = 0; i < _A2J_postDefs.length; ++i) _A2J_postDefs[i]();;
-var App;
-App = {};;
+;
 var __slice = Array.prototype.slice;
 /***
 Creates and returns a copy of the array. The copy contains
