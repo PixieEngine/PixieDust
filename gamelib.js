@@ -17443,6 +17443,16 @@ SpeechBox = function(I) {
     width || (width = image.width);
     height || (height = image.height);
     return {
+      /***
+      Draw this sprite on the given canvas at the given position.
+
+      @name draw
+      @methodOf Sprite#
+
+      @param canvas
+      @param x
+      @param y
+      */
       draw: function(canvas, x, y) {
         return canvas.drawImage(image, sourceX, sourceY, width, height, x, y, width, height);
       },
