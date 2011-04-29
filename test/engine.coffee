@@ -41,6 +41,17 @@ test "invalid module throws error", ->
     engine = Engine
       includedModules: ["HellaInvalidModule"]
 
+test "draw events", 2, ->
+  engine = Engine()
+
+  engine.bind "preDraw", ->
+    ok true
+
+  engine.bind "draw", ->
+    ok true
+
+  engine.frameAdvance()
+
 test "Remove event", 1, ->
   engine = Engine()
 
