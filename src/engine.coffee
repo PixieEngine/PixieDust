@@ -57,8 +57,20 @@
   ###
 
   ###*
-  Called after the engine draws on the canvas, you 
-  wish to draw additional things to the canvas.
+  Called before the engine draws the game objects on the canvas.
+
+  The current camera transform <b>is</b> applied.
+
+  @name preDraw
+  @methodOf Engine#
+  @event
+  ###
+
+  ###*
+  Called after the engine draws on the canvas.
+
+  The current camera transform <b>is not</b> applied, you may
+  choose to apply it yourself using <code>I.cameraTransform</code>.
 
   @name draw
   @methodOf Engine#
@@ -95,6 +107,8 @@
       canvas.withTransform I.cameraTransform, (canvas) ->
         if I.backgroundColor
           canvas.fill(I.backgroundColor)
+
+        self.trigger "preDraw", canvas
 
         I.objects.invoke("draw", canvas)
 
