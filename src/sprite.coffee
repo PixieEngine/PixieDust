@@ -18,6 +18,16 @@
     width ||= image.width
     height ||= image.height
 
+    ###*
+    Draw this sprite on the given canvas at the given position.
+
+    @name draw
+    @methodOf Sprite#
+
+    @param canvas
+    @param x
+    @param y
+    ###
     draw: (canvas, x, y) ->
       canvas.drawImage(
         image,
