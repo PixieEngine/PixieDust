@@ -103,6 +103,10 @@
                     <div class="description">The Engine controls the game world and manages game state.</div>
                   </td>
                 </tr>
+                <tr>
+                  <td></td>
+                  <td class="instanceVariables">&nbsp;</td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -306,8 +310,16 @@
                     <td class="nameDescription">
                       <div class="fixedFont"><b><a href="../symbols/Engine.html#event:draw">draw</a></b>()
                       </div>
-                      <div class="description">Called after the engine draws on the canvas, you
-  wish to draw additional things to the canvas.</div>
+                      <div class="description">Called after the engine draws on the canvas.</div>
+                    </td>
+                  </tr>
+                
+                  <tr>
+                    <td class="attributes">&nbsp;</td>
+                    <td class="nameDescription">
+                      <div class="fixedFont"><b><a href="../symbols/Engine.html#event:preDraw">preDraw</a></b>()
+                      </div>
+                      <div class="description">Called before the engine draws the game objects on the canvas.</div>
                     </td>
                   </tr>
                 
@@ -873,8 +885,38 @@ shadows.
                 </div>
 
                 <div class="description">
-                  Called after the engine draws on the canvas, you
-  wish to draw additional things to the canvas.
+                  Called after the engine draws on the canvas.
+
+  The current camera transform <b>is not</b> applied, you may
+  choose to apply it yourself using <code>I.cameraTransform</code>.
+
+                  
+                </div>
+
+                
+
+                
+
+                
+
+                <div class="hr"></div>
+              
+                <a name="event:event:preDraw"> </a>
+
+                <div class="fixedFont heading">
+                  <span class='lighter'>
+                  
+                  </span>
+
+                  
+
+                  <b>preDraw</b>()
+                </div>
+
+                <div class="description">
+                  Called before the engine draws the game objects on the canvas.
+
+  The current camera transform <b>is</b> applied.
 
                   
                 </div>
