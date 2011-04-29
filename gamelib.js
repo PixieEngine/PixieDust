@@ -16327,8 +16327,19 @@ Emitterable = function(I, self) {
   @event
   */
   /***
-  Called after the engine draws on the canvas, you
-  wish to draw additional things to the canvas.
+  Called before the engine draws the game objects on the canvas.
+
+  The current camera transform <b>is</b> applied.
+
+  @name preDraw
+  @methodOf Engine#
+  @event
+  */
+  /***
+  Called after the engine draws on the canvas.
+
+  The current camera transform <b>is not</b> applied, you may
+  choose to apply it yourself using <code>I.cameraTransform</code>.
 
   @name draw
   @methodOf Engine#
@@ -16363,6 +16374,7 @@ Emitterable = function(I, self) {
         if (I.backgroundColor) {
           canvas.fill(I.backgroundColor);
         }
+        self.trigger("preDraw", canvas);
         return I.objects.invoke("draw", canvas);
       });
       self.trigger("draw", canvas);
@@ -17394,13 +17406,13 @@ SpeechBox = function(I) {
       height: null
     };
   }
-  
+
   function Sprite(image, sourceX, sourceY, width, height) {
     sourceX = sourceX || 0;
     sourceY = sourceY || 0;
     width = width || image.width;
     height = height || image.height;
-    
+
     return {
       draw: function(canvas, x, y) {
         canvas.drawImage(
@@ -17415,44 +17427,44 @@ SpeechBox = function(I) {
           height
         );
       },
-      
+
       fill: function(canvas, x, y, width, height, repeat) {
         repeat = repeat || "repeat";
         var pattern = canvas.createPattern(image, repeat);
         canvas.fillColor(pattern);
         canvas.fillRect(x, y, width, height);
       },
-      
+
       width: width,
       height: height
     };
   };
-  
+
   Sprite.load = function(url, loadedCallback) {
     var img = new Image();
     var proxy = LoaderProxy();
-    
+
     img.onload = function() {
       var tile = Sprite(this);
-      
+
       $.extend(proxy, tile);
-      
+
       if(loadedCallback) {
         loadedCallback(proxy);
       }
     };
-    
+
     img.src = url;
-    
+
     return proxy;
   };
- 
+
   var pixieSpriteImagePath = "http://pixieengine.com/s3/sprites/";
-  
+
   function fromPixieId(id, callback) {
     return Sprite.load(pixieSpriteImagePath + id + "/original.png", callback);
   };
-  
+
   window.Sprite = function(name, callback) {
     if(App.Sprites) {
       var id = App.Sprites[name];
