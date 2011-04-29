@@ -16511,6 +16511,32 @@ Emitterable = function(I, self) {
   });
 })(jQuery);;
 /***
+The <code>Tilemap</code> module provides a way to load tilemaps in the engine.
+
+@name Tilemap
+@fieldOf Engine
+@module
+
+@param {Object} I Instance variables
+@param {Object} self Reference to the engine
+*/
+Engine.Tilemap = function(I, self) {
+  var map;
+  map = null;
+  self.bind("preDraw", function(canvas) {
+    return (typeof map === "undefined" || map === null) ? undefined : map.draw(canvas);
+  });
+  return {
+    loadMap: function(name, complete) {
+      return (map = Tilemap.load({
+        name: name,
+        complete: complete,
+        entity: self.add
+      }));
+    }
+  };
+};;
+/***
 The <code>Collision</code> module provides some simple collision detection methods to engine.
 
 @name Collision
@@ -17395,8 +17421,13 @@ SpeechBox = function(I) {
     }
   });
 };;
+/***
+@name Sprite
+@constructor
+*/
 (function() {
-  function LoaderProxy() {
+  var LoaderProxy, Sprite, fromPixieId, pixieSpriteImagePath;
+  LoaderProxy = function() {
     return {
       draw: $.noop,
       fill: $.noop,
@@ -17405,83 +17436,111 @@ SpeechBox = function(I) {
       width: null,
       height: null
     };
-  }
-
-  function Sprite(image, sourceX, sourceY, width, height) {
-    sourceX = sourceX || 0;
-    sourceY = sourceY || 0;
-    width = width || image.width;
-    height = height || image.height;
-
+  };
+  Sprite = function(image, sourceX, sourceY, width, height) {
+    sourceX || (sourceX = 0);
+    sourceY || (sourceY = 0);
+    width || (width = image.width);
+    height || (height = image.height);
     return {
       draw: function(canvas, x, y) {
-        canvas.drawImage(
-          image,
-          sourceX,
-          sourceY,
-          width,
-          height,
-          x,
-          y,
-          width,
-          height
-        );
+        return canvas.drawImage(image, sourceX, sourceY, width, height, x, y, width, height);
       },
-
       fill: function(canvas, x, y, width, height, repeat) {
-        repeat = repeat || "repeat";
-        var pattern = canvas.createPattern(image, repeat);
+        var pattern;
+        repeat || (repeat = "repeat");
+        pattern = canvas.createPattern(image, repeat);
         canvas.fillColor(pattern);
-        canvas.fillRect(x, y, width, height);
+        return canvas.fillRect(x, y, width, height);
       },
-
       width: width,
       height: height
     };
   };
-
   Sprite.load = function(url, loadedCallback) {
-    var img = new Image();
-    var proxy = LoaderProxy();
-
+    var img, proxy;
+    img = new Image();
+    proxy = LoaderProxy();
     img.onload = function() {
-      var tile = Sprite(this);
-
+      var tile;
+      tile = Sprite(this);
       $.extend(proxy, tile);
-
-      if(loadedCallback) {
-        loadedCallback(proxy);
-      }
+      return loadedCallback ? loadedCallback(proxy) : null;
     };
-
     img.src = url;
-
     return proxy;
   };
-
-  var pixieSpriteImagePath = "http://pixieengine.com/s3/sprites/";
-
-  function fromPixieId(id, callback) {
+  pixieSpriteImagePath = "http://pixieengine.com/s3/sprites/";
+  fromPixieId = function(id, callback) {
     return Sprite.load(pixieSpriteImagePath + id + "/original.png", callback);
   };
-
   window.Sprite = function(name, callback) {
-    if(App.Sprites) {
-      var id = App.Sprites[name];
-      if(id) {
-        return fromPixieId(id, callback);
-      } else {
-        warn("Could not find sprite named: '" + name + "' in App.");
-      }
+    var id;
+    if (App.Sprites) {
+      id = App.Sprites[name];
+      return id ? fromPixieId(id, callback) : warn("Could not find sprite named: '" + name + "' in App.");
     } else {
-      // Treat name as URL
       return window.Sprite.fromURL(name, callback);
     }
   };
-  window.Sprite.EMPTY = window.Sprite.NONE = LoaderProxy();
+  /***
+  A sprite that draws nothing.
+
+  @name EMPTY
+  @fieldOf Sprite
+  @constant
+  @type Sprite
+  */
+  /***
+  A sprite that draws nothing.
+
+  @name NONE
+  @fieldOf Sprite
+  @constant
+  @type Sprite
+  */
+  window.Sprite.EMPTY = (window.Sprite.NONE = LoaderProxy());
+  /***
+  Loads a sprite with the given pixie id.
+
+  @name fromPixieId
+  @methodOf Sprite
+
+  @param id
+  @param [callback]
+
+  @type Sprite
+  */
   window.Sprite.fromPixieId = fromPixieId;
+  /***
+  Loads a sprite from a given url.
+
+  @name fromURL
+  @methodOf Sprite
+
+  @param {String} url
+  @param [callback]
+
+  @type Sprite
+  */
   window.Sprite.fromURL = Sprite.load;
-}());;
+  /***
+  Loads a sprite with the given name.
+
+  @name loadByName
+  @methodOf Sprite
+
+  @param {String} name
+  @param [callback]
+
+  @type Sprite
+  */
+  return (window.Sprite.loadByName = function(name, callback) {
+    var url;
+    url = ("" + (BASE_URL) + "/images/" + (name) + ".png");
+    return Sprite.load(url, callback);
+  });
+})();;
 (function() {
   var Map, fromPixieId, loadByName;
   Map = function(data, entityCallback) {
