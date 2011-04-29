@@ -117,5 +117,20 @@
   ###
   window.Sprite.fromURL = Sprite.load
 
+  ###*
+  Loads a sprite with the given name.
+
+  @name loadByName
+  @methodOf Sprite
+
+  @param {String} name
+  @param [callback]
+
+  @type Sprite
+  ###
+  window.Sprite.loadByName = (name, callback) ->
+    url = "#{BASE_URL}/images/#{name}.png"
+    Sprite.load(url, callback)
+
 )()
 
