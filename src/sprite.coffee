@@ -74,10 +74,19 @@
       return window.Sprite.fromURL(name, callback)
 
   ###*
-  A constant sprite that draws nothing.
+  A sprite that draws nothing.
 
   @name EMPTY
   @fieldOf Sprite
+  @constant
+  @type Sprite
+  ###
+  ###*
+  A sprite that draws nothing.
+
+  @name NONE
+  @fieldOf Sprite
+  @constant
   @type Sprite
   ###
   window.Sprite.EMPTY = window.Sprite.NONE = LoaderProxy()
