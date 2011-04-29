@@ -1,3 +1,8 @@
+###*
+@name Sprite
+@constructor
+###
+
 ( ->
   LoaderProxy = ->
     draw: $.noop
@@ -68,8 +73,39 @@
       # Treat name as URL
       return window.Sprite.fromURL(name, callback)
 
+  ###*
+  A constant sprite that draws nothing.
+
+  @name EMPTY
+  @fieldOf Sprite
+  @type Sprite
+  ###
   window.Sprite.EMPTY = window.Sprite.NONE = LoaderProxy()
+
+  ###*
+  Loads a sprite with the given pixie id.
+
+  @name fromPixieId
+  @methodOf Sprite
+
+  @param id
+  @param [callback]
+
+  @type Sprite
+  ###
   window.Sprite.fromPixieId = fromPixieId
+
+  ###*
+  Loads a sprite from a given url.
+
+  @name fromURL
+  @methodOf Sprite
+
+  @param {String} url
+  @param [callback]
+
+  @type Sprite
+  ###
   window.Sprite.fromURL = Sprite.load
 
 )()
