@@ -17447,7 +17447,7 @@ SpeechBox = function(I) {
     return proxy;
   };
  
-  var pixieSpriteImagePath = "http://s3.amazonaws.com/images.pixie.strd6.com/sprites/";
+  var pixieSpriteImagePath = "http://pixieengine.com/s3/sprites/";
   
   function fromPixieId(id, callback) {
     return Sprite.load(pixieSpriteImagePath + id + "/original.png", callback);
@@ -17471,7 +17471,7 @@ SpeechBox = function(I) {
   window.Sprite.fromURL = Sprite.load;
 }());;
 (function() {
-  var Map, fromPixieId;
+  var Map, fromPixieId, loadByName;
   Map = function(data, entityCallback) {
     var loadEntities, spriteLookup, tileHeight, tileWidth;
     tileHeight = data.tileHeight;
@@ -17529,7 +17529,19 @@ SpeechBox = function(I) {
   };
   fromPixieId = function(id, callback, entityCallback) {
     var proxy, url;
-    url = ("http://pixie.strd6.com/s3/tilemaps/" + (id) + "/data.json");
+    url = ("http://pixieengine.com/s3/tilemaps/" + (id) + "/data.json");
+    proxy = {
+      draw: $.noop
+    };
+    $.getJSON(url, function(data) {
+      $.extend(proxy, Map(data, entityCallback));
+      return (typeof callback === "function" ? callback(proxy) : undefined);
+    });
+    return proxy;
+  };
+  loadByName = function(name, callback, entityCallback) {
+    var proxy, url;
+    url = ("" + (BASE_URL) + "/data/" + (name) + ".tilemap");
     proxy = {
       draw: $.noop
     };
@@ -17541,7 +17553,11 @@ SpeechBox = function(I) {
   };
   window.Tilemap.fromPixieId = fromPixieId;
   return (window.Tilemap.load = function(options) {
-    return options.pixieId ? fromPixieId(options.pixieId, options.complete, options.entity) : null;
+    if (options.pixieId) {
+      return fromPixieId(options.pixieId, options.complete, options.entity);
+    } else if (options.name) {
+      return loadByName(options.name, options.complete, options.entity);
+    }
   });
 })();;
 ;$(function(){ undefined });
