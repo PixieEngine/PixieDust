@@ -57,6 +57,15 @@
   ###
 
   ###*
+  Called after the engine completes an update. Here it is 
+  safe to modify the game objects array.
+
+  @name afterUpdate
+  @methodOf Engine#
+  @event
+  ###
+
+  ###*
   Called before the engine draws the game objects on the canvas.
 
   The current camera transform <b>is</b> applied.
@@ -102,6 +111,8 @@
 
       I.objects = I.objects.concat(queuedObjects)
       queuedObjects = []
+
+      self.trigger "afterUpdate"
 
     draw = ->
       canvas.withTransform I.cameraTransform, (canvas) ->
