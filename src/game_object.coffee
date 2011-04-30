@@ -27,9 +27,17 @@ the destroy event to add particle effects, play sounds, etc.
 ###
 
 ###*
-Triggered every update step.
+Triggered during every update step.
 
 @name step
+@methodOf GameObject#
+@event
+###
+
+###*
+Triggered every update after the `step` event is triggered.
+
+@name update
 @methodOf GameObject#
 @event
 ###
@@ -69,6 +77,7 @@ GameObject = (I) ->
     update: ->
       if I.active
         self.trigger('step')
+        self.trigger('update')
         I.age += 1
 
       I.active
