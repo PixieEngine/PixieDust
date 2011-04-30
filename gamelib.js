@@ -16327,6 +16327,14 @@ Emitterable = function(I, self) {
   @event
   */
   /***
+  Called after the engine completes an update. Here it is
+  safe to modify the game objects array.
+
+  @name afterUpdate
+  @methodOf Engine#
+  @event
+  */
+  /***
   Called before the engine draws the game objects on the canvas.
 
   The current camera transform <b>is</b> applied.
@@ -16367,7 +16375,8 @@ Emitterable = function(I, self) {
       toRemove = _ref[1];
       toRemove.invoke("trigger", "remove");
       I.objects = I.objects.concat(queuedObjects);
-      return (queuedObjects = []);
+      queuedObjects = [];
+      return self.trigger("afterUpdate");
     };
     draw = function() {
       canvas.withTransform(I.cameraTransform, function(canvas) {
