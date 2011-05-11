@@ -121,6 +121,7 @@ asyncTest "Running", ->
 
   engine = Engine
     FPS: fps
+    showFPS: true
 
   engine.start()
 

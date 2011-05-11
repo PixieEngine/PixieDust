@@ -15,7 +15,7 @@ Engine.FPSCounter = (I, self) ->
   framerate = Framerate
     noDOM: true
 
-  self.bind "draw", ->
+  self.bind "draw", (canvas) ->
     if I.showFPS
       canvas.font("bold 9pt consolas, 'Courier New', 'andale mono', 'lucida console', monospace")
       canvas.fillColor("#FFF")
