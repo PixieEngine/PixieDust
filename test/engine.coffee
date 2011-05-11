@@ -114,15 +114,18 @@ test "Selector.process", ->
   equal value, false
 
 asyncTest "Running", ->
-  engine = Engine()
+  fps = 33.33
+  milliseconds = 1000
+
+  engine = Engine
+    FPS: fps
+
   engine.start()
 
-  milliseconds = 2000
-
   setTimeout ->
-    engine.pause()
+    engine.stop()
     age = engine.I.age
-    ok(62 <= age <= 68, "Engine ran #{age} steps in #{milliseconds}ms")
+    ok(30 <= age <= 36, "Engine ran #{age} steps in #{milliseconds}ms")
 
     start()
   , milliseconds

@@ -98,9 +98,6 @@
 
     queuedObjects = []
 
-    framerate = Framerate
-      noDOM: true
-
     update = ->
       self.trigger "update"
 
@@ -124,13 +121,6 @@
         I.objects.invoke("draw", canvas)
 
       self.trigger "draw", canvas
-
-      if I.showFPS
-        canvas.font("bold 9pt consolas, 'Courier New', 'andale mono', 'lucida console', monospace")
-        canvas.fillColor("#FFF")
-        canvas.fillText("fps: " + framerate.fps, 6, 18)
-
-      framerate.rendered()
 
     step = ->
       if !I.paused || frameAdvance
@@ -247,7 +237,7 @@
     self.attrAccessor "cameraTransform"
     self.include Bindable
 
-    defaultModules = ["Shadows", "HUD", "Developer", "SaveState", "Selector", "Collision"]
+    defaultModules = ["Shadows", "HUD", "Developer", "SaveState", "Selector", "Collision", "FPSCounter"]
     modules = defaultModules.concat(I.includedModules)
     modules = modules.without(I.excludedModules)
 
