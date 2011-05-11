@@ -27,7 +27,7 @@ test "#save and #restore", ->
 
   equals(engine.objects().length, 2)
 
-test "befare add event", 1, ->
+test "before add event", 1, ->
   engine = Engine()
 
   engine.bind "beforeAdd", (data) ->
