@@ -1,6 +1,6 @@
 ( ($) ->
   defaults =
-    FPS: 33.3333
+    FPS: 30
     age: 0
     ambientLight: 1
     backgroundColor: "#FFFFFF"
@@ -98,6 +98,23 @@
 
     queuedObjects = []
 
+    running = false
+    startTime = +new Date()
+    lastStepTime = -Infinity
+    animLoop = (timestamp) ->
+      timestamp ||= +new Date()
+      msPerFrame = (1000 / I.FPS)
+
+      delta = timestamp - lastStepTime
+      remainder = delta - msPerFrame
+
+      if remainder > 0
+        lastStepTime = timestamp - Math.min(remainder, msPerFrame)
+        step()
+
+      if running
+        window.requestAnimationFrame(animLoop)
+
     update = ->
       self.trigger "update"
 
@@ -193,10 +210,9 @@
       @name start
       ###
       start: () ->
-        unless intervalId
-          intervalId = setInterval(() ->
-            step()
-          , 1000 / I.FPS)
+        unless running
+          running = true
+          window.requestAnimationFrame(animLoop)
 
       ###*
       Stop the simulation.
@@ -204,8 +220,7 @@
       @name stop
       ###
       stop: ->
-        clearInterval(intervalId)
-        intervalId = null
+        running = false
 
       frameAdvance: ->
         I.paused = true
