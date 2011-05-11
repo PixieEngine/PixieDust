@@ -12010,6 +12010,19 @@ for (var i = 0; i < _A2J_postDefs.length; ++i) _A2J_postDefs[i]();;
 ;
 var __slice = Array.prototype.slice;
 /***
+Returns a copy of the array without null and undefined values.
+
+@name compact
+@methodOf Array#
+@type Array
+@returns An array that contains only the non-null values.
+*/
+Array.prototype.compact = function() {
+  return this.select(function(element) {
+    return (typeof element !== "undefined" && element !== null);
+  });
+};
+/***
 Creates and returns a copy of the array. The copy contains
 the same objects.
 
@@ -12406,6 +12419,20 @@ Array.prototype.sum = function() {
     return sum + n;
   });
 };
+/***
+Multiply all the elements in the array.
+
+@name product
+@methodOf Array#
+
+@type Number
+@returns The product of the elements in the array.
+*/
+Array.prototype.product = function() {
+  return this.inject(1, function(product, n) {
+    return product * n;
+  });
+};
 Array.prototype.zip = function() {
   var args;
   args = __slice.call(arguments, 0);
@@ -12418,6 +12445,11 @@ Array.prototype.zip = function() {
     return output;
   });
 };;
+window.requestAnimationFrame || (window.requestAnimationFrame = (window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function(callback, element) {
+  return window.setTimeout(function() {
+    return callback(+new Date());
+  }, 1000 / 60);
+}));;
 /**
  * CoffeeScript Compiler v1.0.1
  * http://coffeescript.org
@@ -13725,6 +13757,45 @@ Number.prototype.snap = function(resolution) {
   1 / 1;
   return n.floor() * resolution;
 };
+/***
+In number theory, integer factorization or prime factorization is the
+breaking down of a composite number into smaller non-trivial divisors,
+which when multiplied together equal the original integer.
+
+Floors the number for purposes of factorization.
+
+@name primeFactors
+@methodOf Number#
+
+@returns An array containing the factorization of this number.
+@type Array
+*/
+Number.prototype.primeFactors = function() {
+  var factors, i, iSquared, n;
+  factors = [];
+  n = Math.floor(this);
+  if (n === 0) {
+    return undefined;
+  }
+  if (n < 0) {
+    factors.push(-1);
+    n /= -1;
+  }
+  i = 2;
+  iSquared = i * i;
+  while (iSquared < n) {
+    while ((n % i) === 0) {
+      factors.push(i);
+      n /= i;
+    }
+    i += 1;
+    iSquared = i * i;
+  }
+  if (n !== 1) {
+    factors.push(n);
+  }
+  return factors;
+};
 Number.prototype.toColorPart = function() {
   var s;
   s = parseInt(this.clamp(0, 255), 10).toString(16);
@@ -14299,6 +14370,34 @@ var __hasProp = Object.prototype.hasOwnProperty, __slice = Array.prototype.slice
   }));
 })(jQuery);;
 /***
+Returns true if this string only contains whitespace characters.
+
+@name blank
+@methodOf String#
+
+@returns Whether or not this string is blank.
+@type Boolean
+*/
+String.prototype.blank = function() {
+  return /^\s*$/.test(this);
+};
+/***
+@name camelize
+@methodOf String#
+*/
+String.prototype.camelize = function() {
+  return this.trim().replace(/(\-|_|\s)+(.)?/g, function(match, separator, chr) {
+    return chr ? chr.toUpperCase() : '';
+  });
+};
+/***
+@name capitalize
+@methodOf String#
+*/
+String.prototype.capitalize = function() {
+  return this.charAt(0).toUpperCase() + this.substring(1).toLowerCase();
+};
+/***
 Return the class or constant named in this string.
 
 @name constantize
@@ -14314,6 +14413,13 @@ String.prototype.constantize = function() {
   } else {
     return undefined;
   }
+};
+/***
+@name humanize
+@methodOf String#
+*/
+String.prototype.humanize = function() {
+  return this.replace(/_id$/, "").replace(/_/g, " ").capitalize();
 };
 /***
 Parse this string as though it is JSON and return the object it represents. If it
@@ -14334,16 +14440,13 @@ String.prototype.parse = function() {
   }
 };
 /***
-Returns true if this string only contains whitespace characters.
-
-@name blank
+@name titleize
 @methodOf String#
-
-@returns Whether or not this string is blank.
-@type Boolean
 */
-String.prototype.blank = function() {
-  return /^\s*$/.test(this);
+String.prototype.titleize = function() {
+  return this.split(/[- ]/).map(function(word) {
+    return word.capitalize();
+  }).join(' ');
 };;
 /***
 Non-standard
@@ -16274,7 +16377,7 @@ Emitterable = function(I, self) {
 (function($) {
   var defaults;
   defaults = {
-    FPS: 33.3333,
+    FPS: 30,
     age: 0,
     ambientLight: 1,
     backgroundColor: "#FFFFFF",
@@ -16354,7 +16457,7 @@ Emitterable = function(I, self) {
   @event
   */
   return (window.Engine = function(I) {
-    var canvas, defaultModules, draw, frameAdvance, framerate, intervalId, modules, queuedObjects, self, step, update;
+    var animLoop, canvas, defaultModules, draw, frameAdvance, intervalId, lastStepTime, modules, queuedObjects, running, self, startTime, step, update;
     I || (I = {});
     $.reverseMerge(I, {
       objects: []
@@ -16362,9 +16465,21 @@ Emitterable = function(I, self) {
     intervalId = null;
     frameAdvance = false;
     queuedObjects = [];
-    framerate = Framerate({
-      noDOM: true
-    });
+    running = false;
+    startTime = +new Date();
+    lastStepTime = -Infinity;
+    animLoop = function(timestamp) {
+      var delta, msPerFrame, remainder;
+      timestamp || (timestamp = (+new Date()));
+      msPerFrame = (1000 / I.FPS);
+      delta = timestamp - lastStepTime;
+      remainder = delta - msPerFrame;
+      if (remainder > 0) {
+        lastStepTime = timestamp - Math.min(remainder, msPerFrame);
+        step();
+      }
+      return running ? window.requestAnimationFrame(animLoop) : null;
+    };
     update = function() {
       var _ref, toRemove;
       self.trigger("update");
@@ -16386,13 +16501,7 @@ Emitterable = function(I, self) {
         self.trigger("preDraw", canvas);
         return I.objects.invoke("draw", canvas);
       });
-      self.trigger("draw", canvas);
-      if (I.showFPS) {
-        canvas.font("bold 9pt consolas, 'Courier New', 'andale mono', 'lucida console', monospace");
-        canvas.fillColor("#FFF");
-        canvas.fillText("fps: " + framerate.fps, 6, 18);
-      }
-      return framerate.rendered();
+      return self.trigger("draw", canvas);
     };
     step = function() {
       if (!I.paused || frameAdvance) {
@@ -16464,9 +16573,10 @@ Emitterable = function(I, self) {
       @name start
       */
       start: function() {
-        return !(intervalId) ? (intervalId = setInterval(function() {
-          return step();
-        }, 1000 / I.FPS)) : null;
+        if (!(running)) {
+          running = true;
+          return window.requestAnimationFrame(animLoop);
+        }
       },
       /***
       Stop the simulation.
@@ -16474,8 +16584,7 @@ Emitterable = function(I, self) {
       @name stop
       */
       stop: function() {
-        clearInterval(intervalId);
-        return (intervalId = null);
+        return (running = false);
       },
       frameAdvance: function() {
         I.paused = true;
@@ -16507,7 +16616,7 @@ Emitterable = function(I, self) {
     self.attrAccessor("backgroundColor");
     self.attrAccessor("cameraTransform");
     self.include(Bindable);
-    defaultModules = ["Shadows", "HUD", "Developer", "SaveState", "Selector", "Collision"];
+    defaultModules = ["Shadows", "HUD", "Developer", "SaveState", "Selector", "Collision", "FPSCounter"];
     modules = defaultModules.concat(I.includedModules);
     modules = modules.without(I.excludedModules);
     modules.each(function(moduleName) {
@@ -16698,6 +16807,33 @@ for (key in _ref) {
   fn = _ref[key];
   $(document).bind("keydown", key, fn);
 };
+/***
+The <code>FPSCounter</code> module tracks and displays the framerate.
+
+@name FPSCounter
+@fieldOf Engine
+@module
+
+@param {Object} I Instance variables
+@param {Object} self Reference to the engine
+*/
+Engine.FPSCounter = function(I, self) {
+  var framerate;
+  $.reverseMerge(I, {
+    showFPS: false
+  });
+  framerate = Framerate({
+    noDOM: true
+  });
+  return self.bind("draw", function() {
+    if (I.showFPS) {
+      canvas.font("bold 9pt consolas, 'Courier New', 'andale mono', 'lucida console', monospace");
+      canvas.fillColor("#FFF");
+      canvas.fillText("fps: " + framerate.fps, 6, 18);
+    }
+    return framerate.rendered();
+  });
+};;
 /***
 The <code>HUD</code> module provides an extra canvas to draw to. GameObjects that respond to the
 <code>drawHUD</code> method will draw to the HUD canvas. The HUD canvas is not cleared each frame, it is
@@ -17181,7 +17317,7 @@ GameObject = function(I) {
       return (I.active = false);
     }
   });
-  defaultModules = [Bindable, Bounded, Drawable, Durable, Movable];
+  defaultModules = [Bindable, Bounded, Drawable, Durable];
   modules = defaultModules.concat(I.includedModules.invoke('constantize'));
   modules = modules.without(I.excludedModules.invoke('constantize'));
   modules.each(function(Module) {
