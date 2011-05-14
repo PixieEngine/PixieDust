@@ -16457,12 +16457,11 @@ Emitterable = function(I, self) {
   @event
   */
   return (window.Engine = function(I) {
-    var animLoop, canvas, defaultModules, draw, frameAdvance, intervalId, lastStepTime, modules, queuedObjects, running, self, startTime, step, update;
+    var animLoop, canvas, defaultModules, draw, frameAdvance, lastStepTime, modules, queuedObjects, running, self, startTime, step, update;
     I || (I = {});
     $.reverseMerge(I, {
       objects: []
     }, defaults);
-    intervalId = null;
     frameAdvance = false;
     queuedObjects = [];
     running = false;
@@ -16529,7 +16528,7 @@ Emitterable = function(I, self) {
         self.trigger("beforeAdd", entityData);
         obj = GameObject.construct(entityData);
         self.trigger("afterAdd", obj);
-        if (intervalId && !I.paused) {
+        if (running && !I.paused) {
           queuedObjects.push(obj);
         } else {
           I.objects.push(obj);
