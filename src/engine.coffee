@@ -93,11 +93,11 @@
       objects: []
     }, defaults
 
-    intervalId = null
     frameAdvance = false
 
     queuedObjects = []
 
+    running = false
     startTime = +new Date()
     lastStepTime = -Infinity
     animLoop = (timestamp) ->
