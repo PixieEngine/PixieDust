@@ -98,7 +98,6 @@
 
     queuedObjects = []
 
-    running = false
     startTime = +new Date()
     lastStepTime = -Infinity
     animLoop = (timestamp) ->
@@ -168,7 +167,7 @@
 
         self.trigger "afterAdd", obj
 
-        if intervalId && !I.paused
+        if running && !I.paused
           queuedObjects.push obj
         else
           I.objects.push obj
