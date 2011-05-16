@@ -16746,32 +16746,6 @@ Emitterable = function(I, self) {
   });
 })(jQuery);;
 /***
-The <code>Tilemap</code> module provides a way to load tilemaps in the engine.
-
-@name Tilemap
-@fieldOf Engine
-@module
-
-@param {Object} I Instance variables
-@param {Object} self Reference to the engine
-*/
-Engine.Tilemap = function(I, self) {
-  var map;
-  map = null;
-  self.bind("preDraw", function(canvas) {
-    return (typeof map === "undefined" || map === null) ? undefined : map.draw(canvas);
-  });
-  return {
-    loadMap: function(name, complete) {
-      return (map = Tilemap.load({
-        name: name,
-        complete: complete,
-        entity: self.add
-      }));
-    }
-  };
-};;
-/***
 The <code>Collision</code> module provides some simple collision detection methods to engine.
 
 @name Collision
@@ -17264,6 +17238,32 @@ Engine.Shadows = function(I, self) {
     }
   });
   return {};
+};;
+/***
+The <code>Tilemap</code> module provides a way to load tilemaps in the engine.
+
+@name Tilemap
+@fieldOf Engine
+@module
+
+@param {Object} I Instance variables
+@param {Object} self Reference to the engine
+*/
+Engine.Tilemap = function(I, self) {
+  var map;
+  map = null;
+  self.bind("preDraw", function(canvas) {
+    return (typeof map === "undefined" || map === null) ? undefined : map.draw(canvas);
+  });
+  return {
+    loadMap: function(name, complete) {
+      return (map = Tilemap.load({
+        name: name,
+        complete: complete,
+        entity: self.add
+      }));
+    }
+  };
 };;
 var Framerate;
 /***
