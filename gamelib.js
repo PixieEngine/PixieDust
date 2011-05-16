@@ -15713,6 +15713,102 @@ valueOf()
 @methodOf Date#
 */;
 ;
+var Animated;
+Animated = function(I, self) {
+  var advanceFrame, find;
+  I || (I = {});
+  $.reverseMerge(I, {
+    data: {},
+    spriteLookup: {},
+    activeAnimation: [],
+    currentFrameIndex: 0,
+    lastUpdate: new Date().getTime(),
+    useTimer: false,
+    transform: Matrix.IDENTITY
+  });
+  I.activeAnimation = I.data.animations.first();
+  I.currentFrameIndex = I.activeAnimation.frames.first();
+  advanceFrame = function() {
+    var frames, nextState;
+    frames = I.activeAnimation.frames;
+    if (I.currentFrameIndex === frames.last()) {
+      self.trigger("Complete");
+      nextState = I.activeAnimation.complete;
+      if (nextState) {
+        I.activeAnimation = find(nextState) || I.activeAnimation;
+        I.width = I.spriteLookup[I.activeAnimation.frames.first()].width;
+        I.height = I.spriteLookup[I.activeAnimation.frames.first()].height;
+      }
+    }
+    return (I.currentFrameIndex = I.activeAnimation.frames[(frames.indexOf(I.currentFrameIndex) + 1) % frames.length]);
+  };
+  find = function(name) {
+    var result;
+    result = null;
+    I.data.animations.each(function(animation) {
+      if (animation.name.toLowerCase() === name.toLowerCase()) {
+        return (result = animation);
+      }
+    });
+    return result;
+  };
+  I.data.tileset.each(function(spriteData, i) {
+    return (I.spriteLookup[i] = Sprite.fromURL(spriteData.src));
+  });
+  return {
+    draw: function(canvas) {
+      return canvas.withTransform(self.transform(), function() {
+        return I.spriteLookup[I.currentFrameIndex].draw(canvas, I.x, I.y);
+      });
+    },
+    transition: function(newState) {
+      var firstFrame, firstSprite, nextState;
+      if (newState === I.activeAnimation.name) {
+        return null;
+      }
+      if (!(I.activeAnimation.interruptible)) {
+        return null;
+      }
+      nextState = find(newState);
+      if (nextState) {
+        I.activeAnimation = nextState;
+        firstFrame = I.activeAnimation.frames.first();
+        firstSprite = I.spriteLookup[firstFrame];
+        I.currentFrameIndex = firstFrame;
+        I.width = firstSprite.width;
+        return (I.height = firstSprite.height);
+      }
+    },
+    transform: function() {
+      return I.transform;
+    },
+    before: {
+      update: function() {
+        var time, updateFrame;
+        if (I.useTimer) {
+          time = new Date().getTime();
+          updateFrame = (time - I.lastUpdate) >= I.activeAnimation.speed;
+          if (updateFrame) {
+            I.lastUpdate = time;
+            if (I.activeAnimation.triggers && I.activeAnimation.triggers[I.currentFrameIndex]) {
+              I.activeAnimation.triggers[I.currentFrameIndex].each(function(event) {
+                return self.trigger(event);
+              });
+            }
+            return advanceFrame();
+          }
+        } else {
+          if (I.activeAnimation.triggers && I.activeAnimation.triggers[I.currentFrameIndex]) {
+            I.activeAnimation.triggers[I.currentFrameIndex].each(function(event) {
+              return self.trigger(event);
+            });
+          }
+          return advanceFrame();
+        }
+      }
+    }
+  };
+};;
 (function() {
   var Animation, fromPixieId;
   Animation = function(data) {
@@ -16332,6 +16428,7 @@ Emitterable = function(I, self) {
       age: 0,
       color: "blue",
       duration: 30,
+      includedModules: ["Movable"],
       height: 2,
       maxSpeed: 2,
       offset: Point(0, 0),
@@ -17404,6 +17501,17 @@ Hittable = function(I, self) {
   };
 };;
 var Movable;
+/***
+The Movable module automatically updates the position and velocity of
+GameObjects based on the velocity and acceleration. It does not check
+collisions so is probably best suited to particle effect like things.
+
+@name Movable
+@module
+@constructor
+
+@param {Object} I Instance variables
+*/
 Movable = function(I) {
   $.reverseMerge(I, {
     acceleration: Point(0, 0),
