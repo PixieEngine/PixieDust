@@ -11,7 +11,7 @@ Bounded module
 @param {Object} self Reference to including object
 ###
 
-Bounded = (I) ->
+Bounded = (I, self) ->
   I ||= {}
 
   $.reverseMerge I,
@@ -19,6 +19,7 @@ Bounded = (I) ->
     y: 0
     width: 8
     height: 8
+    collisionMargin: Point(0, 0)
 
   ###*
   The position of this game object, the top left point in the local transform.
@@ -31,6 +32,27 @@ Bounded = (I) ->
 
   collides: (bounds) ->
     Collision.rectangular(I, bounds)
+
+  ###*
+  This returns a modified bounds based on the collision margin.
+  The area of the bounds is reduced if collision margin is positive
+  and increased if collision margin is negative.
+
+  @name collisionBounds
+  @methodOf Bounded#
+
+  @param {number} xOffset the amount to shift the x position 
+  @param {number} yOffset the amount to shift the y position
+  ###
+  collisionBounds: (xOffset, yOffset) ->
+    bounds = self.bounds(xOffset, yOffset)
+
+    bounds.x += I.collisionMargin.x
+    bounds.y += I.collisionMargin.y
+    bounds.width -= 2 * I.collisionMargin.x
+    bounds.height -= 2 * I.collisionMargin.y
+
+    return bounds
 
   ###*
   The bounds method returns infomation about the location 
