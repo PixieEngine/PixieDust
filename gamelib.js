@@ -17847,10 +17847,11 @@ SpeechBox = function(I) {
         return null;
       }
       return data.layers.each(function(layer, layerIndex) {
+        var _i, _len, _ref, _ref2, _result, entities, entity, entityData, tileIndex;
         if (!(layer.name.match(/entities/i))) {
           return null;
         }
-        return layer.tiles.each(function(row, y) {
+        layer.tiles == null ? undefined : layer.tiles.each(function(row, y) {
           return row.each(function(tileIndex, x) {
             var entityData;
             if (spriteLookup[tileIndex]) {
@@ -17865,6 +17866,24 @@ SpeechBox = function(I) {
             }
           });
         });
+        if (entities = layer.entities) {
+          _result = []; _ref = entities;
+          for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+            entity = _ref[_i];
+            _result.push((function() {
+              _ref2 = entity;
+              tileIndex = _ref2.tileIndex;
+              entityData = $.extend({
+                layer: layerIndex,
+                sprite: spriteLookup[tileIndex],
+                x: entity.x,
+                y: entity.y
+              }, data.tileset[tileIndex] == null ? undefined : data.tileset[tileIndex].properties, entity.properties);
+              return entityCallback(entityData);
+            })());
+          }
+          return _result;
+        }
       });
     };
     loadEntities();
@@ -17903,7 +17922,7 @@ SpeechBox = function(I) {
   };
   loadByName = function(name, callback, entityCallback) {
     var proxy, url;
-    url = ("" + (BASE_URL) + "/data/" + (name) + ".tilemap");
+    url = ("" + (BASE_URL) + "/data/" + (name) + ".tilemap?" + (new Date().getTime()));
     proxy = {
       draw: $.noop
     };
