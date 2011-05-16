@@ -1,7 +1,7 @@
 # TODO: LOL at name
 Emitterable = (I, self) ->
   I ||= {}
-  
+
   $.reverseMerge I,
     batchSize: 1
     emissionRate: 1
@@ -15,6 +15,7 @@ Emitterable = (I, self) ->
       age: 0
       color: "blue"
       duration: 30
+      includedModules: ["Movable"]
       height: 2
       maxSpeed: 2
       offset: Point(0, 0)
@@ -29,7 +30,7 @@ Emitterable = (I, self) ->
   before:
     draw: (canvas) ->
       particles.invoke "draw", canvas
-      
+
     update: () ->
       I.batchSize.times ->
         if n < I.particleCount && rand() < I.emissionRate
@@ -50,12 +51,12 @@ Emitterable = (I, self) ->
           particleProperties.y += particleProperties.offset.y
 
           particles.push(GameObject(particleProperties))
-          
+
           n += 1
 
       particles = particles.select (particle) ->
         particle.update()
-        
+
       if n == I.particleCount && !particles.length
         I.active = false
 
