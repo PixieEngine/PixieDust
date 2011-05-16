@@ -16738,7 +16738,7 @@ Emitterable = function(I, self) {
     modules = modules.without(I.excludedModules);
     modules.each(function(moduleName) {
       if (!(Engine[moduleName])) {
-        throw "#Engine.{moduleName} is not a valid engine module";
+        throw ("#Engine." + (moduleName) + " is not a valid engine module");
       }
       return self.include(Engine[moduleName]);
     });
