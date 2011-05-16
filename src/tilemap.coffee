@@ -1,4 +1,4 @@
-(() ->
+( ->
   Map = (data, entityCallback) ->
     tileHeight = data.tileHeight
     tileWidth = data.tileWidth
@@ -14,7 +14,7 @@
       data.layers.each (layer, layerIndex) ->
         return unless layer.name.match /entities/i
 
-        layer.tiles.each (row, y) ->
+        layer.tiles?.each (row, y) ->
           row.each (tileIndex, x) ->
             if spriteLookup[tileIndex]
               entityData = $.extend(
@@ -26,6 +26,19 @@
               , data.tileset[tileIndex]?.properties)
 
               entityCallback(entityData)
+
+        if entities = layer.entities
+          for entity in entities
+            {tileIndex} = entity
+            entityData = $.extend(
+              layer: layerIndex
+              sprite: spriteLookup[tileIndex]
+              x: entity.x
+              y: entity.y
+            , data.tileset[tileIndex]?.properties
+            , entity.properties)
+
+            entityCallback(entityData)
 
     loadEntities()      
 
@@ -57,7 +70,8 @@
     return proxy
 
   loadByName = (name, callback, entityCallback) ->
-    url = "#{BASE_URL}/data/#{name}.tilemap"
+    #TODO: Better cachebusting
+    url = "#{BASE_URL}/data/#{name}.tilemap?#{new Date().getTime()}"
 
     proxy =
       draw: $.noop
