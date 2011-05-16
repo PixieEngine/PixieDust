@@ -1,3 +1,14 @@
+###*
+The Movable module automatically updates the position and velocity of
+GameObjects based on the velocity and acceleration. It does not check
+collisions so is probably best suited to particle effect like things.
+
+@name Movable
+@module
+@constructor
+
+@param {Object} I Instance variables
+###
 Movable = (I) ->
   $.reverseMerge I,
     acceleration: Point(0, 0)
@@ -16,7 +27,7 @@ Movable = (I) ->
         currentSpeed = I.velocity.magnitude()
         if currentSpeed > I.maxSpeed
           I.velocity = I.velocity.scale(I.maxSpeed / currentSpeed)
-      
+
       I.x += I.velocity.x
       I.y += I.velocity.y
 
