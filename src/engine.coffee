@@ -251,7 +251,7 @@
     self.attrAccessor "cameraTransform"
     self.include Bindable
 
-    defaultModules = ["Shadows", "HUD", "Developer", "SaveState", "Selector", "Collision", "FPSCounter"]
+    defaultModules = ["Shadows", "HUD", "Developer", "SaveState", "Selector", "Collision", "Tilemap", "FPSCounter"]
     modules = defaultModules.concat(I.includedModules)
     modules = modules.without(I.excludedModules)
 
