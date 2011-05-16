@@ -137,7 +137,7 @@ asyncTest "Adding objects to running engine", ->
   fps = 60
   milliseconds = 50
   min = (fps * (milliseconds/1000)) * 0.9 + 1
-  max = (fps * (milliseconds/1000)) * 1.1 + 1
+  max = (fps * (milliseconds/1000)) * 1.1 + 2
 
   engine = Engine
     FPS: fps
