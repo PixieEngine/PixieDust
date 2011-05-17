@@ -11,6 +11,18 @@ Animated = (I, self) ->
     useTimer: false
     transform: Matrix.IDENTITY
 
+  loadByName = (name, callback, entityCallback) ->
+    url = "#{BASE_URL}/data/#{name}.animation?#{new Date().getTime()}"
+
+    $.getJSON url, (data) ->
+      I.data = data
+
+      callback? I.data
+
+    return I.data
+
+  loadByName(I.animationName)
+
   I.activeAnimation = I.data.animations.first()
   I.currentFrameIndex = I.activeAnimation.frames.first()
 
@@ -43,16 +55,6 @@ Animated = (I, self) ->
   draw: (canvas) ->
     canvas.withTransform self.transform(), ->
       I.spriteLookup[I.currentFrameIndex].draw(canvas, I.x, I.y)
-
-  loadByName: (name, callback, entityCallback) ->
-    url = "#{BASE_URL}/data/#{name}.animation?#{new Date().getTime()}"
-
-    $.getJSON url, (data) ->
-      I.data = data
-
-      callback? I.data
-
-    return I.data
 
   transition: (newState) ->
     return if newState == I.activeAnimation.name
