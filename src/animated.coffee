@@ -2,6 +2,7 @@ Animated = (I, self) ->
   I ||= {}
 
   $.reverseMerge I,
+    animationName: "Animation1"
     data: {}
     spriteLookup: {}
     activeAnimation: []
@@ -37,11 +38,21 @@ Animated = (I, self) ->
     return result  
 
   I.data.tileset.each (spriteData, i) ->
-    I.spriteLookup[i] = Sprite.fromURL(spriteData.src) 
+    I.spriteLookup[i] = Sprite.fromURL(spriteData.src)
 
   draw: (canvas) ->
     canvas.withTransform self.transform(), ->
       I.spriteLookup[I.currentFrameIndex].draw(canvas, I.x, I.y)
+
+  loadByName: (name, callback, entityCallback) ->
+    url = "#{BASE_URL}/data/#{name}.animation?#{new Date().getTime()}"
+
+    $.getJSON url, (data) ->
+      I.data = data
+
+      callback? I.data
+
+    return I.data
 
   transition: (newState) ->
     return if newState == I.activeAnimation.name
