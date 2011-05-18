@@ -2,29 +2,72 @@ Animated = (I, self) ->
   I ||= {}
 
   $.reverseMerge I,
-    animationName: "Animation1"
-    data: {}
+    animationName: null
+    data:
+      version: ""
+      tileset: [
+        id: 0
+        src: ""
+        title: ""
+        circles: [{
+          x: 0
+          y: 0
+          radius: 0
+        }]
+      ]
+      animations: [{
+         name: ""
+         complete: ""
+         interruptible: false
+         speed: ""
+         triggers: {
+           "0": [""]
+         }
+         frames: [0]
+      }]      
     spriteLookup: {}
-    activeAnimation: []
+    activeAnimation:
+      name: ""
+      complete: ""
+      interruptible: false
+      speed: ""
+      triggers: {
+        "0": [""]
+      }
+      frames: [0]
     currentFrameIndex: 0
     lastUpdate: new Date().getTime()
     useTimer: false
     transform: Matrix.IDENTITY
 
-  loadByName = (name, callback, entityCallback) ->
+  loadByName = (name, callback) ->
     url = "#{BASE_URL}/data/#{name}.animation?#{new Date().getTime()}"
 
     $.getJSON url, (data) ->
       I.data = data
 
-      callback? I.data
+      callback? data
 
     return I.data
 
-  loadByName(I.animationName)
+  I.data.tileset.each (spriteData, i) ->
+    I.spriteLookup[i] = Sprite.fromURL(spriteData.src) 
 
-  I.activeAnimation = I.data.animations.first()
-  I.currentFrameIndex = I.activeAnimation.frames.first()
+  if I.data.animations.first().name != "" 
+    I.activeAnimation = I.data.animations.first()
+    I.currentFrameIndex = I.activeAnimation.frames.first()
+
+    I.data.tileset.each (spriteData, i) ->
+      I.spriteLookup[i] = Sprite.fromURL(spriteData.src) 
+  else if I.animationName
+    loadByName I.animationName, ->
+      I.activeAnimation = I.data.animations.first()
+      I.currentFrameIndex = I.activeAnimation.frames.first()
+
+      I.data.tileset.each (spriteData, i) ->
+        I.spriteLookup[i] = Sprite.fromURL(spriteData.src)  
+  else
+    throw "No animation data provided. Either use animationName to specify an animation to load from the project or pass in raw JSON to the data key."
 
   advanceFrame = ->
     frames = I.activeAnimation.frames
@@ -48,9 +91,6 @@ Animated = (I, self) ->
       result = animation if animation.name.toLowerCase() == name.toLowerCase()
 
     return result  
-
-  I.data.tileset.each (spriteData, i) ->
-    I.spriteLookup[i] = Sprite.fromURL(spriteData.src)
 
   draw: (canvas) ->
     canvas.withTransform self.transform(), ->
