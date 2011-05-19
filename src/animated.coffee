@@ -112,6 +112,13 @@ Animated = (I, self) ->
     canvas.withTransform self.transform(), ->
       I.spriteLookup[I.currentFrameIndex].draw(canvas, I.x, I.y)
 
+  ###*
+  Transitions to a new active animation. Will not transition if the new state
+  has the same name as the current one or if the active animation is marked as locked.
+
+  @param {String} newState The name of the target state you wish to transition to.
+  ###
+
   transition: (newState) ->
     return if newState == I.activeAnimation.name
     unless I.activeAnimation.interruptible
