@@ -1,3 +1,15 @@
+###*
+The Animated module, when included in a GameObject, gives the object 
+methods to transition from one animation state to another
+
+@name Animated
+@module
+@constructor
+
+@param {Object} I Instance variables
+@param {Object} self Reference to including object
+###
+
 Animated = (I, self) ->  
   I ||= {}
 
