@@ -398,8 +398,7 @@ module "Animation"
 test "should set proper frame", ->
   animation = GameObject
     data: animationData
-
-  animation.include(Animated)
+    includedModules: ["Animated"]
  
   equals animation.I.currentFrameIndex, animation.I.activeAnimation.frames.first(), "Animation should default to initial sprite"
     
@@ -415,11 +414,12 @@ test "should set proper frame", ->
 test "should be on correct frame after transition is called", ->
   animation = GameObject
     data: animationData
-      
-  animation.include(Animated)
+    includedModules: ["Animated"]
   
   # Bite cannot be interrupted. Hack to get to idle state
-  10.times -> animation.update()
+  8.times -> animation.update()
+  
+  equals animation.I.activeAnimation.name, "Idle1", "Animation should be in idle1 state after bite finishes"
   
   animation.transition("Idle2")
   
