@@ -427,70 +427,68 @@ test "should be on correct frame after transition is called", ->
   equals animation.I.activeAnimation.frames.first(), 20, "Animation should be on first frame after transition"
   
 test "should fire Complete event after updating past the last frame", ->
-  window.completeFired = false
+  completeFired = false
   
   animation = GameObject
     data: animationData
     includedModules: ["Animated"]
     
   animation.bind "Complete", ->
-    window.completeFired = true
+    completeFired = true
     
   animation.I.activeAnimation.frames.length.times ->
     animation.update()
     
-  ok window.completeFired, "Complete event fired"
+  ok completeFired, "Complete event fired"
   
 test "should advance to next state after last frame", ->
   animation = GameObject
     data: animationData
+    includedModules: ["Animated"]
     
-  animation.include(Animated)
-  
-  (animation.I.activeAnimation.frames.length).times ->
+  animation.I.activeAnimation.frames.length.times ->
     animation.update()
     
-  equals animation.I.activeAnimation.name, "Idle1", "After the bite cycle, we should end up in the Idle1 state"
+  equals animation.I.activeAnimation.name, "Idle1", "After the bite cycle we should end up in the Idle1 state"
   
   50.times -> animation.update()
     
   equals animation.I.activeAnimation.name, "Idle1", "The idle1 state loops, so after any number of updates we should still be there"
   
 test "should fire frame specific event on the proper frame", ->
-  window.whiteParticlesFired = window.blueParticlesFired = greenParticlesFired = chompSoundFired = false
+  whiteParticlesFired = blueParticlesFired = greenParticlesFired = chompSoundFired = false
   
   animation = GameObject
     data: animationData
+    includedModules: ["Animated"]
   
   animation.bind "whiteParticles", ->
-    window.whiteParticlesFired = true
+    whiteParticlesFired = true
     
   animation.bind "blueParticles", ->
-    window.blueParticlesFired = true
+    blueParticlesFired = true
     
   animation.bind "greenParticles", ->
-    window.greenParticlesFired = true
+    greenParticlesFired = true
     
   animation.bind "chompSound", ->
-    window.chompSoundFired = true
-  
-  animation.include(Animated)
-  
+    chompSoundFired = true
+    
   animation.update()
   
-  ok window.whiteParticlesFired, "White particle effect fired"
+  ok whiteParticlesFired, "White particle effect fired"
   
   animation.update()
   animation.update()
   animation.update()
   animation.update()
   
-  ok window.blueParticlesFired, "Blue particle effect fired"
-  ok window.greenParticlesFired, "Green particle effect fired"
+  ok blueParticlesFired, "Blue particle effect fired"
+  ok greenParticlesFired, "Green particle effect fired"
   
   animation.update()
   
-  ok window.chompSoundFired, "Chomp sound effect fired"
+  ok chompSoundFired, "Chomp sound effect fired"
   
 module()
   
