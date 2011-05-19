@@ -431,13 +431,12 @@ test "should fire Complete event after updating past the last frame", ->
   
   animation = GameObject
     data: animationData
+    includedModules: ["Animated"]
     
   animation.bind "Complete", ->
     window.completeFired = true
-  
-  animation.include(Animated)
-  
-  (animation.I.activeAnimation.frames.length).times ->
+    
+  animation.I.activeAnimation.frames.length.times ->
     animation.update()
     
   ok window.completeFired, "Complete event fired"
