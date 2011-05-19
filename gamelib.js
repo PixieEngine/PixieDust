@@ -15714,59 +15714,144 @@ valueOf()
 */;
 ;
 var Animated;
+/***
+The Animated module, when included in a GameObject, gives the object
+methods to transition from one animation state to another
+
+@name Animated
+@module
+@constructor
+
+@param {Object} I Instance variables
+@param {Object} self Reference to including object
+*/
 Animated = function(I, self) {
-  var advanceFrame, find;
+  var advanceFrame, find, loadByName;
   I || (I = {});
   $.reverseMerge(I, {
-    data: {},
+    animationName: null,
+    data: {
+      version: "",
+      tileset: [
+        {
+          id: 0,
+          src: "",
+          title: "",
+          circles: [
+            {
+              x: 0,
+              y: 0,
+              radius: 0
+            }
+          ]
+        }
+      ],
+      animations: [
+        {
+          name: "",
+          complete: "",
+          interruptible: false,
+          speed: "",
+          triggers: {
+            "0": [""]
+          },
+          frames: [0]
+        }
+      ]
+    },
     spriteLookup: {},
-    activeAnimation: [],
+    activeAnimation: {
+      name: "",
+      complete: "",
+      interruptible: false,
+      speed: "",
+      triggers: {
+        "0": [""]
+      },
+      frames: [0]
+    },
     currentFrameIndex: 0,
+    debugAnimation: true,
     lastUpdate: new Date().getTime(),
     useTimer: false,
     transform: Matrix.IDENTITY
   });
-  I.activeAnimation = I.data.animations.first();
-  I.currentFrameIndex = I.activeAnimation.frames.first();
+  loadByName = function(name, callback) {
+    var url;
+    url = ("" + (BASE_URL) + "/data/" + (name) + ".animation?" + (new Date().getTime()));
+    $.getJSON(url, function(data) {
+      I.data = data;
+      return (typeof callback === "function" ? callback(data) : undefined);
+    });
+    return I.data;
+  };
+  I.data.tileset.each(function(spriteData, i) {
+    return (I.spriteLookup[i] = Sprite.fromURL(spriteData.src));
+  });
+  if (I.data.animations.first().name !== "") {
+    I.activeAnimation = I.data.animations.first();
+    I.currentFrameIndex = I.activeAnimation.frames.first();
+    I.data.tileset.each(function(spriteData, i) {
+      return (I.spriteLookup[i] = Sprite.fromURL(spriteData.src));
+    });
+  } else if (I.animationName) {
+    loadByName(I.animationName, function() {
+      I.activeAnimation = I.data.animations.first();
+      I.currentFrameIndex = I.activeAnimation.frames.first();
+      return I.data.tileset.each(function(spriteData, i) {
+        return (I.spriteLookup[i] = Sprite.fromURL(spriteData.src));
+      });
+    });
+  } else {
+    throw "No animation data provided. Use animationName to specify an animation to load from the project or pass in raw JSON to the data key.";
+  }
   advanceFrame = function() {
-    var frames, nextState;
+    var frames, nextState, sprite;
     frames = I.activeAnimation.frames;
     if (I.currentFrameIndex === frames.last()) {
       self.trigger("Complete");
       nextState = I.activeAnimation.complete;
       if (nextState) {
         I.activeAnimation = find(nextState) || I.activeAnimation;
-        I.width = I.spriteLookup[I.activeAnimation.frames.first()].width;
-        I.height = I.spriteLookup[I.activeAnimation.frames.first()].height;
+        sprite = I.spriteLookup[I.activeAnimation.frames.first()];
+        I.width = sprite.width;
+        I.height = sprite.height;
       }
     }
     return (I.currentFrameIndex = I.activeAnimation.frames[(frames.indexOf(I.currentFrameIndex) + 1) % frames.length]);
   };
   find = function(name) {
-    var result;
+    var nameLower, result;
     result = null;
+    nameLower = name.toLowerCase();
     I.data.animations.each(function(animation) {
-      if (animation.name.toLowerCase() === name.toLowerCase()) {
+      if (animation.name.toLowerCase() === nameLower) {
         return (result = animation);
       }
     });
     return result;
   };
-  I.data.tileset.each(function(spriteData, i) {
-    return (I.spriteLookup[i] = Sprite.fromURL(spriteData.src));
-  });
   return {
     draw: function(canvas) {
       return canvas.withTransform(self.transform(), function() {
         return I.spriteLookup[I.currentFrameIndex].draw(canvas, I.x, I.y);
       });
     },
+    /***
+    Transitions to a new active animation. Will not transition if the new state
+    has the same name as the current one or if the active animation is marked as locked.
+
+    @param {String} newState The name of the target state you wish to transition to.
+    */
     transition: function(newState) {
       var firstFrame, firstSprite, nextState;
       if (newState === I.activeAnimation.name) {
         return null;
       }
       if (!(I.activeAnimation.interruptible)) {
+        if (I.debugAnimation) {
+          warn("Cannot transition to '" + (newState) + "' because '" + (I.activeAnimation.name) + "' is locked");
+        }
         return null;
       }
       nextState = find(newState);
@@ -15777,6 +15862,10 @@ Animated = function(I, self) {
         I.currentFrameIndex = firstFrame;
         I.width = firstSprite.width;
         return (I.height = firstSprite.height);
+      } else {
+        if (I.debugAnimation) {
+          return warn("Could not find animation state '" + (newState) + "'. The current transition will be ignored");
+        }
       }
     },
     transform: function() {
@@ -15787,10 +15876,9 @@ Animated = function(I, self) {
         var time, updateFrame;
         if (I.useTimer) {
           time = new Date().getTime();
-          updateFrame = (time - I.lastUpdate) >= I.activeAnimation.speed;
-          if (updateFrame) {
+          if (updateFrame = (time - I.lastUpdate) >= I.activeAnimation.speed) {
             I.lastUpdate = time;
-            if (I.activeAnimation.triggers && I.activeAnimation.triggers[I.currentFrameIndex]) {
+            if (I.activeAnimation.triggers == null ? undefined : I.activeAnimation.triggers[I.currentFrameIndex]) {
               I.activeAnimation.triggers[I.currentFrameIndex].each(function(event) {
                 return self.trigger(event);
               });
@@ -15798,7 +15886,7 @@ Animated = function(I, self) {
             return advanceFrame();
           }
         } else {
-          if (I.activeAnimation.triggers && I.activeAnimation.triggers[I.currentFrameIndex]) {
+          if (I.activeAnimation.triggers == null ? undefined : I.activeAnimation.triggers[I.currentFrameIndex]) {
             I.activeAnimation.triggers[I.currentFrameIndex].each(function(event) {
               return self.trigger(event);
             });
