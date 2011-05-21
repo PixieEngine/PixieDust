@@ -17920,57 +17920,47 @@ SpeechBox = function(I) {
     return Sprite.load(url, callback);
   });
 })();;
+var __hasProp = Object.prototype.hasOwnProperty;
 (function() {
   var Map, fromPixieId, loadByName;
   Map = function(data, entityCallback) {
-    var loadEntities, spriteLookup, tileHeight, tileWidth;
+    var _ref, entity, loadEntities, spriteLookup, tileHeight, tileWidth, uuid;
     tileHeight = data.tileHeight;
     tileWidth = data.tileWidth;
     spriteLookup = {};
-    data.tileset.each(function(tileData, i) {
-      return (spriteLookup[i] = Sprite.fromURL(tileData.src));
-    });
+    _ref = App.entities;
+    for (uuid in _ref) {
+      if (!__hasProp.call(_ref, uuid)) continue;
+      entity = _ref[uuid];
+      spriteLookup[uuid] = Sprite.fromURL(entity.tileSrc);
+    }
     loadEntities = function() {
       if (!(entityCallback)) {
         return null;
       }
       return data.layers.each(function(layer, layerIndex) {
-        var _i, _len, _ref, _ref2, _result, entities, entity, entityData, tileIndex;
-        if (!(layer.name.match(/entities/i))) {
-          return null;
-        }
-        layer.tiles == null ? undefined : layer.tiles.each(function(row, y) {
-          return row.each(function(tileIndex, x) {
-            var entityData;
-            if (spriteLookup[tileIndex]) {
-              entityData = $.extend({
-                layer: layerIndex,
-                sprite: spriteLookup[tileIndex],
-                tileIndex: tileIndex,
-                x: x * tileWidth,
-                y: y * tileHeight
-              }, data.tileset[tileIndex] == null ? undefined : data.tileset[tileIndex].properties);
-              return entityCallback(entityData);
+        var _i, _len, _ref2, _ref3, _result, entities, entity, entityData, x, y;
+        if (layer.name.match(/entities/i)) {
+          if (entities = layer.entities) {
+            _result = []; _ref2 = entities;
+            for (_i = 0, _len = _ref2.length; _i < _len; _i++) {
+              entity = _ref2[_i];
+              _result.push((function() {
+                _ref3 = entity;
+                x = _ref3.x;
+                y = _ref3.y;
+                uuid = _ref3.uuid;
+                entityData = $.extend({
+                  layer: layerIndex,
+                  sprite: spriteLookup[uuid],
+                  x: x,
+                  y: y
+                }, App.entities[uuid], entity.properties);
+                return entityCallback(entityData);
+              })());
             }
-          });
-        });
-        if (entities = layer.entities) {
-          _result = []; _ref = entities;
-          for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-            entity = _ref[_i];
-            _result.push((function() {
-              _ref2 = entity;
-              tileIndex = _ref2.tileIndex;
-              entityData = $.extend({
-                layer: layerIndex,
-                sprite: spriteLookup[tileIndex],
-                x: entity.x,
-                y: entity.y
-              }, data.tileset[tileIndex] == null ? undefined : data.tileset[tileIndex].properties, entity.properties);
-              return entityCallback(entityData);
-            })());
+            return _result;
           }
-          return _result;
         }
       });
     };
@@ -17983,9 +17973,9 @@ SpeechBox = function(I) {
               return null;
             }
             return layer.tiles.each(function(row, y) {
-              return row.each(function(tileIndex, x) {
+              return row.each(function(uuid, x) {
                 var sprite;
-                return (sprite = spriteLookup[tileIndex]) ? sprite.draw(canvas, x * tileWidth, y * tileHeight) : null;
+                return (sprite = spriteLookup[uuid]) ? sprite.draw(canvas, x * tileWidth, y * tileHeight) : null;
               });
             });
           });
