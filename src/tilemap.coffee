@@ -5,42 +5,30 @@
 
     spriteLookup = {}
 
-    data.tileset.each (tileData, i) ->
-      spriteLookup[i] = Sprite.fromURL(tileData.src)
+    for uuid, entity of App.entities
+      spriteLookup[uuid] = Sprite.fromURL(entity.tileSrc)
 
     loadEntities = () ->
       return unless entityCallback
 
       data.layers.each (layer, layerIndex) ->
-        return unless layer.name.match /entities/i
+        if layer.name.match /entities/i
+          if entities = layer.entities
+            for entity in entities
+              {x, y, uuid} = entity
 
-        layer.tiles?.each (row, y) ->
-          row.each (tileIndex, x) ->
-            if spriteLookup[tileIndex]
               entityData = $.extend(
                 layer: layerIndex
-                sprite: spriteLookup[tileIndex]
-                tileIndex: tileIndex
-                x: x * tileWidth
-                y: y * tileHeight
-              , data.tileset[tileIndex]?.properties)
+                sprite: spriteLookup[uuid]
+                x: x
+                y: y
+              , App.entities[uuid] # Global entity properties
+              #TODO: Maybe map specific properties?
+              , entity.properties) # Instance properties
 
               entityCallback(entityData)
 
-        if entities = layer.entities
-          for entity in entities
-            {tileIndex} = entity
-            entityData = $.extend(
-              layer: layerIndex
-              sprite: spriteLookup[tileIndex]
-              x: entity.x
-              y: entity.y
-            , data.tileset[tileIndex]?.properties
-            , entity.properties)
-
-            entityCallback(entityData)
-
-    loadEntities()      
+    loadEntities()
 
     $.extend data,
       draw: (canvas, x, y) ->
@@ -49,8 +37,8 @@
             return if layer.name.match /entities/i
 
             layer.tiles.each (row, y) ->
-              row.each (tileIndex, x) ->
-                if sprite = spriteLookup[tileIndex]
+              row.each (uuid, x) ->
+                if sprite = spriteLookup[uuid]
                   sprite.draw(canvas, x * tileWidth, y * tileHeight)
 
   window.Tilemap = (name, callback, entityCallback) ->
