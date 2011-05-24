@@ -16667,7 +16667,7 @@ Emitterable = function(I, self) {
       return draw();
     };
     canvas = I.canvas || $("<canvas />").powerCanvas();
-    self = Core(I).extend((function() {
+    self = Core(I).extend({
       /**
       The add method creates and adds an object to the game world.
       
@@ -16680,7 +16680,6 @@ Emitterable = function(I, self) {
       @param entityData The data used to create the game object.
       @type GameObject
       */
-    })(), {
       add: function(entityData) {
         var obj;
         self.trigger("beforeAdd", entityData);
@@ -16692,15 +16691,13 @@ Emitterable = function(I, self) {
           I.objects.push(obj);
         }
         return obj;
-      }
-    }, (function() {
+      },
       /**
       Returns a reference to the canvas.
       
       @name canvas
       @methodOf Engine#
       */
-    })(), {
       canvas: function() {
         return canvas;
       },
@@ -16725,27 +16722,23 @@ Emitterable = function(I, self) {
       },
       eachObject: function(iterator) {
         return I.objects.each(iterator);
-      }
-    }, (function() {
+      },
       /**
       Start the game simulation.
       @methodOf Engine#
       @name start
       */
-    })(), {
       start: function() {
         if (!running) {
           running = true;
           return window.requestAnimationFrame(animLoop);
         }
-      }
-    }, (function() {
+      },
       /**
       Stop the simulation.
       @methodOf Engine#
       @name stop
       */
-    })(), {
       stop: function() {
         return running = false;
       },
@@ -16757,14 +16750,12 @@ Emitterable = function(I, self) {
       },
       play: function() {
         return I.paused = false;
-      }
-    }, (function() {
+      },
       /**
       Pause the simulation
       @methodOf Engine#
       @name pause
       */
-    })(), {
       pause: function() {
         return I.paused = true;
       },
@@ -17427,14 +17418,13 @@ GameObject = function(I) {
     includedModules: [],
     excludedModules: []
   });
-  self = Core(I).extend((function() {
+  self = Core(I).extend({
     /**
     Update the game object. This is generally called by the engine.
     
     @name update
     @methodOf GameObject#
     */
-  })(), {
     update: function() {
       if (I.active) {
         self.trigger('step');
@@ -17453,15 +17443,13 @@ GameObject = function(I) {
           return self.trigger('draw', canvas);
         });
       }
-    }
-  }, (function() {
+    },
     /**
     Destroys the object and triggers the destroyed callback.
     
     @name destroy
     @methodOf GameObject#
     */
-  })(), {
     destroy: function() {
       if (!I.destroyed) {
         self.trigger('destroy');
