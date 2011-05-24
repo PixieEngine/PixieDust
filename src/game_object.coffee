@@ -67,7 +67,7 @@ GameObject = (I) ->
     includedModules: []
     excludedModules: []
 
-  self = Core(I).extend
+  self = Core(I).extend {
     ###*
     Update the game object. This is generally called by the engine.
 
@@ -101,6 +101,7 @@ GameObject = (I) ->
 
       I.destroyed = true
       I.active = false
+  }
 
   defaultModules = [Bindable, Bounded, Drawable, Durable]
   modules = defaultModules.concat(I.includedModules.invoke('constantize'))
