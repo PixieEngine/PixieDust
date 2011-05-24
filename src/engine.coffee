@@ -147,7 +147,7 @@
 
     canvas = I.canvas || $("<canvas />").powerCanvas()
 
-    self = Core(I).extend
+    self = Core(I).extend {
       ###*
       The add method creates and adds an object to the game world.
 
@@ -245,6 +245,7 @@
         I.FPS = newFPS
         self.stop()
         self.start()
+    }
 
     self.attrAccessor "ambientLight"
     self.attrAccessor "backgroundColor"
