@@ -59,7 +59,8 @@
 
   loadByName = (name, callback, entityCallback) ->
     #TODO: Better cachebusting
-    url = "#{BASE_URL}/data/#{name}.tilemap?#{new Date().getTime()}"
+    directory = App?.directories?.tilemaps || "data"
+    url = "#{BASE_URL}/#{directory}/#{name}.tilemap?#{new Date().getTime()}"
 
     proxy =
       draw: $.noop
