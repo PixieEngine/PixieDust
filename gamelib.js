@@ -12144,7 +12144,7 @@ Array.prototype.each = function(iterator, context) {
 };
 /**
 Call the given iterator once for each element in the array,
-passing in the given object as the first argument and the element
+passing in the element as the first argument and the given object
 as the second argument. Additional arguments are passed similar to
 <code>each</code>
 
@@ -12153,7 +12153,8 @@ as the second argument. Additional arguments are passed similar to
 @name eachWithObject
 @methodOf Array#
 
-@param {Object} object The number of elements in each group.
+@param {Object} object The object to pass to the iterator on each
+visit.
 @param {Function} iterator Function to be called once for 
 each element in the array.
 @param {Object} [context] Optional context parameter to be 
@@ -12164,7 +12165,7 @@ used as `this` when calling the iterator function.
 */
 Array.prototype.eachWithObject = function(object, iterator, context) {
   this.each(function(element, i, self) {
-    return iterator.call(context, object, element, i, self);
+    return iterator.call(context, element, object, i, self);
   });
   return object;
 };
@@ -12757,24 +12758,27 @@ methods.
 @constructor
 
 @param {Object} I Instance variables
-*/
-/**
-@name I
-@memberOf Core#
 */var Core;
 var __slice = Array.prototype.slice;
 Core = function(I) {
   var self;
   I || (I = {});
   return self = {
+    /**
+      External access to instance variables. Use of this property should be avoided
+      in general, but can come in handy from time to time.
+      
+      @name I
+      @fieldOf Core#
+      */
     I: I,
     /**
-    Generates a public jQuery style getter / setter method for each 
-    String argument.
+      Generates a public jQuery style getter / setter method for each 
+      String argument.
     
-    @name attrAccessor
-    @methodOf Core#
-    */
+      @name attrAccessor
+      @methodOf Core#
+      */
     attrAccessor: function() {
       var attrNames;
       attrNames = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
@@ -13038,8 +13042,20 @@ $(function() {
   The global keydown property lets your query the status of keys.
   
   <pre>
+  # Examples:
+  
   if keydown.left
     moveLeft()
+    
+  if keydown.a or keydown.space
+    attack()
+    
+  if keydown.return
+    confirm()
+    
+  if keydown.esc
+    cancel()
+  
   </pre>
   
   @name keydown
@@ -13799,10 +13815,13 @@ The mathematical circle constant of 1 turn.
 */
 Math.TAU = 2 * Math.PI;;
 /**
-* Checks whether an object is an array.
-*
-* @type Object
-* @returns A boolean expressing whether the object is an instance of Array 
+Checks whether an object is an array.
+@name isArray
+@methodOf Object
+
+@param {Object} object The object to check for array-ness.
+@type Boolean
+@returns A boolean expressing whether the object is an instance of Array 
 */Object.isArray = function(object) {
   return Object.prototype.toString.call(object) === '[object Array]';
 };;
@@ -14091,7 +14110,18 @@ var __slice = Array.prototype.slice;
   };
 })(jQuery);;
 (function($) {
-  window.Random = $.extend(window.Random, {
+  /**
+  @name Random
+  @namespace Some useful methods for generating random things.
+  */  window.Random = $.extend(window.Random, (function() {
+    /**
+    Returns a random angle, uniformly distributed, between 0 and 2pi.
+    
+    @name angle
+    @methodOf Random
+    @type Number
+    */
+  })(), {
     angle: function() {
       return rand() * Math.TAU;
     },
@@ -14109,7 +14139,11 @@ var __slice = Array.prototype.slice;
   Returns random integers from [0, n) if n is given.
   Otherwise returns random float between 0 and 1.
   
+  @name rand
+  @methodOf window
+  
   @param {Number} n
+  @type Number
   */
   return window.rand = function(n) {
     if (n) {
@@ -14200,6 +14234,8 @@ Returns true if this string only contains whitespace characters.
   return /^\s*$/.test(this);
 };
 /**
+Returns a new string that is a camelCase version.
+
 @name camelize
 @methodOf String#
 */
@@ -14213,6 +14249,8 @@ String.prototype.camelize = function() {
   });
 };
 /**
+Returns a new string with the first letter capitalized and the rest lower cased.
+
 @name capitalize
 @methodOf String#
 */
@@ -14237,6 +14275,8 @@ String.prototype.constantize = function() {
   }
 };
 /**
+Returns a new string that is a more human readable version.
+
 @name humanize
 @methodOf String#
 */
@@ -14258,10 +14298,11 @@ String.prototype.parse = function() {
   try {
     return JSON.parse(this);
   } catch (e) {
-    return this;
+    return this.toString();
   }
 };
 /**
+Returns a new string in Title Case.
 @name titleize
 @methodOf String#
 */
@@ -14271,13 +14312,13 @@ String.prototype.titleize = function() {
   }).join(' ');
 };
 /**
-@name withoutExtension
-@methodOf String#
-
 Assumes the string is something like a file name and returns the 
 contents of the string without the extension.
 
 "neat.png".witouthExtension() => "neat"
+
+@name withoutExtension
+@methodOf String#
 */
 String.prototype.withoutExtension = function() {
   return this.replace(/\.[^\.]*$/, '');
@@ -16051,66 +16092,6 @@ Bounded = function(I, self) {
     }
   };
 };;
-var CellularAutomata;
-CellularAutomata = function(I) {
-  var currentState, get, neighbors, nextState, self;
-  I || (I = {});
-  $.reverseMerge(I, {
-    cellUpdate: function(row, col, value, neighbors) {
-      var neighborCounts;
-      neighborCounts = neighbors.sum();
-      return +((value + neighborCounts) >= 5);
-    },
-    initializeCell: function(row, col) {
-      return rand() < 0.45;
-    },
-    outsideValue: function(row, col) {
-      return 1;
-    },
-    width: 32,
-    height: 32
-  });
-  currentState = [];
-  nextState = [];
-  get = function(row, col) {
-    if (((0 <= row && row < I.height)) && ((0 <= col && col < I.width))) {
-      return currentState[row][col];
-    } else {
-      return I.outsideValue(row, col);
-    }
-  };
-  neighbors = function(row, col) {
-    return [get(row - 1, col - 1), get(row - 1, col), get(row - 1, col + 1), get(row, col - 1), get(row, col + 1), get(row + 1, col - 1), get(row + 1, col), get(row + 1, col + 1)];
-  };
-  I.height.times(function(row) {
-    currentState[row] = [];
-    return I.width.times(function(col) {
-      return currentState[row][col] = I.initializeCell(row, col);
-    });
-  });
-  self = {
-    data: function() {
-      return currentState;
-    },
-    get: function(row, col) {
-      return currentState[row][col];
-    },
-    update: function(updateFn) {
-      I.height.times(function(row) {
-        return nextState[row] = currentState[row].map(function(value, col) {
-          if (updateFn) {
-            return updateFn(row, col, value, neighbors(row, col));
-          } else {
-            return I.cellUpdate(row, col, value, neighbors(row, col));
-          }
-        });
-      });
-      currentState = nextState;
-      return nextState = [];
-    }
-  };
-  return self;
-};;
 var Collidable;
 Collidable = function(I) {
   I || (I = {});
@@ -16224,168 +16205,6 @@ Collision = {
     }
   }
 };;
-var DebugConsole;
-DebugConsole = function() {
-  var REPL, container, input, output, repl, runButton;
-  REPL = function(input, output) {
-    var print;
-    print = function(message) {
-      return output.append($("<li />", {
-        text: message
-      }));
-    };
-    return {
-      run: function() {
-        var code, result, source;
-        source = input.val();
-        try {
-          code = CoffeeScript.compile(source, {
-            bare: true
-          });
-          if (code.indexOf("var") === 0) {
-            code = code.substring(code.indexOf("\n"));
-          }
-          result = eval(code);
-          print(" => " + result);
-          return input.val('');
-        } catch (error) {
-          if (error.stack) {
-            return print(error.stack);
-          } else {
-            return print(error.toString());
-          }
-        }
-      }
-    };
-  };
-  container = $("<div />", {
-    "class": "console"
-  });
-  input = $("<textarea />");
-  output = $("<ul />");
-  runButton = $("<button />", {
-    text: "Run"
-  });
-  repl = REPL(input, output);
-  container.append(output).append(input).append(runButton);
-  return $(function() {
-    runButton.click(function() {
-      return repl.run();
-    });
-    return $("body").append(container);
-  });
-};;
-function DialogBox(I) {
-  I = I || {};
-  
-  $.reverseMerge(I, {
-    backgroundColor: "#000",
-    blinkRate: 8,
-    cursor: true,
-    cursorWidth: 10,
-    height: 480,
-    lineHeight: 16,
-    paddingX: 24,
-    paddingY: 24,
-    text: "",
-    textColor: "#080",
-    width: 640,
-    x: 0,
-    y: 0
-  });
-  
-  I.textWidth = I.width - 2*(I.paddingX);
-  I.textHeight = I.height - 2*(I.paddingY);
-  
-  var blinkCount = 0;
-  var cursorOn = true;
-  
-  var pageOffset = 0;
-  var displayChars = 0;
-  
-  return {
-    complete: function() {
-      return displayChars >= I.text.length - 1;
-    },
-    
-    draw: function(canvas) {
-      //TODO: A lot of the logic in here should be moved into the
-      // update method and pre-computed.
-      var textStart = Point(I.paddingX, I.paddingY + I.lineHeight);
-      
-      canvas.withTransform(Matrix.translation(I.x, I.y), function() {
-        canvas.fillColor(I.backgroundColor);
-        canvas.fillRect(0, 0, I.width, I.height);
-        
-        canvas.fillColor(I.textColor);
-        
-        var pageCharCount = 0;
-        var displayText = I.text.substr(pageOffset, displayChars);
-        
-        var piecesRemaining = displayText.split(' ');
-        var lineWidth = 0;
-        var line = 0;
-        
-        while(piecesRemaining.length > 0) {
-          var currentLine = piecesRemaining.shift();
-          
-          while((canvas.measureText(currentLine) <= I.textWidth) && (piecesRemaining.length > 0)) {
-            var proposedLine = currentLine + " " + piecesRemaining[0];
-            
-            if(canvas.measureText(proposedLine) <= I.textWidth) {
-              piecesRemaining.shift();
-              currentLine = proposedLine;
-            } else {
-              break;
-                ;//NOOP
-            }
-          }
-          
-          pageCharCount += currentLine.length;
-          
-          canvas.fillText(currentLine, textStart.x, textStart.y + line * I.lineHeight);
-          lineWidth = canvas.measureText(currentLine);
-          
-          if(line * I.lineHeight < I.textHeight) {
-            line += 1;
-          } else {
-            pageOffset += pageCharCount + line;
-            line = 0;
-            pageCharCount = 0;
-            displayChars = 0;
-            break;
-              ;
-          }
-        }
-        
-        if(cursorOn && I.cursor) {
-          canvas.fillRect(textStart.x + lineWidth, textStart.y + (line - 2) *I.lineHeight, I.cursorWidth, I.lineHeight);
-        }
-      });
-      
-    },
-    
-    flush: function() {
-      displayChars = I.text.length;
-    },
-    
-    setText: function(text) {
-      pageOffset = 0;
-      displayChars = 0;
-      I.text = text;
-    },
-    
-    update: function() {
-      displayChars += 1;
-      blinkCount += 1;
-      
-      if(blinkCount >= I.blinkRate) {
-        blinkCount = 0;
-        cursorOn = !cursorOn;
-      }
-    }
-  };
-};
 /*
 The Drawable module is used to provide a simple draw method to the including
 object.
@@ -17858,8 +17677,9 @@ SpeechBox = function(I) {
   @type Sprite
   */
   return window.Sprite.loadByName = function(name, callback) {
-    var url;
-    url = "" + BASE_URL + "/images/" + name + ".png";
+    var directory, url, _ref;
+    directory = (typeof App !== "undefined" && App !== null ? (_ref = App.directories) != null ? _ref.images : void 0 : void 0) || "images";
+    url = "" + BASE_URL + "/" + directory + "/" + name + ".png";
     return Sprite.load(url, callback);
   };
 })();;
@@ -17937,8 +17757,9 @@ SpeechBox = function(I) {
     return proxy;
   };
   loadByName = function(name, callback, entityCallback) {
-    var proxy, url;
-    url = "" + BASE_URL + "/data/" + name + ".tilemap?" + (new Date().getTime());
+    var directory, proxy, url, _ref;
+    directory = (typeof App !== "undefined" && App !== null ? (_ref = App.directories) != null ? _ref.tilemaps : void 0 : void 0) || "data";
+    url = "" + BASE_URL + "/" + directory + "/" + name + ".tilemap?" + (new Date().getTime());
     proxy = {
       draw: $.noop
     };
