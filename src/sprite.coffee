@@ -139,7 +139,8 @@
   @type Sprite
   ###
   window.Sprite.loadByName = (name, callback) ->
-    url = "#{BASE_URL}/images/#{name}.png"
+    directory = App?.directories?.images || "images"
+    url = "#{BASE_URL}/#{directory}/#{name}.png"
     Sprite.load(url, callback)
 
 )()
