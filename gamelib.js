@@ -16700,10 +16700,12 @@ The <code>Collision</code> module provides some simple collision detection metho
       _results = [];
       for (key in developerHotkeys) {
         fn = developerHotkeys[key];
-        _results.push($(document).bind("keydown." + namespace, key, function(event) {
-          event.preventDefault();
-          return fn();
-        }));
+        _results.push((function(key, fn) {
+          return $(document).bind("keydown." + namespace, key, function(event) {
+            event.preventDefault();
+            return fn();
+          });
+        })(key, fn));
       }
       return _results;
     });
