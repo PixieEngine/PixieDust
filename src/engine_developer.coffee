@@ -35,9 +35,10 @@
       $(document).bind "mousedown.#{namespace}", developerModeMousedown
 
       for key, fn of developerHotkeys
-        $(document).bind "keydown.#{namespace}", key, (event) ->
-          event.preventDefault()
-          fn()
+        do (key, fn) ->
+          $(document).bind "keydown.#{namespace}", key, (event) ->
+            event.preventDefault()
+            fn()
 
     return {}
 
