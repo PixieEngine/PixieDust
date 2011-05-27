@@ -17092,13 +17092,32 @@ The <code>Tilemap</code> module provides a way to load tilemaps in the engine.
 @param {Object} I Instance variables
 @param {Object} self Reference to the engine
 */Engine.Tilemap = function(I, self) {
-  var map;
+  var clearObjects, map, updating;
   map = null;
+  updating = false;
+  clearObjects = false;
   self.bind("preDraw", function(canvas) {
     return map != null ? map.draw(canvas) : void 0;
   });
+  self.bind("update", function() {
+    return updating = true;
+  });
+  self.bind("afterUpdate", function() {
+    updating = false;
+    if (clearObjects) {
+      I.objects.clear();
+      return clearObjects = false;
+    }
+  });
   return {
+    /**
+    Loads a new may and unloads any existing map or entities.
+    
+    @name loadMap
+    @methodOf Engine#
+    */
     loadMap: function(name, complete) {
+      clearObjects = updating;
       return map = Tilemap.load({
         name: name,
         complete: complete,
