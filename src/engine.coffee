@@ -261,6 +261,8 @@
 
       self.include Engine[moduleName]
 
+    self.trigger "init"
+
     return self
 )(jQuery)
 
