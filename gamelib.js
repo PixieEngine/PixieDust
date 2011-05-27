@@ -16593,7 +16593,7 @@ Emitterable = function(I, self) {
     self.include(Bindable);
     defaultModules = ["Shadows", "HUD", "Developer", "SaveState", "Selector", "Collision", "Tilemap", "FPSCounter"];
     modules = defaultModules.concat(I.includedModules);
-    modules = modules.without(I.excludedModules);
+    modules = modules.without([].concat(I.excludedModules));
     modules.each(function(moduleName) {
       if (!Engine[moduleName]) {
         throw "#Engine." + moduleName + " is not a valid engine module";
