@@ -41,6 +41,13 @@ test "invalid module throws error", ->
     engine = Engine
       includedModules: ["HellaInvalidModule"]
 
+test "excluded modules", ->
+  engine = Engine
+    excludedModules: "Developer"
+
+  engine = Engine
+    excludedModules: ["Developer"]
+
 test "draw events", 2, ->
   engine = Engine()
 
