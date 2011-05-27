@@ -16600,6 +16600,7 @@ Emitterable = function(I, self) {
       }
       return self.include(Engine[moduleName]);
     });
+    self.trigger("init");
     return self;
   };
 })(jQuery);;
@@ -16659,99 +16660,93 @@ The <code>Collision</code> module provides some simple collision detection metho
     }
   };
 };;
-/**
-The <code>Developer</code> module provides a debug overlay and methods for debugging and live coding.
-
-@name Developer
-@fieldOf Engine
-@module
-
-@param {Object} I Instance variables
-@param {Object} self Reference to the engine
-*/var developerMode, fn, key, objectToUpdate, _ref, _ref2;
-Engine.Developer = function(I, self) {
-  self.bind("draw", function(canvas) {
-    if (I.paused) {
-      canvas.withTransform(I.cameraTransform, function(canvas) {
-        return I.objects.each(function(object) {
-          canvas.fillColor('rgba(255, 0, 0, 0.5)');
-          return canvas.fillRect(object.bounds().x, object.bounds().y, object.bounds().width, object.bounds().height);
+(function($) {
+  /**
+  The <code>Developer</code> module provides a debug overlay and methods for debugging and live coding.
+  
+  @name Developer
+  @fieldOf Engine
+  @module
+  
+  @param {Object} I Instance variables
+  @param {Object} self Reference to the engine
+  */  var developerHotkeys, developerMode, developerModeMousedown, namespace, objectToUpdate;
+  Engine.Developer = function(I, self) {
+    self.bind("draw", function(canvas) {
+      if (I.paused) {
+        canvas.withTransform(I.cameraTransform, function(canvas) {
+          return I.objects.each(function(object) {
+            canvas.fillColor('rgba(255, 0, 0, 0.5)');
+            return canvas.fillRect(object.bounds().x, object.bounds().y, object.bounds().width, object.bounds().height);
+          });
         });
-      });
-      canvas.fillColor('rgba(0, 0, 0, 0.5)');
-      canvas.fillRect(430, 10, 200, 60);
-      canvas.fillColor('#fff');
-      canvas.fillText("Developer Mode. Press Esc to resume", 440, 25);
-      canvas.fillText("Shift+Left click to add boxes", 440, 43);
-      return canvas.fillText("Right click red boxes to edit properties", 440, 60);
-    }
-  });
-  return {};
-};
-developerMode = false;
-objectToUpdate = null;
-window.updateObjectProperties = function(newProperties) {
-  if (objectToUpdate) {
-    return $.extend(objectToUpdate, GameObject.construct(newProperties));
-  }
-};
-if (window.developerModeMousedown) {
-  $(document).unbind(window.developerModeMousedown);
-}
-if (window.developerHotkeys) {
-  for (key in developerHotkeys) {
-    fn = developerHotkeys[key];
-    $(document).unbind("keydown", key, fn);
-  }
-}
-window.developerModeMousedown = function(event) {
-  var object;
-  if (developerMode) {
-    console.log(event.which);
-    if (event.which === 3) {
-      if (object = engine.objectAt(event.pageX, event.pageY)) {
-        parent.editProperties(object.I);
-        objectToUpdate = object;
+        canvas.fillColor('rgba(0, 0, 0, 0.5)');
+        canvas.fillRect(430, 10, 200, 60);
+        canvas.fillColor('#fff');
+        canvas.fillText("Developer Mode. Press Esc to resume", 440, 25);
+        canvas.fillText("Shift+Left click to add boxes", 440, 43);
+        return canvas.fillText("Right click red boxes to edit properties", 440, 60);
       }
-      return console.log(object);
-    } else if (event.which === 2 || keydown.shift) {
-      return typeof window.developerAddObject === "function" ? window.developerAddObject(event) : void 0;
-    }
-  }
-};
-$(document).mousedown(window.developerModeMousedown);
-window.developerHotkeys = {
-  esc: function() {
-    developerMode = !developerMode;
-    if (developerMode) {
-      return engine.pause();
-    } else {
-      return engine.play();
-    }
-  },
-  f3: function() {
-    return Local.set("level", engine.saveState());
-  },
-  f4: function() {
-    return engine.loadState(Local.get("level"));
-  },
-  f5: function() {
-    return engine.reload();
-  }
-};
-_ref = window.developerHotkeys;
-for (key in _ref) {
-  fn = _ref[key];
-  window.developerHotkeys[key] = function(event) {
-    event.preventDefault();
-    return fn();
+    });
+    self.bind("init", function() {
+      var fn, key, _results;
+      window.updateObjectProperties = function(newProperties) {
+        if (objectToUpdate) {
+          return $.extend(objectToUpdate, GameObject.construct(newProperties));
+        }
+      };
+      $(document).unbind("." + namespace);
+      $(document).bind("mousedown." + namespace, developerModeMousedown);
+      _results = [];
+      for (key in developerHotkeys) {
+        fn = developerHotkeys[key];
+        _results.push($(document).bind("keydown." + namespace, key, function(event) {
+          event.preventDefault();
+          return fn();
+        }));
+      }
+      return _results;
+    });
+    return {};
   };
-}
-_ref2 = window.developerHotkeys;
-for (key in _ref2) {
-  fn = _ref2[key];
-  $(document).bind("keydown", key, fn);
-};
+  namespace = "engine_developer";
+  developerMode = false;
+  objectToUpdate = null;
+  developerModeMousedown = function(event) {
+    var object;
+    if (developerMode) {
+      console.log(event.which);
+      if (event.which === 3) {
+        if (object = engine.objectAt(event.pageX, event.pageY)) {
+          parent.editProperties(object.I);
+          objectToUpdate = object;
+        }
+        return console.log(object);
+      } else if (event.which === 2 || keydown.shift) {
+        return typeof window.developerAddObject === "function" ? window.developerAddObject(event) : void 0;
+      }
+    }
+  };
+  return developerHotkeys = {
+    esc: function() {
+      developerMode = !developerMode;
+      if (developerMode) {
+        return engine.pause();
+      } else {
+        return engine.play();
+      }
+    },
+    f3: function() {
+      return Local.set("level", engine.saveState());
+    },
+    f4: function() {
+      return engine.loadState(Local.get("level"));
+    },
+    f5: function() {
+      return engine.reload();
+    }
+  };
+})(jQuery);;
 /**
 The <code>FPSCounter</code> module tracks and displays the framerate.
 
