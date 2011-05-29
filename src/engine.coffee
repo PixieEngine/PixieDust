@@ -9,6 +9,7 @@
     includedModules: []
     paused: false
     showFPS: false
+    zSort: false
 
   ###*
   The Engine controls the game world and manages game state. Once you 
@@ -134,7 +135,13 @@
 
         self.trigger "preDraw", canvas
 
-        I.objects.invoke("draw", canvas)
+        if I.zSort
+          drawObjects = I.objects.copy().sort (a, b) ->
+            a.I.zIndex - b.I.zIndex
+        else
+          drawObjects = I.objects
+
+        drawObjects.invoke("draw", canvas)
 
       self.trigger "draw", canvas
 
