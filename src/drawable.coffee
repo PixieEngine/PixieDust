@@ -21,6 +21,7 @@ Drawable = (I, self) ->
   $.reverseMerge I,
     color: "#196"
     spriteName: null
+    zIndex: 0
 
   if I.spriteName
     I.sprite = Sprite(I.spriteName, (sprite) ->
