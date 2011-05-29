@@ -12594,7 +12594,7 @@ var __slice = Array.prototype.slice;
       alpha = args.first() != null ? args.first() : 1.0;
       parsedColor = rgbMap.concat(parseFloat(alpha));
     } else {
-      color = args.first();
+      color = args.first().toString();
       parsedColor = lookup[normalizeKey(color)] || parseHex(color) || parseRGB(color) || parseHSL(color);
     }
     if (!parsedColor) {
@@ -12767,7 +12767,7 @@ Core = function(I) {
     /**
       External access to instance variables. Use of this property should be avoided
       in general, but can come in handy from time to time.
-      
+    
       @name I
       @fieldOf Core#
       */
@@ -13046,13 +13046,13 @@ $(function() {
   
   if keydown.left
     moveLeft()
-    
+  
   if keydown.a or keydown.space
     attack()
-    
+  
   if keydown.return
     confirm()
-    
+  
   if keydown.esc
     cancel()
   
@@ -14271,7 +14271,7 @@ String.prototype.constantize = function() {
     eval("var that = " + this);
     return that;
   } else {
-    return;
+    throw "String#constantize: '" + this + "' is not a valid constant name.";
   }
 };
 /**
