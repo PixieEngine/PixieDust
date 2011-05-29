@@ -16361,7 +16361,8 @@ Emitterable = function(I, self) {
     excludedModules: [],
     includedModules: [],
     paused: false,
-    showFPS: false
+    showFPS: false,
+    zSort: false
   };
   /**
   The Engine controls the game world and manages game state. Once you 
@@ -16470,11 +16471,19 @@ Emitterable = function(I, self) {
     };
     draw = function() {
       canvas.withTransform(I.cameraTransform, function(canvas) {
+        var drawObjects;
         if (I.backgroundColor) {
           canvas.fill(I.backgroundColor);
         }
         self.trigger("preDraw", canvas);
-        return I.objects.invoke("draw", canvas);
+        if (I.zSort) {
+          drawObjects = I.objects.copy().sort(function(a, b) {
+            return a.I.zIndex - b.I.zIndex;
+          });
+        } else {
+          drawObjects = I.objects;
+        }
+        return drawObjects.invoke("draw", canvas);
       });
       return self.trigger("draw", canvas);
     };
