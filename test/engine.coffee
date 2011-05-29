@@ -36,6 +36,29 @@ test "before add event", 1, ->
   engine.add
     test: "test"
 
+test "zSort", ->
+  engine = Engine
+    zSort: true
+
+  n = 0
+  bindDraw = (o) ->
+    o.bind 'draw', ->
+      n += 1
+      o.I.drawnAt = n
+
+  o2 = engine.add
+    zIndex: 2
+  o1 = engine.add
+    zIndex: 1
+
+  bindDraw(o1)
+  bindDraw(o2)
+
+  engine.frameAdvance()
+
+  equals o1.I.drawnAt, 1, "Object with zIndex #{o1.I.zIndex} should be drawn first"
+  equals o2.I.drawnAt, 2, "Object with zIndex #{o2.I.zIndex} should be drawn second"
+
 test "invalid module throws error", ->
   raises ->
     engine = Engine
