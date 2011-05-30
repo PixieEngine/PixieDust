@@ -1,6 +1,7 @@
 {
   "author": "STRd6",
   "name": "gamelib",
+  "library": true,
   "libs": {
     "corelib.js": "https://github.com/STRd6/corelib/raw/pixie/corelib.js",
     "box2d.js": "http://pixie.strd6.com/production/projects/12/src/Box2dWeb-2.1a.2.js"
