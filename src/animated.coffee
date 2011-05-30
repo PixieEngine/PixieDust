@@ -98,6 +98,7 @@ Animated = (I, self) ->
         I.height = sprite.height
 
     I.currentFrameIndex = I.activeAnimation.frames[(frames.indexOf(I.currentFrameIndex) + 1) % frames.length]
+    I.sprite = I.spriteLookup[I.currentFrameIndex]
 
   find = (name) ->
     result = null
@@ -107,10 +108,6 @@ Animated = (I, self) ->
       result = animation if animation.name.toLowerCase() == nameLower
 
     return result  
-
-  draw: (canvas) ->
-    canvas.withTransform self.transform(), ->
-      I.spriteLookup[I.currentFrameIndex].draw(canvas, I.x, I.y)
 
   ###*
   Transitions to a new active animation. Will not transition if the new state
