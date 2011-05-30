@@ -22,6 +22,25 @@ Engine.Collision = (I, self) ->
       collided || (object.solid() && (object != sourceObject) && object.collides(bounds))
 
   ###*
+  Detects collisions between a bounds and the game objects. 
+  Returns an array of objects colliding with the bounds provided.
+
+  @name collidesWith
+  @methodOf Engine.Collision#
+  @param bounds The bounds to check collisions with.
+  @param [sourceObject] An object to exclude from the results.
+  ###
+  collidesWith: (bounds, sourceObject) ->
+    collided = []
+
+    I.objects.each (object) ->
+      return unless object.solid()
+      if object != sourceObject && object.collides(bounds)
+        collided.push(object)
+
+    return collided if collided.length
+
+  ###*
   Detects collisions between a ray and the game objects.
 
   @name rayCollides
@@ -46,4 +65,3 @@ Engine.Collision = (I, self) ->
         nearestHit = hit
 
     nearestHit
-
