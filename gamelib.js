@@ -15741,7 +15741,7 @@ Animated = function(I, self) {
       frames: [0]
     },
     currentFrameIndex: 0,
-    debugAnimation: true,
+    debugAnimation: false,
     lastUpdate: new Date().getTime(),
     useTimer: false,
     transform: Matrix.IDENTITY
