@@ -16636,6 +16636,30 @@ The <code>Collision</code> module provides some simple collision detection metho
       });
     },
     /**
+    Detects collisions between a bounds and the game objects. 
+    Returns an array of objects colliding with the bounds provided.
+    
+    @name collidesWith
+    @methodOf Engine.Collision#
+    @param bounds The bounds to check collisions with.
+    @param [sourceObject] An object to exclude from the results.
+    */
+    collidesWith: function(bounds, sourceObject) {
+      var collided;
+      collided = [];
+      I.objects.each(function(object) {
+        if (!object.solid()) {
+          return;
+        }
+        if (object !== sourceObject && object.collides(bounds)) {
+          return collided.push(object);
+        }
+      });
+      if (collided.length) {
+        return collided;
+      }
+    },
+    /**
     Detects collisions between a ray and the game objects.
     
     @name rayCollides
