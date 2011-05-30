@@ -1,4 +1,10 @@
 ###*
+The Sprite class provides a way to load images for use in games.
+
+By default, images are loaded asynchronously. A proxy object is 
+returned immediately but though it has a draw method it will not
+draw anything to the screen until the image has been loaded.
+
 @name Sprite
 @constructor
 ###
