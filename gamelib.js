@@ -1,3 +1,4 @@
+;
 /*
 * Copyright (c) 2006-2007 Erin Catto http://www.gphysics.com
 *
@@ -15787,7 +15788,8 @@ Animated = function(I, self) {
         I.height = sprite.height;
       }
     }
-    return I.currentFrameIndex = I.activeAnimation.frames[(frames.indexOf(I.currentFrameIndex) + 1) % frames.length];
+    I.currentFrameIndex = I.activeAnimation.frames[(frames.indexOf(I.currentFrameIndex) + 1) % frames.length];
+    return I.sprite = I.spriteLookup[I.currentFrameIndex];
   };
   find = function(name) {
     var nameLower, result;
@@ -15801,11 +15803,6 @@ Animated = function(I, self) {
     return result;
   };
   return {
-    draw: function(canvas) {
-      return canvas.withTransform(self.transform(), function() {
-        return I.spriteLookup[I.currentFrameIndex].draw(canvas, I.x, I.y);
-      });
-    },
     /**
     Transitions to a new active animation. Will not transition if the new state
     has the same name as the current one or if the active animation is marked as locked.
@@ -17512,68 +17509,13 @@ Rotatable = function(I) {
     }
   };
 };;
-var SpeechBox;
-SpeechBox = function(I) {
-  var addLine, chars, counter, grad, line, self, stringLine, text;
-  I || (I = {});
-  $.reverseMerge(I, {
-    backgroundColor: 'rgb(175, 175, 175)',
-    strokeColor: '#000',
-    strokeWidth: 5,
-    textColor: 'rgb(0, 0, 0)',
-    textDelay: 1,
-    gradient: true,
-    height: 50,
-    padding: 15,
-    width: 400,
-    text: "This is a test blah blah blh blah This is a test blah blah blah blah This is a test blah blah blah blah This is a test blah blah blah blah",
-    x: 50,
-    y: 40
-  });
-  chars = I.text.split("");
-  text = [[]];
-  line = 1;
-  addLine = function() {
-    line++;
-    return text[line - 1] = [];
-  };
-  stringLine = function(line) {
-    return text[line - 1].join("");
-  };
-  counter = 0;
-  if (I.gradient) {
-    grad = Game.canvas.createLinearGradient(0, 0, 0, 3 * I.height);
-    grad.addColorStop(0, I.backgroundColor);
-    grad.addColorStop(1, 'rgb(0, 0, 0)');
-  }
-  return self = {
-    draw: function(canvas) {
-      if (I.gradient) {
-        canvas.context().fillStyle = grad;
-      } else {
-        canvas.fillColor(I.backgroundColor);
-      }
-      canvas.strokeColor(I.strokeColor);
-      canvas.fillRoundRect(I.x + I.strokeWidth / 2, I.y + I.strokeWidth / 2, I.width - I.strokeWidth, I.height, 20, I.strokeWidth);
-      canvas.fillColor(I.textColor);
-      return line.times(function(i) {
-        return canvas.fillText(stringLine(i + 1), I.x + I.padding, I.y + (15 * (i + 1)));
-      });
-    },
-    update: function() {
-      var currentChar;
-      counter = (counter + 1) % I.textDelay;
-      if (counter <= 0) {
-        currentChar = chars.shift();
-        text[line - 1].push(currentChar);
-        if (Game.canvas.measureText(stringLine(line)) > I.width - I.padding * 2) {
-          return addLine();
-        }
-      }
-    }
-  };
-};;
 /**
+The Sprite class provides a way to load images for use in games.
+
+By default, images are loaded asynchronously. A proxy object is 
+returned immediately but though it has a draw method it will not
+draw anything to the screen until the image has been loaded.
+
 @name Sprite
 @constructor
 */(function() {
@@ -17804,4 +17746,5 @@ SpeechBox = function(I) {
     }
   };
 })();;
+App.entities = {};;
 ;$(function(){ undefined });
