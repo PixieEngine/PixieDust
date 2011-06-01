@@ -15723,7 +15723,7 @@ Animated = function(I, self) {
           interruptible: false,
           speed: "",
           triggers: {
-            "0": [""]
+            "0": []
           },
           frames: [0]
         }
@@ -15839,21 +15839,21 @@ Animated = function(I, self) {
     },
     before: {
       update: function() {
-        var time, updateFrame, _ref, _ref2;
+        var time, triggers, updateFrame, _ref, _ref2;
         if (I.useTimer) {
           time = new Date().getTime();
           if (updateFrame = (time - I.lastUpdate) >= I.activeAnimation.speed) {
             I.lastUpdate = time;
-            if ((_ref = I.activeAnimation.triggers) != null ? _ref[I.currentFrameIndex] : void 0) {
-              I.activeAnimation.triggers[I.currentFrameIndex].each(function(event) {
+            if (triggers = (_ref = I.activeAnimation.triggers) != null ? _ref[I.activeAnimation.frames.indexOf(I.currentFrameIndex)] : void 0) {
+              triggers.each(function(event) {
                 return self.trigger(event);
               });
             }
             return advanceFrame();
           }
         } else {
-          if ((_ref2 = I.activeAnimation.triggers) != null ? _ref2[I.currentFrameIndex] : void 0) {
-            I.activeAnimation.triggers[I.currentFrameIndex].each(function(event) {
+          if (triggers = (_ref2 = I.activeAnimation.triggers) != null ? _ref2[I.activeAnimation.frames.indexOf(I.currentFrameIndex)] : void 0) {
+            triggers.each(function(event) {
               return self.trigger(event);
             });
           }
@@ -17533,6 +17533,67 @@ Rotatable = function(I) {
     }
   };
 };;
+(function($) {
+  var Sound, directory, format, loadSoundChannel, sounds, _ref;
+  directory = (typeof App !== "undefined" && App !== null ? (_ref = App.directories) != null ? _ref.sounds : void 0 : void 0) || "sounds";
+  format = "wav";
+  sounds = {};
+  loadSoundChannel = function(name) {
+    var sound, url;
+    url = "" + BASE_URL + "/" + directory + "/" + name + "." + format;
+    return sound = $('<audio />', {
+      autobuffer: true,
+      preload: 'auto',
+      src: url
+    }).get(0);
+  };
+  Sound = function(id, maxChannels) {
+    return {
+      play: function() {
+        return Sound.play(id, maxChannels);
+      },
+      stop: function() {
+        return Sound.stop(id);
+      }
+    };
+  };
+  return $.extend(Sound, {
+    play: function(id, maxChannels) {
+      var channel, channels, freeChannels, sound;
+      maxChannels || (maxChannels = 4);
+      if (!sounds[id]) {
+        sounds[id] = [loadSoundChannel(id)];
+      }
+      channels = sounds[id];
+      freeChannels = $.grep(channels, function(sound) {
+        return sound.currentTime === sound.duration || sound.currentTime === 0;
+      });
+      if (channel = freeChannels.first()) {
+        try {
+          channel.currentTime = 0;
+        } catch (_e) {}
+        return channel.play();
+      } else {
+        if (!maxChannels || channels.length < maxChannels) {
+          sound = loadSoundChannel(id);
+          channels.push(sound);
+          return sound.play();
+        }
+      }
+    },
+    playFromUrl: function(url) {
+      var sound;
+      sound = $('<audio />').get(0);
+      sound.src = url;
+      sound.play();
+      return sound;
+    },
+    stop: function(id) {
+      var _ref2;
+      return (_ref2 = sounds[id]) != null ? _ref2.stop() : void 0;
+    }
+  }, window.Sound = Sound);
+})(jQuery);;
 /**
 The Sprite class provides a way to load images for use in games.
 
