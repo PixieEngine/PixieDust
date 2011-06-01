@@ -15723,7 +15723,7 @@ Animated = function(I, self) {
           interruptible: false,
           speed: "",
           triggers: {
-            "0": []
+            "0": ["a trigger"]
           },
           frames: [0]
         }
