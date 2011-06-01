@@ -28,14 +28,14 @@ Animated = (I, self) ->
         }]
       ]
       animations: [{
-         name: ""
-         complete: ""
-         interruptible: false
-         speed: ""
-         triggers: {
-           "0": [""]
-         }
-         frames: [0]
+        name: ""
+        complete: ""
+        interruptible: false
+        speed: ""
+        triggers: {
+          "0": []
+        }
+        frames: [0]
       }]      
     spriteLookup: {}
     activeAnimation:
@@ -144,14 +144,14 @@ Animated = (I, self) ->
 
         if updateFrame = (time - I.lastUpdate) >= I.activeAnimation.speed
           I.lastUpdate = time
-          if I.activeAnimation.triggers?[I.currentFrameIndex]
-            I.activeAnimation.triggers[I.currentFrameIndex].each (event) ->
+          if triggers = I.activeAnimation.triggers?[I.activeAnimation.frames.indexOf(I.currentFrameIndex)]
+            triggers.each (event) ->
               self.trigger(event)
 
           advanceFrame()
       else
-        if I.activeAnimation.triggers?[I.currentFrameIndex]
-          I.activeAnimation.triggers[I.currentFrameIndex].each (event) ->
+        if triggers = I.activeAnimation.triggers?[I.activeAnimation.frames.indexOf(I.currentFrameIndex)]
+          triggers.each (event) ->
             self.trigger(event)
 
         advanceFrame()
