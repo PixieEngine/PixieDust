@@ -23,7 +23,12 @@ Drawable = (I, self) ->
     spriteName: null
     zIndex: 0
 
-  if I.spriteName
+  if I.sprite.isString?()
+    I.sprite = Sprite(I.sprite, (sprite) ->
+      I.width = sprite.width
+      I.height = sprite.height
+    )
+  else if I.spriteName
     I.sprite = Sprite(I.spriteName, (sprite) ->
       I.width = sprite.width
       I.height = sprite.height
