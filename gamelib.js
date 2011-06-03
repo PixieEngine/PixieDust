@@ -16238,16 +16238,14 @@ Drawable = function(I, self) {
       return I.height = sprite.height;
     });
   }
-  self.bind('step', function() {
+  self.bind('draw', function(canvas) {
     var center;
     center = self.center();
     if (I.rotation) {
-      return I.transform = Matrix.translation(center.x, center.y).concat(Matrix.rotation(I.rotation)).concat(Matrix.translation(-I.width / 2, -I.height / 2));
+      I.transform = Matrix.translation(center.x, center.y).concat(Matrix.rotation(I.rotation)).concat(Matrix.translation(-I.width / 2, -I.height / 2));
     } else {
-      return I.transform = Matrix.translation(I.x, I.y);
+      I.transform = Matrix.translation(I.x, I.y);
     }
-  });
-  self.bind('draw', function(canvas) {
     if (I.sprite) {
       return I.sprite.draw(canvas, 0, 0);
     } else {
