@@ -16220,13 +16220,19 @@ Autoloads the sprite specified in I.spriteName, if any.
 @param {Object} self Reference to including object
 */var Drawable;
 Drawable = function(I, self) {
+  var _ref;
   I || (I = {});
   $.reverseMerge(I, {
     color: "#196",
     spriteName: null,
     zIndex: 0
   });
-  if (I.spriteName) {
+  if ((_ref = I.sprite) != null ? typeof _ref.isString === "function" ? _ref.isString() : void 0 : void 0) {
+    I.sprite = Sprite(I.sprite, function(sprite) {
+      I.width = sprite.width;
+      return I.height = sprite.height;
+    });
+  } else if (I.spriteName) {
     I.sprite = Sprite(I.spriteName, function(sprite) {
       I.width = sprite.width;
       return I.height = sprite.height;
@@ -16361,6 +16367,9 @@ Emitterable = function(I, self) {
     paused: false,
     showFPS: false,
     zSort: false
+  };
+  document.oncontextmenu = function() {
+    return false;
   };
   /**
   The Engine controls the game world and manages game state. Once you 
