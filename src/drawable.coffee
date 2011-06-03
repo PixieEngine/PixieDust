@@ -34,7 +34,9 @@ Drawable = (I, self) ->
       I.height = sprite.height
     )
 
-  self.bind 'step', ->
+  self.bind 'draw', (canvas) ->
+    #TODO: Not sure if setting the transform here is the best
+    # but we want to make sure it's adjusted after *all* the updates
     center = self.center()
 
     if I.rotation
@@ -45,7 +47,6 @@ Drawable = (I, self) ->
       # Assumes I.x and I.y are top-left
       I.transform = Matrix.translation(I.x, I.y)
 
-  self.bind 'draw', (canvas) ->
     if I.sprite
       I.sprite.draw(canvas, 0, 0)
     else
