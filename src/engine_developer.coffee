@@ -10,6 +10,15 @@
   @param {Object} self Reference to the engine
   ###
   Engine.Developer = (I, self) ->
+    screenWidth = App?.width or 480
+    screenHeight = App?.height or 320
+    margin = 10
+    boxWidth = 240
+    boxHeight = 60
+    textStart = screenWidth - boxWidth + margin
+    font = "bold 9pt arial"
+    lineHeight = 16
+
     self.bind "draw", (canvas) ->
       if I.paused
         #TODO: Move this into the debug draw method of the objects themselves
@@ -18,12 +27,14 @@
             canvas.fillColor 'rgba(255, 0, 0, 0.5)'
             canvas.fillRect(object.bounds().x, object.bounds().y, object.bounds().width, object.bounds().height)
 
+        #TODO Displaying text shouldn't be such a damn ordeal
+        canvas.font(font)
         canvas.fillColor 'rgba(0, 0, 0, 0.5)'
-        canvas.fillRect(430, 10, 200, 60)
+        canvas.fillRect(screenWidth - boxWidth, 0, boxWidth, boxHeight)
         canvas.fillColor '#fff'
-        canvas.fillText("Developer Mode. Press Esc to resume", 440, 25)
-        canvas.fillText("Shift+Left click to add boxes", 440, 43)
-        canvas.fillText("Right click red boxes to edit properties", 440, 60)
+        canvas.fillText("Developer Mode. Press Esc to resume", textStart, margin + 5)
+        canvas.fillText("Shift+Left click to add boxes", textStart, margin + 5 + lineHeight)
+        canvas.fillText("Right click red boxes to edit properties", textStart, margin + 5 + 2 * lineHeight)
 
     self.bind "init", ->
       window.updateObjectProperties = (newProperties) ->
