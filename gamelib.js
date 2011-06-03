@@ -16712,6 +16712,15 @@ The <code>Collision</code> module provides some simple collision detection metho
   @param {Object} self Reference to the engine
   */  var developerHotkeys, developerMode, developerModeMousedown, namespace, objectToUpdate;
   Engine.Developer = function(I, self) {
+    var boxHeight, boxWidth, font, lineHeight, margin, screenHeight, screenWidth, textStart;
+    screenWidth = (typeof App !== "undefined" && App !== null ? App.width : void 0) || 480;
+    screenHeight = (typeof App !== "undefined" && App !== null ? App.height : void 0) || 320;
+    margin = 10;
+    boxWidth = 240;
+    boxHeight = 60;
+    textStart = screenWidth - boxWidth + margin;
+    font = "bold 9pt arial";
+    lineHeight = 16;
     self.bind("draw", function(canvas) {
       if (I.paused) {
         canvas.withTransform(I.cameraTransform, function(canvas) {
@@ -16720,12 +16729,13 @@ The <code>Collision</code> module provides some simple collision detection metho
             return canvas.fillRect(object.bounds().x, object.bounds().y, object.bounds().width, object.bounds().height);
           });
         });
+        canvas.font(font);
         canvas.fillColor('rgba(0, 0, 0, 0.5)');
-        canvas.fillRect(430, 10, 200, 60);
+        canvas.fillRect(screenWidth - boxWidth, 0, boxWidth, boxHeight);
         canvas.fillColor('#fff');
-        canvas.fillText("Developer Mode. Press Esc to resume", 440, 25);
-        canvas.fillText("Shift+Left click to add boxes", 440, 43);
-        return canvas.fillText("Right click red boxes to edit properties", 440, 60);
+        canvas.fillText("Developer Mode. Press Esc to resume", textStart, margin + 5);
+        canvas.fillText("Shift+Left click to add boxes", textStart, margin + 5 + lineHeight);
+        return canvas.fillText("Right click red boxes to edit properties", textStart, margin + 5 + 2 * lineHeight);
       }
     });
     self.bind("init", function() {
