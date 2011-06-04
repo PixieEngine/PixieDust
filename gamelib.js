@@ -16260,7 +16260,11 @@ Drawable = function(I, self) {
       I.transform = Matrix.translation(I.x, I.y);
     }
     if (I.sprite) {
-      return I.sprite.draw(canvas, 0, 0);
+      if (I.sprite.draw != null) {
+        return I.sprite.draw(canvas, 0, 0);
+      } else {
+        return typeof warn === "function" ? warn("Sprite has no draw method!") : void 0;
+      }
     } else {
       canvas.fillColor(I.color);
       return canvas.fillRect(0, 0, I.width, I.height);
