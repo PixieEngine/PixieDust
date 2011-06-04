@@ -16241,12 +16241,12 @@ Drawable = function(I, self) {
     zIndex: 0
   });
   if ((_ref = I.sprite) != null ? typeof _ref.isString === "function" ? _ref.isString() : void 0 : void 0) {
-    I.sprite = Sprite(I.sprite, function(sprite) {
+    I.sprite = Sprite.loadByName(I.sprite, function(sprite) {
       I.width = sprite.width;
       return I.height = sprite.height;
     });
   } else if (I.spriteName) {
-    I.sprite = Sprite(I.spriteName, function(sprite) {
+    I.sprite = Sprite.loadByName(I.spriteName, function(sprite) {
       I.width = sprite.width;
       return I.height = sprite.height;
     });
