@@ -48,7 +48,10 @@ Drawable = (I, self) ->
       I.transform = Matrix.translation(I.x, I.y)
 
     if I.sprite
-      I.sprite.draw(canvas, 0, 0)
+      if I.sprite.draw? 
+        I.sprite.draw(canvas, 0, 0)
+      else
+        warn?("Sprite has no draw method!")
     else
       canvas.fillColor(I.color)
       canvas.fillRect(0, 0, I.width, I.height)
