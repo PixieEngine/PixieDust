@@ -16506,11 +16506,15 @@ Emitterable = function(I, self) {
       return self.trigger("draw", canvas);
     };
     step = function() {
-      if (!I.paused || frameAdvance) {
-        update();
-        I.age += 1;
+      try {
+        if (!I.paused || frameAdvance) {
+          update();
+          I.age += 1;
+        }
+        return draw();
+      } catch (e) {
+        return typeof console !== "undefined" && console !== null ? typeof console.error === "function" ? console.error(e) : void 0 : void 0;
       }
-      return draw();
     };
     canvas = I.canvas || $("<canvas />").powerCanvas();
     self = Core(I).extend({
