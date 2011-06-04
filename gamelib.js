@@ -12009,6 +12009,7 @@ _A2J_postDefs = [];
 //post-definitions
 for (var i = 0; i < _A2J_postDefs.length; ++i) _A2J_postDefs[i]();;
 ;
+;
 /**
 Returns a copy of the array without null and undefined values.
 
@@ -14285,6 +14286,17 @@ String.prototype.humanize = function() {
   return this.replace(/_id$/, "").replace(/_/g, " ").capitalize();
 };
 /**
+Returns true.
+
+@name isString
+@methodOf String#
+@type Boolean
+@returns true
+*/
+String.prototype.isString = function() {
+  return true;
+};
+/**
 Parse this string as though it is JSON and return the object it represents. If it
 is not valid JSON returns the string itself.
 
@@ -15683,6 +15695,7 @@ EXAMPLES:
     }).toUpperCase();
   };
 })();;
+;
 ;
 /**
 The Animated module, when included in a GameObject, gives the object 
@@ -17848,5 +17861,5 @@ draw anything to the screen until the image has been loaded.
     }
   };
 })();;
-App.entities = {};;
+;
 ;$(function(){ undefined });
