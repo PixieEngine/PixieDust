@@ -36,6 +36,7 @@ Animated = (I, self) ->
           "0": ["a trigger"]
         }
         frames: [0]
+        transform: [undefined]
       }]      
     activeAnimation:
       name: ""
