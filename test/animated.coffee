@@ -409,7 +409,7 @@ test "should set proper frame", ->
   (animation.I.activeAnimation.frames.length - 1).times ->
     animation.update()
       
-  equals animation.I.currentFrameIndex, animation.I.activeAnimation.frames.first(), "Animation should loop after it reaches the end"
+  equals animation.I.currentFrameIndex, 0, "Animation should loop after it reaches the end"
 
 test "should be on correct frame after transition is called", ->
   animation = GameObject
