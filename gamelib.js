@@ -16386,6 +16386,9 @@ Emitterable = function(I, self) {
   document.oncontextmenu = function() {
     return false;
   };
+  $(document).bind("keydown", function(event) {
+    return event.preventDefault();
+  });
   /**
   The Engine controls the game world and manages game state. Once you 
   set it up and let it run it pretty much takes care of itself.
