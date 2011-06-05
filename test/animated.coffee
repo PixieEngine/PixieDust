@@ -355,6 +355,7 @@ animationData = `{
          "complete":"Idle1",
          "interruptible":false,
          "speed":"110",
+         "transition": ["Matrix.HORIZONTAL_FLIP"]
          "triggers": {
            "0":["whiteParticles"],
            "4":["blueParticles","greenParticles"],
@@ -394,103 +395,110 @@ animationData = `{
 }`
 
 module "Animation"
- 
+
 test "should set proper frame", ->
   animation = GameObject
     data: animationData
     includedModules: ["Animated"]
- 
+
   equals animation.I.currentFrameIndex, animation.I.activeAnimation.frames.first(), "Animation should default to initial sprite"
-    
+
   animation.update()
-    
+
   equals animation.I.currentFrameIndex, animation.I.activeAnimation.frames[1], "After an update the currentFrameIndex has advanced"
-    
+
   (animation.I.activeAnimation.frames.length - 1).times ->
     animation.update()
-      
+
   equals animation.I.currentFrameIndex, 0, "Animation should loop after it reaches the end"
 
 test "should be on correct frame after transition is called", ->
   animation = GameObject
     data: animationData
     includedModules: ["Animated"]
-  
+
   # Bite cannot be interrupted. Hack to get to idle state
   8.times -> animation.update()
-  
+
   equals animation.I.activeAnimation.name, "Idle1", "Animation should be in idle1 state after bite finishes"
-  
+
   animation.transition("Idle2")
-  
+
   equals animation.I.activeAnimation.name, "Idle2", "Animation should be in idle2 state after transition is called"
   equals animation.I.activeAnimation.frames.first(), 20, "Animation should be on first frame after transition"
-  
+
 test "should fire Complete event after updating past the last frame", ->
   completeFired = false
-  
+
   animation = GameObject
     data: animationData
     includedModules: ["Animated"]
-    
+
   animation.bind "Complete", ->
     completeFired = true
-    
+
   animation.I.activeAnimation.frames.length.times ->
     animation.update()
-    
+
   ok completeFired, "Complete event fired"
-  
+
 test "should advance to next state after last frame", ->
   animation = GameObject
     data: animationData
     includedModules: ["Animated"]
-    
+
   animation.I.activeAnimation.frames.length.times ->
     animation.update()
-    
+
   equals animation.I.activeAnimation.name, "Idle1", "After the bite cycle we should end up in the Idle1 state"
-  
+
   50.times -> animation.update()
-    
+
   equals animation.I.activeAnimation.name, "Idle1", "The idle1 state loops, so after any number of updates we should still be there"
-  
+
 test "should fire frame specific event on the proper frame", ->
   whiteParticlesFired = blueParticlesFired = greenParticlesFired = chompSoundFired = false
-  
+
   animation = GameObject
     data: animationData
     includedModules: ["Animated"]
-  
+
   animation.bind "whiteParticles", ->
     whiteParticlesFired = true
-    
+
   animation.bind "blueParticles", ->
     blueParticlesFired = true
-    
+
   animation.bind "greenParticles", ->
     greenParticlesFired = true
-    
+
   animation.bind "chompSound", ->
     chompSoundFired = true
-    
+
   animation.update()
-  
+
   ok whiteParticlesFired, "White particle effect fired"
-  
+
   animation.update()
   animation.update()
   animation.update()
   animation.update()
-  
+
   ok blueParticlesFired, "Blue particle effect fired"
   ok greenParticlesFired, "Green particle effect fired"
-  
+
   animation.update()
-  
+
   ok chompSoundFired, "Chomp sound effect fired"
-   
+
+test "should set transform if one is present", ->
+  animation = GameObject
+    data: animationData
+    includedModules: ["Animated"]  
+
+  animation.update()
+
+  equals animation.I.transform == Matrix.HORIZONTAL_FLIP
+
 module()
-  
-  
-  
+
