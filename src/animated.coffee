@@ -37,7 +37,6 @@ Animated = (I, self) ->
         }
         frames: [0]
       }]      
-    spriteLookup: {}
     activeAnimation:
       name: ""
       complete: ""
@@ -63,19 +62,22 @@ Animated = (I, self) ->
 
     return I.data
 
-  I.data.tileset.each (spriteData, i) ->
-    I.spriteLookup[i] = Sprite.fromURL(spriteData.src) 
+  window["#{I.animationName}SpriteLookup"] ||= []
+
+  unless window["#{I.animationName}SpriteLookup"].length
+    I.data.tileset.each (spriteData, i) ->
+      window["#{I.animationName}SpriteLookup"][i] = Sprite.fromURL(spriteData.src)
+
+  I.spriteLookup = window["#{I.animationName}SpriteLookup"]
 
   if I.data.animations.first().name != "" 
     I.activeAnimation = I.data.animations.first()
-    I.currentFrameIndex = I.activeAnimation.frames.first()
 
     I.data.tileset.each (spriteData, i) ->
       I.spriteLookup[i] = Sprite.fromURL(spriteData.src) 
   else if I.animationName
     loadByName I.animationName, ->
       I.activeAnimation = I.data.animations.first()
-      I.currentFrameIndex = I.activeAnimation.frames.first()
 
       I.data.tileset.each (spriteData, i) ->
         I.spriteLookup[i] = Sprite.fromURL(spriteData.src)  
@@ -85,20 +87,22 @@ Animated = (I, self) ->
   advanceFrame = ->
     frames = I.activeAnimation.frames
 
-    if I.currentFrameIndex == frames.last() 
+    if I.currentFrameIndex == frames.indexOf(frames.last())
       self.trigger("Complete") 
 
       nextState = I.activeAnimation.complete
 
       if nextState
         I.activeAnimation = find(nextState) || I.activeAnimation
-        sprite = I.spriteLookup[I.activeAnimation.frames.first()]
+        I.currentFrameIndex = 0        
+    else
+      I.currentFrameIndex = (I.currentFrameIndex + 1) % frames.length
 
-        I.width = sprite.width
-        I.height = sprite.height
+    sprite = I.spriteLookup[frames[I.currentFrameIndex]]
 
-    I.currentFrameIndex = I.activeAnimation.frames[(frames.indexOf(I.currentFrameIndex) + 1) % frames.length]
-    I.sprite = I.spriteLookup[I.currentFrameIndex]
+    I.sprite = sprite
+    I.width = sprite.width
+    I.height = sprite.height
 
   find = (name) ->
     result = null
@@ -129,7 +133,8 @@ Animated = (I, self) ->
       firstFrame = I.activeAnimation.frames.first()
       firstSprite = I.spriteLookup[firstFrame]
 
-      I.currentFrameIndex = firstFrame
+      I.currentFrameIndex = 0
+      I.sprite = firstSprite
       I.width = firstSprite.width
       I.height = firstSprite.height 
     else
@@ -144,13 +149,13 @@ Animated = (I, self) ->
 
         if updateFrame = (time - I.lastUpdate) >= I.activeAnimation.speed
           I.lastUpdate = time
-          if triggers = I.activeAnimation.triggers?[I.activeAnimation.frames.indexOf(I.currentFrameIndex)]
+          if triggers = I.activeAnimation.triggers?[I.currentFrameIndex]
             triggers.each (event) ->
               self.trigger(event)
 
           advanceFrame()
       else
-        if triggers = I.activeAnimation.triggers?[I.activeAnimation.frames.indexOf(I.currentFrameIndex)]
+        if triggers = I.activeAnimation.triggers?[I.currentFrameIndex]
           triggers.each (event) ->
             self.trigger(event)
 
