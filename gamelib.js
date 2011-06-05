@@ -15709,7 +15709,7 @@ methods to transition from one animation state to another
 @param {Object} self Reference to including object
 */var Animated;
 Animated = function(I, self) {
-  var advanceFrame, find, loadByName;
+  var advanceFrame, find, loadByName, _name;
   I || (I = {});
   $.reverseMerge(I, {
     animationName: null,
@@ -15742,7 +15742,6 @@ Animated = function(I, self) {
         }
       ]
     },
-    spriteLookup: {},
     activeAnimation: {
       name: "",
       complete: "",
@@ -15768,19 +15767,21 @@ Animated = function(I, self) {
     });
     return I.data;
   };
-  I.data.tileset.each(function(spriteData, i) {
-    return I.spriteLookup[i] = Sprite.fromURL(spriteData.src);
-  });
+  window[_name = "" + I.animationName + "SpriteLookup"] || (window[_name] = []);
+  if (!window["" + I.animationName + "SpriteLookup"].length) {
+    I.data.tileset.each(function(spriteData, i) {
+      return window["" + I.animationName + "SpriteLookup"][i] = Sprite.fromURL(spriteData.src);
+    });
+  }
+  I.spriteLookup = window["" + I.animationName + "SpriteLookup"];
   if (I.data.animations.first().name !== "") {
     I.activeAnimation = I.data.animations.first();
-    I.currentFrameIndex = I.activeAnimation.frames.first();
     I.data.tileset.each(function(spriteData, i) {
       return I.spriteLookup[i] = Sprite.fromURL(spriteData.src);
     });
   } else if (I.animationName) {
     loadByName(I.animationName, function() {
       I.activeAnimation = I.data.animations.first();
-      I.currentFrameIndex = I.activeAnimation.frames.first();
       return I.data.tileset.each(function(spriteData, i) {
         return I.spriteLookup[i] = Sprite.fromURL(spriteData.src);
       });
@@ -15791,18 +15792,20 @@ Animated = function(I, self) {
   advanceFrame = function() {
     var frames, nextState, sprite;
     frames = I.activeAnimation.frames;
-    if (I.currentFrameIndex === frames.last()) {
+    if (I.currentFrameIndex === frames.indexOf(frames.last())) {
       self.trigger("Complete");
       nextState = I.activeAnimation.complete;
       if (nextState) {
         I.activeAnimation = find(nextState) || I.activeAnimation;
-        sprite = I.spriteLookup[I.activeAnimation.frames.first()];
-        I.width = sprite.width;
-        I.height = sprite.height;
+        I.currentFrameIndex = 0;
       }
+    } else {
+      I.currentFrameIndex = (I.currentFrameIndex + 1) % frames.length;
     }
-    I.currentFrameIndex = I.activeAnimation.frames[(frames.indexOf(I.currentFrameIndex) + 1) % frames.length];
-    return I.sprite = I.spriteLookup[I.currentFrameIndex];
+    sprite = I.spriteLookup[frames[I.currentFrameIndex]];
+    I.sprite = sprite;
+    I.width = sprite.width;
+    return I.height = sprite.height;
   };
   find = function(name) {
     var nameLower, result;
@@ -15838,7 +15841,8 @@ Animated = function(I, self) {
         I.activeAnimation = nextState;
         firstFrame = I.activeAnimation.frames.first();
         firstSprite = I.spriteLookup[firstFrame];
-        I.currentFrameIndex = firstFrame;
+        I.currentFrameIndex = 0;
+        I.sprite = firstSprite;
         I.width = firstSprite.width;
         return I.height = firstSprite.height;
       } else {
@@ -15857,7 +15861,7 @@ Animated = function(I, self) {
           time = new Date().getTime();
           if (updateFrame = (time - I.lastUpdate) >= I.activeAnimation.speed) {
             I.lastUpdate = time;
-            if (triggers = (_ref = I.activeAnimation.triggers) != null ? _ref[I.activeAnimation.frames.indexOf(I.currentFrameIndex)] : void 0) {
+            if (triggers = (_ref = I.activeAnimation.triggers) != null ? _ref[I.currentFrameIndex] : void 0) {
               triggers.each(function(event) {
                 return self.trigger(event);
               });
@@ -15865,7 +15869,7 @@ Animated = function(I, self) {
             return advanceFrame();
           }
         } else {
-          if (triggers = (_ref2 = I.activeAnimation.triggers) != null ? _ref2[I.activeAnimation.frames.indexOf(I.currentFrameIndex)] : void 0) {
+          if (triggers = (_ref2 = I.activeAnimation.triggers) != null ? _ref2[I.currentFrameIndex] : void 0) {
             triggers.each(function(event) {
               return self.trigger(event);
             });
