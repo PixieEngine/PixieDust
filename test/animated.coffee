@@ -355,7 +355,7 @@ animationData = `{
          "complete":"Idle1",
          "interruptible":false,
          "speed":"110",
-         "transition": ["Matrix.HORIZONTAL_FLIP"]
+         "transition":["Matrix.HORIZONTAL_FLIP"],
          "triggers": {
            "0":["whiteParticles"],
            "4":["blueParticles","greenParticles"],
@@ -498,7 +498,7 @@ test "should set transform if one is present", ->
 
   animation.update()
 
-  equals animation.I.transform == Matrix.HORIZONTAL_FLIP
+  equals animation.I.transform, Matrix.HORIZONTAL_FLIP
 
 module()
 
