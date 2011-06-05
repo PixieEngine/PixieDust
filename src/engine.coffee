@@ -13,6 +13,8 @@
 
   # Prevent browser contextmenu from popping up in games.
   document.oncontextmenu = -> false
+  $(document).bind "keydown", (event) ->
+    event.preventDefault()
 
   ###*
   The Engine controls the game world and manages game state. Once you 
