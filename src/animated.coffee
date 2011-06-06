@@ -101,9 +101,7 @@ Animated = (I, self) ->
 
     sprite = I.spriteLookup[frames[I.currentFrameIndex]]
 
-    I.sprite = sprite
-    I.width = sprite.width
-    I.height = sprite.height
+    updateSprite(sprite)
 
   find = (name) ->
     result = null
@@ -113,6 +111,11 @@ Animated = (I, self) ->
       result = animation if animation.name.toLowerCase() == nameLower
 
     return result  
+
+  updateSprite = (spriteData) ->
+    I.sprite = spriteData
+    I.width = spriteData.width
+    I.height = spriteData.height
 
   ###*
   Transitions to a new active animation. Will not transition if the new state
@@ -135,9 +138,7 @@ Animated = (I, self) ->
       firstSprite = I.spriteLookup[firstFrame]
 
       I.currentFrameIndex = 0
-      I.sprite = firstSprite
-      I.width = firstSprite.width
-      I.height = firstSprite.height 
+      updateSprite(firstSprite)
     else
       warn "Could not find animation state '#{newState}'. The current transition will be ignored" if I.debugAnimation
 
