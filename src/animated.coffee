@@ -112,7 +112,8 @@ Animated = (I, self) ->
     sprite = I.spriteLookup[frames[I.currentFrameIndex]]
 
     updateSprite(sprite)
-    I.activeAnimation
+    I.hflip = I.activeAnimation.transform?[I.currentFrameIndex].hflip
+    I.vflip = I.activeAnimation.transform?[I.currentFrameIndex].vflip 
 
   find = (name) ->
     result = null
@@ -150,6 +151,8 @@ Animated = (I, self) ->
 
       I.currentFrameIndex = 0
       updateSprite(firstSprite)
+      I.hflip = I.activeAnimation.transform?[I.currentFrameIndex].hflip
+      I.vflip = I.activeAnimation.transform?[I.currentFrameIndex].vflip
     else
       warn "Could not find animation state '#{newState}'. The current transition will be ignored" if I.debugAnimation
 
