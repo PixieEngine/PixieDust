@@ -32,6 +32,10 @@ Animated = (I, self) ->
         complete: ""
         interruptible: false
         speed: ""
+        transform: [{
+          hflip: false
+          vflip: false
+        }]
         triggers: {
           "0": ["a trigger"]
         }
@@ -43,6 +47,10 @@ Animated = (I, self) ->
       complete: ""
       interruptible: false
       speed: ""
+      transform: [{
+        hflip: false
+        vflip: false
+      }]
       triggers: {
         "0": [""]
       }
@@ -104,6 +112,7 @@ Animated = (I, self) ->
     sprite = I.spriteLookup[frames[I.currentFrameIndex]]
 
     updateSprite(sprite)
+    I.activeAnimation
 
   find = (name) ->
     result = null
