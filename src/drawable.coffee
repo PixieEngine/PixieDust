@@ -47,6 +47,16 @@ Drawable = (I, self) ->
       # Assumes I.x and I.y are top-left
       I.transform = Matrix.translation(I.x, I.y)
 
+    if I.hflip
+      I.transform = Matrix.translation(center.x, center.y)
+        .concat(Matrix.HORIZONTAL_FLIP)
+        .concat(Matrix.translation(-I.width/2, -I.height/2))
+
+    if I.vflip
+      I.transform = Matrix.translation(center.x, center.y)
+        .concat(Matrix.VERTICAL_FLIP)
+        .concat(Matrix.translation(-I.width/2, -I.height/2))
+
     if I.sprite
       if I.sprite.draw? 
         I.sprite.draw(canvas, 0, 0)
