@@ -49,6 +49,8 @@ Animated = (I, self) ->
       frames: [0]
     currentFrameIndex: 0
     debugAnimation: false
+    hflip: false
+    vflip: false
     lastUpdate: new Date().getTime()
     useTimer: false
     transform: Matrix.IDENTITY
