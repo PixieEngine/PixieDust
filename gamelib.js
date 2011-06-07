@@ -15709,7 +15709,7 @@ methods to transition from one animation state to another
 @param {Object} self Reference to including object
 */var Animated;
 Animated = function(I, self) {
-  var advanceFrame, find, loadByName, _name;
+  var advanceFrame, find, loadByName, updateSprite, _name;
   I || (I = {});
   $.reverseMerge(I, {
     animationName: null,
@@ -15735,10 +15735,17 @@ Animated = function(I, self) {
           complete: "",
           interruptible: false,
           speed: "",
+          transform: [
+            {
+              hflip: false,
+              vflip: false
+            }
+          ],
           triggers: {
             "0": ["a trigger"]
           },
-          frames: [0]
+          frames: [0],
+          transform: [void 0]
         }
       ]
     },
@@ -15747,6 +15754,12 @@ Animated = function(I, self) {
       complete: "",
       interruptible: false,
       speed: "",
+      transform: [
+        {
+          hflip: false,
+          vflip: false
+        }
+      ],
       triggers: {
         "0": [""]
       },
@@ -15754,6 +15767,8 @@ Animated = function(I, self) {
     },
     currentFrameIndex: 0,
     debugAnimation: false,
+    hflip: false,
+    vflip: false,
     lastUpdate: new Date().getTime(),
     useTimer: false,
     transform: Matrix.IDENTITY
@@ -15790,7 +15805,7 @@ Animated = function(I, self) {
     throw "No animation data provided. Use animationName to specify an animation to load from the project or pass in raw JSON to the data key.";
   }
   advanceFrame = function() {
-    var frames, nextState, sprite;
+    var frames, nextState, sprite, _ref, _ref2;
     frames = I.activeAnimation.frames;
     if (I.currentFrameIndex === frames.indexOf(frames.last())) {
       self.trigger("Complete");
@@ -15803,9 +15818,9 @@ Animated = function(I, self) {
       I.currentFrameIndex = (I.currentFrameIndex + 1) % frames.length;
     }
     sprite = I.spriteLookup[frames[I.currentFrameIndex]];
-    I.sprite = sprite;
-    I.width = sprite.width;
-    return I.height = sprite.height;
+    updateSprite(sprite);
+    I.hflip = (_ref = I.activeAnimation.transform) != null ? _ref[I.currentFrameIndex].hflip : void 0;
+    return I.vflip = (_ref2 = I.activeAnimation.transform) != null ? _ref2[I.currentFrameIndex].vflip : void 0;
   };
   find = function(name) {
     var nameLower, result;
@@ -15818,6 +15833,11 @@ Animated = function(I, self) {
     });
     return result;
   };
+  updateSprite = function(spriteData) {
+    I.sprite = spriteData;
+    I.width = spriteData.width;
+    return I.height = spriteData.height;
+  };
   return {
     /**
     Transitions to a new active animation. Will not transition if the new state
@@ -15826,7 +15846,7 @@ Animated = function(I, self) {
     @param {String} newState The name of the target state you wish to transition to.
     */
     transition: function(newState) {
-      var firstFrame, firstSprite, nextState;
+      var firstFrame, firstSprite, nextState, _ref, _ref2;
       if (newState === I.activeAnimation.name) {
         return;
       }
@@ -15842,9 +15862,9 @@ Animated = function(I, self) {
         firstFrame = I.activeAnimation.frames.first();
         firstSprite = I.spriteLookup[firstFrame];
         I.currentFrameIndex = 0;
-        I.sprite = firstSprite;
-        I.width = firstSprite.width;
-        return I.height = firstSprite.height;
+        updateSprite(firstSprite);
+        I.hflip = (_ref = I.activeAnimation.transform) != null ? _ref[I.currentFrameIndex].hflip : void 0;
+        return I.vflip = (_ref2 = I.activeAnimation.transform) != null ? _ref2[I.currentFrameIndex].vflip : void 0;
       } else {
         if (I.debugAnimation) {
           return warn("Could not find animation state '" + newState + "'. The current transition will be ignored");
@@ -15856,7 +15876,7 @@ Animated = function(I, self) {
     },
     before: {
       update: function() {
-        var time, triggers, updateFrame, _ref, _ref2;
+        var time, transition, triggers, updateFrame, _ref, _ref2, _ref3;
         if (I.useTimer) {
           time = new Date().getTime();
           if (updateFrame = (time - I.lastUpdate) >= I.activeAnimation.speed) {
@@ -15873,6 +15893,9 @@ Animated = function(I, self) {
             triggers.each(function(event) {
               return self.trigger(event);
             });
+          }
+          if (transition = (_ref3 = I.activeAnimation.transition) != null ? _ref3[I.currentFrameIndex] : void 0) {
+            I.transform = eval(transition);
           }
           return advanceFrame();
         }
@@ -16262,6 +16285,12 @@ Drawable = function(I, self) {
       I.transform = Matrix.translation(center.x, center.y).concat(Matrix.rotation(I.rotation)).concat(Matrix.translation(-I.width / 2, -I.height / 2));
     } else {
       I.transform = Matrix.translation(I.x, I.y);
+    }
+    if (I.hflip) {
+      I.transform = Matrix.translation(center.x, center.y).concat(Matrix.HORIZONTAL_FLIP).concat(Matrix.translation(-I.width / 2, -I.height / 2));
+    }
+    if (I.vflip) {
+      I.transform = Matrix.translation(center.x, center.y).concat(Matrix.VERTICAL_FLIP).concat(Matrix.translation(-I.width / 2, -I.height / 2));
     }
     if (I.sprite) {
       if (I.sprite.draw != null) {
