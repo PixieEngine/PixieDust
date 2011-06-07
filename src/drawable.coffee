@@ -20,6 +20,8 @@ Drawable = (I, self) ->
 
   $.reverseMerge I,
     color: "#196"
+    hflip: false
+    vflip: false
     spriteName: null
     zIndex: 0
 
@@ -52,7 +54,7 @@ Drawable = (I, self) ->
         .concat(Matrix.HORIZONTAL_FLIP)
         .concat(Matrix.translation(-I.width/2, -I.height/2))
 
-    if I.vflip
+    if I.vflip 
       I.transform = Matrix.translation(center.x, center.y)
         .concat(Matrix.VERTICAL_FLIP)
         .concat(Matrix.translation(-I.width/2, -I.height/2))
