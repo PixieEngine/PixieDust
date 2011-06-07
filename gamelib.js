@@ -16264,6 +16264,8 @@ Drawable = function(I, self) {
   I || (I = {});
   $.reverseMerge(I, {
     color: "#196",
+    hflip: false,
+    vflip: false,
     spriteName: null,
     zIndex: 0
   });
