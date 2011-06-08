@@ -93,3 +93,16 @@ Bounded = (I, self) ->
   center: () ->
     Point(I.x + I.width/2, I.y + I.height/2)
 
+  ###*
+  Return the circular bounds of the object. The circle is
+  centered at the midpoint of the object.
+
+  @name circle
+  @methodOf Bounded#
+  ###
+  circle: () ->
+    circle = self.center()
+    circle.radius = I.radius || I.width/2 || I.height/2
+
+    return circle
+
