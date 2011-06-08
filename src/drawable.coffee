@@ -43,21 +43,19 @@ Drawable = (I, self) ->
 
     if I.rotation
       I.transform = Matrix.translation(center.x, center.y)
-        .concat(Matrix.rotation(I.rotation))
-        .concat(Matrix.translation(-I.width/2, -I.height/2))
+      I.transform = I.transform.concat(Matrix.rotation(I.rotation))
+      I.transform = I.transform.concat(Matrix.HORIZONTAL_FLIP) if I.hflip
+      I.transform = I.transform.concat(Matrix.VERTICAL_FLIP) if I.vflip
+      I.transform = I.transform.concat(Matrix.translation(-I.width/2, -I.height/2))
     else
-      # Assumes I.x and I.y are top-left
+      # Assumes I.x and I.y are top-left      
       I.transform = Matrix.translation(I.x, I.y)
 
-    if I.hflip
-      I.transform = Matrix.translation(center.x, center.y)
-        .concat(Matrix.HORIZONTAL_FLIP)
-        .concat(Matrix.translation(-I.width/2, -I.height/2))
-
-    if I.vflip 
-      I.transform = Matrix.translation(center.x, center.y)
-        .concat(Matrix.VERTICAL_FLIP)
-        .concat(Matrix.translation(-I.width/2, -I.height/2))
+      if I.hflip || I.vflip
+        I.transform = Matrix.translation(center.x, center.y)
+        I.transform = I.transform.concat(Matrix.HORIZONTAL_FLIP) if I.hflip
+        I.transform = I.transform.concat(Matrix.VERTICAL_FLIP) if I.vflip
+        I.transform = I.transform.concat(Matrix.translation(-I.width/2, -I.height/2))
 
     if I.sprite
       if I.sprite.draw? 
@@ -69,4 +67,3 @@ Drawable = (I, self) ->
       canvas.fillRect(0, 0, I.width, I.height)
 
   return {}
-
