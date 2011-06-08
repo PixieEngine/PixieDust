@@ -132,7 +132,9 @@ Construct an object instance from the given entity data.
 @param {Object} entityData
 ###
 GameObject.construct = (entityData) ->
-  if entityData.class
+  if typeof entityData == "string"
+    entityData.constantize()(entityData)
+  else if entityData.class
     entityData.class.constantize()(entityData)
   else
     GameObject(entityData)
