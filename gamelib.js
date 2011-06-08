@@ -14087,6 +14087,14 @@ var __slice = Array.prototype.slice;
           return context.strokeStyle;
         }
       },
+      strokeCircle: function(x, y, radius, color) {
+        $canvas.strokeColor(color);
+        context.beginPath();
+        context.arc(x, y, radius, 0, Math.TAU, true);
+        context.closePath();
+        context.stroke();
+        return this;
+      },
       strokeRect: function(x, y, width, height) {
         context.strokeRect(x, y, width, height);
         return this;
@@ -16126,6 +16134,19 @@ Bounded = function(I, self) {
     */
     center: function() {
       return Point(I.x + I.width / 2, I.y + I.height / 2);
+    },
+    /**
+    Return the circular bounds of the object. The circle is
+    centered at the midpoint of the object.
+    
+    @name circle
+    @methodOf Bounded#
+    */
+    circle: function() {
+      var circle;
+      circle = self.center();
+      circle.radius = I.radius || I.width / 2 || I.height / 2;
+      return circle;
     }
   };
 };;
