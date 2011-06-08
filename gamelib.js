@@ -17464,7 +17464,9 @@ Construct an object instance from the given entity data.
 @param {Object} entityData
 */
 GameObject.construct = function(entityData) {
-  if (entityData["class"]) {
+  if (typeof entityData === "string") {
+    return entityData.constantize()(entityData);
+  } else if (entityData["class"]) {
     return entityData["class"].constantize()(entityData);
   } else {
     return GameObject(entityData);
