@@ -15813,7 +15813,7 @@ Animated = function(I, self) {
     throw "No animation data provided. Use animationName to specify an animation to load from the project or pass in raw JSON to the data key.";
   }
   advanceFrame = function() {
-    var frames, nextState, sprite, _ref, _ref2;
+    var frames, nextState, sprite, _ref, _ref2, _ref3, _ref4;
     frames = I.activeAnimation.frames;
     if (I.currentFrameIndex === frames.indexOf(frames.last())) {
       self.trigger("Complete");
@@ -15827,8 +15827,8 @@ Animated = function(I, self) {
     }
     sprite = I.spriteLookup[frames[I.currentFrameIndex]];
     updateSprite(sprite);
-    I.hflip = (_ref = I.activeAnimation.transform) != null ? _ref[I.currentFrameIndex].hflip : void 0;
-    return I.vflip = (_ref2 = I.activeAnimation.transform) != null ? _ref2[I.currentFrameIndex].vflip : void 0;
+    I.hflip = (_ref = I.activeAnimation.transform) != null ? (_ref2 = _ref[I.currentFrameIndex]) != null ? _ref2.hflip : void 0 : void 0;
+    return I.vflip = (_ref3 = I.activeAnimation.transform) != null ? (_ref4 = _ref3[I.currentFrameIndex]) != null ? _ref4.vflip : void 0 : void 0;
   };
   find = function(name) {
     var nameLower, result;
@@ -15854,7 +15854,7 @@ Animated = function(I, self) {
     @param {String} newState The name of the target state you wish to transition to.
     */
     transition: function(newState) {
-      var firstFrame, firstSprite, nextState, _ref, _ref2;
+      var firstFrame, firstSprite, nextState, _ref, _ref2, _ref3, _ref4;
       if (newState === I.activeAnimation.name) {
         return;
       }
@@ -15871,8 +15871,8 @@ Animated = function(I, self) {
         firstSprite = I.spriteLookup[firstFrame];
         I.currentFrameIndex = 0;
         updateSprite(firstSprite);
-        I.hflip = (_ref = I.activeAnimation.transform) != null ? _ref[I.currentFrameIndex].hflip : void 0;
-        return I.vflip = (_ref2 = I.activeAnimation.transform) != null ? _ref2[I.currentFrameIndex].vflip : void 0;
+        I.hflip = (_ref = I.activeAnimation.transform) != null ? (_ref2 = _ref[I.currentFrameIndex]) != null ? _ref2.hflip : void 0 : void 0;
+        return I.vflip = (_ref3 = I.activeAnimation.transform) != null ? (_ref4 = _ref3[I.currentFrameIndex]) != null ? _ref4.vflip : void 0 : void 0;
       } else {
         if (I.debugAnimation) {
           return warn("Could not find animation state '" + newState + "'. The current transition will be ignored");
@@ -16305,15 +16305,27 @@ Drawable = function(I, self) {
     var center;
     center = self.center();
     if (I.rotation) {
-      I.transform = Matrix.translation(center.x, center.y).concat(Matrix.rotation(I.rotation)).concat(Matrix.translation(-I.width / 2, -I.height / 2));
+      I.transform = Matrix.translation(center.x, center.y);
+      I.transform = I.transform.concat(Matrix.rotation(I.rotation));
+      if (I.hflip) {
+        I.transform = I.transform.concat(Matrix.HORIZONTAL_FLIP);
+      }
+      if (I.vflip) {
+        I.transform = I.transform.concat(Matrix.VERTICAL_FLIP);
+      }
+      I.transform = I.transform.concat(Matrix.translation(-I.width / 2, -I.height / 2));
     } else {
       I.transform = Matrix.translation(I.x, I.y);
-    }
-    if (I.hflip) {
-      I.transform = Matrix.translation(center.x, center.y).concat(Matrix.HORIZONTAL_FLIP).concat(Matrix.translation(-I.width / 2, -I.height / 2));
-    }
-    if (I.vflip) {
-      I.transform = Matrix.translation(center.x, center.y).concat(Matrix.VERTICAL_FLIP).concat(Matrix.translation(-I.width / 2, -I.height / 2));
+      if (I.hflip || I.vflip) {
+        I.transform = Matrix.translation(center.x, center.y);
+        if (I.hflip) {
+          I.transform = I.transform.concat(Matrix.HORIZONTAL_FLIP);
+        }
+        if (I.vflip) {
+          I.transform = I.transform.concat(Matrix.VERTICAL_FLIP);
+        }
+        I.transform = I.transform.concat(Matrix.translation(-I.width / 2, -I.height / 2));
+      }
     }
     if (I.sprite) {
       if (I.sprite.draw != null) {
