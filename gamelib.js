@@ -13040,41 +13040,6 @@ jQuery.extend({
   }
 });;
 $(function() {
-  /**
-  The global keydown property lets your query the status of keys.
-  
-  <pre>
-  # Examples:
-  
-  if keydown.left
-    moveLeft()
-  
-  if keydown.a or keydown.space
-    attack()
-  
-  if keydown.return
-    confirm()
-  
-  if keydown.esc
-    cancel()
-  
-  </pre>
-  
-  @name keydown
-  @namespace
-  */  var keyName;
-  window.keydown = {};
-  keyName = function(event) {
-    return jQuery.hotkeys.specialKeys[event.which] || String.fromCharCode(event.which).toLowerCase();
-  };
-  $(document).bind("keydown", function(event) {
-    return keydown[keyName(event)] = true;
-  });
-  return $(document).bind("keyup", function(event) {
-    return keydown[keyName(event)] = false;
-  });
-});;
-$(function() {
   return ["log", "info", "warn", "error"].each(function(name) {
     if (typeof console !== "undefined") {
       return window[name] = function(message) {
@@ -14331,6 +14296,14 @@ String.prototype.titleize = function() {
   return this.split(/[- ]/).map(function(word) {
     return word.capitalize();
   }).join(' ');
+};
+/**
+Underscore a word, changing camelCased with under_scored.
+@name underscore
+@methodOf String#
+*/
+String.prototype.underscore = function() {
+  return this.replace(/([A-Z]+)([A-Z][a-z])/g, '$1_$2').replace(/([a-z\d])([A-Z])/g, '$1_$2').replace(/-/g, '_').toLowerCase();
 };
 /**
 Assumes the string is something like a file name and returns the 
@@ -17530,6 +17503,64 @@ Hittable = function(I, self) {
     }
   };
 };;
+$(function() {
+  /**
+  The global keydown property lets your query the status of keys.
+  
+  <pre>
+  # Examples:
+  
+  if keydown.left
+    moveLeft()
+  
+  if keydown.a or keydown.space
+    attack()
+  
+  if keydown.return
+    confirm()
+  
+  if keydown.esc
+    cancel()
+  
+  </pre>
+  
+  @name keydown
+  @namespace
+  */  var keyName, prevKeysDown;
+  window.keydown = {};
+  window.justPressed = {};
+  prevKeysDown = {};
+  keyName = function(event) {
+    return jQuery.hotkeys.specialKeys[event.which] || String.fromCharCode(event.which).toLowerCase();
+  };
+  $(document).bind("keydown", function(event) {
+    var key;
+    key = keyName(event);
+    return keydown[key] = true;
+  });
+  $(document).bind("keyup", function(event) {
+    var key;
+    key = keyName(event);
+    return keydown[key] = false;
+  });
+  return window.updateKeys = function() {
+    var key, value, _results;
+    window.justPressed = {};
+    for (key in keydown) {
+      value = keydown[key];
+      if (!prevKeysDown[key]) {
+        justPressed[key] = value;
+      }
+    }
+    prevKeysDown = {};
+    _results = [];
+    for (key in keydown) {
+      value = keydown[key];
+      _results.push(prevKeysDown[key] = value);
+    }
+    return _results;
+  };
+});;
 /**
 The Movable module automatically updates the position and velocity of
 GameObjects based on the velocity and acceleration. It does not check
