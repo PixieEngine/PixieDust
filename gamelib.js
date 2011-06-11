@@ -16123,37 +16123,6 @@ Bounded = function(I, self) {
     }
   };
 };;
-var Collidable;
-Collidable = function(I) {
-  I || (I = {});
-  return {
-    solid_collision: function(other) {
-      if (other.solid && other.bounds) {
-        if (Collision.rectangular(self, other)) {
-          self.trigger('collision');
-          return other.trigger('collision');
-        }
-      }
-    },
-    collides_with: function(other) {
-      var nearby, quadTree;
-      if (other.solid && other.bounds) {
-        if (Object.isArray(other)) {
-          quadTree = QuadTree();
-          other.each(function(collidable) {
-            return quadTree.insert(collidable);
-          });
-          nearby = quadTree.retrieve(self);
-          return nearby.each(function(close_collider) {
-            return self.solid_collision(close_collider);
-          });
-        } else {
-          return solid_collision(other);
-        }
-      }
-    }
-  };
-};;
 /**
 Collision holds many methods useful for checking geometric overlap of various objects.
 
@@ -17472,36 +17441,6 @@ GameUtil = {
     };
     return img.src = data;
   }
-};;
-var Heavy;
-Heavy = function(I) {
-  I || (I = {});
-  $.reverseMerge(I, {
-    gravity: 0.2,
-    maxSpeed: 5
-  });
-  return {
-    before: {
-      update: function() {
-        return I.velocity = I.velocity.add(Point(0, I.gravity));
-      }
-    }
-  };
-};;
-var Hittable;
-Hittable = function(I, self) {
-  I || (I = {});
-  $.reverseMerge(I, {
-    health: 25
-  });
-  return {
-    hit: function() {
-      I.health--;
-      if (I.health < 0) {
-        return self.destroy();
-      }
-    }
-  };
 };;
 $(function() {
   /**
