@@ -355,7 +355,7 @@ animationData = `{
          "complete":"Idle1",
          "interruptible":false,
          "speed":"110",
-         "transition":["Matrix.HORIZONTAL_FLIP"],
+         "transition":[{hflip: true, vflip: true}],
          "triggers": {
            "0":["whiteParticles"],
            "4":["blueParticles","greenParticles"],
@@ -490,15 +490,6 @@ test "should fire frame specific event on the proper frame", ->
   animation.update()
 
   ok chompSoundFired, "Chomp sound effect fired"
-
-test "should set transform if one is present", ->
-  animation = GameObject
-    data: animationData
-    includedModules: ["Animated"]  
-
-  animation.update()
-
-  equals animation.I.transform, Matrix.HORIZONTAL_FLIP
 
 module()
 
