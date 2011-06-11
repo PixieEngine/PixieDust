@@ -15690,10 +15690,10 @@ methods to transition from one animation state to another
 @param {Object} self Reference to including object
 */var Animated;
 Animated = function(I, self) {
-  var advanceFrame, find, loadByName, updateSprite, _name;
+  var advanceFrame, find, loadByName, updateSprite, _name, _ref;
   I || (I = {});
   $.reverseMerge(I, {
-    animationName: null,
+    animationName: (_ref = I["class"]) != null ? _ref.underscore() : void 0,
     data: {
       version: "",
       tileset: [
@@ -15786,7 +15786,7 @@ Animated = function(I, self) {
     throw "No animation data provided. Use animationName to specify an animation to load from the project or pass in raw JSON to the data key.";
   }
   advanceFrame = function() {
-    var frames, nextState, sprite, _ref, _ref2, _ref3, _ref4;
+    var frames, nextState, sprite, _ref2, _ref3, _ref4, _ref5;
     frames = I.activeAnimation.frames;
     if (I.currentFrameIndex === frames.indexOf(frames.last())) {
       self.trigger("Complete");
@@ -15800,8 +15800,8 @@ Animated = function(I, self) {
     }
     sprite = I.spriteLookup[frames[I.currentFrameIndex]];
     updateSprite(sprite);
-    I.hflip = (_ref = I.activeAnimation.transform) != null ? (_ref2 = _ref[I.currentFrameIndex]) != null ? _ref2.hflip : void 0 : void 0;
-    return I.vflip = (_ref3 = I.activeAnimation.transform) != null ? (_ref4 = _ref3[I.currentFrameIndex]) != null ? _ref4.vflip : void 0 : void 0;
+    I.hflip = (_ref2 = I.activeAnimation.transform) != null ? (_ref3 = _ref2[I.currentFrameIndex]) != null ? _ref3.hflip : void 0 : void 0;
+    return I.vflip = (_ref4 = I.activeAnimation.transform) != null ? (_ref5 = _ref4[I.currentFrameIndex]) != null ? _ref5.vflip : void 0 : void 0;
   };
   find = function(name) {
     var nameLower, result;
@@ -15827,7 +15827,7 @@ Animated = function(I, self) {
     @param {String} newState The name of the target state you wish to transition to.
     */
     transition: function(newState) {
-      var firstFrame, firstSprite, nextState, _ref, _ref2, _ref3, _ref4;
+      var firstFrame, firstSprite, nextState, _ref2, _ref3, _ref4, _ref5;
       if (newState === I.activeAnimation.name) {
         return;
       }
@@ -15844,8 +15844,8 @@ Animated = function(I, self) {
         firstSprite = I.spriteLookup[firstFrame];
         I.currentFrameIndex = 0;
         updateSprite(firstSprite);
-        I.hflip = (_ref = I.activeAnimation.transform) != null ? (_ref2 = _ref[I.currentFrameIndex]) != null ? _ref2.hflip : void 0 : void 0;
-        return I.vflip = (_ref3 = I.activeAnimation.transform) != null ? (_ref4 = _ref3[I.currentFrameIndex]) != null ? _ref4.vflip : void 0 : void 0;
+        I.hflip = (_ref2 = I.activeAnimation.transform) != null ? (_ref3 = _ref2[I.currentFrameIndex]) != null ? _ref3.hflip : void 0 : void 0;
+        return I.vflip = (_ref4 = I.activeAnimation.transform) != null ? (_ref5 = _ref4[I.currentFrameIndex]) != null ? _ref5.vflip : void 0 : void 0;
       } else {
         if (I.debugAnimation) {
           return warn("Could not find animation state '" + newState + "'. The current transition will be ignored");
@@ -15857,12 +15857,12 @@ Animated = function(I, self) {
     },
     before: {
       update: function() {
-        var time, transition, triggers, updateFrame, _ref, _ref2, _ref3;
+        var time, transition, triggers, updateFrame, _ref2, _ref3, _ref4;
         if (I.useTimer) {
           time = new Date().getTime();
           if (updateFrame = (time - I.lastUpdate) >= I.activeAnimation.speed) {
             I.lastUpdate = time;
-            if (triggers = (_ref = I.activeAnimation.triggers) != null ? _ref[I.currentFrameIndex] : void 0) {
+            if (triggers = (_ref2 = I.activeAnimation.triggers) != null ? _ref2[I.currentFrameIndex] : void 0) {
               triggers.each(function(event) {
                 return self.trigger(event);
               });
@@ -15870,12 +15870,12 @@ Animated = function(I, self) {
             return advanceFrame();
           }
         } else {
-          if (triggers = (_ref2 = I.activeAnimation.triggers) != null ? _ref2[I.currentFrameIndex] : void 0) {
+          if (triggers = (_ref3 = I.activeAnimation.triggers) != null ? _ref3[I.currentFrameIndex] : void 0) {
             triggers.each(function(event) {
               return self.trigger(event);
             });
           }
-          if (transition = (_ref3 = I.activeAnimation.transition) != null ? _ref3[I.currentFrameIndex] : void 0) {
+          if (transition = (_ref4 = I.activeAnimation.transition) != null ? _ref4[I.currentFrameIndex] : void 0) {
             I.transform = eval(transition);
           }
           return advanceFrame();
