@@ -14,7 +14,7 @@ Animated = (I, self) ->
   I ||= {}
 
   $.reverseMerge I,
-    animationName: null
+    animationName: I.class?.underscore()
     data:
       version: ""
       tileset: [
