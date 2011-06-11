@@ -355,7 +355,7 @@ animationData = `{
          "complete":"Idle1",
          "interruptible":false,
          "speed":"110",
-         "tranform":[{hflip: true, vflip: true}],
+         "transform":[{hflip: true, vflip: true}],
          "triggers": {
            "0":["whiteParticles"],
            "4":["blueParticles","greenParticles"],
@@ -398,13 +398,11 @@ module "Drawable"
 
 test "should update transform to include xflip or vflip when present", ->
   obj = GameObject
-    data: animationData
-    includedModules: ["Animated"]
+    hflip: true
+
+  log obj.I.hflip
 
   obj.update()
-  obj.update()
-
-  log obj.I.transform
 
   equals obj.I.transform, Matrix.HORIZONTAL_FLIP
 
