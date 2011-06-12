@@ -175,7 +175,4 @@ Animated = (I, self) ->
           triggers.each (event) ->
             self.trigger(event)
 
-        if transition = I.activeAnimation.transition?[I.currentFrameIndex]
-          I.transform = eval(transition) 
-
         advanceFrame()
