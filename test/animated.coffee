@@ -355,7 +355,7 @@ animationData = `{
          "complete":"Idle1",
          "interruptible":false,
          "speed":"110",
-         "transition":[{hflip: true, vflip: true}],
+         "transform":[{hflip: true, vflip: true}],
          "triggers": {
            "0":["whiteParticles"],
            "4":["blueParticles","greenParticles"],
@@ -490,6 +490,17 @@ test "should fire frame specific event on the proper frame", ->
   animation.update()
 
   ok chompSoundFired, "Chomp sound effect fired"
+
+test "should set hflip and vflip values", ->
+
+  obj = GameObject
+    data: animationData
+    includedModules: ["Animated"]
+
+  obj.update()
+
+  ok obj.I.hflip
+  ok obj.I.vflip
 
 module()
 
