@@ -98,6 +98,9 @@ Animated = (I, self) ->
   advanceFrame = ->
     frames = I.activeAnimation.frames
 
+    I.hflip = I.activeAnimation.transform?[I.currentFrameIndex]?.hflip
+    I.vflip = I.activeAnimation.transform?[I.currentFrameIndex]?.vflip     
+
     if I.currentFrameIndex == frames.indexOf(frames.last())
       self.trigger("Complete") 
 
@@ -112,9 +115,6 @@ Animated = (I, self) ->
     sprite = I.spriteLookup[frames[I.currentFrameIndex]]
 
     updateSprite(sprite)
-
-    I.hflip = I.activeAnimation.transform?[I.currentFrameIndex]?.hflip
-    I.vflip = I.activeAnimation.transform?[I.currentFrameIndex]?.vflip 
 
   find = (name) ->
     result = null
