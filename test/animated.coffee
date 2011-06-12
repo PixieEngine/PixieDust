@@ -463,7 +463,15 @@ test "should advance to next state after last frame", ->
 
   equals animation.I.activeAnimation.name, animation.I.activeAnimation.complete, "After the bite cycle we should end up in the next state specified by the animation"
 
-  50.times -> animation.update()
+test "should loop on looping animation states", ->
+  animation = GameObject
+    data: animationData
+    includedModules: ["Animated"]
+
+  animation.I.activeAnimation.frames.length.times ->
+    animation.update()  
+
+  30.times -> animation.update()
 
   equals animation.I.activeAnimation.name, "Idle1", "The idle1 state loops, so after any number of updates we should still be there"
 
@@ -488,6 +496,7 @@ test "should fire frame specific event on the proper frame", ->
 
   animation.update()
 
+  equal animation.I.currentFrameIndex, 0
   ok whiteParticlesFired, "White particle effect fired"
 
   animation.update()
