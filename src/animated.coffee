@@ -112,6 +112,7 @@ Animated = (I, self) ->
     sprite = I.spriteLookup[frames[I.currentFrameIndex]]
 
     updateSprite(sprite)
+
     I.hflip = I.activeAnimation.transform?[I.currentFrameIndex]?.hflip
     I.vflip = I.activeAnimation.transform?[I.currentFrameIndex]?.vflip 
 
