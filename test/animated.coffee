@@ -401,11 +401,13 @@ animationData = `{
 
 module "Animation"
 
-test "should increment frame position", ->
-  animation = GameObject
+# overwrites window.animation before each test is run
+QUnit.testStart = ->
+  window.animation = GameObject
     data: animationData
     includedModules: ["Animated"]
 
+test "should increment frame position", ->
   equals animation.I.currentFrameIndex, 0, "should default to initial frame position of 0"
 
   animation.update()
@@ -413,20 +415,12 @@ test "should increment frame position", ->
   equals animation.I.currentFrameIndex, 1, "After an update the currentFrameIndex has advanced"
 
 test "should reset frame position after completing animation state", ->
-  animation = GameObject
-    data: animationData
-    includedModules: ["Animated"]
-
   animation.I.activeAnimation.frames.length.times ->
     animation.update()
 
   equals animation.I.currentFrameIndex, 0, "Frame position should be 0 after reaching the end of an animation state"
 
 test "should be on correct frame after transition is called", ->
-  animation = GameObject
-    data: animationData
-    includedModules: ["Animated"]
-
   # Bite cannot be interrupted. Must force transition
   animation.transition("Idle1", true)
 
@@ -439,10 +433,6 @@ test "should be on correct frame after transition is called", ->
   equals animation.I.currentFrameIndex, 0, "Should be on the first frame of Idle2"
 
 test "should be able to force transition to new state", ->
-  animation = GameObject
-    data: animationData
-    includedModules: ["Animated"]
-
   animation.update()
 
   animation.transition("Idle2", true)
@@ -454,10 +444,6 @@ test "should be able to force transition to new state", ->
 test "should fire Complete event after updating past the last frame", ->
   completeFired = false
 
-  animation = GameObject
-    data: animationData
-    includedModules: ["Animated"]
-
   animation.bind "Complete", ->
     completeFired = true
 
@@ -467,20 +453,12 @@ test "should fire Complete event after updating past the last frame", ->
   ok completeFired, "Complete event fired"
 
 test "should advance to next state after last frame", ->
-  animation = GameObject
-    data: animationData
-    includedModules: ["Animated"]
-
   animation.I.activeAnimation.frames.length.times ->
     animation.update()
 
   equals animation.I.activeAnimation.name, animation.I.activeAnimation.complete, "After the bite cycle we should end up in the next state specified by the animation"
 
 test "should loop on looping animation states", ->
-  animation = GameObject
-    data: animationData
-    includedModules: ["Animated"]
-
   animation.transition("Idle1", true)
 
   30.times -> animation.update()
@@ -489,10 +467,6 @@ test "should loop on looping animation states", ->
 
 test "should fire frame specific event on the proper frame", ->
   whiteParticlesFired = blueParticlesFired = greenParticlesFired = chompSoundFired = false
-
-  animation = GameObject
-    data: animationData
-    includedModules: ["Animated"]
 
   animation.bind "whiteParticles", ->
     whiteParticlesFired = true
@@ -518,7 +492,6 @@ test "should fire frame specific event on the proper frame", ->
   animation.update()
   animation.update()
 
-
   equal animation.I.currentFrameIndex, 4 + 1
   ok blueParticlesFired, "Blue particle effect fired"
   ok greenParticlesFired, "Green particle effect fired"
@@ -528,16 +501,11 @@ test "should fire frame specific event on the proper frame", ->
   equal animation.I.currentFrameIndex, 5 + 1
   ok chompSoundFired, "Chomp sound effect fired"
 
-test "should set hflip and vflip values", ->
+test "should set hflip and vflip values", ->    
+  animation.update()
 
-  obj = GameObject
-    data: animationData
-    includedModules: ["Animated"]
-
-  obj.update()
-
-  ok obj.I.hflip
-  ok obj.I.vflip
+  ok animation.I.hflip
+  ok animation.I.vflip
 
 module()
 
