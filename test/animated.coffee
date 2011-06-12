@@ -406,7 +406,7 @@ test "should set proper frame", ->
     data: animationData
     includedModules: ["Animated"]
 
-  equals animation.I.currentFrameIndex, animation.I.activeAnimation.frames.first(), "Animation should default to initial sprite"
+  equals animation.I.currentFrameIndex, 0, "should default to initial frame position of 0"
 
   animation.update()
 
