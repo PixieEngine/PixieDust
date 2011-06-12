@@ -401,7 +401,7 @@ animationData = `{
 
 module "Animation"
 
-test "should set proper frame", ->
+test "should increment frame position and reset it after completing animation state", ->
   animation = GameObject
     data: animationData
     includedModules: ["Animated"]
@@ -410,12 +410,12 @@ test "should set proper frame", ->
 
   animation.update()
 
-  equals animation.I.currentFrameIndex, animation.I.activeAnimation.frames[1], "After an update the currentFrameIndex has advanced"
+  equals animation.I.currentFrameIndex, 1, "After an update the currentFrameIndex has advanced"
 
   (animation.I.activeAnimation.frames.length - 1).times ->
     animation.update()
 
-  equals animation.I.currentFrameIndex, 0, "Animation should loop after it reaches the end"
+  equals animation.I.currentFrameIndex, 0, "Frame position should be 0 after reaching the end of an animation state"
 
 test "should be on correct frame after transition is called", ->
   animation = GameObject
