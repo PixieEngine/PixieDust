@@ -417,7 +417,7 @@ test "should reset frame position after completing animation state", ->
     data: animationData
     includedModules: ["Animated"]
 
-  (animation.I.activeAnimation.frames.length).times ->
+  animation.I.activeAnimation.frames.length.times ->
     animation.update()
 
   equals animation.I.currentFrameIndex, 0, "Frame position should be 0 after reaching the end of an animation state"
@@ -428,7 +428,7 @@ test "should be on correct frame after transition is called", ->
     includedModules: ["Animated"]
 
   # Bite cannot be interrupted. Hack to get to idle state
-  (animation.I.activeAnimation.frames.length).times -> animation.update()
+  animation.I.activeAnimation.frames.length.times -> animation.update()
 
   equals animation.I.activeAnimation.name, "Idle1", "Animation should be in idle1 state after bite finishes"
 
