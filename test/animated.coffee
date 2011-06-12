@@ -496,7 +496,9 @@ test "should fire frame specific event on the proper frame", ->
 
   animation.update()
 
-  equal animation.I.currentFrameIndex, 0
+  # hack for testing: events fire, then the currentFrameIndex 
+  # is updated, so I'm testing against the correct event index + 1 
+  equal animation.I.currentFrameIndex, 0 + 1 
   ok whiteParticlesFired, "White particle effect fired"
 
   animation.update()
@@ -504,11 +506,14 @@ test "should fire frame specific event on the proper frame", ->
   animation.update()
   animation.update()
 
+
+  equal animation.I.currentFrameIndex, 4 + 1
   ok blueParticlesFired, "Blue particle effect fired"
   ok greenParticlesFired, "Green particle effect fired"
 
   animation.update()
 
+  equal animation.I.currentFrameIndex, 5 + 1
   ok chompSoundFired, "Chomp sound effect fired"
 
 test "should set hflip and vflip values", ->
