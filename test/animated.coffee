@@ -461,7 +461,7 @@ test "should advance to next state after last frame", ->
   animation.I.activeAnimation.frames.length.times ->
     animation.update()
 
-  equals animation.I.activeAnimation.name, "Idle1", "After the bite cycle we should end up in the Idle1 state"
+  equals animation.I.activeAnimation.name, animation.I.activeAnimation.complete, "After the bite cycle we should end up in the next state specified by the animation"
 
   50.times -> animation.update()
 
