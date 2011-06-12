@@ -355,7 +355,12 @@ animationData = `{
          "complete":"Idle1",
          "interruptible":false,
          "speed":"110",
-         "transform":[{hflip: true, vflip: true}],
+         "transform":[
+            {
+               "hflip":true,
+               "vflip":true
+            }
+         ],
          "triggers": {
            "0":["whiteParticles"],
            "4":["blueParticles","greenParticles"],
