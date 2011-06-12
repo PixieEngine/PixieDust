@@ -15756,7 +15756,7 @@ Animated = function(I, self) {
   });
   loadByName = function(name, callback) {
     var url;
-    url = "" + BASE_URL + "/data/" + name + ".animation?" + (new Date().getTime());
+    url = "" + BASE_URL + "/animations/" + name + ".animation?" + (new Date().getTime());
     $.getJSON(url, function(data) {
       I.data = data;
       return typeof callback === "function" ? callback(data) : void 0;
