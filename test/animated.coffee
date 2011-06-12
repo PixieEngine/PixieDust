@@ -438,6 +438,19 @@ test "should be on correct frame after transition is called", ->
   equals animation.I.activeAnimation.frames.first(), 20, "The first frame of Idle2 should be the sprite with index 20 in the tileset"
   equals animation.I.currentFrameIndex, 0, "Should be on the first frame of Idle2"
 
+test "should be able to force transition to new state", ->
+  animation = GameObject
+    data: animationData
+    includedModules: ["Animated"]
+
+  animation.update()
+
+  animation.transition("Idle2", true)
+
+  equals animation.I.activeAnimation.name, "Idle2", "Animation should be in idle2 state after forced transition is called"
+  equals animation.I.activeAnimation.frames.first(), 20, "The first frame of Idle2 should be the sprite with index 20 in the tileset"
+  equals animation.I.currentFrameIndex, 0, "Should be on the first frame of Idle2"
+
 test "should fire Complete event after updating past the last frame", ->
   completeFired = false
 
