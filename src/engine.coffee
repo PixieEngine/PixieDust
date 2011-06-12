@@ -121,6 +121,8 @@
         window.requestAnimationFrame(animLoop)
 
     update = ->
+      window.updateKeys()
+
       self.trigger "update"
 
       [I.objects, toRemove] = I.objects.partition (object) ->
