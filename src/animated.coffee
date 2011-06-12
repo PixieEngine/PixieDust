@@ -137,25 +137,40 @@ Animated = (I, self) ->
   @param {String} newState The name of the target state you wish to transition to.
   ###
 
-  transition: (newState) ->
+  transition: (newState, force) ->
     return if newState == I.activeAnimation.name
-    unless I.activeAnimation.interruptible
-      warn "Cannot transition to '#{newState}' because '#{I.activeAnimation.name}' is locked" if I.debugAnimation
-      return
+    if force
+      nextState = find(newState)
 
-    nextState = find(newState)
+      if nextState    
+        I.activeAnimation = nextState
+        firstFrame = I.activeAnimation.frames.first()
+        firstSprite = I.spriteLookup[firstFrame]
 
-    if nextState    
-      I.activeAnimation = nextState
-      firstFrame = I.activeAnimation.frames.first()
-      firstSprite = I.spriteLookup[firstFrame]
-
-      I.currentFrameIndex = 0
-      updateSprite(firstSprite)
-      I.hflip = I.activeAnimation.transform?[I.currentFrameIndex]?.hflip
-      I.vflip = I.activeAnimation.transform?[I.currentFrameIndex]?.vflip
+        I.currentFrameIndex = 0
+        updateSprite(firstSprite)
+        I.hflip = I.activeAnimation.transform?[I.currentFrameIndex]?.hflip
+        I.vflip = I.activeAnimation.transform?[I.currentFrameIndex]?.vflip
+      else
+        warn "Could not find animation state '#{newState}'. The current transition will be ignored" if I.debugAnimation    
     else
-      warn "Could not find animation state '#{newState}'. The current transition will be ignored" if I.debugAnimation
+      unless I.activeAnimation.interruptible
+        warn "Cannot transition to '#{newState}' because '#{I.activeAnimation.name}' is locked" if I.debugAnimation
+        return
+
+      nextState = find(newState)
+
+      if nextState    
+        I.activeAnimation = nextState
+        firstFrame = I.activeAnimation.frames.first()
+        firstSprite = I.spriteLookup[firstFrame]
+
+        I.currentFrameIndex = 0
+        updateSprite(firstSprite)
+        I.hflip = I.activeAnimation.transform?[I.currentFrameIndex]?.hflip
+        I.vflip = I.activeAnimation.transform?[I.currentFrameIndex]?.vflip
+      else
+        warn "Could not find animation state '#{newState}'. The current transition will be ignored" if I.debugAnimation      
 
   transform: -> I.transform
 
