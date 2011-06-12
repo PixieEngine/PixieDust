@@ -427,10 +427,10 @@ test "should be on correct frame after transition is called", ->
     data: animationData
     includedModules: ["Animated"]
 
-  # Bite cannot be interrupted. Hack to get to idle state
-  animation.I.activeAnimation.frames.length.times -> animation.update()
+  # Bite cannot be interrupted. Must force transition
+  animation.transition("Idle1", true)
 
-  equals animation.I.activeAnimation.name, "Idle1", "Animation should be in idle1 state after bite finishes"
+  equals animation.I.activeAnimation.name, "Idle1", "Animation should be in idle1 state forced transition from bite"
 
   animation.transition("Idle2")
 
@@ -481,8 +481,7 @@ test "should loop on looping animation states", ->
     data: animationData
     includedModules: ["Animated"]
 
-  animation.I.activeAnimation.frames.length.times ->
-    animation.update()  
+  animation.transition("Idle1", true)
 
   30.times -> animation.update()
 
