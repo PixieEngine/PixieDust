@@ -64,7 +64,7 @@ Animated = (I, self) ->
     transform: Matrix.IDENTITY
 
   loadByName = (name, callback) ->
-    url = "#{BASE_URL}/data/#{name}.animation?#{new Date().getTime()}"
+    url = "#{BASE_URL}/animations/#{name}.animation?#{new Date().getTime()}"
 
     $.getJSON url, (data) ->
       I.data = data
