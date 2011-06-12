@@ -428,7 +428,7 @@ test "should be on correct frame after transition is called", ->
     includedModules: ["Animated"]
 
   # Bite cannot be interrupted. Hack to get to idle state
-  8.times -> animation.update()
+  (animation.I.activeAnimation.frames.length).times -> animation.update()
 
   equals animation.I.activeAnimation.name, "Idle1", "Animation should be in idle1 state after bite finishes"
 
