@@ -401,7 +401,7 @@ animationData = `{
 
 module "Animation"
 
-test "should increment frame position and reset it after completing animation state", ->
+test "should increment frame position", ->
   animation = GameObject
     data: animationData
     includedModules: ["Animated"]
@@ -412,7 +412,12 @@ test "should increment frame position and reset it after completing animation st
 
   equals animation.I.currentFrameIndex, 1, "After an update the currentFrameIndex has advanced"
 
-  (animation.I.activeAnimation.frames.length - 1).times ->
+test "should reset frame position after completing animation state", ->
+  animation = GameObject
+    data: animationData
+    includedModules: ["Animated"]
+
+  (animation.I.activeAnimation.frames.length).times ->
     animation.update()
 
   equals animation.I.currentFrameIndex, 0, "Frame position should be 0 after reaching the end of an animation state"
