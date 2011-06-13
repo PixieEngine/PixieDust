@@ -507,6 +507,13 @@ test "should set hflip and vflip values", ->
   ok animation.I.hflip
   ok animation.I.vflip
 
+test "should set hflip and vflip to false when frame isn't flipped", ->
+  animation.update()
+  animation.update()
+
+  ok !animation.I.hflip
+  ok !animation.I.vflip
+
 test "should not advance frame if set to manual mode", ->
   manualAnimation = GameObject
     data: animationData
