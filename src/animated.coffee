@@ -139,8 +139,9 @@ Animated = (I, self) ->
 
   transition: (newState, force) ->
     return if newState == I.activeAnimation.name
-    if force
-      nextState = find(newState)
+
+    toNextState = (state) ->
+      nextState = find(state)
 
       if nextState    
         I.activeAnimation = nextState
@@ -152,25 +153,16 @@ Animated = (I, self) ->
         I.hflip = I.activeAnimation.transform?[I.currentFrameIndex]?.hflip
         I.vflip = I.activeAnimation.transform?[I.currentFrameIndex]?.vflip
       else
-        warn "Could not find animation state '#{newState}'. The current transition will be ignored" if I.debugAnimation    
+        warn "Could not find animation state '#{newState}'. The current transition will be ignored" if I.debugAnimation        
+
+    if force
+      toNextState(newState)  
     else
       unless I.activeAnimation.interruptible
         warn "Cannot transition to '#{newState}' because '#{I.activeAnimation.name}' is locked" if I.debugAnimation
         return
 
-      nextState = find(newState)
-
-      if nextState    
-        I.activeAnimation = nextState
-        firstFrame = I.activeAnimation.frames.first()
-        firstSprite = I.spriteLookup[firstFrame]
-
-        I.currentFrameIndex = 0
-        updateSprite(firstSprite)
-        I.hflip = I.activeAnimation.transform?[I.currentFrameIndex]?.hflip
-        I.vflip = I.activeAnimation.transform?[I.currentFrameIndex]?.vflip
-      else
-        warn "Could not find animation state '#{newState}'. The current transition will be ignored" if I.debugAnimation      
+      toNextState(newState)     
 
   transform: -> I.transform
 
