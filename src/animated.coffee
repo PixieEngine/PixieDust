@@ -73,6 +73,12 @@ Animated = (I, self) ->
 
     return I.data
 
+  initializeState = ->
+    I.activeAnimation = I.data.animations.first()
+
+    I.data.tileset.each (spriteData, i) ->
+      I.spriteLookup[i] = Sprite.fromURL(spriteData.src)     
+
   window["#{I.animationName}SpriteLookup"] ||= []
 
   unless window["#{I.animationName}SpriteLookup"].length
@@ -82,16 +88,10 @@ Animated = (I, self) ->
   I.spriteLookup = window["#{I.animationName}SpriteLookup"]
 
   if I.data.animations.first().name != "" 
-    I.activeAnimation = I.data.animations.first()
-
-    I.data.tileset.each (spriteData, i) ->
-      I.spriteLookup[i] = Sprite.fromURL(spriteData.src) 
+    initializeState()
   else if I.animationName
     loadByName I.animationName, ->
-      I.activeAnimation = I.data.animations.first()
-
-      I.data.tileset.each (spriteData, i) ->
-        I.spriteLookup[i] = Sprite.fromURL(spriteData.src)  
+      initializeState() 
   else
     throw "No animation data provided. Use animationName to specify an animation to load from the project or pass in raw JSON to the data key."
 
