@@ -139,9 +139,7 @@ Animated = (I, self) ->
     return if newState == I.activeAnimation.name
 
     toNextState = (state) ->
-      nextState = find(state)
-
-      if nextState    
+      if nextState = find(state)   
         I.activeAnimation = nextState
         firstFrame = I.activeAnimation.frames.first()
         firstSprite = I.spriteLookup[firstFrame]
