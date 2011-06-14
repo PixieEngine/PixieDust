@@ -104,9 +104,7 @@ Animated = (I, self) ->
     if I.currentFrameIndex == frames.indexOf(frames.last())
       self.trigger("Complete") 
 
-      nextState = I.activeAnimation.complete
-
-      if nextState
+      if nextState = I.activeAnimation.complete
         I.activeAnimation = find(nextState) || I.activeAnimation
         I.currentFrameIndex = 0        
     else
