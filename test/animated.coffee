@@ -517,8 +517,7 @@ test "should set hflip and vflip to false when frame isn't flipped", ->
 test "should not advance frame if set to manual mode", ->
   manualAnimation = GameObject
     data: animationData
-    includedModules: ["Animated"]
-
+    includedModules: ["Animated"] 
 
 module()
 
