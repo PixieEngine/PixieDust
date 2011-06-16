@@ -81,8 +81,7 @@ Animated = (I, self) ->
   window["#{I.animationName}SpriteLookup"] ||= []
 
   unless window["#{I.animationName}SpriteLookup"].length
-    I.data.tileset.each (spriteData, i) ->
-      window["#{I.animationName}SpriteLookup"][i] = Sprite.fromURL(spriteData.src)
+    window["#{I.animationName}SpriteLookup"] = I.data.tileset.map (spriteData) -> Sprite.fromURL(spriteData.src)
 
   I.spriteLookup = window["#{I.animationName}SpriteLookup"]
 
