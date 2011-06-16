@@ -76,8 +76,7 @@ Animated = (I, self) ->
   initializeState = ->
     I.activeAnimation = I.data.animations.first()
 
-    I.data.tileset.each (spriteData, i) ->
-      I.spriteLookup[i] = Sprite.fromURL(spriteData.src)     
+    I.spriteLookup = I.data.tileset.map (spriteData) -> Sprite.fromURL(spriteData.src)     
 
   window["#{I.animationName}SpriteLookup"] ||= []
 
