@@ -56,6 +56,26 @@ draw anything to the screen until the image has been loaded.
     width: width
     height: height
 
+  Sprite.loadSheet = (name, tileWidth, tileHeight) ->
+    directory = App?.directories?.images || "images"
+
+    url = "#{BASE_URL}/#{directory}/#{name}.png"
+
+    console.log url
+
+    sprites = []
+    image = new Image()
+
+    image.onload = ->
+      imgElement = this
+      (image.height / tileHeight).times (row) ->
+        (image.width / tileWidth).times (col) ->
+          sprites.push(Sprite(imgElement, col * tileWidth, row * tileHeight, tileWidth, tileHeight))
+
+    image.src = url
+
+    return sprites
+
   Sprite.load = (url, loadedCallback) ->
     img = new Image()
     proxy = LoaderProxy()
@@ -148,6 +168,8 @@ draw anything to the screen until the image has been loaded.
     directory = App?.directories?.images || "images"
     url = "#{BASE_URL}/#{directory}/#{name}.png"
     Sprite.load(url, callback)
+
+  window.Sprite.create = Sprite
 
 )()
 
