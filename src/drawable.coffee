@@ -57,6 +57,9 @@ Drawable = (I, self) ->
         I.transform = I.transform.concat(Matrix.VERTICAL_FLIP) if I.vflip
         I.transform = I.transform.concat(Matrix.translation(-I.width/2, -I.height/2))
 
+      if I.spriteOffset
+        I.transform = I.transform.concat(Matrix.translation(I.spriteOffset.x, I.spriteOffset.y))
+
     if I.sprite
       if I.sprite.draw? 
         I.sprite.draw(canvas, 0, 0)
