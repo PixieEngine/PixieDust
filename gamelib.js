@@ -16271,6 +16271,9 @@ Drawable = function(I, self) {
         }
         I.transform = I.transform.concat(Matrix.translation(-I.width / 2, -I.height / 2));
       }
+      if (I.spriteOffset) {
+        I.transform = I.transform.concat(Matrix.translation(I.spriteOffset.x, I.spriteOffset.y));
+      }
     }
     if (I.sprite) {
       if (I.sprite.draw != null) {
