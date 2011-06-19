@@ -15690,7 +15690,7 @@ methods to transition from one animation state to another
 @param {Object} self Reference to including object
 */var Animated;
 Animated = function(I, self) {
-  var advanceFrame, find, loadByName, updateSprite, _name, _ref;
+  var advanceFrame, find, initializeState, loadByName, updateSprite, _name, _ref;
   I || (I = {});
   $.reverseMerge(I, {
     animationName: (_ref = I["class"]) != null ? _ref.underscore() : void 0,
@@ -15763,24 +15763,24 @@ Animated = function(I, self) {
     });
     return I.data;
   };
+  initializeState = function() {
+    I.activeAnimation = I.data.animations.first();
+    return I.spriteLookup = I.data.tileset.map(function(spriteData) {
+      return Sprite.fromURL(spriteData.src);
+    });
+  };
   window[_name = "" + I.animationName + "SpriteLookup"] || (window[_name] = []);
   if (!window["" + I.animationName + "SpriteLookup"].length) {
-    I.data.tileset.each(function(spriteData, i) {
-      return window["" + I.animationName + "SpriteLookup"][i] = Sprite.fromURL(spriteData.src);
+    window["" + I.animationName + "SpriteLookup"] = I.data.tileset.map(function(spriteData) {
+      return Sprite.fromURL(spriteData.src);
     });
   }
   I.spriteLookup = window["" + I.animationName + "SpriteLookup"];
   if (I.data.animations.first().name !== "") {
-    I.activeAnimation = I.data.animations.first();
-    I.data.tileset.each(function(spriteData, i) {
-      return I.spriteLookup[i] = Sprite.fromURL(spriteData.src);
-    });
+    initializeState();
   } else if (I.animationName) {
     loadByName(I.animationName, function() {
-      I.activeAnimation = I.data.animations.first();
-      return I.data.tileset.each(function(spriteData, i) {
-        return I.spriteLookup[i] = Sprite.fromURL(spriteData.src);
-      });
+      return initializeState();
     });
   } else {
     throw "No animation data provided. Use animationName to specify an animation to load from the project or pass in raw JSON to the data key.";
@@ -15788,10 +15788,11 @@ Animated = function(I, self) {
   advanceFrame = function() {
     var frames, nextState, sprite, _ref2, _ref3, _ref4, _ref5;
     frames = I.activeAnimation.frames;
+    I.hflip = (_ref2 = I.activeAnimation.transform) != null ? (_ref3 = _ref2[I.currentFrameIndex]) != null ? _ref3.hflip : void 0 : void 0;
+    I.vflip = (_ref4 = I.activeAnimation.transform) != null ? (_ref5 = _ref4[I.currentFrameIndex]) != null ? _ref5.vflip : void 0 : void 0;
     if (I.currentFrameIndex === frames.indexOf(frames.last())) {
       self.trigger("Complete");
-      nextState = I.activeAnimation.complete;
-      if (nextState) {
+      if (nextState = I.activeAnimation.complete) {
         I.activeAnimation = find(nextState) || I.activeAnimation;
         I.currentFrameIndex = 0;
       }
@@ -15799,9 +15800,7 @@ Animated = function(I, self) {
       I.currentFrameIndex = (I.currentFrameIndex + 1) % frames.length;
     }
     sprite = I.spriteLookup[frames[I.currentFrameIndex]];
-    updateSprite(sprite);
-    I.hflip = (_ref2 = I.activeAnimation.transform) != null ? (_ref3 = _ref2[I.currentFrameIndex]) != null ? _ref3.hflip : void 0 : void 0;
-    return I.vflip = (_ref4 = I.activeAnimation.transform) != null ? (_ref5 = _ref4[I.currentFrameIndex]) != null ? _ref5.vflip : void 0 : void 0;
+    return updateSprite(sprite);
   };
   find = function(name) {
     var nameLower, result;
@@ -15826,30 +15825,37 @@ Animated = function(I, self) {
     
     @param {String} newState The name of the target state you wish to transition to.
     */
-    transition: function(newState) {
-      var firstFrame, firstSprite, nextState, _ref2, _ref3, _ref4, _ref5;
+    transition: function(newState, force) {
+      var toNextState;
       if (newState === I.activeAnimation.name) {
         return;
       }
-      if (!I.activeAnimation.interruptible) {
-        if (I.debugAnimation) {
-          warn("Cannot transition to '" + newState + "' because '" + I.activeAnimation.name + "' is locked");
+      toNextState = function(state) {
+        var firstFrame, firstSprite, nextState, _ref2, _ref3, _ref4, _ref5;
+        if (nextState = find(state)) {
+          I.activeAnimation = nextState;
+          firstFrame = I.activeAnimation.frames.first();
+          firstSprite = I.spriteLookup[firstFrame];
+          I.currentFrameIndex = 0;
+          updateSprite(firstSprite);
+          I.hflip = (_ref2 = I.activeAnimation.transform) != null ? (_ref3 = _ref2[I.currentFrameIndex]) != null ? _ref3.hflip : void 0 : void 0;
+          return I.vflip = (_ref4 = I.activeAnimation.transform) != null ? (_ref5 = _ref4[I.currentFrameIndex]) != null ? _ref5.vflip : void 0 : void 0;
+        } else {
+          if (I.debugAnimation) {
+            return warn("Could not find animation state '" + newState + "'. The current transition will be ignored");
+          }
         }
-        return;
-      }
-      nextState = find(newState);
-      if (nextState) {
-        I.activeAnimation = nextState;
-        firstFrame = I.activeAnimation.frames.first();
-        firstSprite = I.spriteLookup[firstFrame];
-        I.currentFrameIndex = 0;
-        updateSprite(firstSprite);
-        I.hflip = (_ref2 = I.activeAnimation.transform) != null ? (_ref3 = _ref2[I.currentFrameIndex]) != null ? _ref3.hflip : void 0 : void 0;
-        return I.vflip = (_ref4 = I.activeAnimation.transform) != null ? (_ref5 = _ref4[I.currentFrameIndex]) != null ? _ref5.vflip : void 0 : void 0;
+      };
+      if (force) {
+        return toNextState(newState);
       } else {
-        if (I.debugAnimation) {
-          return warn("Could not find animation state '" + newState + "'. The current transition will be ignored");
+        if (!I.activeAnimation.interruptible) {
+          if (I.debugAnimation) {
+            warn("Cannot transition to '" + newState + "' because '" + I.activeAnimation.name + "' is locked");
+          }
+          return;
         }
+        return toNextState(newState);
       }
     },
     transform: function() {
@@ -15857,7 +15863,7 @@ Animated = function(I, self) {
     },
     before: {
       update: function() {
-        var time, transition, triggers, updateFrame, _ref2, _ref3, _ref4;
+        var time, triggers, updateFrame, _ref2, _ref3;
         if (I.useTimer) {
           time = new Date().getTime();
           if (updateFrame = (time - I.lastUpdate) >= I.activeAnimation.speed) {
@@ -15874,9 +15880,6 @@ Animated = function(I, self) {
             triggers.each(function(event) {
               return self.trigger(event);
             });
-          }
-          if (transition = (_ref4 = I.activeAnimation.transition) != null ? _ref4[I.currentFrameIndex] : void 0) {
-            I.transform = eval(transition);
           }
           return advanceFrame();
         }
@@ -17725,6 +17728,25 @@ draw anything to the screen until the image has been loaded.
       height: height
     };
   };
+  Sprite.loadSheet = function(name, tileWidth, tileHeight) {
+    var directory, image, sprites, url, _ref;
+    directory = (typeof App !== "undefined" && App !== null ? (_ref = App.directories) != null ? _ref.images : void 0 : void 0) || "images";
+    url = "" + BASE_URL + "/" + directory + "/" + name + ".png";
+    console.log(url);
+    sprites = [];
+    image = new Image();
+    image.onload = function() {
+      var imgElement;
+      imgElement = this;
+      return (image.height / tileHeight).times(function(row) {
+        return (image.width / tileWidth).times(function(col) {
+          return sprites.push(Sprite(imgElement, col * tileWidth, row * tileHeight, tileWidth, tileHeight));
+        });
+      });
+    };
+    image.src = url;
+    return sprites;
+  };
   Sprite.load = function(url, loadedCallback) {
     var img, proxy;
     img = new Image();
@@ -17809,12 +17831,13 @@ draw anything to the screen until the image has been loaded.
   
   @type Sprite
   */
-  return window.Sprite.loadByName = function(name, callback) {
+  window.Sprite.loadByName = function(name, callback) {
     var directory, url, _ref;
     directory = (typeof App !== "undefined" && App !== null ? (_ref = App.directories) != null ? _ref.images : void 0 : void 0) || "images";
     url = "" + BASE_URL + "/" + directory + "/" + name + ".png";
     return Sprite.load(url, callback);
   };
+  return window.Sprite.create = Sprite;
 })();;
 (function() {
   var Map, fromPixieId, loadByName;
