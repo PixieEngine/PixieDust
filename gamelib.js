@@ -16250,7 +16250,7 @@ Drawable = function(I, self) {
     var center;
     center = self.center();
     if (I.rotation) {
-      I.transform = Matrix.translation(center.x, center.y);
+      I.transform = Matrix.translation(center.x.round(), center.y.round());
       I.transform = I.transform.concat(Matrix.rotation(I.rotation));
       if (I.hflip) {
         I.transform = I.transform.concat(Matrix.HORIZONTAL_FLIP);
@@ -16260,9 +16260,9 @@ Drawable = function(I, self) {
       }
       I.transform = I.transform.concat(Matrix.translation(-I.width / 2, -I.height / 2));
     } else {
-      I.transform = Matrix.translation(I.x, I.y);
+      I.transform = Matrix.translation(I.x.round(), I.y.round());
       if (I.hflip || I.vflip) {
-        I.transform = Matrix.translation(center.x, center.y);
+        I.transform = Matrix.translation(center.x.round(), center.y.round());
         if (I.hflip) {
           I.transform = I.transform.concat(Matrix.HORIZONTAL_FLIP);
         }
