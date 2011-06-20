@@ -16590,6 +16590,7 @@ Emitterable = function(I, self) {
         }
         return draw();
       } catch (e) {
+        debugger;
         return typeof console !== "undefined" && console !== null ? typeof console.error === "function" ? console.error(e) : void 0 : void 0;
       }
     };
