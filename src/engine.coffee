@@ -160,6 +160,8 @@
 
         draw()
       catch e
+        # Debug when we encounter an error
+        debugger
         console?.error?(e)
 
     canvas = I.canvas || $("<canvas />").powerCanvas()
