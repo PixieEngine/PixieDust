@@ -83,8 +83,8 @@ GameObject = (I) ->
       I.active
 
     draw: (canvas) ->
-      if I.transform
-        canvas.withTransform I.transform, (canvas) ->
+      if (transform = self.getTransform?())
+        canvas.withTransform transform, (canvas) ->
           self.trigger 'draw', canvas
       else
         canvas.withTransform Matrix.translation(I.x, I.y), (canvas) ->
