@@ -36,30 +36,30 @@ Drawable = (I, self) ->
       I.height = sprite.height
     )
 
-  self.bind 'draw', (canvas) ->
-    #TODO: Not sure if setting the transform here is the best
-    # but we want to make sure it's adjusted after *all* the updates
-    center = self.center()
+  self.extend
+    getTransform: ->
+      center = self.center()
 
-    if I.rotation
-      I.transform = Matrix.translation(center.x.round(), center.y.round())
-      I.transform = I.transform.concat(Matrix.rotation(I.rotation))
-      I.transform = I.transform.concat(Matrix.HORIZONTAL_FLIP) if I.hflip
-      I.transform = I.transform.concat(Matrix.VERTICAL_FLIP) if I.vflip
-      I.transform = I.transform.concat(Matrix.translation(-I.width/2, -I.height/2))
-    else
-      # Assumes I.x and I.y are top-left      
-      I.transform = Matrix.translation(I.x.round(), I.y.round())
-
-      if I.hflip || I.vflip
+      if I.rotation
         I.transform = Matrix.translation(center.x.round(), center.y.round())
+        I.transform = I.transform.concat(Matrix.rotation(I.rotation))
         I.transform = I.transform.concat(Matrix.HORIZONTAL_FLIP) if I.hflip
         I.transform = I.transform.concat(Matrix.VERTICAL_FLIP) if I.vflip
         I.transform = I.transform.concat(Matrix.translation(-I.width/2, -I.height/2))
+      else
+        # Assumes I.x and I.y are top-left      
+        I.transform = Matrix.translation(I.x.round(), I.y.round())
 
-      if I.spriteOffset
-        I.transform = I.transform.concat(Matrix.translation(I.spriteOffset.x, I.spriteOffset.y))
+        if I.hflip || I.vflip
+          I.transform = Matrix.translation(center.x.round(), center.y.round())
+          I.transform = I.transform.concat(Matrix.HORIZONTAL_FLIP) if I.hflip
+          I.transform = I.transform.concat(Matrix.VERTICAL_FLIP) if I.vflip
+          I.transform = I.transform.concat(Matrix.translation(-I.width/2, -I.height/2))
 
+        if I.spriteOffset
+          I.transform = I.transform.concat(Matrix.translation(I.spriteOffset.x, I.spriteOffset.y))
+
+  self.bind 'draw', (canvas) ->
     if I.sprite
       if I.sprite.draw? 
         I.sprite.draw(canvas, 0, 0)
