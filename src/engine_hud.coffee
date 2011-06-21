@@ -11,7 +11,7 @@ the responsibility of the objects drawing on it to manage that themselves.
 @param {Object} self Reference to the engine
 ###
 Engine.HUD = (I, self) ->
-  hudCanvas = $("<canvas width=640 height=480 />").powerCanvas()
+  hudCanvas = $("<canvas width=#{App.width} height=#{App.height} />").powerCanvas()
   hudCanvas.font("bold 9pt consolas, 'Courier New', 'andale mono', 'lucida console', monospace")
 
   self.bind "draw", (canvas) ->
