@@ -46,10 +46,19 @@ Drawable = (I, self) ->
       canvas.fillColor(I.color)
       canvas.fillRect(0, 0, I.width, I.height)
 
+  ###*
+  Draw does not actually do any drawing itself, instead it triggers all of the draw events.
+  Listeners on the events do the actual drawing.
 
+  @name draw
+  @methodOf Drawable#
+  @returns self
+  ###
   draw: (canvas) ->
     canvas.withTransform self.getTransform(), (canvas) ->
       self.trigger 'draw', canvas
+
+    return self
 
   ###*
   Returns the current transform, with translation, rotation, and flipping applied.
