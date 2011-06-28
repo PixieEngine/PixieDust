@@ -15,6 +15,16 @@ Autoloads the sprite specified in I.spriteName, if any.
 @param {Object} I Instance variables
 @param {Object} self Reference to including object
 ###
+
+###*
+Triggered every time the object should be drawn. A canvas is passed as
+the first argument.
+
+@name draw
+@methodOf Drawable#
+@event
+###
+
 Drawable = (I, self) ->
   I ||= {}
 
@@ -55,8 +65,13 @@ Drawable = (I, self) ->
   @returns self
   ###
   draw: (canvas) ->
+
+    self.trigger 'before_transform', canvas
+
     canvas.withTransform self.getTransform(), (canvas) ->
       self.trigger 'draw', canvas
+
+    self.trigger 'after_transform', canvas
 
     return self
 
