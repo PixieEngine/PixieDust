@@ -38,34 +38,24 @@ Drawable = (I, self) ->
 
   self.extend  
     draw: (canvas) ->
-      if (transform = self.getTransform?())
-        canvas.withTransform transform, (canvas) ->
-          self.trigger 'draw', canvas
-      else
-        canvas.withTransform Matrix.translation(I.x, I.y), (canvas) ->
-          self.trigger 'draw', canvas
+      canvas.withTransform self.getTransform(), (canvas) ->
+        self.trigger 'draw', canvas
 
     getTransform: ->
       center = self.center().floor()
 
-      if I.rotation
-        I.transform = Matrix.translation(center.x, center.y)
-        I.transform = I.transform.concat(Matrix.rotation(I.rotation))
-        I.transform = I.transform.concat(Matrix.HORIZONTAL_FLIP) if I.hflip
-        I.transform = I.transform.concat(Matrix.VERTICAL_FLIP) if I.vflip
-        I.transform = I.transform.concat(Matrix.translation(-I.width/2, -I.height/2))
-      else
-        # Assumes I.x and I.y are top-left      
-        I.transform = Matrix.translation(I.x.floor(), I.y.floor())
+      transform = Matrix.translation(center.x, center.y)
 
-        if I.hflip || I.vflip
-          I.transform = Matrix.translation(center.x, center.y)
-          I.transform = I.transform.concat(Matrix.HORIZONTAL_FLIP) if I.hflip
-          I.transform = I.transform.concat(Matrix.VERTICAL_FLIP) if I.vflip
-          I.transform = I.transform.concat(Matrix.translation(-I.width/2, -I.height/2))
+      transform = transform.concat(Matrix.rotation(I.rotation)) if I.rotation
+      transform = transform.concat(Matrix.HORIZONTAL_FLIP) if I.hflip
+      transform = transform.concat(Matrix.VERTICAL_FLIP) if I.vflip
 
-        if I.spriteOffset
-          I.transform = I.transform.concat(Matrix.translation(I.spriteOffset.x, I.spriteOffset.y))
+      transform = transform.concat(Matrix.translation(-I.width/2, -I.height/2))
+
+      if I.spriteOffset
+        transform = transform.concat(Matrix.translation(I.spriteOffset.x, I.spriteOffset.y))
+
+      return transform
 
   self.bind 'draw', (canvas) ->
     if I.sprite
