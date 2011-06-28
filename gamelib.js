@@ -16016,74 +16016,72 @@ Animated = function(I, self) {
   };
   return window.Animation.fromPixieId = fromPixieId;
 })();;
+/**
+Bindable module
+@name Bindable
+@module
+@constructor
+*/var Bindable;
 var __slice = Array.prototype.slice;
-(function($) {
-  /**
-  Bindable module
-  @name Bindable
-  @module
-  @constructor
-  */  var Bindable;
-  Bindable = function() {
-    var eventCallbacks;
-    eventCallbacks = {};
-    return {
-      /**
-      The bind method adds a function as an event listener.
-      
-      @name bind
-      @methodOf Bindable#
-      
-      @param {String} event The event to listen to.
-      @param {Function} callback The function to be called when the specified event
-      is triggered.
-      */
-      bind: function(event, callback) {
-        eventCallbacks[event] = eventCallbacks[event] || [];
-        return eventCallbacks[event].push(callback);
-      },
-      /**
-      The unbind method removes a specific event listener, or all event listeners if
-      no specific listener is given.
-      
-      @name unbind
-      @methodOf Bindable#
-      
-      @param {String} event The event to remove the listener from.
-      @param {Function} [callback] The listener to remove.
-      */
-      unbind: function(event, callback) {
-        eventCallbacks[event] = eventCallbacks[event] || [];
-        if (callback) {
-          return eventCallbacks.remove(callback);
-        } else {
-          return eventCallbacks[event] = [];
-        }
-      },
-      /**
-      The trigger method calls all listeners attached to the specified event.
-      
-      @name trigger
-      @methodOf Bindable#
-      
-      @param {String} event The event to trigger.
-      @param {Array} [parameters] Additional parameters to pass to the event listener.
-      */
-      trigger: function() {
-        var callbacks, event, parameters, self;
-        event = arguments[0], parameters = 2 <= arguments.length ? __slice.call(arguments, 1) : [];
-        callbacks = eventCallbacks[event];
-        if (callbacks && callbacks.length) {
-          self = this;
-          return callbacks.each(function(callback) {
-            return callback.apply(self, parameters);
-          });
-        }
+Bindable = function() {
+  var eventCallbacks;
+  eventCallbacks = {};
+  return {
+    /**
+    The bind method adds a function as an event listener.
+    
+    @name bind
+    @methodOf Bindable#
+    
+    @param {String} event The event to listen to.
+    @param {Function} callback The function to be called when the specified event
+    is triggered.
+    */
+    bind: function(event, callback) {
+      eventCallbacks[event] = eventCallbacks[event] || [];
+      return eventCallbacks[event].push(callback);
+    },
+    /**
+    The unbind method removes a specific event listener, or all event listeners if
+    no specific listener is given.
+    
+    @name unbind
+    @methodOf Bindable#
+    
+    @param {String} event The event to remove the listener from.
+    @param {Function} [callback] The listener to remove.
+    */
+    unbind: function(event, callback) {
+      eventCallbacks[event] = eventCallbacks[event] || [];
+      if (callback) {
+        return eventCallbacks.remove(callback);
+      } else {
+        return eventCallbacks[event] = [];
       }
-    };
+    },
+    /**
+    The trigger method calls all listeners attached to the specified event.
+    
+    @name trigger
+    @methodOf Bindable#
+    
+    @param {String} event The event to trigger.
+    @param {Array} [parameters] Additional parameters to pass to the event listener.
+    */
+    trigger: function() {
+      var callbacks, event, parameters, self;
+      event = arguments[0], parameters = 2 <= arguments.length ? __slice.call(arguments, 1) : [];
+      callbacks = eventCallbacks[event];
+      if (callbacks && callbacks.length) {
+        self = this;
+        return callbacks.each(function(callback) {
+          return callback.apply(self, parameters);
+        });
+      }
+    }
   };
-  return window.Bindable = Bindable;
-})(jQuery);;
+};
+window.Bindable = Bindable;;
 /**
 The Bounded module is used to provide basic data about the
 location and dimensions of the including object
@@ -16294,6 +16292,14 @@ Autoloads the sprite specified in I.spriteName, if any.
 
 @param {Object} I Instance variables
 @param {Object} self Reference to including object
+*/
+/**
+Triggered every time the object should be drawn. A canvas is passed as
+the first argument.
+
+@name draw
+@methodOf Drawable#
+@event
 */var Drawable;
 Drawable = function(I, self) {
   var _ref;
@@ -16316,38 +16322,6 @@ Drawable = function(I, self) {
       return I.height = sprite.height;
     });
   }
-  self.extend({
-    getTransform: function() {
-      var center;
-      center = self.center();
-      if (I.rotation) {
-        I.transform = Matrix.translation(center.x.round(), center.y.round());
-        I.transform = I.transform.concat(Matrix.rotation(I.rotation));
-        if (I.hflip) {
-          I.transform = I.transform.concat(Matrix.HORIZONTAL_FLIP);
-        }
-        if (I.vflip) {
-          I.transform = I.transform.concat(Matrix.VERTICAL_FLIP);
-        }
-        return I.transform = I.transform.concat(Matrix.translation(-I.width / 2, -I.height / 2));
-      } else {
-        I.transform = Matrix.translation(I.x.round(), I.y.round());
-        if (I.hflip || I.vflip) {
-          I.transform = Matrix.translation(center.x.round(), center.y.round());
-          if (I.hflip) {
-            I.transform = I.transform.concat(Matrix.HORIZONTAL_FLIP);
-          }
-          if (I.vflip) {
-            I.transform = I.transform.concat(Matrix.VERTICAL_FLIP);
-          }
-          I.transform = I.transform.concat(Matrix.translation(-I.width / 2, -I.height / 2));
-        }
-        if (I.spriteOffset) {
-          return I.transform = I.transform.concat(Matrix.translation(I.spriteOffset.x, I.spriteOffset.y));
-        }
-      }
-    }
-  });
   self.bind('draw', function(canvas) {
     if (I.sprite) {
       if (I.sprite.draw != null) {
@@ -16360,7 +16334,50 @@ Drawable = function(I, self) {
       return canvas.fillRect(0, 0, I.width, I.height);
     }
   });
-  return {};
+  return {
+    /**
+    Draw does not actually do any drawing itself, instead it triggers all of the draw events.
+    Listeners on the events do the actual drawing.
+    
+    @name draw
+    @methodOf Drawable#
+    @returns self
+    */
+    draw: function(canvas) {
+      self.trigger('before_transform', canvas);
+      canvas.withTransform(self.getTransform(), function(canvas) {
+        return self.trigger('draw', canvas);
+      });
+      self.trigger('after_transform', canvas);
+      return self;
+    },
+    /**
+    Returns the current transform, with translation, rotation, and flipping applied.
+    
+    @name getTransform
+    @methodOf Drawable#
+    @type Matrix
+    */
+    getTransform: function() {
+      var center, transform;
+      center = self.center().floor();
+      transform = Matrix.translation(center.x, center.y);
+      if (I.rotation) {
+        transform = transform.concat(Matrix.rotation(I.rotation));
+      }
+      if (I.hflip) {
+        transform = transform.concat(Matrix.HORIZONTAL_FLIP);
+      }
+      if (I.vflip) {
+        transform = transform.concat(Matrix.VERTICAL_FLIP);
+      }
+      transform = transform.concat(Matrix.translation(-I.width / 2, -I.height / 2));
+      if (I.spriteOffset) {
+        transform = transform.concat(Matrix.translation(I.spriteOffset.x, I.spriteOffset.y));
+      }
+      return transform;
+    }
+  };
 };;
 /**
 The Durable module deactives GameObjects after a specified duration.
@@ -17431,18 +17448,6 @@ GameObject = function(I) {
         I.age += 1;
       }
       return I.active;
-    },
-    draw: function(canvas) {
-      var transform;
-      if ((transform = typeof self.getTransform === "function" ? self.getTransform() : void 0)) {
-        return canvas.withTransform(transform, function(canvas) {
-          return self.trigger('draw', canvas);
-        });
-      } else {
-        return canvas.withTransform(Matrix.translation(I.x, I.y), function(canvas) {
-          return self.trigger('draw', canvas);
-        });
-      }
     },
     /**
     Destroys the object and triggers the destroyed callback.
