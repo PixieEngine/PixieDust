@@ -36,27 +36,6 @@ Drawable = (I, self) ->
       I.height = sprite.height
     )
 
-  self.extend  
-    draw: (canvas) ->
-      canvas.withTransform self.getTransform(), (canvas) ->
-        self.trigger 'draw', canvas
-
-    getTransform: ->
-      center = self.center().floor()
-
-      transform = Matrix.translation(center.x, center.y)
-
-      transform = transform.concat(Matrix.rotation(I.rotation)) if I.rotation
-      transform = transform.concat(Matrix.HORIZONTAL_FLIP) if I.hflip
-      transform = transform.concat(Matrix.VERTICAL_FLIP) if I.vflip
-
-      transform = transform.concat(Matrix.translation(-I.width/2, -I.height/2))
-
-      if I.spriteOffset
-        transform = transform.concat(Matrix.translation(I.spriteOffset.x, I.spriteOffset.y))
-
-      return transform
-
   self.bind 'draw', (canvas) ->
     if I.sprite
       if I.sprite.draw? 
@@ -67,4 +46,31 @@ Drawable = (I, self) ->
       canvas.fillColor(I.color)
       canvas.fillRect(0, 0, I.width, I.height)
 
-  return {}
+
+  draw: (canvas) ->
+    canvas.withTransform self.getTransform(), (canvas) ->
+      self.trigger 'draw', canvas
+
+  ###*
+  Returns the current transform, with translation, rotation, and flipping applied.
+
+  @name getTransform
+  @methodOf Drawable#
+  @type Matrix
+  ###
+  getTransform: ->
+    center = self.center().floor()
+
+    transform = Matrix.translation(center.x, center.y)
+
+    transform = transform.concat(Matrix.rotation(I.rotation)) if I.rotation
+    transform = transform.concat(Matrix.HORIZONTAL_FLIP) if I.hflip
+    transform = transform.concat(Matrix.VERTICAL_FLIP) if I.vflip
+
+    transform = transform.concat(Matrix.translation(-I.width/2, -I.height/2))
+
+    if I.spriteOffset
+      transform = transform.concat(Matrix.translation(I.spriteOffset.x, I.spriteOffset.y))
+
+    return transform
+
