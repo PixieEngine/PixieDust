@@ -16482,7 +16482,7 @@ Emitterable = function(I, self) {
     FPS: 30,
     age: 0,
     ambientLight: 1,
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#00010D",
     cameraTransform: Matrix.IDENTITY,
     excludedModules: [],
     includedModules: [],
@@ -16605,7 +16605,9 @@ Emitterable = function(I, self) {
     draw = function() {
       canvas.withTransform(I.cameraTransform, function(canvas) {
         var drawObjects;
-        if (I.backgroundColor) {
+        if (I.clear) {
+          canvas.clear();
+        } else if (I.backgroundColor) {
           canvas.fill(I.backgroundColor);
         }
         self.trigger("preDraw", canvas);
