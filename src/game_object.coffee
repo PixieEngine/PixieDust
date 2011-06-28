@@ -82,14 +82,6 @@ GameObject = (I) ->
 
       I.active
 
-    draw: (canvas) ->
-      if (transform = self.getTransform?())
-        canvas.withTransform transform, (canvas) ->
-          self.trigger 'draw', canvas
-      else
-        canvas.withTransform Matrix.translation(I.x, I.y), (canvas) ->
-          self.trigger 'draw', canvas
-
     ###*
     Destroys the object and triggers the destroyed callback.
 
