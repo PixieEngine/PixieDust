@@ -36,7 +36,15 @@ Drawable = (I, self) ->
       I.height = sprite.height
     )
 
-  self.extend
+  self.extend  
+    draw: (canvas) ->
+      if (transform = self.getTransform?())
+        canvas.withTransform transform, (canvas) ->
+          self.trigger 'draw', canvas
+      else
+        canvas.withTransform Matrix.translation(I.x, I.y), (canvas) ->
+          self.trigger 'draw', canvas
+
     getTransform: ->
       center = self.center()
 
