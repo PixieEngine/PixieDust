@@ -46,20 +46,20 @@ Drawable = (I, self) ->
           self.trigger 'draw', canvas
 
     getTransform: ->
-      center = self.center()
+      center = self.center().floor()
 
       if I.rotation
-        I.transform = Matrix.translation(center.x.round(), center.y.round())
+        I.transform = Matrix.translation(center.x, center.y)
         I.transform = I.transform.concat(Matrix.rotation(I.rotation))
         I.transform = I.transform.concat(Matrix.HORIZONTAL_FLIP) if I.hflip
         I.transform = I.transform.concat(Matrix.VERTICAL_FLIP) if I.vflip
         I.transform = I.transform.concat(Matrix.translation(-I.width/2, -I.height/2))
       else
         # Assumes I.x and I.y are top-left      
-        I.transform = Matrix.translation(I.x.round(), I.y.round())
+        I.transform = Matrix.translation(I.x.floor(), I.y.floor())
 
         if I.hflip || I.vflip
-          I.transform = Matrix.translation(center.x.round(), center.y.round())
+          I.transform = Matrix.translation(center.x, center.y)
           I.transform = I.transform.concat(Matrix.HORIZONTAL_FLIP) if I.hflip
           I.transform = I.transform.concat(Matrix.VERTICAL_FLIP) if I.vflip
           I.transform = I.transform.concat(Matrix.translation(-I.width/2, -I.height/2))
