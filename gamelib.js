@@ -17923,7 +17923,7 @@ draw anything to the screen until the image has been loaded.
   window.Sprite.loadByName = function(name, callback) {
     var directory, url, _ref;
     directory = (typeof App !== "undefined" && App !== null ? (_ref = App.directories) != null ? _ref.images : void 0 : void 0) || "images";
-    url = "" + BASE_URL + "/" + directory + "/" + name + ".png" + MTIME;
+    url = "" + BASE_URL + "/" + directory + "/" + name + ".png?" + MTIME;
     return Sprite.load(url, callback);
   };
   return window.Sprite.create = Sprite;
