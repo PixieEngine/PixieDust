@@ -166,7 +166,7 @@ draw anything to the screen until the image has been loaded.
   ###
   window.Sprite.loadByName = (name, callback) ->
     directory = App?.directories?.images || "images"
-    url = "#{BASE_URL}/#{directory}/#{name}.png#{MTIME}"
+    url = "#{BASE_URL}/#{directory}/#{name}.png?#{MTIME}"
     Sprite.load(url, callback)
 
   window.Sprite.create = Sprite
