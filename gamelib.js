@@ -16067,7 +16067,7 @@ Bindable = function() {
     unbind: function(event, callback) {
       eventCallbacks[event] = eventCallbacks[event] || [];
       if (callback) {
-        return eventCallbacks.remove(callback);
+        return eventCallbacks[event].remove(callback);
       } else {
         return eventCallbacks[event] = [];
       }
