@@ -36,7 +36,7 @@ Bindable = ->
     eventCallbacks[event] = eventCallbacks[event] || []
 
     if callback
-      eventCallbacks.remove(callback)
+      eventCallbacks[event].remove(callback)
     else
       eventCallbacks[event] = []
 
