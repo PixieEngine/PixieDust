@@ -155,16 +155,11 @@
       self.trigger "draw", canvas
 
     step = ->
-      try
-        if !I.paused || frameAdvance
-          update()
-          I.age += 1
+      if !I.paused || frameAdvance
+        update()
+        I.age += 1
 
-        draw()
-      catch e
-        # Debug when we encounter an error
-        debugger
-        console?.error?(e)
+      draw()
 
     canvas = I.canvas || $("<canvas />").powerCanvas()
 
