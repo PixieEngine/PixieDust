@@ -16357,11 +16357,11 @@ Drawable = function(I, self) {
     @returns self
     */
     draw: function(canvas) {
-      self.trigger('before_transform', canvas);
+      self.trigger('beforeTransform', canvas);
       canvas.withTransform(self.getTransform(), function(canvas) {
         return self.trigger('draw', canvas);
       });
-      self.trigger('after_transform', canvas);
+      self.trigger('afterTransform', canvas);
       return self;
     },
     /**
@@ -16564,7 +16564,7 @@ Emitterable = function(I, self) {
   
   The current camera transform <b>is</b> applied.
   
-  @name preDraw
+  @name beforeDraw
   @methodOf Engine#
   @event
   */
@@ -16623,7 +16623,7 @@ Emitterable = function(I, self) {
         } else if (I.backgroundColor) {
           canvas.fill(I.backgroundColor);
         }
-        self.trigger("preDraw", canvas);
+        self.trigger("beforeDraw", canvas);
         if (I.zSort) {
           drawObjects = I.objects.copy().sort(function(a, b) {
             return a.I.zIndex - b.I.zIndex;
