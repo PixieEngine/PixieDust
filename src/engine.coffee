@@ -76,7 +76,7 @@
 
   The current camera transform <b>is</b> applied.
 
-  @name preDraw
+  @name beforeDraw
   @methodOf Engine#
   @event
   ###
@@ -142,7 +142,7 @@
         else if I.backgroundColor
           canvas.fill(I.backgroundColor)
 
-        self.trigger "preDraw", canvas
+        self.trigger "beforeDraw", canvas
 
         if I.zSort
           drawObjects = I.objects.copy().sort (a, b) ->
