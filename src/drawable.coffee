@@ -66,12 +66,12 @@ Drawable = (I, self) ->
   ###
   draw: (canvas) ->
 
-    self.trigger 'before_transform', canvas
+    self.trigger 'beforeTransform', canvas
 
     canvas.withTransform self.getTransform(), (canvas) ->
       self.trigger 'draw', canvas
 
-    self.trigger 'after_transform', canvas
+    self.trigger 'afterTransform', canvas
 
     return self
 
