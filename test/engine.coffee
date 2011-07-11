@@ -74,7 +74,7 @@ test "excluded modules", ->
 test "draw events", 2, ->
   engine = Engine()
 
-  engine.bind "preDraw", ->
+  engine.bind "beforeDraw", ->
     ok true
 
   engine.bind "draw", ->
