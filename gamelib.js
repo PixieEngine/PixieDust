@@ -16208,15 +16208,35 @@ Bounded = function(I, self) {
   };
 };;
 /**
-Collision holds many methods useful for checking geometric overlap of various objects.
+Collision holds many useful methods for checking geometric overlap of various objects.
 
 @name Collision
 @namespace
 */var Collision;
 Collision = {
+  /**
+    Takes two bounds objects and returns true if they collide (overlap), false otherwise.
+    Bounds objects have x, y, width and height properties.
+    
+    @name rectangular
+    @methodOf Collision
+    
+    @param a
+    @param b
+    */
   rectangular: function(a, b) {
     return a.x < b.x + b.width && a.x + a.width > b.x && a.y < b.y + b.height && a.y + a.height > b.y;
   },
+  /**
+  Takes two circle objects and returns true if they collide (overlap), false otherwise.
+  Circle objects have x, y, and radius.
+  
+  @name circular
+  @methodOf Collision
+  
+  @param a
+  @param b
+  */
   circular: function(a, b) {
     var dx, dy, r;
     r = a.radius + b.radius;
