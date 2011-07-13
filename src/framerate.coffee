@@ -1,11 +1,11 @@
 ###*
-@name Framerate
-@constructor
-
 This object keeps track of framerate and displays it by creating and appending an
 html element to the DOM.
 
 Once created you call snapshot at the end of every rendering cycle.
+
+@name Framerate
+@constructor
 ###
 Framerate = (options) ->
   options ||= {}
@@ -41,10 +41,10 @@ Framerate = (options) ->
   setInterval(updateFramerate, framerateUpdateInterval)
 
   ###*
+  Call this method everytime you render.
+
   @name rendered
   @methodOf Framerate#
-
-  Call this method everytime you render.
   ###
   self =
     rendered: ->
