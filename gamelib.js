@@ -4430,9 +4430,10 @@ Drawable = function(I, self) {
     @type Matrix
     */
     getTransform: function() {
-      var center, transform;
-      center = self.center().floor();
-      transform = Matrix.translation(center.x, center.y);
+      var centerX, centerY, transform;
+      centerX = (I.x + I.width / 2).floor();
+      centerY = (I.y + I.height / 2).floor();
+      transform = Matrix.translation(centerX, centerY);
       if (I.rotation) {
         transform = transform.concat(Matrix.rotation(I.rotation));
       }
