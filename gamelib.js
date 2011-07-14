@@ -5606,6 +5606,21 @@ Movable = function(I) {
     }
   };
 };;
+(function() {
+  var ResourceLoader, typeTable;
+  typeTable = {
+    images: "png"
+  };
+  ResourceLoader = {
+    urlFor: function(directory, name) {
+      var type, _ref;
+      directory = (typeof App !== "undefined" && App !== null ? (_ref = App.directories) != null ? _ref[directory] : void 0 : void 0) || directory;
+      type = typeTable[directory];
+      return "" + BASE_URL + "/" + directory + "/" + name + "." + type + "?" + MTIME;
+    }
+  };
+  return window["ResourceLoader"] = ResourceLoader;
+})();;
 var Rotatable;
 Rotatable = function(I) {
   I || (I = {});
