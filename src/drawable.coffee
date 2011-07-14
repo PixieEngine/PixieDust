@@ -83,9 +83,11 @@ Drawable = (I, self) ->
   @type Matrix
   ###
   getTransform: ->
-    center = self.center().floor()
+    # Optimization: Don't create any new point objects
+    centerX = (I.x + I.width/2).floor()
+    centerY = (I.y + I.height/2).floor()
 
-    transform = Matrix.translation(center.x, center.y)
+    transform = Matrix.translation(centerX, centerY)
 
     transform = transform.concat(Matrix.rotation(I.rotation)) if I.rotation
     transform = transform.concat(Matrix.HORIZONTAL_FLIP) if I.hflip
