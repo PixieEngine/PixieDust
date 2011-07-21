@@ -3,7 +3,7 @@
   "name": "gamelib",
   "library": true,
   "libs": {
-    "corelib.js": "https://github.com/STRd6/corelib/raw/pixie/corelib.js"
+    "corelib.js": "https://raw.github.com/STRd6/corelib/pixie/corelib.js"
   },
   "directories": {
     "lib": "lib",
