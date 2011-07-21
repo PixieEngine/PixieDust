@@ -5958,5 +5958,137 @@ draw anything to the screen until the image has been loaded.
     }
   };
 })();;
+var Joysticks;
+var __slice = Array.prototype.slice;
+Joysticks = (function() {
+  var AXIS_MAX, DEAD_ZONE, buttonMapping, displayInstallPrompt, joysticks, plugin, type;
+  type = "application/x-boomstickjavascriptjoysticksupport";
+  plugin = null;
+  AXIS_MAX = 32767;
+  DEAD_ZONE = AXIS_MAX * 0.125;
+  joysticks = [];
+  buttonMapping = {
+    "A": 1,
+    "B": 2,
+    "C": 4,
+    "D": 8,
+    "X": 4,
+    "Y": 8,
+    "R": 32,
+    "RB": 32,
+    "R1": 32,
+    "L": 16,
+    "LB": 16,
+    "L1": 16,
+    "ANY": 0xFFFFFF
+  };
+  displayInstallPrompt = function(text, url) {
+    return $("<a />", {
+      css: {
+        backgroundColor: "yellow",
+        color: "#000",
+        display: "block",
+        fontWeight: "bold",
+        left: 0,
+        padding: "1em",
+        position: "absolute",
+        textDecoration: "none",
+        top: 0,
+        width: "100%",
+        zIndex: 2000
+      },
+      href: url,
+      target: "_blank",
+      text: text
+    }).appendTo("body");
+  };
+  return {
+    getController: function(i) {
+      return {
+        actionDown: function() {
+          var buttons, stick;
+          buttons = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
+          if (stick = joysticks != null ? joysticks[i] : void 0) {
+            return buttons.inject(false, function(down, button) {
+              return down || stick.buttons & buttonMapping[button];
+            });
+          } else {
+            return false;
+          }
+        },
+        position: function(stick) {
+          var joystick;
+          if (stick == null) {
+            stick = 0;
+          }
+          if (joystick = joysticks != null ? joysticks[i] : void 0) {
+            return Joysticks.position(joystick, stick);
+          } else {
+            return Point(0, 0);
+          }
+        },
+        axis: function(n) {
+          var stick;
+          if (stick = joysticks != null ? joysticks[i] : void 0) {
+            return stick.axes[n];
+          }
+        },
+        axes: function() {
+          var stick;
+          if (stick = joysticks != null ? joysticks[i] : void 0) {
+            return stick.axes;
+          }
+        },
+        buttons: function() {
+          var stick;
+          if (stick = joysticks != null ? joysticks[i] : void 0) {
+            return stick.buttons;
+          }
+        }
+      };
+    },
+    init: function() {
+      if (!plugin) {
+        plugin = document.createElement("object");
+        plugin.type = type;
+        plugin.width = 0;
+        plugin.height = 0;
+        $("body").append(plugin);
+        plugin.maxAxes = 6;
+        if (!plugin.status) {
+          return displayInstallPrompt("Your browser does not yet handle joysticks, please click here to install the Boomstick plugin!", "https://github.com/STRd6/Boomstick/wiki");
+        }
+      }
+    },
+    position: function(joystick, stick) {
+      var magnitude, p, ratio;
+      if (stick == null) {
+        stick = 0;
+      }
+      p = Point(joystick.axes[2 * stick], joystick.axes[2 * stick + 1]);
+      magnitude = p.magnitude();
+      if (magnitude > AXIS_MAX) {
+        return p.norm();
+      } else if (magnitude < DEAD_ZONE) {
+        return Point(0, 0);
+      } else {
+        ratio = magnitude / AXIS_MAX;
+        return p.scale(ratio / AXIS_MAX);
+      }
+    },
+    states: function() {
+      return plugin != null ? plugin.joysticks : void 0;
+    },
+    status: function() {
+      return plugin != null ? plugin.status : void 0;
+    },
+    update: function() {
+      return joysticks = JSON.parse(plugin.joysticksJSON());
+    },
+    joysticks: function() {
+      return joysticks;
+    }
+  };
+})();;
 ;
 ;$(function(){ undefined });
