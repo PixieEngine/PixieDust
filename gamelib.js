@@ -5550,6 +5550,7 @@ Joysticks = (function() {
     return $("<a />", {
       css: {
         backgroundColor: "yellow",
+        boxSizing: "border-box",
         color: "#000",
         display: "block",
         fontWeight: "bold",
