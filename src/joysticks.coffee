@@ -24,6 +24,14 @@ Joysticks = ( ->
     "LB": 16
     "L1": 16
 
+    "SELECT": 64
+    "BACK": 64
+
+    "START": 128
+
+    "HOME": 256
+    "GUIDE": 256
+
     "ANY": 0xFFFFFF
 
   displayInstallPrompt = (text, url) ->
