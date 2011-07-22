@@ -5524,7 +5524,7 @@ Joysticks = (function() {
   type = "application/x-boomstickjavascriptjoysticksupport";
   plugin = null;
   AXIS_MAX = 32767;
-  DEAD_ZONE = AXIS_MAX * 0.125;
+  DEAD_ZONE = AXIS_MAX * 0.2;
   joysticks = [];
   buttonMapping = {
     "A": 1,
