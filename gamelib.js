@@ -4421,7 +4421,7 @@ Drawable = function(I, self) {
     */
     draw: function(canvas) {
       self.trigger('beforeTransform', canvas);
-      canvas.withTransform(self.getTransform(), function(canvas) {
+      canvas.withTransform(self.transform(), function(canvas) {
         return self.trigger('draw', canvas);
       });
       self.trigger('afterTransform', canvas);
@@ -4430,11 +4430,11 @@ Drawable = function(I, self) {
     /**
     Returns the current transform, with translation, rotation, and flipping applied.
     
-    @name getTransform
+    @name transform
     @methodOf Drawable#
     @type Matrix
     */
-    getTransform: function() {
+    transform: function() {
       var centerX, centerY, transform;
       centerX = (I.x + I.width / 2).floor();
       centerY = (I.y + I.height / 2).floor();
