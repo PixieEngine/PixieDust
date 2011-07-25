@@ -68,7 +68,7 @@ Drawable = (I, self) ->
 
     self.trigger 'beforeTransform', canvas
 
-    canvas.withTransform self.getTransform(), (canvas) ->
+    canvas.withTransform self.transform(), (canvas) ->
       self.trigger 'draw', canvas
 
     self.trigger 'afterTransform', canvas
@@ -78,11 +78,11 @@ Drawable = (I, self) ->
   ###*
   Returns the current transform, with translation, rotation, and flipping applied.
 
-  @name getTransform
+  @name transform
   @methodOf Drawable#
   @type Matrix
   ###
-  getTransform: ->
+  transform: ->
     # Optimization: Don't create any new point objects
     centerX = (I.x + I.width/2).floor()
     centerY = (I.y + I.height/2).floor()
