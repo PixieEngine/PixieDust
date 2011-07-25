@@ -4,7 +4,7 @@ test "should apply hflip and vflip transformations", ->
   object = GameObject
     hflip: true
 
-  transform = object.getTransform()
+  transform = object.transform()
 
   equal transform.a, Matrix.HORIZONTAL_FLIP.a
   equal transform.b, Matrix.HORIZONTAL_FLIP.b
@@ -14,7 +14,7 @@ test "should apply hflip and vflip transformations", ->
   object.I.hflip = false
   object.I.vflip = true
 
-  transform = object.getTransform()
+  transform = object.transform()
 
   equal transform.a, Matrix.VERTICAL_FLIP.a
   equal transform.b, Matrix.VERTICAL_FLIP.b
