@@ -4571,7 +4571,9 @@ Emitterable = function(I, self) {
     return false;
   };
   $(document).bind("keydown", function(event) {
-    return event.preventDefault();
+    if (!$(event.target).is("input")) {
+      return event.preventDefault();
+    }
   });
   /**
   The Engine controls the game world and manages game state. Once you 
