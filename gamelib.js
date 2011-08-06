@@ -5554,12 +5554,16 @@ GameUtil = {
 var Joysticks;
 var __slice = Array.prototype.slice;
 Joysticks = (function() {
-  var AXIS_MAX, DEAD_ZONE, buttonMapping, displayInstallPrompt, joysticks, plugin, type;
+  var AXIS_MAX, Controller, DEAD_ZONE, TRIP_HIGH, TRIP_LOW, buttonMapping, controllers, displayInstallPrompt, joysticks, plugin, previousJoysticks, type;
   type = "application/x-boomstickjavascriptjoysticksupport";
   plugin = null;
   AXIS_MAX = 32767;
   DEAD_ZONE = AXIS_MAX * 0.2;
+  TRIP_HIGH = AXIS_MAX * 0.75;
+  TRIP_LOW = AXIS_MAX * 0.5;
+  previousJoysticks = [];
   joysticks = [];
+  controllers = [];
   buttonMapping = {
     "A": 1,
     "B": 2,
@@ -5578,6 +5582,8 @@ Joysticks = (function() {
     "START": 128,
     "HOME": 256,
     "GUIDE": 256,
+    "TL": 512,
+    "TR": 1024,
     "ANY": 0xFFFFFF
   };
   displayInstallPrompt = function(text, url) {
@@ -5601,50 +5607,92 @@ Joysticks = (function() {
       text: text
     }).appendTo("body");
   };
+  Controller = function(i) {
+    var axisTrips, currentState, previousState, self;
+    currentState = function() {
+      return joysticks[i];
+    };
+    previousState = function() {
+      return previousJoysticks[i];
+    };
+    axisTrips = [];
+    return self = Core().include(Bindable).extend({
+      actionDown: function() {
+        var buttons, state;
+        buttons = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
+        if (state = currentState()) {
+          return buttons.inject(false, function(down, button) {
+            return down || state.buttons & buttonMapping[button];
+          });
+        } else {
+          return false;
+        }
+      },
+      buttonPressed: function(button) {
+        var buttonId;
+        buttonId = buttonMapping[button];
+        return (self.buttons() & buttonId) && !(previousState().buttons & buttonId);
+      },
+      position: function(stick) {
+        var state;
+        if (stick == null) {
+          stick = 0;
+        }
+        if (state = currentState()) {
+          return Joysticks.position(state, stick);
+        } else {
+          return Point(0, 0);
+        }
+      },
+      axis: function(n) {
+        return self.axes()[n] || 0;
+      },
+      axes: function() {
+        var state;
+        if (state = currentState()) {
+          return state.axes;
+        } else {
+          return [];
+        }
+      },
+      buttons: function() {
+        var state;
+        if (state = currentState()) {
+          return state.buttons;
+        }
+      },
+      processEvents: function() {
+        var x, y, _ref;
+        _ref = [0, 1].map(function(n) {
+          if (!axisTrips[n] && self.axis(n).abs() > TRIP_HIGH) {
+            axisTrips[n] = true;
+            return self.axis(n).sign();
+          }
+          if (axisTrips[n] && self.axis(n).abs() < TRIP_LOW) {
+            axisTrips[n] = false;
+          }
+          return 0;
+        }), x = _ref[0], y = _ref[1];
+        if (!x || !y) {
+          return self.trigger("tap", Point(x, y));
+        }
+      },
+      drawDebug: function(canvas) {
+        var axis, i, lineHeight, _len, _ref;
+        lineHeight = 18;
+        canvas.fillColor("#FFF");
+        _ref = self.axes();
+        for (i = 0, _len = _ref.length; i < _len; i++) {
+          axis = _ref[i];
+          canvas.fillText(axis, 0, i * lineHeight);
+        }
+        return canvas.fillText(self.buttons(), 0, i * lineHeight);
+      }
+    });
+  };
   return {
     getController: function(i) {
-      return {
-        actionDown: function() {
-          var buttons, stick;
-          buttons = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
-          if (stick = joysticks != null ? joysticks[i] : void 0) {
-            return buttons.inject(false, function(down, button) {
-              return down || stick.buttons & buttonMapping[button];
-            });
-          } else {
-            return false;
-          }
-        },
-        position: function(stick) {
-          var joystick;
-          if (stick == null) {
-            stick = 0;
-          }
-          if (joystick = joysticks != null ? joysticks[i] : void 0) {
-            return Joysticks.position(joystick, stick);
-          } else {
-            return Point(0, 0);
-          }
-        },
-        axis: function(n) {
-          var stick;
-          if (stick = joysticks != null ? joysticks[i] : void 0) {
-            return stick.axes[n];
-          }
-        },
-        axes: function() {
-          var stick;
-          if (stick = joysticks != null ? joysticks[i] : void 0) {
-            return stick.axes;
-          }
-        },
-        buttons: function() {
-          var stick;
-          if (stick = joysticks != null ? joysticks[i] : void 0) {
-            return stick.buttons;
-          }
-        }
-      };
+      return controllers[i] || (controllers[i] = Controller(i));
     },
     init: function() {
       if (!plugin) {
@@ -5675,14 +5723,21 @@ Joysticks = (function() {
         return p.scale(ratio / AXIS_MAX);
       }
     },
-    states: function() {
-      return plugin != null ? plugin.joysticks : void 0;
-    },
     status: function() {
       return plugin != null ? plugin.status : void 0;
     },
     update: function() {
-      return joysticks = JSON.parse(plugin.joysticksJSON());
+      var controller, _i, _len, _results;
+      if (plugin.joysticksJSON) {
+        previousJoysticks = joysticks;
+        joysticks = JSON.parse(plugin.joysticksJSON());
+      }
+      _results = [];
+      for (_i = 0, _len = controllers.length; _i < _len; _i++) {
+        controller = controllers[_i];
+        _results.push(controller != null ? controller.processEvents() : void 0);
+      }
+      return _results;
     },
     joysticks: function() {
       return joysticks;
