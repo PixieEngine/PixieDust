@@ -3,8 +3,14 @@ Joysticks = ( ->
   plugin = null
   AXIS_MAX = 32767
   DEAD_ZONE = AXIS_MAX * 0.2
+  TRIP_HIGH = AXIS_MAX * 0.75
+  TRIP_LOW = AXIS_MAX * 0.5
 
+  # Raw Joysticks data
+  previousJoysticks = []
   joysticks = []
+
+  controllers = []
 
   buttonMapping =
     "A": 1
@@ -32,6 +38,9 @@ Joysticks = ( ->
     "HOME": 256
     "GUIDE": 256
 
+    "TL": 512
+    "TR": 1024
+
     "ANY": 0xFFFFFF
 
   displayInstallPrompt = (text, url) ->
@@ -54,31 +63,73 @@ Joysticks = ( ->
       text: text
     .appendTo("body")
 
+  Controller = (i) ->
+    currentState = ->
+      joysticks[i]
+
+    previousState = ->
+      previousJoysticks[i]
+
+    axisTrips = []
+
+    self = Core().include(Bindable).extend
+      actionDown: (buttons...) ->
+        if state = currentState()
+          buttons.inject false, (down, button) ->
+            down || state.buttons & buttonMapping[button]
+        else
+          false
+
+      # true if button was just pressed
+      buttonPressed: (button) ->
+        buttonId = buttonMapping[button]
+
+        return (self.buttons() & buttonId) && !(previousState().buttons & buttonId)
+
+      position: (stick=0) ->
+        if state = currentState()
+          Joysticks.position(state, stick)
+        else
+          Point(0, 0)
+
+      axis: (n) ->
+        self.axes()[n] || 0
+
+      axes: ->
+        if state = currentState()
+          state.axes
+        else
+          []
+
+      buttons: ->
+        if state = currentState()
+          state.buttons
+
+      processEvents: ->
+        [x, y] = [0, 1].map (n) ->
+          if !axisTrips[n] && self.axis(n).abs() > TRIP_HIGH
+            axisTrips[n] = true
+
+            return self.axis(n).sign()
+
+          if axisTrips[n] && self.axis(n).abs() < TRIP_LOW
+            axisTrips[n] = false
+
+          return 0
+
+        self.trigger("tap", Point(x, y)) if !x || !y
+
+      drawDebug: (canvas) ->
+        lineHeight = 18
+        canvas.fillColor("#FFF")
+
+        for axis, i in self.axes()
+          canvas.fillText(axis, 0, i * lineHeight)
+
+        canvas.fillText(self.buttons(), 0, i * lineHeight)
+
   getController: (i) ->
-    actionDown: (buttons...) ->
-      if stick = joysticks?[i]
-        buttons.inject false, (down, button) ->
-          down || stick.buttons & buttonMapping[button]
-      else
-        false
-
-    position: (stick=0) ->
-      if joystick = joysticks?[i]
-        Joysticks.position(joystick, stick)
-      else
-        Point(0, 0)
-
-    axis: (n) ->
-      if stick = joysticks?[i]
-        stick.axes[n]
-    axes: ->
-      if stick = joysticks?[i]
-        stick.axes
-
-    buttons: ->
-      if stick = joysticks?[i]
-        stick.buttons
-
+    controllers[i] ||= Controller(i)
 
   init: ->
     unless plugin
@@ -108,14 +159,16 @@ Joysticks = ( ->
 
       p.scale(ratio / AXIS_MAX)
 
-  states: ->
-    plugin?.joysticks
-
   status: ->
     plugin?.status
 
   update: ->
-    joysticks = JSON.parse(plugin.joysticksJSON())
+    if plugin.joysticksJSON
+      previousJoysticks = joysticks
+      joysticks = JSON.parse(plugin.joysticksJSON())
+
+    for controller in controllers
+      controller?.processEvents()
 
   joysticks: ->
     joysticks
