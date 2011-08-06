@@ -5057,6 +5057,38 @@ the responsibility of the objects drawing on it to manage that themselves.
   });
   return {};
 };;
+(function($) {
+  /**
+  The <code>Joysticks</code> module gives the engine access to joysticks.
+  
+  @name Joysticks
+  @fieldOf Engine
+  @module
+  
+  @param {Object} I Instance variables
+  @param {Object} self Reference to the engine
+  */  return Engine.Joysticks = function(I, self) {
+    Joysticks.init();
+    log(Joysticks.status());
+    self.bind("update", function() {
+      Joysticks.init();
+      return Joysticks.update();
+    });
+    return {
+      /**
+      Get a controller for a given joystick id.
+      
+      @name controller
+      @methodOf Engine.Joysticks#
+      
+      @param {Number} i The joystick id to get the controller of.
+      */
+      controller: function(i) {
+        return Joysticks.getController(i);
+      }
+    };
+  };
+})();;
 /**
 The <code>SaveState</code> module provides methods to save and restore the current engine state.
 
@@ -5883,7 +5915,9 @@ draw anything to the screen until the image has been loaded.
       },
       fill: function(canvas, x, y, width, height, repeat) {
         var pattern;
-        repeat || (repeat = "repeat");
+        if (repeat == null) {
+          repeat = "repeat";
+        }
         pattern = canvas.createPattern(image, repeat);
         canvas.fillColor(pattern);
         return canvas.fillRect(x, y, width, height);
