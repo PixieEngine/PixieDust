@@ -5,6 +5,7 @@
     ambientLight: 1
     backgroundColor: "#00010D"
     cameraTransform: Matrix.IDENTITY
+    clear: false
     excludedModules: []
     includedModules: []
     paused: false
