@@ -263,9 +263,7 @@
         self.start()
     }
 
-    self.attrAccessor "ambientLight"
-    self.attrAccessor "backgroundColor"
-    self.attrAccessor "cameraTransform"
+    self.attrAccessor "ambientLight", "backgroundColor", "cameraTransform", "clear"
     self.include Bindable
 
     defaultModules = ["Shadows", "HUD", "Developer", "SaveState", "Selector", "Collision", "Tilemap", "FPSCounter"]
