@@ -61,7 +61,6 @@ Animated = (I, self) ->
     vflip: false
     lastUpdate: new Date().getTime()
     useTimer: false
-    transform: Matrix.IDENTITY
 
   loadByName = (name, callback) ->
     url = "#{BASE_URL}/animations/#{name}.animation?#{new Date().getTime()}"
@@ -95,9 +94,6 @@ Animated = (I, self) ->
 
   advanceFrame = ->
     frames = I.activeAnimation.frames
-
-    I.hflip = I.activeAnimation.transform?[I.currentFrameIndex]?.hflip
-    I.vflip = I.activeAnimation.transform?[I.currentFrameIndex]?.vflip     
 
     if I.currentFrameIndex == frames.indexOf(frames.last())
       self.trigger("Complete") 
@@ -144,8 +140,6 @@ Animated = (I, self) ->
 
         I.currentFrameIndex = 0
         updateSprite(firstSprite)
-        I.hflip = I.activeAnimation.transform?[I.currentFrameIndex]?.hflip
-        I.vflip = I.activeAnimation.transform?[I.currentFrameIndex]?.vflip
       else
         warn "Could not find animation state '#{newState}'. The current transition will be ignored" if I.debugAnimation        
 
