@@ -1189,7 +1189,7 @@ $(function() {
       http://mathworld.wolfram.com/MatrixMultiplication.html
       @name concat
       @methodOf Matrix#
-      
+    
       @param {Matrix} matrix The matrix to multiply this matrix by.
       @returns The result of the matrix multiplication, a new matrix.
       @type Matrix
@@ -1342,53 +1342,20 @@ $(function() {
   @name IDENTITY
   @fieldOf Matrix
   */
-  Matrix.IDENTITY = Matrix();
+  Matrix.IDENTITY = Object.freeze(Matrix());
   /**
   A constant representing the horizontal flip transformation matrix.
   @name HORIZONTAL_FLIP
   @fieldOf Matrix
   */
-  Matrix.HORIZONTAL_FLIP = Matrix(-1, 0, 0, 1);
+  Matrix.HORIZONTAL_FLIP = Object.freeze(Matrix(-1, 0, 0, 1));
   /**
   A constant representing the vertical flip transformation matrix.
   @name VERTICAL_FLIP
   @fieldOf Matrix
   */
-  Matrix.VERTICAL_FLIP = Matrix(1, 0, 0, -1);
-  window["Point"] = $.noop;
+  Matrix.VERTICAL_FLIP = Object.freeze(Matrix(1, 0, 0, -1));
   return window["Matrix"] = Matrix;
-})();;
-window.Mouse = (function() {
-  var Mouse, buttons, set_button;
-  Mouse = {
-    left: false,
-    right: false,
-    middle: false,
-    location: Point(0, 0)
-  };
-  buttons = [null, "left", "middle", "right"];
-  set_button = function(index, state) {
-    var button_name;
-    button_name = buttons[index];
-    if (button_name) {
-      return Mouse[button_name] = state;
-    }
-  };
-  $(document).mousedown(function(event) {
-    return set_button(event.which, true);
-  });
-  $(document).mouseup(function(event) {
-    return set_button(event.which, false);
-  });
-  $(document).mousemove(function(event) {
-    var x, y;
-    x = event.pageX;
-    y = event.pageY;
-    Mouse.location = Point(x, y);
-    Mouse.x = x;
-    return Mouse.y = y;
-  });
-  return Mouse;
 })();;
 /** 
 Returns the absolute value of this number.
@@ -1508,6 +1475,34 @@ Number.prototype.sign = function() {
     return -1;
   } else {
     return 0;
+  }
+};
+/**
+Returns true if this number is even (evenly divisible by 2).
+
+@name even
+@methodOf Number#
+
+@type Boolean
+@returns true if this number is an even integer, false otherwise.
+*/
+Number.prototype.even = function() {
+  return this % 2 === 0;
+};
+/**
+Returns true if this number is odd (has remainder of 1 when divided by 2).
+
+@name odd
+@methodOf Number#
+
+@type Boolean
+@returns true if this number is an odd integer, false otherwise.
+*/
+Number.prototype.odd = function() {
+  if (this > 0) {
+    return this % 2 === 1;
+  } else {
+    return this % 2 === -1;
   }
 };
 /**
@@ -1779,10 +1774,15 @@ Checks whether an object is an array.
       return this.copy().norm$(length);
     },
     norm$: function(length) {
+      var m;
       if (length == null) {
         length = 1.0;
       }
-      return this.scale$(length / this.length());
+      if (m = this.length()) {
+        return this.scale$(length / m);
+      } else {
+        return this;
+      }
     },
     /**
     Floor the x and y values, returning a new point.
@@ -1885,6 +1885,8 @@ Checks whether an object is an array.
       return Point.distance(this, other);
     }
     /**
+    @name distance
+    @methodOf Point
     @param {Point} p1
     @param {Point} p2
     @type Number
@@ -1896,6 +1898,9 @@ Checks whether an object is an array.
   };
   /**
   Construct a point on the unit circle for the given angle.
+  
+  @name fromAngle
+  @methodOf Point
   
   @param {Number} angle The angle in radians
   @type Point
@@ -1909,13 +1914,24 @@ Checks whether an object is an array.
   standing at point p2, then this method will return the direction
   that the dude standing at p1 will need to face to look at p2.
   
+  @name direction
+  @methodOf Point
+  
   @param {Point} p1 The starting point.
   @param {Point} p2 The ending point.
+  @type Number
   @returns The direction from p1 to p2 in radians.
   */
   Point.direction = function(p1, p2) {
     return Math.atan2(p2.y - p1.y, p2.x - p1.x);
   };
+  /**
+  @name ZERO
+  @fieldOf Point
+  
+  @type Point
+  */
+  Point.ZERO = Object.freeze(Point());
   return window["Point"] = Point;
 })();;
 var __slice = Array.prototype.slice;
@@ -3877,8 +3893,7 @@ Animated = function(I, self) {
     hflip: false,
     vflip: false,
     lastUpdate: new Date().getTime(),
-    useTimer: false,
-    transform: Matrix.IDENTITY
+    useTimer: false
   });
   loadByName = function(name, callback) {
     var url;
@@ -3912,10 +3927,8 @@ Animated = function(I, self) {
     throw "No animation data provided. Use animationName to specify an animation to load from the project or pass in raw JSON to the data key.";
   }
   advanceFrame = function() {
-    var frames, nextState, sprite, _ref2, _ref3, _ref4, _ref5;
+    var frames, nextState, sprite;
     frames = I.activeAnimation.frames;
-    I.hflip = (_ref2 = I.activeAnimation.transform) != null ? (_ref3 = _ref2[I.currentFrameIndex]) != null ? _ref3.hflip : void 0 : void 0;
-    I.vflip = (_ref4 = I.activeAnimation.transform) != null ? (_ref5 = _ref4[I.currentFrameIndex]) != null ? _ref5.vflip : void 0 : void 0;
     if (I.currentFrameIndex === frames.indexOf(frames.last())) {
       self.trigger("Complete");
       if (nextState = I.activeAnimation.complete) {
@@ -3957,15 +3970,13 @@ Animated = function(I, self) {
         return;
       }
       toNextState = function(state) {
-        var firstFrame, firstSprite, nextState, _ref2, _ref3, _ref4, _ref5;
+        var firstFrame, firstSprite, nextState;
         if (nextState = find(state)) {
           I.activeAnimation = nextState;
           firstFrame = I.activeAnimation.frames.first();
           firstSprite = I.spriteLookup[firstFrame];
           I.currentFrameIndex = 0;
-          updateSprite(firstSprite);
-          I.hflip = (_ref2 = I.activeAnimation.transform) != null ? (_ref3 = _ref2[I.currentFrameIndex]) != null ? _ref3.hflip : void 0 : void 0;
-          return I.vflip = (_ref4 = I.activeAnimation.transform) != null ? (_ref5 = _ref4[I.currentFrameIndex]) != null ? _ref5.vflip : void 0 : void 0;
+          return updateSprite(firstSprite);
         } else {
           if (I.debugAnimation) {
             return warn("Could not find animation state '" + newState + "'. The current transition will be ignored");
