@@ -3995,9 +3995,6 @@ Animated = function(I, self) {
         return toNextState(newState);
       }
     },
-    transform: function() {
-      return I.transform;
-    },
     before: {
       update: function() {
         var time, triggers, updateFrame, _ref2, _ref3;
