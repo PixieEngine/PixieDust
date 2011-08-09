@@ -152,8 +152,6 @@ Animated = (I, self) ->
 
       toNextState(newState)     
 
-  transform: -> I.transform
-
   before:  
     update: ->       
       if I.useTimer
