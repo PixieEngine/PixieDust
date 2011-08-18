@@ -261,4 +261,4 @@
     return self
 
   (exports ? this)["Engine"] = Engine
-)(jQuery)
+)()
