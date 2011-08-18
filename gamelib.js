@@ -3791,7 +3791,7 @@ Emitterable = function(I, self) {
     return self;
   };
   return (typeof exports !== "undefined" && exports !== null ? exports : this)["Engine"] = Engine;
-})(jQuery);;
+})();;
 /**
 The <code>Collision</code> module provides some simple collision detection methods to engine.
 
