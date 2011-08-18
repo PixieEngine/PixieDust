@@ -17,7 +17,7 @@
             for entity in entities
               {x, y, uuid} = entity
 
-              entityData = $.extend(
+              entityData = Object.extend(
                 layer: layerIndex
                 sprite: spriteLookup[uuid]
                 x: x
@@ -30,7 +30,7 @@
 
     loadEntities()
 
-    $.extend data,
+    Object.extend data,
       draw: (canvas, x, y) ->
         canvas.withTransform Matrix.translation(x, y), () ->
           data.layers.each (layer) ->
@@ -41,17 +41,17 @@
                 if sprite = spriteLookup[uuid]
                   sprite.draw(canvas, x * tileWidth, y * tileHeight)
 
-  window.Tilemap = (name, callback, entityCallback) ->
+  Tilemap = (name, callback, entityCallback) ->
     fromPixieId(App.Tilemaps[name], callback, entityCallback)
 
   fromPixieId = (id, callback, entityCallback) ->
     url = "http://pixieengine.com/s3/tilemaps/#{id}/data.json"
 
     proxy =
-      draw: $.noop
+      draw: ->
 
     $.getJSON url, (data) ->
-      $.extend(proxy, Map(data, entityCallback))
+      Object.extend(proxy, Map(data, entityCallback))
 
       callback? proxy
 
@@ -63,22 +63,22 @@
     url = "#{BASE_URL}/#{directory}/#{name}.tilemap?#{new Date().getTime()}"
 
     proxy =
-      draw: $.noop
+      draw: ->
 
     $.getJSON url, (data) ->
-      $.extend(proxy, Map(data, entityCallback))
+      Object.extend(proxy, Map(data, entityCallback))
 
       callback? proxy
 
     return proxy
 
-  window.Tilemap.fromPixieId = fromPixieId
+  Tilemap.fromPixieId = fromPixieId
 
-  window.Tilemap.load = (options) ->
+  Tilemap.load = (options) ->
     if options.pixieId
       fromPixieId options.pixieId, options.complete, options.entity
     else if options.name
       loadByName options.name, options.complete, options.entity
 
+  (exports ? this)["Tilemap"] = Tilemap
 )()
-

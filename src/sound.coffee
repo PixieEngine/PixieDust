@@ -24,7 +24,7 @@
     stop: ->
       Sound.stop(id)
 
-  $.extend Sound,
+  Object.extend Sound,
     play: (id, maxChannels) ->
       # TODO: Too many channels crash Chrome!!!1
       maxChannels ||= 4
@@ -59,6 +59,6 @@
     stop: (id) ->
       sounds[id]?.stop()
 
-    window.Sound = Sound
+    (exports ? this)["Sound"] = Sound
 )(jQuery)
 

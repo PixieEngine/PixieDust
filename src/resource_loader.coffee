@@ -10,6 +10,5 @@
 
       "#{BASE_URL}/#{directory}/#{name}.#{type}?#{MTIME}"
 
-  window["ResourceLoader"] = ResourceLoader
+  (exports ? this)["ResourceLoader"] = ResourceLoader
 )()
-
