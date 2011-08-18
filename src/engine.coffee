@@ -205,7 +205,7 @@
       @methodOf Engine#
       @name start
       ###
-      start: () ->
+      start: ->
         unless running
           running = true
           window.requestAnimationFrame(animLoop)
