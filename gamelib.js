@@ -4326,7 +4326,7 @@ draw anything to the screen until the image has been loaded.
 @name Sprite
 @constructor
 */(function() {
-  var LoaderProxy, Sprite, fromPixieId, pixieSpriteImagePath;
+  var LoaderProxy, Sprite;
   LoaderProxy = function() {
     return {
       draw: function() {},
@@ -4370,10 +4370,8 @@ draw anything to the screen until the image has been loaded.
     };
   };
   Sprite.loadSheet = function(name, tileWidth, tileHeight) {
-    var directory, image, sprites, url, _ref;
-    directory = (typeof App !== "undefined" && App !== null ? (_ref = App.directories) != null ? _ref.images : void 0 : void 0) || "images";
-    url = "" + BASE_URL + "/" + directory + "/" + name + ".png?" + MTIME;
-    console.log(url);
+    var image, sprites, url;
+    url = ResourceLoader.urlFor("images", name);
     sprites = [];
     image = new Image();
     image.onload = function() {
@@ -4403,22 +4401,19 @@ draw anything to the screen until the image has been loaded.
     img.src = url;
     return proxy;
   };
-  pixieSpriteImagePath = "http://pixieengine.com/s3/sprites/";
-  fromPixieId = function(id, callback) {
-    return Sprite.load(pixieSpriteImagePath + id + "/original.png", callback);
-  };
-  window.Sprite = function(name, callback) {
-    var id;
-    if (App.Sprites) {
-      id = App.Sprites[name];
-      if (id) {
-        return fromPixieId(id, callback);
-      } else {
-        return warn("Could not find sprite named: '" + name + "' in App.");
-      }
-    } else {
-      return window.Sprite.fromURL(name, callback);
-    }
+  /**
+  Loads a sprite with the given pixie id.
+  
+  @name fromPixieId
+  @methodOf Sprite
+  
+  @param id
+  @param [callback]
+  
+  @type Sprite
+  */
+  Sprite.fromPixieId = function(id, callback) {
+    return Sprite.load("http://pixieengine.com/s3/sprites/" + id + "/original.png", callback);
   };
   /**
   A sprite that draws nothing.
@@ -4436,19 +4431,7 @@ draw anything to the screen until the image has been loaded.
   @constant
   @type Sprite
   */
-  window.Sprite.EMPTY = window.Sprite.NONE = LoaderProxy();
-  /**
-  Loads a sprite with the given pixie id.
-  
-  @name fromPixieId
-  @methodOf Sprite
-  
-  @param id
-  @param [callback]
-  
-  @type Sprite
-  */
-  window.Sprite.fromPixieId = fromPixieId;
+  Sprite.EMPTY = Sprite.NONE = LoaderProxy();
   /**
   Loads a sprite from a given url.
   
@@ -4460,7 +4443,7 @@ draw anything to the screen until the image has been loaded.
   
   @type Sprite
   */
-  window.Sprite.fromURL = Sprite.load;
+  Sprite.fromURL = Sprite.load;
   /**
   Loads a sprite with the given name.
   
@@ -4472,13 +4455,10 @@ draw anything to the screen until the image has been loaded.
   
   @type Sprite
   */
-  window.Sprite.loadByName = function(name, callback) {
-    var directory, url, _ref;
-    directory = (typeof App !== "undefined" && App !== null ? (_ref = App.directories) != null ? _ref.images : void 0 : void 0) || "images";
-    url = "" + BASE_URL + "/" + directory + "/" + name + ".png?" + MTIME;
-    return Sprite.load(url, callback);
+  Sprite.loadByName = function(name, callback) {
+    return Sprite.load(ResourceLoader.urlFor("images", name), callback);
   };
-  return window.Sprite.create = Sprite;
+  return (typeof exports !== "undefined" && exports !== null ? exports : this)["Sprite"] = Sprite;
 })();;
 ;
 ;$(function(){ undefined });
