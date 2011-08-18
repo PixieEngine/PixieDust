@@ -4461,4 +4461,3 @@ draw anything to the screen until the image has been loaded.
   return (typeof exports !== "undefined" && exports !== null ? exports : this)["Sprite"] = Sprite;
 })();;
 ;
-;$(function(){ undefined });
