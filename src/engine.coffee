@@ -117,7 +117,7 @@
         window.requestAnimationFrame(animLoop)
 
     update = ->
-      window.updateKeys()
+      window.updateKeys?()
 
       self.trigger "update"
 
@@ -260,7 +260,7 @@
     self.attrAccessor "ambientLight", "backgroundColor", "cameraTransform", "clear"
     self.include Bindable
 
-    defaultModules = ["Shadows", "HUD", "Developer", "SaveState", "Selector", "Collision", "Tilemap", "FPSCounter"]
+    defaultModules = ["SaveState", "Selector", "Collision", "FPSCounter"]
     modules = defaultModules.concat(I.includedModules)
     modules = modules.without([].concat(I.excludedModules))
 
