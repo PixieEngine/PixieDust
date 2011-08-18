@@ -93,10 +93,10 @@
   @event
   ###
 
-  window.Engine = (I) ->
+  Engine = (I) ->
     I ||= {}
 
-    $.reverseMerge I, {
+    Object.reverseMerge I, {
       objects: []
     }, defaults
 
@@ -279,5 +279,6 @@
     self.trigger "init"
 
     return self
-)(jQuery)
 
+  (exports ? this)["Engine"] = Engine
+)(jQuery)
