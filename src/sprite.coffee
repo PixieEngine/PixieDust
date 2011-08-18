@@ -56,11 +56,7 @@ draw anything to the screen until the image has been loaded.
     height: height
 
   Sprite.loadSheet = (name, tileWidth, tileHeight) ->
-    directory = App?.directories?.images || "images"
-
-    url = "#{BASE_URL}/#{directory}/#{name}.png?#{MTIME}"
-
-    console.log url
+    url = ResourceLoader.urlFor("images", name)
 
     sprites = []
     image = new Image()
@@ -91,22 +87,20 @@ draw anything to the screen until the image has been loaded.
 
     return proxy
 
-  pixieSpriteImagePath = "http://pixieengine.com/s3/sprites/"
+  ###*
+  Loads a sprite with the given pixie id.
 
-  fromPixieId = (id, callback) ->
-    Sprite.load(pixieSpriteImagePath + id + "/original.png", callback)
+  @name fromPixieId
+  @methodOf Sprite
 
-  window.Sprite = (name, callback) ->
-    if App.Sprites
-      id = App.Sprites[name]
-      if id
-        fromPixieId(id, callback)
-      else
-        warn("Could not find sprite named: '" + name + "' in App.")
+  @param id
+  @param [callback]
 
-    else
-      # Treat name as URL
-      return window.Sprite.fromURL(name, callback)
+  @type Sprite
+  ###
+  Sprite.fromPixieId = (id, callback) ->
+    Sprite.load("http://pixieengine.com/s3/sprites/#{id}/original.png", callback)
+
 
   ###*
   A sprite that draws nothing.
@@ -124,20 +118,7 @@ draw anything to the screen until the image has been loaded.
   @constant
   @type Sprite
   ###
-  window.Sprite.EMPTY = window.Sprite.NONE = LoaderProxy()
-
-  ###*
-  Loads a sprite with the given pixie id.
-
-  @name fromPixieId
-  @methodOf Sprite
-
-  @param id
-  @param [callback]
-
-  @type Sprite
-  ###
-  window.Sprite.fromPixieId = fromPixieId
+  Sprite.EMPTY = Sprite.NONE = LoaderProxy()
 
   ###*
   Loads a sprite from a given url.
@@ -150,7 +131,7 @@ draw anything to the screen until the image has been loaded.
 
   @type Sprite
   ###
-  window.Sprite.fromURL = Sprite.load
+  Sprite.fromURL = Sprite.load
 
   ###*
   Loads a sprite with the given name.
@@ -163,12 +144,9 @@ draw anything to the screen until the image has been loaded.
 
   @type Sprite
   ###
-  window.Sprite.loadByName = (name, callback) ->
-    directory = App?.directories?.images || "images"
-    url = "#{BASE_URL}/#{directory}/#{name}.png?#{MTIME}"
-    Sprite.load(url, callback)
+  Sprite.loadByName = (name, callback) ->
+    Sprite.load(ResourceLoader.urlFor("images", name), callback)
 
-  window.Sprite.create = Sprite
-
+  (exports ? this)["Sprite"] = Sprite
 )()
 
