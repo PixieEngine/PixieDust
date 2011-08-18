@@ -131,21 +131,22 @@
 
       self.trigger "afterUpdate"
 
-    draw = (canvas) ->
-      if I.clear
-        canvas.clear()
-      else if I.backgroundColor
-        canvas.fill(I.backgroundColor)
+    draw = ->
+      I.canvas.withTransform I.cameraTransform, (canvas) ->
+        if I.clear
+          canvas.clear()
+        else if I.backgroundColor
+          canvas.fill(I.backgroundColor)
 
-      self.trigger "beforeDraw", canvas
+        self.trigger "beforeDraw", canvas
 
-      if I.zSort
-        drawObjects = I.objects.copy().sort (a, b) ->
-          a.I.zIndex - b.I.zIndex
-      else
-        drawObjects = I.objects
+        if I.zSort
+          drawObjects = I.objects.copy().sort (a, b) ->
+            a.I.zIndex - b.I.zIndex
+        else
+          drawObjects = I.objects
 
-      drawObjects.invoke("draw", canvas)
+        drawObjects.invoke("draw", canvas)
 
       self.trigger "draw", I.canvas
 
@@ -182,19 +183,6 @@
           I.objects.push obj
 
         return obj
-
-      ###*
-      Returns a reference to the canvas.
-
-      @name canvas
-      @methodOf Engine#
-      ###
-      canvas: ->
-        canvas
-
-      #TODO: This is a bad idea in case access is attempted during update
-      objects: ->
-        I.objects
 
       objectAt: (x, y) ->
         targetObject = null
@@ -256,7 +244,7 @@
         self.start()
     }
 
-    self.attrAccessor "ambientLight", "backgroundColor", "clear"
+    self.attrAccessor "ambientLight", "backgroundColor", "cameraTransform", "clear"
     self.include Bindable
 
     defaultModules = ["SaveState", "Selector", "Collision", "FPSCounter"]
