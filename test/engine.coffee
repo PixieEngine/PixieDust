@@ -15,17 +15,17 @@ test "#save and #restore", ->
   engine.add {}
   engine.add {}
 
-  equals(engine.objects().length, 2)
+  equals(engine.I.objects.length, 2)
 
   engine.saveState()
 
   engine.add {}
 
-  equals(engine.objects().length, 3)
+  equals(engine.I.objects.length, 3)
 
   engine.loadState()
 
-  equals(engine.objects().length, 2)
+  equals(engine.I.objects.length, 2)
 
 test "before add event", 1, ->
   engine = Engine()
@@ -38,6 +38,7 @@ test "before add event", 1, ->
 
 test "zSort", ->
   engine = Engine
+    backgroundColor: false
     zSort: true
 
   n = 0
@@ -72,7 +73,8 @@ test "excluded modules", ->
     excludedModules: ["Developer"]
 
 test "draw events", 2, ->
-  engine = Engine()
+  engine = Engine
+    backgroundColor: false
 
   engine.bind "beforeDraw", ->
     ok true
@@ -83,7 +85,8 @@ test "draw events", 2, ->
   engine.frameAdvance()
 
 test "Remove event", 1, ->
-  engine = Engine()
+  engine = Engine
+    backgroundColor: false
 
   object = engine.add
     active: false
