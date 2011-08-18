@@ -131,22 +131,21 @@
 
       self.trigger "afterUpdate"
 
-    draw = ->
-      I.canvas.withTransform I.cameraTransform, (canvas) ->
-        if I.clear
-          canvas.clear()
-        else if I.backgroundColor
-          canvas.fill(I.backgroundColor)
+    draw = (canvas) ->
+      if I.clear
+        canvas.clear()
+      else if I.backgroundColor
+        canvas.fill(I.backgroundColor)
 
-        self.trigger "beforeDraw", canvas
+      self.trigger "beforeDraw", canvas
 
-        if I.zSort
-          drawObjects = I.objects.copy().sort (a, b) ->
-            a.I.zIndex - b.I.zIndex
-        else
-          drawObjects = I.objects
+      if I.zSort
+        drawObjects = I.objects.copy().sort (a, b) ->
+          a.I.zIndex - b.I.zIndex
+      else
+        drawObjects = I.objects
 
-        drawObjects.invoke("draw", canvas)
+      drawObjects.invoke("draw", canvas)
 
       self.trigger "draw", I.canvas
 
@@ -257,7 +256,7 @@
         self.start()
     }
 
-    self.attrAccessor "ambientLight", "backgroundColor", "cameraTransform", "clear"
+    self.attrAccessor "ambientLight", "backgroundColor", "clear"
     self.include Bindable
 
     defaultModules = ["SaveState", "Selector", "Collision", "FPSCounter"]
