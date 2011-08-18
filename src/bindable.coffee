@@ -58,5 +58,4 @@ Bindable = ->
       callbacks.each (callback) ->
         callback.apply(self, parameters)
 
-window.Bindable = Bindable
-
+(exports ? this)["Bindable"] = Bindable
