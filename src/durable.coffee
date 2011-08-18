@@ -10,7 +10,7 @@ specified the object will have an unlimited duration.
 @param {Object} I Instance variables
 ###
 Durable = (I) ->
-  $.reverseMerge I,
+  Object.reverseMerge I,
     duration: -1
 
   before:

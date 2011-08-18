@@ -14,7 +14,7 @@ Bounded module
 Bounded = (I, self) ->
   I ||= {}
 
-  $.reverseMerge I,
+  Object.reverseMerge I,
     x: 0
     y: 0
     width: 8

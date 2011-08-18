@@ -10,7 +10,7 @@ collisions so is probably best suited to particle effect like things.
 @param {Object} I Instance variables
 ###
 Movable = (I) ->
-  $.reverseMerge I,
+  Object.reverseMerge I,
     acceleration: Point(0, 0)
     velocity: Point(0, 0)
 

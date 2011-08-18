@@ -1,7 +1,7 @@
 Rotatable = (I) ->
   I ||= {}
   
-  $.reverseMerge I,
+  Object.reverseMerge I,
     rotation: 0
     rotationalVelocity: 0
     

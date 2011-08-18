@@ -28,7 +28,7 @@ the first argument.
 Drawable = (I, self) ->
   I ||= {}
 
-  $.reverseMerge I,
+  Object.reverseMerge I,
     color: "#196"
     hflip: false
     vflip: false

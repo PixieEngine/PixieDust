@@ -9,7 +9,7 @@ The <code>FPSCounter</code> module tracks and displays the framerate.
 @param {Object} self Reference to the engine
 ###
 Engine.FPSCounter = (I, self) ->
-  $.reverseMerge I,
+  Object.reverseMerge I,
     showFPS: false
 
   framerate = Framerate

@@ -11,10 +11,10 @@ draw anything to the screen until the image has been loaded.
 
 ( ->
   LoaderProxy = ->
-    draw: $.noop
-    fill: $.noop
-    frame: $.noop
-    update: $.noop
+    draw: ->
+    fill: ->
+    frame: ->
+    update: ->
     width: null
     height: null
 
@@ -82,7 +82,7 @@ draw anything to the screen until the image has been loaded.
     img.onload = ->
       tile = Sprite(this)
 
-      $.extend(proxy, tile)
+      Object.extend(proxy, tile)
 
       if loadedCallback
         loadedCallback(proxy)

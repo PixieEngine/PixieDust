@@ -58,7 +58,7 @@ GameObject = (I) ->
   @name I
   @memberOf GameObject#
   ###
-  $.reverseMerge I,
+  Object.reverseMerge I,
     age: 0
     active: true
     created: false

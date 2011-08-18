@@ -2,7 +2,7 @@
 Emitterable = (I, self) ->
   I ||= {}
 
-  $.reverseMerge I,
+  Object.reverseMerge I,
     batchSize: 1
     emissionRate: 1
     color: "blue"
@@ -36,12 +36,12 @@ Emitterable = (I, self) ->
         if n < I.particleCount && rand() < I.emissionRate
           center = self.center()
 
-          particleProperties = $.reverseMerge {
+          particleProperties = Object.reverseMerge {
             x: center.x
             y: center.y
           }, I.particleData
 
-          $.each I.generator, (key, value) ->
+          for key, value of I.generator
             if I.generator[key].call
               particleProperties[key] = I.generator[key](n, I)
             else
