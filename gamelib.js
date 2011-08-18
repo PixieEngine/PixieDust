@@ -3446,7 +3446,7 @@ Bindable = function() {
     }
   };
 };
-window.Bindable = Bindable;;
+(typeof exports !== "undefined" && exports !== null ? exports : this)["Bindable"] = Bindable;;
 /**
 The Bounded module is used to provide basic data about the
 location and dimensions of the including object
@@ -4155,7 +4155,7 @@ Emitterable = function(I, self) {
   };
 };;
 (function($) {
-  var defaults;
+  var Engine, defaults;
   defaults = {
     FPS: 30,
     age: 0,
@@ -4246,10 +4246,10 @@ Emitterable = function(I, self) {
   @methodOf Engine#
   @event
   */
-  return window.Engine = function(I) {
+  Engine = function(I) {
     var animLoop, canvas, defaultModules, draw, frameAdvance, lastStepTime, modules, queuedObjects, running, self, startTime, step, update;
     I || (I = {});
-    $.reverseMerge(I, {
+    Object.reverseMerge(I, {
       objects: []
     }, defaults);
     frameAdvance = false;
@@ -4426,6 +4426,7 @@ Emitterable = function(I, self) {
     self.trigger("init");
     return self;
   };
+  return (typeof exports !== "undefined" && exports !== null ? exports : this)["Engine"] = Engine;
 })(jQuery);;
 /**
 The <code>Collision</code> module provides some simple collision detection methods to engine.
@@ -5917,7 +5918,7 @@ window.requestAnimationFrame || (window.requestAnimationFrame = window.webkitReq
       return "" + BASE_URL + "/" + directory + "/" + name + "." + type + "?" + MTIME;
     }
   };
-  return window["ResourceLoader"] = ResourceLoader;
+  return (typeof exports !== "undefined" && exports !== null ? exports : this)["ResourceLoader"] = ResourceLoader;
 })();;
 var Rotatable;
 Rotatable = function(I) {
@@ -5958,7 +5959,7 @@ Rotatable = function(I) {
       }
     };
   };
-  return $.extend(Sound, {
+  return Object.extend(Sound, {
     play: function(id, maxChannels) {
       var channel, channels, freeChannels, sound;
       maxChannels || (maxChannels = 4);
@@ -5993,7 +5994,7 @@ Rotatable = function(I) {
       var _ref2;
       return (_ref2 = sounds[id]) != null ? _ref2.stop() : void 0;
     }
-  }, window.Sound = Sound);
+  }, (typeof exports !== "undefined" && exports !== null ? exports : this)["Sound"] = Sound);
 })(jQuery);;
 /**
 The Sprite class provides a way to load images for use in games.
@@ -6160,7 +6161,7 @@ draw anything to the screen until the image has been loaded.
   return window.Sprite.create = Sprite;
 })();;
 (function() {
-  var Map, fromPixieId, loadByName;
+  var Map, Tilemap, fromPixieId, loadByName;
   Map = function(data, entityCallback) {
     var entity, loadEntities, spriteLookup, tileHeight, tileWidth, uuid, _ref;
     tileHeight = data.tileHeight;
@@ -6183,7 +6184,7 @@ draw anything to the screen until the image has been loaded.
             for (_i = 0, _len = entities.length; _i < _len; _i++) {
               entity = entities[_i];
               x = entity.x, y = entity.y, uuid = entity.uuid;
-              entityData = $.extend({
+              entityData = Object.extend({
                 layer: layerIndex,
                 sprite: spriteLookup[uuid],
                 x: x,
@@ -6197,7 +6198,7 @@ draw anything to the screen until the image has been loaded.
       });
     };
     loadEntities();
-    return $.extend(data, {
+    return Object.extend(data, {
       draw: function(canvas, x, y) {
         return canvas.withTransform(Matrix.translation(x, y), function() {
           return data.layers.each(function(layer) {
@@ -6217,17 +6218,17 @@ draw anything to the screen until the image has been loaded.
       }
     });
   };
-  window.Tilemap = function(name, callback, entityCallback) {
+  Tilemap = function(name, callback, entityCallback) {
     return fromPixieId(App.Tilemaps[name], callback, entityCallback);
   };
   fromPixieId = function(id, callback, entityCallback) {
     var proxy, url;
     url = "http://pixieengine.com/s3/tilemaps/" + id + "/data.json";
     proxy = {
-      draw: $.noop
+      draw: function() {}
     };
     $.getJSON(url, function(data) {
-      $.extend(proxy, Map(data, entityCallback));
+      Object.extend(proxy, Map(data, entityCallback));
       return typeof callback === "function" ? callback(proxy) : void 0;
     });
     return proxy;
@@ -6237,22 +6238,23 @@ draw anything to the screen until the image has been loaded.
     directory = (typeof App !== "undefined" && App !== null ? (_ref = App.directories) != null ? _ref.tilemaps : void 0 : void 0) || "data";
     url = "" + BASE_URL + "/" + directory + "/" + name + ".tilemap?" + (new Date().getTime());
     proxy = {
-      draw: $.noop
+      draw: function() {}
     };
     $.getJSON(url, function(data) {
-      $.extend(proxy, Map(data, entityCallback));
+      Object.extend(proxy, Map(data, entityCallback));
       return typeof callback === "function" ? callback(proxy) : void 0;
     });
     return proxy;
   };
-  window.Tilemap.fromPixieId = fromPixieId;
-  return window.Tilemap.load = function(options) {
+  Tilemap.fromPixieId = fromPixieId;
+  Tilemap.load = function(options) {
     if (options.pixieId) {
       return fromPixieId(options.pixieId, options.complete, options.entity);
     } else if (options.name) {
       return loadByName(options.name, options.complete, options.entity);
     }
   };
+  return (typeof exports !== "undefined" && exports !== null ? exports : this)["Tilemap"] = Tilemap;
 })();;
 ;
 ;$(function(){ undefined });
