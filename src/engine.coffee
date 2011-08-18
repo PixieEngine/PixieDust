@@ -1,4 +1,4 @@
-( ($) ->
+( ->
   defaults =
     FPS: 30
     age: 0
@@ -11,11 +11,6 @@
     paused: false
     showFPS: false
     zSort: false
-
-  # Prevent browser contextmenu from popping up in games.
-  document.oncontextmenu = -> false
-  $(document).bind "keydown", (event) ->
-    event.preventDefault() unless $(event.target).is "input"
 
   ###*
   The Engine controls the game world and manages game state. Once you 
@@ -137,7 +132,7 @@
       self.trigger "afterUpdate"
 
     draw = ->
-      canvas.withTransform I.cameraTransform, (canvas) ->
+      I.canvas.withTransform I.cameraTransform, (canvas) ->
         if I.clear
           canvas.clear()
         else if I.backgroundColor
@@ -153,7 +148,7 @@
 
         drawObjects.invoke("draw", canvas)
 
-      self.trigger "draw", canvas
+      self.trigger "draw", I.canvas
 
     step = ->
       if !I.paused || frameAdvance
@@ -161,8 +156,6 @@
         I.age += 1
 
       draw()
-
-    canvas = I.canvas || $("<canvas />").powerCanvas()
 
     self = Core(I).extend {
       ###*

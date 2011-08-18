@@ -1,14 +1,14 @@
 module "Bindable"
 
 test "#bind and #trigger", 1, ->
-  o = $.extend({}, Bindable())
+  o = Object.extend({}, Bindable())
 
   o.bind("test", -> ok true)
 
   o.trigger("test")
 
 test "Multiple bindings", 2, ->
-  o = $.extend({}, Bindable())
+  o = Object.extend({}, Bindable())
 
   o.bind("test", -> ok true)
   o.bind("test", -> ok true)
@@ -16,7 +16,7 @@ test "Multiple bindings", 2, ->
   o.trigger("test")
 
 test "#trigger arguments", ->
-  o = $.extend({}, Bindable())
+  o = Object.extend({}, Bindable())
 
   param1 = "the message"
   param2 = 3
@@ -28,7 +28,7 @@ test "#trigger arguments", ->
   o.trigger "test", param1, param2
 
 test "#unbind", ->
-  o = $.extend({}, Bindable())
+  o = Object.extend({}, Bindable())
 
   callback = ->
     ok false

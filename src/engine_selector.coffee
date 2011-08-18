@@ -40,9 +40,9 @@ Engine.Selector = (I, self) ->
     I.objects.each (object) ->
       results.push object if matcher.match object
 
-    $.extend results, instanceMethods
+    Object.extend results, instanceMethods
 
-$.extend Engine.Selector,
+Object.extend Engine.Selector,
   parse: (selector) ->
     selector.split(",").invoke("trim")
 

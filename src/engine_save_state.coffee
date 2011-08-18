@@ -22,7 +22,7 @@ Engine.SaveState = (I, self) ->
   ###
   saveState: ->
     savedState = I.objects.map (object) ->
-      $.extend({}, object.I)
+      Object.extend({}, object.I)
 
   ###*
   Loads the game state passed in, or the last saved state, if any.
@@ -37,7 +37,7 @@ Engine.SaveState = (I, self) ->
       I.objects = []
 
       newState.each (objectData) ->
-        self.add $.extend({}, objectData)
+        self.add Object.extend({}, objectData)
 
   ###*
   Reloads the current engine state, useful for hotswapping code.
