@@ -1,5 +1,6 @@
 {
   "author": "STRd6",
+  "main": null,
   "name": "gamelib",
   "library": true,
   "libs": {
