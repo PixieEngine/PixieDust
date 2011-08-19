@@ -242,12 +242,15 @@
         I.FPS = newFPS
         self.stop()
         self.start()
+
+      update: update
+      draw: draw
     }
 
     self.attrAccessor "ambientLight", "backgroundColor", "cameraTransform", "clear"
     self.include Bindable
 
-    defaultModules = ["SaveState", "Selector", "Collision", "FPSCounter"]
+    defaultModules = ["SaveState", "Selector", "Collision"]
     modules = defaultModules.concat(I.includedModules)
     modules = modules.without([].concat(I.excludedModules))
 
