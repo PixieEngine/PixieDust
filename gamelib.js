@@ -3774,11 +3774,13 @@ Emitterable = function(I, self) {
         I.FPS = newFPS;
         self.stop();
         return self.start();
-      }
+      },
+      update: update,
+      draw: draw
     });
     self.attrAccessor("ambientLight", "backgroundColor", "cameraTransform", "clear");
     self.include(Bindable);
-    defaultModules = ["SaveState", "Selector", "Collision", "FPSCounter"];
+    defaultModules = ["SaveState", "Selector", "Collision"];
     modules = defaultModules.concat(I.includedModules);
     modules = modules.without([].concat(I.excludedModules));
     modules.each(function(moduleName) {
@@ -3871,32 +3873,6 @@ The <code>Collision</code> module provides some simple collision detection metho
       return nearestHit;
     }
   };
-};;
-/**
-The <code>FPSCounter</code> module tracks and displays the framerate.
-
-@name FPSCounter
-@fieldOf Engine
-@module
-
-@param {Object} I Instance variables
-@param {Object} self Reference to the engine
-*/Engine.FPSCounter = function(I, self) {
-  var framerate;
-  Object.reverseMerge(I, {
-    showFPS: false
-  });
-  framerate = Framerate({
-    noDOM: true
-  });
-  return self.bind("draw", function(canvas) {
-    if (I.showFPS) {
-      canvas.font("bold 9pt consolas, 'Courier New', 'andale mono', 'lucida console', monospace");
-      canvas.fillColor("#FFF");
-      canvas.fillText("fps: " + framerate.fps, 6, 18);
-    }
-    return framerate.rendered();
-  });
 };;
 /**
 The <code>SaveState</code> module provides methods to save and restore the current engine state.
@@ -4055,73 +4031,6 @@ Object.extend(Engine.Selector, {
     };
   }
 });;
-/**
-This object keeps track of framerate and displays it by creating and appending an
-html element to the DOM.
-
-Once created you call snapshot at the end of every rendering cycle.
-
-@name Framerate
-@constructor
-*/var Framerate;
-Framerate = function(options) {
-  var element, framerateUpdateInterval, framerates, numFramerates, renderTime, self, updateFramerate;
-  options || (options = {});
-  if (!options.noDOM) {
-    element = $("<div>", {
-      css: {
-        color: "#FFF",
-        fontFamily: "consolas, 'Courier New', 'andale mono', 'lucida console', monospace",
-        fontWeight: "bold",
-        paddingLeft: 4,
-        position: "fixed",
-        top: 0,
-        left: 0
-      }
-    }).appendTo('body').get(0);
-  }
-  numFramerates = 15;
-  framerateUpdateInterval = 250;
-  renderTime = -1;
-  framerates = [];
-  updateFramerate = function() {
-    var framerate, rate, tot, _i, _len;
-    tot = 0;
-    for (_i = 0, _len = framerates.length; _i < _len; _i++) {
-      rate = framerates[_i];
-      tot += rate;
-    }
-    framerate = (tot / framerates.length).round();
-    self.fps = framerate;
-    if (element) {
-      return element.innerHTML = "fps: " + framerate;
-    }
-  };
-  setInterval(updateFramerate, framerateUpdateInterval);
-  /**
-  Call this method everytime you render.
-  
-  @name rendered
-  @methodOf Framerate#
-  */
-  return self = {
-    rendered: function() {
-      var framerate, newTime, t;
-      if (renderTime < 0) {
-        return renderTime = new Date().getTime();
-      } else {
-        newTime = new Date().getTime();
-        t = newTime - renderTime;
-        framerate = 1000 / t;
-        framerates.push(framerate);
-        while (framerates.length > numFramerates) {
-          framerates.shift();
-        }
-        return renderTime = newTime;
-      }
-    }
-  };
-};;
 /**
 The default base class for all objects you can add to the engine.
 
