@@ -3648,8 +3648,8 @@ Emitterable = function(I, self) {
     };
     update = function() {
       var toRemove, _ref;
-      if (typeof window.updateKeys === "function") {
-        window.updateKeys();
+      if (typeof updateKeys === "function") {
+        updateKeys();
       }
       self.trigger("update");
       _ref = I.objects.partition(function(object) {
