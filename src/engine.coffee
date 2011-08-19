@@ -117,7 +117,10 @@
         window.requestAnimationFrame(animLoop)
 
     update = ->
-      window.updateKeys?()
+      # TODO: Move this update keys into a keyboard engine module
+      # Make a Gamepad/Keyboard input module that has web and XNA
+      # implementations
+      updateKeys?()
 
       self.trigger "update"
 
