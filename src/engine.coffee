@@ -135,12 +135,12 @@
       self.trigger "afterUpdate"
 
     draw = ->
-      if I.clear
-        canvas.clear()
-      else if I.backgroundColor
-        canvas.fill(I.backgroundColor)
+      I.canvas.withTransform I.cameraTransform, (canvas) ->        
+        if I.clear
+          canvas.clear()
+        else if I.backgroundColor
+          canvas.fill(I.backgroundColor)
 
-      I.canvas.withTransform I.cameraTransform, (canvas) ->
         self.trigger "beforeDraw", canvas
 
         if I.zSort
