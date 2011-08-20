@@ -3661,13 +3661,13 @@ Emitterable = function(I, self) {
       return self.trigger("afterUpdate");
     };
     draw = function() {
+      if (I.clear) {
+        I.canvas.clear();
+      } else if (I.backgroundColor) {
+        I.canvas.fill(I.backgroundColor);
+      }
       I.canvas.withTransform(I.cameraTransform, function(canvas) {
         var drawObjects;
-        if (I.clear) {
-          canvas.clear();
-        } else if (I.backgroundColor) {
-          canvas.fill(I.backgroundColor);
-        }
         self.trigger("beforeDraw", canvas);
         if (I.zSort) {
           drawObjects = I.objects.copy().sort(function(a, b) {
