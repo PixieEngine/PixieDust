@@ -3605,7 +3605,7 @@ Emitterable = function(I, self) {
   /**
   Called before the engine draws the game objects on the canvas.
   
-  The current camera transform <b>is</b> applied.
+  The current camera transform is applied.
   
   @name beforeDraw
   @methodOf Engine#
@@ -3614,10 +3614,19 @@ Emitterable = function(I, self) {
   /**
   Called after the engine draws on the canvas.
   
-  The current camera transform <b>is not</b> applied, you may
-  choose to apply it yourself using <code>I.cameraTransform</code>.
+  The current camera transform is applied.
   
   @name draw
+  @methodOf Engine#
+  @event
+  */
+  /**
+  Called after the engine draws.
+  
+  The current camera transform is not applied. This is great for
+  adding overlays.
+  
+  @name overlay
   @methodOf Engine#
   @event
   */
@@ -3676,9 +3685,10 @@ Emitterable = function(I, self) {
         } else {
           drawObjects = I.objects;
         }
-        return drawObjects.invoke("draw", canvas);
+        drawObjects.invoke("draw", canvas);
+        return self.trigger("draw", I.canvas);
       });
-      return self.trigger("draw", I.canvas);
+      return self.trigger("overlay", I.canvas);
     };
     step = function() {
       if (!I.paused || frameAdvance) {
