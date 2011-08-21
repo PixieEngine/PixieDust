@@ -70,7 +70,7 @@
   ###*
   Called before the engine draws the game objects on the canvas.
 
-  The current camera transform <b>is</b> applied.
+  The current camera transform is applied.
 
   @name beforeDraw
   @methodOf Engine#
@@ -80,10 +80,20 @@
   ###*
   Called after the engine draws on the canvas.
 
-  The current camera transform <b>is not</b> applied, you may
-  choose to apply it yourself using <code>I.cameraTransform</code>.
+  The current camera transform is applied.
 
   @name draw
+  @methodOf Engine#
+  @event
+  ###
+
+  ###*
+  Called after the engine draws.
+
+  The current camera transform is not applied. This is great for
+  adding overlays.
+
+  @name overlay
   @methodOf Engine#
   @event
   ###
@@ -151,7 +161,9 @@
 
         drawObjects.invoke("draw", canvas)
 
-      self.trigger "draw", I.canvas
+        self.trigger "draw", I.canvas
+
+      self.trigger "overlay", I.canvas
 
     step = ->
       if !I.paused || frameAdvance
