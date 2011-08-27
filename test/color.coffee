@@ -1,5 +1,18 @@
 module "Color"
 
+test "multiple instantiations work", ->
+  color = Color("burntorange")
+
+  equals color.r(), 192
+
+  color = Color("burntorange")
+
+  equals color.r(), 192
+
+  color = Color("burntorange")
+
+  equals color.r(), 192
+
 test "default should be black", ->
   color = Color()
 
