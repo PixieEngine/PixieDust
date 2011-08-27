@@ -118,6 +118,9 @@
 
     throw "#{args.join(',')} is an unknown color" unless parsedColor
 
+    # HAX: This keeps us from clobbering our lookup until we fix all this splice bs
+    parsedColor = parsedColor.copy()
+
     rgbMap = parsedColor.splice(0, 3).map (channel) ->
       channel.round()
 
