@@ -3477,6 +3477,7 @@ var __slice = Array.prototype.slice;
     if (!parsedColor) {
       throw "" + (args.join(',')) + " is an unknown color";
     }
+    parsedColor = parsedColor.copy();
     rgbMap = parsedColor.splice(0, 3).map(function(channel) {
       return channel.round();
     });
