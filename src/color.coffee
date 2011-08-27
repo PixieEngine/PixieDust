@@ -89,7 +89,7 @@
     else if args.length == 1 && Object.isArray(args.first())
       arr = args.first()
 
-      rgbMap = arr.splice(0, 3).map (channel) ->
+      rgbMap = arr.slice(0, 3).map (channel) ->
         parseFloat channel 
 
       alpha = if arr[0]? then parseFloat arr[0] else 1.0
