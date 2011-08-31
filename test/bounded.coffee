@@ -1,44 +1,62 @@
 module "Bounds"
 
 test "#bounds returns correct x, y, width, height", ->
+  x = 5
+  y = 10
+  width = 50
+  height = 75
+
   obj = GameObject
-    x: 5
-    y: 10
-    width: 50
-    height: 100
+    x: x
+    y: y
+    width: width
+    height: height
 
   obj.include(Bounded)
 
-  equals obj.bounds().x, 5
-  equals obj.bounds().y, 10
-  equals obj.bounds().width, 50
-  equals obj.bounds().height, 100
+  equals obj.bounds().x, x - width/2
+  equals obj.bounds().y, y - height/2
+  equals obj.bounds().width, width
+  equals obj.bounds().height, height
 
 test "#centeredBounds returns correct x, y, xw, yx", ->
+  x = -5
+  y = 20
+
   obj = GameObject
-    x: -5
-    y: 20
+    x: x
+    y: y
     width: 100,
     height: 200
 
   obj.include(Bounded)
   bounds = obj.centeredBounds()
 
-  equals bounds.x, -5 + (100 / 2)
-  equals bounds.y, 20 + (200 / 2)
+  equals bounds.x, x
+  equals bounds.y, y
   equals bounds.xw, 100 / 2
   equals bounds.yw, 200 / 2
 
 test "#bounds(width, height) returns correct x, y", ->
+  x = 20
+  y = 10
+  width = 15
+  height = 25
+
+  offsetX = 7.5
+  offsetY = 12
+
   obj = GameObject
-    x: -5
-    y: 20
+    x: x
+    y: y
+    width: width
+    height: height
 
   obj.include(Bounded)
-  bounds = obj.bounds(5, 10)
+  bounds = obj.bounds(offsetX, offsetY)
 
-  equals bounds.x, 0
-  equals bounds.y, 30
+  equals bounds.x, obj.center().x + offsetX - width/2
+  equals bounds.y, obj.center().y + offsetY - height/2
 
 test "#center returns correct center point", ->
   obj = GameObject
@@ -48,9 +66,9 @@ test "#center returns correct center point", ->
     height: 60
 
   obj.include(Bounded)
-  bounds = obj.center()
+  center = obj.center()
 
-  ok bounds.equal(Point(-5 + (10 / 2), 20 + (60 / 2)))
+  ok center.equal(Point(-5, 20))
 
 module()
 

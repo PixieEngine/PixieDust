@@ -65,8 +65,8 @@ Bounded = (I, self) ->
   @param {number} yOffset the amount to shift the y position
   ### 
   bounds: (xOffset, yOffset) ->
-    x: I.x + (xOffset || 0)
-    y: I.y + (yOffset || 0)
+    x: I.x - I.width/2 + (xOffset || 0)
+    y: I.y - I.height/2 + (yOffset || 0)
     width: I.width
     height: I.height
 
@@ -78,8 +78,8 @@ Bounded = (I, self) ->
   @methodOf Bounded#
   ###  
   centeredBounds: () ->
-    x: I.x + I.width/2
-    y: I.y + I.height/2
+    x: I.x
+    y: I.y
     xw: I.width/2
     yw: I.height/2
 
@@ -91,7 +91,7 @@ Bounded = (I, self) ->
   @methodOf Bounded#
   ###  
   center: () ->
-    Point(I.x + I.width/2, I.y + I.height/2)
+    self.position()
 
   ###*
   Return the circular bounds of the object. The circle is
