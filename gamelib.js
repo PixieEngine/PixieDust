@@ -3186,8 +3186,8 @@ Bounded = function(I, self) {
     */
     bounds: function(xOffset, yOffset) {
       return {
-        x: I.x + (xOffset || 0),
-        y: I.y + (yOffset || 0),
+        x: I.x - I.width / 2 + (xOffset || 0),
+        y: I.y - I.height / 2 + (yOffset || 0),
         width: I.width,
         height: I.height
       };
@@ -3201,8 +3201,8 @@ Bounded = function(I, self) {
     */
     centeredBounds: function() {
       return {
-        x: I.x + I.width / 2,
-        y: I.y + I.height / 2,
+        x: I.x,
+        y: I.y,
         xw: I.width / 2,
         yw: I.height / 2
       };
@@ -3215,7 +3215,7 @@ Bounded = function(I, self) {
     @methodOf Bounded#
     */
     center: function() {
-      return Point(I.x + I.width / 2, I.y + I.height / 2);
+      return self.position();
     },
     /**
     Return the circular bounds of the object. The circle is
@@ -3710,10 +3710,9 @@ Drawable = function(I, self) {
     @type Matrix
     */
     transform: function() {
-      var centerX, centerY, transform;
-      centerX = (I.x + I.width / 2).floor();
-      centerY = (I.y + I.height / 2).floor();
-      transform = Matrix.translation(centerX, centerY);
+      var center, transform;
+      center = self.center();
+      transform = Matrix.translation(center.x, center.y);
       if (I.rotation) {
         transform = transform.concat(Matrix.rotation(I.rotation));
       }
