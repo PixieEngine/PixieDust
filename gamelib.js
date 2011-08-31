@@ -3143,7 +3143,8 @@ Bounded = function(I, self) {
   });
   return {
     /**
-    The position of this game object, the top left point in the local transform.
+    The position of this game object. By default it is the top left point.
+    Redefining the center method will change the relative position.
     
     @returns The position of this object
     @type Point
@@ -3176,7 +3177,7 @@ Bounded = function(I, self) {
     },
     /**
     The bounds method returns infomation about the location 
-    of the object and its dimensions with optional offsets
+    of the object and its dimensions with optional offsets.
     
     @name bounds
     @methodOf Bounded#
@@ -3185,31 +3186,35 @@ Bounded = function(I, self) {
     @param {number} yOffset the amount to shift the y position
     */
     bounds: function(xOffset, yOffset) {
+      var center;
+      center = self.center();
       return {
-        x: I.x - I.width / 2 + (xOffset || 0),
-        y: I.y - I.height / 2 + (yOffset || 0),
+        x: center.x - I.width / 2 + (xOffset || 0),
+        y: center.y - I.height / 2 + (yOffset || 0),
         width: I.width,
         height: I.height
       };
     },
     /**
     The centeredBounds method returns infomation about the center
-    of the object along with the midpoint of the width and height
+    of the object along with the midpoint of the width and height.
     
     @name centeredBounds
     @methodOf Bounded#
     */
     centeredBounds: function() {
+      var center;
+      center = self.center();
       return {
-        x: I.x,
-        y: I.y,
+        x: center.x,
+        y: center.y,
         xw: I.width / 2,
         yw: I.height / 2
       };
     },
     /**
     The center method returns the {@link Point} that is
-    the center of the object
+    the center of the object.
     
     @name center
     @methodOf Bounded#
