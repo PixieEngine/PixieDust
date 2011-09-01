@@ -124,7 +124,7 @@
       hsl = @toHsl()
       hsl[0] = (hsl[0] + degrees) % 360
 
-      return Color(hslToRgb(hsl))      
+      return Color2(hslToRgb(hsl))      
 
     toHex: ->
       padString = (hexString) ->        
