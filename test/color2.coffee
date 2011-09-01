@@ -103,4 +103,20 @@ test "accepts hex value of length 8 as first argument and alpha value as second 
   equal color.b, 205
   equal color.a, 0.59
 
+test "accepts hex string of length 3", ->
+  color = Color2('#df2')
+
+  equal color.r, 221
+  equal color.g, 255
+  equal color.b, 34
+  equal color.a, 1.0
+
+test "accepts hex string of length 4", ->
+  color = Color2('#c987')
+
+  equal color.r, 204
+  equal color.g, 153
+  equal color.b, 136
+  equal color.a.toFixed(2), 0.47
+
 module()
