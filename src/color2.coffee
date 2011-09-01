@@ -74,9 +74,9 @@
     else
       q = (if l < 0.5 then l * (1 + s) else l + s - l * s)
       p = 2 * l - q
-      r = hueToRgb(p, q, h + 1/3)
-      g = hueToRgb(p, q, h)
-      b = hueToRgb(p, q, h - 1/3)
+      r = hueToRgb(p, q, h + 1/3).round()
+      g = hueToRgb(p, q, h).round()
+      b = hueToRgb(p, q, h - 1/3).round()
 
       rgbMap = (channel * 0xFF for channel in [r, g, b])
 
