@@ -63,7 +63,7 @@
           parsedColor = (parseFloat(channel) for channel in color)
           parsedColor[3] = alpha
         else
-          parsedColor = parseRGB(color)
+          parsedColor = parseRGB(color) || parseHSL(color)
           #parsedColor = lookup[normalizeKey(color)] || parseHex(color) || parseRGB(color) || parseHSL(color)
           parsedColor[3] = alpha
 
