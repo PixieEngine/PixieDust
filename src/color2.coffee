@@ -10,6 +10,25 @@
 
     return parsedColor
 
+  parseHex = (hexString) ->
+    hexString = hexString.replace(/#/, '')
+
+    switch hexString.length
+      when 3, 4
+        rgb = for i in [0..2]
+          parseInt(hexString.substr(i, 1), 16) * 0x11
+
+        return rgb.concat(if hexString.substr(3, 1).length then (parseInt(hexString.substr(3, 1), 16) * 0x11) / 255.0 else 1.0)
+
+      when 6, 8
+        rgb = for i in [0..2]
+          parseInt(hexString.substr(2 * i, 2), 16)
+
+        return rgb.concat(if hexString.substr(6, 2).length then parseInt(hexString.substr(6, 2), 16) / 255.0 else 1.0)
+
+      else
+        return undefined
+
   parseHSL = (colorString) ->
     return undefined unless channels = hslParser.exec(colorString)
 
