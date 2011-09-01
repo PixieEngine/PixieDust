@@ -195,5 +195,17 @@ test "#hue", ->
   equal color2.b, 239
   equal color2.a, 1.0
 
+test "#complement", ->
+  # fix hue conversion rounding errors
+
+  color = Color2(10, 30, 50)
+
+  color2 = color.complement()
+
+  equal color2.r, 51
+  equal color2.g, 31
+  equal color2.b, 10
+  equal color2.a, 1.0
+
 module()
 
