@@ -102,8 +102,6 @@
         parsedColor = (parseFloat(channel) for channel in args)
         parsedColor[3] ||= 1.0      
 
-        return parsedColor   
-
     r: parsedColor[0]
     g: parsedColor[1] 
     b: parsedColor[2] 
@@ -115,3 +113,4 @@
 
   (exports ? this)["Color2"] = Color2
 )()
+
