@@ -21,6 +21,7 @@
   hslToRgb = (hsl) ->    
     [h, s, l, a] = (parseFloat(channel) for channel in hsl)
     h /= 360.0
+    a ||= 1.0
 
     r = g = b = null
 
@@ -42,8 +43,7 @@
       g = hueToRgb(p, q, h)
       b = hueToRgb(p, q, h - 1/3)
 
-      rgbMap = [r, g, b].map (channel) ->
-        channel * 0xFF
+      rgbMap = (channel * 0xFF for channel in [r, g, b])
 
     return rgbMap.concat(a)
 
