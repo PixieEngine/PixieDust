@@ -127,4 +127,6 @@ test "accepts hex string of length 6", ->
   equal color.b, 18
   equal color.a, 1.0
 
+test "accepts hex string of length 8", ->  
+
 module()
