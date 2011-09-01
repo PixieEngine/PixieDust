@@ -119,4 +119,12 @@ test "accepts hex string of length 4", ->
   equal color.b, 136
   equal color.a.toFixed(2), 0.47
 
+test "accepts hex string of length 6", ->
+  color = Color2('#cdef12')
+
+  equal color.r, 205
+  equal color.g, 239
+  equal color.b, 18
+  equal color.a, 1.0
+
 module()
