@@ -83,6 +83,7 @@
       when 1
         if Object.isArray(color = args.first())
           parsedColor = (parseFloat(channel) for channel in color)
+          parsedColor[3] ||= 1.0
         else
           parsedColor = parseHex(color) || parseRGB(color) || parseHSL(color)
           #parsedColor = lookup[normalizeKey(color)] || parseHex(color) || parseRGB(color) || parseHSL(color)
