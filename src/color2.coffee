@@ -8,7 +8,7 @@
       when 1
         if Object.isArray(colorArray = args.first())
 
-          rgbMap = [parseFloat colorArray[0], parseFloat colorArray[1], parseFloat colorArray[2]]
+          rgbMap = (parseFloat(channel) for channel in colorArray)
 
           alpha = if args[1]? then parseFloat args[1] else 1.0
 
