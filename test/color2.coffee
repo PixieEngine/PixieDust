@@ -143,5 +143,13 @@ test "accepts 3 numeric values", ->
   equal color.b, 39
   equal color.a, 1.0
 
+test "accepts 4 numeric values", ->
+  color = Color2(23, 43, 100, 0.32)
+
+  equal color.r, 23
+  equal color.g, 43
+  equal color.b, 100
+  equal color.a, 0.32
+
 module()
 
