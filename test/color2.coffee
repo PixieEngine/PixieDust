@@ -184,6 +184,8 @@ test "#toHsl", ->
   equal hsl[3], 1.0
 
 test "#hue", ->
+  # fix hue conversion rounding errors
+
   color = Color2(34, 54, 239)
 
   color2 = color.hue(60)
