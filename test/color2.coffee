@@ -87,4 +87,12 @@ test "accepts hex value of length 4 as first argument and alpha value as second 
   equal color.b, 51
   equal color.a, 0.3
 
+test "accepts hex value of length 6 as first argument and alpha value as second argument", ->
+  color = Color2('#de34ab', 0.27)
+
+  equal color.r, 222
+  equal color.g, 52
+  equal color.b, 171
+  equal color.a, 0.27 
+
 module()
