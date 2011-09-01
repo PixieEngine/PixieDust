@@ -217,5 +217,15 @@ test "#grayscale", ->
   equal color2.b, 35.7
   equal color2.a, 1.0
 
+test "#saturate", ->
+  color = Color2(100, 200, 150)
+
+  color2 = color.saturate(0.3)
+
+  equal color2.r, 69
+  equal color2.g, 232
+  equal color2.b, 150
+  equal color2.a, 1.0
+
 module()
 
