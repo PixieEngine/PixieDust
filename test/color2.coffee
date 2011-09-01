@@ -276,5 +276,20 @@ test "Color.mix", ->
   equals color3.b, 30
   equals color3.a, 1.0
 
+test "accepts named colors", ->
+  white = Color2("white")
+
+  equals white.r, 255
+  equals white.g, 255
+  equals white.b, 255
+  equals white.a, 1.0
+
+  piPink = Color2("Paul Irish Pink")
+
+  equals piPink.r, 255
+  equals piPink.g, 94
+  equals piPink.b, 153
+  equals piPink.a, 1.0
+
 module()
 
