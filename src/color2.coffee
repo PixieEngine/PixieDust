@@ -131,8 +131,8 @@
       "##{hexFromNumber(@r)}#{hexFromNumber(@g)}#{hexFromNumber(@b)}"  
 
     toHsl: ->
-      min = Math.min(r, g, b)
-      max = Math.max(r, g, b)
+      min = Math.min(@r, @g, @b)
+      max = Math.max(@r, @g, @b)
 
       hue = saturation = lightness = (max + min) / 2.0
 
@@ -143,13 +143,13 @@
         saturation = (if lightness > 0.5 then delta / (2 - max - min) else delta / (max + min))  
 
         switch max
-          when r then hue = (g - b) / delta + (if g < b then 6 else 0)
-          when g then hue = (b - r) / delta + 2
-          when b then hue = (r - g) / delta + 4
+          when @r then hue = (@g - @b) / delta + (if @g < @b then 6 else 0)
+          when @g then hue = (@b - @r) / delta + 2
+          when @b then hue = (@r - @g) / delta + 4
 
         hue *= 60
 
-      return [hue, saturation, lightness, channels[3]]      
+      return [hue, saturation, lightness, @a]      
 
     toString: ->
       "rgba(#{@r}, #{@g}, #{@b}, #{@a})"
