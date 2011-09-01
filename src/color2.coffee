@@ -110,11 +110,21 @@
     a: parsedColor[3] 
 
   Color2:: =
+    complement: ->
+      hsl = @toHsl()
+      @hue(180)
+
     equal: (other) ->
       other.r == @r &&
       other.g == @g &&
       other.b == @b &&
       other.a == @a
+
+    hue: (degrees) ->
+      hsl = @toHsl()
+      hsl[0] = (hsl[0] + degrees) % 360
+
+      return Color(hslToRgb(hsl))      
 
     toHex: ->
       padString = (hexString) ->        
