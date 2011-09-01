@@ -237,5 +237,25 @@ test "#desaturate", ->
   equal color2.b, 150
   equal color2.a, 1.0
 
+test "#darken", ->
+  color = Color2(45, 64, 39)
+
+  color2 = color.darken(0.1)
+
+  equal color2.r, 22
+  equal color2.g, 32
+  equal color2.b, 19
+  equal color2.a, 1.0
+
+test "#lighten", ->
+  color = Color2(22, 32, 19)
+
+  color2 = color.lighten(0.1)
+
+  equal color2.r, 45
+  equal color2.g, 64
+  equal color2.b, 39
+  equal color2.a, 1.0
+
 module()
 
