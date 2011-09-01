@@ -212,9 +212,9 @@ test "#grayscale", ->
 
   color2 = color.grayscale()
 
-  equal color2.r, 35.7
-  equal color2.g, 35.7
-  equal color2.b, 35.7
+  equal color2.r, 35
+  equal color2.g, 35
+  equal color2.b, 35
   equal color2.a, 1.0
 
 test "#saturate", ->
