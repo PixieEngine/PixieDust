@@ -114,6 +114,12 @@
       hsl = @toHsl()
       @hue(180)
 
+    desaturate: (amount) ->
+      hsl = @toHsl()
+      hsl[1] -= amount
+
+      return Color2(hslToRgb(hsl))      
+
     equal: (other) ->
       other.r == @r &&
       other.g == @g &&
