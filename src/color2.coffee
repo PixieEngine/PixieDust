@@ -12,8 +12,7 @@
 
           alpha = if args[1]? then parseFloat args[1] else 1.0
 
-          parsedColor = rgbMap.concat(alpha)        
-
+          parsedColor = rgbMap.concat(alpha)                
 
     r: parsedColor[0]
     g: parsedColor[1] 
