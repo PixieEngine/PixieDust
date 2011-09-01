@@ -266,22 +266,22 @@ test "Color.random", ->
   equal color.a, 1.0
 
 test "Color.mix", ->
-  color1 = Color2(50, 50, 50)
-  color2 = Color2(10, 10, 10)
+  color1 = Color2(50, 40, 60)
+  color2 = Color2(10, 5, 16)
 
   mixedColor = Color2.mix(color1, color2)
 
   equals mixedColor.r, 30
-  equals mixedColor.g, 30
-  equals mixedColor.b, 30
+  equals mixedColor.g, (45 / 2).round()
+  equals mixedColor.b, (76 / 2).round()
   equals mixedColor.a, 1.0
 
   weightedMixedColor = Color2.mix(color1, color2, 0.1)
 
-  equals mixedColor2.r(), (3.3 + 45).round()
-  equals mixedColor2.g(), (5.5 + 81).round()
-  equals mixedColor2.b(), (10 + 180).round()
-  equals mixedColor2.a(), 0.1 + (0.5 * 0.9)  
+  equals weightedMixedColor.r(), ((50 * 0.1) + (10 * 0.1)).round()
+  equals weightedMixedColor.g(), (5.5 + 81)
+  equals weightedMixedColor.b(), (10 + 180)
+  equals weightedMixedColor.a(), 0.1 + (0.5 * 0.9)  
 
 test "accepts named colors", ->
   white = Color2("white")
