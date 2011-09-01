@@ -6,6 +6,6 @@ test "r, g, b, a default to 0", ->
   equal color.r, 0
   equal color.g, 0
   equal color.b, 0
-  equal color.a, 0
+  equal color.a, 1
 
 module()
