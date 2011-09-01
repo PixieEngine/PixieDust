@@ -94,8 +94,7 @@
           parsedColor = (parseFloat(channel) for channel in color)
           parsedColor[3] ||= 1.0
         else
-          parsedColor = parseHex(color) || parseRGB(color) || parseHSL(color)
-          #parsedColor = lookup[normalizeKey(color)] || parseHex(color) || parseRGB(color) || parseHSL(color)
+          parsedColor = lookup[normalizeKey(color)] || parseHex(color) || parseRGB(color) || parseHSL(color)
       when 2
         alpha = parseFloat(args[1])
 
@@ -103,8 +102,7 @@
           parsedColor = (parseFloat(channel) for channel in color)
           parsedColor[3] = alpha
         else
-          parsedColor = parseHex(color) || parseRGB(color) || parseHSL(color)
-          #parsedColor = lookup[normalizeKey(color)] || parseHex(color) || parseRGB(color) || parseHSL(color)
+          parsedColor = lookup[normalizeKey(color)] || parseHex(color) || parseRGB(color) || parseHSL(color)
           parsedColor[3] = alpha
       else     
         parsedColor = (parseFloat(channel) for channel in args)
