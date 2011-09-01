@@ -121,7 +121,7 @@
       @hue(180)
 
     darken: (amount) ->
-      shiftLightness(-amount, self)      
+      shiftLightness(-amount)      
 
     desaturate: (amount) ->
       hsl = @toHsl()
@@ -150,7 +150,7 @@
       return Color2(hslToRgb(hsl))
 
     lighten: (amount) ->
-      shiftLightness(amount, self)
+      shiftLightness(amount)
 
     saturate: (amount) ->
       hsl = @toHsl()
