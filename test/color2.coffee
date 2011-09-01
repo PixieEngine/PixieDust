@@ -58,17 +58,17 @@ test "accepts an rgba string as the first argument and an alpha value as the sec
 test "accepts an hsl string as the first argument and an alpha value as the second", ->
   color = Color2('hsl(63, 0.4, 0.3)', 0.21)
 
-  equal color.r.round(), 104
-  equal color.g.round(), 107
-  equal color.b.round(), 46
+  equal color.r, 104
+  equal color.g, 107
+  equal color.b, 46
   equal color.a, 0.21
 
 test "accepts an hsla string as the first argument and an alpha value as the second. The alpha value takes precedence over the hsla string alpha value", ->
   color = Color2('hsla(45, 0.3, 0.5, 0.1)', 0.47)
 
-  equal color.r.round(), 166
-  equal color.g.round(), 147
-  equal color.b.round(), 89
+  equal color.r, 166
+  equal color.g, 147
+  equal color.b, 89
   equal color.a, 0.47
 
 test "accepts hex value of length 3 as first argument and alpha value as second argument", ->
@@ -178,7 +178,7 @@ test "#toHsl", ->
 
   hsl = color.toHsl()
 
-  equal hsl[0].round(), 22
+  equal hsl[0], 22
   equal hsl[1].toFixed(2), 0.38
   equal hsl[2].toFixed(2), 0.13
   equal hsl[3], 1.0
