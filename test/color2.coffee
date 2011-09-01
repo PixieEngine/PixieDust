@@ -31,6 +31,6 @@ test "accepts an array of length 3 as the first argument and an alpha value as t
   equal color.b, 3
   equal color.a, 0.4
 
-test "accepts an array of length 4 as the first argument and an alpha value. The alpha value overrides the alpha passed in by the array"
+test "accepts an array of length 4 as the first argument and an alpha value. The alpha value passed as the second argument overrides the alpha in the array"
 
 module()
