@@ -138,9 +138,9 @@
     grayscale: ->
       hsl = @toHsl()
 
-      g = hsl[2] * 255
+      g = (hsl[2] * 255).round()
 
-      return Color2(g.round(), g.round(), g.round()) 
+      return Color2(g, g, g) 
 
     hue: (degrees) ->
       hsl = @toHsl()
