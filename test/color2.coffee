@@ -39,4 +39,14 @@ test "accepts an array of length 4 as the first argument and an alpha value. The
   equal color.b, 90
   equal color.a, 0.6
 
+test "accepts an rgb string as the first argument and an alpha value as the second", ->
+  color = Color2('rgb(255, 40, 30)', 0.4)
+
+  equal color.r, 255
+  equal color.g, 40
+  equal color.b, 90
+  equal color.a, 0.4
+
+test "accepts an rgba string as the first argument and an alpha value as the second. The alpha value takes precedence over the alpha from the rgba string", ->
+
 module()
