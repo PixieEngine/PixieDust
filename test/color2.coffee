@@ -95,4 +95,12 @@ test "accepts hex value of length 6 as first argument and alpha value as second 
   equal color.b, 171
   equal color.a, 0.27 
 
+test "accepts hex value of length 8 as first argument and alpha value as second argument. Alpha value takes precedence over hex alpha.", ->
+  color = Color2('#ab45cd', 0.59)
+
+  equal color.r, 171
+  equal color.g, 69
+  equal color.b, 205
+  equal color.a, 0.59
+
 module()
