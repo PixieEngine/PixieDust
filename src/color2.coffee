@@ -1,4 +1,14 @@
 ( ->
+  rgbParser = /^rgba?\((\d{1,3}),\s*(\d{1,3}),\s*(\d{1,3}),?\s*(\d?\.?\d*)?\)$/
+
+  parseRGB = (colorString) ->
+    return undefined unless channels = rgbParser.exec(colorString)
+
+    parsedColor = (parseFloat channel for channel in channels)
+    parsedColor[3] ||= 1.0
+
+    return parsedColor
+
   Color2 = (args...) ->
     __proto__: Color::
 
