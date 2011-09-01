@@ -195,6 +195,17 @@
     toString: ->
       "rgba(#{@r}, #{@g}, #{@b}, #{@a})"
 
+  Color2.random = ->
+    Color2(rand(256), rand(256), rand(256)) 
+
+  Color2.mix = (color1, color2, amount) ->
+    amount ||= 0.5
+
+    new_colors = color1.channels().zip(color2.channels()).map (array) ->
+      (array[0] * amount) + (array[1] * (1 - amount))
+
+    return Color2(new_colors)     
+
   (exports ? this)["Color2"] = Color2
 )()
 
