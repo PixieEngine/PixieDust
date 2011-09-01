@@ -120,6 +120,13 @@
       other.b == @b &&
       other.a == @a
 
+    grayscale: ->
+      hsl = @toHsl()
+
+      g = hsl[2] * 255
+
+      return Color2(g, g, g) 
+
     hue: (degrees) ->
       hsl = @toHsl()
 
