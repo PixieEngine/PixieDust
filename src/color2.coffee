@@ -110,9 +110,9 @@
     throw "#{args.join(',')} is an unknown color" unless parsedColor   
 
     __proto__: Color2::
-    r: parsedColor[0]
-    g: parsedColor[1] 
-    b: parsedColor[2] 
+    r: parsedColor[0].round()
+    g: parsedColor[1].round()
+    b: parsedColor[2].round()
     a: parsedColor[3] 
 
   Color2:: =
