@@ -110,7 +110,7 @@
     a: parsedColor[3] 
 
   Color:: =
-    equals: (other) ->
+    equal: (other) ->
       other.r == @r &&
       other.g == @g &&
       other.b == @b &&
