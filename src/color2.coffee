@@ -81,8 +81,11 @@
       when 0
         parsedColor = [0, 0, 0, 1]
       when 1
-        if Object.isArray(channels = args.first())
-          parsedColor = (parseFloat(channel) for channel in channels)
+        if Object.isArray(color = args.first())
+          parsedColor = (parseFloat(channel) for channel in color)
+        else
+          parsedColor = parseHex(color) || parseRGB(color) || parseHSL(color)
+          #parsedColor = lookup[normalizeKey(color)] || parseHex(color) || parseRGB(color) || parseHSL(color)
       when 2
         alpha = parseFloat(args[1])
 
