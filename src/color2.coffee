@@ -122,7 +122,7 @@
       @hue(180)
 
     copy: ->
-      Color(@r, @g, @b, @a)
+      Color2(@r, @g, @b, @a)
 
     darken: (amount) ->
       shiftLightness(-amount, this)      
