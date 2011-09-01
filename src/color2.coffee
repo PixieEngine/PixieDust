@@ -16,7 +16,9 @@
     switch hexString.length
       when 3, 4
         if hexString.length == 4
-          alpha = ((parseInt(hexString.substr(3, 1), 16) * 0x11) / 255.0) || 1.0  
+          alpha = ((parseInt(hexString.substr(3, 1), 16) * 0x11) / 255.0)
+        else
+          alpha = 1.0  
 
         rgb = (parseInt(hexString.substr(i, 1), 16) * 0x11 for i in [0..2])          
 
