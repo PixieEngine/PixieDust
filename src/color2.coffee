@@ -8,10 +8,9 @@
       when 1
         if Object.isArray(colorArray = args.first())
 
-          rgbMap = arr.splice(0, 3).map (channel) ->
-          parseFloat channel 
+          rgbMap = [parseFloat colorArray[0], parseFloat colorArray[1], parseFloat colorArray[2]]
 
-          alpha = if arr[0]? then parseFloat arr[0] else 1.0
+          alpha = if args[1]? then parseFloat args[1] else 1.0
 
           parsedColor = rgbMap.concat(alpha)        
 
