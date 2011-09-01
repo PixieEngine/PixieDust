@@ -100,7 +100,9 @@
           parsedColor[3] = alpha
       else     
         parsedColor = (parseFloat(channel) for channel in args)
-        parsedColor[3] ||= 1.0      
+        parsedColor[3] ||= 1.0   
+
+    throw "#{args.join(',')} is an unknown color" unless parsedColor   
 
     r: parsedColor[0]
     g: parsedColor[1] 
