@@ -118,10 +118,7 @@
 
     toHex: ->
       padString = (hexString) ->        
-        if hexString.length == 1 
-          pad = "0"
-        else
-          pad = ""
+        if hexString.length == 1 then pad = "0" else pad = "" 
 
         return pad + hexString
 
