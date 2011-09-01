@@ -207,5 +207,15 @@ test "#complement", ->
   equal color2.b, 10
   equal color2.a, 1.0
 
+test "#grayscale", ->
+  color = Color2(30, 40, 29)
+
+  color2 = color.grayscale()
+
+  equal color.r, 35.7
+  equal color.g, 35.7
+  equal color.b, 35.7
+  equal color.a, 1.0
+
 module()
 
