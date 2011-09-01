@@ -18,8 +18,7 @@
         if hexString.length == 4
           alpha = ((parseInt(hexString.substr(3, 1), 16) * 0x11) / 255.0) || 1.0  
 
-        rgb = for i in [0..2]
-          parseInt(hexString.substr(i, 1), 16) * 0x11
+        rgb = (parseInt(hexString.substr(i, 1), 16) * 0x11 for i in [0..2])          
 
         return rgb.push(alpha)
 
@@ -27,8 +26,7 @@
         if hexString.length == 8
           alpha = (parseInt(hexString.substr(6, 2), 16) / 255.0) || 1.0
 
-        rgb = for i in [0..2]
-          parseInt(hexString.substr(2 * i, 2), 16)
+        rgb = (parseInt(hexString.substr(2 * i, 2), 16) for i in [0..2])          
 
         return rgb.push(alpha)
 
