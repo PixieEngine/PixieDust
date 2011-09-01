@@ -257,5 +257,13 @@ test "#lighten", ->
   equal color2.b, 39
   equal color2.a, 1.0
 
+test "Color.random", ->
+  color = Color2.random()
+
+  ok 0 <= color.r <= 255
+  ok 0 <= color.g <= 255
+  ok 0 <= color.b <= 255
+  equal color.a, 1.0
+
 module()
 
