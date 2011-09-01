@@ -89,7 +89,6 @@
           parsedColor[3] = alpha
         else
           parsedColor = parseHex(color) || parseRGB(color) || parseHSL(color)
-          log parsedColor
           #parsedColor = lookup[normalizeKey(color)] || parseHex(color) || parseRGB(color) || parseHSL(color)
           parsedColor[3] = alpha
 
