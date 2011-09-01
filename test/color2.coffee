@@ -265,5 +265,16 @@ test "Color.random", ->
   ok 0 <= color.b <= 255
   equal color.a, 1.0
 
+test "Color.mix", ->
+  color1 = Color2(50, 50, 50)
+  color2 = Color2(10, 10, 10)
+
+  color3 = Color.mix(color1, color2)
+
+  equals color3.r, 30
+  equals color3.g, 30
+  equals color3.b, 30
+  equals color3.a, 1.0
+
 module()
 
