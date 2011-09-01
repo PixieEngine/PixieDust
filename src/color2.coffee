@@ -140,7 +140,7 @@
 
       g = hsl[2] * 255
 
-      return Color2(g, g, g) 
+      return Color2(g.round(), g.round(), g.round()) 
 
     hue: (degrees) ->
       hsl = @toHsl()
