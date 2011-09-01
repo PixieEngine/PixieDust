@@ -269,7 +269,7 @@ test "Color.mix", ->
   color1 = Color2(50, 50, 50)
   color2 = Color2(10, 10, 10)
 
-  color3 = Color.mix(color1, color2)
+  color3 = Color2.mix(color1, color2)
 
   equals color3.r, 30
   equals color3.g, 30
