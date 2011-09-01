@@ -150,7 +150,7 @@
       return Color2(hslToRgb(hsl))
 
     lighten: (amount) ->
-      shiftLightness(amount)
+      shiftLightness(amount, this)
 
     saturate: (amount) ->
       hsl = @toHsl()
