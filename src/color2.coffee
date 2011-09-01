@@ -27,7 +27,9 @@
 
       when 6, 8
         if hexString.length == 8
-          alpha = (parseInt(hexString.substr(6, 2), 16) / 255.0) || 1.0
+          alpha = (parseInt(hexString.substr(6, 2), 16) / 255.0)
+        else
+          alpha = 1.0
 
         rgb = (parseInt(hexString.substr(2 * i, 2), 16) for i in [0..2])          
         rgb.push(alpha)
