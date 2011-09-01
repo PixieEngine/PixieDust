@@ -77,7 +77,7 @@
     return rgbMap.concat(a)
 
   Color2 = (args...) ->
-    __proto__: Color::
+    __proto__: Color2::
 
     switch args.length
       when 0
@@ -109,7 +109,7 @@
     b: parsedColor[2] 
     a: parsedColor[3] 
 
-  Color:: =
+  Color2:: =
     equal: (other) ->
       other.r == @r &&
       other.g == @g &&
