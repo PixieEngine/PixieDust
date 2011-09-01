@@ -77,8 +77,6 @@
     return rgbMap.concat(a)
 
   Color2 = (args...) ->
-    __proto__: Color2::
-
     switch args.length
       when 0
         parsedColor = [0, 0, 0, 1]
@@ -104,6 +102,7 @@
 
     throw "#{args.join(',')} is an unknown color" unless parsedColor   
 
+    __proto__: Color2::
     r: parsedColor[0]
     g: parsedColor[1] 
     b: parsedColor[2] 
