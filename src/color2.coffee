@@ -1,5 +1,6 @@
 ( ->
   rgbParser = /^rgba?\((\d{1,3}),\s*(\d{1,3}),\s*(\d{1,3}),?\s*(\d?\.?\d*)?\)$/
+  hslParser = /^hsla?\((\d{1,3}),\s*(\d?\.?\d*),\s*(\d?\.?\d*),?\s*(\d?\.?\d*)?\)$/
 
   parseRGB = (colorString) ->
     return undefined unless channels = rgbParser.exec(colorString)
@@ -8,6 +9,14 @@
     parsedColor[3] ||= 1.0
 
     return parsedColor
+
+  parseHSL = (colorString) ->
+    return undefined unless channels = hslParser.exec(colorString)
+
+    hslMap = bits.splice(1, 3).map (channel) ->
+      parseFloat channel
+
+    return hslToRgb(hslMap.concat(if bits[1]? then parseFloat(bits[1]) else 1.0))
 
   Color2 = (args...) ->
     __proto__: Color::
