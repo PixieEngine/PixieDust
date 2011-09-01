@@ -23,12 +23,14 @@ test "accepts a single array of length 4", ->
   equal color.b, 3
   equal color.a, 0.8
 
-test "accepts an array as the first argument and an alpha value as the second", ->
+test "accepts an array of length 3 as the first argument and an alpha value as the second", ->
   color = Color2([100, 5, 3], 0.4)
 
   equal color.r, 100
   equal color.g, 5
   equal color.b, 3
   equal color.a, 0.4
+
+test "accepts an array of length 4 as the first argument and an alpha value. The alpha value overrides the alpha passed in by the array"
 
 module()
