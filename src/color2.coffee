@@ -120,6 +120,9 @@
       hsl = @toHsl()
       @hue(180)
 
+    darken: (amount) ->
+      shiftLightness(-amount, self)      
+
     desaturate: (amount) ->
       hsl = @toHsl()
       hsl[1] -= amount
@@ -145,6 +148,9 @@
       hsl[0] = (hsl[0] + degrees) % 360
 
       return Color2(hslToRgb(hsl))
+
+    lighten: (amount) ->
+      shiftLightness(amount, self)
 
     saturate: (amount) ->
       hsl = @toHsl()
