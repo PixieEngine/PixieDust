@@ -155,5 +155,11 @@ test "invalid color throws error", ->
   raises ->
     Color2("A Fake Color")
 
+test "#equals", ->
+  color1 = Color2(255, 255, 255, 1)
+  color2 = Color2([255, 255, 255])
+
+  color1.equal(color2)
+
 module()
 
