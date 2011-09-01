@@ -44,7 +44,7 @@ test "accepts an rgb string as the first argument and an alpha value as the seco
 
   equal color.r, 255
   equal color.g, 40
-  equal color.b, 90
+  equal color.b, 30
   equal color.a, 0.4
 
 test "accepts an rgba string as the first argument and an alpha value as the second. The alpha value takes precedence over the alpha from the rgba string", ->
