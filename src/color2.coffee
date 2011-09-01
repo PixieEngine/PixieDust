@@ -13,10 +13,10 @@
   parseHSL = (colorString) ->
     return undefined unless channels = hslParser.exec(colorString)
 
-    hslMap = bits.splice(1, 3).map (channel) ->
-      parseFloat channel
+    parsedColor = (parseFloat channel for channel in channels[1..3])
+    parsedColor[3] ||= 1.0
 
-    return hslToRgb(hslMap.concat(if bits[1]? then parseFloat(bits[1]) else 1.0))
+    return hslToRgb(parsedColor)
 
   Color2 = (args...) ->
     __proto__: Color::
