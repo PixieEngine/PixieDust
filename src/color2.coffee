@@ -82,6 +82,9 @@
 
     return rgbMap.concat(a)
 
+  normalizeKey = (key) ->
+    key.toString().toLowerCase().split(' ').join('')
+
   Color2 = (args...) ->
     switch args.length
       when 0
