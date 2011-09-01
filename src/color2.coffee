@@ -47,8 +47,8 @@
 
     return hslToRgb(parsedColor)
 
-  shiftLightness = (amount) ->
-    hsl = @toHsl()
+  shiftLightness = (amount, self) ->
+    hsl = self.toHsl()
     hsl[2] += amount
 
     return Color2(hslToRgb(hsl))
@@ -121,7 +121,7 @@
       @hue(180)
 
     darken: (amount) ->
-      shiftLightness(-amount)      
+      shiftLightness(-amount, this)      
 
     desaturate: (amount) ->
       hsl = @toHsl()
