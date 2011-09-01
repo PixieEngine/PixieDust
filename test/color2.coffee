@@ -161,5 +161,12 @@ test "#equal", ->
 
   ok color1.equal(color2)
 
+test "#toString", ->
+  noAlpha = Color(30, 40, 23)
+  withAlpha = Color(29, 49, 50, 0.45)
+
+  equal noAlpha.toString(), "rgba(30, 40, 23, 1)"
+  equal withAlpha.toString(), "rgba(29, 49, 50, 0.45)"
+
 module()
 
