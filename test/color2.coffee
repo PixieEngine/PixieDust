@@ -135,4 +135,13 @@ test "accepts hex string of length 8", ->
   equal color.b, 52
   equal color.a.toFixed(2), 0.69
 
+test "accepts 3 numeric values", ->
+  color = Color2(34, 54, 39)
+
+  equal color.r, 34
+  equal color.g, 54
+  equal color.b, 39
+  equal color.a, 1.0
+
 module()
+
