@@ -98,6 +98,11 @@
           parsedColor = parseHex(color) || parseRGB(color) || parseHSL(color)
           #parsedColor = lookup[normalizeKey(color)] || parseHex(color) || parseRGB(color) || parseHSL(color)
           parsedColor[3] = alpha
+      else     
+        parsedColor = (parseFloat(channel) for channel in args)
+        parsedColor[3] ||= 1.0      
+
+        return parsedColor   
 
     r: parsedColor[0]
     g: parsedColor[1] 
