@@ -47,6 +47,12 @@
 
     return hslToRgb(parsedColor)
 
+  shiftLightness = (amount) ->
+    hsl = @toHsl()
+    hsl[2] += amount
+
+    return Color2(hslToRgb(hsl))
+
   hslToRgb = (hsl) ->    
     [h, s, l, a] = (parseFloat(channel) for channel in hsl)
     h /= 360.0
