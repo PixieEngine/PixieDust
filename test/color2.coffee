@@ -66,4 +66,9 @@ test "accepts an hsl string as the first argument and an alpha value as the seco
 test "accepts an hsla string as the first argument and an alpha value as the second. The alpha value takes precedence over the hsla string alpha value", ->
   color = Color2('hsla(45, 0.3, 0.5, 0.1)', 0.47)
 
+  equal color.r.round(), 166
+  equal color.g.round(), 147
+  equal color.b.round(), 89
+  equal color.a, 0.47
+
 module()
