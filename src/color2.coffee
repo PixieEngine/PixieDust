@@ -201,7 +201,7 @@
   Color2.mix = (color1, color2, amount) ->
     amount ||= 0.5
 
-    new_colors = color1.channels().zip(color2.channels()).map (array) ->
+    new_colors = [color1.r, color1.g, color1.b, color1.a].zip([color2.r, color2.g, color2.b, color2.a]).map (array) ->
       (array[0] * amount) + (array[1] * (1 - amount))
 
     return Color2(new_colors)     
