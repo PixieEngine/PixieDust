@@ -168,5 +168,10 @@ test "#toString", ->
   equal noAlpha.toString(), "rgba(30, 40, 23, 1)"
   equal withAlpha.toString(), "rgba(29, 49, 50, 0.45)"
 
+test "#toHex", ->
+  color = Color2(23, 45, 100)
+
+  equal color.toHex(), "#172d64"
+
 module()
 
