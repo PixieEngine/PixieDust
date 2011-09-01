@@ -55,4 +55,12 @@ test "accepts an rgba string as the first argument and an alpha value as the sec
   equal color.b, 15
   equal color.a, 0.35
 
+test "accepts an hsl string as the first argument and an alpha value as the second", ->
+  color = Color2('hsl(63, 0.4, 0.3)', 0.21)
+
+  equal color.r.round(), 104
+  equal color.g.round(), 107
+  equal color.b.round(), 46
+  equal color.a, 0.21
+
 module()
