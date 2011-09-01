@@ -4,7 +4,7 @@
   parseRGB = (colorString) ->
     return undefined unless channels = rgbParser.exec(colorString)
 
-    parsedColor = (parseFloat channel for channel in channels)
+    parsedColor = (parseFloat channel for channel in channels[1..3])
     parsedColor[3] ||= 1.0
 
     return parsedColor
