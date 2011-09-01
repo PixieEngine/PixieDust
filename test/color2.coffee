@@ -183,5 +183,15 @@ test "#toHsl", ->
   equal hsl[2].toFixed(2), 0.13
   equal hsl[3], 1.0
 
+test "#hue", ->
+  color = Color2(34, 54, 239)
+
+  color2 = color.hue(60)
+
+  equal color2.r, 218
+  equal color2.g, 37
+  equal color2.b, 239
+  equal color2.a, 1.0
+
 module()
 
