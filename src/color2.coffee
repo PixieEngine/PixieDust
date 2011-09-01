@@ -15,18 +15,22 @@
 
     switch hexString.length
       when 3, 4
-        alpha = (parseInt(hexString.substr(3, 1), 16) * 0x11) / 255.0 if hexString.length == 4 
+        if hexString.length == 4
+          alpha = ((parseInt(hexString.substr(3, 1), 16) * 0x11) / 255.0) || 1.0  
 
         rgb = for i in [0..2]
           parseInt(hexString.substr(i, 1), 16) * 0x11
 
-        return rgb.concat(alpha)
+        return rgb.push(alpha)
 
       when 6, 8
+        if hexString.length == 8
+          alpha = (parseInt(hexString.substr(6, 2), 16) / 255.0) || 1.0
+
         rgb = for i in [0..2]
           parseInt(hexString.substr(2 * i, 2), 16)
 
-        return rgb.concat(if hexString.substr(6, 2).length then parseInt(hexString.substr(6, 2), 16) / 255.0 else 1.0)
+        return rgb.push(alpha)
 
       else
         return undefined
