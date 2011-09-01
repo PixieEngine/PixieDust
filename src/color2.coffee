@@ -140,7 +140,7 @@
         hue = saturation = 0
       else
         delta = max - min
-        saturation = (if lightness > 0.5 then delta / (2 - max - min) else delta / (max + min))  
+        saturation = (if lightness > 0.5 then delta / (2 - delta) else delta / (max + min))  
 
         switch max
           when @r then hue = (@g - @b) / delta + (if @g < @b then 6 else 0)
