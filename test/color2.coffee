@@ -159,7 +159,7 @@ test "#equal", ->
   color1 = Color2(255, 255, 255, 1)
   color2 = Color2([255, 255, 255])
 
-  log Point()
+  log color1
 
 module()
 
