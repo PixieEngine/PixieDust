@@ -72,7 +72,7 @@ test "accepts an hsla string as the first argument and an alpha value as the sec
   equal color.a, 0.47
 
 test "accepts hex value of length 3 as first argument and alpha value as second argument", ->
-  color = Color('#ff0', 0.5)
+  color = Color2('#ff0', 0.5)
 
   equal color.r, 255
   equal color.g, 255
