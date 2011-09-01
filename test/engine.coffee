@@ -36,6 +36,7 @@ test "before add event", 1, ->
   engine.add
     test: "test"
 
+###
 test "zSort", ->
   engine = Engine
     backgroundColor: false
@@ -59,6 +60,7 @@ test "zSort", ->
 
   equals o1.I.drawnAt, 1, "Object with zIndex #{o1.I.zIndex} should be drawn first"
   equals o2.I.drawnAt, 2, "Object with zIndex #{o2.I.zIndex} should be drawn second"
+###
 
 test "invalid module throws error", ->
   raises ->
@@ -72,6 +74,7 @@ test "excluded modules", ->
   engine = Engine
     excludedModules: ["Developer"]
 
+###
 test "draw events", 2, ->
   engine = Engine
     backgroundColor: false
@@ -95,6 +98,7 @@ test "Remove event", 1, ->
     ok true, "remove called"
 
   engine.frameAdvance()
+###
 
 test "#find", ->
   engine = Engine()
@@ -146,6 +150,7 @@ test "Selector.process", ->
   equal attr, "baz"
   equal value, false
 
+###
 asyncTest "Running", ->
   fps = 30
   milliseconds = 1000
@@ -198,6 +203,8 @@ asyncTest "Adding objects to running engine", ->
 
     start()
   , milliseconds
+
+###
 
 module()
 
