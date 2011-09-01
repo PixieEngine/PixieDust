@@ -116,6 +116,20 @@
       other.b == @b &&
       other.a == @a
 
+    toHex: ->
+      padString = (hexString) ->        
+        if hexString.length == 1 
+          pad = "0"
+        else
+          pad = ""
+
+        return pad + hexString
+
+      hexFromNumber = (number) ->
+        return padString(number.toString(16))
+
+      "##{hexFromNumber(@r)}#{hexFromNumber(@g)}#{hexFromNumber(@b)}"      
+
     toString: ->
       "rgba(#{@r}, #{@g}, #{@b}, #{@a})"
 
