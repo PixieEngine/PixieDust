@@ -151,5 +151,9 @@ test "accepts 4 numeric values", ->
   equal color.b, 100
   equal color.a, 0.32
 
+test "invalid color throws error", ->
+  raises ->
+    Color2("A Fake Color")
+
 module()
 
