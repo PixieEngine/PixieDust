@@ -20,17 +20,19 @@
         else
           alpha = 1.0  
 
-        rgb = (parseInt(hexString.substr(i, 1), 16) * 0x11 for i in [0..2])          
+        rgb = (parseInt(hexString.substr(i, 1), 16) * 0x11 for i in [0..2])      
+        rgb.push(alpha)    
 
-        return rgb.push(alpha)
+        return rgb
 
       when 6, 8
         if hexString.length == 8
           alpha = (parseInt(hexString.substr(6, 2), 16) / 255.0) || 1.0
 
         rgb = (parseInt(hexString.substr(2 * i, 2), 16) for i in [0..2])          
+        rgb.push(alpha)
 
-        return rgb.push(alpha)
+        return rgb
 
       else
         return undefined
