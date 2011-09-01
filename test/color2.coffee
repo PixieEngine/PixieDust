@@ -227,5 +227,15 @@ test "#saturate", ->
   equal color2.b, 150
   equal color2.a, 1.0
 
+test "#desaturate", ->
+  color = Color2(69, 232, 150)
+
+  color2 = color.desaturate(0.3)
+
+  equal color2.r, 100
+  equal color2.g, 200
+  equal color2.b, 150
+  equal color2.a, 1.0
+
 module()
 
