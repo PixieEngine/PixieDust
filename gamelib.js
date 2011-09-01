@@ -3632,6 +3632,305 @@ var __slice = Array.prototype.slice;
     return Color(new_colors);
   };
 })();;
+var __slice = Array.prototype.slice;
+(function() {
+  var Color2, hslParser, hslToRgb, parseHSL, parseHex, parseRGB, rgbParser, shiftLightness;
+  rgbParser = /^rgba?\((\d{1,3}),\s*(\d{1,3}),\s*(\d{1,3}),?\s*(\d?\.?\d*)?\)$/;
+  hslParser = /^hsla?\((\d{1,3}),\s*(\d?\.?\d*),\s*(\d?\.?\d*),?\s*(\d?\.?\d*)?\)$/;
+  parseRGB = function(colorString) {
+    var channel, channels, parsedColor;
+    if (!(channels = rgbParser.exec(colorString))) {
+      return;
+    }
+    parsedColor = (function() {
+      var _i, _len, _ref, _results;
+      _ref = channels.slice(1, 4);
+      _results = [];
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        channel = _ref[_i];
+        _results.push(parseFloat(channel));
+      }
+      return _results;
+    })();
+    parsedColor[3] || (parsedColor[3] = 1.0);
+    return parsedColor;
+  };
+  parseHex = function(hexString) {
+    var alpha, i, rgb;
+    hexString = hexString.replace(/#/, '');
+    switch (hexString.length) {
+      case 3:
+      case 4:
+        if (hexString.length === 4) {
+          alpha = (parseInt(hexString.substr(3, 1), 16) * 0x11) / 255.0;
+        } else {
+          alpha = 1.0;
+        }
+        rgb = (function() {
+          var _results;
+          _results = [];
+          for (i = 0; i <= 2; i++) {
+            _results.push(parseInt(hexString.substr(i, 1), 16) * 0x11);
+          }
+          return _results;
+        })();
+        rgb.push(alpha);
+        return rgb;
+      case 6:
+      case 8:
+        if (hexString.length === 8) {
+          alpha = parseInt(hexString.substr(6, 2), 16) / 255.0;
+        } else {
+          alpha = 1.0;
+        }
+        rgb = (function() {
+          var _results;
+          _results = [];
+          for (i = 0; i <= 2; i++) {
+            _results.push(parseInt(hexString.substr(2 * i, 2), 16));
+          }
+          return _results;
+        })();
+        rgb.push(alpha);
+        return rgb;
+    }
+  };
+  parseHSL = function(colorString) {
+    var channel, channels, parsedColor;
+    if (!(channels = hslParser.exec(colorString))) {
+      return;
+    }
+    parsedColor = (function() {
+      var _i, _len, _ref, _results;
+      _ref = channels.slice(1, 4);
+      _results = [];
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        channel = _ref[_i];
+        _results.push(parseFloat(channel));
+      }
+      return _results;
+    })();
+    parsedColor[3] || (parsedColor[3] = 1.0);
+    return hslToRgb(parsedColor);
+  };
+  shiftLightness = function(amount, self) {
+    var hsl;
+    hsl = self.toHsl();
+    hsl[2] += amount;
+    return Color2(hslToRgb(hsl));
+  };
+  hslToRgb = function(hsl) {
+    var a, b, channel, g, h, hueToRgb, l, p, q, r, rgbMap, s, _ref;
+    _ref = (function() {
+      var _i, _len, _results;
+      _results = [];
+      for (_i = 0, _len = hsl.length; _i < _len; _i++) {
+        channel = hsl[_i];
+        _results.push(parseFloat(channel));
+      }
+      return _results;
+    })(), h = _ref[0], s = _ref[1], l = _ref[2], a = _ref[3];
+    h /= 360.0;
+    a || (a = 1.0);
+    r = g = b = null;
+    hueToRgb = function(p, q, t) {
+      if (t < 0) {
+        t += 1;
+      }
+      if (t > 1) {
+        t -= 1;
+      }
+      if (t < 1 / 6) {
+        return p + (q - p) * 6 * t;
+      }
+      if (t < 1 / 2) {
+        return q;
+      }
+      if (t < 2 / 3) {
+        return p + (q - p) * (2 / 3 - t) * 6;
+      }
+      return p;
+    };
+    if (s === 0) {
+      r = g = b = l;
+    } else {
+      q = (l < 0.5 ? l * (1 + s) : l + s - l * s);
+      p = 2 * l - q;
+      r = hueToRgb(p, q, h + 1 / 3);
+      g = hueToRgb(p, q, h);
+      b = hueToRgb(p, q, h - 1 / 3);
+      rgbMap = (function() {
+        var _i, _len, _ref2, _results;
+        _ref2 = [r, g, b];
+        _results = [];
+        for (_i = 0, _len = _ref2.length; _i < _len; _i++) {
+          channel = _ref2[_i];
+          _results.push(channel * 0xFF);
+        }
+        return _results;
+      })();
+    }
+    return rgbMap.concat(a);
+  };
+  Color2 = function() {
+    var alpha, args, channel, color, parsedColor;
+    args = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
+    switch (args.length) {
+      case 0:
+        parsedColor = [0, 0, 0, 1];
+        break;
+      case 1:
+        if (Object.isArray(color = args.first())) {
+          parsedColor = (function() {
+            var _i, _len, _results;
+            _results = [];
+            for (_i = 0, _len = color.length; _i < _len; _i++) {
+              channel = color[_i];
+              _results.push(parseFloat(channel));
+            }
+            return _results;
+          })();
+          parsedColor[3] || (parsedColor[3] = 1.0);
+        } else {
+          parsedColor = parseHex(color) || parseRGB(color) || parseHSL(color);
+        }
+        break;
+      case 2:
+        alpha = parseFloat(args[1]);
+        if (Object.isArray(color = args.first())) {
+          parsedColor = (function() {
+            var _i, _len, _results;
+            _results = [];
+            for (_i = 0, _len = color.length; _i < _len; _i++) {
+              channel = color[_i];
+              _results.push(parseFloat(channel));
+            }
+            return _results;
+          })();
+          parsedColor[3] = alpha;
+        } else {
+          parsedColor = parseHex(color) || parseRGB(color) || parseHSL(color);
+          parsedColor[3] = alpha;
+        }
+        break;
+      default:
+        parsedColor = (function() {
+          var _i, _len, _results;
+          _results = [];
+          for (_i = 0, _len = args.length; _i < _len; _i++) {
+            channel = args[_i];
+            _results.push(parseFloat(channel));
+          }
+          return _results;
+        })();
+        parsedColor[3] || (parsedColor[3] = 1.0);
+    }
+    if (!parsedColor) {
+      throw "" + (args.join(',')) + " is an unknown color";
+    }
+    return {
+      __proto__: Color2.prototype,
+      r: parsedColor[0],
+      g: parsedColor[1],
+      b: parsedColor[2],
+      a: parsedColor[3]
+    };
+  };
+  Color2.prototype = {
+    complement: function() {
+      var hsl;
+      hsl = this.toHsl();
+      return this.hue(180);
+    },
+    darken: function(amount) {
+      return shiftLightness(-amount, this);
+    },
+    desaturate: function(amount) {
+      var hsl;
+      hsl = this.toHsl();
+      hsl[1] -= amount;
+      return Color2(hslToRgb(hsl));
+    },
+    equal: function(other) {
+      return other.r === this.r && other.g === this.g && other.b === this.b && other.a === this.a;
+    },
+    grayscale: function() {
+      var g, hsl;
+      hsl = this.toHsl();
+      g = hsl[2] * 255;
+      return Color2(g, g, g);
+    },
+    hue: function(degrees) {
+      var hsl;
+      hsl = this.toHsl();
+      hsl[0] = (hsl[0] + degrees) % 360;
+      return Color2(hslToRgb(hsl));
+    },
+    lighten: function(amount) {
+      return shiftLightness(amount);
+    },
+    saturate: function(amount) {
+      var hsl;
+      hsl = this.toHsl();
+      hsl[1] += amount;
+      return Color2(hslToRgb(hsl));
+    },
+    toHex: function() {
+      var hexFromNumber, padString;
+      padString = function(hexString) {
+        var pad;
+        if (hexString.length === 1) {
+          pad = "0";
+        } else {
+          pad = "";
+        }
+        return pad + hexString;
+      };
+      hexFromNumber = function(number) {
+        return padString(number.toString(16));
+      };
+      return "#" + (hexFromNumber(this.r)) + (hexFromNumber(this.g)) + (hexFromNumber(this.b));
+    },
+    toHsl: function() {
+      var b, channel, delta, g, hue, lightness, max, min, r, saturation, _ref;
+      _ref = (function() {
+        var _i, _len, _ref, _results;
+        _ref = [this.r, this.g, this.b];
+        _results = [];
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          channel = _ref[_i];
+          _results.push(channel / 255.0);
+        }
+        return _results;
+      }).call(this), r = _ref[0], g = _ref[1], b = _ref[2];
+      min = Math.min(r, g, b);
+      max = Math.max(r, g, b);
+      hue = saturation = lightness = (max + min) / 2.0;
+      if (max === min) {
+        hue = saturation = 0;
+      } else {
+        delta = max - min;
+        saturation = (lightness > 0.5 ? delta / (2 - max - min) : delta / (max + min));
+        switch (max) {
+          case r:
+            hue = (g - b) / delta + (g < b ? 6 : 0);
+            break;
+          case g:
+            hue = (b - r) / delta + 2;
+            break;
+          case b:
+            hue = (r - g) / delta + 4;
+        }
+        hue *= 60;
+      }
+      return [hue, saturation, lightness, this.a];
+    },
+    toString: function() {
+      return "rgba(" + this.r + ", " + this.g + ", " + this.b + ", " + this.a + ")";
+    }
+  };
+  return (typeof exports !== "undefined" && exports !== null ? exports : this)["Color2"] = Color2;
+})();;
 /*
 The Drawable module is used to provide a simple draw method to the including
 object.
