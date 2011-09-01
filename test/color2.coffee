@@ -173,5 +173,15 @@ test "#toHex", ->
 
   equal color.toHex(), "#172d64"
 
+test "#toHsl", ->
+  color = Color(45, 29, 20)
+
+  hsl = color.toHsl()
+
+  equal hsl[0].round(), 22
+  equal hsl[1].toFixed(2), 0.38
+  equal hsl[2].toFixed(2), 0.13
+  equal hsl[3], 1.0
+
 module()
 
