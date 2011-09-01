@@ -15,4 +15,6 @@ test "accepts a single array in the constructor", ->
   equal color.g, 1
   equal color.b, 2
 
+test "accepts 
+
 module()
