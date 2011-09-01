@@ -110,8 +110,11 @@
     a: parsedColor[3] 
 
   Color:: =
-    aMethod: ->
-      true
+    equals: (other) ->
+      other.r == @r &&
+      other.g == @g &&
+      other.b == @b &&
+      other.a == @a
 
   (exports ? this)["Color2"] = Color2
 )()
