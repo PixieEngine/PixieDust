@@ -116,6 +116,9 @@
       other.b == @b &&
       other.a == @a
 
+    toString: ->
+      "rgba(#{@r}, #{@g}, #{@b}, #{@a})"
+
   (exports ? this)["Color2"] = Color2
 )()
 
