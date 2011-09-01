@@ -77,7 +77,6 @@ test "accepts hex value of length 3 as first argument and alpha value as second 
   equal color.r, 255
   equal color.g, 255
   equal color.b, 0
-  equal color.a, 0.5
-
+  equal color.a, 0.5 
 
 module()
