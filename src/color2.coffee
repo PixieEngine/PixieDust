@@ -43,14 +43,14 @@
     return undefined unless channels = hslParser.exec(colorString)
 
     parsedColor = (parseFloat channel for channel in channels[1..3])
-    parsedColor[0] = parsedColor[0].floor()
+    parsedColor[0] = parsedColor[0].round()
     parsedColor[3] ||= 1.0
 
     return hslToRgb(parsedColor)
 
   hslToRgb = (hsl) ->    
     [h, s, l, a] = (parseFloat(channel) for channel in hsl)
-    h = h.floor()
+    h = h.round()
     h /= 360.0
     a ||= 1.0
 
