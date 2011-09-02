@@ -155,6 +155,13 @@ test "invalid color throws error", ->
   raises ->
     Color2("A Fake Color")
 
+test "#copy", ->
+  color = Color2(123, 231, 2)
+  copiedColor = color.copy()
+
+  ok color.equal(copiedColor)
+  ok color != copiedColor
+
 test "#equal", ->
   color1 = Color2(255, 255, 255, 1)
   color2 = Color2([255, 255, 255])
