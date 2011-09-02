@@ -142,7 +142,7 @@
       other.a == @a
 
     grayscale: ->
-      @copy().grayscale()
+      @copy().grayscale$()
 
     grayscale$: ->
       hsl = @toHsl()
