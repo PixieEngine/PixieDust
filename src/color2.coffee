@@ -133,7 +133,7 @@
       return this      
 
     desaturate: (amount) ->
-      @copy().desaturate(amount) 
+      @copy().desaturate$(amount) 
 
     desaturate$: (amount) ->
       hsl = @toHsl()
