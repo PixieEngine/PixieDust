@@ -122,7 +122,6 @@
       @copy().darken(amount)
 
     darken$: (amount) ->
-      shiftLightness(-amount, this) 
       hsl = @toHsl()
       hsl[2] += amount
 
