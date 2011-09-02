@@ -157,12 +157,17 @@
       shiftLightness(amount, this)
 
     mix: (other, amount) ->
+      @copy().mix$(other, amount) 
+
+    mix$: (other, amount) ->
       amount ||= 0.5
 
-      new_colors = [@r, @g, @b, @a].zip([other.r, other.g, other.b, other.a]).map (array) ->
+      mixedColors = [@r, @g, @b, @a].zip([other.r, other.g, other.b, other.a]).map (array) ->
         (array[0] * amount) + (array[1] * (1 - amount))
 
-      return Color2(new_colors)  
+      [@r, @g, @b, @a] = mixedColors
+
+      return this 
 
     saturate: (amount) ->
       hsl = @toHsl()
