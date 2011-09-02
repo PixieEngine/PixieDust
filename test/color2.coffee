@@ -193,8 +193,6 @@ test "#toHsl", ->
   equal hsl[3], 1.0
 
 test "#hue", ->
-  # fix hue conversion rounding errors
-
   color = Color2(34, 54, 239)
 
   color2 = color.hue(60)
@@ -205,8 +203,6 @@ test "#hue", ->
   equal color2.a, 1.0
 
 test "#hue$", ->
-  # fix hue conversion rounding errors
-
   color = Color2(34, 54, 239)
 
   color.hue$(60)
@@ -217,8 +213,6 @@ test "#hue$", ->
   equal color.a, 1.0
 
 test "#complement", ->
-  # fix hue conversion rounding errors
-
   color = Color2(10, 30, 50)
 
   color2 = color.complement()
@@ -229,8 +223,6 @@ test "#complement", ->
   equal color2.a, 1.0
 
 test "#complement$", ->
-  # fix hue conversion rounding errors
-
   color = Color2(10, 30, 50)
 
   color.complement$()
