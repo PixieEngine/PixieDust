@@ -176,10 +176,10 @@
 
       return this 
 
-    mix: (other, amount) ->
+    mixWith: (other, amount) ->
       @copy().mix$(other, amount) 
 
-    mix$: (other, amount) ->
+    mixWith$: (other, amount) ->
       amount ||= 0.5
 
       mixedColors = [@r, @g, @b, @a].zip([other.r, other.g, other.b, other.a]).map (array) ->
