@@ -112,8 +112,11 @@
 
   Color2:: =
     complement: ->
+      @copy().complement$() 
+
+    complement$: ->
       hsl = @toHsl()
-      @hue(180)  
+      @hue$(180)
 
     copy: ->
       Color2(@r, @g, @b, @a)
