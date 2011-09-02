@@ -140,11 +140,16 @@
       other.a == @a
 
     grayscale: ->
+      @copy().grayscale()
+
+    grayscale$: ->
       hsl = @toHsl()
 
       g = (hsl[2] * 255).round()
 
-      return Color2(g, g, g) 
+      @r = @g = @b = g
+
+      return this 
 
     hue: (degrees) ->
       @copy().hue$(degrees)
