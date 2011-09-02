@@ -177,7 +177,7 @@
       return this 
 
     mixWith: (other, amount) ->
-      @copy().mix$(other, amount) 
+      @copy().mixWith$(other, amount) 
 
     mixWith$: (other, amount) ->
       amount ||= 0.5
