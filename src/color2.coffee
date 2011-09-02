@@ -180,10 +180,7 @@
       return this 
 
     saturate: (amount) ->
-      hsl = @toHsl()
-      hsl[1] += amount
-
-      return Color2(hslToRgb(hsl)) 
+      @copy().saturate$(amount) 
 
     saturate$: (amount) ->
       hsl = @toHsl()
