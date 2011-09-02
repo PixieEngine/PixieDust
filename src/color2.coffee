@@ -235,8 +235,8 @@
 
         switch max
           when r then hue = ((g - b) / chroma) + (if g < b then 6 else 0)
-          when g then hue = ((b - r) / chroma) + 2
-          when b then hue = ((r - g) / chroma) + 4
+          when g then hue = ((b - r) / chroma) + 2.0
+          when b then hue = ((r - g) / chroma) + 4.0
 
         hue *= 60
 
