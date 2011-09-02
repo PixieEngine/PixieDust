@@ -227,6 +227,16 @@ test "#saturate", ->
   equal color2.b, 150
   equal color2.a, 1.0
 
+test "#saturate$", ->
+  color = Color2(100, 200, 150)
+
+  color.saturate$(0.3)
+
+  equal color.r, 69
+  equal color.g, 232
+  equal color.b, 150
+  equal color.a, 1.0
+
 test "#desaturate", ->
   color = Color2(69, 232, 150)
 
