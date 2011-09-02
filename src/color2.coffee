@@ -123,7 +123,7 @@
 
     darken$: (amount) ->
       hsl = @toHsl()
-      hsl[2] += amount
+      hsl[2] -= amount
 
       [@r, @g, @b, @a] = hslToRgb(hsl) 
 
@@ -166,7 +166,15 @@
       return this
 
     lighten: (amount) ->
-      shiftLightness(amount, this)
+      @copy().lighten$(amount)
+
+    lighten$: (amount) ->
+      hsl = @toHsl()
+      hsl[2] += amount
+
+      [@r, @g, @b, @a] = hslToRgb(hsl)
+
+      return this 
 
     mix: (other, amount) ->
       @copy().mix$(other, amount) 
