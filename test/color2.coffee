@@ -169,11 +169,13 @@ test "#equal", ->
   ok color1.equal(color2)
 
 test "#toString", ->
-  noAlpha = Color(30, 40, 23)
-  withAlpha = Color(29, 49, 50, 0.45)
+  noAlpha = Color2(30, 40, 23)
+  withAlpha = Color2(29, 49, 50, 0.45)
+  decimalValues = Color2(34.7, 52.2, 50.1, 0.45)
 
   equal noAlpha.toString(), "rgba(30, 40, 23, 1)"
   equal withAlpha.toString(), "rgba(29, 49, 50, 0.45)"
+  equal decimalValues.toString(), "rgba(35, 52, 50, 0.45)"
 
 test "#toHex", ->
   color = Color2(23, 45, 100)
@@ -181,11 +183,10 @@ test "#toHex", ->
   equal color.toHex(), "#172d64"
 
 test "#toHsl", ->
-  color = Color(45, 29, 20)
+  color = Color2(45, 29, 20)
 
   hsl = color.toHsl()
 
-  # why won't this value round in #toHsl???
   equal hsl[0].round(), 22
   equal hsl[1].toFixed(2), 0.38
   equal hsl[2].toFixed(2), 0.13
