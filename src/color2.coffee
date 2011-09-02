@@ -119,7 +119,7 @@
   Color2:: =
     complement: ->
       hsl = @toHsl()
-      @hue(180)
+      @hue(180)  
 
     copy: ->
       Color2(@r, @g, @b, @a)
@@ -147,11 +147,16 @@
       return Color2(g, g, g) 
 
     hue: (degrees) ->
+      @copy().hue$(degrees)
+
+    hue$: (degrees) ->
       hsl = @toHsl()
 
       hsl[0] = (hsl[0] + degrees) % 360
 
-      return Color2(hslToRgb(hsl))
+      [@r, @g, @b, @a] = hslToRgb(hsl)
+
+      return this
 
     lighten: (amount) ->
       shiftLightness(amount, this)
