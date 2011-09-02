@@ -200,6 +200,9 @@
         (array[0] * amount) + (array[1] * (1 - amount))
 
       [@r, @g, @b, @a] = mixedColors
+      @r = @r.round()
+      @g = @g.round()
+      @b = @b.round()
 
       return this 
 
