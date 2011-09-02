@@ -257,6 +257,24 @@ test "#lighten", ->
   equal color2.b, 39
   equal color2.a, 1.0
 
+test "#mixWith", ->
+  color1 = Color2(50, 40, 60, 0.3)
+  color2 = Color2(10, 5, 16, 0.2)
+
+  mixedColor = color1.mixWith(color2)
+
+  equals mixedColor.r, 30
+  equals mixedColor.g, (45 / 2).round()
+  equals mixedColor.b, (76 / 2).round()
+  equals mixedColor.a, 0.5 / 2
+
+  weightedMixedColor = color1.mixWith(color2, 0.1)
+
+  equals weightedMixedColor.r, ((50 * 0.1) + (10 * 0.9)).round()
+  equals weightedMixedColor.g, ((40 * 0.1) + (5 * 0.9)).round()
+  equals weightedMixedColor.b, ((60 * 0.1) + (16 * 0.9)).round()
+  equals weightedMixedColor.a, (0.3 * 0.1) + (0.2 * 0.9) 
+
 test "Color.random", ->
   color = Color2.random()
 
