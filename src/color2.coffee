@@ -50,6 +50,7 @@
 
   hslToRgb = (hsl) ->    
     [h, s, l, a] = (parseFloat(channel) for channel in hsl)
+    h = h.floor()
     h /= 360.0
     a ||= 1.0
 
