@@ -217,6 +217,16 @@ test "#grayscale", ->
   equal color2.b, 35
   equal color2.a, 1.0
 
+test "#grayscale$", ->
+  color = Color2(30, 40, 29)
+
+  color.grayscale$()
+
+  equal color.r, 35
+  equal color.g, 35
+  equal color.b, 35
+  equal color.a, 1.0
+
 test "#saturate", ->
   color = Color2(100, 200, 150)
 
