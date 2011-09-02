@@ -231,7 +231,7 @@
         hue = saturation = 0
       else
         chroma = max - min
-        saturation = (if lightness > 0.5 then chroma / (2 - max - min) else chroma / (max + min))  
+        saturation = (if lightness > 0.5 then chroma / (2.0 - 2.0 * lightness) else chroma / (lightness * 2.0))  
 
         switch max
           when r then hue = ((g - b) / chroma) + (if g < b then 6 else 0)
