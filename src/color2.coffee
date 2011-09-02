@@ -183,7 +183,15 @@
       hsl = @toHsl()
       hsl[1] += amount
 
-      return Color2(hslToRgb(hsl))      
+      return Color2(hslToRgb(hsl)) 
+
+    saturate$: (amount) ->
+      hsl = @toHsl()
+      hsl[1] += amount
+
+      [@r, @g, @b, @a] = hslToRgb(hsl) 
+
+      return this    
 
     toHex: ->
       padString = (hexString) ->        
