@@ -76,6 +76,10 @@
 
       rgbMap = (channel * 0xFF for channel in [r, g, b])
 
+      rgbMap[0] = rgbMap[0].round()
+      rgbMap[1] = rgbMap[1].round()
+      rgbMap[2] = rgbMap[2].round()
+
     return rgbMap.concat(a)
 
   normalizeKey = (key) ->
@@ -174,6 +178,8 @@
       [@r, @g, @b, @a] = hslToRgb(hsl)
 
       @r = @r.round()
+      @g = @g.round()
+      @b = @b.round()
 
       return this
 
