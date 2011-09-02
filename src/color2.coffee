@@ -173,7 +173,7 @@
 
       [@r, @g, @b, @a] = hslToRgb(hsl)
 
-      @r = @r.roun()
+      @r = @r.round()
 
       return this
 
