@@ -173,6 +173,8 @@
 
       [@r, @g, @b, @a] = hslToRgb(hsl)
 
+      @r = @r.floor()
+
       return this
 
     lighten: (amount) ->
