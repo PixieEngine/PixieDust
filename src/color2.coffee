@@ -119,7 +119,7 @@
       Color2(@r, @g, @b, @a)
 
     darken: (amount) ->
-      @copy().darken(amount)
+      @copy().darken$(amount)
 
     darken$: (amount) ->
       hsl = @toHsl()
