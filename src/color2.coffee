@@ -177,10 +177,6 @@
 
       [@r, @g, @b, @a] = hslToRgb(hsl)
 
-      @r = @r.round()
-      @g = @g.round()
-      @b = @b.round()
-
       return this
 
     lighten: (amount) ->
