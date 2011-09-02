@@ -240,7 +240,7 @@
           when g then hue = ((b - r) / chroma) + 2.0
           when b then hue = ((r - g) / chroma) + 4.0
 
-        hue *= 60.0
+        hue = (hue * 60.0).floor()
 
       return [hue, saturation, lightness, @a]      
 
