@@ -226,6 +226,18 @@ test "#complement", ->
   equal color2.b, 10
   equal color2.a, 1.0
 
+test "#complement$", ->
+  # fix hue conversion rounding errors
+
+  color = Color2(10, 30, 50)
+
+  color.complement$()
+
+  equal color.r, 51
+  equal color.g, 31
+  equal color.b, 10
+  equal color.a, 1.0
+
 test "#grayscale", ->
   color = Color2(30, 40, 29)
 
