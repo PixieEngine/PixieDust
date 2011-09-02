@@ -136,7 +136,15 @@
       hsl = @toHsl()
       hsl[1] -= amount
 
-      return Color2(hslToRgb(hsl))      
+      return Color2(hslToRgb(hsl))  
+
+    desaturate$: (amount) ->
+      hsl = @toHsl()
+      hsl[1] -= amount
+
+      [@r, @g, @b, @a] = hslToRgb(hsl)
+
+      return this    
 
     equal: (other) ->
       other.r == @r &&
