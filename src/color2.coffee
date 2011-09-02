@@ -47,12 +47,6 @@
 
     return hslToRgb(parsedColor)
 
-  shiftLightness = (amount, self) ->
-    hsl = self.toHsl()
-    hsl[2] += amount
-
-    return Color2(hslToRgb(hsl))
-
   hslToRgb = (hsl) ->    
     [h, s, l, a] = (parseFloat(channel) for channel in hsl)
     h /= 360.0
@@ -125,7 +119,16 @@
       Color2(@r, @g, @b, @a)
 
     darken: (amount) ->
-      shiftLightness(-amount, this)      
+      @copy().darken(amount)
+
+    darken$: (amount) ->
+      shiftLightness(-amount, this) 
+      hsl = @toHsl()
+      hsl[2] += amount
+
+      [@r, @g, @b, @a] = hslToRgb(hsl) 
+
+      return this      
 
     desaturate: (amount) ->
       hsl = @toHsl()
