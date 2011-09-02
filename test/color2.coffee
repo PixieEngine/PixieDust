@@ -202,6 +202,18 @@ test "#hue", ->
   equal color2.b, 239
   equal color2.a, 1.0
 
+test "#hue$", ->
+  # fix hue conversion rounding errors
+
+  color = Color2(34, 54, 239)
+
+  color.hue$(60)
+
+  equal color.r, 218
+  equal color.g, 37
+  equal color.b, 239
+  equal color.a, 1.0
+
 test "#complement", ->
   # fix hue conversion rounding errors
 
