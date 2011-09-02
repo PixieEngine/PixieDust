@@ -234,9 +234,9 @@
         saturation = (if lightness > 0.5 then chroma / (2 - max - min) else chroma / (max + min))  
 
         switch max
-          when r then hue = (g - b) / chroma + (if g < b then 6 else 0)
-          when g then hue = (b - r) / chroma + 2
-          when b then hue = (r - g) / chroma + 4
+          when r then hue = ((g - b) / chroma) + (if g < b then 6 else 0)
+          when g then hue = ((b - r) / chroma) + 2
+          when b then hue = ((r - g) / chroma) + 4
 
         hue *= 60
 
