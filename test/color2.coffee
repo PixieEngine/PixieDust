@@ -275,6 +275,26 @@ test "#mixWith", ->
   equals weightedMixedColor.b, ((60 * 0.1) + (16 * 0.9)).round()
   equals weightedMixedColor.a, (0.3 * 0.1) + (0.2 * 0.9) 
 
+test "#mixWith$", ->
+  color1 = Color2(50, 40, 60, 0.3)
+  color2 = Color2(10, 5, 16, 0.2)
+
+  color3 = Color2(50, 40, 60, 0.3)
+
+  color1.mixWith$(color2)
+
+  equals color1.r, 30
+  equals color1.g, (45 / 2).round()
+  equals color1.b, (76 / 2).round()
+  equals color1.a, 0.5 / 2
+
+  color3.mixWith$(color2, 0.1)
+
+  equals color3.r, ((50 * 0.1) + (10 * 0.9)).round()
+  equals color3.g, ((40 * 0.1) + (5 * 0.9)).round()
+  equals color3.b, ((60 * 0.1) + (16 * 0.9)).round()
+  equals color3.a, (0.3 * 0.1) + (0.2 * 0.9) 
+
 test "Color.random", ->
   color = Color2.random()
 
