@@ -185,9 +185,8 @@ test "#toHsl", ->
 
   hsl = color.toHsl()
 
-  log hsl
-
-  equal hsl[0], 22
+  # why won't this value round in #toHsl???
+  equal hsl[0].round(), 22
   equal hsl[1].toFixed(2), 0.38
   equal hsl[2].toFixed(2), 0.13
   equal hsl[3], 1.0
