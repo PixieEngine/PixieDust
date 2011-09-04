@@ -4268,12 +4268,6 @@ var __slice = Array.prototype.slice;
 The Drawable module is used to provide a simple draw method to the including
 object.
 
-Binds a default draw listener to draw a rectangle or a sprite, if one exists.
-
-Binds a step listener to update the transform of the object.
-
-Autoloads the sprite specified in I.spriteName, if any.
-
 <code><pre>
 player = Core
   x: 15
