@@ -2789,10 +2789,10 @@
   Color.random = ->
     Color(rand(256), rand(256), rand(256)) 
 
-  Color.mix = (color1, Color, amount) ->
+  Color.mix = (color1, color2, amount) ->
     amount ||= 0.5
 
-    new_colors = [color1.r, color1.g, color1.b, color1.a].zip([Color.r, Color.g, Color.b, Color.a]).map (array) ->
+    new_colors = [color1.r, color1.g, color1.b, color1.a].zip([color2.r, color2.g, color2.b, color2.a]).map (array) ->
       (array[0] * amount) + (array[1] * (1 - amount))
 
     return Color(new_colors)     
