@@ -12,9 +12,7 @@
     <div class="index">
       <div class="menu">
         <!-- begin publish.classesIndex -->
-        <div align="center"><a href="../index.html">Class Index</a> | <a href="../files.html">File Index</a></div>
-
-<h2 class="heading1">Classes</h2>
+        <h2 class="heading1">Classes</h2>
 
 <ul class="classList">
   
@@ -72,7 +70,7 @@
       <div class="innerContent">
         <h1 class="classTitle">
           
-          Class <span>Core</span>
+          <span>Core</span>
         </h1>
 
         <p class="description summary">
@@ -266,11 +264,30 @@ methods.
                 <div class="description">
                   External access to instance variables. Use of this property should be avoided
       in general, but can come in handy from time to time.
+    
+    <code><pre>
+     I = {
+       r: 255
+       g: 0
+       b: 100
+     }
+    
+     myObject = Core(I)
+    
+     # a bad idea most of the time, but it's 
+     # pretty convenient to have available.
+     myObject.I.r
+    => 255
+    
+     myObject.I.g
+    => 0
+    
+     myObject.I.b
+    => 100
+    </pre></code>
 
                   
                 </div>
-
-                
 
                 
 
@@ -298,14 +315,26 @@ methods.
                   
                   </span>
 
-                  
-
                   <b>attrAccessor</b>()
                 </div>
 
                 <div class="description">
                   Generates a public jQuery style getter / setter method for each 
       String argument.
+    
+      <code><pre>
+      myObject = Core
+        r: 255
+        g: 0
+        b: 100
+    
+      myObject.attrAccessor "r", "g", "b"
+    
+      myObject.r(254)
+      myObject.r()
+    
+     => 254
+      </pre></code>
 
                   
                 </div>
@@ -315,8 +344,6 @@ methods.
                 
 
                 
-
-                <div class="hr"></div>
               
                 <a name="attrReader"></a>
 
@@ -325,13 +352,29 @@ methods.
                   
                   </span>
 
-                  
-
                   <b>attrReader</b>()
                 </div>
 
                 <div class="description">
                   Generates a public jQuery style getter method for each String argument.
+    
+    <code><pre>
+    myObject = Core
+      r: 255
+      g: 0
+      b: 100
+    
+    myObject.attrReader "r", "g", "b"
+    
+    myObject.r()
+     => 255
+    
+    myObject.g()
+     => 0
+    
+    myObject.b()
+     => 100
+    </pre></code>
 
                   
                 </div>
@@ -341,8 +384,6 @@ methods.
                 
 
                 
-
-                <div class="hr"></div>
               
                 <a name="extend"></a>
 
@@ -350,8 +391,6 @@ methods.
                   <span class='lighter'>
                   
                   </span>
-
-                  
 
                   <b>extend</b>()
                 </div>
@@ -369,8 +408,6 @@ methods.
                 
 
                 
-
-                <div class="hr"></div>
               
                 <a name="include"></a>
 
@@ -379,13 +416,21 @@ methods.
                   
                   </span>
 
-                  
-
                   <b>include</b>(Module)
                 </div>
 
                 <div class="description">
                   Includes a module in this object.
+    
+    <code><pre>
+    myObject = Core()
+    myObject.include(Bindable)
+    
+    # now you can bind handlers to functions and
+    # y you've hardly written any code 
+    myObject.bind "someEvent", ->
+      alert("wow. that was easy.")
+    </pre></code>
 
                   
                 </div>
@@ -397,7 +442,7 @@ methods.
                     <dt class="heading">Parameters:</dt>
                     
                       <dt>
-                        <span class="light fixedFont">{Module}</span> <b>Module</b>
+                        <b>Module</b><span class='light fixedFont'> Module</span> 
                         
                       </dt>
                       <dd>the module to include. A module is a constructor 
@@ -405,8 +450,6 @@ methods.
     public methods to extend the including object with.</dd>
                     
                   </dl>
-                
-
                 
 
                 

@@ -12,9 +12,7 @@
     <div class="index">
       <div class="menu">
         <!-- begin publish.classesIndex -->
-        <div align="center"><a href="../index.html">Class Index</a> | <a href="../files.html">File Index</a></div>
-
-<h2 class="heading1">Classes</h2>
+        <h2 class="heading1">Classes</h2>
 
 <ul class="classList">
   
@@ -72,7 +70,7 @@
       <div class="innerContent">
         <h1 class="classTitle">
           
-          Class <span>Object</span>
+          <span>Object</span>
         </h1>
 
         <p class="description summary">
@@ -176,14 +174,29 @@
                   <em>static</em>
                   </span>
 
-                  <span class="light">{<a href="../symbols/Object.html">Object</a>}</span>
-
                   <span class="light">Object.</span><b>extend</b>(target)
                 </div>
 
                 <div class="description">
                   Merges properties from sources into target with overiding.
 Last in covers earlier properties.
+
+<code><pre>
+   I = {
+     a: 1
+     b: 2
+     c: 3
+   }
+
+   Object.extend I, {
+     c: 6
+     d: 4
+   }   
+
+   I
+
+=> {a: 1, b:2, c:6, d: 4}
+</pre></code>
 
                   
                 </div>
@@ -195,7 +208,7 @@ Last in covers earlier properties.
                     <dt class="heading">Parameters:</dt>
                     
                       <dt>
-                        <span class="light fixedFont">{<a href="../symbols/Object.html">Object</a>}</span> <b>target</b>
+                        <b>target</b><span class='light fixedFont'> <a href="../symbols/Object.html">Object</a></span> 
                         
                       </dt>
                       <dd>The object to merge the properties into.</dd>
@@ -225,8 +238,6 @@ Last in covers earlier properties.
 
                   </dl>
                 
-
-                <div class="hr"></div>
               
                 <a name="hasOwnProperty"></a>
 
@@ -234,8 +245,6 @@ Last in covers earlier properties.
                   <span class='lighter'>
                   
                   </span>
-
-                  
 
                   <b>hasOwnProperty</b>(prop)
                 </div>
@@ -264,8 +273,6 @@ Last in covers earlier properties.
                 
 
                 
-
-                <div class="hr"></div>
               
                 <a name=".isArray"></a>
 
@@ -274,13 +281,19 @@ Last in covers earlier properties.
                   <em>static</em>
                   </span>
 
-                  <span class="light">{<a href="../symbols/Boolean.html">Boolean</a>}</span>
-
                   <span class="light">Object.</span><b>isArray</b>(object)
                 </div>
 
                 <div class="description">
                   Checks whether an object is an array.
+
+<code><pre>
+   Object.isArray([1, 2, 4])
+=> true
+
+   Object.isArray({key: "value"})
+=> false
+</pre></code>
 
                   
                 </div>
@@ -292,7 +305,7 @@ Last in covers earlier properties.
                     <dt class="heading">Parameters:</dt>
                     
                       <dt>
-                        <span class="light fixedFont">{<a href="../symbols/Object.html">Object</a>}</span> <b>object</b>
+                        <b>object</b><span class='light fixedFont'> <a href="../symbols/Object.html">Object</a></span> 
                         
                       </dt>
                       <dd>The object to check for array-ness.</dd>
@@ -322,8 +335,6 @@ Last in covers earlier properties.
 
                   </dl>
                 
-
-                <div class="hr"></div>
               
                 <a name=".reverseMerge"></a>
 
@@ -332,14 +343,29 @@ Last in covers earlier properties.
                   <em>static</em>
                   </span>
 
-                  <span class="light">{<a href="../symbols/Object.html">Object</a>}</span>
-
                   <span class="light">Object.</span><b>reverseMerge</b>(target)
                 </div>
 
                 <div class="description">
                   Merges properties from objects into target without overiding.
 First come, first served.
+
+<code><pre>
+   I = {
+     a: 1
+     b: 2
+     c: 3
+   }
+
+   Object.reverseMerge I, {
+     c: 6
+     d: 4
+   }   
+
+   I
+
+=> {a: 1, b:2, c:3, d: 4}
+</pre></code>
 
                   
                 </div>
@@ -351,7 +377,7 @@ First come, first served.
                     <dt class="heading">Parameters:</dt>
                     
                       <dt>
-                        <span class="light fixedFont">{<a href="../symbols/Object.html">Object</a>}</span> <b>target</b>
+                        <b>target</b><span class='light fixedFont'> <a href="../symbols/Object.html">Object</a></span> 
                         
                       </dt>
                       <dd>The object to merge the properties into.</dd>
@@ -380,8 +406,6 @@ First come, first served.
                     
 
                   </dl>
-                
-
                 
               
             </div>

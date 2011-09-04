@@ -12,9 +12,7 @@
     <div class="index">
       <div class="menu">
         <!-- begin publish.classesIndex -->
-        <div align="center"><a href="../index.html">Class Index</a> | <a href="../files.html">File Index</a></div>
-
-<h2 class="heading1">Classes</h2>
+        <h2 class="heading1">Classes</h2>
 
 <ul class="classList">
   
@@ -72,7 +70,7 @@
       <div class="innerContent">
         <h1 class="classTitle">
           
-          Class <span>Number</span>
+          <span>Number</span>
         </h1>
 
         <p class="description summary">
@@ -111,6 +109,33 @@
                     <tr>
                       <td class="attributes">&nbsp;</td>
                       <td class="nameDescription">
+                        <div class="fixedFont"><b><a href="../symbols/Number.html#approach">approach</a></b>()
+                        </div>
+                        <div class="description">Returns a number that is maxDelta closer to target.</div>
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <td class="attributes">&nbsp;</td>
+                      <td class="nameDescription">
+                        <div class="fixedFont"><b><a href="../symbols/Number.html#approachByRatio">approachByRatio</a></b>()
+                        </div>
+                        <div class="description">Returns a number that is closer to the target by the ratio.</div>
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <td class="attributes">&nbsp;</td>
+                      <td class="nameDescription">
+                        <div class="fixedFont"><b><a href="../symbols/Number.html#approachRotation">approachRotation</a></b>()
+                        </div>
+                        <div class="description">Returns a number that is closer to the target angle by the delta.</div>
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <td class="attributes">&nbsp;</td>
+                      <td class="nameDescription">
                         <div class="fixedFont"><b><a href="../symbols/Number.html#ceil">ceil</a></b>()
                         </div>
                         <div class="description">Returns the mathematical ceiling of this number.</div>
@@ -132,6 +157,15 @@
                         <div class="fixedFont"><b><a href="../symbols/Number.html#constrainRotation">constrainRotation</a></b>()
                         </div>
                         <div class="description">Constrains a rotation to between -PI and PI.</div>
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <td class="attributes">&nbsp;</td>
+                      <td class="nameDescription">
+                        <div class="fixedFont"><b><a href="../symbols/Number.html#d">d</a></b>()
+                        </div>
+                        <div class="description">The mathematical d operator.</div>
                       </td>
                     </tr>
                   
@@ -216,6 +250,16 @@ which when multiplied together equal the original integer.</div>
                         </div>
                         <div class="description">Calls iterator the specified number of times, passing in the number of the 
 current iteration as a parameter: 0 on first call, 1 on the second call, etc.</div>
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <td class="attributes">&nbsp;</td>
+                      <td class="nameDescription">
+                        <div class="fixedFont"><b><a href="../symbols/Number.html#toColorPart">toColorPart</a></b>()
+                        </div>
+                        <div class="description">Returns the two character hexidecimal 
+representation of numbers 0 through 255.</div>
                       </td>
                     </tr>
                   
@@ -329,13 +373,16 @@ current iteration as a parameter: 0 on first call, 1 on the second call, etc.</d
                   
                   </span>
 
-                  <span class="light">{<a href="../symbols/Number.html">Number</a>}</span>
-
                   <b>abs</b>()
                 </div>
 
                 <div class="description">
                   Returns the absolute value of this number.
+
+<code><pre>
+   (-4).abs()
+=> 4
+</pre></code>
 
                   
                 </div>
@@ -366,23 +413,27 @@ current iteration as a parameter: 0 on first call, 1 on the second call, etc.</d
 
                   </dl>
                 
-
-                <div class="hr"></div>
               
-                <a name="ceil"></a>
+                <a name="approach"></a>
 
                 <div class="fixedFont heading">
                   <span class='lighter'>
                   
                   </span>
 
-                  <span class="light">{<a href="../symbols/Number.html">Number</a>}</span>
-
-                  <b>ceil</b>()
+                  <b>approach</b>()
                 </div>
 
                 <div class="description">
-                  Returns the mathematical ceiling of this number.
+                  Returns a number that is maxDelta closer to target.
+
+<code><pre>
+   255.approach(0, 5)
+=> 250
+
+   5.approach(0, 10)
+=> 0
+</pre></code>
 
                   
                 </div>
@@ -403,11 +454,7 @@ current iteration as a parameter: 0 on first call, 1 on the second call, etc.</d
                     
                       <dt class="heading">Returns:</dt>
                       
-                        <dd>The number truncated to the nearest integer of greater than or equal value.
-
-(4.9).ceil() # => 5
-(4.2).ceil() # => 5
-(-1.2).ceil() # => -1</dd>
+                        <dd>A number maxDelta toward target</dd>
                       
                     
 
@@ -417,8 +464,156 @@ current iteration as a parameter: 0 on first call, 1 on the second call, etc.</d
 
                   </dl>
                 
+              
+                <a name="approachByRatio"></a>
 
-                <div class="hr"></div>
+                <div class="fixedFont heading">
+                  <span class='lighter'>
+                  
+                  </span>
+
+                  <b>approachByRatio</b>()
+                </div>
+
+                <div class="description">
+                  Returns a number that is closer to the target by the ratio.
+
+<code><pre>
+   255.approachByRatio(0, 0.1)
+=> 229.5
+</pre></code>
+
+                  
+                </div>
+
+                
+
+                
+
+                
+                  <dl class="detailList nomargin">
+
+                    
+
+                    
+
+                    
+
+                    
+                      <dt class="heading">Returns:</dt>
+                      
+                        <dd>A number toward target by the ratio</dd>
+                      
+                    
+
+                    
+
+                    
+
+                  </dl>
+                
+              
+                <a name="approachRotation"></a>
+
+                <div class="fixedFont heading">
+                  <span class='lighter'>
+                  
+                  </span>
+
+                  <b>approachRotation</b>()
+                </div>
+
+                <div class="description">
+                  Returns a number that is closer to the target angle by the delta.
+
+<code><pre>
+   Math.PI.approachRotation(0, Math.PI/4)
+=> 2.356194490192345 # this is (3/4) * Math.PI, which is (1/4) * Math.PI closer to 0 from Math.PI
+</pre></code>
+
+                  
+                </div>
+
+                
+
+                
+
+                
+                  <dl class="detailList nomargin">
+
+                    
+
+                    
+
+                    
+
+                    
+                      <dt class="heading">Returns:</dt>
+                      
+                        <dd>A number toward the target angle by maxDelta</dd>
+                      
+                    
+
+                    
+
+                    
+
+                  </dl>
+                
+              
+                <a name="ceil"></a>
+
+                <div class="fixedFont heading">
+                  <span class='lighter'>
+                  
+                  </span>
+
+                  <b>ceil</b>()
+                </div>
+
+                <div class="description">
+                  Returns the mathematical ceiling of this number.
+
+<code><pre>
+   4.9.ceil() 
+=> 5
+
+   4.2.ceil()
+=> 5
+
+   (-1.2).ceil()
+=> -1
+</pre></code>
+
+                  
+                </div>
+
+                
+
+                
+
+                
+                  <dl class="detailList nomargin">
+
+                    
+
+                    
+
+                    
+
+                    
+                      <dt class="heading">Returns:</dt>
+                      
+                        <dd>The number truncated to the nearest integer of greater than or equal value.</dd>
+                      
+                    
+
+                    
+
+                    
+
+                  </dl>
+                
               
                 <a name="clamp"></a>
 
@@ -427,18 +622,17 @@ current iteration as a parameter: 0 on first call, 1 on the second call, etc.</d
                   
                   </span>
 
-                  <span class="light">{<a href="../symbols/Number.html">Number</a>}</span>
-
                   <b>clamp</b>(min, max)
                 </div>
 
                 <div class="description">
                   Returns a number whose value is limited to the given range.
 
-Example: limit the output of this computation to between 0 and 255
-<pre>
-(x * 255).clamp(0, 255)
-</pre>
+<code><pre>   
+   # limit the output of this computation to between 0 and 255
+   (2 * 255).clamp(0, 255)
+=> 255
+</pre></code>
 
                   
                 </div>
@@ -450,13 +644,13 @@ Example: limit the output of this computation to between 0 and 255
                     <dt class="heading">Parameters:</dt>
                     
                       <dt>
-                        <span class="light fixedFont">{<a href="../symbols/Number.html">Number</a>}</span> <b>min</b>
+                        <b>min</b><span class='light fixedFont'> <a href="../symbols/Number.html">Number</a></span> 
                         
                       </dt>
                       <dd>The lower boundary of the output range</dd>
                     
                       <dt>
-                        <span class="light fixedFont">{<a href="../symbols/Number.html">Number</a>}</span> <b>max</b>
+                        <b>max</b><span class='light fixedFont'> <a href="../symbols/Number.html">Number</a></span> 
                         
                       </dt>
                       <dd>The upper boundary of the output range</dd>
@@ -486,8 +680,6 @@ Example: limit the output of this computation to between 0 and 255
 
                   </dl>
                 
-
-                <div class="hr"></div>
               
                 <a name="constrainRotation"></a>
 
@@ -496,13 +688,16 @@ Example: limit the output of this computation to between 0 and 255
                   
                   </span>
 
-                  <span class="light">{<a href="../symbols/Number.html">Number</a>}</span>
-
                   <b>constrainRotation</b>()
                 </div>
 
                 <div class="description">
                   Constrains a rotation to between -PI and PI.
+
+<code><pre>
+   (9/4 * Math.PI).constrainRotation() 
+=> 0.7853981633974483 # this is (1/4) * Math.PI
+</pre></code>
 
                   
                 </div>
@@ -533,8 +728,49 @@ Example: limit the output of this computation to between 0 and 255
 
                   </dl>
                 
+              
+                <a name="d"></a>
 
-                <div class="hr"></div>
+                <div class="fixedFont heading">
+                  <span class='lighter'>
+                  
+                  </span>
+
+                  <b>d</b>()
+                </div>
+
+                <div class="description">
+                  The mathematical d operator. Useful for simulating dice rolls.
+
+                  
+                </div>
+
+                
+
+                
+
+                
+                  <dl class="detailList nomargin">
+
+                    
+
+                    
+
+                    
+
+                    
+                      <dt class="heading">Returns:</dt>
+                      
+                        <dd>The sum of rolling <code>this</code> many <code>sides</code>-sided dice</dd>
+                      
+                    
+
+                    
+
+                    
+
+                  </dl>
+                
               
                 <a name="even"></a>
 
@@ -543,13 +779,22 @@ Example: limit the output of this computation to between 0 and 255
                   
                   </span>
 
-                  <span class="light">{<a href="../symbols/Boolean.html">Boolean</a>}</span>
-
                   <b>even</b>()
                 </div>
 
                 <div class="description">
                   Returns true if this number is even (evenly divisible by 2).
+
+<code><pre>
+   2.even()
+=> true
+
+   3.even()
+=> false
+
+   0.even()
+=> true      
+</pre></code>
 
                   
                 </div>
@@ -580,8 +825,6 @@ Example: limit the output of this computation to between 0 and 255
 
                   </dl>
                 
-
-                <div class="hr"></div>
               
                 <a name="floor"></a>
 
@@ -590,13 +833,22 @@ Example: limit the output of this computation to between 0 and 255
                   
                   </span>
 
-                  <span class="light">{<a href="../symbols/Number.html">Number</a>}</span>
-
                   <b>floor</b>()
                 </div>
 
                 <div class="description">
                   Returns the mathematical floor of this number.
+
+<code><pre>
+   4.9.floor()
+=> 4
+
+   4.2.floor()
+=> 4
+
+   (-1.2).floor()
+=> -2
+</pre></code>
 
                   
                 </div>
@@ -617,11 +869,7 @@ Example: limit the output of this computation to between 0 and 255
                     
                       <dt class="heading">Returns:</dt>
                       
-                        <dd>The number truncated to the nearest integer of less than or equal value.
-
-(4.9).floor() # => 4
-(4.2).floor() # => 4
-(-1.2).floor() # => -2</dd>
+                        <dd>The number truncated to the nearest integer of less than or equal value.</dd>
                       
                     
 
@@ -631,8 +879,6 @@ Example: limit the output of this computation to between 0 and 255
 
                   </dl>
                 
-
-                <div class="hr"></div>
               
                 <a name="mod"></a>
 
@@ -641,8 +887,6 @@ Example: limit the output of this computation to between 0 and 255
                   
                   </span>
 
-                  <span class="light">{<a href="../symbols/Number.html">Number</a>}</span>
-
                   <b>mod</b>(base)
                 </div>
 
@@ -650,10 +894,10 @@ Example: limit the output of this computation to between 0 and 255
                   A mod method useful for array wrapping. The range of the function is
 constrained to remain in bounds of array indices.
 
-<pre>
-Example:
-(-1).mod(5) == 4
-</pre>
+<code><pre>
+   (-1).mod(5)
+=> 4
+</pre></code>
 
                   
                 </div>
@@ -665,7 +909,7 @@ Example:
                     <dt class="heading">Parameters:</dt>
                     
                       <dt>
-                        <span class="light fixedFont">{<a href="../symbols/Number.html">Number</a>}</span> <b>base</b>
+                        <b>base</b><span class='light fixedFont'> <a href="../symbols/Number.html">Number</a></span> 
                         
                       </dt>
                       <dd></dd>
@@ -695,8 +939,6 @@ Example:
 
                   </dl>
                 
-
-                <div class="hr"></div>
               
                 <a name="odd"></a>
 
@@ -705,13 +947,22 @@ Example:
                   
                   </span>
 
-                  <span class="light">{<a href="../symbols/Boolean.html">Boolean</a>}</span>
-
                   <b>odd</b>()
                 </div>
 
                 <div class="description">
                   Returns true if this number is odd (has remainder of 1 when divided by 2).
+
+<code><pre>
+   2.odd()
+=> false
+
+   3.odd()
+=> true
+
+   0.odd()
+=> false     
+</pre></code>
 
                   
                 </div>
@@ -742,8 +993,6 @@ Example:
 
                   </dl>
                 
-
-                <div class="hr"></div>
               
                 <a name="primeFactors"></a>
 
@@ -751,8 +1000,6 @@ Example:
                   <span class='lighter'>
                   
                   </span>
-
-                  <span class="light">{<a href="../symbols/Array.html">Array</a>}</span>
 
                   <b>primeFactors</b>()
                 </div>
@@ -763,6 +1010,14 @@ breaking down of a composite number into smaller non-trivial divisors,
 which when multiplied together equal the original integer.
 
 Floors the number for purposes of factorization.
+
+<code><pre>
+   60.primeFactors()
+=> [2, 2, 3, 5]
+
+   37.primeFactors()
+=> [37]
+</pre></code>
 
                   
                 </div>
@@ -793,8 +1048,6 @@ Floors the number for purposes of factorization.
 
                   </dl>
                 
-
-                <div class="hr"></div>
               
                 <a name="round"></a>
 
@@ -803,13 +1056,19 @@ Floors the number for purposes of factorization.
                   
                   </span>
 
-                  <span class="light">{<a href="../symbols/Number.html">Number</a>}</span>
-
                   <b>round</b>()
                 </div>
 
                 <div class="description">
                   Returns this number rounded to the nearest integer.
+
+<code><pre>
+   4.5.round()
+=> 5
+
+   4.4.round()
+=> 4
+</pre></code>
 
                   
                 </div>
@@ -830,10 +1089,7 @@ Floors the number for purposes of factorization.
                     
                       <dt class="heading">Returns:</dt>
                       
-                        <dd>The number rounded to the nearest integer.
-
-(4.5).round() # => 5
-(4.4).round() # => 4</dd>
+                        <dd>The number rounded to the nearest integer.</dd>
                       
                     
 
@@ -843,8 +1099,6 @@ Floors the number for purposes of factorization.
 
                   </dl>
                 
-
-                <div class="hr"></div>
               
                 <a name="sign"></a>
 
@@ -853,13 +1107,22 @@ Floors the number for purposes of factorization.
                   
                   </span>
 
-                  <span class="light">{<a href="../symbols/Number.html">Number</a>}</span>
-
                   <b>sign</b>()
                 </div>
 
                 <div class="description">
                   Get the sign of this number as an integer (1, -1, or 0).
+
+<code><pre>
+   (-5).sign()
+=> -1
+
+   0.sign()
+=> 0
+
+   5.sign()
+=> 1
+</pre></code>
 
                   
                 </div>
@@ -890,8 +1153,6 @@ Floors the number for purposes of factorization.
 
                   </dl>
                 
-
-                <div class="hr"></div>
               
                 <a name="snap"></a>
 
@@ -900,18 +1161,22 @@ Floors the number for purposes of factorization.
                   
                   </span>
 
-                  <span class="light">{<a href="../symbols/Number.html">Number</a>}</span>
-
                   <b>snap</b>(resolution)
                 </div>
 
                 <div class="description">
                   Returns the the nearest grid resolution less than or equal to the number. 
 
-  EX: 
-   (7).snap(8) => 0
-   (4).snap(8) => 0
-   (12).snap(8) => 8
+<code><pre>
+    7.snap(8) 
+=> 0
+
+    4.snap(8) 
+=> 0
+
+   12.snap(8) 
+=> 8
+</pre></code>
 
                   
                 </div>
@@ -923,7 +1188,7 @@ Floors the number for purposes of factorization.
                     <dt class="heading">Parameters:</dt>
                     
                       <dt>
-                        <span class="light fixedFont">{<a href="../symbols/Number.html">Number</a>}</span> <b>resolution</b>
+                        <b>resolution</b><span class='light fixedFont'> <a href="../symbols/Number.html">Number</a></span> 
                         
                       </dt>
                       <dd>The grid resolution to snap to.</dd>
@@ -953,8 +1218,6 @@ Floors the number for purposes of factorization.
 
                   </dl>
                 
-
-                <div class="hr"></div>
               
                 <a name="times"></a>
 
@@ -963,14 +1226,22 @@ Floors the number for purposes of factorization.
                   
                   </span>
 
-                  <span class="light">{<a href="../symbols/Number.html">Number</a>}</span>
-
                   <b>times</b>(iterator, context)
                 </div>
 
                 <div class="description">
                   Calls iterator the specified number of times, passing in the number of the 
-current iteration as a parameter: 0 on first call, 1 on the second call, etc.
+current iteration as a parameter: 0 on first call, 1 on the second call, etc. 
+
+<code><pre>
+   output = []
+
+   5.times (n) ->
+     output.push(n)
+
+   output
+=> [0, 1, 2, 3, 4]
+</pre></code>
 
                   
                 </div>
@@ -982,14 +1253,14 @@ current iteration as a parameter: 0 on first call, 1 on the second call, etc.
                     <dt class="heading">Parameters:</dt>
                     
                       <dt>
-                        <span class="light fixedFont">{<a href="../symbols/Function.html">Function</a>}</span> <b>iterator</b>
+                        <b>iterator</b><span class='light fixedFont'> <a href="../symbols/Function.html">Function</a></span> 
                         
                       </dt>
                       <dd>The iterator takes a single parameter, the number 
 of the current iteration.</dd>
                     
                       <dt>
-                        <span class="light fixedFont">{<a href="../symbols/Object.html">Object</a>}</span> <b>context</b>
+                        <b>context</b><span class='light fixedFont'> <a href="../symbols/Object.html">Object</a></span> 
                         <i>Optional</i>
                       </dt>
                       <dd>The optional context parameter specifies an object
@@ -1020,8 +1291,61 @@ to treat as <code>this</code> in the iterator block.</dd>
 
                   </dl>
                 
+              
+                <a name="toColorPart"></a>
 
-                <div class="hr"></div>
+                <div class="fixedFont heading">
+                  <span class='lighter'>
+                  
+                  </span>
+
+                  <b>toColorPart</b>()
+                </div>
+
+                <div class="description">
+                  Returns the two character hexidecimal 
+representation of numbers 0 through 255.
+
+<code><pre>
+   255.toColorPart()
+=> "ff"
+
+   0.toColorPart()
+=> "00"
+
+   200.toColorPart()
+=> "c8"
+</pre></code>
+
+                  
+                </div>
+
+                
+
+                
+
+                
+                  <dl class="detailList nomargin">
+
+                    
+
+                    
+
+                    
+
+                    
+                      <dt class="heading">Returns:</dt>
+                      
+                        <dd>Hexidecimal representation of the number</dd>
+                      
+                    
+
+                    
+
+                    
+
+                  </dl>
+                
               
                 <a name="toExponential"></a>
 
@@ -1029,8 +1353,6 @@ to treat as <code>this</code> in the iterator block.</dd>
                   <span class='lighter'>
                   
                   </span>
-
-                  
 
                   <b>toExponential</b>(fractionDigits)
                 </div>
@@ -1060,8 +1382,6 @@ to as many digits as necessary to specify the number.</dd>
                 
 
                 
-
-                <div class="hr"></div>
               
                 <a name="toFixed"></a>
 
@@ -1069,8 +1389,6 @@ to as many digits as necessary to specify the number.</dd>
                   <span class='lighter'>
                   
                   </span>
-
-                  
 
                   <b>toFixed</b>(digits)
                 </div>
@@ -1102,8 +1420,6 @@ support a larger range of values. If this argument is omitted, it is treated as
                 
 
                 
-
-                <div class="hr"></div>
               
                 <a name="toLocaleString"></a>
 
@@ -1111,8 +1427,6 @@ support a larger range of values. If this argument is omitted, it is treated as
                   <span class='lighter'>
                   
                   </span>
-
-                  
 
                   <b>toLocaleString</b>()
                 </div>
@@ -1128,8 +1442,6 @@ support a larger range of values. If this argument is omitted, it is treated as
                 
 
                 
-
-                <div class="hr"></div>
               
                 <a name="toPrecision"></a>
 
@@ -1137,8 +1449,6 @@ support a larger range of values. If this argument is omitted, it is treated as
                   <span class='lighter'>
                   
                   </span>
-
-                  
 
                   <b>toPrecision</b>(precision)
                 </div>
@@ -1167,8 +1477,6 @@ support a larger range of values. If this argument is omitted, it is treated as
                 
 
                 
-
-                <div class="hr"></div>
               
                 <a name="toSource"></a>
 
@@ -1176,8 +1484,6 @@ support a larger range of values. If this argument is omitted, it is treated as
                   <span class='lighter'>
                   
                   </span>
-
-                  
 
                   <b>toSource</b>()
                 </div>
@@ -1193,8 +1499,6 @@ support a larger range of values. If this argument is omitted, it is treated as
                 
 
                 
-
-                <div class="hr"></div>
               
                 <a name="toString"></a>
 
@@ -1202,8 +1506,6 @@ support a larger range of values. If this argument is omitted, it is treated as
                   <span class='lighter'>
                   
                   </span>
-
-                  
 
                   <b>toString</b>(radix)
                 </div>
@@ -1233,8 +1535,6 @@ numeric values.</dd>
                 
 
                 
-
-                <div class="hr"></div>
               
                 <a name="valueOf"></a>
 
@@ -1242,8 +1542,6 @@ numeric values.</dd>
                   <span class='lighter'>
                   
                   </span>
-
-                  
 
                   <b>valueOf</b>()
                 </div>
@@ -1253,8 +1551,6 @@ numeric values.</dd>
 
                   
                 </div>
-
-                
 
                 
 

@@ -12,9 +12,7 @@
     <div class="index">
       <div class="menu">
         <!-- begin publish.classesIndex -->
-        <div align="center"><a href="../index.html">Class Index</a> | <a href="../files.html">File Index</a></div>
-
-<h2 class="heading1">Classes</h2>
+        <h2 class="heading1">Classes</h2>
 
 <ul class="classList">
   
@@ -72,7 +70,7 @@
       <div class="innerContent">
         <h1 class="classTitle">
           
-          Module <span>Bindable</span>
+          <span>Bindable</span>
         </h1>
 
         <p class="description summary">
@@ -214,13 +212,21 @@
                   
                   </span>
 
-                  
-
                   <b>bind</b>(event, callback)
                 </div>
 
                 <div class="description">
                   The bind method adds a function as an event listener.
+    
+    <code><pre>
+    # this will call coolEventHandler after
+    # yourObject.trigger "someCustomEvent" is called.
+    yourObject.bind "someCustomEvent", coolEventHandler
+    
+    #or
+    yourObject.bind "anotherCustomEvent", ->
+      doSomething()
+    </pre></code>
 
                   
                 </div>
@@ -232,13 +238,13 @@
                     <dt class="heading">Parameters:</dt>
                     
                       <dt>
-                        <span class="light fixedFont">{<a href="../symbols/String.html">String</a>}</span> <b>event</b>
+                        <b>event</b><span class='light fixedFont'> <a href="../symbols/String.html">String</a></span> 
                         
                       </dt>
                       <dd>The event to listen to.</dd>
                     
                       <dt>
-                        <span class="light fixedFont">{<a href="../symbols/Function.html">Function</a>}</span> <b>callback</b>
+                        <b>callback</b><span class='light fixedFont'> <a href="../symbols/Function.html">Function</a></span> 
                         
                       </dt>
                       <dd>The function to be called when the specified event
@@ -248,8 +254,6 @@
                 
 
                 
-
-                <div class="hr"></div>
               
                 <a name="trigger"></a>
 
@@ -258,13 +262,16 @@
                   
                   </span>
 
-                  
-
                   <b>trigger</b>(event, parameters)
                 </div>
 
                 <div class="description">
                   The trigger method calls all listeners attached to the specified event.
+    
+    <code><pre>
+    # calls each event handler bound to "someCustomEvent"
+    yourObject.trigger "someCustomEvent"
+    </pre></code>
 
                   
                 </div>
@@ -276,13 +283,13 @@
                     <dt class="heading">Parameters:</dt>
                     
                       <dt>
-                        <span class="light fixedFont">{<a href="../symbols/String.html">String</a>}</span> <b>event</b>
+                        <b>event</b><span class='light fixedFont'> <a href="../symbols/String.html">String</a></span> 
                         
                       </dt>
                       <dd>The event to trigger.</dd>
                     
                       <dt>
-                        <span class="light fixedFont">{<a href="../symbols/Array.html">Array</a>}</span> <b>parameters</b>
+                        <b>parameters</b><span class='light fixedFont'> <a href="../symbols/Array.html">Array</a></span> 
                         <i>Optional</i>
                       </dt>
                       <dd>Additional parameters to pass to the event listener.</dd>
@@ -291,8 +298,6 @@
                 
 
                 
-
-                <div class="hr"></div>
               
                 <a name="unbind"></a>
 
@@ -301,14 +306,21 @@
                   
                   </span>
 
-                  
-
                   <b>unbind</b>(event, callback)
                 </div>
 
                 <div class="description">
                   The unbind method removes a specific event listener, or all event listeners if
     no specific listener is given.
+    
+    <code><pre>
+    #  removes the handler coolEventHandler from the event
+    # "someCustomEvent" while leaving the other events intact.
+    yourObject.unbind "someCustomEvent", coolEventHandler
+    
+    # removes all handlers attached to "anotherCustomEvent" 
+    yourObject.unbind "anotherCustomEvent"
+    </pre></code>
 
                   
                 </div>
@@ -320,20 +332,18 @@
                     <dt class="heading">Parameters:</dt>
                     
                       <dt>
-                        <span class="light fixedFont">{<a href="../symbols/String.html">String</a>}</span> <b>event</b>
+                        <b>event</b><span class='light fixedFont'> <a href="../symbols/String.html">String</a></span> 
                         
                       </dt>
                       <dd>The event to remove the listener from.</dd>
                     
                       <dt>
-                        <span class="light fixedFont">{<a href="../symbols/Function.html">Function</a>}</span> <b>callback</b>
+                        <b>callback</b><span class='light fixedFont'> <a href="../symbols/Function.html">Function</a></span> 
                         <i>Optional</i>
                       </dt>
                       <dd>The listener to remove.</dd>
                     
                   </dl>
-                
-
                 
 
                 

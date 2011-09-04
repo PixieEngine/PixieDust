@@ -12,9 +12,7 @@
     <div class="index">
       <div class="menu">
         <!-- begin publish.classesIndex -->
-        <div align="center"><a href="../index.html">Class Index</a> | <a href="../files.html">File Index</a></div>
-
-<h2 class="heading1">Classes</h2>
+        <h2 class="heading1">Classes</h2>
 
 <ul class="classList">
   
@@ -72,7 +70,7 @@
       <div class="innerContent">
         <h1 class="classTitle">
           
-          Class <span>Array</span>
+          <span>Array</span>
         </h1>
 
         <p class="description summary">
@@ -143,7 +141,7 @@ value(s).</div>
                         </div>
                         <div class="description">Call the given iterator once for each element in the array,
 passing in the element as the first argument, the index of 
-the element as the second argument, and this array as the
+the element as the second argument, and <code>this</code> array as the
 third argument.</div>
                       </td>
                     </tr>
@@ -303,10 +301,12 @@ if it is not present.</div>
                     <tr>
                       <td class="attributes">&nbsp;</td>
                       <td class="nameDescription">
-                        <div class="fixedFont"><b><a href="../symbols/Array.html#map">map</a></b>(callbackthisObject)
+                        <div class="fixedFont"><b><a href="../symbols/Array.html#map">map</a></b>(iterator, context)
                         </div>
-                        <div class="description">Creates a new array with the results of calling a provided function on every
-element in this array.</div>
+                        <div class="description">Call the given iterator once for each element in the array, 
+passing in the element as the first argument, the index of 
+the element as the second argument, and `this` array as the
+third argument.</div>
                       </td>
                     </tr>
                   
@@ -391,7 +391,7 @@ right-to-left) as to reduce it to a single value.</div>
                       <td class="nameDescription">
                         <div class="fixedFont"><b><a href="../symbols/Array.html#remove">remove</a></b>(object)
                         </div>
-                        <div class="description">Remove the first occurance of the given object from the array if it is
+                        <div class="description">Remove the first occurrence of the given object from the array if it is
 present.</div>
                       </td>
                     </tr>
@@ -566,13 +566,18 @@ length of the array.</div>
                   
                   </span>
 
-                  <span class="light">{<a href="../symbols/Array.html">Array</a>}</span>
-
                   <b>clear</b>()
                 </div>
 
                 <div class="description">
                   Empties the array of its contents. It is modified in place.
+
+<code><pre>
+   fullArray = [1, 2, 3]
+   fullArray.clear()
+   fullArray
+=> []
+</pre></code>
 
                   
                 </div>
@@ -603,8 +608,6 @@ length of the array.</div>
 
                   </dl>
                 
-
-                <div class="hr"></div>
               
                 <a name="compact"></a>
 
@@ -613,13 +616,16 @@ length of the array.</div>
                   
                   </span>
 
-                  <span class="light">{<a href="../symbols/Array.html">Array</a>}</span>
-
                   <b>compact</b>()
                 </div>
 
                 <div class="description">
                   Returns a copy of the array without null and undefined values.
+
+<code><pre>
+   [null, undefined, 3, 3, undefined, 5].compact()
+=> [3, 3, 5]
+</pre></code>
 
                   
                 </div>
@@ -640,7 +646,7 @@ length of the array.</div>
                     
                       <dt class="heading">Returns:</dt>
                       
-                        <dd>An array that contains only the non-null values.</dd>
+                        <dd>A new array that contains only the non-null values.</dd>
                       
                     
 
@@ -650,8 +656,6 @@ length of the array.</div>
 
                   </dl>
                 
-
-                <div class="hr"></div>
               
                 <a name="concat"></a>
 
@@ -659,8 +663,6 @@ length of the array.</div>
                   <span class='lighter'>
                   
                   </span>
-
-                  
 
                   <b>concat</b>(valueN)
                 </div>
@@ -690,8 +692,6 @@ value(s).
                 
 
                 
-
-                <div class="hr"></div>
               
                 <a name="copy"></a>
 
@@ -700,14 +700,25 @@ value(s).
                   
                   </span>
 
-                  <span class="light">{<a href="../symbols/Array.html">Array</a>}</span>
-
                   <b>copy</b>()
                 </div>
 
                 <div class="description">
                   Creates and returns a copy of the array. The copy contains
 the same objects.
+
+<code><pre>
+   a = ["a", "b", "c"]
+   b = a.copy()
+
+   # their elements are equal
+   a[0] == b[0] && a[1] == b[1] && a[2] == b[2]
+=> true
+
+   # but they aren't the same object in memory
+   a === b
+=> false
+</pre></code>
 
                   
                 </div>
@@ -738,8 +749,6 @@ the same objects.
 
                   </dl>
                 
-
-                <div class="hr"></div>
               
                 <a name="each"></a>
 
@@ -748,16 +757,30 @@ the same objects.
                   
                   </span>
 
-                  <span class="light">{<a href="../symbols/Array.html">Array</a>}</span>
-
                   <b>each</b>(iterator, context)
                 </div>
 
                 <div class="description">
                   Call the given iterator once for each element in the array,
 passing in the element as the first argument, the index of 
-the element as the second argument, and this array as the
+the element as the second argument, and <code>this</code> array as the
 third argument.
+
+<code><pre>
+   word = ""
+   indices = []
+   ["r", "a", "d"].each (letter, index) ->
+     word += letter
+     indices.push(index)
+
+=> ["r", "a", "d"]
+
+   word
+=> "rad"
+
+   indices
+=> [0, 1, 2]
+</pre></code>
 
                   
                 </div>
@@ -769,14 +792,14 @@ third argument.
                     <dt class="heading">Parameters:</dt>
                     
                       <dt>
-                        <span class="light fixedFont">{<a href="../symbols/Function.html">Function</a>}</span> <b>iterator</b>
+                        <b>iterator</b><span class='light fixedFont'> <a href="../symbols/Function.html">Function</a></span> 
                         
                       </dt>
                       <dd>Function to be called once for 
 each element in the array.</dd>
                     
                       <dt>
-                        <span class="light fixedFont">{<a href="../symbols/Object.html">Object</a>}</span> <b>context</b>
+                        <b>context</b><span class='light fixedFont'> <a href="../symbols/Object.html">Object</a></span> 
                         <i>Optional</i>
                       </dt>
                       <dd>Optional context parameter to be 
@@ -807,8 +830,6 @@ used as `this` when calling the iterator function.</dd>
 
                   </dl>
                 
-
-                <div class="hr"></div>
               
                 <a name="eachPair"></a>
 
@@ -817,21 +838,15 @@ used as `this` when calling the iterator function.</dd>
                   
                   </span>
 
-                  
-
                   <b>eachPair</b>(iterator, context)
                 </div>
 
                 <div class="description">
                   Call the given iterator once for each pair of objects in the array.
 
-Ex. [1, 2, 3, 4].eachPair (a, b) ->
-  # 1, 2
-  # 1, 3
-  # 1, 4
-  # 2, 3
-  # 2, 4
-  # 3, 4
+<code><pre>
+  [1, 2, 3, 4].eachPair (a, b) ->
+</pre></code>
 
                   
                 </div>
@@ -843,14 +858,14 @@ Ex. [1, 2, 3, 4].eachPair (a, b) ->
                     <dt class="heading">Parameters:</dt>
                     
                       <dt>
-                        <span class="light fixedFont">{<a href="../symbols/Function.html">Function</a>}</span> <b>iterator</b>
+                        <b>iterator</b><span class='light fixedFont'> <a href="../symbols/Function.html">Function</a></span> 
                         
                       </dt>
                       <dd>Function to be called once for 
 each pair of elements in the array.</dd>
                     
                       <dt>
-                        <span class="light fixedFont">{<a href="../symbols/Object.html">Object</a>}</span> <b>context</b>
+                        <b>context</b><span class='light fixedFont'> <a href="../symbols/Object.html">Object</a></span> 
                         <i>Optional</i>
                       </dt>
                       <dd>Optional context parameter to be 
@@ -860,8 +875,6 @@ used as `this` when calling the iterator function.</dd>
                 
 
                 
-
-                <div class="hr"></div>
               
                 <a name="eachSlice"></a>
 
@@ -870,15 +883,23 @@ used as `this` when calling the iterator function.</dd>
                   
                   </span>
 
-                  <span class="light">{<a href="../symbols/Array.html">Array</a>}</span>
-
                   <b>eachSlice</b>(n, iterator, context)
                 </div>
 
                 <div class="description">
                   Call the given iterator once for each group of elements in the array,
 passing in the elements in groups of n. Additional argumens are
-passed as in <code>each</each>.
+passed as in each.
+
+<code><pre>
+   results = []
+   [1, 2, 3, 4].eachSlice 2, (slice) ->
+     results.push(slice)
+=> [1, 2, 3, 4]
+
+   results
+=> [[1, 2], [3, 4]]
+</pre></code>
 
                   
                 </div>
@@ -890,20 +911,20 @@ passed as in <code>each</each>.
                     <dt class="heading">Parameters:</dt>
                     
                       <dt>
-                        <span class="light fixedFont">{<a href="../symbols/Number.html">Number</a>}</span> <b>n</b>
+                        <b>n</b><span class='light fixedFont'> <a href="../symbols/Number.html">Number</a></span> 
                         
                       </dt>
                       <dd>The number of elements in each group.</dd>
                     
                       <dt>
-                        <span class="light fixedFont">{<a href="../symbols/Function.html">Function</a>}</span> <b>iterator</b>
+                        <b>iterator</b><span class='light fixedFont'> <a href="../symbols/Function.html">Function</a></span> 
                         
                       </dt>
                       <dd>Function to be called once for 
 each group of elements in the array.</dd>
                     
                       <dt>
-                        <span class="light fixedFont">{<a href="../symbols/Object.html">Object</a>}</span> <b>context</b>
+                        <b>context</b><span class='light fixedFont'> <a href="../symbols/Object.html">Object</a></span> 
                         <i>Optional</i>
                       </dt>
                       <dd>Optional context parameter to be 
@@ -939,8 +960,6 @@ used as `this` when calling the iterator function.</dd>
 
                   </dl>
                 
-
-                <div class="hr"></div>
               
                 <a name="eachWithObject"></a>
 
@@ -949,8 +968,6 @@ used as `this` when calling the iterator function.</dd>
                   
                   </span>
 
-                  <span class="light">{<a href="../symbols/Array.html">Array</a>}</span>
-
                   <b>eachWithObject</b>(object, iterator, context)
                 </div>
 
@@ -958,7 +975,7 @@ used as `this` when calling the iterator function.</dd>
                   Call the given iterator once for each element in the array,
 passing in the element as the first argument and the given object
 as the second argument. Additional arguments are passed similar to
-<code>each</code>
+<code>each</code>.
 
                   
                 </div>
@@ -970,21 +987,21 @@ as the second argument. Additional arguments are passed similar to
                     <dt class="heading">Parameters:</dt>
                     
                       <dt>
-                        <span class="light fixedFont">{<a href="../symbols/Object.html">Object</a>}</span> <b>object</b>
+                        <b>object</b><span class='light fixedFont'> <a href="../symbols/Object.html">Object</a></span> 
                         
                       </dt>
                       <dd>The object to pass to the iterator on each
 visit.</dd>
                     
                       <dt>
-                        <span class="light fixedFont">{<a href="../symbols/Function.html">Function</a>}</span> <b>iterator</b>
+                        <b>iterator</b><span class='light fixedFont'> <a href="../symbols/Function.html">Function</a></span> 
                         
                       </dt>
                       <dd>Function to be called once for 
 each element in the array.</dd>
                     
                       <dt>
-                        <span class="light fixedFont">{<a href="../symbols/Object.html">Object</a>}</span> <b>context</b>
+                        <b>context</b><span class='light fixedFont'> <a href="../symbols/Object.html">Object</a></span> 
                         <i>Optional</i>
                       </dt>
                       <dd>Optional context parameter to be 
@@ -1020,8 +1037,6 @@ used as `this` when calling the iterator function.</dd>
 
                   </dl>
                 
-
-                <div class="hr"></div>
               
                 <a name="every"></a>
 
@@ -1029,8 +1044,6 @@ used as `this` when calling the iterator function.</dd>
                   <span class='lighter'>
                   
                   </span>
-
-                  
 
                   <b>every</b>(callbackthisObject)
                 </div>
@@ -1061,8 +1074,6 @@ this when executing callback.</dd>
                 
 
                 
-
-                <div class="hr"></div>
               
                 <a name="extremes"></a>
 
@@ -1071,16 +1082,16 @@ this when executing callback.</dd>
                   
                   </span>
 
-                  <span class="light">{<a href="../symbols/Object.html">Object</a>}</span>
-
                   <b>extremes</b>(fn)
                 </div>
 
                 <div class="description">
                   Returns an object containing the extremes of this array.
-<pre>
-[-1, 3, 0].extremes() # => {min: -1, max: 3}
-</pre>
+
+<code><pre>
+   [-1, 3, 0].extremes()
+=> {min: -1, max: 3}
+</pre></code>
 
                   
                 </div>
@@ -1092,7 +1103,7 @@ this when executing callback.</dd>
                     <dt class="heading">Parameters:</dt>
                     
                       <dt>
-                        <span class="light fixedFont">{<a href="../symbols/Function.html">Function</a>}</span> <b>fn</b>
+                        <b>fn</b><span class='light fixedFont'> <a href="../symbols/Function.html">Function</a></span> 
                         <i>Optional</i>
                       </dt>
                       <dd>An optional funtion used to evaluate 
@@ -1123,8 +1134,6 @@ each element to calculate its value for determining extremes.</dd>
 
                   </dl>
                 
-
-                <div class="hr"></div>
               
                 <a name="filter"></a>
 
@@ -1132,8 +1141,6 @@ each element to calculate its value for determining extremes.</dd>
                   <span class='lighter'>
                   
                   </span>
-
-                  
 
                   <b>filter</b>(callback)
                 </div>
@@ -1164,8 +1171,6 @@ use as this when executing callback.</dd>
                 
 
                 
-
-                <div class="hr"></div>
               
                 <a name="first"></a>
 
@@ -1174,13 +1179,16 @@ use as this when executing callback.</dd>
                   
                   </span>
 
-                  <span class="light">{<a href="../symbols/Object.html">Object</a>}</span>
-
                   <b>first</b>()
                 </div>
 
                 <div class="description">
                   Returns the first element of the array, undefined if the array is empty.
+
+<code><pre>
+   ["first", "second", "third"].first()
+=> "first"
+</pre></code>
 
                   
                 </div>
@@ -1211,8 +1219,6 @@ use as this when executing callback.</dd>
 
                   </dl>
                 
-
-                <div class="hr"></div>
               
                 <a name="flatten"></a>
 
@@ -1221,13 +1227,21 @@ use as this when executing callback.</dd>
                   
                   </span>
 
-                  <span class="light">{<a href="../symbols/Array.html">Array</a>}</span>
-
                   <b>flatten</b>()
                 </div>
 
                 <div class="description">
                   Flatten out an array of arrays into a single array of elements.
+
+<code><pre>
+   [[1, 2], [3, 4], 5].flatten()
+=> [1, 2, 3, 4, 5]
+
+   # won't flatten twice nested arrays. call
+   # flatten twice if that is what you want
+   [[1, 2], [3, [4, 5]], 6].flatten()
+=> [1, 2, 3, [4, 5], 6]
+</pre></code>
 
                   
                 </div>
@@ -1258,8 +1272,6 @@ use as this when executing callback.</dd>
 
                   </dl>
                 
-
-                <div class="hr"></div>
               
                 <a name="forEach"></a>
 
@@ -1267,8 +1279,6 @@ use as this when executing callback.</dd>
                   <span class='lighter'>
                   
                   </span>
-
-                  
 
                   <b>forEach</b>(callback)
                 </div>
@@ -1298,8 +1308,6 @@ as this when executing callback.</dd>
                 
 
                 
-
-                <div class="hr"></div>
               
                 <a name="include"></a>
 
@@ -1308,13 +1316,19 @@ as this when executing callback.</dd>
                   
                   </span>
 
-                  <span class="light">{<a href="../symbols/Boolean.html">Boolean</a>}</span>
-
                   <b>include</b>(element)
                 </div>
 
                 <div class="description">
                   Returns true if the element is present in the array.
+
+<code><pre>
+   ["a", "b", "c"].include("c")
+=> true
+
+   [40, "a"].include(700)
+=> false
+</pre></code>
 
                   
                 </div>
@@ -1326,7 +1340,7 @@ as this when executing callback.</dd>
                     <dt class="heading">Parameters:</dt>
                     
                       <dt>
-                        <span class="light fixedFont">{<a href="../symbols/Object.html">Object</a>}</span> <b>element</b>
+                        <b>element</b><span class='light fixedFont'> <a href="../symbols/Object.html">Object</a></span> 
                         
                       </dt>
                       <dd>The element to check if present.</dd>
@@ -1356,8 +1370,6 @@ as this when executing callback.</dd>
 
                   </dl>
                 
-
-                <div class="hr"></div>
               
                 <a name="indexOf"></a>
 
@@ -1365,8 +1377,6 @@ as this when executing callback.</dd>
                   <span class='lighter'>
                   
                   </span>
-
-                  
 
                   <b>indexOf</b>(searchElement)
                 </div>
@@ -1402,8 +1412,6 @@ array is still searched from front to back. If the calculated index is less than
                 
 
                 
-
-                <div class="hr"></div>
               
                 <a name="inject"></a>
 
@@ -1411,8 +1419,6 @@ array is still searched from front to back. If the calculated index is less than
                   <span class='lighter'>
                   
                   </span>
-
-                  <span class="light">{<a href="../symbols/Object.html">Object</a>}</span>
 
                   <b>inject</b>()
                 </div>
@@ -1451,8 +1457,6 @@ value (memo) and the element.
 
                   </dl>
                 
-
-                <div class="hr"></div>
               
                 <a name="invoke"></a>
 
@@ -1460,8 +1464,6 @@ value (memo) and the element.
                   <span class='lighter'>
                   
                   </span>
-
-                  <span class="light">{<a href="../symbols/Array.html">Array</a>}</span>
 
                   <b>invoke</b>(method)
                 </div>
@@ -1471,11 +1473,11 @@ value (memo) and the element.
 and return a new array containing the results of the invocation.
 
 <code><pre>
-  [1.1, 2.2, 3.3, 4.4].invoke("floor")
-  => [1, 2, 3, 4]
+   [1.1, 2.2, 3.3, 4.4].invoke("floor")
+=> [1, 2, 3, 4]
 
-  ['hello', 'world', 'cool!'].invoke('substring', 0, 3)
-  => ['hel', 'wor', 'coo']
+   ['hello', 'world', 'cool!'].invoke('substring', 0, 3)
+=> ['hel', 'wor', 'coo']
 </pre></code>
 
                   
@@ -1488,7 +1490,7 @@ and return a new array containing the results of the invocation.
                     <dt class="heading">Parameters:</dt>
                     
                       <dt>
-                        <span class="light fixedFont">{<a href="../symbols/String.html">String</a>}</span> <b>method</b>
+                        <b>method</b><span class='light fixedFont'> <a href="../symbols/String.html">String</a></span> 
                         
                       </dt>
                       <dd>The name of the method to invoke.</dd>
@@ -1525,8 +1527,6 @@ named method on each element.</dd>
 
                   </dl>
                 
-
-                <div class="hr"></div>
               
                 <a name="join"></a>
 
@@ -1534,8 +1534,6 @@ named method on each element.</dd>
                   <span class='lighter'>
                   
                   </span>
-
-                  
 
                   <b>join</b>(separator)
                 </div>
@@ -1566,8 +1564,6 @@ are separated with a comma.</dd>
                 
 
                 
-
-                <div class="hr"></div>
               
                 <a name="last"></a>
 
@@ -1576,13 +1572,16 @@ are separated with a comma.</dd>
                   
                   </span>
 
-                  <span class="light">{<a href="../symbols/Object.html">Object</a>}</span>
-
                   <b>last</b>()
                 </div>
 
                 <div class="description">
                   Returns the last element of the array, undefined if the array is empty.
+
+<code><pre>
+   ["first", "second", "third"].last()
+=> "third"
+</pre></code>
 
                   
                 </div>
@@ -1613,8 +1612,6 @@ are separated with a comma.</dd>
 
                   </dl>
                 
-
-                <div class="hr"></div>
               
                 <a name="lastIndexOf"></a>
 
@@ -1622,8 +1619,6 @@ are separated with a comma.</dd>
                   <span class='lighter'>
                   
                   </span>
-
-                  
 
                   <b>lastIndexOf</b>(searchElement)
                 </div>
@@ -1659,8 +1654,6 @@ index is less than 0, -1 is returned, i.e. the array will not be searched.</dd>
                 
 
                 
-
-                <div class="hr"></div>
               
                 <a name="map"></a>
 
@@ -1669,16 +1662,21 @@ index is less than 0, -1 is returned, i.e. the array will not be searched.</dd>
                   
                   </span>
 
-                  
-
-                  <b>map</b>(callbackthisObject)
+                  <b>map</b>(iterator, context)
                 </div>
 
                 <div class="description">
-                  Creates a new array with the results of calling a provided function on every
-element in this array.
+                  Call the given iterator once for each element in the array, 
+passing in the element as the first argument, the index of 
+the element as the second argument, and `this` array as the
+third argument.
 
-<code><em>array</em>.map(<em>callback</em>[, <em>thisObject</em>])</code>
+<code><pre>
+   [1, 2, 3].map (number) ->
+     number * number
+
+=> [1, 4, 9]
+</pre></code>
 
                   
                 </div>
@@ -1690,19 +1688,45 @@ element in this array.
                     <dt class="heading">Parameters:</dt>
                     
                       <dt>
-                        <b>callbackthisObject</b>
+                        <b>iterator</b><span class='light fixedFont'> <a href="../symbols/Function.html">Function</a></span> 
                         
                       </dt>
-                      <dd>Function that produces an element of the new Array
-from an element of the current one.Object to use as this when executing
-callback.</dd>
+                      <dd>Function to be called once for
+each element in the array.</dd>
+                    
+                      <dt>
+                        <b>context</b><span class='light fixedFont'> <a href="../symbols/Object.html">Object</a></span> 
+                        <i>Optional</i>
+                      </dt>
+                      <dd>Optional context parameter to be
+used as `this` when calling the iterator function.</dd>
                     
                   </dl>
                 
 
                 
+                  <dl class="detailList nomargin">
 
-                <div class="hr"></div>
+                    
+
+                    
+
+                    
+
+                    
+                      <dt class="heading">Returns:</dt>
+                      
+                        <dd>An array of the results of the iterator function
+being called on the original array elements.</dd>
+                      
+                    
+
+                    
+
+                    
+
+                  </dl>
+                
               
                 <a name="partition"></a>
 
@@ -1710,8 +1734,6 @@ callback.</dd>
                   <span class='lighter'>
                   
                   </span>
-
-                  <span class="light">{<a href="../symbols/Array.html">Array</a>}</span>
 
                   <b>partition</b>(iterator, context)
                 </div>
@@ -1730,13 +1752,13 @@ true, and those for which it returns false.
                     <dt class="heading">Parameters:</dt>
                     
                       <dt>
-                        <span class="light fixedFont">{<a href="../symbols/Function.html">Function</a>}</span> <b>iterator</b>
+                        <b>iterator</b><span class='light fixedFont'> <a href="../symbols/Function.html">Function</a></span> 
                         
                       </dt>
                       <dd></dd>
                     
                       <dt>
-                        <span class="light fixedFont">{<a href="../symbols/Object.html">Object</a>}</span> <b>context</b>
+                        <b>context</b><span class='light fixedFont'> <a href="../symbols/Object.html">Object</a></span> 
                         <i>Optional</i>
                       </dt>
                       <dd>Optional context parameter to be
@@ -1767,8 +1789,6 @@ used as `this` when calling the iterator function.</dd>
 
                   </dl>
                 
-
-                <div class="hr"></div>
               
                 <a name="pop"></a>
 
@@ -1776,8 +1796,6 @@ used as `this` when calling the iterator function.</dd>
                   <span class='lighter'>
                   
                   </span>
-
-                  
 
                   <b>pop</b>()
                 </div>
@@ -1797,8 +1815,6 @@ used as `this` when calling the iterator function.</dd>
                 
 
                 
-
-                <div class="hr"></div>
               
                 <a name="product"></a>
 
@@ -1806,8 +1822,6 @@ used as `this` when calling the iterator function.</dd>
                   <span class='lighter'>
                   
                   </span>
-
-                  <span class="light">{<a href="../symbols/Number.html">Number</a>}</span>
 
                   <b>product</b>()
                 </div>
@@ -1844,8 +1858,6 @@ used as `this` when calling the iterator function.</dd>
 
                   </dl>
                 
-
-                <div class="hr"></div>
               
                 <a name="push"></a>
 
@@ -1853,8 +1865,6 @@ used as `this` when calling the iterator function.</dd>
                   <span class='lighter'>
                   
                   </span>
-
-                  
 
                   <b>push</b>(element1,)
                 </div>
@@ -1884,8 +1894,6 @@ the array.
                 
 
                 
-
-                <div class="hr"></div>
               
                 <a name="rand"></a>
 
@@ -1893,8 +1901,6 @@ the array.
                   <span class='lighter'>
                   
                   </span>
-
-                  <span class="light">{<a href="../symbols/Object.html">Object</a>}</span>
 
                   <b>rand</b>()
                 </div>
@@ -1931,8 +1937,6 @@ the array.
 
                   </dl>
                 
-
-                <div class="hr"></div>
               
                 <a name="reduce"></a>
 
@@ -1940,8 +1944,6 @@ the array.
                   <span class='lighter'>
                   
                   </span>
-
-                  
 
                   <b>reduce</b>(callbackinitialValue)
                 </div>
@@ -1972,8 +1974,6 @@ array.Object to use as the first argument to the first call of the callback.</dd
                 
 
                 
-
-                <div class="hr"></div>
               
                 <a name="reduceRight"></a>
 
@@ -1981,8 +1981,6 @@ array.Object to use as the first argument to the first call of the callback.</dd
                   <span class='lighter'>
                   
                   </span>
-
-                  
 
                   <b>reduceRight</b>(callback)
                 </div>
@@ -2013,8 +2011,6 @@ array.Object to use as the first argument to the first call of the callback.</dd
                 
 
                 
-
-                <div class="hr"></div>
               
                 <a name="reject"></a>
 
@@ -2022,8 +2018,6 @@ array.Object to use as the first argument to the first call of the callback.</dd
                   <span class='lighter'>
                   
                   </span>
-
-                  <span class="light">{<a href="../symbols/Array.html">Array</a>}</span>
 
                   <b>reject</b>(iterator, context)
                 </div>
@@ -2041,14 +2035,14 @@ array.Object to use as the first argument to the first call of the callback.</dd
                     <dt class="heading">Parameters:</dt>
                     
                       <dt>
-                        <span class="light fixedFont">{<a href="../symbols/Function.html">Function</a>}</span> <b>iterator</b>
+                        <b>iterator</b><span class='light fixedFont'> <a href="../symbols/Function.html">Function</a></span> 
                         
                       </dt>
                       <dd>The iterator receives each element in turn as 
 the first agument.</dd>
                     
                       <dt>
-                        <span class="light fixedFont">{<a href="../symbols/Object.html">Object</a>}</span> <b>context</b>
+                        <b>context</b><span class='light fixedFont'> <a href="../symbols/Object.html">Object</a></span> 
                         <i>Optional</i>
                       </dt>
                       <dd>Optional context parameter to be
@@ -2079,8 +2073,6 @@ used as `this` when calling the iterator function.</dd>
 
                   </dl>
                 
-
-                <div class="hr"></div>
               
                 <a name="remove"></a>
 
@@ -2089,14 +2081,21 @@ used as `this` when calling the iterator function.</dd>
                   
                   </span>
 
-                  
-
                   <b>remove</b>(object)
                 </div>
 
                 <div class="description">
-                  Remove the first occurance of the given object from the array if it is
-present.
+                  Remove the first occurrence of the given object from the array if it is
+present. The array is modified in place.
+
+<code><pre>
+   a = [1, 1, "a", "b"]
+   a.remove(1)
+=> 1
+
+   a
+=> [1, "a", "b"]
+</pre></code>
 
                   
                 </div>
@@ -2108,7 +2107,7 @@ present.
                     <dt class="heading">Parameters:</dt>
                     
                       <dt>
-                        <span class="light fixedFont">{<a href="../symbols/Object.html">Object</a>}</span> <b>object</b>
+                        <b>object</b><span class='light fixedFont'> <a href="../symbols/Object.html">Object</a></span> 
                         
                       </dt>
                       <dd>The object to remove from the array if present.</dd>
@@ -2138,8 +2137,6 @@ present.
 
                   </dl>
                 
-
-                <div class="hr"></div>
               
                 <a name="reverse"></a>
 
@@ -2147,8 +2144,6 @@ present.
                   <span class='lighter'>
                   
                   </span>
-
-                  
 
                   <b>reverse</b>()
                 </div>
@@ -2167,8 +2162,6 @@ last becomes the first.
                 
 
                 
-
-                <div class="hr"></div>
               
                 <a name="select"></a>
 
@@ -2176,8 +2169,6 @@ last becomes the first.
                   <span class='lighter'>
                   
                   </span>
-
-                  <span class="light">{<a href="../symbols/Array.html">Array</a>}</span>
 
                   <b>select</b>(iterator, context)
                 </div>
@@ -2195,14 +2186,14 @@ last becomes the first.
                     <dt class="heading">Parameters:</dt>
                     
                       <dt>
-                        <span class="light fixedFont">{<a href="../symbols/Function.html">Function</a>}</span> <b>iterator</b>
+                        <b>iterator</b><span class='light fixedFont'> <a href="../symbols/Function.html">Function</a></span> 
                         
                       </dt>
                       <dd>The iterator receives each element in turn as 
 the first agument.</dd>
                     
                       <dt>
-                        <span class="light fixedFont">{<a href="../symbols/Object.html">Object</a>}</span> <b>context</b>
+                        <b>context</b><span class='light fixedFont'> <a href="../symbols/Object.html">Object</a></span> 
                         <i>Optional</i>
                       </dt>
                       <dd>Optional context parameter to be
@@ -2233,8 +2224,6 @@ used as `this` when calling the iterator function.</dd>
 
                   </dl>
                 
-
-                <div class="hr"></div>
               
                 <a name="shift"></a>
 
@@ -2242,8 +2231,6 @@ used as `this` when calling the iterator function.</dd>
                   <span class='lighter'>
                   
                   </span>
-
-                  
 
                   <b>shift</b>()
                 </div>
@@ -2262,8 +2249,6 @@ changes the length of the array.
                 
 
                 
-
-                <div class="hr"></div>
               
                 <a name="shuffle"></a>
 
@@ -2271,8 +2256,6 @@ changes the length of the array.
                   <span class='lighter'>
                   
                   </span>
-
-                  <span class="light">{<a href="../symbols/Array.html">Array</a>}</span>
 
                   <b>shuffle</b>()
                 </div>
@@ -2309,8 +2292,6 @@ changes the length of the array.
 
                   </dl>
                 
-
-                <div class="hr"></div>
               
                 <a name="slice"></a>
 
@@ -2318,8 +2299,6 @@ changes the length of the array.
                   <span class='lighter'>
                   
                   </span>
-
-                  
 
                   <b>slice</b>(begin, end)
                 </div>
@@ -2361,8 +2340,6 @@ extracts to the end of the sequence.</dd>
                 
 
                 
-
-                <div class="hr"></div>
               
                 <a name="some"></a>
 
@@ -2370,8 +2347,6 @@ extracts to the end of the sequence.</dd>
                   <span class='lighter'>
                   
                   </span>
-
-                  
 
                   <b>some</b>(callback)
                 </div>
@@ -2402,8 +2377,6 @@ this when executing callback.</dd>
                 
 
                 
-
-                <div class="hr"></div>
               
                 <a name="sort"></a>
 
@@ -2411,8 +2384,6 @@ this when executing callback.</dd>
                   <span class='lighter'>
                   
                   </span>
-
-                  
 
                   <b>sort</b>(compareFunction)
                 </div>
@@ -2443,8 +2414,6 @@ to the string conversion of each element.</dd>
                 
 
                 
-
-                <div class="hr"></div>
               
                 <a name="splice"></a>
 
@@ -2452,8 +2421,6 @@ to the string conversion of each element.</dd>
                   <span class='lighter'>
                   
                   </span>
-
-                  
 
                   <b>splice</b>(index, howMany, element1,)
                 </div>
@@ -2501,8 +2468,6 @@ specify any elements, splice simply removes elements from the array.</dd>
                 
 
                 
-
-                <div class="hr"></div>
               
                 <a name="sum"></a>
 
@@ -2510,8 +2475,6 @@ specify any elements, splice simply removes elements from the array.</dd>
                   <span class='lighter'>
                   
                   </span>
-
-                  <span class="light">{<a href="../symbols/Number.html">Number</a>}</span>
 
                   <b>sum</b>()
                 </div>
@@ -2548,8 +2511,6 @@ specify any elements, splice simply removes elements from the array.</dd>
 
                   </dl>
                 
-
-                <div class="hr"></div>
               
                 <a name="toSource"></a>
 
@@ -2557,8 +2518,6 @@ specify any elements, splice simply removes elements from the array.</dd>
                   <span class='lighter'>
                   
                   </span>
-
-                  
 
                   <b>toSource</b>()
                 </div>
@@ -2574,8 +2533,6 @@ specify any elements, splice simply removes elements from the array.</dd>
                 
 
                 
-
-                <div class="hr"></div>
               
                 <a name="toString"></a>
 
@@ -2583,8 +2540,6 @@ specify any elements, splice simply removes elements from the array.</dd>
                   <span class='lighter'>
                   
                   </span>
-
-                  
 
                   <b>toString</b>()
                 </div>
@@ -2602,8 +2557,6 @@ specify any elements, splice simply removes elements from the array.</dd>
                 
 
                 
-
-                <div class="hr"></div>
               
                 <a name="unshift"></a>
 
@@ -2611,8 +2564,6 @@ specify any elements, splice simply removes elements from the array.</dd>
                   <span class='lighter'>
                   
                   </span>
-
-                  
 
                   <b>unshift</b>(element1,)
                 </div>
@@ -2642,8 +2593,6 @@ length of the array.
                 
 
                 
-
-                <div class="hr"></div>
               
                 <a name="without"></a>
 
@@ -2651,8 +2600,6 @@ length of the array.
                   <span class='lighter'>
                   
                   </span>
-
-                  <span class="light">{<a href="../symbols/Array.html">Array</a>}</span>
 
                   <b>without</b>(values)
                 </div>
@@ -2670,7 +2617,7 @@ length of the array.
                     <dt class="heading">Parameters:</dt>
                     
                       <dt>
-                        <span class="light fixedFont">{<a href="../symbols/Array.html">Array</a>}</span> <b>values</b>
+                        <b>values</b><span class='light fixedFont'> <a href="../symbols/Array.html">Array</a></span> 
                         
                       </dt>
                       <dd>List of elements to exclude.</dd>
@@ -2700,8 +2647,6 @@ length of the array.
 
                   </dl>
                 
-
-                <div class="hr"></div>
               
                 <a name="wrap"></a>
 
@@ -2710,8 +2655,6 @@ length of the array.
                   
                   </span>
 
-                  <span class="light">{<a href="../symbols/Object.html">Object</a> or Array}</span>
-
                   <b>wrap</b>(start, length)
                 </div>
 
@@ -2719,6 +2662,17 @@ length of the array.
                   Pretend the array is a circle and grab a new array containing length elements. 
 If length is not given return the element at start, again assuming the array 
 is a circle.
+
+<code><pre>
+   [1, 2, 3].wrap(-1)
+=> 3
+
+   [1, 2, 3].wrap(6)
+=> 1
+
+   ["l", "o", "o", "p"].wrap(0, 16)
+=> ["l", "o", "o", "p", "l", "o", "o", "p", "l", "o", "o", "p", "l", "o", "o", "p"]
+</pre></code>
 
                   
                 </div>
@@ -2730,14 +2684,14 @@ is a circle.
                     <dt class="heading">Parameters:</dt>
                     
                       <dt>
-                        <span class="light fixedFont">{<a href="../symbols/Number.html">Number</a>}</span> <b>start</b>
+                        <b>start</b><span class='light fixedFont'> <a href="../symbols/Number.html">Number</a></span> 
                         
                       </dt>
                       <dd>The index to start wrapping at, or the index of the 
 sole element to return if no length is given.</dd>
                     
                       <dt>
-                        <span class="light fixedFont">{<a href="../symbols/Number.html">Number</a>}</span> <b>length</b>
+                        <b>length</b><span class='light fixedFont'> <a href="../symbols/Number.html">Number</a></span> 
                         <i>Optional</i>
                       </dt>
                       <dd>Optional length determines how long result 
@@ -2768,8 +2722,6 @@ starting from start and wrapping.</dd>
                     
 
                   </dl>
-                
-
                 
               
             </div>

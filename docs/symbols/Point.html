@@ -12,9 +12,7 @@
     <div class="index">
       <div class="menu">
         <!-- begin publish.classesIndex -->
-        <div align="center"><a href="../index.html">Class Index</a> | <a href="../files.html">File Index</a></div>
-
-<h2 class="heading1">Classes</h2>
+        <h2 class="heading1">Classes</h2>
 
 <ul class="classList">
   
@@ -72,7 +70,7 @@
       <div class="innerContent">
         <h1 class="classTitle">
           
-          Class <span>Point</span>
+          <span>Point</span>
         </h1>
 
         <p class="description summary">
@@ -405,8 +403,6 @@
                 
 
                 
-
-                <div class="hr"></div>
               
                 <a name="y"></a>
 
@@ -429,8 +425,6 @@
                 
 
                 
-
-                <div class="hr"></div>
               
                 <a name=".ZERO"></a>
 
@@ -449,8 +443,6 @@
 
                   
                 </div>
-
-                
 
                 
 
@@ -478,8 +470,6 @@
                   
                   </span>
 
-                  <span class="light">{<a href="../symbols/Point.html">Point</a>}</span>
-
                   <b>add</b>(other)
                 </div>
 
@@ -498,7 +488,7 @@
                     <dt class="heading">Parameters:</dt>
                     
                       <dt>
-                        <span class="light fixedFont">{<a href="../symbols/Point.html">Point</a>}</span> <b>other</b>
+                        <b>other</b><span class='light fixedFont'> <a href="../symbols/Point.html">Point</a></span> 
                         
                       </dt>
                       <dd>The point to add this point to.</dd>
@@ -528,8 +518,6 @@
 
                   </dl>
                 
-
-                <div class="hr"></div>
               
                 <a name="copy"></a>
 
@@ -537,8 +525,6 @@
                   <span class='lighter'>
                   
                   </span>
-
-                  <span class="light">{<a href="../symbols/Point.html">Point</a>}</span>
 
                   <b>copy</b>()
                 </div>
@@ -565,7 +551,18 @@
                     
                       <dt class="heading">Returns:</dt>
                       
-                        <dd>A new point with the same x and y value as this point.</dd>
+                        <dd>A new point with the same x and y value as this point.
+    
+      <code><pre>
+        point = Point(1, 1)
+        pointCopy = point.copy()
+    
+        point.equal(pointCopy)
+        => true
+    
+        point == pointCopy
+        => false     
+      </pre></code></dd>
                       
                     
 
@@ -575,8 +572,6 @@
 
                   </dl>
                 
-
-                <div class="hr"></div>
               
                 <a name="cross"></a>
 
@@ -584,8 +579,6 @@
                   <span class='lighter'>
                   
                   </span>
-
-                  <span class="light">{<a href="../symbols/Number.html">Number</a>}</span>
 
                   <b>cross</b>(other)
                 </div>
@@ -607,7 +600,7 @@
                     <dt class="heading">Parameters:</dt>
                     
                       <dt>
-                        <span class="light fixedFont">{<a href="../symbols/Point.html">Point</a>}</span> <b>other</b>
+                        <b>other</b><span class='light fixedFont'> <a href="../symbols/Point.html">Point</a></span> 
                         
                       </dt>
                       <dd>The point to cross with this point.</dd>
@@ -637,8 +630,6 @@
 
                   </dl>
                 
-
-                <div class="hr"></div>
               
                 <a name="direction"></a>
 
@@ -646,8 +637,6 @@
                   <span class='lighter'>
                   
                   </span>
-
-                  <span class="light">{<a href="../symbols/Number.html">Number</a>}</span>
 
                   <b>direction</b>()
                 </div>
@@ -663,8 +652,6 @@
                 
 
                 
-
-                <div class="hr"></div>
               
                 <a name=".direction"></a>
 
@@ -672,8 +659,6 @@
                   <span class='lighter'>
                   <em>static</em>
                   </span>
-
-                  <span class="light">{<a href="../symbols/Number.html">Number</a>}</span>
 
                   <span class="light">Point.</span><b>direction</b>(p1, p2)
                 </div>
@@ -693,13 +678,13 @@
                     <dt class="heading">Parameters:</dt>
                     
                       <dt>
-                        <span class="light fixedFont">{<a href="../symbols/Point.html">Point</a>}</span> <b>p1</b>
+                        <b>p1</b><span class='light fixedFont'> <a href="../symbols/Point.html">Point</a></span> 
                         
                       </dt>
                       <dd>The starting point.</dd>
                     
                       <dt>
-                        <span class="light fixedFont">{<a href="../symbols/Point.html">Point</a>}</span> <b>p2</b>
+                        <b>p2</b><span class='light fixedFont'> <a href="../symbols/Point.html">Point</a></span> 
                         
                       </dt>
                       <dd>The ending point.</dd>
@@ -729,8 +714,6 @@
 
                   </dl>
                 
-
-                <div class="hr"></div>
               
                 <a name="distance"></a>
 
@@ -738,8 +721,6 @@
                   <span class='lighter'>
                   
                   </span>
-
-                  <span class="light">{<a href="../symbols/Number.html">Number</a>}</span>
 
                   <b>distance</b>(other)
                 </div>
@@ -757,7 +738,7 @@
                     <dt class="heading">Parameters:</dt>
                     
                       <dt>
-                        <span class="light fixedFont">{<a href="../symbols/Point.html">Point</a>}</span> <b>other</b>
+                        <b>other</b><span class='light fixedFont'> <a href="../symbols/Point.html">Point</a></span> 
                         
                       </dt>
                       <dd>The point to compute the distance to.</dd>
@@ -787,8 +768,6 @@
 
                   </dl>
                 
-
-                <div class="hr"></div>
               
                 <a name=".distance"></a>
 
@@ -796,8 +775,6 @@
                   <span class='lighter'>
                   <em>static</em>
                   </span>
-
-                  <span class="light">{<a href="../symbols/Number.html">Number</a>}</span>
 
                   <span class="light">Point.</span><b>distance</b>(p1, p2)
                 </div>
@@ -815,13 +792,13 @@
                     <dt class="heading">Parameters:</dt>
                     
                       <dt>
-                        <span class="light fixedFont">{<a href="../symbols/Point.html">Point</a>}</span> <b>p1</b>
+                        <b>p1</b><span class='light fixedFont'> <a href="../symbols/Point.html">Point</a></span> 
                         
                       </dt>
                       <dd></dd>
                     
                       <dt>
-                        <span class="light fixedFont">{<a href="../symbols/Point.html">Point</a>}</span> <b>p2</b>
+                        <b>p2</b><span class='light fixedFont'> <a href="../symbols/Point.html">Point</a></span> 
                         
                       </dt>
                       <dd></dd>
@@ -851,8 +828,6 @@
 
                   </dl>
                 
-
-                <div class="hr"></div>
               
                 <a name="dot"></a>
 
@@ -860,8 +835,6 @@
                   <span class='lighter'>
                   
                   </span>
-
-                  <span class="light">{<a href="../symbols/Number.html">Number</a>}</span>
 
                   <b>dot</b>(other)
                 </div>
@@ -879,7 +852,7 @@
                     <dt class="heading">Parameters:</dt>
                     
                       <dt>
-                        <span class="light fixedFont">{<a href="../symbols/Point.html">Point</a>}</span> <b>other</b>
+                        <b>other</b><span class='light fixedFont'> <a href="../symbols/Point.html">Point</a></span> 
                         
                       </dt>
                       <dd>The point to dot with this point.</dd>
@@ -909,8 +882,6 @@
 
                   </dl>
                 
-
-                <div class="hr"></div>
               
                 <a name="equal"></a>
 
@@ -918,8 +889,6 @@
                   <span class='lighter'>
                   
                   </span>
-
-                  <span class="light">{<a href="../symbols/Boolean.html">Boolean</a>}</span>
 
                   <b>equal</b>(other)
                 </div>
@@ -937,7 +906,7 @@
                     <dt class="heading">Parameters:</dt>
                     
                       <dt>
-                        <span class="light fixedFont">{<a href="../symbols/Point.html">Point</a>}</span> <b>other</b>
+                        <b>other</b><span class='light fixedFont'> <a href="../symbols/Point.html">Point</a></span> 
                         
                       </dt>
                       <dd>The point to check for equality.</dd>
@@ -967,8 +936,6 @@
 
                   </dl>
                 
-
-                <div class="hr"></div>
               
                 <a name="floor"></a>
 
@@ -976,8 +943,6 @@
                   <span class='lighter'>
                   
                   </span>
-
-                  <span class="light">{<a href="../symbols/Point.html">Point</a>}</span>
 
                   <b>floor</b>()
                 </div>
@@ -1014,8 +979,6 @@
 
                   </dl>
                 
-
-                <div class="hr"></div>
               
                 <a name=".fromAngle"></a>
 
@@ -1023,8 +986,6 @@
                   <span class='lighter'>
                   <em>static</em>
                   </span>
-
-                  <span class="light">{<a href="../symbols/Point.html">Point</a>}</span>
 
                   <span class="light">Point.</span><b>fromAngle</b>(angle)
                 </div>
@@ -1042,7 +1003,7 @@
                     <dt class="heading">Parameters:</dt>
                     
                       <dt>
-                        <span class="light fixedFont">{<a href="../symbols/Number.html">Number</a>}</span> <b>angle</b>
+                        <b>angle</b><span class='light fixedFont'> <a href="../symbols/Number.html">Number</a></span> 
                         
                       </dt>
                       <dd>The angle in radians</dd>
@@ -1072,8 +1033,6 @@
 
                   </dl>
                 
-
-                <div class="hr"></div>
               
                 <a name="length"></a>
 
@@ -1081,8 +1040,6 @@
                   <span class='lighter'>
                   
                   </span>
-
-                  <span class="light">{<a href="../symbols/Number.html">Number</a>}</span>
 
                   <b>length</b>()
                 </div>
@@ -1119,8 +1076,6 @@
 
                   </dl>
                 
-
-                <div class="hr"></div>
               
                 <a name="magnitude"></a>
 
@@ -1128,8 +1083,6 @@
                   <span class='lighter'>
                   
                   </span>
-
-                  <span class="light">{<a href="../symbols/Number.html">Number</a>}</span>
 
                   <b>magnitude</b>()
                 </div>
@@ -1166,8 +1119,6 @@
 
                   </dl>
                 
-
-                <div class="hr"></div>
               
                 <a name="norm"></a>
 
@@ -1175,8 +1126,6 @@
                   <span class='lighter'>
                   
                   </span>
-
-                  <span class="light">{<a href="../symbols/Point.html">Point</a>}</span>
 
                   <b>norm</b>()
                 </div>
@@ -1214,8 +1163,6 @@
 
                   </dl>
                 
-
-                <div class="hr"></div>
               
                 <a name="scale"></a>
 
@@ -1223,8 +1170,6 @@
                   <span class='lighter'>
                   
                   </span>
-
-                  <span class="light">{<a href="../symbols/Point.html">Point</a>}</span>
 
                   <b>scale</b>(scalar)
                 </div>
@@ -1242,7 +1187,7 @@
                     <dt class="heading">Parameters:</dt>
                     
                       <dt>
-                        <span class="light fixedFont">{<a href="../symbols/Number.html">Number</a>}</span> <b>scalar</b>
+                        <b>scalar</b><span class='light fixedFont'> <a href="../symbols/Number.html">Number</a></span> 
                         
                       </dt>
                       <dd>The amount to scale this point by.</dd>
@@ -1272,8 +1217,6 @@
 
                   </dl>
                 
-
-                <div class="hr"></div>
               
                 <a name="subtract"></a>
 
@@ -1281,8 +1224,6 @@
                   <span class='lighter'>
                   
                   </span>
-
-                  <span class="light">{<a href="../symbols/Point.html">Point</a>}</span>
 
                   <b>subtract</b>(other)
                 </div>
@@ -1300,7 +1241,7 @@
                     <dt class="heading">Parameters:</dt>
                     
                       <dt>
-                        <span class="light fixedFont">{<a href="../symbols/Point.html">Point</a>}</span> <b>other</b>
+                        <b>other</b><span class='light fixedFont'> <a href="../symbols/Point.html">Point</a></span> 
                         
                       </dt>
                       <dd>The point to subtract from this point.</dd>
@@ -1329,8 +1270,6 @@
                     
 
                   </dl>
-                
-
                 
               
             </div>
