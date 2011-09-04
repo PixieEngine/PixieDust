@@ -14,7 +14,7 @@ specified the object will have an unlimited duration.
    enemy.I.active
 => true
 
-   6.times ->
+   5.times ->
      enemy.update()
 
    enemy.I.active
@@ -33,6 +33,8 @@ Durable = (I) ->
 
   before:
     update: () ->
-      if I.duration != -1 && I.age >= I.duration
+      # adding in I.age + 1 because this 
+      # check occurs before I.age is updated
+      if I.duration != -1 && I.age + 1 >= I.duration
         I.active = false
 
