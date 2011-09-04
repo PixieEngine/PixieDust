@@ -4264,7 +4264,7 @@ var __slice = Array.prototype.slice;
   };
   return (typeof exports !== "undefined" && exports !== null ? exports : this)["Color"] = Color;
 })();;
-/*
+/**
 The Drawable module is used to provide a simple draw method to the including
 object.
 
