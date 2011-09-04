@@ -4274,6 +4274,28 @@ Binds a step listener to update the transform of the object.
 
 Autoloads the sprite specified in I.spriteName, if any.
 
+<code><pre>
+player = Core
+  x: 15
+  y: 30
+  width: 5
+  height: 5
+  sprite: "my_cool_sprite"
+  
+engine.bind 'draw', (canvas) ->
+  player.draw(canvas) 
+=> Uncaught TypeError: Object has no method 'draw'
+
+player.include(Drawable)
+
+engine.bind 'draw', (canvas) ->
+  player.draw(canvas)
+player.draw(window.canvas)
+=> if you have a sprite named "my_cool_sprite" in your images folder
+then it will be drawn. Otherwise, a rectangle positioned at x: 15 and
+y: 30 with width and height 5 will be drawn.
+</pre></code>
+
 @name Drawable
 @module
 @constructor
@@ -4403,7 +4425,7 @@ Durable = function(I) {
   return {
     before: {
       update: function() {
-        if (I.duration !== -1 && I.age + 1 >= I.duration) {
+        if (I.duration !== -1 && I.age >= I.duration) {
           return I.active = false;
         }
       }
