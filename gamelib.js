@@ -3608,10 +3608,10 @@ by default in <code>GameObject</code>.
      height: 20
      other: "stuff"
      more: "properties"
-  
+
    player.position()
 => Uncaught TypeError: Object has no method 'position'
-  
+
    player.include(Bounded)
 
    # now player has all the methods provided by this module
@@ -3659,7 +3659,7 @@ Bounded = function(I, self) {
         y: 6
         width: 20
         height: 20
-        
+    
       player.collides({x: 5, y: 7, width: 20, height: 20})
       => true
     </pre></code>
@@ -3684,7 +3684,7 @@ Bounded = function(I, self) {
         y: 50
         width: 20
         height: 20
-        
+    
       player.collisionBounds()
       => {x: 38, y: 36 height: 28, width: 24}
     
@@ -3717,12 +3717,12 @@ Bounded = function(I, self) {
         y: 6
         width: 2
         height: 2
-        
+    
       player.include(Bounded)
-      
+    
       player.bounds()
       => {x: 3, y: 6, width: 2, height: 2}
-      
+    
       player.bounds(7, 4)
       => {x: 10, y: 10, width: 2, height: 2}   
     </pre></code>
@@ -3753,9 +3753,9 @@ Bounded = function(I, self) {
         y: 6
         width: 2
         height: 2
-        
+    
       player.include(Bounded)
-      
+    
       player.centeredBounds()
       => {x: 4, y: 7, xw: 1, yw: 1}
     </pre></code>  
@@ -3793,7 +3793,7 @@ Bounded = function(I, self) {
       x: 50
       y: 50
       other: "stuff"
-      
+    
     player.include(Bounded)
     
     player.circle()
@@ -4281,7 +4281,7 @@ player = Core
   width: 5
   height: 5
   sprite: "my_cool_sprite"
-  
+
 engine.bind 'draw', (canvas) ->
   player.draw(canvas) 
 => Uncaught TypeError: Object has no method 'draw'
@@ -4399,15 +4399,15 @@ specified the object will have an unlimited duration.
      x: 50
      y: 30
      duration: 5
-    
+
    enemy.include(Durable)
-  
+
    enemy.I.active
 => true
-  
+
    5.times ->
      enemy.update()
-   
+
    enemy.I.active
 => false
 </pre></code>
