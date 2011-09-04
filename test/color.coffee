@@ -1,321 +1,408 @@
+( ->
+
+equalEnough = (actual, expected, tolerance=3, message) ->
+  message ||= "" + expected + " within " + tolerance + " of " + actual
+  ok(expected + tolerance >= actual && expected - tolerance <= actual, message)
+
 module "Color"
 
-test "multiple instantiations work", ->
-  color = Color("burntorange")
-
-  equals color.r(), 192
-
-  color = Color("burntorange")
-
-  equals color.r(), 192
-
-  color = Color("burntorange")
-
-  equals color.r(), 192
-
-test "default should be black", ->
+test "r, g, b default to 0, a defaults to 1", ->
   color = Color()
 
-  ok color.equals
-    r: -> 0
-    g: -> 0
-    b: -> 0 
-    a: -> 1
+  equalEnough color.r, 0
+  equalEnough color.g, 0
+  equalEnough color.b, 0
+  equalEnough color.a, 1
 
-test "should parse rgb", ->
-  color = Color('rgb(3, 56, 174)')
+test "accepts a single array of length 3", ->
+  color = Color([255, 1, 2])
 
-  ok color.equals
-    r: -> 3
-    g: -> 56
-    b: -> 174
-    a: -> 1
+  equalEnough color.r, 255
+  equalEnough color.g, 1
+  equalEnough color.b, 2
 
-test "should parse rgba", ->
-  color = Color('rgb(4, 66, 134, 0.45)')
+test "accepts a single array of length 4", ->
+  color = Color([255, 4, 3, 0.8])
 
-  ok color.equals
-    r: -> 4
-    g: -> 66
-    b: -> 134
-    a: -> 0.45
+  equalEnough color.r, 255
+  equalEnough color.g, 4
+  equalEnough color.b, 3
+  equalEnough color.a, 0.8
 
-test "should parse rgba without leading 0 on alpha value", -> 
-  color = Color('rgb(4, 66, 134, .33)')
+test "accepts an array of length 3 as the first argument and an alpha value as the second", ->
+  color = Color([100, 5, 3], 0.4)
 
-  ok color.equals
-    r: -> 4
-    g: -> 66
-    b: -> 134
-    a: -> 0.33
+  equalEnough color.r, 100
+  equalEnough color.g, 5
+  equalEnough color.b, 3
+  equalEnough color.a, 0.4
 
-test "should parse length 8 hex string", -> 
-  color = Color('ae56f03a')
+test "accepts an array of length 4 as the first argument and an alpha value. The alpha value passed as the second argument overrides the alpha in the array", ->
+  color = Color([4, 20, 90, 0.1], 0.6)
 
-  ok color.equals
-    r: -> 174
-    g: -> 86
-    b: -> 240
-    a: -> 58 / 255.0
+  equalEnough color.r, 4
+  equalEnough color.g, 20
+  equalEnough color.b, 90
+  equalEnough color.a, 0.6
 
-test "should parse length 8 hex string with leading #", ->
-  color = Color('#001f34bb')
+test "accepts an rgb string as the first argument and an alpha value as the second", ->
+  color = Color('rgb(255, 40, 30)', 0.4)
 
-  ok color.equals
-    r: -> 0
-    g: -> 31
-    b: -> 52
-    a: -> 187 / 255.0
+  equalEnough color.r, 255
+  equalEnough color.g, 40
+  equalEnough color.b, 30
+  equalEnough color.a, 0.4
 
-test "should parse length 6 hex string", -> 
-  color = Color('1084ce')
+test "accepts an rgba string as the first argument and an alpha value as the second. The alpha value takes precedence over the alpha from the rgba string", ->
+  color = Color('rgba(30, 20, 15, 0.8)', 0.35)
 
-  ok color.equals
-    r: -> 16
-    g: -> 132
-    b: -> 206
-    a: -> 1
+  equalEnough color.r, 30
+  equalEnough color.g, 20
+  equalEnough color.b, 15
+  equalEnough color.a, 0.35
 
-test "should parse length 6 hex string with leading #", ->
-  color = Color('#dfef12')
+test "accepts an hsl string as the first argument and an alpha value as the second", ->
+  color = Color('hsl(63, 0.4, 0.3)', 0.21)
 
-  ok color.equals
-    r: -> 223
-    g: -> 239
-    b: -> 18
-    a: -> 1
+  equalEnough color.r, 104
+  equalEnough color.g, 107
+  equalEnough color.b, 46
+  equalEnough color.a, 0.21
 
-test "should parse length 4 hex string", ->   
-  color = Color('b8f0')
+test "accepts an hsla string as the first argument and an alpha value as the second. The alpha value takes precedence over the hsla string alpha value", ->
+  color = Color('hsla(45, 0.3, 0.5, 0.1)', 0.47)
 
-  ok color.equals
-    r: -> 187
-    g: -> 136
-    b: -> 255
-    a: -> 0
+  equalEnough color.r, 166
+  equalEnough color.g, 147
+  equalEnough color.b, 89
+  equalEnough color.a, 0.47
 
-test "should parse length 4 hex string with leading #", ->  
-  color = Color('#ab87')
+test "accepts hex value of length 3 as first argument and alpha value as second argument", ->
+  color = Color('#ff0', 0.5)
 
-  ok color.equals
-    r: -> 170
-    g: -> 187
-    b: -> 136
-    a: -> 119 / 255.0
+  equalEnough color.r, 255
+  equalEnough color.g, 255
+  equalEnough color.b, 0
+  equalEnough color.a, 0.5 
 
-test "should parse length 3 hex string", ->   
-  color = Color('a94')
+test "accepts hex value of length 4 as first argument and alpha value as second argument. The alpha value takes precedence over the alpha from the hex string.", ->
+  color = Color('#ef3c', 0.3)
 
-  ok color.equals
-    r: -> 170
-    g: -> 153
-    b: -> 68
-    a: -> 1
+  equalEnough color.r, 238
+  equalEnough color.g, 255
+  equalEnough color.b, 51
+  equalEnough color.a, 0.3
 
-test "should parse length 3 hex string with leading #", ->  
-  color = Color('#3ef')
+test "accepts hex value of length 6 as first argument and alpha value as second argument", ->
+  color = Color('#de34ab', 0.27)
 
-  ok color.equals
-    r: -> 51
-    g: -> 238
-    b: -> 255
-    a: -> 1  
+  equalEnough color.r, 222
+  equalEnough color.g, 52
+  equalEnough color.b, 171
+  equalEnough color.a, 0.27 
 
-test "should know what lavender blue is", ->
-  color = Color("lavender blue")
+test "accepts hex value of length 8 as first argument and alpha value as second argument. Alpha value takes precedence over hex alpha.", ->
+  color = Color('#ab45cd', 0.59)
 
-  ok color.equals
-    r: -> 139
-    g: -> 136
-    b: -> 248
-    a: -> 1
+  equalEnough color.r, 171
+  equalEnough color.g, 69
+  equalEnough color.b, 205
+  equalEnough color.a, 0.59
 
-test "should parse 'transparent'", ->
-  color = Color("transparent")
+test "accepts hex string of length 3", ->
+  color = Color('#df2')
 
-  ok color.equals
-    r: -> 0
-    g: -> 0
-    b: -> 0
-    a: -> 0
+  equalEnough color.r, 221
+  equalEnough color.g, 255
+  equalEnough color.b, 34
+  equalEnough color.a, 1.0
 
-test "should throw error if cannot find color", ->
+test "accepts hex string of length 4", ->
+  color = Color('#c987')
+
+  equalEnough color.r, 204
+  equalEnough color.g, 153
+  equalEnough color.b, 136
+  equalEnough color.a.toFixed(2), 0.47
+
+test "accepts hex string of length 6", ->
+  color = Color('#cdef12')
+
+  equalEnough color.r, 205
+  equalEnough color.g, 239
+  equalEnough color.b, 18
+  equalEnough color.a, 1.0
+
+test "accepts hex string of length 8", ->  
+  color = Color('#ef1234af')
+
+  equalEnough color.r, 239
+  equalEnough color.g, 18
+  equalEnough color.b, 52
+  equalEnough color.a.toFixed(2), 0.69
+
+test "accepts 3 numeric values", ->
+  color = Color(34, 54, 39)
+
+  equalEnough color.r, 34
+  equalEnough color.g, 54
+  equalEnough color.b, 39
+  equalEnough color.a, 1.0
+
+test "accepts 4 numeric values", ->
+  color = Color(23, 43, 100, 0.32)
+
+  equalEnough color.r, 23
+  equalEnough color.g, 43
+  equalEnough color.b, 100
+  equalEnough color.a, 0.32
+
+test "invalid color throws error", ->
   raises ->
-    color = Color("asdf39402394")
-  , "asdf39402394 is an unknown color"
+    Color("A Fake Color")
 
-test "should parse arrays", ->
-  color = Color([1, 24, 101])
+test "#copy", ->
+  color = Color(123, 231, 2)
+  copiedColor = color.copy()
 
-  ok color.equals
-    r: -> 1
-    g: -> 24
-    b: -> 101
-    a: -> 1
+  ok color.equal(copiedColor)
+  ok color != copiedColor
 
-test "parse 3 or 4 number arguments", ->
-  color = Color(4, 34, 102, 0.4)
+test "#equal", ->
+  color1 = Color(255, 255, 255, 1)
+  color2 = Color([255, 255, 255])
 
-  ok color.equals
-    r: -> 4
-    g: -> 34
-    b: -> 102
-    a: -> 0.4
+  ok color1.equal(color2)
 
-test "should parse first argument array, second argument alpha", ->
-  color = Color([4, 200, 43], 0.4)
+test "#toString", ->
+  noAlpha = Color(30, 40, 23)
+  withAlpha = Color(29, 49, 50, 0.45)
+  decimalValues = Color(34.7, 52.2, 50.1, 0.45)
 
-  ok color.equals
-    r: -> 4
-    g: -> 200
-    b: -> 43
-    a: -> 0.4
+  equal noAlpha.toString(), "rgba(30, 40, 23, 1)"
+  equal withAlpha.toString(), "rgba(29, 49, 50, 0.45)"
+  equal decimalValues.toString(), "rgba(35, 52, 50, 0.45)"
 
-test "should parse first argument string, second argument alpha", ->
-  hexColor = Color("#1084ce", 0.5)
-  rgbColor = Color("rgb(3, 90, 210)", 0.3)
+test "#toHex", ->
+  color = Color(23, 45, 100)
 
-  ok hexColor.equals
-    r: -> 16
-    g: -> 132
-    b: -> 206
-    a: -> 0.5
-
-  ok rgbColor.equals
-    r: -> 3
-    g: -> 90
-    b: -> 210
-    a: -> 0.3 
-
-test "should be able to lighten", ->
-  color = Color('#f00').lighten(0.1)
-
-  equals color.r(), 255
-  equals color.g(), 51
-  equals color.b(), 51
-  equals color.a(), 1
-
-test "should equal colors with the same rbga values", ->
-  color1 = Color(4, 20, 100)
-  color2 = Color('rgb(4, 20, 100)')
-  color3 = Color('#041464')
-  color4 = Color([4, 20, 100])
-
-  ok color1.equals(color2)
-  ok color1.equals(color3)
-  ok color1.equals(color4)
-
-  alpha1 = Color(51, 51, 51, 1)
-  alpha2 = Color('rgba(51, 51, 51, 1)')
-  alpha3 = Color('#333333ff')
-  alpha4 = Color('#333f')
-  alpha5 = Color([51,51,51,1])
-
-  ok alpha1.equals(alpha2)
-  ok alpha1.equals(alpha3)
-  ok alpha1.equals(alpha4)
-  ok alpha1.equals(alpha5)
-
-test "should parse colors input as hsl", ->
-  color = Color("hsl(300, 0.3, 0.6)")
-
-  ok color.equals
-    r: -> 184
-    g: -> 122
-    b: -> 184
-    a: -> 1
-
-test "should output proper toString", ->
-  color = Color(5, 25, 125, 0.73)
-
-  equals color.toString(), "rgba(5, 25, 125, 0.73)"
-
-test "should output proper toHex", ->
-  white = Color(255, 255, 255)
-  black = Color(0, 0, 0)
-
-  equals white.toHex(), "#ffffff"
-  equals black.toHex(), "#000000"
-
-test "should recognize an object with a channels array as a Color", ->
-  red = Color(255, 0, 0)
-  testColor = Color(red)
-
-  ok testColor.equals
-    r: -> 255
-    g: -> 0
-    b: -> 0
-    a: -> 1
+  equal color.toHex(), "#172d64"
 
 test "#toHsl", ->
-  color = Color(123, 43, 98)
+  color = Color(45, 29, 20)
+
   hsl = color.toHsl()
 
-  equals hsl[0].round(), 319
-  equals hsl[1].toFixed(2), "0.48"
-  equals hsl[2].toFixed(2), "0.33"
-  equals hsl[3], 1
+  equalEnough hsl[0].round(), 22
+  equalEnough hsl[1].toFixed(2), 0.38
+  equalEnough hsl[2].toFixed(2), 0.13
+  equalEnough hsl[3], 1.0
 
-test "#lighten", ->
-  color = Color(20, 45, 123)
-  lightColor = color.lighten(0.1)
+test "#hue", ->
+  color = Color(34, 54, 239).hue(20)
 
-  equals lightColor.r().round(), 27
-  equals lightColor.g().round(), 61
-  equals lightColor.b().round(), 167
+  equalEnough color.r, 84
+  equalEnough color.g, 37
+  equalEnough color.b, 239
+  equalEnough color.a, 1.0
 
-test "#darken", ->
-  color = Color(34, 58, 29)
-  darkColor = color.darken(0.1)
+test "#hue$", ->
+  color = Color(34, 54, 239)
 
-  equals darkColor.r(), 14 
-  equals darkColor.g(), 24
-  equals darkColor.b(), 12
+  color.hue$(60)
+
+  equalEnough color.r, 218
+  equalEnough color.g, 37
+  equalEnough color.b, 239
+  equalEnough color.a, 1.0
 
 test "#complement", ->
-  color = Color(40, 39, 210)
+  color = Color(10, 30, 50).complement()
 
-  complement = color.complement()
+  equalEnough color.r, 51
+  equalEnough color.g, 31
+  equalEnough color.b, 10
+  equalEnough color.a, 1.0
 
-  equals complement.r(), 209
-  equals complement.g(), 210
-  equals complement.b(), 39
+test "#complement$", ->
+  color = Color(10, 30, 50)
+
+  color.complement$()
+
+  equalEnough color.r, 51
+  equalEnough color.g, 31
+  equalEnough color.b, 10
+  equalEnough color.a, 1.0
 
 test "#grayscale", ->
-  color = Color(59, 200, 1)
+  color = Color(30, 40, 29).grayscale()
 
-  gray = color.grayscale()
+  equalEnough color.r, 35
+  equalEnough color.g, 35
+  equalEnough color.b, 35
+  equalEnough color.a, 1.0
 
-  equals gray.r(), (0.3941176470588235 * 255).round()
-  equals gray.g(), (0.3941176470588235 * 255).round()
-  equals gray.b(), (0.39411764705882350 * 255).round()
+test "#grayscale$", ->
+  color = Color(30, 40, 29)
+
+  color.grayscale$()
+
+  equalEnough color.r, 35
+  equalEnough color.g, 35
+  equalEnough color.b, 35
+  equalEnough color.a, 1.0
 
 test "#saturate", ->
-  color = Color(45, 26, 100)
+  color = Color(100, 200, 150).saturate(0.3)
 
-  saturated = color.saturate(0.3)
+  equalEnough color.r, 69
+  equalEnough color.g, 232
+  equalEnough color.b, 150
+  equalEnough color.a, 1.0
 
-  equals saturated.r(), 36
-  equals saturated.g(), 7
-  equals saturated.b(), 119
+test "#saturate$", ->
+  color = Color(100, 200, 150)
+
+  color.saturate$(0.3)
+
+  equalEnough color.r, 69
+  equalEnough color.g, 232
+  equalEnough color.b, 150
+  equalEnough color.a, 1.0
+
+test "#desaturate", ->
+  color = Color(69, 232, 150).desaturate(0.3)
+
+  equalEnough color.r, 100
+  equalEnough color.g, 200
+  equalEnough color.b, 150
+  equalEnough color.a, 1.0
+
+test "#desaturate$", ->
+  color = Color(69, 232, 150)
+
+  color.desaturate$(0.3)
+
+  equalEnough color.r, 100
+  equalEnough color.g, 200
+  equalEnough color.b, 150
+  equalEnough color.a, 1.0
+
+test "#darken", ->
+  color = Color(45, 64, 39).darken(0.1)
+
+  equalEnough color.r, 22
+  equalEnough color.g, 32
+  equalEnough color.b, 19
+  equalEnough color.a, 1.0
+
+test "#darken$", ->
+  color = Color(45, 64, 39)
+
+  color.darken$(0.1)
+
+  equalEnough color.r, 22
+  equalEnough color.g, 32
+  equalEnough color.b, 19
+  equalEnough color.a, 1.0
+
+test "#lighten", ->
+  color = Color(22, 32, 19).lighten(0.1)
+
+  equalEnough color.r, 45
+  equalEnough color.g, 64
+  equalEnough color.b, 39
+  equalEnough color.a, 1.0
+
+test "#lighten$", ->
+  color = Color(22, 32, 19)
+
+  color.lighten$(0.1)
+
+  equalEnough color.r, 45
+  equalEnough color.g, 64
+  equalEnough color.b, 39
+  equalEnough color.a, 1.0
+
+test "#mixWith", ->
+  color1 = Color(50, 40, 60, 0.3)
+  color2 = Color(10, 5, 16, 0.2)
+
+  mixedColor = color1.mixWith(color2)
+
+  equalEnough mixedColor.r, 30
+  equalEnough mixedColor.g, (45 / 2).round()
+  equalEnough mixedColor.b, (76 / 2).round()
+  equalEnough mixedColor.a, 0.5 / 2
+
+  weightedMixedColor = color1.mixWith(color2, 0.1)
+
+  equalEnough weightedMixedColor.r, ((50 * 0.1) + (10 * 0.9)).round()
+  equalEnough weightedMixedColor.g, ((40 * 0.1) + (5 * 0.9)).round()
+  equalEnough weightedMixedColor.b, ((60 * 0.1) + (16 * 0.9)).round()
+  equalEnough weightedMixedColor.a, (0.3 * 0.1) + (0.2 * 0.9) 
+
+test "#mixWith$", ->
+  color1 = Color(50, 40, 60, 0.3)
+  color2 = Color(10, 5, 16, 0.2)
+
+  color3 = Color(50, 40, 60, 0.3)
+
+  color1.mixWith$(color2)
+
+  equalEnough color1.r, 30
+  equalEnough color1.g, (45 / 2).round()
+  equalEnough color1.b, (76 / 2).round()
+  equalEnough color1.a, 0.5 / 2
+
+  color3.mixWith$(color2, 0.1)
+
+  equalEnough color3.r, ((50 * 0.1) + (10 * 0.9)).round()
+  equalEnough color3.g, ((40 * 0.1) + (5 * 0.9)).round()
+  equalEnough color3.b, ((60 * 0.1) + (16 * 0.9)).round()
+  equalEnough color3.a, (0.3 * 0.1) + (0.2 * 0.9) 
+
+test "Color.random", ->
+  color = Color.random()
+
+  ok 0 <= color.r <= 255
+  ok 0 <= color.g <= 255
+  ok 0 <= color.b <= 255
+  equalEnough color.a, 1.0
 
 test "Color.mix", ->
-  color1 = Color(33, 55, 100, 1)
-  color2 = Color(50, 90, 200, 0.5)
+  mixedColor = Color.mix(
+    Color("red"),
+    Color("sky blue")
+  )
 
-  mixedColor = Color.mix(color1, color2)
+  equalEnough mixedColor.r, 173
+  equalEnough mixedColor.g, 94
+  equalEnough mixedColor.b, 127
+  equalEnough mixedColor.a, 1
 
-  equals mixedColor.r(), (83 / 2).round()
-  equals mixedColor.g(), (145 / 2).round()
-  equals mixedColor.b(), (300 / 2).round()
-  equals mixedColor.a(), 0.75
+  weightedMixedColor = Color.mix(Color(0, 255, 0, 1), Color(255, 0, 255, 0.6), 0.1)
 
-  mixedColor2 = Color.mix(color1, color2, 0.1)
+  equalEnough weightedMixedColor.r, ((0 * 0.1) + (255 * 0.9)).round()
+  equalEnough weightedMixedColor.g, ((255 * 0.1) + (0 * 0.9)).round()
+  equalEnough weightedMixedColor.b, ((0 * 0.1) + (255 * 0.9)).round()
+  equalEnough weightedMixedColor.a, (1 * 0.1) + (0.6 * 0.9)  
 
-  equals mixedColor2.r(), (3.3 + 45).round()
-  equals mixedColor2.g(), (5.5 + 81).round()
-  equals mixedColor2.b(), (10 + 180).round()
-  equals mixedColor2.a(), 0.1 + (0.5 * 0.9)
+test "accepts named colors", ->
+  white = Color("white")
+
+  equalEnough white.r, 255
+  equalEnough white.g, 255
+  equalEnough white.b, 255
+  equalEnough white.a, 1.0
+
+  piPink = Color("Paul Irish Pink")
+
+  equalEnough piPink.r, 255
+  equalEnough piPink.g, 94
+  equalEnough piPink.b, 153
+  equalEnough piPink.a, 1.0
 
 module()
 
+)()
