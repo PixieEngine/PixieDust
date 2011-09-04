@@ -1,0 +1,371 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="generator" content="JsDoc Toolkit" />
+    
+    <title>JsDoc Reference - Function</title>
+    <link href="/stylesheets/docs.css" type="text/css" rel="stylesheet" media="all" />
+  </head>
+
+  <body>
+    <div class="index">
+      <div class="menu">
+        <!-- begin publish.classesIndex -->
+        <h2 class="heading1">Classes</h2>
+
+<ul class="classList">
+  
+    <li><a href="../symbols/_global_.html">_global_</a></li>
+  
+    <li><a href="../symbols/Array.html">Array</a></li>
+  
+    <li><a href="../symbols/Bindable.html">Bindable</a></li>
+  
+    <li><a href="../symbols/Boolean.html">Boolean</a></li>
+  
+    <li><a href="../symbols/Bounded.html">Bounded</a></li>
+  
+    <li><a href="../symbols/Collision.html">Collision</a></li>
+  
+    <li><a href="../symbols/Core.html">Core</a></li>
+  
+    <li><a href="../symbols/Date.html">Date</a></li>
+  
+    <li><a href="../symbols/Durable.html">Durable</a></li>
+  
+    <li><a href="../symbols/Engine.html">Engine</a></li>
+  
+    <li><a href="../symbols/Function.html">Function</a></li>
+  
+    <li><a href="../symbols/GameObject.html">GameObject</a></li>
+  
+    <li><a href="../symbols/Math.html">Math</a></li>
+  
+    <li><a href="../symbols/Matrix.html">Matrix</a></li>
+  
+    <li><a href="../symbols/Movable.html">Movable</a></li>
+  
+    <li><a href="../symbols/Number.html">Number</a></li>
+  
+    <li><a href="../symbols/Object.html">Object</a></li>
+  
+    <li><a href="../symbols/Point.html">Point</a></li>
+  
+    <li><a href="../symbols/Random.html">Random</a></li>
+  
+    <li><a href="../symbols/RegExp.html">RegExp</a></li>
+  
+    <li><a href="../symbols/Sprite.html">Sprite</a></li>
+  
+    <li><a href="../symbols/String.html">String</a></li>
+  
+</ul>
+
+        <!-- end publish.classesIndex -->
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="innerContent">
+        <h1 class="classTitle">
+          
+          <span>Function</span>
+        </h1>
+
+        <p class="description summary">
+          
+
+          
+
+          
+        </p>
+
+        
+
+        
+
+  <!--
+  #### METHODS SUMMARY
+  -->
+        
+          
+          
+            <div class="props">
+              <table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class Function.">
+                <caption>Method Summary</caption>
+
+                <tbody>
+                  
+                    <tr>
+                      <td class="nameDescription">
+                        <div class="fixedFont"><b><a href="../symbols/Function.html#apply">apply</a></b>(thisArg, argsArray)
+                        </div>
+                        <div class="description">Calls a function with a given this value and arguments provided as an array.</div>
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <td class="nameDescription">
+                        <div class="fixedFont"><b><a href="../symbols/Function.html#bind">bind</a></b>(thisValuearg1,)
+                        </div>
+                        <div class="description">Creates a new function that, when called, itself calls this function in the
+context of the provided this value, with a given sequence of arguments preceding
+any provided when the new function was called.</div>
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <td class="nameDescription">
+                        <div class="fixedFont"><b><a href="../symbols/Function.html#call">call</a></b>(thisArg, arg1,)
+                        </div>
+                        <div class="description">Calls a function with a given this value and arguments provided individually.</div>
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <td class="nameDescription">
+                        <div class="fixedFont"><b><a href="../symbols/Function.html#toSource">toSource</a></b>()
+                        </div>
+                        <div class="description">Non-standard</div>
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <td class="nameDescription">
+                        <div class="fixedFont"><b><a href="../symbols/Function.html#toString">toString</a></b>(indentation)
+                        </div>
+                        <div class="description">Returns a string representing the source code of the function.</div>
+                      </td>
+                    </tr>
+                  
+                </tbody>
+              </table>
+            </div>
+          
+
+          
+        
+
+  <!--
+  #### EVENTS SUMMARY
+  -->
+        
+
+  <!--
+  #### CONSTRUCTOR DETAILS
+  -->
+        
+
+  <!--
+  #### FIELD DETAILS
+  -->
+        
+
+  <!--
+  #### METHOD DETAILS
+  -->
+        
+          <div class="details props">
+            <div class="innerProps">
+              
+                <div class="fixedFont heading">
+                  <a name="apply"></a>
+                  <span class='lighter'>
+                  
+                  </span>
+
+                  <b>apply</b>(thisArg, argsArray)
+                </div>
+
+                <div class="description">
+                  Calls a function with a given this value and arguments provided as an array.
+
+<code><em>fun</em>.apply(<em>thisArg</em>[, <em>argsArray</em>])</code>
+
+                  
+                </div>
+
+                
+
+                
+                  <dl class="detailList params">
+                    <dt class="heading">Parameters:</dt>
+                    
+                      <dt>
+                        <b>thisArg</b>
+                        
+                      </dt>
+                      <dd>Determines the value of this inside fun. If thisArg is null or
+undefined, this will be the global object. Otherwise, this will be equal to
+Object(thisArg) (which is thisArg if thisArg is already an object, or a String,
+Boolean, or Number if thisArg is a primitive value of the corresponding type).
+Therefore, it is always true that typeof this == "object" when the function
+executes.</dd>
+                    
+                      <dt>
+                        <b>argsArray</b>
+                        
+                      </dt>
+                      <dd>An argument array for the object, specifying the arguments
+with which fun should be called, or null or undefined if no arguments should be
+provided to the function.</dd>
+                    
+                  </dl>
+                
+
+                
+              
+                <div class="fixedFont heading">
+                  <a name="bind"></a>
+                  <span class='lighter'>
+                  
+                  </span>
+
+                  <b>bind</b>(thisValuearg1,)
+                </div>
+
+                <div class="description">
+                  Creates a new function that, when called, itself calls this function in the
+context of the provided this value, with a given sequence of arguments preceding
+any provided when the new function was called.
+
+<code><em>fun</em>.bind(<em>thisArg</em>[, <em>arg1</em>[, <em>arg2</em>[, ...]]])</code>
+
+                  
+                </div>
+
+                
+
+                
+                  <dl class="detailList params">
+                    <dt class="heading">Parameters:</dt>
+                    
+                      <dt>
+                        <b>thisValuearg1,</b>
+                        
+                      </dt>
+                      <dd>arg2, ... The value to be passed as the this parameter to
+the target function when the bound function is called.  The value is ignored if
+the bound function is constructed using the new operator.Arguments to prepend to
+arguments provided to the bound function when invoking the target function.</dd>
+                    
+                  </dl>
+                
+
+                
+              
+                <div class="fixedFont heading">
+                  <a name="call"></a>
+                  <span class='lighter'>
+                  
+                  </span>
+
+                  <b>call</b>(thisArg, arg1,)
+                </div>
+
+                <div class="description">
+                  Calls a function with a given this value and arguments provided individually.
+
+<code><em>fun</em>.call(<em>thisArg</em>[, <em>arg1</em>[, <em>arg2</em>[, ...]]])</code>
+
+                  
+                </div>
+
+                
+
+                
+                  <dl class="detailList params">
+                    <dt class="heading">Parameters:</dt>
+                    
+                      <dt>
+                        <b>thisArg</b>
+                        
+                      </dt>
+                      <dd>Determines the value of this inside fun. If thisArg is null or
+undefined, this will be the global object. Otherwise, this will be equal to
+Object(thisArg) (which is thisArg if thisArg is already an object, or a String,
+Boolean, or Number if thisArg is a primitive value of the corresponding type).
+Therefore, it is always true that typeof this == "object" when the function
+executes.</dd>
+                    
+                      <dt>
+                        <b>arg1,</b>
+                        
+                      </dt>
+                      <dd>arg2, ...  Arguments for the object.</dd>
+                    
+                  </dl>
+                
+
+                
+              
+                <div class="fixedFont heading">
+                  <a name="toSource"></a>
+                  <span class='lighter'>
+                  
+                  </span>
+
+                  <b>toSource</b>()
+                </div>
+
+                <div class="description">
+                  Non-standard
+
+                  
+                </div>
+
+                
+
+                
+
+                
+              
+                <div class="fixedFont heading">
+                  <a name="toString"></a>
+                  <span class='lighter'>
+                  
+                  </span>
+
+                  <b>toString</b>(indentation)
+                </div>
+
+                <div class="description">
+                  Returns a string representing the source code of the function.
+
+<code><em>function</em>.toString(<em>indentation</em>)</code>
+
+                  
+                </div>
+
+                
+
+                
+                  <dl class="detailList params">
+                    <dt class="heading">Parameters:</dt>
+                    
+                      <dt>
+                        <b>indentation</b>
+                        
+                      </dt>
+                      <dd>Non-standard     The amount of spaces to indent the string
+representation of the source code. If indentation is less than or equal to -1,
+most unnecessary spaces are removed.</dd>
+                    
+                  </dl>
+                
+
+                
+              
+            </div>
+          </div>
+        
+
+  <!--
+  #### EVENT DETAILS
+  -->
+        
+      </div>
+    </div>
+  </body>
+</html>

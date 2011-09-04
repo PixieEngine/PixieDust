@@ -1,11 +1,13 @@
 ###*
 The Bounded module is used to provide basic data about the
-location and dimensions of the including object
+location and dimensions of the including object. This module is included
+by default in <code>GameObject</code>.
 
 Bounded module
 @name Bounded
 @module
 @constructor
+@see GameObject
 
 @param {Object} I Instance variables
 @param {Object} self Reference to including object
