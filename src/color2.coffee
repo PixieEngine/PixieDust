@@ -6,7 +6,7 @@
     return undefined unless channels = rgbParser.exec(colorString)
 
     parsedColor = (parseFloat channel for channel in channels[1..3])
-    parsedColor[3] ||= 1.0
+    parsedColor[3] ||= 1
 
     return parsedColor
 
@@ -16,9 +16,9 @@
     switch hexString.length
       when 3, 4
         if hexString.length == 4
-          alpha = ((parseInt(hexString.substr(3, 1), 16) * 0x11) / 255.0)
+          alpha = ((parseInt(hexString.substr(3, 1), 16) * 0x11) / 255)
         else
-          alpha = 1.0  
+          alpha = 1
 
         rgb = (parseInt(hexString.substr(i, 1), 16) * 0x11 for i in [0..2])      
         rgb.push(alpha)    
@@ -27,9 +27,9 @@
 
       when 6, 8
         if hexString.length == 8
-          alpha = (parseInt(hexString.substr(6, 2), 16) / 255.0)
+          alpha = (parseInt(hexString.substr(6, 2), 16) / 255)
         else
-          alpha = 1.0
+          alpha = 1
 
         rgb = (parseInt(hexString.substr(2 * i, 2), 16) for i in [0..2])          
         rgb.push(alpha)
@@ -44,15 +44,15 @@
 
     parsedColor = (parseFloat channel for channel in channels[1..3])
     parsedColor[0] = parsedColor[0]
-    parsedColor[3] ||= 1.0
+    parsedColor[3] ||= 1
 
     return hslToRgb(parsedColor)
 
   hslToRgb = (hsl) ->    
     [h, s, l, a] = (parseFloat(channel) for channel in hsl)
 
-    h /= 360.0
-    a ||= 1.0
+    h /= 360
+    a ||= 1
 
     r = g = b = null
 
@@ -74,7 +74,7 @@
       g = hueToRgb(p, q, h)
       b = hueToRgb(p, q, h - 1/3)
 
-      rgbMap = (channel * 0xFF for channel in [r, g, b])
+      rgbMap = ((channel * 0xFF).round() for channel in [r, g, b])
 
     return rgbMap.concat(a)
 
@@ -124,7 +124,6 @@
       @copy().complement$() 
 
     complement$: ->
-      hsl = @toHsl()
       @hue$(180)
 
     copy: ->
@@ -176,7 +175,7 @@
     hue$: (degrees) ->
       hsl = @toHsl()
 
-      hsl[0] = (hsl[0] + degrees) % 360
+      hsl[0] = (hsl[0] + degrees).mod 360
 
       [@r, @g, @b, @a] = hslToRgb(hsl)
 
@@ -199,10 +198,11 @@
     mixWith$: (other, amount) ->
       amount ||= 0.5
 
-      mixedColors = [@r, @g, @b, @a].zip([other.r, other.g, other.b, other.a]).map (array) ->
+      [@r, @g, @b, @a] = [@r, @g, @b, @a].zip([other.r, other.g, other.b, other.a]).map (array) ->
         (array[0] * amount) + (array[1] * (1 - amount))
 
-      [@r, @g, @b, @a] = mixedColors
+      [@r, @g, @b] = [@r, @g, @b].map (color) ->
+        color.round()
 
       return this 
 
@@ -229,25 +229,31 @@
       "##{hexFromNumber(@r)}#{hexFromNumber(@g)}#{hexFromNumber(@b)}"  
 
     toHsl: ->
-      [r, g, b] = (channel / 255.0 for channel in [@r, @g, @b])
+      [r, g, b] = (channel / 255 for channel in [@r, @g, @b])
 
-      min = Math.min(r, g, b)
-      max = Math.max(r, g, b)
+      {min, max} = [r, g, b].extremes()
 
-      hue = saturation = lightness = (max + min) / 2.0
+      hue = saturation = lightness = (max + min) / 2
 
       if max == min
         hue = saturation = 0
       else
         chroma = max - min
-        saturation = (if lightness > 0.5 then chroma / (2.0 - 2.0 * lightness) else chroma / (lightness * 2.0))  
+
+        saturation =
+          if lightness > 0.5
+            chroma / (1 - lightness)
+          else 
+            chroma / lightness
+
+        saturation /= 2
 
         switch max
-          when r then hue = ((g - b) / chroma) + (if g < b then 6 else 0)
-          when g then hue = ((b - r) / chroma) + 2.0
-          when b then hue = ((r - g) / chroma) + 4.0
+          when r then hue = ((g - b) / chroma) + 0
+          when g then hue = ((b - r) / chroma) + 2
+          when b then hue = ((r - g) / chroma) + 4
 
-        hue *= 60.0
+        hue *= 60
 
       return [hue, saturation, lightness, @a]      
 
