@@ -3646,6 +3646,24 @@ Bounded = function(I, self) {
     position: function() {
       return Point(I.x, I.y);
     },
+    /**
+    Does a check to see if this object is overlapping
+    with the bounds passed in.
+    
+    <code><pre>
+      player = Core
+        x: 4
+        y: 6
+        width: 20
+        height: 20
+        
+      player.collides({x: 5, y: 7, width: 20, height: 20})
+      => true
+    </pre></code>
+    
+    @returns The position of this object
+    @type Point
+    */
     collides: function(bounds) {
       return Collision.rectangular(I, bounds);
     },
@@ -3653,6 +3671,23 @@ Bounded = function(I, self) {
     This returns a modified bounds based on the collision margin.
     The area of the bounds is reduced if collision margin is positive
     and increased if collision margin is negative.
+    
+    <code><pre>
+      player = Core
+        collisionMargin: 
+          x: -2
+          y: -4
+        x: 50
+        y: 50
+        width: 20
+        height: 20
+        
+      player.collisionBounds()
+      => {x: 38, y: 36 height: 28, width: 24}
+    
+      player.collisionBounds(10, 10)
+      => {x: 48, y: 46 height: 28, width: 24}
+    </pre></code>  
     
     @name collisionBounds
     @methodOf Bounded#
@@ -3748,6 +3783,19 @@ Bounded = function(I, self) {
     /**
     Return the circular bounds of the object. The circle is
     centered at the midpoint of the object.
+    
+    <code><pre>  
+    player = Core
+      radius: 5
+      x: 50
+      y: 50
+      other: "stuff"
+      
+    player.include(Bounded)
+    
+    player.circle()
+    => {radius: 5, x: 50, y: 50}
+    </pre></code>
     
     @name circle
     @methodOf Bounded#
