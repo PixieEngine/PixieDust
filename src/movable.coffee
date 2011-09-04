@@ -15,20 +15,28 @@ collisions so is probably best suited to particle effect like things.
 
    player.I.velocity
 => {x: 0, y: 0}
+   player.position()
+=> {x: 0, y: 0}
 
    player.update()
    player.I.velocity
+=> {x: 1, y: 0}
+   player.position()
 => {x: 1, y: 0}
 
    player.update()
    player.I.velocity
 => {x: 2, y: 0}
+   player.position()
+=> {x: 3, y: 0}
 
    # now we've hit our maxSpeed
    # so our velocity won't increase
    player.update()
    player.I.velocity
 => {x: 2, y: 0}
+   player.position()
+=> {x: 5, y: 0}
 </pre></code>
 
 @name Movable
