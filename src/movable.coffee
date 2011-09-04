@@ -9,7 +9,7 @@ collisions so is probably best suited to particle effect like things.
      y: 0
      velocity: Point(0, 0)
      acceleration: Point(1, 0)
-     maxSpeed = 2
+     maxSpeed: 2
 
    player.include(Movable)
 
