@@ -185,6 +185,19 @@ Bounded = (I, self) ->
   Return the circular bounds of the object. The circle is
   centered at the midpoint of the object.
 
+  <code><pre>  
+  player = Core
+    radius: 5
+    x: 50
+    y: 50
+    other: "stuff"
+
+  player.include(Bounded)
+
+  player.circle()
+  => {radius: 5, x: 50, y: 50}
+  </pre></code>
+
   @name circle
   @methodOf Bounded#
   ###
