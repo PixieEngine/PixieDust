@@ -93,9 +93,7 @@
                       <b><a href="../symbols/Bounded.html#constructor">Bounded</a></b>(I, self)
                     </div>
                     <div class="description">The Bounded module is used to provide basic data about the
-location and dimensions of the including object
-
-Bounded module</div>
+location and dimensions of the including object.</div>
                   </td>
                 </tr>
                 <tr>
@@ -122,6 +120,7 @@ Bounded module</div>
                 <tbody>
                   
                     <tr>
+                      <td class="attributes">&nbsp;</td>
                       <td class="nameDescription">
                         <div class="fixedFont"><b><a href="../symbols/Bounded.html#bounds">bounds</a></b>(xOffset, yOffset)
                         </div>
@@ -131,6 +130,7 @@ Bounded module</div>
                     </tr>
                   
                     <tr>
+                      <td class="attributes">&nbsp;</td>
                       <td class="nameDescription">
                         <div class="fixedFont"><b><a href="../symbols/Bounded.html#center">center</a></b>()
                         </div>
@@ -140,6 +140,7 @@ Bounded module</div>
                     </tr>
                   
                     <tr>
+                      <td class="attributes">&nbsp;</td>
                       <td class="nameDescription">
                         <div class="fixedFont"><b><a href="../symbols/Bounded.html#centeredBounds">centeredBounds</a></b>()
                         </div>
@@ -149,6 +150,7 @@ Bounded module</div>
                     </tr>
                   
                     <tr>
+                      <td class="attributes">&nbsp;</td>
                       <td class="nameDescription">
                         <div class="fixedFont"><b><a href="../symbols/Bounded.html#circle">circle</a></b>()
                         </div>
@@ -157,6 +159,7 @@ Bounded module</div>
                     </tr>
                   
                     <tr>
+                      <td class="attributes">&nbsp;</td>
                       <td class="nameDescription">
                         <div class="fixedFont"><b><a href="../symbols/Bounded.html#collisionBounds">collisionBounds</a></b>(xOffset, yOffset)
                         </div>
@@ -191,9 +194,27 @@ Bounded module</div>
 
               <div class="description">
                 The Bounded module is used to provide basic data about the
-location and dimensions of the including object
+location and dimensions of the including object. This module is included
+by default in <code>GameObject</code>.
 
-Bounded module
+<code><pre>
+
+player = Core
+  x: 10
+  y: 50
+  width: 20
+  height: 20
+  other: "stuff"
+  more: "properties"
+  
+player.include(Bounded)
+
+# now player has all the methods provided by this module
+player.position()
+
+=> {x: 10, y: 50}
+
+</pre></code>
                 
               </div>
 
@@ -218,6 +239,27 @@ Bounded module
                 </dl>
               
 
+              
+                <dl class="detailList nomargin">
+                  
+
+                  
+
+                  
+
+                  
+
+                  
+
+                  
+                    <dt class="heading">See:</dt>
+                    
+                      <dd><a href="../symbols/GameObject.html">GameObject</a>
+
+Bounded module</dd>
+                    
+                  
+                </dl>
               
             </div>
           </div>

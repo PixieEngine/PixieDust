@@ -4,7 +4,6 @@ location and dimensions of the including object. This module is included
 by default in <code>GameObject</code>.
 
 <code><pre>
-
 player = Core
   x: 10
   y: 50
@@ -19,7 +18,6 @@ player.include(Bounded)
 player.position()
 
 => {x: 10, y: 50}
-
 </pre></code>
 
 @see GameObject
