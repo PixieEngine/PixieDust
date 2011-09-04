@@ -33,8 +33,8 @@ Durable = (I) ->
 
   before:
     update: () ->
-      # adding in I.age + 1 because this 
-      # check occurs before I.age is updated
-      if I.duration != -1 && I.age + 1 >= I.duration
+      # this check occurs before I.age is updated
+      # off by 1 error
+      if I.duration != -1 && I.age >= I.duration
         I.active = false
 
