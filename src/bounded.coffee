@@ -13,7 +13,7 @@ by default in <code>GameObject</code>.
      more: "properties"
 
    player.position()
-=> Uncaught TypeError: Object #<Object> has no method 'position'
+=> "Uncaught TypeError: Object #<Object> has no method 'position'"
 
    player.include(Bounded)
 
