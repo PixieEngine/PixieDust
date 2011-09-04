@@ -24,7 +24,7 @@ collisions so is probably best suited to particle effect like things.
    player.I.velocity
 => {x: 2, y: 0}
 
-   # now we've hit our max speed
+   # now we've hit our maxSpeed
    # so our velocity won't increase
    player.update()
    player.I.velocity
