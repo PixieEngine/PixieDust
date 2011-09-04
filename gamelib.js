@@ -3686,8 +3686,7 @@ Bounded = function(I, self) {
       => {x: 3, y: 6, width: 2, height: 2}
       
       player.bounds(7, 4)
-      => {x: 10, y: 10, width: 2, height: 2}
-      
+      => {x: 10, y: 10, width: 2, height: 2}   
     </pre></code>
     
     @name bounds
