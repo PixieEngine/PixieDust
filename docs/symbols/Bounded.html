@@ -120,6 +120,7 @@ location and dimensions of the including object.</div>
                 <tbody>
                   
                     <tr>
+                      <td class="attributes">&nbsp;</td>
                       <td class="nameDescription">
                         <div class="fixedFont"><b><a href="../symbols/Bounded.html#bounds">bounds</a></b>(xOffset, yOffset)
                         </div>
@@ -129,6 +130,7 @@ location and dimensions of the including object.</div>
                     </tr>
                   
                     <tr>
+                      <td class="attributes">&nbsp;</td>
                       <td class="nameDescription">
                         <div class="fixedFont"><b><a href="../symbols/Bounded.html#center">center</a></b>()
                         </div>
@@ -138,6 +140,7 @@ location and dimensions of the including object.</div>
                     </tr>
                   
                     <tr>
+                      <td class="attributes">&nbsp;</td>
                       <td class="nameDescription">
                         <div class="fixedFont"><b><a href="../symbols/Bounded.html#centeredBounds">centeredBounds</a></b>()
                         </div>
@@ -147,6 +150,7 @@ location and dimensions of the including object.</div>
                     </tr>
                   
                     <tr>
+                      <td class="attributes">&nbsp;</td>
                       <td class="nameDescription">
                         <div class="fixedFont"><b><a href="../symbols/Bounded.html#circle">circle</a></b>()
                         </div>
@@ -155,6 +159,7 @@ location and dimensions of the including object.</div>
                     </tr>
                   
                     <tr>
+                      <td class="attributes">&nbsp;</td>
                       <td class="nameDescription">
                         <div class="fixedFont"><b><a href="../symbols/Bounded.html#collisionBounds">collisionBounds</a></b>(xOffset, yOffset)
                         </div>
@@ -393,6 +398,19 @@ Bounded module</dd>
                 <div class="description">
                   Return the circular bounds of the object. The circle is
     centered at the midpoint of the object.
+    
+    <code><pre>  
+    player = Core
+      radius: 5
+      x: 50
+      y: 50
+      other: "stuff"
+      
+    player.include(Bounded)
+    
+    player.circle()
+    => {radius: 5, x: 50, y: 50}
+    </pre></code>
 
                   
                 </div>
@@ -416,6 +434,23 @@ Bounded module</dd>
                   This returns a modified bounds based on the collision margin.
     The area of the bounds is reduced if collision margin is positive
     and increased if collision margin is negative.
+    
+    <code><pre>
+      player = Core
+        collisionMargin: 
+          x: -2
+          y: -4
+        x: 50
+        y: 50
+        width: 20
+        height: 20
+        
+      player.collisionBounds()
+      => {x: 38, y: 36 height: 28, width: 24}
+    
+      player.collisionBounds(10, 10)
+      => {x: 48, y: 46 height: 28, width: 24}
+    </pre></code>
 
                   
                 </div>
