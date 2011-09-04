@@ -14,7 +14,7 @@ specified the object will have an unlimited duration.
    enemy.I.active
 => true
 
-   5.times ->
+   6.times ->
      enemy.update()
 
    enemy.I.active
