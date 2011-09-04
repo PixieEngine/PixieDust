@@ -41,8 +41,6 @@ y: 30 with width and height 5 will be drawn.
 Triggered every time the object should be drawn. A canvas is passed as
 the first argument. 
 
-Note: Things will be drawn positioned relatively to the object.
-
 <code><pre>
 player = Core
   x: 0
@@ -52,6 +50,8 @@ player = Core
 
 player.bind "draw", (canvas) ->
   canvas.fillColor("white")
+
+  # Text will be drawn positioned relatively to the object.
   canvas.fillText("Hey, drawing stuff is pretty easy.", 5, 5)
 </pre></code>
 
