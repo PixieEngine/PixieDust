@@ -99,7 +99,7 @@
 
     return result
 
-  Color2 = (args...) ->
+  Color = (args...) ->
     parsedColor = 
       switch args.length
         when 0
@@ -113,13 +113,13 @@
 
     throw "#{args.join(',')} is an unknown color" unless parsedColor   
 
-    __proto__: Color2::
+    __proto__: Color::
     r: parsedColor[0].round()
     g: parsedColor[1].round()
     b: parsedColor[2].round()
     a: parsedColor[3] 
 
-  Color2:: =
+  Color:: =
     complement: ->
       @copy().complement$() 
 
@@ -127,7 +127,7 @@
       @hue$(180)
 
     copy: ->
-      Color2(@r, @g, @b, @a)
+      Color(@r, @g, @b, @a)
 
     darken: (amount) ->
       @copy().darken$(amount)
@@ -2786,17 +2786,17 @@
   names.each (element) ->
     lookup[normalizeKey(element[1])] = parseHex(element[0])
 
-  Color2.random = ->
-    Color2(rand(256), rand(256), rand(256)) 
+  Color.random = ->
+    Color(rand(256), rand(256), rand(256)) 
 
-  Color2.mix = (color1, color2, amount) ->
+  Color.mix = (color1, Color, amount) ->
     amount ||= 0.5
 
-    new_colors = [color1.r, color1.g, color1.b, color1.a].zip([color2.r, color2.g, color2.b, color2.a]).map (array) ->
+    new_colors = [color1.r, color1.g, color1.b, color1.a].zip([Color.r, Color.g, Color.b, Color.a]).map (array) ->
       (array[0] * amount) + (array[1] * (1 - amount))
 
-    return Color2(new_colors)     
+    return Color(new_colors)     
 
-  (exports ? this)["Color2"] = Color2
+  (exports ? this)["Color"] = Color
 )()
 
