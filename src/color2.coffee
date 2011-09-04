@@ -43,14 +43,14 @@
     return undefined unless channels = hslParser.exec(colorString)
 
     parsedColor = (parseFloat channel for channel in channels[1..3])
-    parsedColor[0] = parsedColor[0].round()
+    parsedColor[0] = parsedColor[0]
     parsedColor[3] ||= 1.0
 
     return hslToRgb(parsedColor)
 
   hslToRgb = (hsl) ->    
     [h, s, l, a] = (parseFloat(channel) for channel in hsl)
-    h = h.round()
+
     h /= 360.0
     a ||= 1.0
 
@@ -76,37 +76,40 @@
 
       rgbMap = (channel * 0xFF for channel in [r, g, b])
 
-      rgbMap[0] = rgbMap[0].round()
-      rgbMap[1] = rgbMap[1].round()
-      rgbMap[2] = rgbMap[2].round()
-
     return rgbMap.concat(a)
 
   normalizeKey = (key) ->
     key.toString().toLowerCase().split(' ').join('')
 
-  Color2 = (args...) ->
-    switch args.length
-      when 0
-        parsedColor = [0, 0, 0, 1]
-      when 1
-        if Object.isArray(color = args.first())
-          parsedColor = (parseFloat(channel) for channel in color)
-          parsedColor[3] ||= 1.0
-        else
-          parsedColor = lookup[normalizeKey(color)] || parseHex(color) || parseRGB(color) || parseHSL(color)
-      when 2
-        alpha = parseFloat(args[1])
+  channelize = (color, alpha) ->
+    if Object.isArray color
+      if alpha?
+        alpha = parseFloat(alpha)
+      else if color[3]?
+        alpha = parseFloat(color[3])
+      else
+        alpha = 1
 
-        if Object.isArray(color = args.first())
-          parsedColor = (parseFloat(channel) for channel in color)
-          parsedColor[3] = alpha
-        else
-          parsedColor = lookup[normalizeKey(color)] || parseHex(color) || parseRGB(color) || parseHSL(color)
-          parsedColor[3] = alpha
-      else     
-        parsedColor = (parseFloat(channel) for channel in args)
-        parsedColor[3] ||= 1.0   
+      result = (parseFloat(channel) for channel in color[0..2]).concat(alpha)
+    else
+      result = lookup[normalizeKey(color)] || parseHex(color) || parseRGB(color) || parseHSL(color)
+
+      if alpha?
+        result[3] = parseFloat(alpha)
+
+    return result
+
+  Color2 = (args...) ->
+    parsedColor = 
+      switch args.length
+        when 0
+          [0, 0, 0, 1]
+        when 1
+          channelize(args.first())
+        when 2
+          channelize(args.first(), args.last())
+        else     
+          channelize(args)
 
     throw "#{args.join(',')} is an unknown color" unless parsedColor   
 
@@ -200,9 +203,6 @@
         (array[0] * amount) + (array[1] * (1 - amount))
 
       [@r, @g, @b, @a] = mixedColors
-      @r = @r.round()
-      @g = @g.round()
-      @b = @b.round()
 
       return this 
 
