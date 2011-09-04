@@ -78,6 +78,23 @@ Bounded = (I, self) ->
   The bounds method returns infomation about the location 
   of the object and its dimensions with optional offsets.
 
+  <code><pre>
+    player = CoreObject
+      x: 3
+      y: 6
+      width: 2
+      height: 2
+
+    player.include(Bounded)
+
+    player.bounds()
+    => {x: 3, y: 6, width: 2, height: 2}
+
+    player.bounds(7, 4)
+    => {x: 10, y: 10, width: 2, height: 2}
+
+  </pre></code>
+
   @name bounds
   @methodOf Bounded#
 
