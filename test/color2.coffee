@@ -170,9 +170,9 @@ test "#copy", ->
 
 test "#equal", ->
   color1 = Color(255, 255, 255, 1)
-  Color = Color([255, 255, 255])
+  color2 = Color([255, 255, 255])
 
-  ok color1.equal(Color)
+  ok color1.equal(color2)
 
 test "#toString", ->
   noAlpha = Color(30, 40, 23)
@@ -199,14 +199,12 @@ test "#toHsl", ->
   equalEnough hsl[3], 1.0
 
 test "#hue", ->
-  color = Color(34, 54, 239)
+  color = Color(34, 54, 239).hue(20)
 
-  Color = color.hue(20)
-
-  equalEnough Color.r, 84
-  equalEnough Color.g, 37
-  equalEnough Color.b, 239
-  equalEnough Color.a, 1.0
+  equalEnough color.r, 84
+  equalEnough color.g, 37
+  equalEnough color.b, 239
+  equalEnough color.a, 1.0
 
 test "#hue$", ->
   color = Color(34, 54, 239)
@@ -219,14 +217,12 @@ test "#hue$", ->
   equalEnough color.a, 1.0
 
 test "#complement", ->
-  color = Color(10, 30, 50)
+  color = Color(10, 30, 50).complement()
 
-  Color = color.complement()
-
-  equalEnough Color.r, 51
-  equalEnough Color.g, 31
-  equalEnough Color.b, 10
-  equalEnough Color.a, 1.0
+  equalEnough color.r, 51
+  equalEnough color.g, 31
+  equalEnough color.b, 10
+  equalEnough color.a, 1.0
 
 test "#complement$", ->
   color = Color(10, 30, 50)
@@ -239,14 +235,12 @@ test "#complement$", ->
   equalEnough color.a, 1.0
 
 test "#grayscale", ->
-  color = Color(30, 40, 29)
+  color = Color(30, 40, 29).grayscale()
 
-  Color = color.grayscale()
-
-  equalEnough Color.r, 35
-  equalEnough Color.g, 35
-  equalEnough Color.b, 35
-  equalEnough Color.a, 1.0
+  equalEnough color.r, 35
+  equalEnough color.g, 35
+  equalEnough color.b, 35
+  equalEnough color.a, 1.0
 
 test "#grayscale$", ->
   color = Color(30, 40, 29)
@@ -259,14 +253,12 @@ test "#grayscale$", ->
   equalEnough color.a, 1.0
 
 test "#saturate", ->
-  color = Color(100, 200, 150)
+  color = Color(100, 200, 150).saturate(0.3)
 
-  Color = color.saturate(0.3)
-
-  equalEnough Color.r, 69
-  equalEnough Color.g, 232
-  equalEnough Color.b, 150
-  equalEnough Color.a, 1.0
+  equalEnough color.r, 69
+  equalEnough color.g, 232
+  equalEnough color.b, 150
+  equalEnough color.a, 1.0
 
 test "#saturate$", ->
   color = Color(100, 200, 150)
@@ -279,14 +271,12 @@ test "#saturate$", ->
   equalEnough color.a, 1.0
 
 test "#desaturate", ->
-  color = Color(69, 232, 150)
+  color = Color(69, 232, 150).desaturate(0.3)
 
-  Color = color.desaturate(0.3)
-
-  equalEnough Color.r, 100
-  equalEnough Color.g, 200
-  equalEnough Color.b, 150
-  equalEnough Color.a, 1.0
+  equalEnough color.r, 100
+  equalEnough color.g, 200
+  equalEnough color.b, 150
+  equalEnough color.a, 1.0
 
 test "#desaturate$", ->
   color = Color(69, 232, 150)
@@ -299,14 +289,12 @@ test "#desaturate$", ->
   equalEnough color.a, 1.0
 
 test "#darken", ->
-  color = Color(45, 64, 39)
+  color = Color(45, 64, 39).darken(0.1)
 
-  Color = color.darken(0.1)
-
-  equalEnough Color.r, 22
-  equalEnough Color.g, 32
-  equalEnough Color.b, 19
-  equalEnough Color.a, 1.0
+  equalEnough color.r, 22
+  equalEnough color.g, 32
+  equalEnough color.b, 19
+  equalEnough color.a, 1.0
 
 test "#darken$", ->
   color = Color(45, 64, 39)
@@ -319,14 +307,12 @@ test "#darken$", ->
   equalEnough color.a, 1.0
 
 test "#lighten", ->
-  color = Color(22, 32, 19)
+  color = Color(22, 32, 19).lighten(0.1)
 
-  Color = color.lighten(0.1)
-
-  equalEnough Color.r, 45
-  equalEnough Color.g, 64
-  equalEnough Color.b, 39
-  equalEnough Color.a, 1.0
+  equalEnough color.r, 45
+  equalEnough color.g, 64
+  equalEnough color.b, 39
+  equalEnough color.a, 1.0
 
 test "#lighten$", ->
   color = Color(22, 32, 19)
@@ -340,16 +326,16 @@ test "#lighten$", ->
 
 test "#mixWith", ->
   color1 = Color(50, 40, 60, 0.3)
-  Color = Color(10, 5, 16, 0.2)
+  color2 = Color(10, 5, 16, 0.2)
 
-  mixedColor = color1.mixWith(Color)
+  mixedColor = color1.mixWith(color2)
 
   equalEnough mixedColor.r, 30
   equalEnough mixedColor.g, (45 / 2).round()
   equalEnough mixedColor.b, (76 / 2).round()
   equalEnough mixedColor.a, 0.5 / 2
 
-  weightedMixedColor = color1.mixWith(Color, 0.1)
+  weightedMixedColor = color1.mixWith(color2, 0.1)
 
   equalEnough weightedMixedColor.r, ((50 * 0.1) + (10 * 0.9)).round()
   equalEnough weightedMixedColor.g, ((40 * 0.1) + (5 * 0.9)).round()
@@ -358,18 +344,18 @@ test "#mixWith", ->
 
 test "#mixWith$", ->
   color1 = Color(50, 40, 60, 0.3)
-  Color = Color(10, 5, 16, 0.2)
+  color2 = Color(10, 5, 16, 0.2)
 
   color3 = Color(50, 40, 60, 0.3)
 
-  color1.mixWith$(Color)
+  color1.mixWith$(color2)
 
   equalEnough color1.r, 30
   equalEnough color1.g, (45 / 2).round()
   equalEnough color1.b, (76 / 2).round()
   equalEnough color1.a, 0.5 / 2
 
-  color3.mixWith$(Color, 0.1)
+  color3.mixWith$(color2, 0.1)
 
   equalEnough color3.r, ((50 * 0.1) + (10 * 0.9)).round()
   equalEnough color3.g, ((40 * 0.1) + (5 * 0.9)).round()
@@ -385,22 +371,22 @@ test "Color.random", ->
   equalEnough color.a, 1.0
 
 test "Color.mix", ->
-  color1 = Color(50, 40, 60, 0.3)
-  Color = Color(10, 5, 16, 0.2)
+  mixedColor = Color.mix(
+    Color("red"),
+    Color("sky blue")
+  )
 
-  mixedColor = Color.mix(color1, Color)
+  equalEnough mixedColor.r, 173
+  equalEnough mixedColor.g, 94
+  equalEnough mixedColor.b, 127
+  equalEnough mixedColor.a, 1
 
-  equalEnough mixedColor.r, 30
-  equalEnough mixedColor.g, (45 / 2).round()
-  equalEnough mixedColor.b, (76 / 2).round()
-  equalEnough mixedColor.a, 0.5 / 2
+  weightedMixedColor = Color.mix(Color(0, 255, 0, 1), Color(255, 0, 255, 0.6), 0.1)
 
-  weightedMixedColor = Color.mix(color1, Color, 0.1)
-
-  equalEnough weightedMixedColor.r, ((50 * 0.1) + (10 * 0.9)).round()
-  equalEnough weightedMixedColor.g, ((40 * 0.1) + (5 * 0.9)).round()
-  equalEnough weightedMixedColor.b, ((60 * 0.1) + (16 * 0.9)).round()
-  equalEnough weightedMixedColor.a, (0.3 * 0.1) + (0.2 * 0.9)  
+  equalEnough weightedMixedColor.r, ((0 * 0.1) + (255 * 0.9)).round()
+  equalEnough weightedMixedColor.g, ((255 * 0.1) + (0 * 0.9)).round()
+  equalEnough weightedMixedColor.b, ((0 * 0.1) + (255 * 0.9)).round()
+  equalEnough weightedMixedColor.a, (1 * 0.1) + (0.6 * 0.9)  
 
 test "accepts named colors", ->
   white = Color("white")
