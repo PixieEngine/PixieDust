@@ -5154,17 +5154,17 @@ collisions so is probably best suited to particle effect like things.
     
    player.include(Movable)
   
-=> `player velocity is {x: 0, y: 0} | player position is {x: 0, y: 0}`
+=> `velocity is {x: 0, y: 0} and position is {x: 0, y: 0}`
 
    player.update()
-=> `player velocity is {x: 1, y: 0} | player position is {x: 1, y: 0}` 
+=> `velocity is {x: 1, y: 0} and position is {x: 1, y: 0}` 
 
    player.update()
-=> `player velocity is {x: 2, y: 0} | player position is {x: 3, y: 0}`   
+=> `velocity is {x: 2, y: 0} and position is {x: 3, y: 0}`   
    
    # we've hit our maxSpeed so our velocity won't increase
    player.update()
-=> `player velocity is {x: 2, y: 0} | player position is {x: 5, y: 0}`
+=> `velocity is {x: 2, y: 0} and position is {x: 5, y: 0}`
 </pre></code>
 
 @name Movable
