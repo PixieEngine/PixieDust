@@ -17,6 +17,9 @@ by default in <code>GameObject</code>.
    # now player has all the methods provided by this module
    player.position()
 => {x: 10, y: 50}
+
+   player.collides({x: 15, y: 55, width: 20, height: 20})
+=> true
 </pre></code>
 
 @see GameObject
