@@ -3674,7 +3674,7 @@ Bounded = function(I, self) {
     of the object and its dimensions with optional offsets.
     
     <code><pre>
-      player = CoreObject
+      player = Core
         x: 3
         y: 6
         width: 2
@@ -3708,6 +3708,19 @@ Bounded = function(I, self) {
     /**
     The centeredBounds method returns infomation about the center
     of the object along with the midpoint of the width and height.
+    
+    <code><pre>
+      player = Core
+        x: 3
+        y: 6
+        width: 2
+        height: 2
+        
+      player.include(Bounded)
+      
+      player.centeredBounds()
+      => {x: 4, y: 7, xw: 1, yw: 1}
+    </pre></code>  
     
     @name centeredBounds
     @methodOf Bounded#
