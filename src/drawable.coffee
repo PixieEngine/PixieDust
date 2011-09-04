@@ -41,6 +41,18 @@ y: 30 with width and height 5 will be drawn.
 Triggered every time the object should be drawn. A canvas is passed as
 the first argument.
 
+<code><pre>
+player = Core
+  x: 0
+  y: 10
+  width: 5
+  height: 5
+
+player.bind "draw", (canvas) ->
+  canvas.fillColor("white")
+  canvas.fillText("Hey, drawing stuff is pretty easy.", 5, 5)
+</pre></code>
+
 @name draw
 @methodOf Drawable#
 @event
