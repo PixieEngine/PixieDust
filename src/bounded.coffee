@@ -22,11 +22,12 @@ player.position()
 
 </pre></code>
 
+@see GameObject
+
 Bounded module
 @name Bounded
 @module
 @constructor
-@see GameObject
 
 @param {Object} I Instance variables
 @param {Object} self Reference to including object
