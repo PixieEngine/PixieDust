@@ -79,7 +79,7 @@ Bounded = (I, self) ->
   of the object and its dimensions with optional offsets.
 
   <code><pre>
-    player = CoreObject
+    player = Core
       x: 3
       y: 6
       width: 2
