@@ -3,6 +3,25 @@ The Bounded module is used to provide basic data about the
 location and dimensions of the including object. This module is included
 by default in <code>GameObject</code>.
 
+<code><pre>
+
+player = Core
+  x: 10
+  y: 50
+  width: 20
+  height: 20
+  other: "stuff"
+  more: "properties"
+
+player.include(Bounded)
+
+# now player has all the methods provided by this module
+player.position()
+
+=> {x: 10, y: 50}
+
+</pre></code>
+
 Bounded module
 @name Bounded
 @module
