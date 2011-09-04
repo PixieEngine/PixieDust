@@ -34,21 +34,13 @@
   
     <li><a href="../symbols/Date.html">Date</a></li>
   
-    <li><a href="../symbols/Drawable.html">Drawable</a></li>
-  
     <li><a href="../symbols/Durable.html">Durable</a></li>
   
     <li><a href="../symbols/Engine.html">Engine</a></li>
   
-    <li><a href="../symbols/Framerate.html">Framerate</a></li>
-  
     <li><a href="../symbols/Function.html">Function</a></li>
   
     <li><a href="../symbols/GameObject.html">GameObject</a></li>
-  
-    <li><a href="../symbols/keydown.html">keydown</a></li>
-  
-    <li><a href="../symbols/Local.html">Local</a></li>
   
     <li><a href="../symbols/Math.html">Math</a></li>
   
@@ -60,11 +52,9 @@
   
     <li><a href="../symbols/Object.html">Object</a></li>
   
-    <li><a href="../symbols/Physical.html">Physical</a></li>
-  
     <li><a href="../symbols/Point.html">Point</a></li>
   
-    <li><a href="../symbols/PowerCanvas.html">PowerCanvas</a></li>
+    <li><a href="../symbols/Random.html">Random</a></li>
   
     <li><a href="../symbols/RegExp.html">RegExp</a></li>
   
@@ -152,9 +142,18 @@ value(s).</div>
                         <div class="fixedFont"><b><a href="../symbols/Array.html#each">each</a></b>(iterator, context)
                         </div>
                         <div class="description">Call the given iterator once for each element in the array,
-passing in the element as the first argument, the index of
+passing in the element as the first argument, the index of 
 the element as the second argument, and this array as the
 third argument.</div>
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <td class="attributes">&nbsp;</td>
+                      <td class="nameDescription">
+                        <div class="fixedFont"><b><a href="../symbols/Array.html#eachPair">eachPair</a></b>(iterator, context)
+                        </div>
+                        <div class="description">Call the given iterator once for each pair of objects in the array.</div>
                       </td>
                     </tr>
                   
@@ -174,7 +173,7 @@ passing in the elements in groups of n.</div>
                         <div class="fixedFont"><b><a href="../symbols/Array.html#eachWithObject">eachWithObject</a></b>(object, iterator, context)
                         </div>
                         <div class="description">Call the given iterator once for each element in the array,
-passing in the given object as the first argument and the element
+passing in the element as the first argument and the given object
 as the second argument.</div>
                       </td>
                     </tr>
@@ -214,6 +213,15 @@ provided function.</div>
                         <div class="fixedFont"><b><a href="../symbols/Array.html#first">first</a></b>()
                         </div>
                         <div class="description">Returns the first element of the array, undefined if the array is empty.</div>
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <td class="attributes">&nbsp;</td>
+                      <td class="nameDescription">
+                        <div class="fixedFont"><b><a href="../symbols/Array.html#flatten">flatten</a></b>()
+                        </div>
+                        <div class="description">Flatten out an array of arrays into a single array of elements.</div>
                       </td>
                     </tr>
                   
@@ -747,7 +755,7 @@ the same objects.
 
                 <div class="description">
                   Call the given iterator once for each element in the array,
-passing in the element as the first argument, the index of
+passing in the element as the first argument, the index of 
 the element as the second argument, and this array as the
 third argument.
 
@@ -764,14 +772,14 @@ third argument.
                         <span class="light fixedFont">{<a href="../symbols/Function.html">Function</a>}</span> <b>iterator</b>
                         
                       </dt>
-                      <dd>Function to be called once for
+                      <dd>Function to be called once for 
 each element in the array.</dd>
                     
                       <dt>
                         <span class="light fixedFont">{<a href="../symbols/Object.html">Object</a>}</span> <b>context</b>
                         <i>Optional</i>
                       </dt>
-                      <dd>Optional context parameter to be
+                      <dd>Optional context parameter to be 
 used as `this` when calling the iterator function.</dd>
                     
                   </dl>
@@ -798,6 +806,59 @@ used as `this` when calling the iterator function.</dd>
                     
 
                   </dl>
+                
+
+                <div class="hr"></div>
+              
+                <a name="eachPair"></a>
+
+                <div class="fixedFont heading">
+                  <span class='lighter'>
+                  
+                  </span>
+
+                  
+
+                  <b>eachPair</b>(iterator, context)
+                </div>
+
+                <div class="description">
+                  Call the given iterator once for each pair of objects in the array.
+
+Ex. [1, 2, 3, 4].eachPair (a, b) ->
+  # 1, 2
+  # 1, 3
+  # 1, 4
+  # 2, 3
+  # 2, 4
+  # 3, 4
+
+                  
+                </div>
+
+                
+
+                
+                  <dl class="detailList params">
+                    <dt class="heading">Parameters:</dt>
+                    
+                      <dt>
+                        <span class="light fixedFont">{<a href="../symbols/Function.html">Function</a>}</span> <b>iterator</b>
+                        
+                      </dt>
+                      <dd>Function to be called once for 
+each pair of elements in the array.</dd>
+                    
+                      <dt>
+                        <span class="light fixedFont">{<a href="../symbols/Object.html">Object</a>}</span> <b>context</b>
+                        <i>Optional</i>
+                      </dt>
+                      <dd>Optional context parameter to be 
+used as `this` when calling the iterator function.</dd>
+                    
+                  </dl>
+                
+
                 
 
                 <div class="hr"></div>
@@ -838,14 +899,14 @@ passed as in <code>each</each>.
                         <span class="light fixedFont">{<a href="../symbols/Function.html">Function</a>}</span> <b>iterator</b>
                         
                       </dt>
-                      <dd>Function to be called once for
+                      <dd>Function to be called once for 
 each group of elements in the array.</dd>
                     
                       <dt>
                         <span class="light fixedFont">{<a href="../symbols/Object.html">Object</a>}</span> <b>context</b>
                         <i>Optional</i>
                       </dt>
-                      <dd>Optional context parameter to be
+                      <dd>Optional context parameter to be 
 used as `this` when calling the iterator function.</dd>
                     
                   </dl>
@@ -895,7 +956,7 @@ used as `this` when calling the iterator function.</dd>
 
                 <div class="description">
                   Call the given iterator once for each element in the array,
-passing in the given object as the first argument and the element
+passing in the element as the first argument and the given object
 as the second argument. Additional arguments are passed similar to
 <code>each</code>
 
@@ -912,20 +973,21 @@ as the second argument. Additional arguments are passed similar to
                         <span class="light fixedFont">{<a href="../symbols/Object.html">Object</a>}</span> <b>object</b>
                         
                       </dt>
-                      <dd>The number of elements in each group.</dd>
+                      <dd>The object to pass to the iterator on each
+visit.</dd>
                     
                       <dt>
                         <span class="light fixedFont">{<a href="../symbols/Function.html">Function</a>}</span> <b>iterator</b>
                         
                       </dt>
-                      <dd>Function to be called once for
+                      <dd>Function to be called once for 
 each element in the array.</dd>
                     
                       <dt>
                         <span class="light fixedFont">{<a href="../symbols/Object.html">Object</a>}</span> <b>context</b>
                         <i>Optional</i>
                       </dt>
-                      <dd>Optional context parameter to be
+                      <dd>Optional context parameter to be 
 used as `this` when calling the iterator function.</dd>
                     
                   </dl>
@@ -1033,7 +1095,7 @@ this when executing callback.</dd>
                         <span class="light fixedFont">{<a href="../symbols/Function.html">Function</a>}</span> <b>fn</b>
                         <i>Optional</i>
                       </dt>
-                      <dd>An optional funtion used to evaluate
+                      <dd>An optional funtion used to evaluate 
 each element to calculate its value for determining extremes.</dd>
                     
                   </dl>
@@ -1140,6 +1202,53 @@ use as this when executing callback.</dd>
                       <dt class="heading">Returns:</dt>
                       
                         <dd>The first element, or undefined if the array is empty.</dd>
+                      
+                    
+
+                    
+
+                    
+
+                  </dl>
+                
+
+                <div class="hr"></div>
+              
+                <a name="flatten"></a>
+
+                <div class="fixedFont heading">
+                  <span class='lighter'>
+                  
+                  </span>
+
+                  <span class="light">{<a href="../symbols/Array.html">Array</a>}</span>
+
+                  <b>flatten</b>()
+                </div>
+
+                <div class="description">
+                  Flatten out an array of arrays into a single array of elements.
+
+                  
+                </div>
+
+                
+
+                
+
+                
+                  <dl class="detailList nomargin">
+
+                    
+
+                    
+
+                    
+
+                    
+                      <dt class="heading">Returns:</dt>
+                      
+                        <dd>A new array with all the sub-arrays flattened to the top.</dd>
                       
                     
 
@@ -1310,7 +1419,7 @@ array is still searched from front to back. If the calculated index is less than
 
                 <div class="description">
                   Combines all elements of the array by applying a binary operation.
-for each element in the arra the iterator is passed an accumulator
+for each element in the arra the iterator is passed an accumulator 
 value (memo) and the element.
 
                   
@@ -1405,7 +1514,7 @@ and return a new array containing the results of the invocation.
                     
                       <dt class="heading">Returns:</dt>
                       
-                        <dd>A new array containing the results of invoking the
+                        <dd>A new array containing the results of invoking the 
 named method on each element.</dd>
                       
                     
@@ -1935,7 +2044,7 @@ array.Object to use as the first argument to the first call of the callback.</dd
                         <span class="light fixedFont">{<a href="../symbols/Function.html">Function</a>}</span> <b>iterator</b>
                         
                       </dt>
-                      <dd>The iterator receives each element in turn as
+                      <dd>The iterator receives each element in turn as 
 the first agument.</dd>
                     
                       <dt>
@@ -2089,7 +2198,7 @@ last becomes the first.
                         <span class="light fixedFont">{<a href="../symbols/Function.html">Function</a>}</span> <b>iterator</b>
                         
                       </dt>
-                      <dd>The iterator receives each element in turn as
+                      <dd>The iterator receives each element in turn as 
 the first agument.</dd>
                     
                       <dt>
@@ -2607,8 +2716,8 @@ length of the array.
                 </div>
 
                 <div class="description">
-                  Pretend the array is a circle and grab a new array containing length elements.
-If length is not given return the element at start, again assuming the array
+                  Pretend the array is a circle and grab a new array containing length elements. 
+If length is not given return the element at start, again assuming the array 
 is a circle.
 
                   
@@ -2624,14 +2733,14 @@ is a circle.
                         <span class="light fixedFont">{<a href="../symbols/Number.html">Number</a>}</span> <b>start</b>
                         
                       </dt>
-                      <dd>The index to start wrapping at, or the index of the
+                      <dd>The index to start wrapping at, or the index of the 
 sole element to return if no length is given.</dd>
                     
                       <dt>
                         <span class="light fixedFont">{<a href="../symbols/Number.html">Number</a>}</span> <b>length</b>
                         <i>Optional</i>
                       </dt>
-                      <dd>Optional length determines how long result
+                      <dd>Optional length determines how long result 
 array should be.</dd>
                     
                   </dl>
@@ -2649,7 +2758,7 @@ array should be.</dd>
                     
                       <dt class="heading">Returns:</dt>
                       
-                        <dd>The element at start mod array.length, or an array of length elements,
+                        <dd>The element at start mod array.length, or an array of length elements, 
 starting from start and wrapping.</dd>
                       
                     

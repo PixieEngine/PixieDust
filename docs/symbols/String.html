@@ -34,21 +34,13 @@
   
     <li><a href="../symbols/Date.html">Date</a></li>
   
-    <li><a href="../symbols/Drawable.html">Drawable</a></li>
-  
     <li><a href="../symbols/Durable.html">Durable</a></li>
   
     <li><a href="../symbols/Engine.html">Engine</a></li>
   
-    <li><a href="../symbols/Framerate.html">Framerate</a></li>
-  
     <li><a href="../symbols/Function.html">Function</a></li>
   
     <li><a href="../symbols/GameObject.html">GameObject</a></li>
-  
-    <li><a href="../symbols/keydown.html">keydown</a></li>
-  
-    <li><a href="../symbols/Local.html">Local</a></li>
   
     <li><a href="../symbols/Math.html">Math</a></li>
   
@@ -60,11 +52,9 @@
   
     <li><a href="../symbols/Object.html">Object</a></li>
   
-    <li><a href="../symbols/Physical.html">Physical</a></li>
-  
     <li><a href="../symbols/Point.html">Point</a></li>
   
-    <li><a href="../symbols/PowerCanvas.html">PowerCanvas</a></li>
+    <li><a href="../symbols/Random.html">Random</a></li>
   
     <li><a href="../symbols/RegExp.html">RegExp</a></li>
   
@@ -161,7 +151,7 @@
                       <td class="nameDescription">
                         <div class="fixedFont"><b><a href="../symbols/String.html#camelize">camelize</a></b>()
                         </div>
-                        <div class="description"></div>
+                        <div class="description">Returns a new string that is a camelCase version.</div>
                       </td>
                     </tr>
                   
@@ -170,7 +160,7 @@
                       <td class="nameDescription">
                         <div class="fixedFont"><b><a href="../symbols/String.html#capitalize">capitalize</a></b>()
                         </div>
-                        <div class="description"></div>
+                        <div class="description">Returns a new string with the first letter capitalized and the rest lower cased.</div>
                       </td>
                     </tr>
                   
@@ -247,7 +237,7 @@ for unicode codepoints > 0x10000).</div>
                       <td class="nameDescription">
                         <div class="fixedFont"><b><a href="../symbols/String.html#humanize">humanize</a></b>()
                         </div>
-                        <div class="description"></div>
+                        <div class="description">Returns a new string that is a more human readable version.</div>
                       </td>
                     </tr>
                   
@@ -259,6 +249,15 @@ for unicode codepoints > 0x10000).</div>
                         <div class="description">Returns the index within the calling String object of the first occurrence of
 the specified value, starting the search at fromIndex,
 returns -1 if the value is not found.</div>
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <td class="attributes">&nbsp;</td>
+                      <td class="nameDescription">
+                        <div class="fixedFont"><b><a href="../symbols/String.html#isString">isString</a></b>()
+                        </div>
+                        <div class="description">Returns true.</div>
                       </td>
                     </tr>
                   
@@ -428,7 +427,7 @@ of the string.</div>
                       <td class="nameDescription">
                         <div class="fixedFont"><b><a href="../symbols/String.html#titleize">titleize</a></b>()
                         </div>
-                        <div class="description"></div>
+                        <div class="description">Returns a new string in Title Case.</div>
                       </td>
                     </tr>
                   
@@ -518,9 +517,28 @@ locale-specific case mappings.</div>
                     <tr>
                       <td class="attributes">&nbsp;</td>
                       <td class="nameDescription">
+                        <div class="fixedFont"><b><a href="../symbols/String.html#underscore">underscore</a></b>()
+                        </div>
+                        <div class="description">Underscore a word, changing camelCased with under_scored.</div>
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <td class="attributes">&nbsp;</td>
+                      <td class="nameDescription">
                         <div class="fixedFont"><b><a href="../symbols/String.html#valueOf">valueOf</a></b>()
                         </div>
                         <div class="description">Returns the primitive value of a String object.</div>
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <td class="attributes">&nbsp;</td>
+                      <td class="nameDescription">
+                        <div class="fixedFont"><b><a href="../symbols/String.html#withoutExtension">withoutExtension</a></b>()
+                        </div>
+                        <div class="description">Assumes the string is something like a file name and returns the 
+contents of the string without the extension.</div>
                       </td>
                     </tr>
                   
@@ -724,7 +742,7 @@ locale-specific case mappings.</div>
                 </div>
 
                 <div class="description">
-                  
+                  Returns a new string that is a camelCase version.
 
                   
                 </div>
@@ -750,7 +768,7 @@ locale-specific case mappings.</div>
                 </div>
 
                 <div class="description">
-                  
+                  Returns a new string with the first letter capitalized and the rest lower cased.
 
                   
                 </div>
@@ -1022,7 +1040,7 @@ if it is not a number, it defaults to 0.</dd>
                 </div>
 
                 <div class="description">
-                  
+                  Returns a new string that is a more human readable version.
 
                   
                 </div>
@@ -1080,6 +1098,53 @@ value is 0.</dd>
                   </dl>
                 
 
+                
+
+                <div class="hr"></div>
+              
+                <a name="isString"></a>
+
+                <div class="fixedFont heading">
+                  <span class='lighter'>
+                  
+                  </span>
+
+                  <span class="light">{<a href="../symbols/Boolean.html">Boolean</a>}</span>
+
+                  <b>isString</b>()
+                </div>
+
+                <div class="description">
+                  Returns true.
+
+                  
+                </div>
+
+                
+
+                
+
+                
+                  <dl class="detailList nomargin">
+
+                    
+
+                    
+
+                    
+
+                    
+                      <dt class="heading">Returns:</dt>
+                      
+                        <dd>true</dd>
+                      
+                    
+
+                    
+
+                    
+
+                  </dl>
                 
 
                 <div class="hr"></div>
@@ -1392,12 +1457,12 @@ section below.</dd>
                         <b>flags</b>
                         
                       </dt>
-                      <dd>gimy
+                      <dd>gimy 
 
 Non-standardThe use of the flags parameter in the String.replace method is
 non-standard. For cross-browser compatibility, use a RegExp object with
 corresponding flags.A string containing any combination of the RegExp flags: g
-global match i ignore case m match over multiple lines y Non-standard
+global match i ignore case m match over multiple lines y Non-standard     
 sticky global matchignore casematch over multiple linesNon-standard     sticky</dd>
                     
                   </dl>
@@ -1752,7 +1817,7 @@ of the string.
                 </div>
 
                 <div class="description">
-                  
+                  Returns a new string in Title Case.
 
                   
                 </div>
@@ -2013,6 +2078,32 @@ locale-specific case mappings.
 
                 <div class="hr"></div>
               
+                <a name="underscore"></a>
+
+                <div class="fixedFont heading">
+                  <span class='lighter'>
+                  
+                  </span>
+
+                  
+
+                  <b>underscore</b>()
+                </div>
+
+                <div class="description">
+                  Underscore a word, changing camelCased with under_scored.
+
+                  
+                </div>
+
+                
+
+                
+
+                
+
+                <div class="hr"></div>
+              
                 <a name="valueOf"></a>
 
                 <div class="fixedFont heading">
@@ -2029,6 +2120,35 @@ locale-specific case mappings.
                   Returns the primitive value of a String object.
 
 <code><em>string</em>.valueOf()</code>
+
+                  
+                </div>
+
+                
+
+                
+
+                
+
+                <div class="hr"></div>
+              
+                <a name="withoutExtension"></a>
+
+                <div class="fixedFont heading">
+                  <span class='lighter'>
+                  
+                  </span>
+
+                  
+
+                  <b>withoutExtension</b>()
+                </div>
+
+                <div class="description">
+                  Assumes the string is something like a file name and returns the 
+contents of the string without the extension.
+
+"neat.png".witouthExtension() => "neat"
 
                   
                 </div>

@@ -34,21 +34,13 @@
   
     <li><a href="../symbols/Date.html">Date</a></li>
   
-    <li><a href="../symbols/Drawable.html">Drawable</a></li>
-  
     <li><a href="../symbols/Durable.html">Durable</a></li>
   
     <li><a href="../symbols/Engine.html">Engine</a></li>
   
-    <li><a href="../symbols/Framerate.html">Framerate</a></li>
-  
     <li><a href="../symbols/Function.html">Function</a></li>
   
     <li><a href="../symbols/GameObject.html">GameObject</a></li>
-  
-    <li><a href="../symbols/keydown.html">keydown</a></li>
-  
-    <li><a href="../symbols/Local.html">Local</a></li>
   
     <li><a href="../symbols/Math.html">Math</a></li>
   
@@ -60,11 +52,9 @@
   
     <li><a href="../symbols/Object.html">Object</a></li>
   
-    <li><a href="../symbols/Physical.html">Physical</a></li>
-  
     <li><a href="../symbols/Point.html">Point</a></li>
   
-    <li><a href="../symbols/PowerCanvas.html">PowerCanvas</a></li>
+    <li><a href="../symbols/Random.html">Random</a></li>
   
     <li><a href="../symbols/RegExp.html">RegExp</a></li>
   
@@ -105,12 +95,12 @@
                       <b><a href="../symbols/Matrix.html#constructor">Matrix</a></b>(a, b, c, d, tx, ty)
                     </div>
                     <div class="description"><pre>
- _        _
-| a  c tx  |
-| b  d ty  |
-|_0  0  1 _|
-</pre>
-Creates a matrix for 2d affine transformations.</div>
+     _        _
+    | a  c tx  |
+    | b  d ty  |
+    |_0  0  1 _|
+  </pre>
+  Creates a matrix for 2d affine transformations.</div>
                   </td>
                 </tr>
                 <tr>
@@ -247,7 +237,7 @@ Creates a matrix for 2d affine transformations.</div>
                         <div class="fixedFont"><b><a href="../symbols/Matrix.html#concat">concat</a></b>(matrix)
                         </div>
                         <div class="description">Returns the result of this matrix multiplied by another matrix
-combining the geometric effects of the two.</div>
+      combining the geometric effects of the two.</div>
                       </td>
                     </tr>
                   
@@ -256,8 +246,8 @@ combining the geometric effects of the two.</div>
                       <td class="nameDescription">
                         <div class="fixedFont"><b><a href="../symbols/Matrix.html#deltaTransformPoint">deltaTransformPoint</a></b>()
                         </div>
-                        <div class="description">Given a point in the pretransform coordinate space, returns the coordinates of
-that point after the transformation occurs.</div>
+                        <div class="description">Given a point in the pretransform coordinate space, returns the coordinates of 
+    that point after the transformation occurs.</div>
                       </td>
                     </tr>
                   
@@ -276,7 +266,7 @@ that point after the transformation occurs.</div>
                         <div class="fixedFont"><b><a href="../symbols/Matrix.html#rotate">rotate</a></b>(theta, aboutPoint)
                         </div>
                         <div class="description">Returns a new matrix that corresponds this matrix multiplied by a
-a rotation matrix.</div>
+    a rotation matrix.</div>
                       </td>
                     </tr>
                   
@@ -286,7 +276,7 @@ a rotation matrix.</div>
                         <div class="fixedFont"><b><a href="../symbols/Matrix.html#scale">scale</a></b>(sx, sy, aboutPoint)
                         </div>
                         <div class="description">Returns a new matrix that corresponds this matrix multiplied by a
-a scaling matrix.</div>
+    a scaling matrix.</div>
                       </td>
                     </tr>
                   
@@ -295,8 +285,8 @@ a scaling matrix.</div>
                       <td class="nameDescription">
                         <div class="fixedFont"><b><a href="../symbols/Matrix.html#transformPoint">transformPoint</a></b>()
                         </div>
-                        <div class="description">Returns the result of applying the geometric transformation represented by the
-Matrix object to the specified point.</div>
+                        <div class="description">Returns the result of applying the geometric transformation represented by the 
+    Matrix object to the specified point.</div>
                       </td>
                     </tr>
                   
@@ -340,17 +330,17 @@ Matrix object to the specified point.</div>
 
               <div class="description">
                 <pre>
- _        _
-| a  c tx  |
-| b  d ty  |
-|_0  0  1 _|
-</pre>
-Creates a matrix for 2d affine transformations.
-
-concat, inverse, rotate, scale and translate return new matrices with the
-transformations applied. The matrix is not modified in place.
-
-Returns the identity matrix when called with no arguments.
+     _        _
+    | a  c tx  |
+    | b  d ty  |
+    |_0  0  1 _|
+  </pre>
+  Creates a matrix for 2d affine transformations.
+  
+  concat, inverse, rotate, scale and translate return new matrices with the
+  transformations applied. The matrix is not modified in place.
+  
+  Returns the identity matrix when called with no arguments.
                 
               </div>
 
@@ -661,10 +651,10 @@ Returns the identity matrix when called with no arguments.
 
                 <div class="description">
                   Returns the result of this matrix multiplied by another matrix
-combining the geometric effects of the two. In mathematical terms,
-concatenating two matrixes is the same as combining them using matrix multiplication.
-If this matrix is A and the matrix passed in is B, the resulting matrix is A x B
-http://mathworld.wolfram.com/MatrixMultiplication.html
+      combining the geometric effects of the two. In mathematical terms, 
+      concatenating two matrixes is the same as combining them using matrix multiplication.
+      If this matrix is A and the matrix passed in is B, the resulting matrix is A x B
+      http://mathworld.wolfram.com/MatrixMultiplication.html
 
                   
                 </div>
@@ -722,10 +712,10 @@ http://mathworld.wolfram.com/MatrixMultiplication.html
                 </div>
 
                 <div class="description">
-                  Given a point in the pretransform coordinate space, returns the coordinates of
-that point after the transformation occurs. Unlike the standard transformation
-applied using the transformPoint() method, the deltaTransformPoint() method
-does not consider the translation parameters tx and ty.
+                  Given a point in the pretransform coordinate space, returns the coordinates of 
+    that point after the transformation occurs. Unlike the standard transformation 
+    applied using the transformPoint() method, the deltaTransformPoint() method 
+    does not consider the translation parameters tx and ty.
 
                   
                 </div>
@@ -778,7 +768,7 @@ does not consider the translation parameters tx and ty.
 
                 <div class="description">
                   Returns the inverse of the matrix.
-http://mathworld.wolfram.com/MatrixInverse.html
+    http://mathworld.wolfram.com/MatrixInverse.html
 
                   
                 </div>
@@ -826,7 +816,7 @@ http://mathworld.wolfram.com/MatrixInverse.html
 
                 <div class="description">
                   Returns a new matrix that corresponds this matrix multiplied by a
-a rotation matrix.
+    a rotation matrix.
 
                   
                 </div>
@@ -896,7 +886,7 @@ a rotation matrix.
 
                 <div class="description">
                   Returns a new matrix that corresponds this matrix multiplied by a
-a scaling matrix.
+    a scaling matrix.
 
                   
                 </div>
@@ -966,8 +956,8 @@ a scaling matrix.
                 </div>
 
                 <div class="description">
-                  Returns the result of applying the geometric transformation represented by the
-Matrix object to the specified point.
+                  Returns the result of applying the geometric transformation represented by the 
+    Matrix object to the specified point.
 
                   
                 </div>

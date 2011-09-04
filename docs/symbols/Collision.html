@@ -34,21 +34,13 @@
   
     <li><a href="../symbols/Date.html">Date</a></li>
   
-    <li><a href="../symbols/Drawable.html">Drawable</a></li>
-  
     <li><a href="../symbols/Durable.html">Durable</a></li>
   
     <li><a href="../symbols/Engine.html">Engine</a></li>
   
-    <li><a href="../symbols/Framerate.html">Framerate</a></li>
-  
     <li><a href="../symbols/Function.html">Function</a></li>
   
     <li><a href="../symbols/GameObject.html">GameObject</a></li>
-  
-    <li><a href="../symbols/keydown.html">keydown</a></li>
-  
-    <li><a href="../symbols/Local.html">Local</a></li>
   
     <li><a href="../symbols/Math.html">Math</a></li>
   
@@ -60,11 +52,9 @@
   
     <li><a href="../symbols/Object.html">Object</a></li>
   
-    <li><a href="../symbols/Physical.html">Physical</a></li>
-  
     <li><a href="../symbols/Point.html">Point</a></li>
   
-    <li><a href="../symbols/PowerCanvas.html">PowerCanvas</a></li>
+    <li><a href="../symbols/Random.html">Random</a></li>
   
     <li><a href="../symbols/RegExp.html">RegExp</a></li>
   
@@ -104,7 +94,7 @@
                     <div class="fixedFont">
                       <b><a href="../symbols/Collision.html#constructor">Collision</a></b>()
                     </div>
-                    <div class="description">Collision holds many methods useful for checking geometric overlap of various objects.</div>
+                    <div class="description">Collision holds many useful methods for checking geometric overlap of various objects.</div>
                   </td>
                 </tr>
                 <tr>
@@ -121,6 +111,39 @@
   <!--
   #### METHODS SUMMARY
   -->
+        
+          
+          
+            <div class="props">
+              <table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class Collision.">
+                <caption>Method Summary</caption>
+
+                <tbody>
+                  
+                    <tr>
+                      <td class="attributes"><em>static</em>&nbsp;</td>
+                      <td class="nameDescription">
+                        <div class="fixedFont">Collision.<b><a href="../symbols/Collision.html#.circular">circular</a></b>(a, b)
+                        </div>
+                        <div class="description">Takes two circle objects and returns true if they collide (overlap), false otherwise.</div>
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <td class="attributes"><em>static</em>&nbsp;</td>
+                      <td class="nameDescription">
+                        <div class="fixedFont">Collision.<b><a href="../symbols/Collision.html#.rectangular">rectangular</a></b>(a, b)
+                        </div>
+                        <div class="description">Takes two bounds objects and returns true if they collide (overlap), false otherwise.</div>
+                      </td>
+                    </tr>
+                  
+                </tbody>
+              </table>
+            </div>
+          
+
+          
         
 
   <!--
@@ -145,7 +168,7 @@
               </div>
 
               <div class="description">
-                Collision holds many methods useful for checking geometric overlap of various objects.
+                Collision holds many useful methods for checking geometric overlap of various objects.
                 
               </div>
 
@@ -166,6 +189,104 @@
   <!--
   #### METHOD DETAILS
   -->
+        
+          <div class="details props">
+            <div class="innerProps">
+              <div class="sectionTitle">
+                Method Detail
+              </div>
+
+              
+                <a name=".circular"></a>
+
+                <div class="fixedFont heading">
+                  <span class='lighter'>
+                  <em>static</em>
+                  </span>
+
+                  
+
+                  <span class="light">Collision.</span><b>circular</b>(a, b)
+                </div>
+
+                <div class="description">
+                  Takes two circle objects and returns true if they collide (overlap), false otherwise.
+  Circle objects have x, y, and radius.
+
+                  
+                </div>
+
+                
+
+                
+                  <dl class="detailList params">
+                    <dt class="heading">Parameters:</dt>
+                    
+                      <dt>
+                        <b>a</b>
+                        
+                      </dt>
+                      <dd></dd>
+                    
+                      <dt>
+                        <b>b</b>
+                        
+                      </dt>
+                      <dd></dd>
+                    
+                  </dl>
+                
+
+                
+
+                <div class="hr"></div>
+              
+                <a name=".rectangular"></a>
+
+                <div class="fixedFont heading">
+                  <span class='lighter'>
+                  <em>static</em>
+                  </span>
+
+                  
+
+                  <span class="light">Collision.</span><b>rectangular</b>(a, b)
+                </div>
+
+                <div class="description">
+                  Takes two bounds objects and returns true if they collide (overlap), false otherwise.
+    Bounds objects have x, y, width and height properties.
+
+                  
+                </div>
+
+                
+
+                
+                  <dl class="detailList params">
+                    <dt class="heading">Parameters:</dt>
+                    
+                      <dt>
+                        <b>a</b>
+                        
+                      </dt>
+                      <dd></dd>
+                    
+                      <dt>
+                        <b>b</b>
+                        
+                      </dt>
+                      <dd></dd>
+                    
+                  </dl>
+                
+
+                
+
+                
+              
+            </div>
+          </div>
         
 
   <!--

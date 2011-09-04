@@ -34,21 +34,13 @@
   
     <li><a href="../symbols/Date.html">Date</a></li>
   
-    <li><a href="../symbols/Drawable.html">Drawable</a></li>
-  
     <li><a href="../symbols/Durable.html">Durable</a></li>
   
     <li><a href="../symbols/Engine.html">Engine</a></li>
   
-    <li><a href="../symbols/Framerate.html">Framerate</a></li>
-  
     <li><a href="../symbols/Function.html">Function</a></li>
   
     <li><a href="../symbols/GameObject.html">GameObject</a></li>
-  
-    <li><a href="../symbols/keydown.html">keydown</a></li>
-  
-    <li><a href="../symbols/Local.html">Local</a></li>
   
     <li><a href="../symbols/Math.html">Math</a></li>
   
@@ -60,11 +52,9 @@
   
     <li><a href="../symbols/Object.html">Object</a></li>
   
-    <li><a href="../symbols/Physical.html">Physical</a></li>
-  
     <li><a href="../symbols/Point.html">Point</a></li>
   
-    <li><a href="../symbols/PowerCanvas.html">PowerCanvas</a></li>
+    <li><a href="../symbols/Random.html">Random</a></li>
   
     <li><a href="../symbols/RegExp.html">RegExp</a></li>
   
@@ -110,11 +100,38 @@
                 <tbody>
                   
                     <tr>
+                      <td class="attributes"><em>static</em>&nbsp;</td>
+                      <td class="nameDescription">
+                        <div class="fixedFont">Object.<b><a href="../symbols/Object.html#.extend">extend</a></b>(target)
+                        </div>
+                        <div class="description">Merges properties from sources into target with overiding.</div>
+                      </td>
+                    </tr>
+                  
+                    <tr>
                       <td class="attributes">&nbsp;</td>
                       <td class="nameDescription">
                         <div class="fixedFont"><b><a href="../symbols/Object.html#hasOwnProperty">hasOwnProperty</a></b>(prop)
                         </div>
                         <div class="description">Returns a boolean indicating whether the object has the specified property.</div>
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <td class="attributes"><em>static</em>&nbsp;</td>
+                      <td class="nameDescription">
+                        <div class="fixedFont">Object.<b><a href="../symbols/Object.html#.isArray">isArray</a></b>(object)
+                        </div>
+                        <div class="description">Checks whether an object is an array.</div>
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <td class="attributes"><em>static</em>&nbsp;</td>
+                      <td class="nameDescription">
+                        <div class="fixedFont">Object.<b><a href="../symbols/Object.html#.reverseMerge">reverseMerge</a></b>(target)
+                        </div>
+                        <div class="description">Merges properties from objects into target without overiding.</div>
                       </td>
                     </tr>
                   
@@ -152,6 +169,65 @@
               </div>
 
               
+                <a name=".extend"></a>
+
+                <div class="fixedFont heading">
+                  <span class='lighter'>
+                  <em>static</em>
+                  </span>
+
+                  <span class="light">{<a href="../symbols/Object.html">Object</a>}</span>
+
+                  <span class="light">Object.</span><b>extend</b>(target)
+                </div>
+
+                <div class="description">
+                  Merges properties from sources into target with overiding.
+Last in covers earlier properties.
+
+                  
+                </div>
+
+                
+
+                
+                  <dl class="detailList params">
+                    <dt class="heading">Parameters:</dt>
+                    
+                      <dt>
+                        <span class="light fixedFont">{<a href="../symbols/Object.html">Object</a>}</span> <b>target</b>
+                        
+                      </dt>
+                      <dd>The object to merge the properties into.</dd>
+                    
+                  </dl>
+                
+
+                
+                  <dl class="detailList nomargin">
+
+                    
+
+                    
+
+                    
+
+                    
+                      <dt class="heading">Returns:</dt>
+                      
+                        <dd>target</dd>
+                      
+                    
+
+                    
+
+                    
+
+                  </dl>
+                
+
+                <div class="hr"></div>
+              
                 <a name="hasOwnProperty"></a>
 
                 <div class="fixedFont heading">
@@ -187,6 +263,123 @@
                   </dl>
                 
 
+                
+
+                <div class="hr"></div>
+              
+                <a name=".isArray"></a>
+
+                <div class="fixedFont heading">
+                  <span class='lighter'>
+                  <em>static</em>
+                  </span>
+
+                  <span class="light">{<a href="../symbols/Boolean.html">Boolean</a>}</span>
+
+                  <span class="light">Object.</span><b>isArray</b>(object)
+                </div>
+
+                <div class="description">
+                  Checks whether an object is an array.
+
+                  
+                </div>
+
+                
+
+                
+                  <dl class="detailList params">
+                    <dt class="heading">Parameters:</dt>
+                    
+                      <dt>
+                        <span class="light fixedFont">{<a href="../symbols/Object.html">Object</a>}</span> <b>object</b>
+                        
+                      </dt>
+                      <dd>The object to check for array-ness.</dd>
+                    
+                  </dl>
+                
+
+                
+                  <dl class="detailList nomargin">
+
+                    
+
+                    
+
+                    
+
+                    
+                      <dt class="heading">Returns:</dt>
+                      
+                        <dd>A boolean expressing whether the object is an instance of Array</dd>
+                      
+                    
+
+                    
+
+                    
+
+                  </dl>
+                
+
+                <div class="hr"></div>
+              
+                <a name=".reverseMerge"></a>
+
+                <div class="fixedFont heading">
+                  <span class='lighter'>
+                  <em>static</em>
+                  </span>
+
+                  <span class="light">{<a href="../symbols/Object.html">Object</a>}</span>
+
+                  <span class="light">Object.</span><b>reverseMerge</b>(target)
+                </div>
+
+                <div class="description">
+                  Merges properties from objects into target without overiding.
+First come, first served.
+
+                  
+                </div>
+
+                
+
+                
+                  <dl class="detailList params">
+                    <dt class="heading">Parameters:</dt>
+                    
+                      <dt>
+                        <span class="light fixedFont">{<a href="../symbols/Object.html">Object</a>}</span> <b>target</b>
+                        
+                      </dt>
+                      <dd>The object to merge the properties into.</dd>
+                    
+                  </dl>
+                
+
+                
+                  <dl class="detailList nomargin">
+
+                    
+
+                    
+
+                    
+
+                    
+                      <dt class="heading">Returns:</dt>
+                      
+                        <dd>target</dd>
+                      
+                    
+
+                    
+
+                    
+
+                  </dl>
                 
 
                 

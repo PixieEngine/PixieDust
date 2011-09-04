@@ -34,21 +34,13 @@
   
     <li><a href="../symbols/Date.html">Date</a></li>
   
-    <li><a href="../symbols/Drawable.html">Drawable</a></li>
-  
     <li><a href="../symbols/Durable.html">Durable</a></li>
   
     <li><a href="../symbols/Engine.html">Engine</a></li>
   
-    <li><a href="../symbols/Framerate.html">Framerate</a></li>
-  
     <li><a href="../symbols/Function.html">Function</a></li>
   
     <li><a href="../symbols/GameObject.html">GameObject</a></li>
-  
-    <li><a href="../symbols/keydown.html">keydown</a></li>
-  
-    <li><a href="../symbols/Local.html">Local</a></li>
   
     <li><a href="../symbols/Math.html">Math</a></li>
   
@@ -60,11 +52,9 @@
   
     <li><a href="../symbols/Object.html">Object</a></li>
   
-    <li><a href="../symbols/Physical.html">Physical</a></li>
-  
     <li><a href="../symbols/Point.html">Point</a></li>
   
-    <li><a href="../symbols/PowerCanvas.html">PowerCanvas</a></li>
+    <li><a href="../symbols/Random.html">Random</a></li>
   
     <li><a href="../symbols/RegExp.html">RegExp</a></li>
   
@@ -132,7 +122,7 @@ extending the object class directly.</div>
                         <div class="fixedFont">
                         <b><a href="../symbols/Core.html#I">I</a></b>
                         </div>
-                        <div class="description"></div>
+                        <div class="description">External access to instance variables.</div>
                       </td>
                     </tr>
                   
@@ -161,8 +151,8 @@ extending the object class directly.</div>
                       <td class="nameDescription">
                         <div class="fixedFont"><b><a href="../symbols/Core.html#attrAccessor">attrAccessor</a></b>()
                         </div>
-                        <div class="description">Generates a public jQuery style getter / setter method for each
-    String argument.</div>
+                        <div class="description">Generates a public jQuery style getter / setter method for each 
+      String argument.</div>
                       </td>
                     </tr>
                   
@@ -274,7 +264,8 @@ methods.
                 </div>
 
                 <div class="description">
-                  
+                  External access to instance variables. Use of this property should be avoided
+      in general, but can come in handy from time to time.
 
                   
                 </div>
@@ -313,8 +304,8 @@ methods.
                 </div>
 
                 <div class="description">
-                  Generates a public jQuery style getter / setter method for each
-    String argument.
+                  Generates a public jQuery style getter / setter method for each 
+      String argument.
 
                   
                 </div>
@@ -366,8 +357,8 @@ methods.
                 </div>
 
                 <div class="description">
-                  Extends this object with methods from the passed in object. `before` and
-    `after` are special option names that glue functionality before or after
+                  Extends this object with methods from the passed in object. `before` and 
+    `after` are special option names that glue functionality before or after 
     existing methods.
 
                   
@@ -409,8 +400,8 @@ methods.
                         <span class="light fixedFont">{Module}</span> <b>Module</b>
                         
                       </dt>
-                      <dd>the module to include. A module is a constructor
-    that takes two parameters, I and self, and returns an object containing the
+                      <dd>the module to include. A module is a constructor 
+    that takes two parameters, I and self, and returns an object containing the 
     public methods to extend the including object with.</dd>
                     
                   </dl>
