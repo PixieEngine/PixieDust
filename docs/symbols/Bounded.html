@@ -205,10 +205,10 @@ by default in <code>GameObject</code>.
      height: 20
      other: "stuff"
      more: "properties"
-  
+
    player.position()
 => Uncaught TypeError: Object has no method 'position'
-  
+
    player.include(Bounded)
 
    # now player has all the methods provided by this module
@@ -296,12 +296,12 @@ Bounded module</dd>
         y: 6
         width: 2
         height: 2
-        
+    
       player.include(Bounded)
-      
+    
       player.bounds()
       => {x: 3, y: 6, width: 2, height: 2}
-      
+    
       player.bounds(7, 4)
       => {x: 10, y: 10, width: 2, height: 2}   
     </pre></code>
@@ -373,9 +373,9 @@ Bounded module</dd>
         y: 6
         width: 2
         height: 2
-        
+    
       player.include(Bounded)
-      
+    
       player.centeredBounds()
       => {x: 4, y: 7, xw: 1, yw: 1}
     </pre></code>
@@ -408,7 +408,7 @@ Bounded module</dd>
       x: 50
       y: 50
       other: "stuff"
-      
+    
     player.include(Bounded)
     
     player.circle()
@@ -447,7 +447,7 @@ Bounded module</dd>
         y: 50
         width: 20
         height: 20
-        
+    
       player.collisionBounds()
       => {x: 38, y: 36 height: 28, width: 24}
     
