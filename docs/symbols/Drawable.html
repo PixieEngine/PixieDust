@@ -4,7 +4,7 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="generator" content="JsDoc Toolkit" />
     
-    <title>JsDoc Reference - Bindable</title>
+    <title>JsDoc Reference - Drawable</title>
     <link href="/stylesheets/docs.css" type="text/css" rel="stylesheet" media="all" />
   </head>
 
@@ -72,7 +72,7 @@
       <div class="innerContent">
         <h1 class="classTitle">
           
-          <span>Bindable</span>
+          <span>Drawable</span>
         </h1>
 
         <p class="description summary">
@@ -85,16 +85,17 @@
 
         
           <div class="props">
-            <table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class Bindable.">
+            <table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class Drawable.">
               <caption>Module Summary</caption>
               <tbody>
                 <tr>
                   <td class="attributes">&nbsp;</td>
                   <td class="nameDescription" >
                     <div class="fixedFont">
-                      <b><a href="../symbols/Bindable.html#constructor">Bindable</a></b>()
+                      <b><a href="../symbols/Drawable.html#constructor">Drawable</a></b>(I, self)
                     </div>
-                    <div class="description">Bindable module</div>
+                    <div class="description">The Drawable module is used to provide a simple draw method to the including
+object.</div>
                   </td>
                 </tr>
                 <tr>
@@ -115,33 +116,24 @@
           
           
             <div class="props">
-              <table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class Bindable.">
+              <table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class Drawable.">
                 <caption>Method Summary</caption>
 
                 <tbody>
                   
                     <tr>
                       <td class="nameDescription">
-                        <div class="fixedFont"><b><a href="../symbols/Bindable.html#bind">bind</a></b>(event, callback)
+                        <div class="fixedFont"><b><a href="../symbols/Drawable.html#draw">draw</a></b>()
                         </div>
-                        <div class="description">The bind method adds a function as an event listener.</div>
+                        <div class="description">Draw does not actually do any drawing itself, instead it triggers all of the draw events.</div>
                       </td>
                     </tr>
                   
                     <tr>
                       <td class="nameDescription">
-                        <div class="fixedFont"><b><a href="../symbols/Bindable.html#trigger">trigger</a></b>(event, parameters)
+                        <div class="fixedFont"><b><a href="../symbols/Drawable.html#transform">transform</a></b>()
                         </div>
-                        <div class="description">The trigger method calls all listeners attached to the specified event.</div>
-                      </td>
-                    </tr>
-                  
-                    <tr>
-                      <td class="nameDescription">
-                        <div class="fixedFont"><b><a href="../symbols/Bindable.html#unbind">unbind</a></b>(event, callback)
-                        </div>
-                        <div class="description">The unbind method removes a specific event listener, or all event listeners if
-    no specific listener is given.</div>
+                        <div class="description">Returns the current transform, with translation, rotation, and flipping applied.</div>
                       </td>
                     </tr>
                   
@@ -157,6 +149,30 @@
   #### EVENTS SUMMARY
   -->
         
+          
+          
+          <div class="props">
+            <table class="summaryTable" cellspacing="0" summary="A summary of the events documented in the class Drawable.">
+              <caption>Event Summary</caption>
+
+              <tbody>
+                
+                  <tr>
+                    <td class="attributes">&nbsp;</td>
+                    <td class="nameDescription">
+                      <div class="fixedFont"><b><a href="../symbols/Drawable.html#event:draw">draw</a></b>()
+                      </div>
+                      <div class="description">Triggered every time the object should be drawn.</div>
+                    </td>
+                  </tr>
+                
+              </tbody>
+            </table>
+          </div>
+          
+
+          
+        
 
   <!--
   #### CONSTRUCTOR DETAILS
@@ -167,16 +183,62 @@
               <a name="constructor"></a>
 
               <div class="fixedFont">
-                <b>Bindable</b>()
+                <b>Drawable</b>(I, self)
               </div>
 
               <div class="description">
-                Bindable module
+                The Drawable module is used to provide a simple draw method to the including
+object.
+
+Binds a default draw listener to draw a rectangle or a sprite, if one exists.
+
+Binds a step listener to update the transform of the object.
+
+Autoloads the sprite specified in I.spriteName, if any.
+
+<code><pre>
+player = Core
+  x: 15
+  y: 30
+  width: 5
+  height: 5
+  sprite: "my_cool_sprite"
+
+engine.bind 'draw', (canvas) ->
+  player.draw(canvas) 
+=> Uncaught TypeError: Object has no method 'draw'
+
+player.include(Drawable)
+
+engine.bind 'draw', (canvas) ->
+  player.draw(canvas)
+player.draw(window.canvas)
+=> if you have a sprite named "my_cool_sprite" in your images folder
+then it will be drawn. Otherwise, a rectangle positioned at x: 15 and
+y: 30 with width and height 5 will be drawn.
+</pre></code>
                 
               </div>
 
               
 
+              
+                <dl class="detailList params">
+                  <dt class="heading">Parameters:</dt>
+                  
+                    <dt>
+                      <span class="light fixedFont">{<a href="../symbols/Object.html">Object</a>}</span>  <b>I</b>
+                      
+                    </dt>
+                    <dd>Instance variables</dd>
+                  
+                    <dt>
+                      <span class="light fixedFont">{<a href="../symbols/Object.html">Object</a>}</span>  <b>self</b>
+                      
+                    </dt>
+                    <dd>Reference to including object</dd>
+                  
+                </dl>
               
 
               
@@ -197,26 +259,17 @@
             <div class="innerProps">
               
                 <div class="fixedFont heading">
-                  <a name="bind"></a>
+                  <a name="draw"></a>
                   <span class='lighter'>
                   
                   </span>
 
-                  <b>bind</b>(event, callback)
+                  <b>draw</b>()
                 </div>
 
                 <div class="description">
-                  The bind method adds a function as an event listener.
-    
-    <code><pre>
-    # this will call coolEventHandler after
-    # yourObject.trigger "someCustomEvent" is called.
-    yourObject.bind "someCustomEvent", coolEventHandler
-    
-    #or
-    yourObject.bind "anotherCustomEvent", ->
-      doSomething()
-    </pre></code>
+                  Draw does not actually do any drawing itself, instead it triggers all of the draw events.
+    Listeners on the events do the actual drawing.
 
                   
                 </div>
@@ -224,114 +277,47 @@
                 
 
                 
-                  <dl class="detailList params">
-                    <dt class="heading">Parameters:</dt>
-                    
-                      <dt>
-                        <b>event</b><span class='light fixedFont'> <a href="../symbols/String.html">String</a></span> 
-                        
-                      </dt>
-                      <dd>The event to listen to.</dd>
-                    
-                      <dt>
-                        <b>callback</b><span class='light fixedFont'> <a href="../symbols/Function.html">Function</a></span> 
-                        
-                      </dt>
-                      <dd>The function to be called when the specified event
-    is triggered.</dd>
-                    
-                  </dl>
-                
 
+                
+                  <dl class="detailList nomargin">
+
+                    
+
+                    
+
+                    
+
+                    
+                      <dt class="heading">Returns:</dt>
+                      
+                        <dd>self</dd>
+                      
+                    
+
+                    
+
+                    
+
+                  </dl>
                 
               
                 <div class="fixedFont heading">
-                  <a name="trigger"></a>
+                  <a name="transform"></a>
                   <span class='lighter'>
                   
                   </span>
 
-                  <b>trigger</b>(event, parameters)
+                  <b>transform</b>()
                 </div>
 
                 <div class="description">
-                  The trigger method calls all listeners attached to the specified event.
-    
-    <code><pre>
-    # calls each event handler bound to "someCustomEvent"
-    yourObject.trigger "someCustomEvent"
-    </pre></code>
+                  Returns the current transform, with translation, rotation, and flipping applied.
 
                   
                 </div>
 
                 
 
-                
-                  <dl class="detailList params">
-                    <dt class="heading">Parameters:</dt>
-                    
-                      <dt>
-                        <b>event</b><span class='light fixedFont'> <a href="../symbols/String.html">String</a></span> 
-                        
-                      </dt>
-                      <dd>The event to trigger.</dd>
-                    
-                      <dt>
-                        <b>parameters</b><span class='light fixedFont'> <a href="../symbols/Array.html">Array</a></span> 
-                        <i>Optional</i>
-                      </dt>
-                      <dd>Additional parameters to pass to the event listener.</dd>
-                    
-                  </dl>
-                
-
-                
-              
-                <div class="fixedFont heading">
-                  <a name="unbind"></a>
-                  <span class='lighter'>
-                  
-                  </span>
-
-                  <b>unbind</b>(event, callback)
-                </div>
-
-                <div class="description">
-                  The unbind method removes a specific event listener, or all event listeners if
-    no specific listener is given.
-    
-    <code><pre>
-    #  removes the handler coolEventHandler from the event
-    # "someCustomEvent" while leaving the other events intact.
-    yourObject.unbind "someCustomEvent", coolEventHandler
-    
-    # removes all handlers attached to "anotherCustomEvent" 
-    yourObject.unbind "anotherCustomEvent"
-    </pre></code>
-
-                  
-                </div>
-
-                
-
-                
-                  <dl class="detailList params">
-                    <dt class="heading">Parameters:</dt>
-                    
-                      <dt>
-                        <b>event</b><span class='light fixedFont'> <a href="../symbols/String.html">String</a></span> 
-                        
-                      </dt>
-                      <dd>The event to remove the listener from.</dd>
-                    
-                      <dt>
-                        <b>callback</b><span class='light fixedFont'> <a href="../symbols/Function.html">Function</a></span> 
-                        <i>Optional</i>
-                      </dt>
-                      <dd>The listener to remove.</dd>
-                    
-                  </dl>
                 
 
                 
@@ -343,6 +329,37 @@
   <!--
   #### EVENT DETAILS
   -->
+        
+          <div class="details props">
+            <div class="innerProps">
+              
+                <a name="event:event:draw"> </a>
+
+                <div class="fixedFont heading">
+                  <span class='lighter'>
+                  
+                  </span>
+
+                  
+
+                  <b>draw</b>()
+                </div>
+
+                <div class="description">
+                  Triggered every time the object should be drawn. A canvas is passed as
+the first argument.
+
+                  
+                </div>
+
+                
+
+                
+
+                
+              
+            </div>
+          </div>
         
       </div>
     </div>
