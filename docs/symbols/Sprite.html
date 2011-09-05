@@ -181,9 +181,26 @@
                   
                     <tr>
                       <td class="nameDescription">
+                        <div class="fixedFont">Sprite.<b><a href="../symbols/Sprite.html#.load">load</a></b>(url, loadedCallback)
+                        </div>
+                        <div class="description">Loads a sprite from a given url.</div>
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <td class="nameDescription">
                         <div class="fixedFont">Sprite.<b><a href="../symbols/Sprite.html#.loadByName">loadByName</a></b>(name, callback)
                         </div>
                         <div class="description">Loads a sprite with the given name.</div>
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <td class="nameDescription">
+                        <div class="fixedFont">Sprite.<b><a href="../symbols/Sprite.html#.loadSheet">loadSheet</a></b>(name, tileWidth, tileHeight)
+                        </div>
+                        <div class="description">Loads all sprites from a sprite sheet found in
+  your images directory, specified by the name passed in.</div>
                       </td>
                     </tr>
                   
@@ -411,6 +428,65 @@ draw anything to the screen until the image has been loaded.
                 
               
                 <div class="fixedFont heading">
+                  <a name=".load"></a>
+                  <span class='lighter'>
+                  <em>static</em>
+                  </span>
+
+                  <span class="light">Sprite.</span><b>load</b>(url, loadedCallback)
+                </div>
+
+                <div class="description">
+                  Loads a sprite from a given url.
+
+                  
+                </div>
+
+                
+
+                
+                  <dl class="detailList params">
+                    <dt class="heading">Parameters:</dt>
+                    
+                      <dt>
+                        <b>url</b><span class='light fixedFont'> <a href="../symbols/String.html">String</a></span> 
+                        
+                      </dt>
+                      <dd></dd>
+                    
+                      <dt>
+                        <b>loadedCallback</b>
+                        <i>Optional</i>
+                      </dt>
+                      <dd></dd>
+                    
+                  </dl>
+                
+
+                
+                  <dl class="detailList nomargin">
+
+                    
+
+                    
+
+                    
+
+                    
+                      <dt class="heading">Returns:</dt>
+                      
+                        <dd>A sprite object</dd>
+                      
+                    
+
+                    
+
+                    
+
+                  </dl>
+                
+              
+                <div class="fixedFont heading">
                   <a name=".loadByName"></a>
                   <span class='lighter'>
                   <em>static</em>
@@ -446,6 +522,72 @@ draw anything to the screen until the image has been loaded.
                   </dl>
                 
 
+                
+              
+                <div class="fixedFont heading">
+                  <a name=".loadSheet"></a>
+                  <span class='lighter'>
+                  <em>static</em>
+                  </span>
+
+                  <span class="light">Sprite.</span><b>loadSheet</b>(name, tileWidth, tileHeight)
+                </div>
+
+                <div class="description">
+                  Loads all sprites from a sprite sheet found in
+  your images directory, specified by the name passed in.
+
+                  
+                </div>
+
+                
+
+                
+                  <dl class="detailList params">
+                    <dt class="heading">Parameters:</dt>
+                    
+                      <dt>
+                        <b>name</b><span class='light fixedFont'> <a href="../symbols/String.html">String</a></span> 
+                        
+                      </dt>
+                      <dd></dd>
+                    
+                      <dt>
+                        <b>tileWidth</b><span class='light fixedFont'> <a href="../symbols/Number.html">Number</a></span> 
+                        
+                      </dt>
+                      <dd></dd>
+                    
+                      <dt>
+                        <b>tileHeight</b><span class='light fixedFont'> <a href="../symbols/Number.html">Number</a></span> 
+                        
+                      </dt>
+                      <dd></dd>
+                    
+                  </dl>
+                
+
+                
+                  <dl class="detailList nomargin">
+
+                    
+
+                    
+
+                    
+
+                    
+                      <dt class="heading">Returns:</dt>
+                      
+                        <dd><span class="light fixedFont">{<a href="../symbols/Array.html">Array</a>}</span> An array of sprite objects</dd>
+                      
+                    
+
+                    
+
+                    
+
+                  </dl>
                 
               
             </div>

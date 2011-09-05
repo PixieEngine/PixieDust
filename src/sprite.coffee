@@ -91,7 +91,7 @@ draw anything to the screen until the image has been loaded.
   @methodOf Sprite
 
   @param {String} url
-  @param [loadedCallback]
+  @param {Function} [loadedCallback]
 
   @returns A sprite object
   ###
@@ -117,8 +117,8 @@ draw anything to the screen until the image has been loaded.
   @name fromPixieId
   @methodOf Sprite
 
-  @param id
-  @param [callback]
+  @param {Number} id
+  @param {Function} [callback]
 
   @type Sprite
   ###
@@ -151,7 +151,7 @@ draw anything to the screen until the image has been loaded.
   @methodOf Sprite
 
   @param {String} url
-  @param [callback]
+  @param {Function} [callback]
 
   @type Sprite
   ###
@@ -164,7 +164,7 @@ draw anything to the screen until the image has been loaded.
   @methodOf Sprite
 
   @param {String} name
-  @param [callback]
+  @param {Function} [callback]
 
   @type Sprite
   ###
