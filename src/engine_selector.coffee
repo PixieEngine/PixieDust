@@ -23,13 +23,19 @@ Engine.Selector = (I, self) ->
      player = engine.add
        class: "Player"
 
-     enemy = enemy.add
+     enemy = engine.add
        class: "Enemy"
        speed: 5
+       x: 0
 
-     boss = enemy.add
+     distantEnemy = engine.add
+       class "Enemy"
+       x: 500
+
+     boss = engine.add
        class: "Enemy"
        id: "Boss"
+       x: 0
 
      # to select an object by id use "#anId"
      engine.find "#Boss"
@@ -42,13 +48,9 @@ Engine.Selector = (I, self) ->
      # to select an object by properties use ".someProperty" or ".someProperty=someValue"
      engine.find ".speed=5"
   => [enemy]
+
+     # You may mix and match selectors. "Enemy
   </pre></code>
-
-  To select an object by id use "#anId"
-
-  To select objects by class use "MyClass"
-
-  To select objects by properties use ".someProperty" or ".someProperty=someValue"
 
   You may mix and match selectors. "Wall.x=0" to select all objects of class Wall with an x property of 0.
 
