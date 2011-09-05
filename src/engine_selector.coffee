@@ -49,7 +49,9 @@ Engine.Selector = (I, self) ->
      engine.find ".speed=5"
   => [enemy]
 
-     # You may mix and match selectors. "Enemy
+     # You may mix and match selectors.
+     engine.find "Enemy.x=0"
+  => [enemy, boss] # doesn't return distantEnemy
   </pre></code>
 
   You may mix and match selectors. "Wall.x=0" to select all objects of class Wall with an x property of 0.
