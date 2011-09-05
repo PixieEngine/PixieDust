@@ -3835,7 +3835,7 @@ Bounded = function(I, self) {
   };
 };;
 /**
-Collision holds many useful methods for checking geometric overlap of various objects.
+Collision holds many useful class methods for checking geometric overlap of various objects.
 
 @name Collision
 @namespace
@@ -3844,12 +3844,36 @@ Collision = {
   /**
     Takes two bounds objects and returns true if they collide (overlap), false otherwise.
     Bounds objects have x, y, width and height properties.
+    
+    <code><pre>
+       player = GameObject
+         x: 0
+         y: 0
+         width: 10
+         height: 10
+        
+       enemy = GameObject
+         x: 5
+         y: 5
+         width: 10
+         height: 10
+        
+       Collision.rectangular(player, enemy)
+    => true
+    
+       Collision.rectangular(player, {x: 50, y: 40, width: 30, height: 30})
+    => false
+        
+    </pre></code>
   
     @name rectangular
     @methodOf Collision
   
     @param a
     @param b
+    
+    @type boolean
+    @returns true if the rectangles overlap, false otherwise
     */
   rectangular: function(a, b) {
     return a.x < b.x + b.width && a.x + a.width > b.x && a.y < b.y + b.height && a.y + a.height > b.y;
@@ -3858,11 +3882,37 @@ Collision = {
   Takes two circle objects and returns true if they collide (overlap), false otherwise.
   Circle objects have x, y, and radius.
   
+  <code><pre>
+     player = GameObject
+       x: 5
+       y: 5
+       radius: 10
+       
+     enemy = GameObject
+       x: 10
+       y: 10
+       radius: 10
+       
+     farEnemy = GameObject
+       x: 500
+       y: 500
+       radius: 30
+       
+     Collision.circular(player, enemy)
+  => true
+  
+     Collision.circular(player, farEnemy)
+  => false
+  </pre></code>
+  
   @name circular
   @methodOf Collision
   
   @param a
   @param b
+  
+  @type boolean
+  @returns true is the circles overlap, false otherwise
   */
   circular: function(a, b) {
     var dx, dy, r;
@@ -3871,6 +3921,19 @@ Collision = {
     dy = b.y - a.y;
     return r * r >= dx * dx + dy * dy;
   },
+  /**
+  Detects whether a line intersects a circle
+  
+  @name rayCircle
+  @methodOf Collision
+  
+  @param source
+  @param direction
+  @param target
+  
+  @type boolean
+  @returns true if the line intersects the circle, false otherwise
+  */
   rayCircle: function(source, direction, target) {
     var dt, hit, intersection, intersectionToTarget, intersectionToTargetLength, laserToTarget, projection, projectionLength, radius;
     radius = target.radius();
