@@ -116,36 +116,30 @@
                 <tbody>
                   
                     <tr>
+                      <td class="attributes"><em>static</em>&nbsp;</td>
                       <td class="nameDescription">
                         <div class="fixedFont">
                         Engine.<b><a href="../symbols/Engine.html#.Collision">Collision</a></b>
-                          <span class='lighter'>
-                          <em>static</em>
-                          </span>
                         </div>
                         <div class="description">The <code>Collision</code> module provides some simple collision detection methods to engine.</div>
                       </td>
                     </tr>
                   
                     <tr>
+                      <td class="attributes"><em>static</em>&nbsp;</td>
                       <td class="nameDescription">
                         <div class="fixedFont">
                         Engine.<b><a href="../symbols/Engine.html#.SaveState">SaveState</a></b>
-                          <span class='lighter'>
-                          <em>static</em>
-                          </span>
                         </div>
                         <div class="description">The <code>SaveState</code> module provides methods to save and restore the current engine state.</div>
                       </td>
                     </tr>
                   
                     <tr>
+                      <td class="attributes"><em>static</em>&nbsp;</td>
                       <td class="nameDescription">
                         <div class="fixedFont">
                         Engine.<b><a href="../symbols/Engine.html#.Selector">Selector</a></b>
-                          <span class='lighter'>
-                          <em>static</em>
-                          </span>
                         </div>
                         <div class="description">The <code>Selector</code> module provides methods to query the engine to find game objects.</div>
                       </td>
@@ -330,10 +324,10 @@
                   <dt class="heading">Parameters:</dt>
                   
                     <dt>
-                      <b>I</b>
+                      <b>I</b><span class='light fixedFont'> <a href="../symbols/Object.html">Object</a></span> 
                       
                     </dt>
-                    <dd></dd>
+                    <dd>Instance variables of the engine</dd>
                   
                 </dl>
               
@@ -352,12 +346,13 @@
               
                 <div class="fixedFont heading">
                   <a name=".Collision"></a>
-                  
-
-                  <span class="light">Engine.</span><b>Collision</b>
                   <span class='lighter'>
                   <em>static</em>
                   </span>
+
+                  
+
+                  <span class="light">Engine.</span><b>Collision</b>
                 </div>
 
                 <div class="description">
@@ -372,12 +367,13 @@
               
                 <div class="fixedFont heading">
                   <a name=".SaveState"></a>
-                  
-
-                  <span class="light">Engine.</span><b>SaveState</b>
                   <span class='lighter'>
                   <em>static</em>
                   </span>
+
+                  
+
+                  <span class="light">Engine.</span><b>SaveState</b>
                 </div>
 
                 <div class="description">
@@ -392,12 +388,13 @@
               
                 <div class="fixedFont heading">
                   <a name=".Selector"></a>
-                  
-
-                  <span class="light">Engine.</span><b>Selector</b>
                   <span class='lighter'>
                   <em>static</em>
                   </span>
+
+                  
+
+                  <span class="light">Engine.</span><b>Selector</b>
                 </div>
 
                 <div class="description">
@@ -468,13 +465,43 @@
 
                 <div class="description">
                   Get a selection of GameObjects that match the specified selector criteria. The selector language
-    can select objects by id, class, or attributes.
+    can select objects by id, class, or attributes. Note that this method always returns an Array,
+    so if you are trying to find only one object you will need something like <code>engine.find("Enemy").first()</code>.
     
-    To select an object by id use "#anId"
+    <code><pre>
+       player = engine.add
+         class: "Player"
+        
+       enemy = engine.add
+         class: "Enemy"
+         speed: 5
+         x: 0
+          
+       distantEnemy = engine.add
+         class "Enemy"
+         x: 500
+     
+       boss = engine.add
+         class: "Enemy"
+         id: "Boss"
+         x: 0
+      
+       # to select an object by id use "#anId"
+       engine.find "#Boss"
+    => [boss]
     
-    To select objects by class use "MyClass"
+       # to select an object by class use "MyClass"
+       engine.find "Enemy"
+    => [enemy, boss]
     
-    To select objects by properties use ".someProperty" or ".someProperty=someValue"
+       # to select an object by properties use ".someProperty" or ".someProperty=someValue"
+       engine.find ".speed=5"
+    => [enemy]
+    
+       # You may mix and match selectors.
+       engine.find "Enemy.x=0"
+    => [enemy, boss] # doesn't return distantEnemy
+    </pre></code>
     
     You may mix and match selectors. "Wall.x=0" to select all objects of class Wall with an x property of 0.
 
@@ -581,7 +608,6 @@
                   
 
                   <b>afterAdd</b>(object)
-                  <span class="lighter"><em>event</em></span>
                 </div>
 
                 <div class="description">
@@ -618,7 +644,6 @@
                   
 
                   <b>afterUpdate</b>()
-                  <span class="lighter"><em>event</em></span>
                 </div>
 
                 <div class="description">
@@ -643,7 +668,6 @@
                   
 
                   <b>beforeAdd</b>(entityData)
-                  <span class="lighter"><em>event</em></span>
                 </div>
 
                 <div class="description">
@@ -679,7 +703,6 @@
                   
 
                   <b>beforeDraw</b>()
-                  <span class="lighter"><em>event</em></span>
                 </div>
 
                 <div class="description">
@@ -705,7 +728,6 @@
                   
 
                   <b>draw</b>()
-                  <span class="lighter"><em>event</em></span>
                 </div>
 
                 <div class="description">
@@ -731,7 +753,6 @@
                   
 
                   <b>overlay</b>()
-                  <span class="lighter"><em>event</em></span>
                 </div>
 
                 <div class="description">
@@ -758,7 +779,6 @@
                   
 
                   <b>update</b>()
-                  <span class="lighter"><em>event</em></span>
                 </div>
 
                 <div class="description">
