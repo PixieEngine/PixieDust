@@ -3924,7 +3924,7 @@ Collision = {
     return r * r >= dx * dx + dy * dy;
   },
   /**
-  Detects whether a line intersects a circle
+  Detects whether a line intersects a circle.
   
   @name rayCircle
   @methodOf Collision
@@ -3933,7 +3933,7 @@ Collision = {
   @param direction
   @param target
   
-  @type boolean
+  @type bool
   @returns true if the line intersects the circle, false otherwise
   */
   rayCircle: function(source, direction, target) {
@@ -3957,6 +3957,19 @@ Collision = {
       return hit = direction.scale(projectionLength - dt).add(source);
     }
   },
+  /**
+  Detects whether a line intersects a rectangle.
+  
+  @name rayRectangle
+  @methodOf Collision
+  
+  @param source
+  @param direction
+  @param target
+  
+  @type bool
+  @returns true if the line intersects the rectangle, false otherwise
+  */
   rayRectangle: function(source, direction, target) {
     var areaPQ0, areaPQ1, hit, p0, p1, t, tX, tY, xval, xw, yval, yw, _ref, _ref2;
     xw = target.xw;
