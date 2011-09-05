@@ -233,7 +233,7 @@
                 The Sprite class provides a way to load images for use in games.
 
 By default, images are loaded asynchronously. A proxy object is 
-returned immediately but though it has a draw method it will not
+returned immediately. Even though it has a draw method it will not
 draw anything to the screen until the image has been loaded.
                 
               </div>
@@ -329,22 +329,22 @@ draw anything to the screen until the image has been loaded.
                     <dt class="heading">Parameters:</dt>
                     
                       <dt>
-                        <b>canvas</b>
+                        <b>canvas</b><span class='light fixedFont'> PowerCanvas</span> 
                         
                       </dt>
-                      <dd></dd>
+                      <dd>Reference to the canvas to draw the sprite on</dd>
                     
                       <dt>
-                        <b>x</b>
+                        <b>x</b><span class='light fixedFont'> <a href="../symbols/Number.html">Number</a></span> 
                         
                       </dt>
-                      <dd></dd>
+                      <dd>Position on the x axis to draw the sprite</dd>
                     
                       <dt>
-                        <b>y</b>
+                        <b>y</b><span class='light fixedFont'> <a href="../symbols/Number.html">Number</a></span> 
                         
                       </dt>
-                      <dd></dd>
+                      <dd>Position on the y axis to draw the sprite</dd>
                     
                   </dl>
                 
@@ -376,17 +376,38 @@ draw anything to the screen until the image has been loaded.
                         <b>id</b><span class='light fixedFont'> <a href="../symbols/Number.html">Number</a></span> 
                         
                       </dt>
-                      <dd></dd>
+                      <dd>Pixie Id of the sprite to load</dd>
                     
                       <dt>
                         <b>callback</b><span class='light fixedFont'> <a href="../symbols/Function.html">Function</a></span> 
                         <i>Optional</i>
                       </dt>
-                      <dd></dd>
+                      <dd>Function to execute once the image is loaded. The sprite proxy data is passed to this as a parameter.</dd>
                     
                   </dl>
                 
 
+                
+                  <dl class="detailList nomargin">
+
+                    
+
+                    
+
+                    
+
+                    
+                      <dt class="heading">Returns:</dt>
+                      
+                        <dd><span class="light fixedFont">{<a href="../symbols/Sprite.html">Sprite</a>}</span> </dd>
+                      
+                    
+
+                    
+
+                    
+
+                  </dl>
                 
               
                 <div class="fixedFont heading">
@@ -414,13 +435,13 @@ draw anything to the screen until the image has been loaded.
                         <b>url</b><span class='light fixedFont'> <a href="../symbols/String.html">String</a></span> 
                         
                       </dt>
-                      <dd></dd>
+                      <dd>The url where the image to load is located</dd>
                     
                       <dt>
                         <b>callback</b><span class='light fixedFont'> <a href="../symbols/Function.html">Function</a></span> 
                         <i>Optional</i>
                       </dt>
-                      <dd></dd>
+                      <dd>Function to execute once the image is loaded. The sprite proxy data is passed to this as a parameter.</dd>
                     
                   </dl>
                 
@@ -496,7 +517,7 @@ draw anything to the screen until the image has been loaded.
                     
                       <dt class="heading">Returns:</dt>
                       
-                        <dd>A sprite object</dd>
+                        <dd><span class="light fixedFont">{<a href="../symbols/Sprite.html">Sprite</a>}</span> A sprite object</dd>
                       
                     
 
@@ -532,17 +553,38 @@ draw anything to the screen until the image has been loaded.
                         <b>name</b><span class='light fixedFont'> <a href="../symbols/String.html">String</a></span> 
                         
                       </dt>
-                      <dd></dd>
+                      <dd>The name of the image in your images directory</dd>
                     
                       <dt>
                         <b>callback</b><span class='light fixedFont'> <a href="../symbols/Function.html">Function</a></span> 
                         <i>Optional</i>
                       </dt>
-                      <dd></dd>
+                      <dd>Function to execute once the image is loaded. The sprite proxy data is passed to this as a parameter.</dd>
                     
                   </dl>
                 
 
+                
+                  <dl class="detailList nomargin">
+
+                    
+
+                    
+
+                    
+
+                    
+                      <dt class="heading">Returns:</dt>
+                      
+                        <dd><span class="light fixedFont">{<a href="../symbols/Sprite.html">Sprite</a>}</span> </dd>
+                      
+                    
+
+                    
+
+                    
+
+                  </dl>
                 
               
                 <div class="fixedFont heading">
@@ -571,19 +613,19 @@ draw anything to the screen until the image has been loaded.
                         <b>name</b><span class='light fixedFont'> <a href="../symbols/String.html">String</a></span> 
                         
                       </dt>
-                      <dd></dd>
+                      <dd>Name of the spriteSheet image in your images directory</dd>
                     
                       <dt>
                         <b>tileWidth</b><span class='light fixedFont'> <a href="../symbols/Number.html">Number</a></span> 
                         
                       </dt>
-                      <dd></dd>
+                      <dd>Width of each sprite in the sheet</dd>
                     
                       <dt>
                         <b>tileHeight</b><span class='light fixedFont'> <a href="../symbols/Number.html">Number</a></span> 
                         
                       </dt>
-                      <dd></dd>
+                      <dd>Height of each sprite in the sheet</dd>
                     
                   </dl>
                 
