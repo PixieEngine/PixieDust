@@ -9,6 +9,24 @@ Collision =
   Takes two bounds objects and returns true if they collide (overlap), false otherwise.
   Bounds objects have x, y, width and height properties.
 
+  <code><pre>
+     player = GameObject
+       x: 0
+       y: 0
+       width: 10
+       height: 10
+
+     enemy = GameObject
+       x: 5
+       y: 5
+       width: 10
+       height: 10
+
+     Collision.rectangular(player, enemy)
+  => true
+
+  </pre></code>
+
   @name rectangular
   @methodOf Collision
 
