@@ -153,7 +153,7 @@ draw anything to the screen until the image has been loaded.
   @param {String} url
   @param {Function} [callback]
 
-  @type Sprite
+  @returns {Sprite}
   ###
   Sprite.fromURL = Sprite.load
 
