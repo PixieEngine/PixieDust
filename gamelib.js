@@ -3967,7 +3967,7 @@ Collision = {
   @param direction
   @param target
   
-  @returns {Boolean} true if the line intersects the rectangle, false otherwise
+  @returns Boolean true if the line intersects the rectangle, false otherwise
   @type Boolean
   */
   rayRectangle: function(source, direction, target) {
