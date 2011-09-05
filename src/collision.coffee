@@ -23,7 +23,8 @@ Collision =
        height: 10
 
      Collision.rectangular(player, enemy)
-  => true   
+  => true
+
      Collision.rectangular(player, {x: 50, y: 40, width: 30, height: 30})
   => false
 
