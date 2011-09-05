@@ -2,7 +2,7 @@
 The Sprite class provides a way to load images for use in games.
 
 By default, images are loaded asynchronously. A proxy object is 
-returned immediately but though it has a draw method it will not
+returned immediately. Even though it has a draw method it will not
 draw anything to the screen until the image has been loaded.
 
 @name Sprite
@@ -30,9 +30,9 @@ draw anything to the screen until the image has been loaded.
     @name draw
     @methodOf Sprite#
 
-    @param canvas
-    @param x
-    @param y
+    @param {PowerCanvas} canvas Reference to the canvas to draw the sprite on
+    @param {Number} x Position on the x axis to draw the sprite
+    @param {Number} y Position on the y axis to draw the sprite
     ###
     draw: (canvas, x, y) ->
       canvas.drawImage(
