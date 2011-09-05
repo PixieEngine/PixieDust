@@ -1,5 +1,5 @@
 ###*
-Collision holds many useful methods for checking geometric overlap of various objects.
+Collision holds many useful class methods for checking geometric overlap of various objects.
 
 @name Collision
 @namespace
