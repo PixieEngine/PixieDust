@@ -26,7 +26,7 @@ specified the object will have an unlimited duration.
 @constructor
 
 @param {Object} I Instance variables
-@param {Core} self The object to which we are adding the Durable functionality.
+@param {Core} self Reference to including object
 ###
 Durable = (I) ->
   Object.reverseMerge I,
