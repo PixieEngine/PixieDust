@@ -253,6 +253,12 @@ Call the given iterator once for each pair of objects in the array.
 
 <code><pre>
   [1, 2, 3, 4].eachPair (a, b) ->
+    # 1, 2
+    # 1, 3
+    # 1, 4
+    # 2, 3
+    # 2, 4
+    # 3, 4
 </pre></code>
 
 @name eachPair
@@ -628,7 +634,24 @@ Array.prototype.zip = function() {
   });
 };;
 /**
-Bindable module
+Bindable module.
+
+<code><pre>
+player = Core
+  x: 5
+  y: 10
+  
+player.bind "update", ->
+  updatePlayer()
+=> Uncaught TypeError: Object has no method 'bind'
+
+player.include(Bindable)
+
+player.bind "update", ->
+  updatePlayer()
+=> this will call updatePlayer each time through the main loop
+</pre></code>  
+
 @name Bindable
 @module
 @constructor
@@ -4312,7 +4335,7 @@ player = Core
   y: 10
   width: 5
   height: 5
-  
+
 player.bind "draw", (canvas) ->
   canvas.fillColor("white")
 
@@ -5164,9 +5187,9 @@ collisions so is probably best suited to particle effect like things.
      velocity: Point(0, 0)
      acceleration: Point(1, 0)
      maxSpeed: 2
-    
+
    player.include(Movable)
-  
+
 => `velocity is {x: 0, y: 0} and position is {x: 0, y: 0}`
 
    player.update()
@@ -5174,7 +5197,7 @@ collisions so is probably best suited to particle effect like things.
 
    player.update()
 => `velocity is {x: 2, y: 0} and position is {x: 3, y: 0}`   
-   
+
    # we've hit our maxSpeed so our velocity won't increase
    player.update()
 => `velocity is {x: 2, y: 0} and position is {x: 5, y: 0}`
