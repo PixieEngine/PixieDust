@@ -120,7 +120,7 @@ draw anything to the screen until the image has been loaded.
   @param {Number} id
   @param {Function} [callback]
 
-  @type Sprite
+  @returns {Sprite}
   ###
   Sprite.fromPixieId = (id, callback) ->
     Sprite.load("http://pixieengine.com/s3/sprites/#{id}/original.png", callback)
