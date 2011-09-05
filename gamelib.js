@@ -5346,7 +5346,7 @@ Rotatable = function(I) {
 The Sprite class provides a way to load images for use in games.
 
 By default, images are loaded asynchronously. A proxy object is 
-returned immediately but though it has a draw method it will not
+returned immediately. Even though it has a draw method it will not
 draw anything to the screen until the image has been loaded.
 
 @name Sprite
@@ -5375,9 +5375,9 @@ draw anything to the screen until the image has been loaded.
       @name draw
       @methodOf Sprite#
       
-      @param canvas
-      @param x
-      @param y
+      @param {PowerCanvas} canvas Reference to the canvas to draw the sprite on
+      @param {Number} x Position on the x axis to draw the sprite
+      @param {Number} y Position on the y axis to draw the sprite
       */
       draw: function(canvas, x, y) {
         return canvas.drawImage(image, sourceX, sourceY, width, height, x, y, width, height);
@@ -5402,9 +5402,9 @@ draw anything to the screen until the image has been loaded.
   @name loadSheet
   @methodOf Sprite
   
-  @param {String} name
-  @param {Number} tileWidth
-  @param {Number} tileHeight
+  @param {String} name Name of the spriteSheet image in your images directory
+  @param {Number} tileWidth Width of each sprite in the sheet
+  @param {Number} tileHeight Height of each sprite in the sheet
   
   @returns {Array} An array of sprite objects
   */
@@ -5434,7 +5434,7 @@ draw anything to the screen until the image has been loaded.
   @param {String} url
   @param {Function} [loadedCallback]
   
-  @returns A sprite object
+  @returns {Sprite} A sprite object
   */
   Sprite.load = function(url, loadedCallback) {
     var img, proxy;
@@ -5457,10 +5457,10 @@ draw anything to the screen until the image has been loaded.
   @name fromPixieId
   @methodOf Sprite
   
-  @param {Number} id
-  @param {Function} [callback]
+  @param {Number} id Pixie Id of the sprite to load
+  @param {Function} [callback] Function to execute once the image is loaded. The sprite proxy data is passed to this as a parameter.
   
-  @type Sprite
+  @returns {Sprite}
   */
   Sprite.fromPixieId = function(id, callback) {
     return Sprite.load("http://pixieengine.com/s3/sprites/" + id + "/original.png", callback);
@@ -5471,7 +5471,7 @@ draw anything to the screen until the image has been loaded.
   @name EMPTY
   @fieldOf Sprite
   @constant
-  @type Sprite
+  @returns {Sprite}
   */
   /**
   A sprite that draws nothing.
@@ -5479,7 +5479,7 @@ draw anything to the screen until the image has been loaded.
   @name NONE
   @fieldOf Sprite
   @constant
-  @type Sprite
+  @returns {Sprite}
   */
   Sprite.EMPTY = Sprite.NONE = LoaderProxy();
   /**
@@ -5488,8 +5488,8 @@ draw anything to the screen until the image has been loaded.
   @name fromURL
   @methodOf Sprite
   
-  @param {String} url
-  @param {Function} [callback]
+  @param {String} url The url where the image to load is located
+  @param {Function} [callback] Function to execute once the image is loaded. The sprite proxy data is passed to this as a parameter.
   
   @returns {Sprite}
   */
@@ -5500,10 +5500,10 @@ draw anything to the screen until the image has been loaded.
   @name loadByName
   @methodOf Sprite
   
-  @param {String} name
-  @param {Function} [callback]
+  @param {String} name The name of the image in your images directory
+  @param {Function} [callback] Function to execute once the image is loaded. The sprite proxy data is passed to this as a parameter.
   
-  @type Sprite
+  @returns {Sprite}
   */
   Sprite.loadByName = function(name, callback) {
     return Sprite.load(ResourceLoader.urlFor("images", name), callback);
