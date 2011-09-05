@@ -93,7 +93,7 @@
                     <div class="fixedFont">
                       <b><a href="../symbols/Collision.html#constructor">Collision</a></b>()
                     </div>
-                    <div class="description">Collision holds many useful methods for checking geometric overlap of various objects.</div>
+                    <div class="description">Collision holds many useful class methods for checking geometric overlap of various objects.</div>
                   </td>
                 </tr>
                 <tr>
@@ -123,6 +123,14 @@
                         <div class="fixedFont">Collision.<b><a href="../symbols/Collision.html#.circular">circular</a></b>(a, b)
                         </div>
                         <div class="description">Takes two circle objects and returns true if they collide (overlap), false otherwise.</div>
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <td class="nameDescription">
+                        <div class="fixedFont">Collision.<b><a href="../symbols/Collision.html#.rayCircle">rayCircle</a></b>(source, direction, target)
+                        </div>
+                        <div class="description">Detects whether a line intersects a circle</div>
                       </td>
                     </tr>
                   
@@ -160,7 +168,7 @@
               </div>
 
               <div class="description">
-                Collision holds many useful methods for checking geometric overlap of various objects.
+                Collision holds many useful class methods for checking geometric overlap of various objects.
                 
               </div>
 
@@ -197,6 +205,29 @@
                 <div class="description">
                   Takes two circle objects and returns true if they collide (overlap), false otherwise.
   Circle objects have x, y, and radius.
+  
+  <code><pre>
+     player = GameObject
+       x: 5
+       y: 5
+       radius: 10
+       
+     enemy = GameObject
+       x: 10
+       y: 10
+       radius: 10
+       
+     farEnemy = GameObject
+       x: 500
+       y: 500
+       radius: 30
+       
+     Collision.circular(player, enemy)
+  => true
+  
+     Collision.circular(player, farEnemy)
+  => false
+  </pre></code>
 
                   
                 </div>
@@ -222,6 +253,92 @@
                   </dl>
                 
 
+                
+                  <dl class="detailList nomargin">
+
+                    
+
+                    
+
+                    
+
+                    
+                      <dt class="heading">Returns:</dt>
+                      
+                        <dd>true is the circles overlap, false otherwise</dd>
+                      
+                    
+
+                    
+
+                    
+
+                  </dl>
+                
+              
+                <div class="fixedFont heading">
+                  <a name=".rayCircle"></a>
+                  <span class='lighter'>
+                  <em>static</em>
+                  </span>
+
+                  <span class="light">Collision.</span><b>rayCircle</b>(source, direction, target)
+                </div>
+
+                <div class="description">
+                  Detects whether a line intersects a circle
+
+                  
+                </div>
+
+                
+
+                
+                  <dl class="detailList params">
+                    <dt class="heading">Parameters:</dt>
+                    
+                      <dt>
+                        <b>source</b>
+                        
+                      </dt>
+                      <dd></dd>
+                    
+                      <dt>
+                        <b>direction</b>
+                        
+                      </dt>
+                      <dd></dd>
+                    
+                      <dt>
+                        <b>target</b>
+                        
+                      </dt>
+                      <dd></dd>
+                    
+                  </dl>
+                
+
+                
+                  <dl class="detailList nomargin">
+
+                    
+
+                    
+
+                    
+
+                    
+                      <dt class="heading">Returns:</dt>
+                      
+                        <dd>true if the line intersects the circle, false otherwise</dd>
+                      
+                    
+
+                    
+
+                    
+
+                  </dl>
                 
               
                 <div class="fixedFont heading">
@@ -236,6 +353,27 @@
                 <div class="description">
                   Takes two bounds objects and returns true if they collide (overlap), false otherwise.
     Bounds objects have x, y, width and height properties.
+    
+    <code><pre>
+       player = GameObject
+         x: 0
+         y: 0
+         width: 10
+         height: 10
+        
+       enemy = GameObject
+         x: 5
+         y: 5
+         width: 10
+         height: 10
+        
+       Collision.rectangular(player, enemy)
+    => true
+    
+       Collision.rectangular(player, {x: 50, y: 40, width: 30, height: 30})
+    => false
+        
+    </pre></code>
 
                   
                 </div>
@@ -261,6 +399,27 @@
                   </dl>
                 
 
+                
+                  <dl class="detailList nomargin">
+
+                    
+
+                    
+
+                    
+
+                    
+                      <dt class="heading">Returns:</dt>
+                      
+                        <dd>true if the rectangles overlap, false otherwise</dd>
+                      
+                    
+
+                    
+
+                    
+
+                  </dl>
                 
               
             </div>

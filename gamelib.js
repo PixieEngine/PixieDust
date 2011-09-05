@@ -640,7 +640,7 @@ Bindable module.
 player = Core
   x: 5
   y: 10
-  
+
 player.bind "update", ->
   updatePlayer()
 => Uncaught TypeError: Object has no method 'bind'
@@ -963,16 +963,19 @@ Function.prototype.withAfter = function(interception) {
 };;
 /**
   @name Logging
-
-<code><pre>
-  log "Testing123"
-  info "Hey, this is happening"
-  warn "Be careful, this might be a problem"
-  error "Kaboom!"
-</pre></code>
+  @namespace
 
   Gives you some convenience methods for outputting data
   while developing. 
+
+<code>
+  <pre>
+    log "Testing123"
+    info "Hey, this is happening"
+    warn "Be careful, this might be a problem"
+    error "Kaboom!"
+  </pre>
+</code>
 */["log", "info", "warn", "error"].each(function(name) {
   if (typeof console !== "undefined") {
     return (typeof exports !== "undefined" && exports !== null ? exports : this)[name] = function(message) {
@@ -3844,26 +3847,26 @@ Collision = {
   /**
     Takes two bounds objects and returns true if they collide (overlap), false otherwise.
     Bounds objects have x, y, width and height properties.
-    
+  
     <code><pre>
        player = GameObject
          x: 0
          y: 0
          width: 10
          height: 10
-        
+  
        enemy = GameObject
          x: 5
          y: 5
          width: 10
          height: 10
-        
+  
        Collision.rectangular(player, enemy)
     => true
-    
+  
        Collision.rectangular(player, {x: 50, y: 40, width: 30, height: 30})
     => false
-        
+  
     </pre></code>
   
     @name rectangular
@@ -3871,7 +3874,7 @@ Collision = {
   
     @param a
     @param b
-    
+  
     @type boolean
     @returns true if the rectangles overlap, false otherwise
     */
@@ -3887,17 +3890,17 @@ Collision = {
        x: 5
        y: 5
        radius: 10
-       
+  
      enemy = GameObject
        x: 10
        y: 10
        radius: 10
-       
+  
      farEnemy = GameObject
        x: 500
        y: 500
        radius: 30
-       
+  
      Collision.circular(player, enemy)
   => true
   
