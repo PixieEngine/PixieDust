@@ -3874,8 +3874,8 @@ Collision = {
     @param a The first rectangle
     @param b The second rectangle
   
-    @returns true if the rectangles overlap, false otherwise
-    @type boolean
+    @returns {Boolean} true if the rectangles overlap, false otherwise
+    @type Boolean
     */
   rectangular: function(a, b) {
     return a.x < b.x + b.width && a.x + a.width > b.x && a.y < b.y + b.height && a.y + a.height > b.y;
@@ -3913,8 +3913,8 @@ Collision = {
   @param a
   @param b
   
-  @type boolean
-  @returns true is the circles overlap, false otherwise
+  @returns {Boolean} true is the circles overlap, false otherwise
+  @type Boolean
   */
   circular: function(a, b) {
     var dx, dy, r;
@@ -3933,8 +3933,8 @@ Collision = {
   @param direction
   @param target
   
-  @type bool
-  @returns true if the line intersects the circle, false otherwise
+  @returns {Boolean} true if the line intersects the circle, false otherwise
+  @type Boolean
   */
   rayCircle: function(source, direction, target) {
     var dt, hit, intersection, intersectionToTarget, intersectionToTargetLength, laserToTarget, projection, projectionLength, radius;
@@ -3967,7 +3967,7 @@ Collision = {
   @param direction
   @param target
   
-  @returns Boolean true if the line intersects the rectangle, false otherwise
+  @returns {Boolean} true if the line intersects the rectangle, false otherwise
   @type Boolean
   */
   rayRectangle: function(source, direction, target) {
