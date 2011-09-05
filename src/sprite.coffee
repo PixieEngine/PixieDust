@@ -55,6 +55,19 @@ draw anything to the screen until the image has been loaded.
     width: width
     height: height
 
+  ###*
+  Loads all sprites from a sprite sheet found in
+  your images directory, specified by the name passed in.
+
+  @name loadSheet
+  @methodOf Sprite
+
+  @param {String} name
+  @param {Number} tileWidth
+  @param {Number} tileHeight
+
+  @returns {Array} An array of sprite objects
+  ###
   Sprite.loadSheet = (name, tileWidth, tileHeight) ->
     url = ResourceLoader.urlFor("images", name)
 
@@ -71,6 +84,17 @@ draw anything to the screen until the image has been loaded.
 
     return sprites
 
+  ###*
+  Loads a sprite from a given url.
+
+  @name load
+  @methodOf Sprite
+
+  @param {String} url
+  @param [loadedCallback]
+
+  @returns A sprite object
+  ###
   Sprite.load = (url, loadedCallback) ->
     img = new Image()
     proxy = LoaderProxy()
