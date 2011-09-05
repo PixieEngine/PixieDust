@@ -3654,7 +3654,7 @@ Bounded module
 @constructor
 
 @param {Object} I Instance variables
-@param {Object} self Reference to including object
+@param {Core} self Reference to including object
 */var Bounded;
 Bounded = function(I, self) {
   I || (I = {});
@@ -3876,7 +3876,6 @@ Collision = {
     @param b The second rectangle
   
     @returns {Boolean} true if the rectangles overlap, false otherwise
-    @type Boolean
     */
   rectangular: function(a, b) {
     return a.x < b.x + b.width && a.x + a.width > b.x && a.y < b.y + b.height && a.y + a.height > b.y;
@@ -3915,7 +3914,6 @@ Collision = {
   @param b
   
   @returns {Boolean} true is the circles overlap, false otherwise
-  @type Boolean
   */
   circular: function(a, b) {
     var dx, dy, r;
@@ -3935,7 +3933,6 @@ Collision = {
   @param target
   
   @returns {Boolean} true if the line intersects the circle, false otherwise
-  @type Boolean
   */
   rayCircle: function(source, direction, target) {
     var dt, hit, intersection, intersectionToTarget, intersectionToTargetLength, laserToTarget, projection, projectionLength, radius;
@@ -3969,7 +3966,6 @@ Collision = {
   @param target
   
   @returns {Boolean} true if the line intersects the rectangle, false otherwise
-  @type Boolean
   */
   rayRectangle: function(source, direction, target) {
     var areaPQ0, areaPQ1, hit, p0, p1, t, tX, tY, xval, xw, yval, yw, _ref, _ref2;
@@ -4402,7 +4398,7 @@ y: 30 with width and height 5 will be drawn.
 @constructor
 
 @param {Object} I Instance variables
-@param {Object} self Reference to including object
+@param {Core} self Reference to including object
 */
 /**
 Triggered every time the object should be drawn. A canvas is passed as
@@ -4532,6 +4528,7 @@ specified the object will have an unlimited duration.
 @constructor
 
 @param {Object} I Instance variables
+@param {Core} self Reference to including object
 */var Durable;
 Durable = function(I) {
   Object.reverseMerge(I, {
@@ -5287,6 +5284,7 @@ collisions so is probably best suited to particle effect like things.
 @constructor
 
 @param {Object} I Instance variables
+@param {Core} self Reference to including object
 */var Movable;
 Movable = function(I) {
   Object.reverseMerge(I, {
