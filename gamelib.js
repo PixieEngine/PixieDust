@@ -5096,7 +5096,7 @@ The <code>Selector</code> module provides methods to query the engine to find ga
     
        # to select an object by class use "MyClass"
        engine.find "Enemy"
-    => [enemy, boss]
+    => [enemy, distantEnemy, boss]
     
        # to select an object by properties use ".someProperty" or ".someProperty=someValue"
        engine.find ".speed=5"
