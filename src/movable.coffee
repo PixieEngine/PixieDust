@@ -31,6 +31,7 @@ collisions so is probably best suited to particle effect like things.
 @constructor
 
 @param {Object} I Instance variables
+@param {Core} self Reference to including object
 ###
 Movable = (I) ->
   Object.reverseMerge I,
