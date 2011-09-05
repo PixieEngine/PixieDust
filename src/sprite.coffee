@@ -62,9 +62,9 @@ draw anything to the screen until the image has been loaded.
   @name loadSheet
   @methodOf Sprite
 
-  @param {String} name
-  @param {Number} tileWidth
-  @param {Number} tileHeight
+  @param {String} name Name of the image file in your images directory
+  @param {Number} tileWidth Width of each sprite in the sheet
+  @param {Number} tileHeight Height of each sprite in the sheet
 
   @returns {Array} An array of sprite objects
   ###
@@ -93,7 +93,7 @@ draw anything to the screen until the image has been loaded.
   @param {String} url
   @param {Function} [loadedCallback]
 
-  @returns A sprite object
+  @returns {Sprite} A sprite object
   ###
   Sprite.load = (url, loadedCallback) ->
     img = new Image()
