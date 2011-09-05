@@ -3968,6 +3968,7 @@ Collision = {
   @param target
   
   @returns {Boolean} true if the line intersects the rectangle, false otherwise
+  @type Boolean
   */
   rayRectangle: function(source, direction, target) {
     var areaPQ0, areaPQ1, hit, p0, p1, t, tX, tY, xval, xw, yval, yw, _ref, _ref2;
