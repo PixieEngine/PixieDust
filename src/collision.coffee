@@ -88,7 +88,7 @@ Collision =
     r * r >= dx * dx + dy * dy
 
   ###*
-  Detects whether a line intersects a circle
+  Detects whether a line intersects a circle.
 
   @name rayCircle
   @methodOf Collision
@@ -97,7 +97,7 @@ Collision =
   @param direction
   @param target
 
-  @type boolean
+  @type bool
   @returns true if the line intersects the circle, false otherwise
   ###
   rayCircle: (source, direction, target) ->
@@ -125,6 +125,19 @@ Collision =
 
       hit = direction.scale(projectionLength - dt).add(source)
 
+  ###*
+  Detects whether a line intersects a rectangle.
+
+  @name rayRectangle
+  @methodOf Collision
+
+  @param source
+  @param direction
+  @param target
+
+  @type bool
+  @returns true if the line intersects the rectangle, false otherwise
+  ###
   rayRectangle: (source, direction, target) ->
     xw = target.xw
     yw = target.yw
