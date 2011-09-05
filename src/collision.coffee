@@ -36,7 +36,6 @@ Collision =
   @param b The second rectangle
 
   @returns {Boolean} true if the rectangles overlap, false otherwise
-  @type Boolean
   ###
   rectangular: (a, b) ->
     a.x < b.x + b.width &&
@@ -78,7 +77,6 @@ Collision =
   @param b
 
   @returns {Boolean} true is the circles overlap, false otherwise
-  @type Boolean
   ###
   circular: (a, b) ->
     r = a.radius + b.radius
@@ -98,7 +96,6 @@ Collision =
   @param target
 
   @returns {Boolean} true if the line intersects the circle, false otherwise
-  @type Boolean
   ###
   rayCircle: (source, direction, target) ->
     radius = target.radius()
@@ -136,7 +133,6 @@ Collision =
   @param target
 
   @returns {Boolean} true if the line intersects the rectangle, false otherwise
-  @type Boolean
   ###
   rayRectangle: (source, direction, target) ->
     xw = target.xw
