@@ -17,7 +17,8 @@ Engine.Selector = (I, self) ->
 
   ###*
   Get a selection of GameObjects that match the specified selector criteria. The selector language
-  can select objects by id, class, or attributes.
+  can select objects by id, class, or attributes. Note that this method always returns an Array,
+  so if you are trying to find only one object you will need something like <code>engine.find("Enemy").first()</code>.
 
   <code><pre>
      player = engine.add
@@ -39,7 +40,7 @@ Engine.Selector = (I, self) ->
 
      # to select an object by id use "#anId"
      engine.find "#Boss"
-  => boss
+  => [boss]
 
      # to select an object by class use "MyClass"
      engine.find "Enemy"
