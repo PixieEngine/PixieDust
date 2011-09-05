@@ -117,14 +117,13 @@ draw anything to the screen until the image has been loaded.
   @name fromPixieId
   @methodOf Sprite
 
-  @param {Number} id
-  @param {Function} [callback]
+  @param {Number} id Pixie Id of the sprite to load
+  @param {Function} [callback] Function to execute once the image is loaded. The image proxy data is passed to this as a parameter.
 
   @returns {Sprite}
   ###
   Sprite.fromPixieId = (id, callback) ->
     Sprite.load("http://pixieengine.com/s3/sprites/#{id}/original.png", callback)
-
 
   ###*
   A sprite that draws nothing.
