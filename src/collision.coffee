@@ -82,6 +82,19 @@ Collision =
 
     r * r >= dx * dx + dy * dy
 
+  ###*
+  Detects whether a line intersects a circle
+
+  @name rayCircle
+  @methodOf Collision
+
+  @param source
+  @param direction
+  @param target
+
+  @type boolean
+  @returns true if the line intersects the circle, false otherwise
+  ###
   rayCircle: (source, direction, target) ->
     radius = target.radius()
     target = target.position()
