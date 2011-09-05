@@ -34,7 +34,7 @@ y: 30 with width and height 5 will be drawn.
 @constructor
 
 @param {Object} I Instance variables
-@param {Object} self Reference to including object
+@param {Core} self Reference to including object
 ###
 
 ###*
