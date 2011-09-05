@@ -27,17 +27,16 @@ Collision =
 
      Collision.rectangular(player, {x: 50, y: 40, width: 30, height: 30})
   => false
-
   </pre></code>
 
   @name rectangular
   @methodOf Collision
 
-  @param a
-  @param b
+  @param a The first rectangle
+  @param b The second rectangle
 
-  @type boolean
   @returns true if the rectangles overlap, false otherwise
+  @type boolean
   ###
   rectangular: (a, b) ->
     a.x < b.x + b.width &&
