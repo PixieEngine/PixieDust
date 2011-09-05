@@ -5395,6 +5395,19 @@ draw anything to the screen until the image has been loaded.
       height: height
     };
   };
+  /**
+  Loads all sprites from a sprite sheet found in
+  your images directory, specified by the name passed in.
+  
+  @name loadSheet
+  @methodOf Sprite
+  
+  @param {String} name
+  @param {Number} tileWidth
+  @param {Number} tileHeight
+  
+  @returns {Array} An array of sprite objects
+  */
   Sprite.loadSheet = function(name, tileWidth, tileHeight) {
     var image, sprites, url;
     url = ResourceLoader.urlFor("images", name);
@@ -5412,6 +5425,17 @@ draw anything to the screen until the image has been loaded.
     image.src = url;
     return sprites;
   };
+  /**
+  Loads a sprite from a given url.
+  
+  @name load
+  @methodOf Sprite
+  
+  @param {String} url
+  @param [loadedCallback]
+  
+  @returns A sprite object
+  */
   Sprite.load = function(url, loadedCallback) {
     var img, proxy;
     img = new Image();
