@@ -30,7 +30,7 @@ Bounded module
 @constructor
 
 @param {Object} I Instance variables
-@param {Object} self Reference to including object
+@param {Core} self Reference to including object
 ###
 
 Bounded = (I, self) ->
