@@ -35,6 +35,9 @@ Collision =
 
   @param a
   @param b
+
+  @type boolean
+  @returns true if the rectangles overlap, false otherwise
   ###
   rectangular: (a, b) ->
     a.x < b.x + b.width &&
@@ -74,6 +77,9 @@ Collision =
 
   @param a
   @param b
+
+  @type boolean
+  @returns true is the circles overlap, false otherwise
   ###
   circular: (a, b) ->
     r = a.radius + b.radius
