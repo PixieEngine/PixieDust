@@ -23,7 +23,9 @@ Collision =
        height: 10
 
      Collision.rectangular(player, enemy)
-  => true
+  => true   
+     Collision.rectangular(player, {x: 50, y: 40, width: 30, height: 30})
+  => false
 
   </pre></code>
 
@@ -42,6 +44,10 @@ Collision =
   ###*
   Takes two circle objects and returns true if they collide (overlap), false otherwise.
   Circle objects have x, y, and radius.
+
+  <code><pre>
+     player = 
+  </pre></code>
 
   @name circular
   @methodOf Collision
