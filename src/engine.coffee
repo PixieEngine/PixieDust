@@ -26,7 +26,7 @@
 
   @name Engine
   @constructor
-  @param I
+  @param {Object} I Instance variables of the engine 
   ###
 
   ###*
