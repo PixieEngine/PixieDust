@@ -136,6 +136,7 @@ Collision =
   @param target
 
   @returns {Boolean} true if the line intersects the rectangle, false otherwise
+  @type Boolean
   ###
   rayRectangle: (source, direction, target) ->
     xw = target.xw
