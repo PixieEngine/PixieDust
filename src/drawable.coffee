@@ -58,6 +58,8 @@ player.bind "draw", (canvas) ->
 @name draw
 @methodOf Drawable#
 @event
+
+@param {PowerCanvas} canvas A reference to the canvas to draw on.
 ###
 
 Drawable = (I, self) ->
