@@ -4807,16 +4807,25 @@ Emitterable = function(I, self) {
     };
     self = Core(I).extend({
       /**
-      The add method creates and adds an object to the game world.
+      The add method creates and adds an object to the game world. Two
+      other events are triggered around this one: beforeAdd and afterAdd.
       
-      Events triggered:
-      <code>beforeAdd(entityData)</code>
-      <code>afterAdd(gameObject)</code>
+      <code><pre>
+      # you can add arbitrary entityData and
+      # the engine will make it into a GameObject
+      engine.add 
+        x: 50
+        y: 30
+        color: "red"
+        
+      player = engine.add
+        class: "Player"
+      </pre></code>
       
       @name add
       @methodOf Engine#
-      @param entityData The data used to create the game object.
-      @type GameObject
+      @param {Object} entityData The data used to create the game object.
+      @returns {GameObject}
       */
       add: function(entityData) {
         var obj;
