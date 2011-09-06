@@ -5322,6 +5322,7 @@ engine.bind 'step', ->
 /**
 Triggered every update after the <code>step</code> event is triggered.
 
+<code><pre>
 # we can really use the update and 
 # step events almost interchangebly
 engine.bind 'update', ->
