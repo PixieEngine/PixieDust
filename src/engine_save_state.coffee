@@ -17,8 +17,15 @@ Engine.SaveState = (I, self) ->
   ###*
   Save the current game state and returns a JSON object representing that state.
 
+  <code><pre>
+    engine.bind 'step', ->
+      if justPressed.s
+        engine.saveState()
+  </pre></code>
+
   @name saveState
   @methodOf Engine.SaveState#
+  @returns {Array} An array of the instance data of all objects in the game
   ###
   saveState: ->
     savedState = I.objects.map (object) ->
