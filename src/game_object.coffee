@@ -12,6 +12,17 @@ may be bound with <code>object.bind(eventName, callback)</code>
 
 ###*
 Triggered when the object is created.
+
+<code><pre>
+enemyCount = 0
+
+enemy = engine.add
+  class: "Enemy"
+
+enemy.bind 'create', ->
+  enemyCount++
+</pre></code>
+
 @name create
 @methodOf GameObject#
 @event
@@ -40,7 +51,7 @@ Triggered during every update step.
 <code><pre>
 player = GameObject()
 
-engine.bind 'step', ->
+player.bind 'step', ->
   # check to see if keys are being pressed and 
   # change the player's velocity
   if keydown.left
@@ -60,9 +71,11 @@ engine.bind 'step', ->
 Triggered every update after the <code>step</code> event is triggered.
 
 <code><pre>
+player = GameObject()
+
 # we can really use the update and 
 # step events almost interchangebly
-engine.bind 'update', ->
+player.bind 'update', ->
   # check to see if keys are being pressed and 
   # change the player's velocity
   if keydown.left
@@ -98,7 +111,7 @@ GameObject = (I) ->
   I ||= {}
 
   ###*
-  @name I
+  @name {Object} I Instance variables 
   @memberOf GameObject#
   ###
   Object.reverseMerge I,
