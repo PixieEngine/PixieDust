@@ -285,6 +285,16 @@
       paused: ->
         I.paused
 
+      ###*
+      Change the framerate of the game. The default framerate is 30 fps.
+
+      <code><pre>
+      engine.setFramerate(60)
+      </pre></code>
+
+      @methodOf Engine#
+      @name pause
+      ###
       setFramerate: (newFPS) ->
         I.FPS = newFPS
         self.stop()
