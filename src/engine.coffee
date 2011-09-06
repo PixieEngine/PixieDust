@@ -238,10 +238,23 @@
       Stop the simulation.
       @methodOf Engine#
       @name stop
+
+      <code><pre>
+      engine.stop()
+      </pre></code>
       ###
       stop: ->
         running = false
 
+      ###*
+      Pause the game and step through 1 update of the engine.
+      @methodOf Engine#
+      @name frameAdvance
+
+      <code><pre>
+      engine.frameAdvance()
+      </pre></code>
+      ###
       frameAdvance: ->
         I.paused = true
         frameAdvance = true
@@ -280,7 +293,7 @@
       </pre></code>
 
       @methodOf Engine#
-      @name pause
+      @name paused
       ###
       paused: ->
         I.paused
@@ -293,7 +306,7 @@
       </pre></code>
 
       @methodOf Engine#
-      @name pause
+      @name setFramerate
       ###
       setFramerate: (newFPS) ->
         I.FPS = newFPS
