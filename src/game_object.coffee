@@ -29,13 +29,27 @@ the destroy event to add particle effects, play sounds, etc.
 ###*
 Triggered during every update step.
 
+<code><pre>
+player = GameObject()
+
+engine.bind 'step', ->
+  # check to see if keys are being pressed and 
+  # change the player's velocity
+  if keydown.left
+    player.velocity(Point(-1, 0))
+  else if keydown.right
+    player.velocity(Point(1, 0))
+  else
+    player.velocity(Point(0, 0))
+</pre></code>
+
 @name step
 @methodOf GameObject#
 @event
 ###
 
 ###*
-Triggered every update after the `step` event is triggered.
+Triggered every update after the <code>step</code> event is triggered.
 
 @name update
 @methodOf GameObject#

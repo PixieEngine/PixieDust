@@ -199,11 +199,7 @@
                       <td class="nameDescription">
                         <div class="fixedFont"><b><a href="../symbols/Engine.html#pause">pause</a></b>()
                         </div>
-                        <div class="description">Pause the simulation
-      
-      <code><pre>
-      engine.pause()
-      </pre></code></div>
+                        <div class="description">Pause the simulation.</div>
                       </td>
                     </tr>
                   
@@ -627,7 +623,7 @@
                 </div>
 
                 <div class="description">
-                  Pause the simulation
+                  Pause the simulation.
       
       <code><pre>
       engine.pause()
@@ -897,9 +893,7 @@
                 </div>
 
                 <div class="description">
-                  Called before the engine draws the game objects on the canvas.
-  
-  The current camera transform is applied.
+                  Called before the engine draws the game objects on the canvas. The current camera transform is applied.
 
                   
                 </div>
@@ -923,9 +917,13 @@
                 </div>
 
                 <div class="description">
-                  Called after the engine draws on the canvas.
+                  Called after the engine draws on the canvas. The current camera transform is applied.
   
-  The current camera transform is applied.
+  <code><pre>
+  engine.bind "draw", (canvas) ->
+    # print some directions for the player
+    canvas.fillText("Go this way =>", 200, 200) 
+  </pre></code>
 
                   
                 </div>
@@ -953,6 +951,14 @@
   
   The current camera transform is not applied. This is great for
   adding overlays.
+  
+  <code><pre>
+  engine.bind "overlay", (canvas) ->
+    # print the player's health. This will be
+    # positioned absolutely according to the viewport.
+    canvas.fillText("HEALTH:", 20, 20)
+    canvas.fillText(player.health(), 50, 20)
+  </pre></code>
 
                   
                 </div>
