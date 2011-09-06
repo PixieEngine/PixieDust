@@ -253,12 +253,35 @@
 
       ###*
       Pause the simulation
+
+      <code><pre>
+      engine.pause()
+      </pre></code>
+
       @methodOf Engine#
       @name pause
       ###
       pause: ->
         I.paused = true
 
+      ###*
+      Query the engine to see if it is paused.
+
+      <code><pre>
+         engine.pause()
+
+         engine.paused()
+      => true
+
+         engine.play()
+
+         engine.paused()
+      => false
+      </pre></code>
+
+      @methodOf Engine#
+      @name pause
+      ###
       paused: ->
         I.paused
 

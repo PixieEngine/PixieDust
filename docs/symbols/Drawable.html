@@ -159,7 +159,7 @@ object.</div>
                 
                   <tr>
                     <td class="nameDescription">
-                      <div class="fixedFont"><b><a href="../symbols/Drawable.html#event:draw">draw</a></b>()
+                      <div class="fixedFont"><b><a href="../symbols/Drawable.html#event:draw">draw</a></b>(canvas)
                       </div>
                       <div class="description">Triggered every time the object should be drawn.</div>
                     </td>
@@ -339,7 +339,7 @@ y: 30 with width and height 5 will be drawn.
 
                   
 
-                  <b>draw</b>()
+                  <b>draw</b>(canvas)
                   <span class="lighter"><em>event</em></span>
                 </div>
 
@@ -366,6 +366,17 @@ player.bind "draw", (canvas) ->
 
                 
 
+                
+                  <dl class="detailList params">
+                    <dt class="heading">Parameters:</dt>
+                    
+                      <dt>
+                        <b>canvas</b><span class='light fixedFont'> PowerCanvas</span> 
+                        
+                      </dt>
+                      <dd>A reference to the canvas to draw on.</dd>
+                    
+                  </dl>
                 
 
                 

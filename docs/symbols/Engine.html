@@ -431,11 +431,20 @@
                 </div>
 
                 <div class="description">
-                  The add method creates and adds an object to the game world.
+                  The add method creates and adds an object to the game world. Two
+      other events are triggered around this one: beforeAdd and afterAdd.
       
-      Events triggered:
-      <code>beforeAdd(entityData)</code>
-      <code>afterAdd(gameObject)</code>
+      <code><pre>
+      # you can add arbitrary entityData and
+      # the engine will make it into a GameObject
+      engine.add 
+        x: 50
+        y: 30
+        color: "red"
+        
+      player = engine.add
+        class: "Player"
+      </pre></code>
 
                   
                 </div>
@@ -447,7 +456,7 @@
                     <dt class="heading">Parameters:</dt>
                     
                       <dt>
-                        <b>entityData</b>
+                        <b>entityData</b><span class='light fixedFont'> <a href="../symbols/Object.html">Object</a></span> 
                         
                       </dt>
                       <dd>The data used to create the game object.</dd>
@@ -455,6 +464,27 @@
                   </dl>
                 
 
+                
+                  <dl class="detailList nomargin">
+
+                    
+
+                    
+
+                    
+
+                    
+                      <dt class="heading">Returns:</dt>
+                      
+                        <dd><span class="light fixedFont">{<a href="../symbols/GameObject.html">GameObject</a>}</span> </dd>
+                      
+                    
+
+                    
+
+                    
+
+                  </dl>
                 
               
                 <div class="fixedFont heading">
@@ -474,21 +504,21 @@
     <code><pre>
        player = engine.add
          class: "Player"
-        
+    
        enemy = engine.add
          class: "Enemy"
          speed: 5
          x: 0
-          
+    
        distantEnemy = engine.add
          class "Enemy"
          x: 500
-     
+    
        boss = engine.add
          class: "Enemy"
          id: "Boss"
          x: 0
-      
+    
        # to select an object by id use "#anId"
        engine.find "#Boss"
     => [boss]
