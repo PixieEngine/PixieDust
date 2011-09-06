@@ -3747,8 +3747,8 @@ Bounded = function(I, self) {
     @name collisionBounds
     @methodOf Bounded#
     
-    @param {number} xOffset the amount to shift the x position 
-    @param {number} yOffset the amount to shift the y position
+    @param {Number} xOffset the amount to shift the x position 
+    @param {Number} yOffset the amount to shift the y position
     */
     collisionBounds: function(xOffset, yOffset) {
       var bounds;
@@ -3782,8 +3782,8 @@ Bounded = function(I, self) {
     @name bounds
     @methodOf Bounded#
     
-    @param {number} xOffset the amount to shift the x position 
-    @param {number} yOffset the amount to shift the y position
+    @param {Number} xOffset the amount to shift the x position 
+    @param {Number} yOffset the amount to shift the y position
     */
     bounds: function(xOffset, yOffset) {
       var center;
@@ -4446,6 +4446,8 @@ player.bind "draw", (canvas) ->
 @name draw
 @methodOf Drawable#
 @event
+
+@param {PowerCanvas} canvas A reference to the canvas to draw on.
 */var Drawable;
 Drawable = function(I, self) {
   var _ref;
@@ -5075,21 +5077,21 @@ The <code>Selector</code> module provides methods to query the engine to find ga
     <code><pre>
        player = engine.add
          class: "Player"
-        
+    
        enemy = engine.add
          class: "Enemy"
          speed: 5
          x: 0
-          
+    
        distantEnemy = engine.add
          class "Enemy"
          x: 500
-     
+    
        boss = engine.add
          class: "Enemy"
          id: "Boss"
          x: 0
-      
+    
        # to select an object by id use "#anId"
        engine.find "#Boss"
     => [boss]
