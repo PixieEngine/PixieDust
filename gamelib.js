@@ -4833,7 +4833,7 @@ Emitterable = function(I, self) {
         x: 50
         y: 30
         color: "red"
-        
+      
       player = engine.add
         class: "Player"
       </pre></code>
@@ -4950,12 +4950,12 @@ Emitterable = function(I, self) {
       
       <code><pre>
          engine.pause()
-         
+      
          engine.paused()
       => true
       
          engine.play()
-         
+      
          engine.paused()
       => false
       </pre></code>
@@ -5286,6 +5286,14 @@ Triggered when the object is created.
 Triggered when object is destroyed. Use 
 the destroy event to add particle effects, play sounds, etc.
 
+<code><pre>
+bomb = GameObject()
+
+bomb.bind 'destroy', ->
+  bomb.explode()
+  Sound.play "Kaboom"
+</pre></code>
+
 @name destroy
 @methodOf GameObject#
 @event
@@ -5293,12 +5301,39 @@ the destroy event to add particle effects, play sounds, etc.
 /**
 Triggered during every update step.
 
+<code><pre>
+player = GameObject()
+
+engine.bind 'step', ->
+  # check to see if keys are being pressed and 
+  # change the player's velocity
+  if keydown.left
+    player.velocity(Point(-1, 0))
+  else if keydown.right
+    player.velocity(Point(1, 0))
+  else
+    player.velocity(Point(0, 0))
+</pre></code>
+
 @name step
 @methodOf GameObject#
 @event
 */
 /**
-Triggered every update after the `step` event is triggered.
+Triggered every update after the <code>step</code> event is triggered.
+
+# we can really use the update and 
+# step events almost interchangebly
+engine.bind 'update', ->
+  # check to see if keys are being pressed and 
+  # change the player's velocity
+  if keydown.left
+    player.velocity(Point(-1, 0))
+  else if keydown.right
+    player.velocity(Point(1, 0))
+  else
+    player.velocity(Point(0, 0))
+</pre></code>
 
 @name update
 @methodOf GameObject#
@@ -5307,6 +5342,13 @@ Triggered every update after the `step` event is triggered.
 /**
 Triggered when the object is removed from
 the engine. Use the remove event to handle any clean up.
+
+<code><pre>
+boss = GameObject()
+
+boss.bind 'remove', ->
+  unlockDoorToLevel2()
+</pre></code>
 
 @name remove
 @methodOf GameObject#
@@ -5344,7 +5386,7 @@ GameObject = function(I) {
       return I.active;
     },
     /**
-    Destroys the object and triggers the destroyed callback.
+    Destroys the object and triggers the destroyed event.
     
     @name destroy
     @methodOf GameObject#
