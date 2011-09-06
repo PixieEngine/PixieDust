@@ -5107,8 +5107,6 @@ The <code>Selector</code> module provides methods to query the engine to find ga
     => [enemy, boss] # doesn't return distantEnemy
     </pre></code>
     
-    You may mix and match selectors. "Wall.x=0" to select all objects of class Wall with an x property of 0.
-    
     @name find
     @methodOf Engine#
     @param {String} selector
