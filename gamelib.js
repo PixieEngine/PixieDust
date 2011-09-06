@@ -899,22 +899,22 @@ Core = function(I) {
          x: 30
          y: 40
          maxSpeed: 5
-       
+    
        # we are using extend to give player
        # additional methods that Core doesn't have
        player = Core(I).extend
          increaseSpeed: ->
            I.maxSpeed += 1
-           
+    
          # this will execute before the update method
          beforeUpdate: ->
            checkPowerupStatus()
-       
+    
        player.I.maxSpeed
     => 5
-       
+    
        player.increaseSpeed()
-       
+    
        player.I.maxSpeed
     => 6
     </pre></code>
@@ -2071,11 +2071,10 @@ Object.extend = function() {
     }
     /**
     @name distance
-    @methodOf Point
+    @fieldOf Point
     @param {Point} p1
     @param {Point} p2
-    @type Number
-    @returns The Euclidean distance between two points.
+    @returns {Number} The Euclidean distance between two points.
     */
   };
   Point.distance = function(p1, p2) {
@@ -2085,11 +2084,10 @@ Object.extend = function() {
   Construct a point on the unit circle for the given angle.
   
   @name fromAngle
-  @methodOf Point
+  @fieldOf Point
   
   @param {Number} angle The angle in radians
-  @type Point
-  @returns The point on the unit circle.
+  @returns {Point} The point on the unit circle.
   */
   Point.fromAngle = function(angle) {
     return Point(Math.cos(angle), Math.sin(angle));
@@ -2100,12 +2098,11 @@ Object.extend = function() {
   that the dude standing at p1 will need to face to look at p2.
   
   @name direction
-  @methodOf Point
+  @fieldOf Point
   
   @param {Point} p1 The starting point.
   @param {Point} p2 The ending point.
-  @type Number
-  @returns The direction from p1 to p2 in radians.
+  @returns {Number} The direction from p1 to p2 in radians.
   */
   Point.direction = function(p1, p2) {
     return Math.atan2(p2.y - p1.y, p2.x - p1.x);
@@ -5284,7 +5281,7 @@ enemyCount = 0
 
 enemy = engine.add
   class: "Enemy"
-  
+
 enemy.bind 'create', ->
   enemyCount++
 </pre></code>
@@ -5372,7 +5369,7 @@ GameObject = function(I) {
   var autobindEvents, defaultModules, modules, self;
   I || (I = {});
   /**
-  @name I
+  @name {Object} I Instance variables 
   @memberOf GameObject#
   */
   Object.reverseMerge(I, {
