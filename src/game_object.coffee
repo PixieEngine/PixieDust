@@ -21,11 +21,13 @@ Triggered when the object is created.
 Triggered when object is destroyed. Use 
 the destroy event to add particle effects, play sounds, etc.
 
+<code><pre>
 bomb = GameObject()
 
 bomb.bind 'destroy', ->
   bomb.explode()
   Sound.play "Kaboom"
+</pre></code>
 
 @name destroy
 @methodOf GameObject#
@@ -57,6 +59,7 @@ engine.bind 'step', ->
 ###*
 Triggered every update after the <code>step</code> event is triggered.
 
+<code><pre>
 # we can really use the update and 
 # step events almost interchangebly
 engine.bind 'update', ->

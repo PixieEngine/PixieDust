@@ -169,7 +169,7 @@
                       <td class="nameDescription">
                         <div class="fixedFont"><b><a href="../symbols/GameObject.html#destroy">destroy</a></b>()
                         </div>
-                        <div class="description">Destroys the object and triggers the destroyed callback.</div>
+                        <div class="description">Destroys the object and triggers the destroyed event.</div>
                       </td>
                     </tr>
                   
@@ -242,7 +242,7 @@ the engine.</div>
                     <td class="nameDescription">
                       <div class="fixedFont"><b><a href="../symbols/GameObject.html#event:update">update</a></b>()
                       </div>
-                      <div class="description">Triggered every update after the `step` event is triggered.</div>
+                      <div class="description">Triggered every update after the <code>step</code> event is triggered.</div>
                     </td>
                   </tr>
                 
@@ -355,7 +355,7 @@ may be bound with <code>object.bind(eventName, callback)</code>
                 </div>
 
                 <div class="description">
-                  Destroys the object and triggers the destroyed callback.
+                  Destroys the object and triggers the destroyed event.
 
                   
                 </div>
@@ -438,6 +438,14 @@ may be bound with <code>object.bind(eventName, callback)</code>
                   Triggered when object is destroyed. Use 
 the destroy event to add particle effects, play sounds, etc.
 
+<code><pre>
+bomb = GameObject()
+
+bomb.bind 'destroy', ->
+  bomb.explode()
+  Sound.play "Kaboom"
+</pre></code>
+
                   
                 </div>
 
@@ -463,6 +471,13 @@ the destroy event to add particle effects, play sounds, etc.
                   Triggered when the object is removed from
 the engine. Use the remove event to handle any clean up.
 
+<code><pre>
+boss = GameObject()
+
+boss.bind 'remove', ->
+  unlockDoorToLevel2()
+</pre></code>
+
                   
                 </div>
 
@@ -487,6 +502,20 @@ the engine. Use the remove event to handle any clean up.
                 <div class="description">
                   Triggered during every update step.
 
+<code><pre>
+player = GameObject()
+
+engine.bind 'step', ->
+  # check to see if keys are being pressed and 
+  # change the player's velocity
+  if keydown.left
+    player.velocity(Point(-1, 0))
+  else if keydown.right
+    player.velocity(Point(1, 0))
+  else
+    player.velocity(Point(0, 0))
+</pre></code>
+
                   
                 </div>
 
@@ -509,7 +538,20 @@ the engine. Use the remove event to handle any clean up.
                 </div>
 
                 <div class="description">
-                  Triggered every update after the `step` event is triggered.
+                  Triggered every update after the <code>step</code> event is triggered.
+
+# we can really use the update and 
+# step events almost interchangebly
+engine.bind 'update', ->
+  # check to see if keys are being pressed and 
+  # change the player's velocity
+  if keydown.left
+    player.velocity(Point(-1, 0))
+  else if keydown.right
+    player.velocity(Point(1, 0))
+  else
+    player.velocity(Point(0, 0))
+</pre></code>
 
                   
                 </div>
