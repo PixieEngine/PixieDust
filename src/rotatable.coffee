@@ -24,7 +24,7 @@ based on its rotational velocity.
 => 0.09817477042468103 # 2 * (Math.PI / 64)
 </pre></code>
 
-@name Movable
+@name Rotatable
 @module
 @constructor
 
