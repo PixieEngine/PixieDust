@@ -4860,6 +4860,11 @@ Emitterable = function(I, self) {
       },
       /**
       Start the game simulation.
+      
+      <code><pre>
+      engine.start()
+      </pre></code>
+      
       @methodOf Engine#
       @name start
       */
@@ -4871,32 +4876,90 @@ Emitterable = function(I, self) {
       },
       /**
       Stop the simulation.
+      
+      <code><pre>
+      engine.stop()
+      </pre></code>
+      
       @methodOf Engine#
       @name stop
       */
       stop: function() {
         return running = false;
       },
+      /**
+      Pause the game and step through 1 update of the engine.
+      
+      <code><pre>
+      engine.frameAdvance()
+      </pre></code>
+      
+      @methodOf Engine#
+      @name frameAdvance
+      */
       frameAdvance: function() {
         I.paused = true;
         frameAdvance = true;
         step();
         return frameAdvance = false;
       },
+      /**
+      Resume the game.
+      
+      <code><pre>
+      engine.play()
+      </pre></code>
+      
+      @methodOf Engine#
+      @name play
+      */
       play: function() {
         return I.paused = false;
       },
       /**
       Pause the simulation
+      
+      <code><pre>
+      engine.pause()
+      </pre></code>
+      
       @methodOf Engine#
       @name pause
       */
       pause: function() {
         return I.paused = true;
       },
+      /**
+      Query the engine to see if it is paused.
+      
+      <code><pre>
+         engine.pause()
+         
+         engine.paused()
+      => true
+      
+         engine.play()
+         
+         engine.paused()
+      => false
+      </pre></code>
+      
+      @methodOf Engine#
+      @name paused
+      */
       paused: function() {
         return I.paused;
       },
+      /**
+      Change the framerate of the game. The default framerate is 30 fps.
+      
+      <code><pre>
+      engine.setFramerate(60)
+      </pre></code>
+      
+      @methodOf Engine#
+      @name setFramerate
+      */
       setFramerate: function(newFPS) {
         I.FPS = newFPS;
         self.stop();
