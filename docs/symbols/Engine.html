@@ -189,9 +189,45 @@
                   
                     <tr>
                       <td class="nameDescription">
+                        <div class="fixedFont"><b><a href="../symbols/Engine.html#frameAdvance">frameAdvance</a></b>()
+                        </div>
+                        <div class="description">Pause the game and step through 1 update of the engine.</div>
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <td class="nameDescription">
                         <div class="fixedFont"><b><a href="../symbols/Engine.html#pause">pause</a></b>()
                         </div>
-                        <div class="description">Pause the simulation</div>
+                        <div class="description">Pause the simulation
+      
+      <code><pre>
+      engine.pause()
+      </pre></code></div>
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <td class="nameDescription">
+                        <div class="fixedFont"><b><a href="../symbols/Engine.html#paused">paused</a></b>()
+                        </div>
+                        <div class="description">Query the engine to see if it is paused.</div>
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <td class="nameDescription">
+                        <div class="fixedFont"><b><a href="../symbols/Engine.html#play">play</a></b>()
+                        </div>
+                        <div class="description">Resume the game.</div>
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <td class="nameDescription">
+                        <div class="fixedFont"><b><a href="../symbols/Engine.html#setFramerate">setFramerate</a></b>()
+                        </div>
+                        <div class="description">Change the framerate of the game.</div>
                       </td>
                     </tr>
                   
@@ -557,6 +593,31 @@
                 
               
                 <div class="fixedFont heading">
+                  <a name="frameAdvance"></a>
+                  <span class='lighter'>
+                  
+                  </span>
+
+                  <b>frameAdvance</b>()
+                </div>
+
+                <div class="description">
+                  Pause the game and step through 1 update of the engine.
+      
+      <code><pre>
+      engine.frameAdvance()
+      </pre></code>
+
+                  
+                </div>
+
+                
+
+                
+
+                
+              
+                <div class="fixedFont heading">
                   <a name="pause"></a>
                   <span class='lighter'>
                   
@@ -567,6 +628,93 @@
 
                 <div class="description">
                   Pause the simulation
+      
+      <code><pre>
+      engine.pause()
+      </pre></code>
+
+                  
+                </div>
+
+                
+
+                
+
+                
+              
+                <div class="fixedFont heading">
+                  <a name="paused"></a>
+                  <span class='lighter'>
+                  
+                  </span>
+
+                  <b>paused</b>()
+                </div>
+
+                <div class="description">
+                  Query the engine to see if it is paused.
+      
+      <code><pre>
+         engine.pause()
+         
+         engine.paused()
+      => true
+      
+         engine.play()
+         
+         engine.paused()
+      => false
+      </pre></code>
+
+                  
+                </div>
+
+                
+
+                
+
+                
+              
+                <div class="fixedFont heading">
+                  <a name="play"></a>
+                  <span class='lighter'>
+                  
+                  </span>
+
+                  <b>play</b>()
+                </div>
+
+                <div class="description">
+                  Resume the game.
+      
+      <code><pre>
+      engine.play()
+      </pre></code>
+
+                  
+                </div>
+
+                
+
+                
+
+                
+              
+                <div class="fixedFont heading">
+                  <a name="setFramerate"></a>
+                  <span class='lighter'>
+                  
+                  </span>
+
+                  <b>setFramerate</b>()
+                </div>
+
+                <div class="description">
+                  Change the framerate of the game. The default framerate is 30 fps.
+      
+      <code><pre>
+      engine.setFramerate(60)
+      </pre></code>
 
                   
                 </div>
@@ -588,6 +736,10 @@
 
                 <div class="description">
                   Start the game simulation.
+      
+      <code><pre>
+      engine.start()
+      </pre></code>
 
                   
                 </div>
@@ -609,6 +761,10 @@
 
                 <div class="description">
                   Stop the simulation.
+      
+      <code><pre>
+      engine.stop()
+      </pre></code>
 
                   
                 </div>

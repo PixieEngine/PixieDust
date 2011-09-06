@@ -68,23 +68,29 @@
   ###
 
   ###*
-  Called before the engine draws the game objects on the canvas.
-
-  The current camera transform is applied.
+  Called before the engine draws the game objects on the canvas. The current camera transform is applied.
 
   @name beforeDraw
   @methodOf Engine#
   @event
+
+  @params {PowerCanvas} canvas A reference to the canvas to draw on.
   ###
 
   ###*
-  Called after the engine draws on the canvas.
+  Called after the engine draws on the canvas. The current camera transform is applied.
 
-  The current camera transform is applied.
+  <code><pre>
+  engine.bind "draw", (canvas) ->
+    # print some directions for the player
+    canvas.fillText("Go this way =>", 200, 200) 
+  </pre></code>
 
   @name draw
   @methodOf Engine#
   @event
+
+  @params {PowerCanvas} canvas A reference to the canvas to draw on.
   ###
 
   ###*
@@ -93,9 +99,19 @@
   The current camera transform is not applied. This is great for
   adding overlays.
 
+  <code><pre>
+  engine.bind "overlay", (canvas) ->
+    # print the player's health. This will be
+    # positioned absolutely according to the viewport.
+    canvas.fillText("HEALTH:", 20, 20)
+    canvas.fillText(player.health(), 50, 20)
+  </pre></code>
+
   @name overlay
   @methodOf Engine#
   @event
+
+  @params {PowerCanvas} canvas A reference to the canvas to draw on. 
   ###
 
   Engine = (I) ->
@@ -226,6 +242,11 @@
 
       ###*
       Start the game simulation.
+
+      <code><pre>
+      engine.start()
+      </pre></code>
+
       @methodOf Engine#
       @name start
       ###
@@ -236,24 +257,26 @@
 
       ###*
       Stop the simulation.
-      @methodOf Engine#
-      @name stop
 
       <code><pre>
       engine.stop()
       </pre></code>
+
+      @methodOf Engine#
+      @name stop
       ###
       stop: ->
         running = false
 
       ###*
       Pause the game and step through 1 update of the engine.
-      @methodOf Engine#
-      @name frameAdvance
 
       <code><pre>
       engine.frameAdvance()
       </pre></code>
+
+      @methodOf Engine#
+      @name frameAdvance
       ###
       frameAdvance: ->
         I.paused = true
@@ -261,11 +284,21 @@
         step()
         frameAdvance = false
 
+      ###*
+      Resume the game.
+
+      <code><pre>
+      engine.play()
+      </pre></code>
+
+      @methodOf Engine#
+      @name play
+      ###
       play: ->
         I.paused = false
 
       ###*
-      Pause the simulation
+      Pause the simulation.
 
       <code><pre>
       engine.pause()
