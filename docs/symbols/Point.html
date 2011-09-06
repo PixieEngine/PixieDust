@@ -137,7 +137,7 @@
                           <em>static</em>
                           </span>
                         </div>
-                        <div class="description"></div>
+                        <div class="description">Compute the Euclidean distance between two points.</div>
                       </td>
                     </tr>
                   
@@ -219,6 +219,14 @@
                   
                     <tr>
                       <td class="nameDescription">
+                        <div class="fixedFont"><b><a href="../symbols/Point.html#add$">add$</a></b>(other)
+                        </div>
+                        <div class="description">Adds a point to this one, returning a modified point.</div>
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <td class="nameDescription">
                         <div class="fixedFont"><b><a href="../symbols/Point.html#copy">copy</a></b>()
                         </div>
                         <div class="description">Creates a copy of this point.</div>
@@ -245,7 +253,7 @@
                       <td class="nameDescription">
                         <div class="fixedFont"><b><a href="../symbols/Point.html#distance">distance</a></b>(other)
                         </div>
-                        <div class="description">Computed the Euclidean between this point and another point.</div>
+                        <div class="description">Compute the Euclidean distance between this point and another point.</div>
                       </td>
                     </tr>
                   
@@ -275,9 +283,17 @@
                   
                     <tr>
                       <td class="nameDescription">
+                        <div class="fixedFont"><b><a href="../symbols/Point.html#floor$">floor$</a></b>()
+                        </div>
+                        <div class="description">Floor the x and y values, returning a modified point.</div>
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <td class="nameDescription">
                         <div class="fixedFont"><b><a href="../symbols/Point.html#length">length</a></b>()
                         </div>
-                        <div class="description">Computed the length of this point as though it were a vector from (0,0) to (x,y)</div>
+                        <div class="description">Computed the length of this point as though it were a vector from (0,0) to (x,y).</div>
                       </td>
                     </tr>
                   
@@ -299,6 +315,14 @@
                   
                     <tr>
                       <td class="nameDescription">
+                        <div class="fixedFont"><b><a href="../symbols/Point.html#norm$">norm$</a></b>()
+                        </div>
+                        <div class="description">The norm of a vector is the unit vector pointing in the same direction.</div>
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <td class="nameDescription">
                         <div class="fixedFont"><b><a href="../symbols/Point.html#scale">scale</a></b>(scalar)
                         </div>
                         <div class="description">Scale this Point (Vector) by a constant amount.</div>
@@ -307,7 +331,23 @@
                   
                     <tr>
                       <td class="nameDescription">
+                        <div class="fixedFont"><b><a href="../symbols/Point.html#scale$">scale$</a></b>(scalar)
+                        </div>
+                        <div class="description">Scale this Point (Vector) by a constant amount.</div>
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <td class="nameDescription">
                         <div class="fixedFont"><b><a href="../symbols/Point.html#subtract">subtract</a></b>(other)
+                        </div>
+                        <div class="description">Subtracts a point to this one and returns the new point.</div>
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <td class="nameDescription">
+                        <div class="fixedFont"><b><a href="../symbols/Point.html#subtract$">subtract$</a></b>(other)
                         </div>
                         <div class="description">Subtracts a point to this one and returns the new point.</div>
                       </td>
@@ -341,6 +381,24 @@
               <div class="description">
                 Create a new point with given x and y coordinates. If no arguments are given
   defaults to (0, 0).
+  
+  <code><pre>
+     point = Point()
+  
+     p.x
+  => 0
+  
+     p.y
+  => 0
+  
+     point = Point(-2, 5)
+     
+     p.x
+  => -2
+  
+     p.y
+  => 5
+  </pre></code>
                 
               </div>
 
@@ -391,6 +449,14 @@
                   If you have two dudes, one standing at point p1, and the other
   standing at point p2, then this method will return the direction
   that the dude standing at p1 will need to face to look at p2.
+  
+  <code><pre>
+     p1 = Point(0, 0)
+     p2 = Point(7, 3)
+     
+     Point.direction(p1, p2)
+  => 0.40489178628508343
+  </pre></code>
 
                   
                 </div>
@@ -410,7 +476,15 @@
                 </div>
 
                 <div class="description">
-                  
+                  Compute the Euclidean distance between two points.
+    
+    <code><pre>
+       pointA = Point(2, 3)
+       pointB = Point(9, 2)
+       
+       Point.distance(pointA, pointB)
+    => 7.0710678118654755 # Math.sqrt(50)
+    </pre></code>
 
                   
                 </div>
@@ -431,6 +505,16 @@
 
                 <div class="description">
                   Construct a point on the unit circle for the given angle.
+  
+  <code><pre>
+     point = Point.fromAngle(Math.PI / 2)
+  
+     point.x
+  => 0
+  
+     point.y
+  => 1
+  </pre></code>
 
                   
                 </div>
@@ -523,6 +607,24 @@
                   Adds a point to this one and returns the new point. You may
     also use a two argument call like <code>point.add(x, y)</code>
     to add x and y values without a second point object.
+    
+    <code><pre>
+       point = Point(2, 3).add(Point(3, 4))
+       
+       point.x
+    => 5
+    
+       point.y
+    => 7
+    
+       anotherPoint = Point(2, 3).add(3, 4)
+       
+       anotherPoint.x
+    => 5
+    
+       anotherPoint.y
+    => 7
+    </pre></code>
 
                   
                 </div>
@@ -554,7 +656,89 @@
                     
                       <dt class="heading">Returns:</dt>
                       
-                        <dd>A new point, the sum of both.</dd>
+                        <dd><span class="light fixedFont">{<a href="../symbols/Point.html">Point</a>}</span> A new point, the sum of both.</dd>
+                      
+                    
+
+                    
+
+                    
+
+                  </dl>
+                
+              
+                <div class="fixedFont heading">
+                  <a name="add$"></a>
+                  <span class='lighter'>
+                  
+                  </span>
+
+                  <b>add$</b>(other)
+                </div>
+
+                <div class="description">
+                  Adds a point to this one, returning a modified point. You may
+    also use a two argument call like <code>point.add(x, y)</code>
+    to add x and y values without a second point object.
+    
+    <code><pre>
+       point = Point(2, 3)
+       
+       point.x
+    => 2
+    
+       point.y
+    => 3
+       
+       point.add$(Point(3, 4))
+       
+       point.x
+    => 5
+    
+       point.y
+    => 7
+    
+       anotherPoint = Point(2, 3)
+       anotherPoint.add$(3, 4)
+       
+       anotherPoint.x
+    => 5
+    
+       anotherPoint.y
+    => 7
+    </pre></code>
+
+                  
+                </div>
+
+                
+
+                
+                  <dl class="detailList params">
+                    <dt class="heading">Parameters:</dt>
+                    
+                      <dt>
+                        <b>other</b><span class='light fixedFont'> <a href="../symbols/Point.html">Point</a></span> 
+                        
+                      </dt>
+                      <dd>The point to add this point to.</dd>
+                    
+                  </dl>
+                
+
+                
+                  <dl class="detailList nomargin">
+
+                    
+
+                    
+
+                    
+
+                    
+                      <dt class="heading">Returns:</dt>
+                      
+                        <dd><span class="light fixedFont">{<a href="../symbols/Point.html">Point</a>}</span> The sum of both points.</dd>
                       
                     
 
@@ -664,7 +848,7 @@
                     
                       <dt class="heading">Returns:</dt>
                       
-                        <dd>The cross product of this point with the other point as scalar value.</dd>
+                        <dd><span class="light fixedFont">{<a href="../symbols/Number.html">Number</a>}</span> The cross product of this point with the other point as scalar value.</dd>
                       
                     
 
@@ -686,6 +870,13 @@
 
                 <div class="description">
                   Returns the direction in radians of this point from the origin.
+    
+    <code><pre>
+       point = Point(0, 1)
+       
+       point.direction()
+    => 1.5707963267948966 # Math.PI / 2
+    </pre></code>
 
                   
                 </div>
@@ -694,6 +885,27 @@
 
                 
 
+                
+                  <dl class="detailList nomargin">
+
+                    
+
+                    
+
+                    
+
+                    
+                      <dt class="heading">Returns:</dt>
+                      
+                        <dd><span class="light fixedFont">{<a href="../symbols/Number.html">Number</a>}</span> The direction in radians of this point from the origin</dd>
+                      
+                    
+
+                    
+
+                    
+
+                  </dl>
                 
               
                 <div class="fixedFont heading">
@@ -706,7 +918,15 @@
                 </div>
 
                 <div class="description">
-                  Computed the Euclidean between this point and another point.
+                  Compute the Euclidean distance between this point and another point.
+    
+    <code><pre>
+       pointA = Point(2, 3)
+       pointB = Point(9, 2)
+       
+       pointA.distance(pointB)
+    => 7.0710678118654755 # Math.sqrt(50)
+    </pre></code>
 
                   
                 </div>
@@ -738,7 +958,7 @@
                     
                       <dt class="heading">Returns:</dt>
                       
-                        <dd>The distance between this point and another point.</dd>
+                        <dd><span class="light fixedFont">{<a href="../symbols/Number.html">Number</a>}</span> The distance between this point and another point.</dd>
                       
                     
 
@@ -791,7 +1011,7 @@
                     
                       <dt class="heading">Returns:</dt>
                       
-                        <dd>The dot product of this point dot other as a scalar value.</dd>
+                        <dd><span class="light fixedFont">{<a href="../symbols/Number.html">Number</a>}</span> The dot product of this point dot other as a scalar value.</dd>
                       
                     
 
@@ -813,6 +1033,18 @@
 
                 <div class="description">
                   Determine whether this point is equal to another point.
+    
+    <code><pre>
+       pointA = Point(2, 3)
+       pointB = Point(2, 3)
+       pointC = Point(4, 5)
+       
+       pointA.equal(pointB)
+    => true
+    
+       pointA.equal(pointC)
+    => false
+    </pre></code>
 
                   
                 </div>
@@ -844,7 +1076,7 @@
                     
                       <dt class="heading">Returns:</dt>
                       
-                        <dd>true if the other point has the same x, y coordinates, false otherwise.</dd>
+                        <dd><span class="light fixedFont">{<a href="../symbols/Boolean.html">Boolean</a>}</span> true if the other point has the same x, y coordinates, false otherwise.</dd>
                       
                     
 
@@ -866,6 +1098,16 @@
 
                 <div class="description">
                   Floor the x and y values, returning a new point.
+    
+    <code><pre>
+       point = Point(3.4, 5.8).floor()
+       
+       point.x
+    => 3
+    
+       point.y
+    => 5
+    </pre></code>
 
                   
                 </div>
@@ -886,7 +1128,60 @@
                     
                       <dt class="heading">Returns:</dt>
                       
-                        <dd>A new point, with x and y values each floored to the largest previous integer.</dd>
+                        <dd><span class="light fixedFont">{<a href="../symbols/Point.html">Point</a>}</span> A new point, with x and y values each floored to the largest previous integer.</dd>
+                      
+                    
+
+                    
+
+                    
+
+                  </dl>
+                
+              
+                <div class="fixedFont heading">
+                  <a name="floor$"></a>
+                  <span class='lighter'>
+                  
+                  </span>
+
+                  <b>floor$</b>()
+                </div>
+
+                <div class="description">
+                  Floor the x and y values, returning a modified point.
+    
+    <code><pre>
+       point = Point(3.4, 5.8)
+       point.floor$()
+       
+       point.x
+    => 3
+    
+       point.y
+    => 5
+    </pre></code>
+
+                  
+                </div>
+
+                
+
+                
+
+                
+                  <dl class="detailList nomargin">
+
+                    
+
+                    
+
+                    
+
+                    
+                      <dt class="heading">Returns:</dt>
+                      
+                        <dd><span class="light fixedFont">{<a href="../symbols/Point.html">Point</a>}</span> A modified point, with x and y values each floored to the largest previous integer.</dd>
                       
                     
 
@@ -907,7 +1202,14 @@
                 </div>
 
                 <div class="description">
-                  Computed the length of this point as though it were a vector from (0,0) to (x,y)
+                  Computed the length of this point as though it were a vector from (0,0) to (x,y).
+    
+    <code><pre>
+       point = Point(5, 7)
+       
+       point.length()
+    => 8.602325267042627
+    </pre></code>
 
                   
                 </div>
@@ -928,7 +1230,7 @@
                     
                       <dt class="heading">Returns:</dt>
                       
-                        <dd>The length of the vector from the origin to this point.</dd>
+                        <dd><span class="light fixedFont">{<a href="../symbols/Number.html">Number</a>}</span> The length of the vector from the origin to this point.</dd>
                       
                     
 
@@ -950,6 +1252,13 @@
 
                 <div class="description">
                   Calculate the magnitude of this Point (Vector).
+    
+    <code><pre>
+       point = Point(5, 7)
+       
+       point.magnitude()
+    => 8.602325267042627
+    </pre></code>
 
                   
                 </div>
@@ -970,7 +1279,7 @@
                     
                       <dt class="heading">Returns:</dt>
                       
-                        <dd>The magnitude of this point as if it were a vector from (0, 0) -> (x, y).</dd>
+                        <dd><span class="light fixedFont">{<a href="../symbols/Number.html">Number</a>}</span> The magnitude of this point as if it were a vector from (0, 0) -> (x, y).</dd>
                       
                     
 
@@ -993,6 +1302,24 @@
                 <div class="description">
                   The norm of a vector is the unit vector pointing in the same direction. This method
     treats the point as though it is a vector from the origin to (x, y).
+    
+    <code><pre>
+       point = Point(2, 3).norm()
+       
+       point.x
+    => 0.5547001962252291
+       
+       point.y  
+    => 0.8320502943378437
+       
+       anotherPoint = Point(2, 3).norm(2)
+       
+       anotherPoint.x
+    => 1.1094003924504583
+     
+       anotherPoint.y   
+    => 1.6641005886756874    
+    </pre></code>
 
                   
                 </div>
@@ -1013,7 +1340,68 @@
                     
                       <dt class="heading">Returns:</dt>
                       
-                        <dd>The unit vector pointing in the same direction as this vector.</dd>
+                        <dd><span class="light fixedFont">{<a href="../symbols/Point.html">Point</a>}</span> The unit vector pointing in the same direction as this vector.</dd>
+                      
+                    
+
+                    
+
+                    
+
+                  </dl>
+                
+              
+                <div class="fixedFont heading">
+                  <a name="norm$"></a>
+                  <span class='lighter'>
+                  
+                  </span>
+
+                  <b>norm$</b>()
+                </div>
+
+                <div class="description">
+                  The norm of a vector is the unit vector pointing in the same direction. This method
+    treats the point as though it is a vector from the origin to (x, y). Modifies the point in place.
+    
+    <code><pre>
+       point = Point(2, 3).norm$()
+       
+       point.x
+    => 0.5547001962252291
+       
+       point.y  
+    => 0.8320502943378437
+       
+       anotherPoint = Point(2, 3).norm$(2)
+       
+       anotherPoint.x
+    => 1.1094003924504583
+     
+       anotherPoint.y   
+    => 1.6641005886756874    
+    </pre></code>
+
+                  
+                </div>
+
+                
+
+                
+
+                
+                  <dl class="detailList nomargin">
+
+                    
+
+                    
+
+                    
+
+                    
+                      <dt class="heading">Returns:</dt>
+                      
+                        <dd><span class="light fixedFont">{<a href="../symbols/Point.html">Point</a>}</span> The unit vector pointing in the same direction as this vector.</dd>
                       
                     
 
@@ -1035,6 +1423,16 @@
 
                 <div class="description">
                   Scale this Point (Vector) by a constant amount.
+    
+    <code><pre>
+       point = Point(5, 6).scale(2)
+       
+       point.x
+    => 10
+    
+       point.y
+    => 12
+    </pre></code>
 
                   
                 </div>
@@ -1066,7 +1464,78 @@
                     
                       <dt class="heading">Returns:</dt>
                       
-                        <dd>A new point, this * scalar.</dd>
+                        <dd><span class="light fixedFont">{<a href="../symbols/Point.html">Point</a>}</span> A new point, this * scalar.</dd>
+                      
+                    
+
+                    
+
+                    
+
+                  </dl>
+                
+              
+                <div class="fixedFont heading">
+                  <a name="scale$"></a>
+                  <span class='lighter'>
+                  
+                  </span>
+
+                  <b>scale$</b>(scalar)
+                </div>
+
+                <div class="description">
+                  Scale this Point (Vector) by a constant amount. Modifies the point in place.
+    
+    <code><pre>
+       point = Point(5, 6)
+       
+       point.x
+    => 5
+    
+       point.y
+    => 6
+       
+       point.scale$(2)
+       
+       point.x
+    => 10
+    
+       point.y
+    => 12
+    </pre></code>
+
+                  
+                </div>
+
+                
+
+                
+                  <dl class="detailList params">
+                    <dt class="heading">Parameters:</dt>
+                    
+                      <dt>
+                        <b>scalar</b><span class='light fixedFont'> <a href="../symbols/Number.html">Number</a></span> 
+                        
+                      </dt>
+                      <dd>The amount to scale this point by.</dd>
+                    
+                  </dl>
+                
+
+                
+                  <dl class="detailList nomargin">
+
+                    
+
+                    
+
+                    
+
+                    
+                      <dt class="heading">Returns:</dt>
+                      
+                        <dd><span class="light fixedFont">{<a href="../symbols/Point.html">Point</a>}</span> this * scalar.</dd>
                       
                     
 
@@ -1088,6 +1557,24 @@
 
                 <div class="description">
                   Subtracts a point to this one and returns the new point.
+    
+    <code><pre>
+       point = Point(1, 2).subtract(Point(2, 0))
+       
+       point.x
+    => -1
+    
+       point.y
+    => 2
+       
+       anotherPoint = Point(1, 2).subtract(2, 0)
+    
+       anotherPoint.x
+    => -1
+    
+       anotherPoint.y
+    => 2
+    </pre></code>
 
                   
                 </div>
@@ -1119,7 +1606,87 @@
                     
                       <dt class="heading">Returns:</dt>
                       
-                        <dd>A new point, this - other.</dd>
+                        <dd><span class="light fixedFont">{<a href="../symbols/Point.html">Point</a>}</span> A new point, this - other.</dd>
+                      
+                    
+
+                    
+
+                    
+
+                  </dl>
+                
+              
+                <div class="fixedFont heading">
+                  <a name="subtract$"></a>
+                  <span class='lighter'>
+                  
+                  </span>
+
+                  <b>subtract$</b>(other)
+                </div>
+
+                <div class="description">
+                  Subtracts a point to this one and returns the new point.
+    
+    <code><pre>
+       point = Point(1, 2)
+       
+       point.x
+    => 1
+    
+       point.y
+    => 2
+       
+       point.subtract$(Point(2, 0))
+    
+       point.x
+    => -1
+    
+       point.y
+    => 2
+    
+       anotherPoint = Point(1, 2)
+       anotherPoint.subtract$(2, 0)
+    
+       anotherPoint.x
+    => -1
+    
+       anotherPoint.y
+    => 2
+    </pre></code>
+
+                  
+                </div>
+
+                
+
+                
+                  <dl class="detailList params">
+                    <dt class="heading">Parameters:</dt>
+                    
+                      <dt>
+                        <b>other</b><span class='light fixedFont'> <a href="../symbols/Point.html">Point</a></span> 
+                        
+                      </dt>
+                      <dd>The point to subtract from this point.</dd>
+                    
+                  </dl>
+                
+
+                
+                  <dl class="detailList nomargin">
+
+                    
+
+                    
+
+                    
+
+                    
+                      <dt class="heading">Returns:</dt>
+                      
+                        <dd><span class="light fixedFont">{<a href="../symbols/Point.html">Point</a>}</span> The difference of the two points.</dd>
                       
                     
 
