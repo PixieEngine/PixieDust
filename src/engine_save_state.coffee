@@ -61,6 +61,17 @@ Engine.SaveState = (I, self) ->
   ###*
   Reloads the current engine state, useful for hotswapping code.
 
+  <code><pre>
+  engine.I.objects.each (object) ->
+    # bring all objects to (0, 0) for some reason
+    object.I.x = 0
+    object.I.y = 0
+
+  # reload all objects to make sure
+  # they are at (0, 0)  
+  engine.reload()
+  </pre></code>
+
   @name reload
   @methodOf Engine.SaveState#
   ###
