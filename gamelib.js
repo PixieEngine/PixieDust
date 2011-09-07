@@ -5319,6 +5319,7 @@ The <code>Collision</code> module provides some simple collision detection metho
     @methodOf Engine#
     @param bounds The bounds to check collisions with.
     @param [sourceObject] An object to exclude from the results.
+    @returns {Boolean} true if the bounds object collides with any of the game objects, false otherwise.
     */
     collides: function(bounds, sourceObject) {
       return I.objects.inject(false, function(collided, object) {
@@ -5333,6 +5334,7 @@ The <code>Collision</code> module provides some simple collision detection metho
     @methodOf Engine#
     @param bounds The bounds to check collisions with.
     @param [sourceObject] An object to exclude from the results.
+    @returns {Array} An array of objects that collide with the given bounds.
     */
     collidesWith: function(bounds, sourceObject) {
       var collided;
@@ -5840,12 +5842,25 @@ Movable = function(I) {
     }
   };
 };;
-(function() {
+/**
+  @name ResourceLoader
+  @namespace
+
+  Helps access the assets in your game.
+*/(function() {
   var ResourceLoader, typeTable;
   typeTable = {
     images: "png"
   };
   ResourceLoader = {
+    /**
+      @name urlFor
+      @methodOf ResourceLoader#
+      @param {String} directory The directory your file is in.
+      @param {String} name The name of the file.
+      @returns {String} The full url of your asset
+      
+      */
     urlFor: function(directory, name) {
       var type, _ref;
       directory = (typeof App !== "undefined" && App !== null ? (_ref = App.directories) != null ? _ref[directory] : void 0 : void 0) || directory;
