@@ -47,7 +47,7 @@ Engine.SaveState = (I, self) ->
   </pre></code>
 
   @name loadState
-  @methodOf Engine.SaveState#
+  @methodOf Engine#
   @param [newState] The game state to load.
   ###
   loadState: (newState) ->
@@ -73,7 +73,7 @@ Engine.SaveState = (I, self) ->
   </pre></code>
 
   @name reload
-  @methodOf Engine.SaveState#
+  @methodOf Engine#
   ###
   reload: ->
     oldObjects = I.objects
