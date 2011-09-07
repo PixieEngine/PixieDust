@@ -13,7 +13,7 @@ Engine.Collision = (I, self) ->
   Detects collisions between a bounds and the game objects.
 
   @name collides
-  @methodOf Engine.Collision#
+  @methodOf Engine#
   @param bounds The bounds to check collisions with.
   @param [sourceObject] An object to exclude from the results.
   ###
@@ -26,7 +26,7 @@ Engine.Collision = (I, self) ->
   Returns an array of objects colliding with the bounds provided.
 
   @name collidesWith
-  @methodOf Engine.Collision#
+  @methodOf Engine#
   @param bounds The bounds to check collisions with.
   @param [sourceObject] An object to exclude from the results.
   ###
@@ -44,7 +44,7 @@ Engine.Collision = (I, self) ->
   Detects collisions between a ray and the game objects.
 
   @name rayCollides
-  @methodOf Engine.Collision#
+  @methodOf Engine#
   @param source The origin point
   @param direction A point representing the direction of the ray
   @param [sourceObject] An object to exclude from the results.

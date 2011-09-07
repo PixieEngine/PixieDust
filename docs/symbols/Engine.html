@@ -199,6 +199,14 @@
                   
                     <tr>
                       <td class="nameDescription">
+                        <div class="fixedFont"><b><a href="../symbols/Engine.html#loadState">loadState</a></b>(newState)
+                        </div>
+                        <div class="description">Loads the game state passed in, or the last saved state, if any.</div>
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <td class="nameDescription">
                         <div class="fixedFont"><b><a href="../symbols/Engine.html#pause">pause</a></b>()
                         </div>
                         <div class="description">Pause the simulation.</div>
@@ -218,6 +226,22 @@
                         <div class="fixedFont"><b><a href="../symbols/Engine.html#play">play</a></b>()
                         </div>
                         <div class="description">Resume the game.</div>
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <td class="nameDescription">
+                        <div class="fixedFont"><b><a href="../symbols/Engine.html#reload">reload</a></b>()
+                        </div>
+                        <div class="description">Reloads the current engine state, useful for hotswapping code.</div>
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <td class="nameDescription">
+                        <div class="fixedFont"><b><a href="../symbols/Engine.html#saveState">saveState</a></b>()
+                        </div>
+                        <div class="description">Save the current game state and returns a JSON object representing that state.</div>
                       </td>
                     </tr>
                   
@@ -616,6 +640,50 @@
                 
               
                 <div class="fixedFont heading">
+                  <a name="loadState"></a>
+                  <span class='lighter'>
+                  
+                  </span>
+
+                  <b>loadState</b>(newState)
+                </div>
+
+                <div class="description">
+                  Loads the game state passed in, or the last saved state, if any.
+    
+    <code><pre>
+    engine.bind 'step', ->
+      if justPressed.l
+        # loads the last saved state
+        engine.loadState()
+        
+      if justPressed.o
+        # removes all game objects, then reinstantiates 
+        # them with the entityData passed in
+        engine.loadState([{x: 40, y: 50, class: "Player"}, {x: 0, y: 0, class: "Enemy"}, {x: 500, y: 400, class: "Boss"}])
+    </pre></code>
+
+                  
+                </div>
+
+                
+
+                
+                  <dl class="detailList params">
+                    <dt class="heading">Parameters:</dt>
+                    
+                      <dt>
+                        <b>newState</b>
+                        <i>Optional</i>
+                      </dt>
+                      <dd>The game state to load.</dd>
+                    
+                  </dl>
+                
+
+                
+              
+                <div class="fixedFont heading">
                   <a name="pause"></a>
                   <span class='lighter'>
                   
@@ -696,6 +764,86 @@
 
                 
 
+                
+              
+                <div class="fixedFont heading">
+                  <a name="reload"></a>
+                  <span class='lighter'>
+                  
+                  </span>
+
+                  <b>reload</b>()
+                </div>
+
+                <div class="description">
+                  Reloads the current engine state, useful for hotswapping code.
+    
+    <code><pre>
+    engine.I.objects.each (object) ->
+      # bring all objects to (0, 0) for some reason
+      object.I.x = 0
+      object.I.y = 0
+      
+    # reload all objects to make sure
+    # they are at (0, 0)  
+    engine.reload()
+    </pre></code>
+
+                  
+                </div>
+
+                
+
+                
+
+                
+              
+                <div class="fixedFont heading">
+                  <a name="saveState"></a>
+                  <span class='lighter'>
+                  
+                  </span>
+
+                  <b>saveState</b>()
+                </div>
+
+                <div class="description">
+                  Save the current game state and returns a JSON object representing that state.
+    
+    <code><pre>
+    engine.bind 'step', ->
+      if justPressed.s
+        engine.saveState()
+    </pre></code>
+
+                  
+                </div>
+
+                
+
+                
+
+                
+                  <dl class="detailList nomargin">
+
+                    
+
+                    
+
+                    
+
+                    
+                      <dt class="heading">Returns:</dt>
+                      
+                        <dd><span class="light fixedFont">{<a href="../symbols/Array.html">Array</a>}</span> An array of the instance data of all objects in the game</dd>
+                      
+                    
+
+                    
+
+                    
+
+                  </dl>
                 
               
                 <div class="fixedFont heading">
