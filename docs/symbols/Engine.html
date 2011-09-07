@@ -183,6 +183,22 @@
                   
                     <tr>
                       <td class="nameDescription">
+                        <div class="fixedFont"><b><a href="../symbols/Engine.html#collides">collides</a></b>(bounds, sourceObject)
+                        </div>
+                        <div class="description">Detects collisions between a bounds and the game objects.</div>
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <td class="nameDescription">
+                        <div class="fixedFont"><b><a href="../symbols/Engine.html#collidesWith">collidesWith</a></b>(bounds, sourceObject)
+                        </div>
+                        <div class="description">Detects collisions between a bounds and the game objects.</div>
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <td class="nameDescription">
                         <div class="fixedFont"><b><a href="../symbols/Engine.html#find">find</a></b>(selector)
                         </div>
                         <div class="description">Get a selection of GameObjects that match the specified selector criteria.</div>
@@ -226,6 +242,14 @@
                         <div class="fixedFont"><b><a href="../symbols/Engine.html#play">play</a></b>()
                         </div>
                         <div class="description">Resume the game.</div>
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <td class="nameDescription">
+                        <div class="fixedFont"><b><a href="../symbols/Engine.html#rayCollides">rayCollides</a></b>(source, direction, sourceObject)
+                        </div>
+                        <div class="description">Detects collisions between a ray and the game objects.</div>
                       </td>
                     </tr>
                   
@@ -546,6 +570,83 @@
                 
               
                 <div class="fixedFont heading">
+                  <a name="collides"></a>
+                  <span class='lighter'>
+                  
+                  </span>
+
+                  <b>collides</b>(bounds, sourceObject)
+                </div>
+
+                <div class="description">
+                  Detects collisions between a bounds and the game objects.
+
+                  
+                </div>
+
+                
+
+                
+                  <dl class="detailList params">
+                    <dt class="heading">Parameters:</dt>
+                    
+                      <dt>
+                        <b>bounds</b>
+                        
+                      </dt>
+                      <dd>The bounds to check collisions with.</dd>
+                    
+                      <dt>
+                        <b>sourceObject</b>
+                        <i>Optional</i>
+                      </dt>
+                      <dd>An object to exclude from the results.</dd>
+                    
+                  </dl>
+                
+
+                
+              
+                <div class="fixedFont heading">
+                  <a name="collidesWith"></a>
+                  <span class='lighter'>
+                  
+                  </span>
+
+                  <b>collidesWith</b>(bounds, sourceObject)
+                </div>
+
+                <div class="description">
+                  Detects collisions between a bounds and the game objects. 
+    Returns an array of objects colliding with the bounds provided.
+
+                  
+                </div>
+
+                
+
+                
+                  <dl class="detailList params">
+                    <dt class="heading">Parameters:</dt>
+                    
+                      <dt>
+                        <b>bounds</b>
+                        
+                      </dt>
+                      <dd>The bounds to check collisions with.</dd>
+                    
+                      <dt>
+                        <b>sourceObject</b>
+                        <i>Optional</i>
+                      </dt>
+                      <dd>An object to exclude from the results.</dd>
+                    
+                  </dl>
+                
+
+                
+              
+                <div class="fixedFont heading">
                   <a name="find"></a>
                   <span class='lighter'>
                   
@@ -762,6 +863,50 @@
 
                 
 
+                
+
+                
+              
+                <div class="fixedFont heading">
+                  <a name="rayCollides"></a>
+                  <span class='lighter'>
+                  
+                  </span>
+
+                  <b>rayCollides</b>(source, direction, sourceObject)
+                </div>
+
+                <div class="description">
+                  Detects collisions between a ray and the game objects.
+
+                  
+                </div>
+
+                
+
+                
+                  <dl class="detailList params">
+                    <dt class="heading">Parameters:</dt>
+                    
+                      <dt>
+                        <b>source</b>
+                        
+                      </dt>
+                      <dd>The origin point</dd>
+                    
+                      <dt>
+                        <b>direction</b>
+                        
+                      </dt>
+                      <dd>A point representing the direction of the ray</dd>
+                    
+                      <dt>
+                        <b>sourceObject</b>
+                        <i>Optional</i>
+                      </dt>
+                      <dd>An object to exclude from the results.</dd>
+                    
+                  </dl>
                 
 
                 

@@ -16,6 +16,7 @@ Engine.Collision = (I, self) ->
   @methodOf Engine#
   @param bounds The bounds to check collisions with.
   @param [sourceObject] An object to exclude from the results.
+  @returns {Boolean} true if the bounds object collides with any of the game objects, false otherwise.
   ###
   collides: (bounds, sourceObject) ->
     I.objects.inject false, (collided, object) ->
@@ -29,6 +30,7 @@ Engine.Collision = (I, self) ->
   @methodOf Engine#
   @param bounds The bounds to check collisions with.
   @param [sourceObject] An object to exclude from the results.
+  @returns {Array} An array of objects that collide with the given bounds.
   ###
   collidesWith: (bounds, sourceObject) ->
     collided = []
