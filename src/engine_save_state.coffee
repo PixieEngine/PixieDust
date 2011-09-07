@@ -24,7 +24,7 @@ Engine.SaveState = (I, self) ->
   </pre></code>
 
   @name saveState
-  @methodOf Engine.SaveState#
+  @methodOf Engine#
   @returns {Array} An array of the instance data of all objects in the game
   ###
   saveState: ->
