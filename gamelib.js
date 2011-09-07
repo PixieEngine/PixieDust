@@ -5854,6 +5854,13 @@ Movable = function(I) {
   };
   ResourceLoader = {
     /**
+      Return the url for a particular asset
+      
+      <code><pre>
+         ResourceLoader.urlFor("images", "player")
+      => This returns the url for the file "player.png" in your images directory.
+      </pre></code>
+      
       @name urlFor
       @methodOf ResourceLoader#
       @param {String} directory The directory your file is in.
