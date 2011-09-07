@@ -4,7 +4,7 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="generator" content="JsDoc Toolkit" />
     
-    <title>JsDoc Reference - Logging</title>
+    <title>JsDoc Reference - ResourceLoader</title>
     <link href="/stylesheets/docs.css" type="text/css" rel="stylesheet" media="all" />
   </head>
 
@@ -78,7 +78,7 @@
       <div class="innerContent">
         <h1 class="classTitle">
           
-          <span>Logging</span>
+          <span>ResourceLoader</span>
         </h1>
 
         <p class="description summary">
@@ -86,28 +86,18 @@
 
           
 
-          Gives you some convenience methods for outputting data
-  while developing. 
-
-<code>
-  <pre>
-    log "Testing123"
-    info "Hey, this is happening"
-    warn "Be careful, this might be a problem"
-    error "Kaboom!"
-  </pre>
-</code>
+          Helps access the assets in your game.
         </p>
 
         
           <div class="props">
-            <table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class Logging.">
+            <table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class ResourceLoader.">
               <caption>Class Summary</caption>
               <tbody>
                 <tr>
                   <td class="nameDescription" >
                     <div class="fixedFont">
-                      <b><a href="../symbols/Logging.html#constructor">Logging</a></b>()
+                      <b><a href="../symbols/ResourceLoader.html#constructor">ResourceLoader</a></b>()
                     </div>
                     <div class="description"></div>
                   </td>
@@ -126,6 +116,29 @@
   #### METHODS SUMMARY
   -->
         
+          
+          
+            <div class="props">
+              <table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class ResourceLoader.">
+                <caption>Method Summary</caption>
+
+                <tbody>
+                  
+                    <tr>
+                      <td class="nameDescription">
+                        <div class="fixedFont"><b><a href="../symbols/ResourceLoader.html#urlFor">urlFor</a></b>(directory, name)
+                        </div>
+                        <div class="description"></div>
+                      </td>
+                    </tr>
+                  
+                </tbody>
+              </table>
+            </div>
+          
+
+          
+        
 
   <!--
   #### EVENTS SUMMARY
@@ -141,7 +154,7 @@
               <a name="constructor"></a>
 
               <div class="fixedFont">
-                <b>Logging</b>()
+                <b>ResourceLoader</b>()
               </div>
 
               <div class="description">
@@ -166,6 +179,71 @@
   <!--
   #### METHOD DETAILS
   -->
+        
+          <div class="details props">
+            <div class="innerProps">
+              
+                <div class="fixedFont heading">
+                  <a name="urlFor"></a>
+                  <span class='lighter'>
+                  
+                  </span>
+
+                  <b>urlFor</b>(directory, name)
+                </div>
+
+                <div class="description">
+                  
+
+                  
+                </div>
+
+                
+
+                
+                  <dl class="detailList params">
+                    <dt class="heading">Parameters:</dt>
+                    
+                      <dt>
+                        <b>directory</b><span class='light fixedFont'> <a href="../symbols/String.html">String</a></span> 
+                        
+                      </dt>
+                      <dd>The directory your file is in.</dd>
+                    
+                      <dt>
+                        <b>name</b><span class='light fixedFont'> <a href="../symbols/String.html">String</a></span> 
+                        
+                      </dt>
+                      <dd>The name of the file.</dd>
+                    
+                  </dl>
+                
+
+                
+                  <dl class="detailList nomargin">
+
+                    
+
+                    
+
+                    
+
+                    
+                      <dt class="heading">Returns:</dt>
+                      
+                        <dd><span class="light fixedFont">{<a href="../symbols/String.html">String</a>}</span> The full url of your asset</dd>
+                      
+                    
+
+                    
+
+                    
+
+                  </dl>
+                
+              
+            </div>
+          </div>
         
 
   <!--
