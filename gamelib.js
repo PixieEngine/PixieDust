@@ -5405,7 +5405,7 @@ The <code>SaveState</code> module provides methods to save and restore the curre
     </pre></code>
     
     @name saveState
-    @methodOf Engine.SaveState#
+    @methodOf Engine#
     @returns {Array} An array of the instance data of all objects in the game
     */
     saveState: function() {
@@ -5429,7 +5429,7 @@ The <code>SaveState</code> module provides methods to save and restore the curre
     </pre></code>
     
     @name loadState
-    @methodOf Engine.SaveState#
+    @methodOf Engine#
     @param [newState] The game state to load.
     */
     loadState: function(newState) {
@@ -5456,7 +5456,7 @@ The <code>SaveState</code> module provides methods to save and restore the curre
     </pre></code>
     
     @name reload
-    @methodOf Engine.SaveState#
+    @methodOf Engine#
     */
     reload: function() {
       var oldObjects;
