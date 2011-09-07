@@ -10,7 +10,7 @@
 
   ResourceLoader =
     ###*
-    Return the url for a particular asset
+    Return the url for a particular asset.
 
     <code><pre>
        ResourceLoader.urlFor("images", "player")
