@@ -197,14 +197,14 @@ Bounded = (I, self) ->
   the center of the object.
 
   <code><pre>
-    player = Core
-      x: 50
-      y: 40
+  player = Core
+    x: 50
+    y: 40
 
-    player.include(Bounded)  
+  player.include(Bounded)  
 
-    player.position()
-    => {x: 50, y: 40}
+  player.position()
+  => {x: 50, y: 40}
   </pre></code>   
 
   @name center
