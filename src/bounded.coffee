@@ -47,10 +47,18 @@ Bounded = (I, self) ->
   The position of this game object. By default it is the top left point.
   Redefining the center method will change the relative position.
 
+  <code><pre>
+    player = Core
+      x: 50
+      y: 40
+
+    player.position()
+    => {x: 50, y: 40}
+  </pre></code> 
+
   @name position
   @methodOf Bounded#
-  @returns The position of this object
-  @type Point
+  @returns {Point} The position of this object
   ###
   position: ->
     Point(I.x, I.y)
@@ -72,8 +80,7 @@ Bounded = (I, self) ->
 
   @name collides
   @methodOf Bounded#
-  @returns The position of this object
-  @type Point
+  @returns {Point} The position of this object
   ###
   collides: (bounds) ->
     Collision.rectangular(I, bounds)

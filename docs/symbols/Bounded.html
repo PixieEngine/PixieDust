@@ -162,9 +162,26 @@ location and dimensions of the including object.</div>
                   
                     <tr>
                       <td class="nameDescription">
+                        <div class="fixedFont"><b><a href="../symbols/Bounded.html#collides">collides</a></b>()
+                        </div>
+                        <div class="description">Does a check to see if this object is overlapping
+    with the bounds passed in.</div>
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <td class="nameDescription">
                         <div class="fixedFont"><b><a href="../symbols/Bounded.html#collisionBounds">collisionBounds</a></b>(xOffset, yOffset)
                         </div>
                         <div class="description">This returns a modified bounds based on the collision margin.</div>
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <td class="nameDescription">
+                        <div class="fixedFont"><b><a href="../symbols/Bounded.html#position">position</a></b>()
+                        </div>
+                        <div class="description">The position of this game object.</div>
                       </td>
                     </tr>
                   
@@ -426,6 +443,60 @@ Bounded module</dd>
                 
               
                 <div class="fixedFont heading">
+                  <a name="collides"></a>
+                  <span class='lighter'>
+                  
+                  </span>
+
+                  <b>collides</b>()
+                </div>
+
+                <div class="description">
+                  Does a check to see if this object is overlapping
+    with the bounds passed in.
+    
+    <code><pre>
+      player = Core
+        x: 4
+        y: 6
+        width: 20
+        height: 20
+    
+      player.collides({x: 5, y: 7, width: 20, height: 20})
+      => true
+    </pre></code>
+
+                  
+                </div>
+
+                
+
+                
+
+                
+                  <dl class="detailList nomargin">
+
+                    
+
+                    
+
+                    
+
+                    
+                      <dt class="heading">Returns:</dt>
+                      
+                        <dd>The position of this object</dd>
+                      
+                    
+
+                    
+
+                    
+
+                  </dl>
+                
+              
+                <div class="fixedFont heading">
                   <a name="collisionBounds"></a>
                   <span class='lighter'>
                   
@@ -480,6 +551,49 @@ Bounded module</dd>
                   </dl>
                 
 
+                
+              
+                <div class="fixedFont heading">
+                  <a name="position"></a>
+                  <span class='lighter'>
+                  
+                  </span>
+
+                  <b>position</b>()
+                </div>
+
+                <div class="description">
+                  The position of this game object. By default it is the top left point.
+    Redefining the center method will change the relative position.
+
+                  
+                </div>
+
+                
+
+                
+
+                
+                  <dl class="detailList nomargin">
+
+                    
+
+                    
+
+                    
+
+                    
+                      <dt class="heading">Returns:</dt>
+                      
+                        <dd>The position of this object</dd>
+                      
+                    
+
+                    
+
+                    
+
+                  </dl>
                 
               
             </div>
