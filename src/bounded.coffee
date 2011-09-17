@@ -47,6 +47,7 @@ Bounded = (I, self) ->
   The position of this game object. By default it is the top left point.
   Redefining the center method will change the relative position.
 
+  @name position
   @returns The position of this object
   @type Point
   ###
