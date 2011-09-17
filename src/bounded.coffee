@@ -211,6 +211,7 @@ Bounded = (I, self) ->
 
   @name center
   @methodOf Bounded#
+  @returns {Point} The middle of the calling object
   ###  
   center: () ->
     self.position()
