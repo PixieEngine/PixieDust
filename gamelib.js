@@ -4022,6 +4022,8 @@ Bounded = function(I, self) {
         y: 6
         width: 20
         height: 20
+        
+      player.include(Bounded)  
     
       player.collides({x: 5, y: 7, width: 20, height: 20})
       => true
@@ -4048,6 +4050,8 @@ Bounded = function(I, self) {
         y: 50
         width: 20
         height: 20
+        
+      player.include(Bounded)
     
       player.collisionBounds()
       => {x: 38, y: 36, height: 28, width: 24}
@@ -4061,6 +4065,7 @@ Bounded = function(I, self) {
     
     @param {Number} xOffset the amount to shift the x position 
     @param {Number} yOffset the amount to shift the y position
+    @returns {Object} The collision bounds
     */
     collisionBounds: function(xOffset, yOffset) {
       var bounds;
