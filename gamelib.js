@@ -4283,6 +4283,17 @@ Collision = {
   /**
   Detects whether a line intersects a circle.
   
+  <code><pre>
+  circle = engine.add
+    class: "circle"
+    x: 50
+    y: 50
+    radius: 10
+    
+  Collision.rayCircle(Point(0, 0), Point(1, 0), circle)
+  => true
+  </pre></code>
+  
   @name rayCircle
   @methodOf Collision
   
@@ -4315,6 +4326,18 @@ Collision = {
   },
   /**
   Detects whether a line intersects a rectangle.
+  
+  <code><pre>
+  rect = engine.add
+    class: "circle"
+    x: 50
+    y: 50
+    width: 20
+    height: 20
+    
+  Collision.rayRectangle(Point(0, 0), Point(1, 0), rect)
+  => true
+  </pre></code>
   
   @name rayRectangle
   @methodOf Collision
