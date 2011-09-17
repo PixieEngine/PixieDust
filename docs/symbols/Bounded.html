@@ -362,6 +362,19 @@ Bounded module</dd>
                 <div class="description">
                   The center method returns the <a href="../symbols/Point.html">Point</a> that is
     the center of the object.
+    
+    <code><pre>
+    player = Core
+      x: 50
+      y: 40
+      width: 10
+      height: 30
+      
+    player.include(Bounded)  
+    
+    player.center()
+    => {x: 30, y: 35}
+    </pre></code>
 
                   
                 </div>
@@ -370,6 +383,27 @@ Bounded module</dd>
 
                 
 
+                
+                  <dl class="detailList nomargin">
+
+                    
+
+                    
+
+                    
+
+                    
+                      <dt class="heading">Returns:</dt>
+                      
+                        <dd><span class="light fixedFont">{<a href="../symbols/Point.html">Point</a>}</span> The middle of the calling object</dd>
+                      
+                    
+
+                    
+
+                    
+
+                  </dl>
                 
               
                 <div class="fixedFont heading">
@@ -595,6 +629,8 @@ Bounded module</dd>
       player = Core
         x: 50
         y: 40
+    
+      player.include(Bounded)      
     
       player.position()
       => {x: 50, y: 40}

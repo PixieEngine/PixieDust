@@ -220,7 +220,7 @@ Bounded = (I, self) ->
   Return the circular bounds of the object. The circle is
   centered at the midpoint of the object.
 
-  <code><pre>  
+  <code><pre>
   player = Core
     radius: 5
     x: 50
