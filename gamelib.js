@@ -4024,7 +4024,7 @@ Bounded = function(I, self) {
         y: 6
         width: 20
         height: 20
-        
+    
       player.include(Bounded)  
     
       player.collides({x: 5, y: 7, width: 20, height: 20})
@@ -4052,7 +4052,7 @@ Bounded = function(I, self) {
         y: 50
         width: 20
         height: 20
-        
+    
       player.include(Bounded)
     
       player.collisionBounds()
@@ -4154,7 +4154,7 @@ Bounded = function(I, self) {
       y: 40
       width: 10
       height: 30
-      
+    
     player.include(Bounded)  
     
     player.center()
