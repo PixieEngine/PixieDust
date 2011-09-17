@@ -3997,6 +3997,7 @@ Bounded = function(I, self) {
     Redefining the center method will change the relative position.
     
     @name position
+    @methodOf Bounded#
     @returns The position of this object
     @type Point
     */
@@ -4019,6 +4020,7 @@ Bounded = function(I, self) {
     </pre></code>
     
     @name collides
+    @methodOf Bounded#
     @returns The position of this object
     @type Point
     */
