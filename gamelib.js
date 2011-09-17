@@ -4003,20 +4003,21 @@ Bounded = function(I, self) {
       return Point(I.x, I.y);
     },
     /**
-    Does a check to see if $this object is overlapping
+    Does a check to see if this object is overlapping
     with the bounds passed in.
     
     <code><pre>
-     player = Core
-       x: 4
-       y: 6
-       width: 20
-       height: 20
+      player = Core
+        x: 4
+        y: 6
+        width: 20
+        height: 20
     
-     player.collides({x: 5, y: 7, width: 20, height: 20})
-    => true
+      player.collides({x: 5, y: 7, width: 20, height: 20})
+      => true
     </pre></code>
     
+    @name collides
     @returns The position of this object
     @type Point
     */
