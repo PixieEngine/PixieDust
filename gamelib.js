@@ -3996,10 +3996,18 @@ Bounded = function(I, self) {
     The position of this game object. By default it is the top left point.
     Redefining the center method will change the relative position.
     
+    <code><pre>
+      player = Core
+        x: 50
+        y: 40
+    
+      player.position()
+      => {x: 50, y: 40}
+    </pre></code> 
+    
     @name position
     @methodOf Bounded#
-    @returns The position of this object
-    @type Point
+    @returns {Point} The position of this object
     */
     position: function() {
       return Point(I.x, I.y);
@@ -4021,8 +4029,7 @@ Bounded = function(I, self) {
     
     @name collides
     @methodOf Bounded#
-    @returns The position of this object
-    @type Point
+    @returns {Point} The position of this object
     */
     collides: function(bounds) {
       return Collision.rectangular(I, bounds);
@@ -4043,10 +4050,10 @@ Bounded = function(I, self) {
         height: 20
     
       player.collisionBounds()
-      => {x: 38, y: 36 height: 28, width: 24}
+      => {x: 38, y: 36, height: 28, width: 24}
     
       player.collisionBounds(10, 10)
-      => {x: 48, y: 46 height: 28, width: 24}
+      => {x: 48, y: 46, height: 28, width: 24}
     </pre></code>  
     
     @name collisionBounds
