@@ -200,11 +200,13 @@ Bounded = (I, self) ->
   player = Core
     x: 50
     y: 40
+    width: 10
+    height: 30
 
   player.include(Bounded)  
 
-  player.position()
-  => {x: 50, y: 40}
+  player.center()
+  => {x: 30, y: 35}
   </pre></code>   
 
   @name center
