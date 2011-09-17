@@ -461,6 +461,8 @@ Bounded module</dd>
         y: 6
         width: 20
         height: 20
+        
+      player.include(Bounded)  
     
       player.collides({x: 5, y: 7, width: 20, height: 20})
       => true
@@ -519,6 +521,8 @@ Bounded module</dd>
         y: 50
         width: 20
         height: 20
+        
+      player.include(Bounded)
     
       player.collisionBounds()
       => {x: 38, y: 36, height: 28, width: 24}
@@ -551,6 +555,27 @@ Bounded module</dd>
                   </dl>
                 
 
+                
+                  <dl class="detailList nomargin">
+
+                    
+
+                    
+
+                    
+
+                    
+                      <dt class="heading">Returns:</dt>
+                      
+                        <dd><span class="light fixedFont">{<a href="../symbols/Object.html">Object</a>}</span> The collision bounds</dd>
+                      
+                    
+
+                    
+
+                    
+
+                  </dl>
                 
               
                 <div class="fixedFont heading">
