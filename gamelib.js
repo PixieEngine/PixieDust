@@ -4230,8 +4230,8 @@ Collision = {
     @name rectangular
     @methodOf Collision
   
-    @param a {Object} The first rectangle
-    @param b {Object} The second rectangle
+    @param {Object} a The first rectangle
+    @param {Object} b The second rectangle
   
     @returns {Boolean} true if the rectangles overlap, false otherwise
     */
@@ -4268,8 +4268,8 @@ Collision = {
   @name circular
   @methodOf Collision
   
-  @param a {Object} The first circle
-  @param b {Object} The second circle
+  @param {Object} a The first circle
+  @param {Object} b The second circle
   
   @returns {Boolean} true is the circles overlap, false otherwise
   */
