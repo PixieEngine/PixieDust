@@ -91,9 +91,9 @@ Collision =
   @name rayCircle
   @methodOf Collision
 
-  @param source
-  @param direction
-  @param target
+  @param {Point} source A point
+  @param {Number} direction
+  @param {Object} target The circle 
 
   @returns {Boolean} true if the line intersects the circle, false otherwise
   ###
