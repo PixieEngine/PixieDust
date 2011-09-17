@@ -91,8 +91,8 @@ Collision =
   @name rayCircle
   @methodOf Collision
 
-  @param {Point} source A point
-  @param {Number} direction The direction from the point
+  @param {Point} source The starting position
+  @param {Point} direction A vector from the point
   @param {Object} target The circle 
 
   @returns {Boolean} true if the line intersects the circle, false otherwise
@@ -128,9 +128,9 @@ Collision =
   @name rayRectangle
   @methodOf Collision
 
-  @param source
-  @param direction
-  @param target
+  @param {Point} source The starting position
+  @param {Point} direction A vector from the point
+  @param {Object} target The rectangle
 
   @returns {Boolean} true if the line intersects the rectangle, false otherwise
   ###
