@@ -116,6 +116,7 @@ Bounded = (I, self) ->
 
   @param {Number} xOffset the amount to shift the x position 
   @param {Number} yOffset the amount to shift the y position
+  @returns {Object} The collision bounds
   ###
   collisionBounds: (xOffset, yOffset) ->
     bounds = self.bounds(xOffset, yOffset)
