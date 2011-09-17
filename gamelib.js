@@ -4003,7 +4003,7 @@ Bounded = function(I, self) {
       return Point(I.x, I.y);
     },
     /**
-    Does a check to see if this object is overlapping
+    Does a check to see if $this object is overlapping
     with the bounds passed in.
     
     <code><pre>
