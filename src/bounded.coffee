@@ -101,10 +101,10 @@ Bounded = (I, self) ->
       height: 20
 
     player.collisionBounds()
-    => {x: 38, y: 36 height: 28, width: 24}
+    => {x: 38, y: 36, height: 28, width: 24}
 
     player.collisionBounds(10, 10)
-    => {x: 48, y: 46 height: 28, width: 24}
+    => {x: 48, y: 46, height: 28, width: 24}
   </pre></code>  
 
   @name collisionBounds
