@@ -53,9 +53,9 @@ Bounded = (I, self) ->
   position: ->
     Point(I.x, I.y)
 
-###*
-Does a check to see if $this object is overlapping
-with the bounds passed in.
+  ###*
+  Does a check to see if this object is overlapping
+  with the bounds passed in.
 
 <code><pre>
    player = Core
@@ -68,9 +68,9 @@ with the bounds passed in.
 => true
 </pre></code>
 
-@returns The position of this object
-@type Point
-###
+  @returns The position of this object
+  @type Point
+  ###
   collides: (bounds) ->
     Collision.rectangular(I, bounds)
 
