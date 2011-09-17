@@ -73,8 +73,8 @@ Collision =
   @name circular
   @methodOf Collision
 
-  @param a {Object}
-  @param b {Object}
+  @param a {Object} The first circle
+  @param b {Object} The second circle
 
   @returns {Boolean} true is the circles overlap, false otherwise
   ###
