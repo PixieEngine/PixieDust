@@ -1,5 +1,3 @@
-( ->
-
 equalEnough = (actual, expected, tolerance=3, message) ->
   message ||= "" + expected + " within " + tolerance + " of " + actual
   ok(expected + tolerance >= actual && expected - tolerance <= actual, message)
@@ -405,4 +403,3 @@ test "accepts named colors", ->
 
 module()
 
-)()
