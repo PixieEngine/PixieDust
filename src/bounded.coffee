@@ -74,6 +74,8 @@ Bounded = (I, self) ->
       width: 20
       height: 20
 
+    player.include(Bounded)  
+
     player.collides({x: 5, y: 7, width: 20, height: 20})
     => true
   </pre></code>
@@ -99,6 +101,8 @@ Bounded = (I, self) ->
       y: 50
       width: 20
       height: 20
+
+    player.include(Bounded)
 
     player.collisionBounds()
     => {x: 38, y: 36, height: 28, width: 24}
