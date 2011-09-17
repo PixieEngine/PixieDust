@@ -4005,7 +4005,7 @@ Bounded = function(I, self) {
     
       player.position()
       => {x: 50, y: 40}
-    </pre></code> 
+    </pre></code>
     
     @name position
     @methodOf Bounded#
@@ -4060,7 +4060,7 @@ Bounded = function(I, self) {
     
       player.collisionBounds(10, 10)
       => {x: 48, y: 46, height: 28, width: 24}
-    </pre></code>  
+    </pre></code>
     
     @name collisionBounds
     @methodOf Bounded#
@@ -4129,7 +4129,7 @@ Bounded = function(I, self) {
     
       player.centeredBounds()
       => {x: 4, y: 7, xw: 1, yw: 1}
-    </pre></code>  
+    </pre></code>
     
     @name centeredBounds
     @methodOf Bounded#
@@ -4159,7 +4159,7 @@ Bounded = function(I, self) {
     
     player.center()
     => {x: 30, y: 35}
-    </pre></code>   
+    </pre></code>
     
     @name center
     @methodOf Bounded#
@@ -4172,7 +4172,7 @@ Bounded = function(I, self) {
     Return the circular bounds of the object. The circle is
     centered at the midpoint of the object.
     
-    <code><pre>  
+    <code><pre>
     player = Core
       radius: 5
       x: 50
