@@ -68,6 +68,7 @@ Bounded = (I, self) ->
 => true
 </pre></code>
 
+  @name position
   @returns The position of this object
   @type Point
   ###
