@@ -32,8 +32,8 @@ Collision =
   @name rectangular
   @methodOf Collision
 
-  @param a The first rectangle
-  @param b The second rectangle
+  @param a {Object} The first rectangle
+  @param b {Object} The second rectangle
 
   @returns {Boolean} true if the rectangles overlap, false otherwise
   ###
