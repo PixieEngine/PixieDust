@@ -92,7 +92,7 @@ Collision =
   @methodOf Collision
 
   @param {Point} source A point
-  @param {Number} direction
+  @param {Number} direction The direction from the point
   @param {Object} target The circle 
 
   @returns {Boolean} true if the line intersects the circle, false otherwise
