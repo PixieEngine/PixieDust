@@ -47,14 +47,14 @@ Bounded = (I, self) ->
   Redefining the center method will change the relative position.
 
   <code><pre>
-   player = Core
-     x: 50
-     y: 40
+  player = Core
+    x: 50
+    y: 40
 
-   player.include(Bounded)      
+  player.include(Bounded)      
 
-   player.position()
-=> {x: 50, y: 40}
+  player.position()
+  => {x: 50, y: 40}
   </pre></code>
 
   @name position
