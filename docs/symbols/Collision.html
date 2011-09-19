@@ -221,26 +221,26 @@
   Circle objects have x, y, and radius.
 
   <code><pre>
-     player = GameObject
-       x: 5
-       y: 5
-       radius: 10
+  player = GameObject
+    x: 5
+    y: 5
+    radius: 10
 
-     enemy = GameObject
-       x: 10
-       y: 10
-       radius: 10
+  enemy = GameObject
+    x: 10
+    y: 10
+    radius: 10
 
-     farEnemy = GameObject
-       x: 500
-       y: 500
-       radius: 30
+  farEnemy = GameObject
+    x: 500
+    y: 500
+    radius: 30
 
-     Collision.circular(player, enemy)
-  => true
+  Collision.circular(player, enemy)
+  # => true
 
-     Collision.circular(player, farEnemy)
-  => false
+  Collision.circular(player, farEnemy)
+  # => false
   </pre></code>
 
                   
@@ -310,7 +310,7 @@
     radius: 10
 
   Collision.rayCircle(Point(0, 0), Point(1, 0), circle)
-  => true
+  # => true
   </pre></code>
 
                   
@@ -387,7 +387,7 @@
     height: 20
 
   Collision.rayRectangle(Point(0, 0), Point(1, 0), rect)
-  => true
+  # => true
   </pre></code>
 
                   
@@ -457,23 +457,23 @@
     Bounds objects have x, y, width and height properties.
 
     <code><pre>
-       player = GameObject
-         x: 0
-         y: 0
-         width: 10
-         height: 10
+    player = GameObject
+      x: 0
+      y: 0
+      width: 10
+      height: 10
 
-       enemy = GameObject
-         x: 5
-         y: 5
-         width: 10
-         height: 10
+    enemy = GameObject
+      x: 5
+      y: 5
+      width: 10
+      height: 10
 
-       Collision.rectangular(player, enemy)
-    => true
+    Collision.rectangular(player, enemy)
+    # => true
 
-       Collision.rectangular(player, {x: 50, y: 40, width: 30, height: 30})
-    => false
+    Collision.rectangular(player, {x: 50, y: 40, width: 30, height: 30})
+    # => false
     </pre></code>
 
                   
