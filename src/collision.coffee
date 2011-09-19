@@ -92,7 +92,7 @@ Collision =
     radius: 10
 
   Collision.rayCircle(Point(0, 0), Point(1, 0), circle)
-  => true
+  # => true
   </pre></code>
 
   @name rayCircle
