@@ -3923,22 +3923,22 @@ location and dimensions of the including object. This module is included
 by default in <code>GameObject</code>.
 
 <code><pre>
-   player = Core
-     x: 10
-     y: 50
-     width: 20
-     height: 20
-     other: "stuff"
-     more: "properties"
+player = Core
+  x: 10
+  y: 50
+  width: 20
+  height: 20
+  other: "stuff"
+  more: "properties"
 
-   player.position()
-=> Uncaught TypeError: Object has no method 'position'
+player.position()
+# => Uncaught TypeError: Object has no method 'position'
 
-   player.include(Bounded)
+player.include(Bounded)
 
-   # now player has all the methods provided by this module
-   player.position()
-=> {x: 10, y: 50}
+# now player has all the methods provided by this module
+player.position()
+# => {x: 10, y: 50}
 </pre></code>
 
 @see GameObject
@@ -3947,7 +3947,6 @@ Bounded module
 @name Bounded
 @module
 @constructor
-
 @param {Object} I Instance variables
 @param {Core} self Reference to including object
 */var Bounded;
@@ -3966,14 +3965,14 @@ Bounded = function(I, self) {
     Redefining the center method will change the relative position.
 
     <code><pre>
-     player = Core
-       x: 50
-       y: 40
+    player = Core
+      x: 50
+      y: 40
 
-     player.include(Bounded)      
+    player.include(Bounded)      
 
-     player.position()
-    => {x: 50, y: 40}
+    player.position()
+    # => {x: 50, y: 40}
     </pre></code>
 
     @name position
@@ -3988,16 +3987,16 @@ Bounded = function(I, self) {
     with the bounds passed in.
 
     <code><pre>
-      player = Core
-        x: 4
-        y: 6
-        width: 20
-        height: 20
+    player = Core
+      x: 4
+      y: 6
+      width: 20
+      height: 20
 
-      player.include(Bounded)  
+    player.include(Bounded)  
 
-      player.collides({x: 5, y: 7, width: 20, height: 20})
-      => true
+    player.collides({x: 5, y: 7, width: 20, height: 20})
+    # => true
     </pre></code>
 
     @name collides
@@ -4013,27 +4012,26 @@ Bounded = function(I, self) {
     and increased if collision margin is negative.
 
     <code><pre>
-      player = Core
-        collisionMargin: 
-          x: -2
-          y: -4
-        x: 50
-        y: 50
-        width: 20
-        height: 20
+    player = Core
+      collisionMargin: 
+        x: -2
+        y: -4
+      x: 50
+      y: 50
+      width: 20
+      height: 20
 
-      player.include(Bounded)
+    player.include(Bounded)
 
-      player.collisionBounds()
-      => {x: 38, y: 36, height: 28, width: 24}
+    player.collisionBounds()
+    # => {x: 38, y: 36, height: 28, width: 24}
 
-      player.collisionBounds(10, 10)
-      => {x: 48, y: 46, height: 28, width: 24}
+    player.collisionBounds(10, 10)
+    # => {x: 48, y: 46, height: 28, width: 24}
     </pre></code>
 
     @name collisionBounds
     @methodOf Bounded#
-
     @param {Number} xOffset the amount to shift the x position 
     @param {Number} yOffset the amount to shift the y position
     @returns {Object} The collision bounds
@@ -4052,24 +4050,23 @@ Bounded = function(I, self) {
     of the object and its dimensions with optional offsets.
 
     <code><pre>
-      player = Core
-        x: 3
-        y: 6
-        width: 2
-        height: 2
+    player = Core
+      x: 3
+      y: 6
+      width: 2
+      height: 2
 
-      player.include(Bounded)
+    player.include(Bounded)
 
-      player.bounds()
-      => {x: 3, y: 6, width: 2, height: 2}
+    player.bounds()
+    # => {x: 3, y: 6, width: 2, height: 2}
 
-      player.bounds(7, 4)
-      => {x: 10, y: 10, width: 2, height: 2}   
+    player.bounds(7, 4)
+    # => {x: 10, y: 10, width: 2, height: 2}   
     </pre></code>
 
     @name bounds
     @methodOf Bounded#
-
     @param {Number} xOffset the amount to shift the x position 
     @param {Number} yOffset the amount to shift the y position
     */
@@ -4088,16 +4085,16 @@ Bounded = function(I, self) {
     of the object along with the midpoint of the width and height.
 
     <code><pre>
-      player = Core
-        x: 3
-        y: 6
-        width: 2
-        height: 2
+    player = Core
+      x: 3
+      y: 6
+      width: 2
+      height: 2
 
-      player.include(Bounded)
+    player.include(Bounded)
 
-      player.centeredBounds()
-      => {x: 4, y: 7, xw: 1, yw: 1}
+    player.centeredBounds()
+    # => {x: 4, y: 7, xw: 1, yw: 1}
     </pre></code>
 
     @name centeredBounds
@@ -4127,7 +4124,7 @@ Bounded = function(I, self) {
     player.include(Bounded)  
 
     player.center()
-    => {x: 30, y: 35}
+    # => {x: 30, y: 35}
     </pre></code>
 
     @name center
@@ -4151,11 +4148,12 @@ Bounded = function(I, self) {
     player.include(Bounded)
 
     player.circle()
-    => {radius: 5, x: 50, y: 50}
+    # => {radius: 5, x: 50, y: 50}
     </pre></code>
 
     @name circle
     @methodOf Bounded#
+    @returns {Object} An object with a position and a radius
     */
     circle: function() {
       var circle;
@@ -4177,31 +4175,29 @@ Collision = {
     Bounds objects have x, y, width and height properties.
 
     <code><pre>
-       player = GameObject
-         x: 0
-         y: 0
-         width: 10
-         height: 10
+    player = GameObject
+      x: 0
+      y: 0
+      width: 10
+      height: 10
 
-       enemy = GameObject
-         x: 5
-         y: 5
-         width: 10
-         height: 10
+    enemy = GameObject
+      x: 5
+      y: 5
+      width: 10
+      height: 10
 
-       Collision.rectangular(player, enemy)
-    => true
+    Collision.rectangular(player, enemy)
+    # => true
 
-       Collision.rectangular(player, {x: 50, y: 40, width: 30, height: 30})
-    => false
+    Collision.rectangular(player, {x: 50, y: 40, width: 30, height: 30})
+    # => false
     </pre></code>
 
     @name rectangular
     @methodOf Collision
-
     @param {Object} a The first rectangle
     @param {Object} b The second rectangle
-
     @returns {Boolean} true if the rectangles overlap, false otherwise
     */
   rectangular: function(a, b) {
@@ -4212,34 +4208,32 @@ Collision = {
   Circle objects have x, y, and radius.
 
   <code><pre>
-     player = GameObject
-       x: 5
-       y: 5
-       radius: 10
+  player = GameObject
+    x: 5
+    y: 5
+    radius: 10
 
-     enemy = GameObject
-       x: 10
-       y: 10
-       radius: 10
+  enemy = GameObject
+    x: 10
+    y: 10
+    radius: 10
 
-     farEnemy = GameObject
-       x: 500
-       y: 500
-       radius: 30
+  farEnemy = GameObject
+    x: 500
+    y: 500
+    radius: 30
 
-     Collision.circular(player, enemy)
-  => true
+  Collision.circular(player, enemy)
+  # => true
 
-     Collision.circular(player, farEnemy)
-  => false
+  Collision.circular(player, farEnemy)
+  # => false
   </pre></code>
 
   @name circular
   @methodOf Collision
-
   @param {Object} a The first circle
   @param {Object} b The second circle
-
   @returns {Boolean} true is the circles overlap, false otherwise
   */
   circular: function(a, b) {
@@ -4260,16 +4254,14 @@ Collision = {
     radius: 10
 
   Collision.rayCircle(Point(0, 0), Point(1, 0), circle)
-  => true
+  # => true
   </pre></code>
 
   @name rayCircle
   @methodOf Collision
-
   @param {Point} source The starting position
   @param {Point} direction A vector from the point
   @param {Object} target The circle 
-
   @returns {Boolean} true if the line intersects the circle, false otherwise
   */
   rayCircle: function(source, direction, target) {
@@ -4305,16 +4297,14 @@ Collision = {
     height: 20
 
   Collision.rayRectangle(Point(0, 0), Point(1, 0), rect)
-  => true
+  # => true
   </pre></code>
 
   @name rayRectangle
   @methodOf Collision
-
   @param {Point} source The starting position
   @param {Point} direction A vector from the point
   @param {Object} target The rectangle
-
   @returns {Boolean} true if the line intersects the rectangle, false otherwise
   */
   rayRectangle: function(source, direction, target) {
