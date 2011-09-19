@@ -115,7 +115,7 @@ Drawable = (I, self) ->
 
   @name transform
   @methodOf Drawable#
-  @returns {Matrix} The current transform.
+  @returns {Matrix} The current transform
   ###
   transform: ->
     center = self.center()
