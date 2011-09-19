@@ -54,7 +54,7 @@ Bounded = (I, self) ->
   player.include(Bounded)      
 
   player.position()
-  => {x: 50, y: 40}
+  # => {x: 50, y: 40}
   </pre></code>
 
   @name position
@@ -78,7 +78,7 @@ Bounded = (I, self) ->
   player.include(Bounded)  
 
   player.collides({x: 5, y: 7, width: 20, height: 20})
-  => true
+  # => true
   </pre></code>
 
   @name collides
@@ -106,10 +106,10 @@ Bounded = (I, self) ->
   player.include(Bounded)
 
   player.collisionBounds()
-  => {x: 38, y: 36, height: 28, width: 24}
+  # => {x: 38, y: 36, height: 28, width: 24}
 
   player.collisionBounds(10, 10)
-  => {x: 48, y: 46, height: 28, width: 24}
+  # => {x: 48, y: 46, height: 28, width: 24}
   </pre></code>
 
   @name collisionBounds
@@ -133,24 +133,23 @@ Bounded = (I, self) ->
   of the object and its dimensions with optional offsets.
 
   <code><pre>
-    player = Core
-      x: 3
-      y: 6
-      width: 2
-      height: 2
+  player = Core
+    x: 3
+    y: 6
+    width: 2
+    height: 2
 
-    player.include(Bounded)
+  player.include(Bounded)
 
-    player.bounds()
-    => {x: 3, y: 6, width: 2, height: 2}
+  player.bounds()
+  # => {x: 3, y: 6, width: 2, height: 2}
 
-    player.bounds(7, 4)
-    => {x: 10, y: 10, width: 2, height: 2}   
+  player.bounds(7, 4)
+  # => {x: 10, y: 10, width: 2, height: 2}   
   </pre></code>
 
   @name bounds
   @methodOf Bounded#
-
   @param {Number} xOffset the amount to shift the x position 
   @param {Number} yOffset the amount to shift the y position
   ### 
@@ -167,16 +166,16 @@ Bounded = (I, self) ->
   of the object along with the midpoint of the width and height.
 
   <code><pre>
-    player = Core
-      x: 3
-      y: 6
-      width: 2
-      height: 2
+  player = Core
+    x: 3
+    y: 6
+    width: 2
+    height: 2
 
-    player.include(Bounded)
+  player.include(Bounded)
 
-    player.centeredBounds()
-    => {x: 4, y: 7, xw: 1, yw: 1}
+  player.centeredBounds()
+  # => {x: 4, y: 7, xw: 1, yw: 1}
   </pre></code>
 
   @name centeredBounds
