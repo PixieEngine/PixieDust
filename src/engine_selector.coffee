@@ -4,7 +4,6 @@ The <code>Selector</code> module provides methods to query the engine to find ga
 @name Selector
 @fieldOf Engine
 @module
-
 @param {Object} I Instance variables
 @param {Object} self Reference to the engine
 ###
