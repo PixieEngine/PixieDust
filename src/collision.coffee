@@ -144,11 +144,9 @@ Collision =
 
   @name rayRectangle
   @methodOf Collision
-
   @param {Point} source The starting position
   @param {Point} direction A vector from the point
   @param {Object} target The rectangle
-
   @returns {Boolean} true if the line intersects the rectangle, false otherwise
   ###
   rayRectangle: (source, direction, target) ->
