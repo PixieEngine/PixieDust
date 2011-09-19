@@ -114,7 +114,6 @@ Bounded = (I, self) ->
 
   @name collisionBounds
   @methodOf Bounded#
-
   @param {Number} xOffset the amount to shift the x position 
   @param {Number} yOffset the amount to shift the y position
   @returns {Object} The collision bounds
