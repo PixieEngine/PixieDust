@@ -97,11 +97,9 @@ Collision =
 
   @name rayCircle
   @methodOf Collision
-
   @param {Point} source The starting position
   @param {Point} direction A vector from the point
   @param {Object} target The circle 
-
   @returns {Boolean} true if the line intersects the circle, false otherwise
   ###
   rayCircle: (source, direction, target) ->
@@ -141,7 +139,7 @@ Collision =
     height: 20
 
   Collision.rayRectangle(Point(0, 0), Point(1, 0), rect)
-  => true
+  # => true
   </pre></code>
 
   @name rayRectangle
