@@ -10,23 +10,23 @@ Collision =
   Bounds objects have x, y, width and height properties.
 
   <code><pre>
-     player = GameObject
-       x: 0
-       y: 0
-       width: 10
-       height: 10
+  player = GameObject
+    x: 0
+    y: 0
+    width: 10
+    height: 10
 
-     enemy = GameObject
-       x: 5
-       y: 5
-       width: 10
-       height: 10
+  enemy = GameObject
+    x: 5
+    y: 5
+    width: 10
+    height: 10
 
-     Collision.rectangular(player, enemy)
-  => true
+  Collision.rectangular(player, enemy)
+  # => true
 
-     Collision.rectangular(player, {x: 50, y: 40, width: 30, height: 30})
-  => false
+  Collision.rectangular(player, {x: 50, y: 40, width: 30, height: 30})
+  # => false
   </pre></code>
 
   @name rectangular
