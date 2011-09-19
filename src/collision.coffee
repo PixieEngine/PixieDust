@@ -46,26 +46,26 @@ Collision =
   Circle objects have x, y, and radius.
 
   <code><pre>
-     player = GameObject
-       x: 5
-       y: 5
-       radius: 10
+  player = GameObject
+    x: 5
+    y: 5
+    radius: 10
 
-     enemy = GameObject
-       x: 10
-       y: 10
-       radius: 10
+  enemy = GameObject
+    x: 10
+    y: 10
+    radius: 10
 
-     farEnemy = GameObject
-       x: 500
-       y: 500
-       radius: 30
+  farEnemy = GameObject
+    x: 500
+    y: 500
+    radius: 30
 
-     Collision.circular(player, enemy)
-  => true
+  Collision.circular(player, enemy)
+  # => true
 
-     Collision.circular(player, farEnemy)
-  => false
+  Collision.circular(player, farEnemy)
+  # => false
   </pre></code>
 
   @name circular
