@@ -1,8 +1,8 @@
 ###*
-  @name ResourceLoader
-  @namespace
+@name ResourceLoader
+@namespace
 
-  Helps access the assets in your game.
+Helps access the assets in your game.
 ###
 (->
   typeTable =
