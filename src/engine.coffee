@@ -35,7 +35,6 @@
   @name beforeAdd
   @methodOf Engine#
   @event
-
   @param {Object} entityData
   ###
 
@@ -45,7 +44,6 @@
   @name afterAdd
   @methodOf Engine#
   @event
-
   @param {GameObject} object The object that has just been added to the
   engine.
   ###
@@ -73,7 +71,6 @@
   @name beforeDraw
   @methodOf Engine#
   @event
-
   @params {PowerCanvas} canvas A reference to the canvas to draw on.
   ###
 
@@ -89,7 +86,6 @@
   @name draw
   @methodOf Engine#
   @event
-
   @params {PowerCanvas} canvas A reference to the canvas to draw on.
   ###
 
@@ -110,7 +106,6 @@
   @name overlay
   @methodOf Engine#
   @event
-
   @params {PowerCanvas} canvas A reference to the canvas to draw on. 
   ###
 
