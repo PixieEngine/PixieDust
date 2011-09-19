@@ -18,21 +18,20 @@ player = Core
 
 engine.bind 'draw', (canvas) ->
   player.draw(canvas) 
-=> Uncaught TypeError: Object has no method 'draw'
+# => Uncaught TypeError: Object has no method 'draw'
 
 player.include(Drawable)
 
 engine.bind 'draw', (canvas) ->
   player.draw(canvas)
-=> if you have a sprite named "my_cool_sprite" in your images folder
-then it will be drawn. Otherwise, a rectangle positioned at x: 15 and
-y: 30 with width and height 5 will be drawn.
+# => if you have a sprite named "my_cool_sprite" in your images folder
+# then it will be drawn. Otherwise, a rectangle positioned at x: 15 and
+# y: 30 with width and height 5 will be drawn.
 </pre></code>
 
 @name Drawable
 @module
 @constructor
-
 @param {Object} I Instance variables
 @param {Core} self Reference to including object
 ###
@@ -58,7 +57,6 @@ player.bind "draw", (canvas) ->
 @name draw
 @methodOf Drawable#
 @event
-
 @param {PowerCanvas} canvas A reference to the canvas to draw on.
 ###
 
@@ -117,7 +115,7 @@ Drawable = (I, self) ->
 
   @name transform
   @methodOf Drawable#
-  @type Matrix
+  @returns {Matrix} The current transform.
   ###
   transform: ->
     center = self.center()
