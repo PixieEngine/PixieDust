@@ -94,22 +94,22 @@ Bounded = (I, self) ->
   and increased if collision margin is negative.
 
   <code><pre>
-    player = Core
-      collisionMargin: 
-        x: -2
-        y: -4
-      x: 50
-      y: 50
-      width: 20
-      height: 20
+  player = Core
+    collisionMargin: 
+      x: -2
+      y: -4
+    x: 50
+    y: 50
+    width: 20
+    height: 20
 
-    player.include(Bounded)
+  player.include(Bounded)
 
-    player.collisionBounds()
-    => {x: 38, y: 36, height: 28, width: 24}
+  player.collisionBounds()
+  => {x: 38, y: 36, height: 28, width: 24}
 
-    player.collisionBounds(10, 10)
-    => {x: 48, y: 46, height: 28, width: 24}
+  player.collisionBounds(10, 10)
+  => {x: 48, y: 46, height: 28, width: 24}
   </pre></code>
 
   @name collisionBounds
