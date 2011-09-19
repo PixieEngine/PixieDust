@@ -29,7 +29,6 @@ draw anything to the screen until the image has been loaded.
 
     @name draw
     @methodOf Sprite#
-
     @param {PowerCanvas} canvas Reference to the canvas to draw the sprite on
     @param {Number} x Position on the x axis to draw the sprite
     @param {Number} y Position on the y axis to draw the sprite
@@ -61,7 +60,6 @@ draw anything to the screen until the image has been loaded.
 
   @name loadSheet
   @methodOf Sprite
-
   @param {String} name Name of the spriteSheet image in your images directory
   @param {Number} tileWidth Width of each sprite in the sheet
   @param {Number} tileHeight Height of each sprite in the sheet
