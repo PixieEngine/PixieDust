@@ -27,7 +27,6 @@ player.I.rotation
 @name Rotatable
 @module
 @constructor
-
 @param {Object} I Instance variables
 @param {Core} self Reference to including object
 ###
