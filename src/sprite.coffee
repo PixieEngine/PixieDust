@@ -86,10 +86,8 @@ draw anything to the screen until the image has been loaded.
 
   @name load
   @methodOf Sprite
-
   @param {String} url
   @param {Function} [loadedCallback]
-
   @returns {Sprite} A sprite object
   ###
   Sprite.load = (url, loadedCallback) ->
@@ -113,10 +111,8 @@ draw anything to the screen until the image has been loaded.
 
   @name fromPixieId
   @methodOf Sprite
-
   @param {Number} id Pixie Id of the sprite to load
   @param {Function} [callback] Function to execute once the image is loaded. The sprite proxy data is passed to this as a parameter.
-
   @returns {Sprite}
   ###
   Sprite.fromPixieId = (id, callback) ->
@@ -145,10 +141,8 @@ draw anything to the screen until the image has been loaded.
 
   @name fromURL
   @methodOf Sprite
-
   @param {String} url The url where the image to load is located
   @param {Function} [callback] Function to execute once the image is loaded. The sprite proxy data is passed to this as a parameter.
-
   @returns {Sprite}
   ###
   Sprite.fromURL = Sprite.load
@@ -158,10 +152,8 @@ draw anything to the screen until the image has been loaded.
 
   @name loadByName
   @methodOf Sprite
-
   @param {String} name The name of the image in your images directory
   @param {Function} [callback] Function to execute once the image is loaded. The sprite proxy data is passed to this as a parameter.
-
   @returns {Sprite}
   ###
   Sprite.loadByName = (name, callback) ->
