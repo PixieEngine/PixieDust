@@ -203,7 +203,7 @@ Bounded = (I, self) ->
   player.include(Bounded)  
 
   player.center()
-  => {x: 30, y: 35}
+  # => {x: 30, y: 35}
   </pre></code>
 
   @name center
@@ -227,11 +227,12 @@ Bounded = (I, self) ->
   player.include(Bounded)
 
   player.circle()
-  => {radius: 5, x: 50, y: 50}
+  # => {radius: 5, x: 50, y: 50}
   </pre></code>
 
   @name circle
   @methodOf Bounded#
+  @returns {Object} An object with a position and a radius
   ###
   circle: () ->
     circle = self.center()
