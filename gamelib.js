@@ -4722,21 +4722,20 @@ player = Core
 
 engine.bind 'draw', (canvas) ->
   player.draw(canvas) 
-=> Uncaught TypeError: Object has no method 'draw'
+# => Uncaught TypeError: Object has no method 'draw'
 
 player.include(Drawable)
 
 engine.bind 'draw', (canvas) ->
   player.draw(canvas)
-=> if you have a sprite named "my_cool_sprite" in your images folder
-then it will be drawn. Otherwise, a rectangle positioned at x: 15 and
-y: 30 with width and height 5 will be drawn.
+# => if you have a sprite named "my_cool_sprite" in your images folder
+# then it will be drawn. Otherwise, a rectangle positioned at x: 15 and
+# y: 30 with width and height 5 will be drawn.
 </pre></code>
 
 @name Drawable
 @module
 @constructor
-
 @param {Object} I Instance variables
 @param {Core} self Reference to including object
 */
@@ -4761,7 +4760,6 @@ player.bind "draw", (canvas) ->
 @name draw
 @methodOf Drawable#
 @event
-
 @param {PowerCanvas} canvas A reference to the canvas to draw on.
 */var Drawable;
 Drawable = function(I, self) {
@@ -4819,7 +4817,7 @@ Drawable = function(I, self) {
 
     @name transform
     @methodOf Drawable#
-    @type Matrix
+    @returns {Matrix} The current transform
     */
     transform: function() {
       var center, transform;
@@ -4848,27 +4846,26 @@ If a duration is specified the object will update that many times. If -1 is
 specified the object will have an unlimited duration.
 
 <code><pre>
-   enemy = GameObject
-     x: 50
-     y: 30
-     duration: 5
+enemy = GameObject
+  x: 50
+  y: 30
+  duration: 5
 
-   enemy.include(Durable)
+enemy.include(Durable)
 
-   enemy.I.active
-=> true
+enemy.I.active
+# => true
 
-   5.times ->
-     enemy.update()
+5.times ->
+  enemy.update()
 
-   enemy.I.active
-=> false
+enemy.I.active
+# => false
 </pre></code>
 
 @name Durable
 @module
 @constructor
-
 @param {Object} I Instance variables
 @param {Core} self Reference to including object
 */var Durable;
@@ -4997,7 +4994,6 @@ Emitterable = function(I, self) {
   @name beforeAdd
   @methodOf Engine#
   @event
-
   @param {Object} entityData
   */
   /**
@@ -5006,7 +5002,6 @@ Emitterable = function(I, self) {
   @name afterAdd
   @methodOf Engine#
   @event
-
   @param {GameObject} object The object that has just been added to the
   engine.
   */
@@ -5031,7 +5026,6 @@ Emitterable = function(I, self) {
   @name beforeDraw
   @methodOf Engine#
   @event
-
   @params {PowerCanvas} canvas A reference to the canvas to draw on.
   */
   /**
@@ -5046,7 +5040,6 @@ Emitterable = function(I, self) {
   @name draw
   @methodOf Engine#
   @event
-
   @params {PowerCanvas} canvas A reference to the canvas to draw on.
   */
   /**
@@ -5066,7 +5059,6 @@ Emitterable = function(I, self) {
   @name overlay
   @methodOf Engine#
   @event
-
   @params {PowerCanvas} canvas A reference to the canvas to draw on. 
   */
   Engine = function(I) {
@@ -5321,7 +5313,6 @@ The <code>Collision</code> module provides some simple collision detection metho
 @name Collision
 @fieldOf Engine
 @module
-
 @param {Object} I Instance variables
 @param {Object} self Reference to the engine
 */Engine.Collision = function(I, self) {
@@ -5403,7 +5394,6 @@ The <code>SaveState</code> module provides methods to save and restore the curre
 @name SaveState
 @fieldOf Engine
 @module
-
 @param {Object} I Instance variables
 @param {Object} self Reference to the engine
 */Engine.SaveState = function(I, self) {
@@ -5491,7 +5481,6 @@ The <code>Selector</code> module provides methods to query the engine to find ga
 @name Selector
 @fieldOf Engine
 @module
-
 @param {Object} I Instance variables
 @param {Object} self Reference to the engine
 */Engine.Selector = function(I, self) {
@@ -5510,44 +5499,44 @@ The <code>Selector</code> module provides methods to query the engine to find ga
     so if you are trying to find only one object you will need something like <code>engine.find("Enemy").first()</code>.
 
     <code><pre>
-       player = engine.add
-         class: "Player"
+    player = engine.add
+      class: "Player"
 
-       enemy = engine.add
-         class: "Enemy"
-         speed: 5
-         x: 0
+    enemy = engine.add
+      class: "Enemy"
+      speed: 5
+      x: 0
 
-       distantEnemy = engine.add
-         class "Enemy"
-         x: 500
+    distantEnemy = engine.add
+      class "Enemy"
+      x: 500
 
-       boss = engine.add
-         class: "Enemy"
-         id: "Boss"
-         x: 0
+    boss = engine.add
+      class: "Enemy"
+      id: "Boss"
+      x: 0
 
-       # to select an object by id use "#anId"
-       engine.find "#Boss"
-    => [boss]
+    # to select an object by id use "#anId"
+    engine.find "#Boss"
+    # => [boss]
 
-       # to select an object by class use "MyClass"
-       engine.find "Enemy"
-    => [enemy, distantEnemy, boss]
+    # to select an object by class use "MyClass"
+    engine.find "Enemy"
+    # => [enemy, distantEnemy, boss]
 
-       # to select an object by properties use ".someProperty" or ".someProperty=someValue"
-       engine.find ".speed=5"
-    => [enemy]
+    # to select an object by properties use ".someProperty" or ".someProperty=someValue"
+    engine.find ".speed=5"
+    # => [enemy]
 
-       # You may mix and match selectors.
-       engine.find "Enemy.x=0"
-    => [enemy, boss] # doesn't return distantEnemy
+    # You may mix and match selectors.
+    engine.find "Enemy.x=0"
+    # => [enemy, boss] # doesn't return distantEnemy
     </pre></code>
 
     @name find
     @methodOf Engine#
     @param {String} selector
-    @type Array
+    @returns {Array} An array of the objects found
     */
     find: function(selector) {
       var matcher, results;
@@ -5803,32 +5792,31 @@ GameObjects based on the velocity and acceleration. It does not check
 collisions so is probably best suited to particle effect like things.
 
 <code><pre>
-   player = GameObject
-     x: 0
-     y: 0
-     velocity: Point(0, 0)
-     acceleration: Point(1, 0)
-     maxSpeed: 2
+player = GameObject
+  x: 0
+  y: 0
+  velocity: Point(0, 0)
+  acceleration: Point(1, 0)
+  maxSpeed: 2
 
-   player.include(Movable)
+player.include(Movable)
 
-=> `velocity is {x: 0, y: 0} and position is {x: 0, y: 0}`
+# => `velocity is {x: 0, y: 0} and position is {x: 0, y: 0}`
 
-   player.update()
-=> `velocity is {x: 1, y: 0} and position is {x: 1, y: 0}` 
+player.update()
+# => `velocity is {x: 1, y: 0} and position is {x: 1, y: 0}` 
 
-   player.update()
-=> `velocity is {x: 2, y: 0} and position is {x: 3, y: 0}`   
+player.update()
+# => `velocity is {x: 2, y: 0} and position is {x: 3, y: 0}`   
 
-   # we've hit our maxSpeed so our velocity won't increase
-   player.update()
-=> `velocity is {x: 2, y: 0} and position is {x: 5, y: 0}`
+# we've hit our maxSpeed so our velocity won't increase
+player.update()
+# => `velocity is {x: 2, y: 0} and position is {x: 5, y: 0}`
 </pre></code>
 
 @name Movable
 @module
 @constructor
-
 @param {Object} I Instance variables
 @param {Core} self Reference to including object
 */var Movable;
@@ -5857,10 +5845,10 @@ Movable = function(I) {
   };
 };;
 /**
-  @name ResourceLoader
-  @namespace
+@name ResourceLoader
+@namespace
 
-  Helps access the assets in your game.
+Helps access the assets in your game.
 */(function() {
   var ResourceLoader, typeTable;
   typeTable = {
@@ -5871,8 +5859,8 @@ Movable = function(I) {
       Return the url for a particular asset.
 
       <code><pre>
-         ResourceLoader.urlFor("images", "player")
-      => This returns the url for the file "player.png" in your images directory.
+      ResourceLoader.urlFor("images", "player")
+      # => This returns the url for the file "player.png" in your images directory.
       </pre></code>
 
       @name urlFor
@@ -5896,31 +5884,30 @@ The Rotatable module rotates the object
 based on its rotational velocity.
 
 <code><pre>
-   player = GameObject
-     x: 0
-     y: 0
-     rotationalVelocity: Math.PI / 64
+player = GameObject
+  x: 0
+  y: 0
+  rotationalVelocity: Math.PI / 64
 
-   player.include(Rotatable)
+player.include(Rotatable)
 
-   player.I.rotation
-=> 0
+player.I.rotation
+# => 0
 
-   player.update()
+player.update()
 
-   player.I.rotation
-=> 0.04908738521234052 # Math.PI / 64
+player.I.rotation
+# => 0.04908738521234052 # Math.PI / 64
 
-   player.update()
+player.update()
 
-   player.I.rotation
-=> 0.09817477042468103 # 2 * (Math.PI / 64)
+player.I.rotation
+# => 0.09817477042468103 # 2 * (Math.PI / 64)
 </pre></code>
 
 @name Rotatable
 @module
 @constructor
-
 @param {Object} I Instance variables
 @param {Core} self Reference to including object
 */var Rotatable;
@@ -5970,7 +5957,6 @@ draw anything to the screen until the image has been loaded.
 
       @name draw
       @methodOf Sprite#
-
       @param {PowerCanvas} canvas Reference to the canvas to draw the sprite on
       @param {Number} x Position on the x axis to draw the sprite
       @param {Number} y Position on the y axis to draw the sprite
@@ -5997,11 +5983,9 @@ draw anything to the screen until the image has been loaded.
 
   @name loadSheet
   @methodOf Sprite
-
   @param {String} name Name of the spriteSheet image in your images directory
   @param {Number} tileWidth Width of each sprite in the sheet
   @param {Number} tileHeight Height of each sprite in the sheet
-
   @returns {Array} An array of sprite objects
   */
   Sprite.loadSheet = function(name, tileWidth, tileHeight) {
@@ -6026,10 +6010,8 @@ draw anything to the screen until the image has been loaded.
 
   @name load
   @methodOf Sprite
-
   @param {String} url
   @param {Function} [loadedCallback]
-
   @returns {Sprite} A sprite object
   */
   Sprite.load = function(url, loadedCallback) {
@@ -6052,10 +6034,8 @@ draw anything to the screen until the image has been loaded.
 
   @name fromPixieId
   @methodOf Sprite
-
   @param {Number} id Pixie Id of the sprite to load
   @param {Function} [callback] Function to execute once the image is loaded. The sprite proxy data is passed to this as a parameter.
-
   @returns {Sprite}
   */
   Sprite.fromPixieId = function(id, callback) {
@@ -6083,10 +6063,8 @@ draw anything to the screen until the image has been loaded.
 
   @name fromURL
   @methodOf Sprite
-
   @param {String} url The url where the image to load is located
   @param {Function} [callback] Function to execute once the image is loaded. The sprite proxy data is passed to this as a parameter.
-
   @returns {Sprite}
   */
   Sprite.fromURL = Sprite.load;
@@ -6095,10 +6073,8 @@ draw anything to the screen until the image has been loaded.
 
   @name loadByName
   @methodOf Sprite
-
   @param {String} name The name of the image in your images directory
   @param {Function} [callback] Function to execute once the image is loaded. The sprite proxy data is passed to this as a parameter.
-
   @returns {Sprite}
   */
   Sprite.loadByName = function(name, callback) {
