@@ -219,26 +219,26 @@
                 <div class="description">
                   Takes two circle objects and returns true if they collide (overlap), false otherwise.
   Circle objects have x, y, and radius.
-  
+
   <code><pre>
      player = GameObject
        x: 5
        y: 5
        radius: 10
-  
+
      enemy = GameObject
        x: 10
        y: 10
        radius: 10
-  
+
      farEnemy = GameObject
        x: 500
        y: 500
        radius: 30
-  
+
      Collision.circular(player, enemy)
   => true
-  
+
      Collision.circular(player, farEnemy)
   => false
   </pre></code>
@@ -277,9 +277,9 @@
                     
 
                     
-                      <dt class="heading">Returns:</dt>
                       
-                        <dd><span class="light fixedFont">{<a href="../symbols/Boolean.html">Boolean</a>}</span> true is the circles overlap, false otherwise</dd>
+                        <dt class="heading">Returns <span class="light fixedFont"><a href="../symbols/Boolean.html">Boolean</a></span> :</dt>
+                        <dd>true is the circles overlap, false otherwise</dd>
                       
                     
 
@@ -301,14 +301,14 @@
 
                 <div class="description">
                   Detects whether a line intersects a circle.
-  
+
   <code><pre>
   circle = engine.add
     class: "circle"
     x: 50
     y: 50
     radius: 10
-    
+
   Collision.rayCircle(Point(0, 0), Point(1, 0), circle)
   => true
   </pre></code>
@@ -353,9 +353,9 @@
                     
 
                     
-                      <dt class="heading">Returns:</dt>
                       
-                        <dd><span class="light fixedFont">{<a href="../symbols/Boolean.html">Boolean</a>}</span> true if the line intersects the circle, false otherwise</dd>
+                        <dt class="heading">Returns <span class="light fixedFont"><a href="../symbols/Boolean.html">Boolean</a></span> :</dt>
+                        <dd>true if the line intersects the circle, false otherwise</dd>
                       
                     
 
@@ -377,7 +377,7 @@
 
                 <div class="description">
                   Detects whether a line intersects a rectangle.
-  
+
   <code><pre>
   rect = engine.add
     class: "circle"
@@ -385,7 +385,7 @@
     y: 50
     width: 20
     height: 20
-    
+
   Collision.rayRectangle(Point(0, 0), Point(1, 0), rect)
   => true
   </pre></code>
@@ -430,9 +430,9 @@
                     
 
                     
-                      <dt class="heading">Returns:</dt>
                       
-                        <dd><span class="light fixedFont">{<a href="../symbols/Boolean.html">Boolean</a>}</span> true if the line intersects the rectangle, false otherwise</dd>
+                        <dt class="heading">Returns <span class="light fixedFont"><a href="../symbols/Boolean.html">Boolean</a></span> :</dt>
+                        <dd>true if the line intersects the rectangle, false otherwise</dd>
                       
                     
 
@@ -455,23 +455,23 @@
                 <div class="description">
                   Takes two bounds objects and returns true if they collide (overlap), false otherwise.
     Bounds objects have x, y, width and height properties.
-  
+
     <code><pre>
        player = GameObject
          x: 0
          y: 0
          width: 10
          height: 10
-  
+
        enemy = GameObject
          x: 5
          y: 5
          width: 10
          height: 10
-  
+
        Collision.rectangular(player, enemy)
     => true
-  
+
        Collision.rectangular(player, {x: 50, y: 40, width: 30, height: 30})
     => false
     </pre></code>
@@ -510,9 +510,9 @@
                     
 
                     
-                      <dt class="heading">Returns:</dt>
                       
-                        <dd><span class="light fixedFont">{<a href="../symbols/Boolean.html">Boolean</a>}</span> true if the rectangles overlap, false otherwise</dd>
+                        <dt class="heading">Returns <span class="light fixedFont"><a href="../symbols/Boolean.html">Boolean</a></span> :</dt>
+                        <dd>true if the rectangles overlap, false otherwise</dd>
                       
                     
 

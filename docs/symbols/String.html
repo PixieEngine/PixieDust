@@ -585,6 +585,17 @@ contents of the string without the extension.</div>
                 <div class="description">
                   Returns true if this string only contains whitespace characters.
 
+<code><pre>
+"".blank()
+# => true
+
+"hello".blank()
+# => false
+
+"   ".blank()
+# => true
+</pre></code>
+
                   
                 </div>
 
@@ -602,8 +613,8 @@ contents of the string without the extension.</div>
                     
 
                     
-                      <dt class="heading">Returns:</dt>
                       
+                        <dt class="heading">Returns <span class="light fixedFont"><a href="../symbols/Boolean.html">Boolean</a></span> :</dt>
                         <dd>Whether or not this string is blank.</dd>
                       
                     
@@ -671,6 +682,14 @@ contents of the string without the extension.</div>
                 <div class="description">
                   Returns a new string that is a camelCase version.
 
+<code><pre>
+"camel_case".camelize()
+"camel-case".camelize()
+"camel case".camelize()
+
+# => "camelCase"
+</pre></code>
+
                   
                 </div>
 
@@ -678,6 +697,27 @@ contents of the string without the extension.</div>
 
                 
 
+                
+                  <dl class="detailList nomargin">
+
+                    
+
+                    
+
+                    
+
+                    
+                      
+                        <dt class="heading">Returns <span class="light fixedFont"><a href="../symbols/String.html">String</a></span> :</dt>
+                        <dd>A new string. camelCase version of `this`.</dd>
+                      
+                    
+
+                    
+
+                    
+
+                  </dl>
                 
               
                 <div class="fixedFont heading">
@@ -692,6 +732,15 @@ contents of the string without the extension.</div>
                 <div class="description">
                   Returns a new string with the first letter capitalized and the rest lower cased.
 
+<code><pre>
+"capital".capitalize()
+"cAPITAL".capitalize()
+"cApItAl".capitalize()
+"CAPITAL".capitalize()
+
+# => "Capital"
+</pre></code>
+
                   
                 </div>
 
@@ -699,6 +748,27 @@ contents of the string without the extension.</div>
 
                 
 
+                
+                  <dl class="detailList nomargin">
+
+                    
+
+                    
+
+                    
+
+                    
+                      
+                        <dt class="heading">Returns <span class="light fixedFont"><a href="../symbols/String.html">String</a></span> :</dt>
+                        <dd>A new string. Capitalized version of `this`</dd>
+                      
+                    
+
+                    
+
+                    
+
+                  </dl>
                 
               
                 <div class="fixedFont heading">
@@ -815,6 +885,13 @@ if it is not a number, it defaults to 0.</dd>
                 <div class="description">
                   Return the class or constant named in this string.
 
+<code><pre>
+
+"Constant".constantize()
+# => Constant
+# notice this isn't a string. Useful for calling methods on class with the same name as `this`.
+</pre></code>
+
                   
                 </div>
 
@@ -832,8 +909,8 @@ if it is not a number, it defaults to 0.</dd>
                     
 
                     
-                      <dt class="heading">Returns:</dt>
                       
+                        <dt class="heading">Returns <span class="light fixedFont"><a href="../symbols/Object.html">Object</a></span> :</dt>
                         <dd>The class or constant named in this string.</dd>
                       
                     
@@ -924,6 +1001,14 @@ if it is not a number, it defaults to 0.</dd>
                 <div class="description">
                   Returns a new string that is a more human readable version.
 
+<code><pre>
+"player_id".humanize()
+# => "Player"
+
+"player_ammo".humanize()
+# => "Player ammo"
+</pre></code>
+
                   
                 </div>
 
@@ -931,6 +1016,27 @@ if it is not a number, it defaults to 0.</dd>
 
                 
 
+                
+                  <dl class="detailList nomargin">
+
+                    
+
+                    
+
+                    
+
+                    
+                      
+                        <dt class="heading">Returns <span class="light fixedFont"><a href="../symbols/String.html">String</a></span> :</dt>
+                        <dd>A new string. Replaces _id and _ with "" and capitalizes the word.</dd>
+                      
+                    
+
+                    
+
+                    
+
+                  </dl>
                 
               
                 <div class="fixedFont heading">
@@ -1006,8 +1112,8 @@ value is 0.</dd>
                     
 
                     
-                      <dt class="heading">Returns:</dt>
                       
+                        <dt class="heading">Returns <span class="light fixedFont"><a href="../symbols/Boolean.html">Boolean</a></span> :</dt>
                         <dd>true</dd>
                       
                     
@@ -1178,6 +1284,17 @@ it is implicitly converted to a RegExp by using new RegExp(obj).</dd>
                   Parse this string as though it is JSON and return the object it represents. If it
 is not valid JSON returns the string itself.
 
+<code><pre>
+# this is valid json, so an object is returned
+'{"a": 3}'.parse()
+# => {a: 3}
+
+# double quoting instead isn't valid JSON so a string is returned
+"{'a': 3}".parse()
+# => "{'a': 3}"
+
+</pre></code>
+
                   
                 </div>
 
@@ -1195,10 +1312,9 @@ is not valid JSON returns the string itself.
                     
 
                     
-                      <dt class="heading">Returns:</dt>
                       
-                        <dd>Returns an object from the JSON this string contains. If it
-is not valid JSON returns the string itself.</dd>
+                        <dt class="heading">Returns <span class="light fixedFont"><a href="../symbols/Object.html">Object</a></span> :</dt>
+                        <dd>Returns an object from the JSON this string contains. If it is not valid JSON returns the string itself.</dd>
                       
                     
 
@@ -1241,7 +1357,7 @@ is not valid JSON returns the string itself.</dd>
 
                 <div class="description">
                   Returns a new string with some or all matches of a pattern replaced by a
-replacement.  The pattern can be a string or a RegExp, and the replacement can
+replacement.  The pattern can be a string or a RegExp, and the replacement can
 be a string or a function to be called for each match.
 
 <code><em>str</em>.replace(<em>regexp|substr</em>, <em>newSubStr|function[</em>, </code><code><em>flags]</em>);</code>
@@ -1601,6 +1717,14 @@ of the string.
                 <div class="description">
                   Returns a new string in Title Case.
 
+<code><pre>
+"title-case".titleize()
+# => "Title Case"
+
+"title case".titleize()
+# => "Title Case"
+</pre></code>
+
                   
                 </div>
 
@@ -1608,6 +1732,27 @@ of the string.
 
                 
 
+                
+                  <dl class="detailList nomargin">
+
+                    
+
+                    
+
+                    
+
+                    
+                      
+                        <dt class="heading">Returns <span class="light fixedFont"><a href="../symbols/String.html">String</a></span> :</dt>
+                        <dd>A new string. Title Cased.</dd>
+                      
+                    
+
+                    
+
+                    
+
+                  </dl>
                 
               
                 <div class="fixedFont heading">
@@ -1825,6 +1970,17 @@ locale-specific case mappings.
                 <div class="description">
                   Underscore a word, changing camelCased with under_scored.
 
+<code><pre>
+"UNDERScore".underscore()
+# => "under_score"
+
+"UNDER-SCORE".underscore()
+# => "under_score"
+
+"UnDEr-SCorE".underscore()
+# => "un_d_er_s_cor_e"
+</pre></code>
+
                   
                 </div>
 
@@ -1832,6 +1988,27 @@ locale-specific case mappings.
 
                 
 
+                
+                  <dl class="detailList nomargin">
+
+                    
+
+                    
+
+                    
+
+                    
+                      
+                        <dt class="heading">Returns <span class="light fixedFont"><a href="../symbols/String.html">String</a></span> :</dt>
+                        <dd>A new string. Separated by _.</dd>
+                      
+                    
+
+                    
+
+                    
+
+                  </dl>
                 
               
                 <div class="fixedFont heading">
@@ -1870,7 +2047,10 @@ locale-specific case mappings.
                   Assumes the string is something like a file name and returns the 
 contents of the string without the extension.
 
-"neat.png".witouthExtension() => "neat"
+<code><pre>
+"neat.png".witouthExtension() 
+# => "neat"
+</pre></code>
 
                   
                 </div>
@@ -1879,6 +2059,27 @@ contents of the string without the extension.
 
                 
 
+                
+                  <dl class="detailList nomargin">
+
+                    
+
+                    
+
+                    
+
+                    
+                      
+                        <dt class="heading">Returns <span class="light fixedFont"><a href="../symbols/String.html">String</a></span> :</dt>
+                        <dd>A new string without the extension name.</dd>
+                      
+                    
+
+                    
+
+                    
+
+                  </dl>
                 
               
             </div>

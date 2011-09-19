@@ -131,6 +131,14 @@
                   
                     <tr>
                       <td class="nameDescription">
+                        <div class="fixedFont">Object.<b><a href="../symbols/Object.html#.isObject">isObject</a></b>(object)
+                        </div>
+                        <div class="description">Helper method that tells you if something is an object.</div>
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <td class="nameDescription">
                         <div class="fixedFont">Object.<b><a href="../symbols/Object.html#.reverseMerge">reverseMerge</a></b>(target)
                         </div>
                         <div class="description">Merges properties from objects into target without overiding.</div>
@@ -181,20 +189,16 @@
 Last in covers earlier properties.
 
 <code><pre>
-   I = {
-     a: 1
-     b: 2
-     c: 3
-   }
+  I =
+    a: 1
+    b: 2
+    c: 3
 
-   Object.extend I, {
-     c: 6
-     d: 4
-   }   
+  Object.extend I,
+    c: 6
+    d: 4
 
-   I
-
-=> {a: 1, b:2, c:6, d: 4}
+  I # => {a: 1, b:2, c:6, d: 4}
 </pre></code>
 
                   
@@ -225,8 +229,8 @@ Last in covers earlier properties.
                     
 
                     
-                      <dt class="heading">Returns:</dt>
                       
+                        <dt class="heading">Returns <span class="light fixedFont"><a href="../symbols/Object.html">Object</a></span> :</dt>
                         <dd>target</dd>
                       
                     
@@ -285,11 +289,11 @@ Last in covers earlier properties.
                   Checks whether an object is an array.
 
 <code><pre>
-   Object.isArray([1, 2, 4])
-=> true
+Object.isArray([1, 2, 4])
+# => true
 
-   Object.isArray({key: "value"})
-=> false
+Object.isArray({key: "value"})
+# => false
 </pre></code>
 
                   
@@ -320,9 +324,69 @@ Last in covers earlier properties.
                     
 
                     
-                      <dt class="heading">Returns:</dt>
                       
+                        <dt class="heading">Returns <span class="light fixedFont"><a href="../symbols/Boolean.html">Boolean</a></span> :</dt>
                         <dd>A boolean expressing whether the object is an instance of Array</dd>
+                      
+                    
+
+                    
+
+                    
+
+                  </dl>
+                
+              
+                <div class="fixedFont heading">
+                  <a name=".isObject"></a>
+                  <span class='lighter'>
+                  <em>static</em>
+                  </span>
+
+                  <span class="light">Object.</span><b>isObject</b>(object)
+                </div>
+
+                <div class="description">
+                  Helper method that tells you if something is an object.
+
+<code><pre>
+object = {a: 1}
+
+Object.isObject(object)
+# => true
+</pre></code>
+
+                  
+                </div>
+
+                
+
+                
+                  <dl class="detailList params">
+                    <dt class="heading">Parameters:</dt>
+                    
+                      <dt>
+                        <b>object</b><span class='light fixedFont'> <a href="../symbols/Object.html">Object</a></span> 
+                        
+                      </dt>
+                      <dd>Maybe this guy is an object.</dd>
+                    
+                  </dl>
+                
+
+                
+                  <dl class="detailList nomargin">
+
+                    
+
+                    
+
+                    
+
+                    
+                      
+                        <dt class="heading">Returns <span class="light fixedFont"><a href="../symbols/Boolean.html">Boolean</a></span> :</dt>
+                        <dd>true if this guy is an object.</dd>
                       
                     
 
@@ -347,20 +411,16 @@ Last in covers earlier properties.
 First come, first served.
 
 <code><pre>
-   I = {
-     a: 1
-     b: 2
-     c: 3
-   }
+  I =
+    a: 1
+    b: 2
+    c: 3
 
-   Object.reverseMerge I, {
-     c: 6
-     d: 4
-   }   
+  Object.reverseMerge I,
+    c: 6
+    d: 4   
 
-   I
-
-=> {a: 1, b:2, c:3, d: 4}
+  I # => {a: 1, b:2, c:3, d: 4}
 </pre></code>
 
                   
@@ -391,8 +451,8 @@ First come, first served.
                     
 
                     
-                      <dt class="heading">Returns:</dt>
                       
+                        <dt class="heading">Returns <span class="light fixedFont"><a href="../symbols/Object.html">Object</a></span> :</dt>
                         <dd>target</dd>
                       
                     

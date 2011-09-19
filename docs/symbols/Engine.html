@@ -396,12 +396,12 @@
               <div class="description">
                 The Engine controls the game world and manages game state. Once you 
   set it up and let it run it pretty much takes care of itself.
-  
+
   You can use the engine to add or remove objects from the game world.
-  
+
   There are several modules that can include to add additional capabilities 
   to the engine.
-  
+
   The engine fires events that you  may bind listeners to. Event listeners 
   may be bound with <code>engine.bind(eventName, callback)</code>
                 
@@ -517,7 +517,7 @@
                 <div class="description">
                   The add method creates and adds an object to the game world. Two
       other events are triggered around this one: beforeAdd and afterAdd.
-      
+
       <code><pre>
       # you can add arbitrary entityData and
       # the engine will make it into a GameObject
@@ -525,7 +525,7 @@
         x: 50
         y: 30
         color: "red"
-      
+
       player = engine.add
         class: "Player"
       </pre></code>
@@ -558,9 +558,9 @@
                     
 
                     
-                      <dt class="heading">Returns:</dt>
                       
-                        <dd><span class="light fixedFont">{<a href="../symbols/GameObject.html">GameObject</a>}</span> </dd>
+                        <dt class="heading">Returns <span class="light fixedFont"><a href="../symbols/GameObject.html">GameObject</a></span> :</dt>
+                        <dd></dd>
                       
                     
 
@@ -617,9 +617,9 @@
                     
 
                     
-                      <dt class="heading">Returns:</dt>
                       
-                        <dd><span class="light fixedFont">{<a href="../symbols/Boolean.html">Boolean</a>}</span> true if the bounds object collides with any of the game objects, false otherwise.</dd>
+                        <dt class="heading">Returns <span class="light fixedFont"><a href="../symbols/Boolean.html">Boolean</a></span> :</dt>
+                        <dd>true if the bounds object collides with any of the game objects, false otherwise.</dd>
                       
                     
 
@@ -677,9 +677,9 @@
                     
 
                     
-                      <dt class="heading">Returns:</dt>
                       
-                        <dd><span class="light fixedFont">{<a href="../symbols/Array.html">Array</a>}</span> An array of objects that collide with the given bounds.</dd>
+                        <dt class="heading">Returns <span class="light fixedFont"><a href="../symbols/Array.html">Array</a></span> :</dt>
+                        <dd>An array of objects that collide with the given bounds.</dd>
                       
                     
 
@@ -703,37 +703,37 @@
                   Get a selection of GameObjects that match the specified selector criteria. The selector language
     can select objects by id, class, or attributes. Note that this method always returns an Array,
     so if you are trying to find only one object you will need something like <code>engine.find("Enemy").first()</code>.
-    
+
     <code><pre>
        player = engine.add
          class: "Player"
-    
+
        enemy = engine.add
          class: "Enemy"
          speed: 5
          x: 0
-    
+
        distantEnemy = engine.add
          class "Enemy"
          x: 500
-    
+
        boss = engine.add
          class: "Enemy"
          id: "Boss"
          x: 0
-    
+
        # to select an object by id use "#anId"
        engine.find "#Boss"
     => [boss]
-    
+
        # to select an object by class use "MyClass"
        engine.find "Enemy"
     => [enemy, distantEnemy, boss]
-    
+
        # to select an object by properties use ".someProperty" or ".someProperty=someValue"
        engine.find ".speed=5"
     => [enemy]
-    
+
        # You may mix and match selectors.
        engine.find "Enemy.x=0"
     => [enemy, boss] # doesn't return distantEnemy
@@ -770,7 +770,7 @@
 
                 <div class="description">
                   Pause the game and step through 1 update of the engine.
-      
+
       <code><pre>
       engine.frameAdvance()
       </pre></code>
@@ -795,13 +795,13 @@
 
                 <div class="description">
                   Loads the game state passed in, or the last saved state, if any.
-    
+
     <code><pre>
     engine.bind 'step', ->
       if justPressed.l
         # loads the last saved state
         engine.loadState()
-    
+
       if justPressed.o
         # removes all game objects, then reinstantiates 
         # them with the entityData passed in
@@ -839,7 +839,7 @@
 
                 <div class="description">
                   Pause the simulation.
-      
+
       <code><pre>
       engine.pause()
       </pre></code>
@@ -864,15 +864,15 @@
 
                 <div class="description">
                   Query the engine to see if it is paused.
-      
+
       <code><pre>
          engine.pause()
-      
+
          engine.paused()
       => true
-      
+
          engine.play()
-      
+
          engine.paused()
       => false
       </pre></code>
@@ -897,7 +897,7 @@
 
                 <div class="description">
                   Resume the game.
-      
+
       <code><pre>
       engine.play()
       </pre></code>
@@ -966,13 +966,13 @@
 
                 <div class="description">
                   Reloads the current engine state, useful for hotswapping code.
-    
+
     <code><pre>
     engine.I.objects.each (object) ->
       # bring all objects to (0, 0) for some reason
       object.I.x = 0
       object.I.y = 0
-    
+
     # reload all objects to make sure
     # they are at (0, 0)  
     engine.reload()
@@ -998,7 +998,7 @@
 
                 <div class="description">
                   Save the current game state and returns a JSON object representing that state.
-    
+
     <code><pre>
     engine.bind 'step', ->
       if justPressed.s
@@ -1022,9 +1022,9 @@
                     
 
                     
-                      <dt class="heading">Returns:</dt>
                       
-                        <dd><span class="light fixedFont">{<a href="../symbols/Array.html">Array</a>}</span> An array of the instance data of all objects in the game</dd>
+                        <dt class="heading">Returns <span class="light fixedFont"><a href="../symbols/Array.html">Array</a></span> :</dt>
+                        <dd>An array of the instance data of all objects in the game</dd>
                       
                     
 
@@ -1046,7 +1046,7 @@
 
                 <div class="description">
                   Change the framerate of the game. The default framerate is 30 fps.
-      
+
       <code><pre>
       engine.setFramerate(60)
       </pre></code>
@@ -1071,7 +1071,7 @@
 
                 <div class="description">
                   Start the game simulation.
-      
+
       <code><pre>
       engine.start()
       </pre></code>
@@ -1096,7 +1096,7 @@
 
                 <div class="description">
                   Stop the simulation.
-      
+
       <code><pre>
       engine.stop()
       </pre></code>
@@ -1257,7 +1257,7 @@
 
                 <div class="description">
                   Called after the engine draws on the canvas. The current camera transform is applied.
-  
+
   <code><pre>
   engine.bind "draw", (canvas) ->
     # print some directions for the player
@@ -1287,10 +1287,10 @@
 
                 <div class="description">
                   Called after the engine draws.
-  
+
   The current camera transform is not applied. This is great for
   adding overlays.
-  
+
   <code><pre>
   engine.bind "overlay", (canvas) ->
     # print the player's health. This will be

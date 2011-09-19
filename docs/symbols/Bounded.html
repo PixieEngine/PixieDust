@@ -307,19 +307,19 @@ Bounded module</dd>
                 <div class="description">
                   The bounds method returns infomation about the location 
     of the object and its dimensions with optional offsets.
-    
+
     <code><pre>
       player = Core
         x: 3
         y: 6
         width: 2
         height: 2
-    
+
       player.include(Bounded)
-    
+
       player.bounds()
       => {x: 3, y: 6, width: 2, height: 2}
-    
+
       player.bounds(7, 4)
       => {x: 10, y: 10, width: 2, height: 2}   
     </pre></code>
@@ -362,16 +362,16 @@ Bounded module</dd>
                 <div class="description">
                   The center method returns the <a href="../symbols/Point.html">Point</a> that is
     the center of the object.
-    
+
     <code><pre>
     player = Core
       x: 50
       y: 40
       width: 10
       height: 30
-    
+
     player.include(Bounded)  
-    
+
     player.center()
     => {x: 30, y: 35}
     </pre></code>
@@ -393,9 +393,9 @@ Bounded module</dd>
                     
 
                     
-                      <dt class="heading">Returns:</dt>
                       
-                        <dd><span class="light fixedFont">{<a href="../symbols/Point.html">Point</a>}</span> The middle of the calling object</dd>
+                        <dt class="heading">Returns <span class="light fixedFont"><a href="../symbols/Point.html">Point</a></span> :</dt>
+                        <dd>The middle of the calling object</dd>
                       
                     
 
@@ -418,16 +418,16 @@ Bounded module</dd>
                 <div class="description">
                   The centeredBounds method returns infomation about the center
     of the object along with the midpoint of the width and height.
-    
+
     <code><pre>
       player = Core
         x: 3
         y: 6
         width: 2
         height: 2
-    
+
       player.include(Bounded)
-    
+
       player.centeredBounds()
       => {x: 4, y: 7, xw: 1, yw: 1}
     </pre></code>
@@ -453,16 +453,16 @@ Bounded module</dd>
                 <div class="description">
                   Return the circular bounds of the object. The circle is
     centered at the midpoint of the object.
-    
+
     <code><pre>
     player = Core
       radius: 5
       x: 50
       y: 50
       other: "stuff"
-    
+
     player.include(Bounded)
-    
+
     player.circle()
     => {radius: 5, x: 50, y: 50}
     </pre></code>
@@ -488,16 +488,16 @@ Bounded module</dd>
                 <div class="description">
                   Does a check to see if this object is overlapping
     with the bounds passed in.
-    
+
     <code><pre>
       player = Core
         x: 4
         y: 6
         width: 20
         height: 20
-    
+
       player.include(Bounded)  
-    
+
       player.collides({x: 5, y: 7, width: 20, height: 20})
       => true
     </pre></code>
@@ -519,9 +519,9 @@ Bounded module</dd>
                     
 
                     
-                      <dt class="heading">Returns:</dt>
                       
-                        <dd><span class="light fixedFont">{<a href="../symbols/Point.html">Point</a>}</span> The position of this object</dd>
+                        <dt class="heading">Returns <span class="light fixedFont"><a href="../symbols/Point.html">Point</a></span> :</dt>
+                        <dd>The position of this object</dd>
                       
                     
 
@@ -545,7 +545,7 @@ Bounded module</dd>
                   This returns a modified bounds based on the collision margin.
     The area of the bounds is reduced if collision margin is positive
     and increased if collision margin is negative.
-    
+
     <code><pre>
       player = Core
         collisionMargin: 
@@ -555,12 +555,12 @@ Bounded module</dd>
         y: 50
         width: 20
         height: 20
-    
+
       player.include(Bounded)
-    
+
       player.collisionBounds()
       => {x: 38, y: 36, height: 28, width: 24}
-    
+
       player.collisionBounds(10, 10)
       => {x: 48, y: 46, height: 28, width: 24}
     </pre></code>
@@ -599,9 +599,9 @@ Bounded module</dd>
                     
 
                     
-                      <dt class="heading">Returns:</dt>
                       
-                        <dd><span class="light fixedFont">{<a href="../symbols/Object.html">Object</a>}</span> The collision bounds</dd>
+                        <dt class="heading">Returns <span class="light fixedFont"><a href="../symbols/Object.html">Object</a></span> :</dt>
+                        <dd>The collision bounds</dd>
                       
                     
 
@@ -624,14 +624,14 @@ Bounded module</dd>
                 <div class="description">
                   The position of this game object. By default it is the top left point.
     Redefining the center method will change the relative position.
-    
+
     <code><pre>
      player = Core
        x: 50
        y: 40
-    
+
      player.include(Bounded)      
-    
+
      player.position()
     => {x: 50, y: 40}
     </pre></code>
@@ -653,9 +653,9 @@ Bounded module</dd>
                     
 
                     
-                      <dt class="heading">Returns:</dt>
                       
-                        <dd><span class="light fixedFont">{<a href="../symbols/Point.html">Point</a>}</span> The position of this object</dd>
+                        <dt class="heading">Returns <span class="light fixedFont"><a href="../symbols/Point.html">Point</a></span> :</dt>
+                        <dd>The position of this object</dd>
                       
                     
 
