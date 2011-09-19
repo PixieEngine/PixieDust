@@ -57,7 +57,7 @@ Engine.Selector = (I, self) ->
   @name find
   @methodOf Engine#
   @param {String} selector
-  @type Array
+  @returns {Array} An array of the objects found
   ###
   find: (selector) ->
     results = []
