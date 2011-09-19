@@ -69,16 +69,16 @@ Bounded = (I, self) ->
   with the bounds passed in.
 
   <code><pre>
-    player = Core
-      x: 4
-      y: 6
-      width: 20
-      height: 20
+  player = Core
+    x: 4
+    y: 6
+    width: 20
+    height: 20
 
-    player.include(Bounded)  
+  player.include(Bounded)  
 
-    player.collides({x: 5, y: 7, width: 20, height: 20})
-    => true
+  player.collides({x: 5, y: 7, width: 20, height: 20})
+  => true
   </pre></code>
 
   @name collides
