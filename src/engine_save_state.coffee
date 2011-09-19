@@ -4,7 +4,6 @@ The <code>SaveState</code> module provides methods to save and restore the curre
 @name SaveState
 @fieldOf Engine
 @module
-
 @param {Object} I Instance variables
 @param {Object} self Reference to the engine
 ###
