@@ -63,7 +63,6 @@ draw anything to the screen until the image has been loaded.
   @param {String} name Name of the spriteSheet image in your images directory
   @param {Number} tileWidth Width of each sprite in the sheet
   @param {Number} tileHeight Height of each sprite in the sheet
-
   @returns {Array} An array of sprite objects
   ###
   Sprite.loadSheet = (name, tileWidth, tileHeight) ->
