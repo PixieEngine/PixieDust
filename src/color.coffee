@@ -82,6 +82,7 @@
     key.toString().toLowerCase().split(' ').join('')
 
   channelize = (color, alpha) ->
+    return color.channels() if color.channels?
     if Object.isArray color
       if alpha?
         alpha = parseFloat(alpha)
