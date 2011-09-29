@@ -120,6 +120,9 @@
     a: parsedColor[3] 
 
   Color:: =
+    channels: ->
+      [@r, @g, @b, @a]
+
     complement: ->
       @copy().complement$() 
 
