@@ -217,7 +217,7 @@
 
       return this    
 
-    toHex: ->
+    toHex: (leadingHash) ->
       padString = (hexString) ->        
         if hexString.length == 1 then pad = "0" else pad = "" 
 
@@ -226,7 +226,10 @@
       hexFromNumber = (number) ->
         return padString(number.toString(16))
 
-      "##{hexFromNumber(@r)}#{hexFromNumber(@g)}#{hexFromNumber(@b)}"  
+      if !leadingHash
+        "#{hexFromNumber(@r)}#{hexFromNumber(@g)}#{hexFromNumber(@b)}"
+      else
+        "##{hexFromNumber(@r)}#{hexFromNumber(@g)}#{hexFromNumber(@b)}"  
 
     toHsl: ->
       [r, g, b] = (channel / 255 for channel in [@r, @g, @b])
