@@ -185,6 +185,7 @@ test "#toHex", ->
   color = Color(23, 45, 100)
 
   equal color.toHex(), "#172d64"
+  equal color.toHex(false), "172d64" 
 
 test "#toHsl", ->
   color = Color(45, 29, 20)
