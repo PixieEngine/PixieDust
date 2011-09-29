@@ -155,6 +155,16 @@ test "accepts 4 numeric values", ->
   equalEnough color.b, 100
   equalEnough color.a, 0.32
 
+test "accepts a color object", ->
+  color = Color(23, 54, 49, 1)
+
+  newColor = Color(color)
+
+  equal newColor.r, 23
+  equal newColor.g, 54
+  equal newColor.b, 49
+  equal newColor.a, 1
+
 test "invalid color throws error", ->
   raises ->
     Color("A Fake Color")
