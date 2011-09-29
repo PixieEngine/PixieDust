@@ -215,6 +215,25 @@ test "#hue$", ->
   equalEnough color.b, 239
   equalEnough color.a, 1.0
 
+test "#channels", ->
+  no_alpha = Color(128, 2, 50)
+
+  no_alpha_channels = no_alpha.channels()
+
+  equal no_alpha_channels[0], 128
+  equal no_alpha_channels[1], 2
+  equal no_alpha_channels[2], 50
+  equal no_alpha_channels[3], 1
+
+  alpha = Color(128, 2, 50, 0.3)
+
+  alpha_channels = alpha.channels()
+
+  equal alpha_channels[0], 128
+  equal alpha_channels[1], 2
+  equal alpha_channels[2], 50
+  equal alpha_channels[3], 0.3
+
 test "#complement", ->
   color = Color(10, 30, 50).complement()
 
