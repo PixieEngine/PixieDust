@@ -226,7 +226,7 @@
       hexFromNumber = (number) ->
         return padString(number.toString(16))
 
-      if !leadingHash
+      if leadingHash == false
         "#{hexFromNumber(@r)}#{hexFromNumber(@g)}#{hexFromNumber(@b)}"
       else
         "##{hexFromNumber(@r)}#{hexFromNumber(@g)}#{hexFromNumber(@b)}"  
