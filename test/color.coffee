@@ -208,6 +208,15 @@ test "#toHsl", ->
   equalEnough hsl[3], 1.0
 
 test "#hue", ->
+  color = Color(20, 45, 49)
+  color.hue(60)
+
+  equalEnough color.r, 51
+  equalEnough color.g, 51
+  equalEnough color.b, 21
+  equalEnough color.a, 1.0
+
+test "#shiftHue", ->
   color = Color(34, 54, 239).shiftHue(20)
 
   equalEnough color.r, 84
@@ -215,7 +224,7 @@ test "#hue", ->
   equalEnough color.b, 239
   equalEnough color.a, 1.0
 
-test "#hue$", ->
+test "#shiftHue$", ->
   color = Color(34, 54, 239)
 
   color.shiftHue$(60)
