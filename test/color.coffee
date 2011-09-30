@@ -220,10 +220,19 @@ test "#saturation", ->
   color = Color(40, 39, 29)
   color.saturation(0.3)
 
-  equalEnough color.r, 200
-  equalEnough color.g, 109
-  equalEnough color.b, 44
+  equalEnough color.r, 46
+  equalEnough color.g, 45
+  equalEnough color.b, 25
   equalEnough color.a, 1.0  
+
+test "#lightness", ->
+  color = Color(4, 200, 49)
+  color.lightness(0.47)
+
+  equalEnough color.r, 5
+  equalEnough color.g, 235
+  equalEnough color.b, 58
+  equalEnough color.a, 1.0 
 
 test "#shiftHue", ->
   color = Color(34, 54, 239).shiftHue(20)
