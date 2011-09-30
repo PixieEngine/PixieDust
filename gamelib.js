@@ -4491,6 +4491,9 @@ var __slice = Array.prototype.slice;
   };
   channelize = function(color, alpha) {
     var channel, result;
+    if (color.channels != null) {
+      return color.channels();
+    }
     if (Object.isArray(color)) {
       if (alpha != null) {
         alpha = parseFloat(alpha);
@@ -4544,6 +4547,9 @@ var __slice = Array.prototype.slice;
     };
   };
   Color.prototype = {
+    channels: function() {
+      return [this.r, this.g, this.b, this.a];
+    },
     complement: function() {
       return this.copy().complement$();
     },
@@ -4630,7 +4636,7 @@ var __slice = Array.prototype.slice;
       _ref = hslToRgb(hsl), this.r = _ref[0], this.g = _ref[1], this.b = _ref[2], this.a = _ref[3];
       return this;
     },
-    toHex: function() {
+    toHex: function(leadingHash) {
       var hexFromNumber, padString;
       padString = function(hexString) {
         var pad;
@@ -4644,7 +4650,11 @@ var __slice = Array.prototype.slice;
       hexFromNumber = function(number) {
         return padString(number.toString(16));
       };
-      return "#" + (hexFromNumber(this.r)) + (hexFromNumber(this.g)) + (hexFromNumber(this.b));
+      if (leadingHash === false) {
+        return "" + (hexFromNumber(this.r)) + (hexFromNumber(this.g)) + (hexFromNumber(this.b));
+      } else {
+        return "#" + (hexFromNumber(this.r)) + (hexFromNumber(this.g)) + (hexFromNumber(this.b));
+      }
     },
     toHsl: function() {
       var b, channel, chroma, g, hue, lightness, max, min, r, saturation, _ref, _ref2;
