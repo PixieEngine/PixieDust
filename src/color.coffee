@@ -173,6 +173,28 @@
 
       return this 
 
+    hue: (newVal) ->
+      hsl = @toHsl()
+      if newVal?
+        hsl[0] = newVal
+
+        [@r, @g, @b, @a] = hslToRgb(hsl)
+
+        return this
+      else
+        return hsl[0]
+
+    lightness: (newVal) ->
+      hsl = @toHsl()
+      if newVal?
+        hsl[2] = newVal
+
+        [@r, @g, @b, @a] = hslToRgb(hsl)
+
+        return this
+      else
+        return hsl[2]
+
     shiftHue: (degrees) ->
       @copy().shiftHue$(degrees)
 
