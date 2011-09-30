@@ -4761,10 +4761,12 @@ player = Core
   height: 5
 
 player.bind "draw", (canvas) ->
-  canvas.fillColor("white")
-
   # Text will be drawn positioned relatively to the object.
-  canvas.fillText("Hey, drawing stuff is pretty easy.", 5, 5)
+  canvas.drawText
+    text: "Hey, drawing stuff is pretty easy."
+    color: "white"
+    x: 5
+    y: 5
 </pre></code>
 
 @name draw
