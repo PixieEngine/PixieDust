@@ -5043,7 +5043,7 @@ Emitterable = function(I, self) {
   @name beforeDraw
   @methodOf Engine#
   @event
-  @params {PowerCanvas} canvas A reference to the canvas to draw on.
+  @params {PixieCanvas} canvas A reference to the canvas to draw on.
   */
   /**
   Called after the engine draws on the canvas. The current camera transform is applied.
@@ -5051,13 +5051,16 @@ Emitterable = function(I, self) {
   <code><pre>
   engine.bind "draw", (canvas) ->
     # print some directions for the player
-    canvas.fillText("Go this way =>", 200, 200) 
+    canvas.drawText
+      text: "Go this way =>"
+      x: 200
+      y: 200 
   </pre></code>
 
   @name draw
   @methodOf Engine#
   @event
-  @params {PowerCanvas} canvas A reference to the canvas to draw on.
+  @params {PixieCanvas} canvas A reference to the canvas to draw on.
   */
   /**
   Called after the engine draws.
@@ -5069,14 +5072,19 @@ Emitterable = function(I, self) {
   engine.bind "overlay", (canvas) ->
     # print the player's health. This will be
     # positioned absolutely according to the viewport.
-    canvas.fillText("HEALTH:", 20, 20)
-    canvas.fillText(player.health(), 50, 20)
+    canvas.drawText
+      text: "HEALTH:"
+      position: Point(20, 20)
+
+    canvas.drawText
+      text: player.health()
+      position: Point(50, 20)
   </pre></code>
 
   @name overlay
   @methodOf Engine#
   @event
-  @params {PowerCanvas} canvas A reference to the canvas to draw on. 
+  @params {PixieCanvas} canvas A reference to the canvas to draw on. 
   */
   Engine = function(I) {
     var animLoop, defaultModules, draw, frameAdvance, lastStepTime, modules, queuedObjects, running, self, startTime, step, update;
