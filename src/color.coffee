@@ -128,7 +128,7 @@
       @copy().complement$() 
 
     complement$: ->
-      @hue$(180)
+      @shiftHue$(180)
 
     copy: ->
       Color(@r, @g, @b, @a)
@@ -174,7 +174,7 @@
       return this 
 
     shiftHue: (degrees) ->
-      @copy().hue$(degrees)
+      @copy().shiftHue$(degrees)
 
     shiftHue$: (degrees) ->
       hsl = @toHsl()
