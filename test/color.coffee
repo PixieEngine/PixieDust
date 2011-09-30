@@ -7,10 +7,10 @@ module "Color"
 test "r, g, b default to 0, a defaults to 1", ->
   color = Color()
 
-  equalEnough color.r, 0
-  equalEnough color.g, 0
-  equalEnough color.b, 0
-  equalEnough color.a, 1
+  equal color.r, 0
+  equal color.g, 0
+  equal color.b, 0
+  equal color.a, 0
 
 test "accepts a single array of length 3", ->
   color = Color([255, 1, 2])
