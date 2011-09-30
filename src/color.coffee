@@ -173,10 +173,10 @@
 
       return this 
 
-    hue: (degrees) ->
+    shiftHue: (degrees) ->
       @copy().hue$(degrees)
 
-    hue$: (degrees) ->
+    shiftHue$: (degrees) ->
       hsl = @toHsl()
 
       hsl[0] = (hsl[0] + degrees).mod 360
