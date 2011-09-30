@@ -49,8 +49,7 @@ draw anything to the screen until the image has been loaded.
 
     fill: (canvas, x, y, width, height, repeat="repeat") ->
       pattern = canvas.createPattern(image, repeat)
-      canvas.fillColor(pattern)
-      canvas.fillRect(x, y, width, height)
+      canvas.drawRect({x, y, width, height, color: pattern})
 
     width: width
     height: height
