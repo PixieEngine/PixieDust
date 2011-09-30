@@ -4219,8 +4219,13 @@ Drawable = function(I, self) {
         return typeof warn === "function" ? warn("Sprite has no draw method!") : void 0;
       }
     } else {
-      canvas.fillColor(I.color);
-      return canvas.fillRect(0, 0, I.width, I.height);
+      return canvas.drawRect({
+        x: 0,
+        y: 0,
+        width: I.width,
+        height: I.height,
+        color: I.color
+      });
     }
   });
   return {
@@ -5111,8 +5116,13 @@ draw anything to the screen until the image has been loaded.
           repeat = "repeat";
         }
         pattern = canvas.createPattern(image, repeat);
-        canvas.fillColor(pattern);
-        return canvas.fillRect(x, y, width, height);
+        return canvas.drawRect({
+          x: x,
+          y: y,
+          width: width,
+          height: height,
+          color: pattern
+        });
       },
       width: width,
       height: height
