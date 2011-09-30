@@ -26,7 +26,7 @@
 
   @name Engine
   @constructor
-  @param I
+  @param {Object} I Instance variables of the engine 
   ###
 
   ###*
@@ -35,7 +35,6 @@
   @name beforeAdd
   @methodOf Engine#
   @event
-
   @param {Object} entityData
   ###
 
@@ -45,7 +44,6 @@
   @name afterAdd
   @methodOf Engine#
   @event
-
   @param {GameObject} object The object that has just been added to the
   engine.
   ###
@@ -68,23 +66,27 @@
   ###
 
   ###*
-  Called before the engine draws the game objects on the canvas.
-
-  The current camera transform is applied.
+  Called before the engine draws the game objects on the canvas. The current camera transform is applied.
 
   @name beforeDraw
   @methodOf Engine#
   @event
+  @params {PowerCanvas} canvas A reference to the canvas to draw on.
   ###
 
   ###*
-  Called after the engine draws on the canvas.
+  Called after the engine draws on the canvas. The current camera transform is applied.
 
-  The current camera transform is applied.
+  <code><pre>
+  engine.bind "draw", (canvas) ->
+    # print some directions for the player
+    canvas.fillText("Go this way =>", 200, 200) 
+  </pre></code>
 
   @name draw
   @methodOf Engine#
   @event
+  @params {PowerCanvas} canvas A reference to the canvas to draw on.
   ###
 
   ###*
@@ -93,9 +95,18 @@
   The current camera transform is not applied. This is great for
   adding overlays.
 
+  <code><pre>
+  engine.bind "overlay", (canvas) ->
+    # print the player's health. This will be
+    # positioned absolutely according to the viewport.
+    canvas.fillText("HEALTH:", 20, 20)
+    canvas.fillText(player.health(), 50, 20)
+  </pre></code>
+
   @name overlay
   @methodOf Engine#
   @event
+  @params {PowerCanvas} canvas A reference to the canvas to draw on. 
   ###
 
   Engine = (I) ->
@@ -174,16 +185,25 @@
 
     self = Core(I).extend {
       ###*
-      The add method creates and adds an object to the game world.
+      The add method creates and adds an object to the game world. Two
+      other events are triggered around this one: beforeAdd and afterAdd.
 
-      Events triggered:
-      <code>beforeAdd(entityData)</code>
-      <code>afterAdd(gameObject)</code>
+      <code><pre>
+      # you can add arbitrary entityData and
+      # the engine will make it into a GameObject
+      engine.add 
+        x: 50
+        y: 30
+        color: "red"
+
+      player = engine.add
+        class: "Player"
+      </pre></code>
 
       @name add
       @methodOf Engine#
-      @param entityData The data used to create the game object.
-      @type GameObject
+      @param {Object} entityData The data used to create the game object.
+      @returns {GameObject}
       ###
       add: (entityData) ->
         self.trigger "beforeAdd", entityData
@@ -217,6 +237,11 @@
 
       ###*
       Start the game simulation.
+
+      <code><pre>
+      engine.start()
+      </pre></code>
+
       @methodOf Engine#
       @name start
       ###
@@ -227,32 +252,90 @@
 
       ###*
       Stop the simulation.
+
+      <code><pre>
+      engine.stop()
+      </pre></code>
+
       @methodOf Engine#
       @name stop
       ###
       stop: ->
         running = false
 
+      ###*
+      Pause the game and step through 1 update of the engine.
+
+      <code><pre>
+      engine.frameAdvance()
+      </pre></code>
+
+      @methodOf Engine#
+      @name frameAdvance
+      ###
       frameAdvance: ->
         I.paused = true
         frameAdvance = true
         step()
         frameAdvance = false
 
+      ###*
+      Resume the game.
+
+      <code><pre>
+      engine.play()
+      </pre></code>
+
+      @methodOf Engine#
+      @name play
+      ###
       play: ->
         I.paused = false
 
       ###*
-      Pause the simulation
+      Pause the simulation.
+
+      <code><pre>
+      engine.pause()
+      </pre></code>
+
       @methodOf Engine#
       @name pause
       ###
       pause: ->
         I.paused = true
 
+      ###*
+      Query the engine to see if it is paused.
+
+      <code><pre>
+         engine.pause()
+
+         engine.paused()
+      => true
+
+         engine.play()
+
+         engine.paused()
+      => false
+      </pre></code>
+
+      @methodOf Engine#
+      @name paused
+      ###
       paused: ->
         I.paused
 
+      ###*
+      Change the framerate of the game. The default framerate is 30 fps.
+
+      <code><pre>
+      engine.setFramerate(60)
+      </pre></code>
+
+      @methodOf Engine#
+      @name setFramerate
+      ###
       setFramerate: (newFPS) ->
         I.FPS = newFPS
         self.stop()

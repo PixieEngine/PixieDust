@@ -1,4 +1,4 @@
-###
+###*
 The Drawable module is used to provide a simple draw method to the including
 object.
 
@@ -8,21 +8,56 @@ Binds a step listener to update the transform of the object.
 
 Autoloads the sprite specified in I.spriteName, if any.
 
+<code><pre>
+player = Core
+  x: 15
+  y: 30
+  width: 5
+  height: 5
+  sprite: "my_cool_sprite"
+
+engine.bind 'draw', (canvas) ->
+  player.draw(canvas) 
+# => Uncaught TypeError: Object has no method 'draw'
+
+player.include(Drawable)
+
+engine.bind 'draw', (canvas) ->
+  player.draw(canvas)
+# => if you have a sprite named "my_cool_sprite" in your images folder
+# then it will be drawn. Otherwise, a rectangle positioned at x: 15 and
+# y: 30 with width and height 5 will be drawn.
+</pre></code>
+
 @name Drawable
 @module
 @constructor
-
 @param {Object} I Instance variables
-@param {Object} self Reference to including object
+@param {Core} self Reference to including object
 ###
 
 ###*
 Triggered every time the object should be drawn. A canvas is passed as
-the first argument.
+the first argument. 
+
+<code><pre>
+player = Core
+  x: 0
+  y: 10
+  width: 5
+  height: 5
+
+player.bind "draw", (canvas) ->
+  canvas.fillColor("white")
+
+  # Text will be drawn positioned relatively to the object.
+  canvas.fillText("Hey, drawing stuff is pretty easy.", 5, 5)
+</pre></code>
 
 @name draw
 @methodOf Drawable#
 @event
+@param {PowerCanvas} canvas A reference to the canvas to draw on.
 ###
 
 Drawable = (I, self) ->
@@ -84,7 +119,7 @@ Drawable = (I, self) ->
 
   @name transform
   @methodOf Drawable#
-  @type Matrix
+  @returns {Matrix} The current transform
   ###
   transform: ->
     center = self.center()

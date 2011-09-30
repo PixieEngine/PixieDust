@@ -3,11 +3,34 @@ The Movable module automatically updates the position and velocity of
 GameObjects based on the velocity and acceleration. It does not check
 collisions so is probably best suited to particle effect like things.
 
+<code><pre>
+player = GameObject
+  x: 0
+  y: 0
+  velocity: Point(0, 0)
+  acceleration: Point(1, 0)
+  maxSpeed: 2
+
+player.include(Movable)
+
+# => `velocity is {x: 0, y: 0} and position is {x: 0, y: 0}`
+
+player.update()
+# => `velocity is {x: 1, y: 0} and position is {x: 1, y: 0}` 
+
+player.update()
+# => `velocity is {x: 2, y: 0} and position is {x: 3, y: 0}`   
+
+# we've hit our maxSpeed so our velocity won't increase
+player.update()
+# => `velocity is {x: 2, y: 0} and position is {x: 5, y: 0}`
+</pre></code>
+
 @name Movable
 @module
 @constructor
-
 @param {Object} I Instance variables
+@param {Core} self Reference to including object
 ###
 Movable = (I) ->
   Object.reverseMerge I,

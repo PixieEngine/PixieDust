@@ -4,7 +4,6 @@ The <code>Selector</code> module provides methods to query the engine to find ga
 @name Selector
 @fieldOf Engine
 @module
-
 @param {Object} I Instance variables
 @param {Object} self Reference to the engine
 ###
@@ -17,20 +16,48 @@ Engine.Selector = (I, self) ->
 
   ###*
   Get a selection of GameObjects that match the specified selector criteria. The selector language
-  can select objects by id, class, or attributes.
+  can select objects by id, class, or attributes. Note that this method always returns an Array,
+  so if you are trying to find only one object you will need something like <code>engine.find("Enemy").first()</code>.
 
-  To select an object by id use "#anId"
+  <code><pre>
+  player = engine.add
+    class: "Player"
 
-  To select objects by class use "MyClass"
+  enemy = engine.add
+    class: "Enemy"
+    speed: 5
+    x: 0
 
-  To select objects by properties use ".someProperty" or ".someProperty=someValue"
+  distantEnemy = engine.add
+    class "Enemy"
+    x: 500
 
-  You may mix and match selectors. "Wall.x=0" to select all objects of class Wall with an x property of 0.
+  boss = engine.add
+    class: "Enemy"
+    id: "Boss"
+    x: 0
+
+  # to select an object by id use "#anId"
+  engine.find "#Boss"
+  # => [boss]
+
+  # to select an object by class use "MyClass"
+  engine.find "Enemy"
+  # => [enemy, distantEnemy, boss]
+
+  # to select an object by properties use ".someProperty" or ".someProperty=someValue"
+  engine.find ".speed=5"
+  # => [enemy]
+
+  # You may mix and match selectors.
+  engine.find "Enemy.x=0"
+  # => [enemy, boss] # doesn't return distantEnemy
+  </pre></code>
 
   @name find
   @methodOf Engine#
   @param {String} selector
-  @type Array
+  @returns {Array} An array of the objects found
   ###
   find: (selector) ->
     results = []

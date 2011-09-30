@@ -82,6 +82,7 @@
     key.toString().toLowerCase().split(' ').join('')
 
   channelize = (color, alpha) ->
+    return color.channels() if color.channels?
     if Object.isArray color
       if alpha?
         alpha = parseFloat(alpha)
@@ -120,6 +121,9 @@
     a: parsedColor[3] 
 
   Color:: =
+    channels: ->
+      [@r, @g, @b, @a]
+
     complement: ->
       @copy().complement$() 
 
@@ -217,7 +221,7 @@
 
       return this    
 
-    toHex: ->
+    toHex: (leadingHash) ->
       padString = (hexString) ->        
         if hexString.length == 1 then pad = "0" else pad = "" 
 
@@ -226,7 +230,10 @@
       hexFromNumber = (number) ->
         return padString(number.toString(16))
 
-      "##{hexFromNumber(@r)}#{hexFromNumber(@g)}#{hexFromNumber(@b)}"  
+      if leadingHash == false
+        "#{hexFromNumber(@r)}#{hexFromNumber(@g)}#{hexFromNumber(@b)}"
+      else
+        "##{hexFromNumber(@r)}#{hexFromNumber(@g)}#{hexFromNumber(@b)}"  
 
     toHsl: ->
       [r, g, b] = (channel / 255 for channel in [@r, @g, @b])

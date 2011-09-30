@@ -5,14 +5,13 @@
 Returns a copy of the array without null and undefined values.
 
 <code><pre>
-   [null, undefined, 3, 3, undefined, 5].compact()
-=> [3, 3, 5]
+[null, undefined, 3, 3, undefined, 5].compact()
+# => [3, 3, 5]
 </pre></code>
 
 @name compact
 @methodOf Array#
-@type Array
-@returns A new array that contains only the non-null values.
+@returns {Array} A new array that contains only the non-null values.
 */var __slice = Array.prototype.slice;
 Array.prototype.compact = function() {
   return this.select(function(element) {
@@ -24,22 +23,21 @@ Creates and returns a copy of the array. The copy contains
 the same objects.
 
 <code><pre>
-   a = ["a", "b", "c"]
-   b = a.copy()
+a = ["a", "b", "c"]
+b = a.copy()
 
-   # their elements are equal
-   a[0] == b[0] && a[1] == b[1] && a[2] == b[2]
-=> true
+# their elements are equal
+a[0] == b[0] && a[1] == b[1] && a[2] == b[2]
+# => true
 
-   # but they aren't the same object in memory
-   a === b
-=> false
+# but they aren't the same object in memory
+a === b
+# => false
 </pre></code>
 
 @name copy
 @methodOf Array#
-@type Array
-@returns A new array that is a copy of the array
+@returns {Array} A new array that is a copy of the array
 */
 Array.prototype.copy = function() {
   return this.concat();
@@ -48,16 +46,15 @@ Array.prototype.copy = function() {
 Empties the array of its contents. It is modified in place.
 
 <code><pre>
-   fullArray = [1, 2, 3]
-   fullArray.clear()
-   fullArray
-=> []
+fullArray = [1, 2, 3]
+fullArray.clear()
+fullArray
+# => []
 </pre></code>
 
 @name clear
 @methodOf Array#
-@type Array
-@returns this, now emptied.
+@returns {Array} this, now emptied.
 */
 Array.prototype.clear = function() {
   this.length = 0;
@@ -67,19 +64,18 @@ Array.prototype.clear = function() {
 Flatten out an array of arrays into a single array of elements.
 
 <code><pre>
-   [[1, 2], [3, 4], 5].flatten()
-=> [1, 2, 3, 4, 5]
+[[1, 2], [3, 4], 5].flatten()
+# => [1, 2, 3, 4, 5]
 
-   # won't flatten twice nested arrays. call
-   # flatten twice if that is what you want
-   [[1, 2], [3, [4, 5]], 6].flatten()
-=> [1, 2, 3, [4, 5], 6]
+# won't flatten twice nested arrays. call
+# flatten twice if that is what you want
+[[1, 2], [3, [4, 5]], 6].flatten()
+# => [1, 2, 3, [4, 5], 6]
 </pre></code>
 
 @name flatten
 @methodOf Array#
-@type Array
-@returns A new array with all the sub-arrays flattened to the top.
+@returns {Array} A new array with all the sub-arrays flattened to the top.
 */
 Array.prototype.flatten = function() {
   return this.inject([], function(a, b) {
@@ -91,21 +87,18 @@ Invoke the named method on each element in the array
 and return a new array containing the results of the invocation.
 
 <code><pre>
-   [1.1, 2.2, 3.3, 4.4].invoke("floor")
-=> [1, 2, 3, 4]
+[1.1, 2.2, 3.3, 4.4].invoke("floor")
+# => [1, 2, 3, 4]
 
-   ['hello', 'world', 'cool!'].invoke('substring', 0, 3)
-=> ['hel', 'wor', 'coo']
+['hello', 'world', 'cool!'].invoke('substring', 0, 3)
+# => ['hel', 'wor', 'coo']
 </pre></code>
 
 @param {String} method The name of the method to invoke.
 @param [arg...] Optional arguments to pass to the method being invoked.
-
 @name invoke
 @methodOf Array#
-@type Array
-@returns A new array containing the results of invoking the 
-named method on each element.
+@returns {Array} A new array containing the results of invoking the named method on each element.
 */
 Array.prototype.invoke = function() {
   var args, method;
@@ -117,10 +110,14 @@ Array.prototype.invoke = function() {
 /**
 Randomly select an element from the array.
 
+<code><pre>
+[1, 2, 3].rand()
+# => 2
+</pre></code>
+
 @name rand
 @methodOf Array#
-@type Object
-@returns A random element from an array
+@returns {Object} A random element from an array
 */
 Array.prototype.rand = function() {
   return this[rand(this.length)];
@@ -130,18 +127,18 @@ Remove the first occurrence of the given object from the array if it is
 present. The array is modified in place.
 
 <code><pre>
-   a = [1, 1, "a", "b"]
-   a.remove(1)
-=> 1
+a = [1, 1, "a", "b"]
+a.remove(1)
+# => 1
 
-   a
-=> [1, "a", "b"]
+a
+# => [1, "a", "b"]
 </pre></code>
 
 @name remove
 @methodOf Array#
 @param {Object} object The object to remove from the array if present.
-@returns The removed object if present otherwise undefined.
+@returns {Object} The removed object if present otherwise undefined.
 */
 Array.prototype.remove = function(object) {
   var index;
@@ -156,18 +153,17 @@ Array.prototype.remove = function(object) {
 Returns true if the element is present in the array.
 
 <code><pre>
-   ["a", "b", "c"].include("c")
-=> true
+["a", "b", "c"].include("c")
+# => true
 
-   [40, "a"].include(700)
-=> false
+[40, "a"].include(700)
+# => false
 </pre></code>
 
 @name include
 @methodOf Array#
 @param {Object} element The element to check if present.
-@returns true if the element is in the array, false otherwise.
-@type Boolean
+@returns {Boolean} true if the element is in the array, false otherwise.
 */
 Array.prototype.include = function(element) {
   return this.indexOf(element) !== -1;
@@ -179,30 +175,26 @@ the element as the second argument, and <code>this</code> array as the
 third argument.
 
 <code><pre>
-   word = ""
-   indices = []
-   ["r", "a", "d"].each (letter, index) ->
-     word += letter
-     indices.push(index)
+word = ""
+indices = []
+["r", "a", "d"].each (letter, index) ->
+  word += letter
+  indices.push(index)
 
-=> ["r", "a", "d"]
+# => ["r", "a", "d"]
 
-   word
-=> "rad"
+word
+# => "rad"
 
-   indices
-=> [0, 1, 2]
+indices
+# => [0, 1, 2]
 </pre></code>
 
 @name each
 @methodOf Array#
-@param {Function} iterator Function to be called once for 
-each element in the array.
-@param {Object} [context] Optional context parameter to be 
-used as `this` when calling the iterator function.
-
-@type Array
-@returns this to enable method chaining.
+@param {Function} iterator Function to be called once for each element in the array.
+@param {Object} [context] Optional context parameter to be used as `this` when calling the iterator function.
+@returns {Array} this to enable method chaining.
 */
 Array.prototype.each = function(iterator, context) {
   var element, i, _len;
@@ -223,21 +215,16 @@ the element as the second argument, and `this` array as the
 third argument.
 
 <code><pre>
-   [1, 2, 3].map (number) ->
-     number * number
-
-=> [1, 4, 9]
+[1, 2, 3].map (number) ->
+  number * number
+# => [1, 4, 9]
 </pre></code>
 
 @name map
 @methodOf Array#
-@param {Function} iterator Function to be called once for
-each element in the array.
-@param {Object} [context] Optional context parameter to be
-used as `this` when calling the iterator function.
-@type Array
-@returns An array of the results of the iterator function
-being called on the original array elements.
+@param {Function} iterator Function to be called once for each element in the array.
+@param {Object} [context] Optional context parameter to be used as `this` when calling the iterator function.
+@returns {Array} An array of the results of the iterator function being called on the original array elements.
 */
 Array.prototype.map || (Array.prototype.map = function(iterator, context) {
   var element, i, results, _len;
@@ -252,15 +239,19 @@ Array.prototype.map || (Array.prototype.map = function(iterator, context) {
 Call the given iterator once for each pair of objects in the array.
 
 <code><pre>
-  [1, 2, 3, 4].eachPair (a, b) ->
+[1, 2, 3, 4].eachPair (a, b) ->
+  # 1, 2
+  # 1, 3
+  # 1, 4
+  # 2, 3
+  # 2, 4
+  # 3, 4
 </pre></code>
 
 @name eachPair
 @methodOf Array#
-@param {Function} iterator Function to be called once for 
-each pair of elements in the array.
-@param {Object} [context] Optional context parameter to be 
-used as `this` when calling the iterator function.
+@param {Function} iterator Function to be called once for each pair of elements in the array.
+@param {Object} [context] Optional context parameter to be used as `this` when calling the iterator function.
 */
 Array.prototype.eachPair = function(iterator, context) {
   var a, b, i, j, length, _results;
@@ -291,19 +282,12 @@ as the second argument. Additional arguments are passed similar to
 <code>each</code>.
 
 @see Array#each
-
 @name eachWithObject
 @methodOf Array#
-
-@param {Object} object The object to pass to the iterator on each
-visit.
-@param {Function} iterator Function to be called once for 
-each element in the array.
-@param {Object} [context] Optional context parameter to be 
-used as `this` when calling the iterator function.
-
-@returns this
-@type Array
+@param {Object} object The object to pass to the iterator on each visit.
+@param {Function} iterator Function to be called once for each element in the array.
+@param {Object} [context] Optional context parameter to be used as `this` when calling the iterator function.
+@returns {Array} this
 */
 Array.prototype.eachWithObject = function(object, iterator, context) {
   this.each(function(element, i, self) {
@@ -317,28 +301,22 @@ passing in the elements in groups of n. Additional argumens are
 passed as in each.
 
 <code><pre>
-   results = []
-   [1, 2, 3, 4].eachSlice 2, (slice) ->
-     results.push(slice)
-=> [1, 2, 3, 4]
+results = []
+[1, 2, 3, 4].eachSlice 2, (slice) ->
+  results.push(slice)
+# => [1, 2, 3, 4]
 
-   results
-=> [[1, 2], [3, 4]]
+results
+# => [[1, 2], [3, 4]]
 </pre></code>
 
 @see Array#each
-
 @name eachSlice
 @methodOf Array#
-
 @param {Number} n The number of elements in each group.
-@param {Function} iterator Function to be called once for 
-each group of elements in the array.
-@param {Object} [context] Optional context parameter to be 
-used as `this` when calling the iterator function.
-
-@returns this
-@type Array
+@param {Function} iterator Function to be called once for each group of elements in the array.
+@param {Object} [context] Optional context parameter to be used as `this` when calling the iterator function.
+@returns {Array} this
 */
 Array.prototype.eachSlice = function(n, iterator, context) {
   var i, len;
@@ -354,11 +332,18 @@ Array.prototype.eachSlice = function(n, iterator, context) {
 /**
 Returns a new array with the elements all shuffled up.
 
+<code><pre>
+a = [1, 2, 3]
+
+a.shuffle()
+# => [2, 3, 1]
+
+a # => [1, 2, 3]
+</pre></code>
+
 @name shuffle
 @methodOf Array#
-
-@returns A new array that is randomly shuffled.
-@type Array
+@returns {Array} A new array that is randomly shuffled.
 */
 Array.prototype.shuffle = function() {
   var shuffledArray;
@@ -372,15 +357,13 @@ Array.prototype.shuffle = function() {
 Returns the first element of the array, undefined if the array is empty.
 
 <code><pre>
-   ["first", "second", "third"].first()
-=> "first"
+["first", "second", "third"].first()
+# => "first"
 </pre></code>
 
 @name first
 @methodOf Array#
-
-@returns The first element, or undefined if the array is empty.
-@type Object
+@returns {Object} The first element, or undefined if the array is empty.
 */
 Array.prototype.first = function() {
   return this[0];
@@ -389,15 +372,13 @@ Array.prototype.first = function() {
 Returns the last element of the array, undefined if the array is empty.
 
 <code><pre>
-   ["first", "second", "third"].last()
-=> "third"
+["first", "second", "third"].last()
+# => "third"
 </pre></code>
 
 @name last
 @methodOf Array#
-
-@returns The last element, or undefined if the array is empty.
-@type Object
+@returns {Object} The last element, or undefined if the array is empty.
 */
 Array.prototype.last = function() {
   return this[this.length - 1];
@@ -406,17 +387,14 @@ Array.prototype.last = function() {
 Returns an object containing the extremes of this array.
 
 <code><pre>
-   [-1, 3, 0].extremes()
-=> {min: -1, max: 3}
+[-1, 3, 0].extremes()
+# => {min: -1, max: 3}
 </pre></code>
 
 @name extremes
 @methodOf Array#
-
-@param {Function} [fn] An optional funtion used to evaluate 
-each element to calculate its value for determining extremes.
-@returns {min: minElement, max: maxElement}
-@type Object
+@param {Function} [fn] An optional funtion used to evaluate each element to calculate its value for determining extremes.
+@returns {Object} {min: minElement, max: maxElement}
 */
 Array.prototype.extremes = function(fn) {
   var max, maxResult, min, minResult;
@@ -458,26 +436,21 @@ If length is not given return the element at start, again assuming the array
 is a circle.
 
 <code><pre>
-   [1, 2, 3].wrap(-1)
-=> 3
+[1, 2, 3].wrap(-1)
+# => 3
 
-   [1, 2, 3].wrap(6)
-=> 1
+[1, 2, 3].wrap(6)
+# => 1
 
-   ["l", "o", "o", "p"].wrap(0, 16)
-=> ["l", "o", "o", "p", "l", "o", "o", "p", "l", "o", "o", "p", "l", "o", "o", "p"]
+["l", "o", "o", "p"].wrap(0, 16)
+# => ["l", "o", "o", "p", "l", "o", "o", "p", "l", "o", "o", "p", "l", "o", "o", "p"]
 </pre></code>
 
 @name wrap
 @methodOf Array#
-
-@param {Number} start The index to start wrapping at, or the index of the 
-sole element to return if no length is given.
-@param {Number} [length] Optional length determines how long result 
-array should be.
-@returns The element at start mod array.length, or an array of length elements, 
-starting from start and wrapping.
-@type Object or Array
+@param {Number} start The index to start wrapping at, or the index of the sole element to return if no length is given.
+@param {Number} [length] Optional length determines how long result array should be.
+@returns {Object} or {Array} The element at start mod array.length, or an array of length elements, starting from start and wrapping.
 */
 Array.prototype.wrap = function(start, length) {
   var end, i, result;
@@ -499,13 +472,9 @@ true, and those for which it returns false.
 
 @name partition
 @methodOf Array#
-
 @param {Function} iterator
-@param {Object} [context] Optional context parameter to be
-used as `this` when calling the iterator function.
-
-@type Array
-@returns An array in the form of [trueCollection, falseCollection]
+@param {Object} [context] Optional context parameter to be used as `this` when calling the iterator function.
+@returns {Array} An array in the form of [trueCollection, falseCollection]
 */
 Array.prototype.partition = function(iterator, context) {
   var falseCollection, trueCollection;
@@ -525,14 +494,9 @@ Return the group of elements for which the return value of the iterator is true.
 
 @name select
 @methodOf Array#
-
-@param {Function} iterator The iterator receives each element in turn as 
-the first agument.
-@param {Object} [context] Optional context parameter to be
-used as `this` when calling the iterator function.
-
-@type Array
-@returns An array containing the elements for which the iterator returned true.
+@param {Function} iterator The iterator receives each element in turn as the first agument.
+@param {Object} [context] Optional context parameter to be used as `this` when calling the iterator function.
+@returns {Array} An array containing the elements for which the iterator returned true.
 */
 Array.prototype.select = function(iterator, context) {
   return this.partition(iterator, context)[0];
@@ -542,11 +506,8 @@ Return the group of elements that are not in the passed in set.
 
 @name without
 @methodOf Array#
-
 @param {Array} values List of elements to exclude.
-
-@type Array
-@returns An array containing the elements that are not passed in.
+@returns {Array} An array containing the elements that are not passed in.
 */
 Array.prototype.without = function(values) {
   return this.reject(function(element) {
@@ -558,14 +519,9 @@ Return the group of elements for which the return value of the iterator is false
 
 @name reject
 @methodOf Array#
-
-@param {Function} iterator The iterator receives each element in turn as 
-the first agument.
-@param {Object} [context] Optional context parameter to be
-used as `this` when calling the iterator function.
-
-@type Array
-@returns An array containing the elements for which the iterator returned false.
+@param {Function} iterator The iterator receives each element in turn as the first agument.
+@param {Object} [context] Optional context parameter to be used as `this` when calling the iterator function.
+@returns {Array} An array containing the elements for which the iterator returned false.
 */
 Array.prototype.reject = function(iterator, context) {
   return this.partition(iterator, context)[1];
@@ -577,9 +533,7 @@ value (memo) and the element.
 
 @name inject
 @methodOf Array#
-
-@type Object
-@returns The result of a
+@returns {Object} The result of a
 */
 Array.prototype.inject = function(initial, iterator) {
   this.each(function(element) {
@@ -590,11 +544,14 @@ Array.prototype.inject = function(initial, iterator) {
 /**
 Add all the elements in the array.
 
+<code><pre>
+[1, 2, 3, 4].sum()
+# => 10
+</pre></code>
+
 @name sum
 @methodOf Array#
-
-@type Number
-@returns The sum of the elements in the array.
+@returns {Number} The sum of the elements in the array.
 */
 Array.prototype.sum = function() {
   return this.inject(0, function(sum, n) {
@@ -604,17 +561,32 @@ Array.prototype.sum = function() {
 /**
 Multiply all the elements in the array.
 
+<code><pre>
+[1, 2, 3, 4].product()
+# => 24
+</pre></code>
+
 @name product
 @methodOf Array#
-
-@type Number
-@returns The product of the elements in the array.
+@returns {Number} The product of the elements in the array.
 */
 Array.prototype.product = function() {
   return this.inject(1, function(product, n) {
     return product * n;
   });
 };
+/**
+Merges together the values of each of the arrays with the values at the corresponding position.
+
+<code><pre>
+['a', 'b', 'c'].zip([1, 2, 3])
+# => [['a', 1], ['b', 2], ['c', 3]]
+</pre></code>
+
+@name zip
+@methodOf Array#
+@returns {Array} Array groupings whose values are arranged by their positions in the original input arrays.
+*/
 Array.prototype.zip = function() {
   var args;
   args = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
@@ -628,7 +600,24 @@ Array.prototype.zip = function() {
   });
 };;
 /**
-Bindable module
+Bindable module.
+
+<code><pre>
+player = Core
+  x: 5
+  y: 10
+
+player.bind "update", ->
+  updatePlayer()
+# => Uncaught TypeError: Object has no method 'bind'
+
+player.include(Bindable)
+
+player.bind "update", ->
+  updatePlayer()
+# => this will call updatePlayer each time through the main loop
+</pre></code>
+
 @name Bindable
 @module
 @constructor
@@ -640,20 +629,19 @@ Bindable = function() {
   return {
     /**
     The bind method adds a function as an event listener.
-    
+
     <code><pre>
     # this will call coolEventHandler after
     # yourObject.trigger "someCustomEvent" is called.
     yourObject.bind "someCustomEvent", coolEventHandler
-    
+
     #or
     yourObject.bind "anotherCustomEvent", ->
       doSomething()
-    </pre></code>  
-    
+    </pre></code>
+
     @name bind
     @methodOf Bindable#
-    
     @param {String} event The event to listen to.
     @param {Function} callback The function to be called when the specified event
     is triggered.
@@ -665,19 +653,18 @@ Bindable = function() {
     /**
     The unbind method removes a specific event listener, or all event listeners if
     no specific listener is given.
-    
+
     <code><pre>
     #  removes the handler coolEventHandler from the event
     # "someCustomEvent" while leaving the other events intact.
     yourObject.unbind "someCustomEvent", coolEventHandler
-    
+
     # removes all handlers attached to "anotherCustomEvent" 
     yourObject.unbind "anotherCustomEvent"
-    </pre></code>   
-    
+    </pre></code>
+
     @name unbind
     @methodOf Bindable#
-    
     @param {String} event The event to remove the listener from.
     @param {Function} [callback] The listener to remove.
     */
@@ -691,15 +678,14 @@ Bindable = function() {
     },
     /**
     The trigger method calls all listeners attached to the specified event.
-    
+
     <code><pre>
     # calls each event handler bound to "someCustomEvent"
     yourObject.trigger "someCustomEvent"
-    </pre></code>  
-    
+    </pre></code>
+
     @name trigger
     @methodOf Bindable#
-    
     @param {String} event The event to trigger.
     @param {Array} [parameters] Additional parameters to pass to the event listener.
     */
@@ -772,28 +758,27 @@ Core = function(I) {
     /**
       External access to instance variables. Use of this property should be avoided
       in general, but can come in handy from time to time.
-    
-    <code><pre>
-     I = {
-       r: 255
-       g: 0
-       b: 100
-     }
-    
-     myObject = Core(I)
-    
-     # a bad idea most of the time, but it's 
-     # pretty convenient to have available.
-     myObject.I.r
-    => 255
-    
-     myObject.I.g
-    => 0
-    
-     myObject.I.b
-    => 100
-    </pre></code>    
-    
+
+      <code><pre>
+      I =
+        r: 255
+        g: 0
+        b: 100
+
+      myObject = Core(I)
+
+      # a bad idea most of the time, but it's 
+      # pretty convenient to have available.
+      myObject.I.r
+      # => 255
+
+      myObject.I.g
+      # => 0
+
+      myObject.I.b
+      # => 100
+      </pre></code>
+
       @name I
       @fieldOf Core#
       */
@@ -801,21 +786,21 @@ Core = function(I) {
     /**
       Generates a public jQuery style getter / setter method for each 
       String argument.
-    
+
       <code><pre>
       myObject = Core
         r: 255
         g: 0
         b: 100
-    
+
       myObject.attrAccessor "r", "g", "b"
-    
+
       myObject.r(254)
       myObject.r()
-    
-     => 254
-      </pre></code>       
-    
+
+      => 254
+      </pre></code>
+
       @name attrAccessor
       @methodOf Core#
       */
@@ -835,25 +820,25 @@ Core = function(I) {
     },
     /**
     Generates a public jQuery style getter method for each String argument.
-    
+
     <code><pre>
     myObject = Core
       r: 255
       g: 0
       b: 100
-    
+
     myObject.attrReader "r", "g", "b"
-    
+
     myObject.r()
-     => 255
-    
+    => 255
+
     myObject.g()
-     => 0
-    
+    => 0
+
     myObject.b()
-     => 100
-    </pre></code>    
-    
+    => 100
+    </pre></code>
+
     @name attrReader
     @methodOf Core#
     */
@@ -870,7 +855,32 @@ Core = function(I) {
     Extends this object with methods from the passed in object. `before` and 
     `after` are special option names that glue functionality before or after 
     existing methods.
-    
+
+    <code><pre>
+    I =
+      x: 30
+      y: 40
+      maxSpeed: 5
+
+    # we are using extend to give player
+    # additional methods that Core doesn't have
+    player = Core(I).extend
+      increaseSpeed: ->
+        I.maxSpeed += 1
+
+      # this will execute before the update method
+      beforeUpdate: ->
+        checkPowerupStatus()
+
+    player.I.maxSpeed
+    => 5
+
+    player.increaseSpeed()
+
+    player.I.maxSpeed
+    => 6
+    </pre></code>
+
     @name extend
     @methodOf Core#
     */
@@ -897,23 +907,19 @@ Core = function(I) {
     },
     /** 
     Includes a module in this object.
-    
+
     <code><pre>
     myObject = Core()
     myObject.include(Bindable)
-    
-    # now you can bind handlers to functions and
-    # y you've hardly written any code 
+
+    # now you can bind handlers to functions
     myObject.bind "someEvent", ->
       alert("wow. that was easy.")
-    </pre></code>    
-    
+    </pre></code>
+
     @name include
     @methodOf Core#
-    
-    @param {Module} Module the module to include. A module is a constructor 
-    that takes two parameters, I and self, and returns an object containing the 
-    public methods to extend the including object with.
+    @param {Module} Module the module to include. A module is a constructor that takes two parameters, I and self, and returns an object containing the public methods to extend the including object with.
     */
     include: function(Module) {
       return self.extend(Module(I, self));
@@ -939,7 +945,10 @@ Function.prototype.withAfter = function(interception) {
   };
 };;
 /**
-  @name Logging
+@name Logging
+@namespace
+
+Gives you some convenience methods for outputting data while developing. 
 
 <code><pre>
   log "Testing123"
@@ -947,9 +956,6 @@ Function.prototype.withAfter = function(interception) {
   warn "Be careful, this might be a problem"
   error "Kaboom!"
 </pre></code>
-
-  Gives you some convenience methods for outputting data
-  while developing. 
 */["log", "info", "warn", "error"].each(function(name) {
   if (typeof console !== "undefined") {
     return (typeof exports !== "undefined" && exports !== null ? exports : this)[name] = function(message) {
@@ -995,12 +1001,12 @@ Function.prototype.withAfter = function(interception) {
     |_0  0  1 _|
   </pre>
   Creates a matrix for 2d affine transformations.
-  
+
   concat, inverse, rotate, scale and translate return new matrices with the
   transformations applied. The matrix is not modified in place.
-  
+
   Returns the identity matrix when called with no arguments.
-  
+
   @name Matrix
   @param {Number} [a]
   @param {Number} [b]
@@ -1054,10 +1060,8 @@ Function.prototype.withAfter = function(interception) {
       http://mathworld.wolfram.com/MatrixMultiplication.html
       @name concat
       @methodOf Matrix#
-    
       @param {Matrix} matrix The matrix to multiply this matrix by.
-      @returns The result of the matrix multiplication, a new matrix.
-      @type Matrix
+      @returns {Matrix} The result of the matrix multiplication, a new matrix.
       */
     concat: function(matrix) {
       return Matrix(this.a * matrix.a + this.c * matrix.b, this.b * matrix.a + this.d * matrix.b, this.a * matrix.c + this.c * matrix.d, this.b * matrix.c + this.d * matrix.d, this.a * matrix.tx + this.c * matrix.ty + this.tx, this.b * matrix.tx + this.d * matrix.ty + this.ty);
@@ -1070,9 +1074,7 @@ Function.prototype.withAfter = function(interception) {
     @name deltaTransformPoint
     @methodOf Matrix#
     @see #transformPoint
-    
-    @return A new point transformed by this matrix ignoring tx and ty.
-    @type Point
+    @return {Point} A new point transformed by this matrix ignoring tx and ty.
     */
     deltaTransformPoint: function(point) {
       return Point(this.a * point.x + this.c * point.y, this.b * point.x + this.d * point.y);
@@ -1082,9 +1084,7 @@ Function.prototype.withAfter = function(interception) {
     http://mathworld.wolfram.com/MatrixInverse.html
     @name inverse
     @methodOf Matrix#
-    
-    @returns A new matrix that is the inverse of this matrix.
-    @type Matrix
+    @returns {Matrix} A new matrix that is the inverse of this matrix.
     */
     inverse: function() {
       var determinant;
@@ -1097,11 +1097,9 @@ Function.prototype.withAfter = function(interception) {
     @name rotate
     @methodOf Matrix#
     @see Matrix.rotation
-    
     @param {Number} theta Amount to rotate in radians.
     @param {Point} [aboutPoint] The point about which this rotation occurs. Defaults to (0,0).
-    @returns A new matrix, rotated by the specified amount.
-    @type Matrix
+    @returns {Matrix} A new matrix, rotated by the specified amount.
     */
     rotate: function(theta, aboutPoint) {
       return this.concat(Matrix.rotation(theta, aboutPoint));
@@ -1112,11 +1110,10 @@ Function.prototype.withAfter = function(interception) {
     @name scale
     @methodOf Matrix#
     @see Matrix.scale
-    
     @param {Number} sx
     @param {Number} [sy]
     @param {Point} [aboutPoint] The point that remains fixed during the scaling
-    @type Matrix
+    @returns {Matrix} A new Matrix. The original multiplied by a scaling matrix.
     */
     scale: function(sx, sy, aboutPoint) {
       return this.concat(Matrix.scale(sx, sy, aboutPoint));
@@ -1127,9 +1124,7 @@ Function.prototype.withAfter = function(interception) {
     @name transformPoint
     @methodOf Matrix#
     @see #deltaTransformPoint
-    
-    @returns A new point with the transformation applied.
-    @type Point
+    @returns {Point} A new point with the transformation applied.
     */
     transformPoint: function(point) {
       return Point(this.a * point.x + this.c * point.y + this.tx, this.b * point.x + this.d * point.y + this.ty);
@@ -1139,11 +1134,9 @@ Function.prototype.withAfter = function(interception) {
     @name translate
     @methodOf Matrix#
     @see Matrix.translation
-    
     @param {Number} tx The translation along the x axis.
     @param {Number} ty The translation along the y axis.
-    @returns A new matrix with the translation applied.
-    @type Matrix
+    @returns {Matrix} A new matrix with the translation applied.
     */
     translate: function(tx, ty) {
       return this.concat(Matrix.translation(tx, ty));
@@ -1152,11 +1145,9 @@ Function.prototype.withAfter = function(interception) {
     Creates a matrix transformation that corresponds to the given rotation,
     around (0,0) or the specified point.
     @see Matrix#rotate
-    
     @param {Number} theta Rotation in radians.
     @param {Point} [aboutPoint] The point about which this rotation occurs. Defaults to (0,0).
-    @returns 
-    @type Matrix
+    @returns {Matrix} A new matrix rotated by the given amount.
     */
   };
   Matrix.rotate = Matrix.rotation = function(theta, aboutPoint) {
@@ -1174,12 +1165,10 @@ Function.prototype.withAfter = function(interception) {
   If the optional aboutPoint parameter is given the scaling takes place
   about the given point.
   @see Matrix#scale
-  
   @param {Number} sx The amount to scale by along the x axis or uniformly if no sy is given.
   @param {Number} [sy] The amount to scale by along the y axis.
   @param {Point} [aboutPoint] The point about which the scaling occurs. Defaults to (0,0).
-  @returns A matrix transformation representing scaling by sx and sy.
-  @type Matrix
+  @returns {Matrix} A matrix transformation representing scaling by sx and sy.
   */
   Matrix.scale = function(sx, sy, aboutPoint) {
     var scaleMatrix;
@@ -1193,11 +1182,9 @@ Function.prototype.withAfter = function(interception) {
   /**
   Returns a matrix that corresponds to a translation of tx, ty.
   @see Matrix#translate
-  
   @param {Number} tx The amount to translate in the x direction.
   @param {Number} ty The amount to translate in the y direction.
-  @return A matrix transformation representing a translation by tx and ty.
-  @type Matrix
+  @return {Matrix} A matrix transformation representing a translation by tx and ty.
   */
   Matrix.translate = Matrix.translation = function(tx, ty) {
     return Matrix(1, 0, 0, 1, tx, ty);
@@ -1231,15 +1218,13 @@ Function.prototype.withAfter = function(interception) {
 Returns the absolute value of this number.
 
 <code><pre>
-   (-4).abs()
-=> 4
+(-4).abs()
+# => 4
 </pre></code>
 
 @name abs
 @methodOf Number#
-
-@type Number
-@returns The absolute value of the number.
+@returns {Number} The absolute value of the number.
 */Number.prototype.abs = function() {
   return Math.abs(this);
 };
@@ -1247,21 +1232,19 @@ Returns the absolute value of this number.
 Returns the mathematical ceiling of this number.
 
 <code><pre>
-   4.9.ceil() 
-=> 5
+4.9.ceil() 
+# => 5
 
-   4.2.ceil()
-=> 5
+4.2.ceil()
+# => 5
 
-   (-1.2).ceil()
-=> -1
+(-1.2).ceil()
+# => -1
 </pre></code>
 
 @name ceil
 @methodOf Number#
-
-@type Number
-@returns The number truncated to the nearest integer of greater than or equal value.
+@returns {Number} The number truncated to the nearest integer of greater than or equal value.
 */
 Number.prototype.ceil = function() {
   return Math.ceil(this);
@@ -1270,21 +1253,19 @@ Number.prototype.ceil = function() {
 Returns the mathematical floor of this number.
 
 <code><pre>
-   4.9.floor()
-=> 4
+4.9.floor()
+# => 4
 
-   4.2.floor()
-=> 4
+4.2.floor()
+# => 4
 
-   (-1.2).floor()
-=> -2
+(-1.2).floor()
+# => -2
 </pre></code>
 
 @name floor
 @methodOf Number#
-
-@type Number
-@returns The number truncated to the nearest integer of less than or equal value.
+@returns {Number} The number truncated to the nearest integer of less than or equal value.
 */
 Number.prototype.floor = function() {
   return Math.floor(this);
@@ -1293,18 +1274,16 @@ Number.prototype.floor = function() {
 Returns this number rounded to the nearest integer.
 
 <code><pre>
-   4.5.round()
-=> 5
+4.5.round()
+# => 5
 
-   4.4.round()
-=> 4
+4.4.round()
+# => 4
 </pre></code>
 
 @name round
 @methodOf Number#
-
-@type Number
-@returns The number rounded to the nearest integer.
+@returns {Number} The number rounded to the nearest integer.
 */
 Number.prototype.round = function() {
   return Math.round(this);
@@ -1312,20 +1291,17 @@ Number.prototype.round = function() {
 /**
 Returns a number whose value is limited to the given range.
 
-<code><pre>   
-   # limit the output of this computation to between 0 and 255
-   (2 * 255).clamp(0, 255)
-=> 255
+<code><pre>
+# limit the output of this computation to between 0 and 255
+(2 * 255).clamp(0, 255)
+# => 255
 </pre></code>
 
 @name clamp
 @methodOf Number#
-
 @param {Number} min The lower boundary of the output range
 @param {Number} max The upper boundary of the output range
-
-@type Number
-@returns A number in the range [min, max]
+@returns {Number} A number in the range [min, max]
 */
 Number.prototype.clamp = function(min, max) {
   return Math.min(Math.max(this, min), max);
@@ -1335,16 +1311,14 @@ A mod method useful for array wrapping. The range of the function is
 constrained to remain in bounds of array indices.
 
 <code><pre>
-   (-1).mod(5)
-=> 4
+(-1).mod(5)
+# => 4
 </pre></code>
 
 @name mod
 @methodOf Number#
-
 @param {Number} base
-@type Number
-@returns An integer between 0 and (base - 1) if base is positive.
+@returns {Number} An integer between 0 and (base - 1) if base is positive.
 */
 Number.prototype.mod = function(base) {
   var result;
@@ -1358,21 +1332,19 @@ Number.prototype.mod = function(base) {
 Get the sign of this number as an integer (1, -1, or 0).
 
 <code><pre>
-   (-5).sign()
-=> -1
+(-5).sign()
+# => -1
 
-   0.sign()
-=> 0
+0.sign()
+# => 0
 
-   5.sign()
-=> 1
+5.sign()
+# => 1
 </pre></code>
 
 @name sign
 @methodOf Number#
-
-@type Number
-@returns The sign of this number, 0 if the number is 0.
+@returns {Number} The sign of this number, 0 if the number is 0.
 */
 Number.prototype.sign = function() {
   if (this > 0) {
@@ -1387,21 +1359,19 @@ Number.prototype.sign = function() {
 Returns true if this number is even (evenly divisible by 2).
 
 <code><pre>
-   2.even()
-=> true
+2.even()
+# => true
 
-   3.even()
-=> false
+3.even()
+# => false
 
-   0.even()
-=> true      
+0.even()
+# => true      
 </pre></code>
 
 @name even
 @methodOf Number#
-
-@type Boolean
-@returns true if this number is an even integer, false otherwise.
+@returns {Boolean} true if this number is an even integer, false otherwise.
 */
 Number.prototype.even = function() {
   return this % 2 === 0;
@@ -1410,21 +1380,19 @@ Number.prototype.even = function() {
 Returns true if this number is odd (has remainder of 1 when divided by 2).
 
 <code><pre>
-   2.odd()
-=> false
+2.odd()
+# => false
 
-   3.odd()
-=> true
+3.odd()
+# => true
 
-   0.odd()
-=> false     
+0.odd()
+# => false     
 </pre></code>
 
 @name odd
 @methodOf Number#
-
-@type Boolean
-@returns true if this number is an odd integer, false otherwise.
+@returns {Boolean} true if this number is an odd integer, false otherwise.
 */
 Number.prototype.odd = function() {
   if (this > 0) {
@@ -1438,25 +1406,20 @@ Calls iterator the specified number of times, passing in the number of the
 current iteration as a parameter: 0 on first call, 1 on the second call, etc. 
 
 <code><pre>
-   output = []
+output = []
 
-   5.times (n) ->
-     output.push(n)
+5.times (n) ->
+  output.push(n)
 
-   output
-=> [0, 1, 2, 3, 4]
+output
+# => [0, 1, 2, 3, 4]
 </pre></code>
 
 @name times
 @methodOf Number#
-
-@param {Function} iterator The iterator takes a single parameter, the number 
-of the current iteration.
-@param {Object} [context] The optional context parameter specifies an object
-to treat as <code>this</code> in the iterator block.
-
-@type Number
-@returns The number of times the iterator was called.
+@param {Function} iterator The iterator takes a single parameter, the number of the current iteration.
+@param {Object} [context] The optional context parameter specifies an object to treat as <code>this</code> in the iterator block.
+@returns {Number} The number of times the iterator was called.
 */
 Number.prototype.times = function(iterator, context) {
   var i;
@@ -1470,22 +1433,20 @@ Number.prototype.times = function(iterator, context) {
 Returns the the nearest grid resolution less than or equal to the number. 
 
 <code><pre>
-    7.snap(8) 
-=> 0
+7.snap(8) 
+# => 0
 
-    4.snap(8) 
-=> 0
+4.snap(8) 
+# => 0
 
-   12.snap(8) 
-=> 8
+12.snap(8) 
+# => 8
 </pre></code>
 
 @name snap
 @methodOf Number#
-
 @param {Number} resolution The grid resolution to snap to.
-@type Number
-@returns The nearest multiple of resolution lower than the number.
+@returns {Number} The nearest multiple of resolution lower than the number.
 */
 Number.prototype.snap = function(resolution) {
   var n;
@@ -1501,18 +1462,16 @@ which when multiplied together equal the original integer.
 Floors the number for purposes of factorization.
 
 <code><pre>
-   60.primeFactors()
-=> [2, 2, 3, 5]
+60.primeFactors()
+# => [2, 2, 3, 5]
 
-   37.primeFactors()
-=> [37]
+37.primeFactors()
+# => [37]
 </pre></code>
 
 @name primeFactors
 @methodOf Number#
-
-@type Array
-@returns An array containing the factorization of this number.
+@returns {Array} An array containing the factorization of this number.
 */
 Number.prototype.primeFactors = function() {
   var factors, i, iSquared, n;
@@ -1545,21 +1504,19 @@ Returns the two character hexidecimal
 representation of numbers 0 through 255.
 
 <code><pre>
-   255.toColorPart()
-=> "ff"
+255.toColorPart()
+# => "ff"
 
-   0.toColorPart()
-=> "00"
+0.toColorPart()
+# => "00"
 
-   200.toColorPart()
-=> "c8"
+200.toColorPart()
+# => "c8"
 </pre></code>
 
 @name toColorPart
 @methodOf Number#
-
-@type String
-@returns Hexidecimal representation of the number
+@returns {String} Hexidecimal representation of the number
 */
 Number.prototype.toColorPart = function() {
   var s;
@@ -1573,18 +1530,16 @@ Number.prototype.toColorPart = function() {
 Returns a number that is maxDelta closer to target.
 
 <code><pre>
-   255.approach(0, 5)
-=> 250
+255.approach(0, 5)
+# => 250
 
-   5.approach(0, 10)
-=> 0
+5.approach(0, 10)
+# => 0
 </pre></code>
 
 @name approach
 @methodOf Number#
-
-@type Number
-@returns A number maxDelta toward target
+@returns {Number} A number maxDelta toward target
 */
 Number.prototype.approach = function(target, maxDelta) {
   return (target - this).clamp(-maxDelta, maxDelta) + this;
@@ -1593,15 +1548,13 @@ Number.prototype.approach = function(target, maxDelta) {
 Returns a number that is closer to the target by the ratio.
 
 <code><pre>
-   255.approachByRatio(0, 0.1)
-=> 229.5
+255.approachByRatio(0, 0.1)
+# => 229.5
 </pre></code>
 
 @name approachByRatio
 @methodOf Number#
-
-@type Number
-@returns A number toward target by the ratio
+@returns {Number} A number toward target by the ratio
 */
 Number.prototype.approachByRatio = function(target, ratio) {
   return this.approach(target, this * ratio);
@@ -1610,15 +1563,13 @@ Number.prototype.approachByRatio = function(target, ratio) {
 Returns a number that is closer to the target angle by the delta.
 
 <code><pre>
-   Math.PI.approachRotation(0, Math.PI/4)
-=> 2.356194490192345 # this is (3/4) * Math.PI, which is (1/4) * Math.PI closer to 0 from Math.PI
+Math.PI.approachRotation(0, Math.PI/4)
+# => 2.356194490192345 # this is (3/4) * Math.PI, which is (1/4) * Math.PI closer to 0 from Math.PI
 </pre></code>
 
 @name approachRotation
 @methodOf Number#
-
-@type Number
-@returns A number toward the target angle by maxDelta
+@returns {Number} A number toward the target angle by maxDelta
 */
 Number.prototype.approachRotation = function(target, maxDelta) {
   while (target > this + Math.PI) {
@@ -1633,15 +1584,13 @@ Number.prototype.approachRotation = function(target, maxDelta) {
 Constrains a rotation to between -PI and PI.
 
 <code><pre>
-   (9/4 * Math.PI).constrainRotation() 
-=> 0.7853981633974483 # this is (1/4) * Math.PI
+(9/4 * Math.PI).constrainRotation() 
+# => 0.7853981633974483 # this is (1/4) * Math.PI
 </pre></code>
 
 @name constrainRotation
 @methodOf Number#
-
-@type Number
-@returns This number constrained between -PI and PI.
+@returns {Number} This number constrained between -PI and PI.
 */
 Number.prototype.constrainRotation = function() {
   var target;
@@ -1659,9 +1608,7 @@ The mathematical d operator. Useful for simulating dice rolls.
 
 @name d
 @methodOf Number#
-
-@type Number
-@returns The sum of rolling <code>this</code> many <code>sides</code>-sided dice
+@returns {Number} The sum of rolling <code>this</code> many <code>sides</code>-sided dice
 */
 Number.prototype.d = function(sides) {
   var sum;
@@ -1682,20 +1629,17 @@ Math.TAU = 2 * Math.PI;;
 Checks whether an object is an array.
 
 <code><pre>
-   Object.isArray([1, 2, 4])
-=> true
+Object.isArray([1, 2, 4])
+# => true
 
-   Object.isArray({key: "value"})
-=> false
+Object.isArray({key: "value"})
+# => false
 </pre></code>
 
 @name isArray
 @methodOf Object
-
 @param {Object} object The object to check for array-ness.
-@type Boolean
-@returns A boolean expressing whether the object is an instance of Array 
-
+@returns {Boolean} A boolean expressing whether the object is an instance of Array 
 */var __slice = Array.prototype.slice;
 Object.isArray = function(object) {
   return Object.prototype.toString.call(object) === '[object Array]';
@@ -1705,28 +1649,22 @@ Merges properties from objects into target without overiding.
 First come, first served.
 
 <code><pre>
-   I = {
-     a: 1
-     b: 2
-     c: 3
-   }
+  I =
+    a: 1
+    b: 2
+    c: 3
 
-   Object.reverseMerge I, {
-     c: 6
-     d: 4
-   }   
+  Object.reverseMerge I,
+    c: 6
+    d: 4   
 
-   I
-
-=> {a: 1, b:2, c:3, d: 4}
+  I # => {a: 1, b:2, c:3, d: 4}
 </pre></code>
 
 @name reverseMerge
 @methodOf Object
-
 @param {Object} target The object to merge the properties into.
-@type Object
-@returns target
+@returns {Object} target
 */
 Object.reverseMerge = function() {
   var name, object, objects, target, _i, _len;
@@ -1746,28 +1684,22 @@ Merges properties from sources into target with overiding.
 Last in covers earlier properties.
 
 <code><pre>
-   I = {
-     a: 1
-     b: 2
-     c: 3
-   }
+  I =
+    a: 1
+    b: 2
+    c: 3
 
-   Object.extend I, {
-     c: 6
-     d: 4
-   }   
+  Object.extend I,
+    c: 6
+    d: 4
 
-   I
-
-=> {a: 1, b:2, c:6, d: 4}
+  I # => {a: 1, b:2, c:6, d: 4}
 </pre></code>
 
 @name extend
 @methodOf Object
-
 @param {Object} target The object to merge the properties into.
-@type Object
-@returns target
+@returns {Object} target
 */
 Object.extend = function() {
   var name, source, sources, target, _i, _len;
@@ -1779,11 +1711,48 @@ Object.extend = function() {
     }
   }
   return target;
+};
+/**
+Helper method that tells you if something is an object.
+
+<code><pre>
+object = {a: 1}
+
+Object.isObject(object)
+# => true
+</pre></code>
+
+@name isObject
+@methodOf Object
+@param {Object} object Maybe this guy is an object.
+@returns {Boolean} true if this guy is an object.
+*/
+Object.isObject = function(object) {
+  return Object.prototype.toString.call(object) === '[object Object]';
 };;
 (function() {
   /**
   Create a new point with given x and y coordinates. If no arguments are given
   defaults to (0, 0).
+
+  <code><pre>
+  point = Point()
+
+  p.x
+  # => 0
+
+  p.y
+  # => 0
+
+  point = Point(-2, 5)
+
+  p.x
+  # => -2
+
+  p.y
+  # => 5
+  </pre></code>
+
   @name Point
   @param {Number} [x]
   @param {Number} [y]
@@ -1809,21 +1778,20 @@ Object.extend = function() {
   Point.prototype = {
     /**
       Creates a copy of this point.
-    
+
       @name copy
       @methodOf Point#
-      @type Point
-      @returns A new point with the same x and y value as this point.
-    
+      @returns {Point} A new point with the same x and y value as this point.
+
       <code><pre>
-        point = Point(1, 1)
-        pointCopy = point.copy()
-    
-        point.equal(pointCopy)
-        => true
-    
-        point == pointCopy
-        => false     
+      point = Point(1, 1)
+      pointCopy = point.copy()
+
+      point.equal(pointCopy)
+      # => true
+
+      point == pointCopy
+      # => false     
       </pre></code>
       */
     copy: function() {
@@ -1833,16 +1801,70 @@ Object.extend = function() {
     Adds a point to this one and returns the new point. You may
     also use a two argument call like <code>point.add(x, y)</code>
     to add x and y values without a second point object.
+
+    <code><pre>
+    point = Point(2, 3).add(Point(3, 4))
+
+    point.x
+    # => 5
+
+    point.y
+    # => 7
+
+    anotherPoint = Point(2, 3).add(3, 4)
+
+    anotherPoint.x
+    # => 5
+
+    anotherPoint.y
+    # => 7
+    </pre></code>
+
     @name add
     @methodOf Point#
-    
     @param {Point} other The point to add this point to.
-    @returns A new point, the sum of both.
-    @type Point
+    @returns {Point} A new point, the sum of both.
     */
     add: function(first, second) {
       return this.copy().add$(first, second);
     },
+    /**
+    Adds a point to this one, returning a modified point. You may
+    also use a two argument call like <code>point.add(x, y)</code>
+    to add x and y values without a second point object.
+
+    <code><pre>
+    point = Point(2, 3)
+
+    point.x
+    # => 2
+
+    point.y
+    # => 3
+
+    point.add$(Point(3, 4))
+
+    point.x
+    # => 5
+
+    point.y
+    # => 7
+
+    anotherPoint = Point(2, 3)
+    anotherPoint.add$(3, 4)
+
+    anotherPoint.x
+    # => 5
+
+    anotherPoint.y
+    # => 7
+    </pre></code>
+
+    @name add$
+    @methodOf Point#
+    @param {Point} other The point to add this point to.
+    @returns {Point} The sum of both points.
+    */
     add$: function(first, second) {
       if (second != null) {
         this.x += first;
@@ -1855,16 +1877,68 @@ Object.extend = function() {
     },
     /**
     Subtracts a point to this one and returns the new point.
+
+    <code><pre>
+    point = Point(1, 2).subtract(Point(2, 0))
+
+    point.x
+    # => -1
+
+    point.y
+    # => 2
+
+    anotherPoint = Point(1, 2).subtract(2, 0)
+
+    anotherPoint.x
+    # => -1
+
+    anotherPoint.y
+    # => 2
+    </pre></code>
+
     @name subtract
     @methodOf Point#
-    
     @param {Point} other The point to subtract from this point.
-    @returns A new point, this - other.
-    @type Point
+    @returns {Point} A new point, this - other.
     */
     subtract: function(first, second) {
       return this.copy().subtract$(first, second);
     },
+    /**
+    Subtracts a point to this one and returns the new point.
+
+    <code><pre>
+    point = Point(1, 2)
+
+    point.x
+    # => 1
+
+    point.y
+    # => 2
+
+    point.subtract$(Point(2, 0))
+
+    point.x
+    # => -1
+
+    point.y
+    # => 2
+
+    anotherPoint = Point(1, 2)
+    anotherPoint.subtract$(2, 0)
+
+    anotherPoint.x
+    # => -1
+
+    anotherPoint.y
+    # => 2
+    </pre></code>
+
+    @name subtract$
+    @methodOf Point#
+    @param {Point} other The point to subtract from this point.
+    @returns {Point} The difference of the two points.
+    */
     subtract$: function(first, second) {
       if (second != null) {
         this.x -= first;
@@ -1877,16 +1951,51 @@ Object.extend = function() {
     },
     /**
     Scale this Point (Vector) by a constant amount.
+
+    <code><pre>
+    point = Point(5, 6).scale(2)
+
+    point.x
+    # => 10
+
+    point.y
+    # => 12
+    </pre></code>
+
     @name scale
     @methodOf Point#
-    
     @param {Number} scalar The amount to scale this point by.
-    @returns A new point, this * scalar.
-    @type Point
+    @returns {Point} A new point, this * scalar.
     */
     scale: function(scalar) {
       return this.copy().scale$(scalar);
     },
+    /**
+    Scale this Point (Vector) by a constant amount. Modifies the point in place.
+
+    <code><pre>
+    point = Point(5, 6)
+
+    point.x
+    # => 5
+
+    point.y
+    # => 6
+
+    point.scale$(2)
+
+    point.x
+    # => 10
+
+    point.y
+    # => 12
+    </pre></code>
+
+    @name scale$
+    @methodOf Point#
+    @param {Number} scalar The amount to scale this point by.
+    @returns {Point} this * scalar.
+    */
     scale$: function(scalar) {
       this.x *= scalar;
       this.y *= scalar;
@@ -1895,11 +2004,28 @@ Object.extend = function() {
     /**
     The norm of a vector is the unit vector pointing in the same direction. This method
     treats the point as though it is a vector from the origin to (x, y).
+
+    <code><pre>
+    point = Point(2, 3).norm()
+
+    point.x
+    # => 0.5547001962252291
+
+    point.y  
+    # => 0.8320502943378437
+
+    anotherPoint = Point(2, 3).norm(2)
+
+    anotherPoint.x
+    # => 1.1094003924504583
+
+    anotherPoint.y   
+    # => 1.6641005886756874    
+    </pre></code>
+
     @name norm
     @methodOf Point#
-    
-    @returns The unit vector pointing in the same direction as this vector.
-    @type Point
+    @returns {Point} The unit vector pointing in the same direction as this vector.
     */
     norm: function(length) {
       if (length == null) {
@@ -1907,6 +2033,32 @@ Object.extend = function() {
       }
       return this.copy().norm$(length);
     },
+    /**
+    The norm of a vector is the unit vector pointing in the same direction. This method
+    treats the point as though it is a vector from the origin to (x, y). Modifies the point in place.
+
+    <code><pre>
+    point = Point(2, 3).norm$()
+
+    point.x
+    # => 0.5547001962252291
+
+    point.y  
+    # => 0.8320502943378437
+
+    anotherPoint = Point(2, 3).norm$(2)
+
+    anotherPoint.x
+    # => 1.1094003924504583
+
+    anotherPoint.y   
+    # => 1.6641005886756874    
+    </pre></code>
+
+    @name norm$
+    @methodOf Point#
+    @returns {Point} The unit vector pointing in the same direction as this vector.
+    */
     norm$: function(length) {
       var m;
       if (length == null) {
@@ -1920,15 +2072,42 @@ Object.extend = function() {
     },
     /**
     Floor the x and y values, returning a new point.
-    
+
+    <code><pre>
+    point = Point(3.4, 5.8).floor()
+
+    point.x
+    # => 3
+
+    point.y
+    # => 5
+    </pre></code>
+
     @name floor
     @methodOf Point#
-    @returns A new point, with x and y values each floored to the largest previous integer.
-    @type Point
+    @returns {Point} A new point, with x and y values each floored to the largest previous integer.
     */
     floor: function() {
       return this.copy().floor$();
     },
+    /**
+    Floor the x and y values, returning a modified point.
+
+    <code><pre>
+    point = Point(3.4, 5.8)
+    point.floor$()
+
+    point.x
+    # => 3
+
+    point.y
+    # => 5
+    </pre></code>
+
+    @name floor$
+    @methodOf Point#
+    @returns {Point} A modified point, with x and y values each floored to the largest previous integer.
+    */
     floor$: function() {
       this.x = this.x.floor();
       this.y = this.y.floor();
@@ -1936,44 +2115,74 @@ Object.extend = function() {
     },
     /**
     Determine whether this point is equal to another point.
+
+    <code><pre>
+    pointA = Point(2, 3)
+    pointB = Point(2, 3)
+    pointC = Point(4, 5)
+
+    pointA.equal(pointB)
+    # => true
+
+    pointA.equal(pointC)
+    # => false
+    </pre></code>
+
     @name equal
     @methodOf Point#
-    
     @param {Point} other The point to check for equality.
-    @returns true if the other point has the same x, y coordinates, false otherwise.
-    @type Boolean
+    @returns {Boolean} true if the other point has the same x, y coordinates, false otherwise.
     */
     equal: function(other) {
       return this.x === other.x && this.y === other.y;
     },
     /**
-    Computed the length of this point as though it were a vector from (0,0) to (x,y)
+    Computed the length of this point as though it were a vector from (0,0) to (x,y).
+
+    <code><pre>
+    point = Point(5, 7)
+
+    point.length()
+    # => 8.602325267042627
+    </pre></code>
+
     @name length
     @methodOf Point#
-    
-    @returns The length of the vector from the origin to this point.
-    @type Number
+    @returns {Number} The length of the vector from the origin to this point.
     */
     length: function() {
       return Math.sqrt(this.dot(this));
     },
     /**
     Calculate the magnitude of this Point (Vector).
+
+    <code><pre>
+    point = Point(5, 7)
+
+    point.magnitude()
+    # => 8.602325267042627
+    </pre></code>
+
     @name magnitude
     @methodOf Point#
-    
-    @returns The magnitude of this point as if it were a vector from (0, 0) -> (x, y).
-    @type Number
+    @returns {Number} The magnitude of this point as if it were a vector from (0, 0) -> (x, y).
     */
     magnitude: function() {
       return this.length();
     },
     /**
     Returns the direction in radians of this point from the origin.
+
+    <code><pre>
+    point = Point(0, 1)
+
+    point.direction()
+    # => 1.5707963267948966 # Math.PI / 2
+    </pre></code>
+
     @name direction
     @methodOf Point#
-    
-    @type Number
+    @returns {Number} The direction in radians of this point from the origin
     */
     direction: function() {
       return Math.atan2(this.y, this.x);
@@ -1982,10 +2191,8 @@ Object.extend = function() {
     Calculate the dot product of this point and another point (Vector).
     @name dot
     @methodOf Point#
-    
     @param {Point} other The point to dot with this point.
-    @returns The dot product of this point dot other as a scalar value.
-    @type Number
+    @returns {Number} The dot product of this point dot other as a scalar value.
     */
     dot: function(other) {
       return this.x * other.x + this.y * other.y;
@@ -1996,35 +2203,50 @@ Object.extend = function() {
     but z can be treated as zero. The result of this method is interpreted as the magnitude 
     of the vector result of the cross product between [x1, y1, 0] x [x2, y2, 0]
     perpendicular to the xy plane.
+
     @name cross
     @methodOf Point#
-    
     @param {Point} other The point to cross with this point.
-    @returns The cross product of this point with the other point as scalar value.
-    @type Number
+    @returns {Number} The cross product of this point with the other point as scalar value.
     */
     cross: function(other) {
       return this.x * other.y - other.x * this.y;
     },
     /**
-    Computed the Euclidean between this point and another point.
+    Compute the Euclidean distance between this point and another point.
+
+    <code><pre>
+    pointA = Point(2, 3)
+    pointB = Point(9, 2)
+
+    pointA.distance(pointB)
+    # => 7.0710678118654755 # Math.sqrt(50)
+    </pre></code>
+
     @name distance
     @methodOf Point#
-    
     @param {Point} other The point to compute the distance to.
-    @returns The distance between this point and another point.
-    @type Number
+    @returns {Number} The distance between this point and another point.
     */
     distance: function(other) {
       return Point.distance(this, other);
     }
     /**
+    Compute the Euclidean distance between two points.
+
+    <code><pre>
+    pointA = Point(2, 3)
+    pointB = Point(9, 2)
+
+    Point.distance(pointA, pointB)
+    # => 7.0710678118654755 # Math.sqrt(50)
+    </pre></code>
+
     @name distance
-    @methodOf Point
+    @fieldOf Point
     @param {Point} p1
     @param {Point} p2
-    @type Number
-    @returns The Euclidean distance between two points.
+    @returns {Number} The Euclidean distance between two points.
     */
   };
   Point.distance = function(p1, p2) {
@@ -2032,13 +2254,21 @@ Object.extend = function() {
   };
   /**
   Construct a point on the unit circle for the given angle.
-  
+
+  <code><pre>
+  point = Point.fromAngle(Math.PI / 2)
+
+  point.x
+  # => 0
+
+  point.y
+  # => 1
+  </pre></code>
+
   @name fromAngle
-  @methodOf Point
-  
+  @fieldOf Point
   @param {Number} angle The angle in radians
-  @type Point
-  @returns The point on the unit circle.
+  @returns {Point} The point on the unit circle.
   */
   Point.fromAngle = function(angle) {
     return Point(Math.cos(angle), Math.sin(angle));
@@ -2047,14 +2277,20 @@ Object.extend = function() {
   If you have two dudes, one standing at point p1, and the other
   standing at point p2, then this method will return the direction
   that the dude standing at p1 will need to face to look at p2.
-  
+
+  <code><pre>
+  p1 = Point(0, 0)
+  p2 = Point(7, 3)
+
+  Point.direction(p1, p2)
+  # => 0.40489178628508343
+  </pre></code>
+
   @name direction
-  @methodOf Point
-  
+  @fieldOf Point
   @param {Point} p1 The starting point.
   @param {Point} p2 The ending point.
-  @type Number
-  @returns The direction from p1 to p2 in radians.
+  @returns {Number} The direction from p1 to p2 in radians.
   */
   Point.direction = function(p1, p2) {
     return Math.atan2(p2.y - p1.y, p2.x - p1.x);
@@ -2062,8 +2298,7 @@ Object.extend = function() {
   /**
   @name ZERO
   @fieldOf Point
-  
-  @type Point
+  @returns {Point} The point (0, 0)
   */
   Point.ZERO = Point();
   if (Object.freeze) {
@@ -2078,32 +2313,50 @@ Object.extend = function() {
   */  (typeof exports !== "undefined" && exports !== null ? exports : this)["Random"] = {
     /**
       Returns a random angle, uniformly distributed, between 0 and 2pi.
-    
+
       @name angle
       @methodOf Random
-      @type Number
+      @returns {Number} A random angle between 0 and 2pi
       */
     angle: function() {
       return rand() * Math.TAU;
     },
+    /**
+    Returns a random color.
+
+    @name color
+    @methodOf Random
+    @returns {Color} A random color
+    */
     color: function() {
       return Color.random();
     },
+    /**
+    Happens often.
+
+    @name often
+    @methodOf Random
+    */
     often: function() {
       return rand(3);
     },
+    /**
+    Happens sometimes.
+
+    @name sometimes
+    @methodOf Random
+    */
     sometimes: function() {
       return !rand(3);
     }
     /**
     Returns random integers from [0, n) if n is given.
     Otherwise returns random float between 0 and 1.
-    
+
     @name rand
     @methodOf window
-    
     @param {Number} n
-    @type Number
+    @returns {Number} A random integer from 0 to n - 1 if n is given. If n is not given, a random float between 0 and 1. 
     */
   };
   return (typeof exports !== "undefined" && exports !== null ? exports : this)["rand"] = function(n) {
@@ -2117,19 +2370,37 @@ Object.extend = function() {
 /**
 Returns true if this string only contains whitespace characters.
 
+<code><pre>
+"".blank()
+# => true
+
+"hello".blank()
+# => false
+
+"   ".blank()
+# => true
+</pre></code>
+
 @name blank
 @methodOf String#
-
-@returns Whether or not this string is blank.
-@type Boolean
+@returns {Boolean} Whether or not this string is blank.
 */String.prototype.blank = function() {
   return /^\s*$/.test(this);
 };
 /**
 Returns a new string that is a camelCase version.
 
+<code><pre>
+"camel_case".camelize()
+"camel-case".camelize()
+"camel case".camelize()
+
+# => "camelCase"
+</pre></code>
+
 @name camelize
 @methodOf String#
+@returns {String} A new string. camelCase version of `this`. 
 */
 String.prototype.camelize = function() {
   return this.trim().replace(/(\-|_|\s)+(.)?/g, function(match, separator, chr) {
@@ -2143,8 +2414,18 @@ String.prototype.camelize = function() {
 /**
 Returns a new string with the first letter capitalized and the rest lower cased.
 
+<code><pre>
+"capital".capitalize()
+"cAPITAL".capitalize()
+"cApItAl".capitalize()
+"CAPITAL".capitalize()
+
+# => "Capital"
+</pre></code>
+
 @name capitalize
 @methodOf String#
+@returns {String} A new string. Capitalized version of `this`
 */
 String.prototype.capitalize = function() {
   return this.charAt(0).toUpperCase() + this.substring(1).toLowerCase();
@@ -2152,11 +2433,16 @@ String.prototype.capitalize = function() {
 /**
 Return the class or constant named in this string.
 
+<code><pre>
+
+"Constant".constantize()
+# => Constant
+# notice this isn't a string. Useful for calling methods on class with the same name as `this`.
+</pre></code>
+
 @name constantize
 @methodOf String#
-
-@returns The class or constant named in this string.
-@type Object
+@returns {Object} The class or constant named in this string.
 */
 String.prototype.constantize = function() {
   if (this.match(/[A-Z][A-Za-z0-9]*/)) {
@@ -2169,8 +2455,17 @@ String.prototype.constantize = function() {
 /**
 Returns a new string that is a more human readable version.
 
+<code><pre>
+"player_id".humanize()
+# => "Player"
+
+"player_ammo".humanize()
+# => "Player ammo"
+</pre></code>
+
 @name humanize
 @methodOf String#
+@returns {String} A new string. Replaces _id and _ with "" and capitalizes the word.
 */
 String.prototype.humanize = function() {
   return this.replace(/_id$/, "").replace(/_/g, " ").capitalize();
@@ -2180,8 +2475,7 @@ Returns true.
 
 @name isString
 @methodOf String#
-@type Boolean
-@returns true
+@returns {Boolean} true
 */
 String.prototype.isString = function() {
   return true;
@@ -2190,12 +2484,20 @@ String.prototype.isString = function() {
 Parse this string as though it is JSON and return the object it represents. If it
 is not valid JSON returns the string itself.
 
+<code><pre>
+# this is valid json, so an object is returned
+'{"a": 3}'.parse()
+# => {a: 3}
+
+# double quoting instead isn't valid JSON so a string is returned
+"{'a': 3}".parse()
+# => "{'a': 3}"
+
+</pre></code>
+
 @name parse
 @methodOf String#
-
-@returns Returns an object from the JSON this string contains. If it
-is not valid JSON returns the string itself.
-@type Object
+@returns {Object} Returns an object from the JSON this string contains. If it is not valid JSON returns the string itself.
 */
 String.prototype.parse = function() {
   try {
@@ -2206,8 +2508,18 @@ String.prototype.parse = function() {
 };
 /**
 Returns a new string in Title Case.
+
+<code><pre>
+"title-case".titleize()
+# => "Title Case"
+
+"title case".titleize()
+# => "Title Case"
+</pre></code>
+
 @name titleize
 @methodOf String#
+@returns {String} A new string. Title Cased.
 */
 String.prototype.titleize = function() {
   return this.split(/[- ]/).map(function(word) {
@@ -2216,8 +2528,21 @@ String.prototype.titleize = function() {
 };
 /**
 Underscore a word, changing camelCased with under_scored.
+
+<code><pre>
+"UNDERScore".underscore()
+# => "under_score"
+
+"UNDER-SCORE".underscore()
+# => "under_score"
+
+"UnDEr-SCorE".underscore()
+# => "un_d_er_s_cor_e"
+</pre></code>
+
 @name underscore
 @methodOf String#
+@returns {String} A new string. Separated by _.
 */
 String.prototype.underscore = function() {
   return this.replace(/([A-Z]+)([A-Z][a-z])/g, '$1_$2').replace(/([a-z\d])([A-Z])/g, '$1_$2').replace(/-/g, '_').toLowerCase();
@@ -2226,18 +2551,20 @@ String.prototype.underscore = function() {
 Assumes the string is something like a file name and returns the 
 contents of the string without the extension.
 
-"neat.png".witouthExtension() => "neat"
+<code><pre>
+"neat.png".witouthExtension() 
+# => "neat"
+</pre></code>
 
 @name withoutExtension
 @methodOf String#
+@returns {String} A new string without the extension name.
 */
 String.prototype.withoutExtension = function() {
   return this.replace(/\.[^\.]*$/, '');
 };;
 /**
 Non-standard
-
-
 
 @name toSource
 @methodOf Boolean#
@@ -2282,8 +2609,6 @@ support a larger range of values. If this argument is omitted, it is treated as
 /**
 number.toLocaleString();
 
-
-
 @name toLocaleString
 @methodOf Number#
 */
@@ -2297,8 +2622,6 @@ Returns a string representing the Number object to the specified precision.
 */
 /**
 Non-standard
-
-
 
 @name toSource
 @methodOf Number#
@@ -2316,8 +2639,6 @@ numeric values.
 /**
 Returns the primitive value of a Number object.
 
-
-
 @name valueOf
 @methodOf Number#
 */
@@ -2325,7 +2646,7 @@ Returns the primitive value of a Number object.
 Returns the specified character from a string.
 
 <code><em>string</em>.charAt(<em>index</em>)</code>
-@param index  An integer between 0 and 1 less than the length of the string.
+@param index  An integer between 0 and 1 less than the length of the string.
 @name charAt
 @methodOf String#
 */
@@ -2334,7 +2655,7 @@ Returns the numeric Unicode value of the character at the given index (except
 for unicode codepoints > 0x10000).
 
 
-@param index  An integer greater than 0 and less than the length of the string;
+@param index  An integer greater than 0 and less than the length of the string;
 if it is not a number, it defaults to 0.
 @name charCodeAt
 @methodOf String#
@@ -2343,7 +2664,7 @@ if it is not a number, it defaults to 0.
 Combines the text of two or more strings and returns a new string.
 
 <code><em>string</em>.concat(<em>string2</em>, <em>string3</em>[, ..., <em>stringN</em>])</code>
-@param string2...stringN  Strings to concatenate to this string.
+@param string2...stringN  Strings to concatenate to this string.
 @name concat
 @methodOf String#
 */
@@ -2353,8 +2674,8 @@ the specified value, starting the search at fromIndex,
 returns -1 if the value is not found.
 
 <code><em>string</em>.indexOf(<em>searchValue</em>[, <em>fromIndex</em>]</code>
-@param searchValue  A string representing the value to search for.
-@param fromIndex  The location within the calling string to start the search
+@param searchValue  A string representing the value to search for.
+@param fromIndex  The location within the calling string to start the search
 from. It can be any integer between 0 and the length of the string. The default
 value is 0.
 @name indexOf
@@ -2366,8 +2687,8 @@ specified value, or -1 if not found. The calling string is searched backward,
 starting at fromIndex.
 
 <code><em>string</em>.lastIndexOf(<em>searchValue</em>[, <em>fromIndex</em>])</code>
-@param searchValue  A string representing the value to search for.
-@param fromIndex  The location within the calling string to start the search
+@param searchValue  A string representing the value to search for.
+@param fromIndex  The location within the calling string to start the search
 from, indexed from left to right. It can be any integer between 0 and the length
 of the string. The default value is the length of the string.
 @name lastIndexOf
@@ -2402,21 +2723,21 @@ Non-standard
 */
 /**
 Returns a new string with some or all matches of a pattern replaced by a
-replacement.  The pattern can be a string or a RegExp, and the replacement can
+replacement.  The pattern can be a string or a RegExp, and the replacement can
 be a string or a function to be called for each match.
 
 <code><em>str</em>.replace(<em>regexp|substr</em>, <em>newSubStr|function[</em>, </code><code><em>flags]</em>);</code>
-@param regexp  A RegExp object. The match is replaced by the return value of
+@param regexp  A RegExp object. The match is replaced by the return value of
 parameter #2.
-@param substr  A String that is to be replaced by newSubStr.
-@param newSubStr  The String that replaces the substring received from parameter
+@param substr  A String that is to be replaced by newSubStr.
+@param newSubStr  The String that replaces the substring received from parameter
 #1. A number of special replacement patterns are supported; see the "Specifying
 a string as a parameter" section below.
-@param function  A function to be invoked to create the new substring (to put in
+@param function  A function to be invoked to create the new substring (to put in
 place of the substring received from parameter #1). The arguments supplied to
 this function are described in the "Specifying a function as a parameter"
 section below.
-@param flags gimy 
+@param flags gimy 
 
 Non-standardThe use of the flags parameter in the String.replace method is
 non-standard. For cross-browser compatibility, use a RegExp object with
@@ -2431,7 +2752,7 @@ Executes the search for a match between a regular expression and this String
 object.
 
 <code><em>string</em>.search(<em>regexp</em>)</code>
-@param regexp  A  regular expression object. If a non-RegExp object obj is
+@param regexp  A  regular expression object. If a non-RegExp object obj is
 passed, it is implicitly converted to a RegExp by using new RegExp(obj).
 @name search
 @methodOf String#
@@ -2440,8 +2761,8 @@ passed, it is implicitly converted to a RegExp by using new RegExp(obj).
 Extracts a section of a string and returns a new string.
 
 <code><em>string</em>.slice(<em>beginslice</em>[, <em>endSlice</em>])</code>
-@param beginSlice  The zero-based index at which to begin extraction.
-@param endSlice  The zero-based index at which to end extraction. If omitted,
+@param beginSlice  The zero-based index at which to begin extraction.
+@param endSlice  The zero-based index at which to end extraction. If omitted,
 slice extracts to the end of the string.
 @name slice
 @methodOf String#
@@ -2451,11 +2772,11 @@ Splits a String object into an array of strings by separating the string into
 substrings.
 
 <code><em>string</em>.split([<em>separator</em>][, <em>limit</em>])</code>
-@param separator  Specifies the character to use for separating the string. The
+@param separator  Specifies the character to use for separating the string. The
 separator is treated as a string or a regular expression. If separator is
 omitted, the array returned contains one element consisting of the entire
 string.
-@param limit  Integer specifying a limit on the number of splits to be found.
+@param limit  Integer specifying a limit on the number of splits to be found.
 @name split
 @methodOf String#
 */
@@ -2464,8 +2785,8 @@ Returns the characters in a string beginning at the specified location through
 the specified number of characters.
 
 <code><em>string</em>.substr(<em>start</em>[, <em>length</em>])</code>
-@param start  Location at which to begin extracting characters.
-@param length  The number of characters to extract.
+@param start  Location at which to begin extracting characters.
+@param length  The number of characters to extract.
 @name substr
 @methodOf String#
 */
@@ -2474,8 +2795,8 @@ Returns a subset of a string between one index and another, or through the end
 of the string.
 
 <code><em>string</em>.substring(<em>indexA</em>[, <em>indexB</em>])</code>
-@param indexA  An integer between 0 and one less than the length of the string.
-@param indexB  (optional) An integer between 0 and the length of the string.
+@param indexA  An integer between 0 and one less than the length of the string.
+@param indexB  (optional) An integer between 0 and the length of the string.
 @name substring
 @methodOf String#
 */
@@ -2685,7 +3006,7 @@ the array.
 @methodOf Array#
 */
 /**
-Reverses an array in place.  The first array element becomes the last and the
+Reverses an array in place.  The first array element becomes the last and the
 last becomes the first.
 
 <code><em>array</em>.reverse()</code>
@@ -2706,7 +3027,7 @@ changes the length of the array.
 Sorts the elements of an array in place.
 
 <code><em>array</em>.sort([<em>compareFunction</em>])</code>
-@param compareFunction  Specifies a function that defines the sort order. If
+@param compareFunction  Specifies a function that defines the sort order. If
 omitted, the array is sorted lexicographically (in dictionary order) according
 to the string conversion of each element.
 @name sort
@@ -2717,14 +3038,14 @@ Changes the content of an array, adding new elements while removing old
 elements.
 
 <code><em>array</em>.splice(<em>index</em>, <em>howMany</em>[, <em>element1</em>[, ...[, <em>elementN</em>]]])</code>
-@param index  Index at which to start changing the array. If negative, will
+@param index  Index at which to start changing the array. If negative, will
 begin that many elements from the end.
-@param howMany  An integer indicating the number of old array elements to
+@param howMany  An integer indicating the number of old array elements to
 remove. If howMany is 0, no elements are removed. In this case, you should
 specify at least one new element. If no howMany parameter is specified (second
 syntax above, which is a SpiderMonkey extension), all elements after index are
 removed.
-@param element1, ..., elementN  The elements to add to the array. If you don't
+@param element1, ..., elementN  The elements to add to the array. If you don't
 specify any elements, splice simply removes elements from the array.
 @name splice
 @methodOf Array#
@@ -2743,7 +3064,7 @@ Returns a new array comprised of this array joined with other array(s) and/or
 value(s).
 
 <code><em>array</em>.concat(<em>value1</em>, <em>value2</em>, ..., <em>valueN</em>)</code>
-@param valueN  Arrays and/or values to concatenate to the resulting array.
+@param valueN  Arrays and/or values to concatenate to the resulting array.
 @name concat
 @methodOf Array#
 */
@@ -2751,7 +3072,7 @@ value(s).
 Joins all elements of an array into a string.
 
 <code><em>array</em>.join(<em>separator</em>)</code>
-@param separator  Specifies a string to separate each element of the array. The
+@param separator  Specifies a string to separate each element of the array. The
 separator is converted to a string if necessary. If omitted, the array elements
 are separated with a comma.
 @name join
@@ -2761,10 +3082,10 @@ are separated with a comma.
 Returns a one-level deep copy of a portion of an array.
 
 <code><em>array</em>.slice(<em>begin</em>[, <em>end</em>])</code>
-@param begin  Zero-based index at which to begin extraction.As a negative index,
+@param begin  Zero-based index at which to begin extraction.As a negative index,
 start indicates an offset from the end of the sequence. slice(-2) extracts the
 second-to-last element and the last element in the sequence.
-@param end  Zero-based index at which to end extraction. slice extracts up to
+@param end  Zero-based index at which to end extraction. slice extracts up to
 but not including end.slice(1,4) extracts the second element through the fourth
 element (elements indexed 1, 2, and 3).As a negative index, end indicates an
 offset from the end of the sequence. slice(2,-1) extracts the third element
@@ -2794,7 +3115,7 @@ Returns the first index at which a given element can be found in the array, or
 -1 if it is not present.
 
 <code><em>array</em>.indexOf(<em>searchElement</em>[, <em>fromIndex</em>])</code>
-@param searchElement fromIndex  Element to locate in the array.The index at
+@param searchElement fromIndex  Element to locate in the array.The index at
 which to begin the search. Defaults to 0, i.e. the whole array will be searched.
 If the index is greater than or equal to the length of the array, -1 is
 returned, i.e. the array will not be searched. If negative, it is taken as the
@@ -2809,7 +3130,7 @@ Returns the last index at which a given element can be found in the array, or -1
 if it is not present. The array is searched backwards, starting at fromIndex.
 
 <code><em>array</em>.lastIndexOf(<em>searchElement</em>[, <em>fromIndex</em>])</code>
-@param searchElement fromIndex  Element to locate in the array.The index at
+@param searchElement fromIndex  Element to locate in the array.The index at
 which to start searching backwards. Defaults to the array's length, i.e. the
 whole array will be searched. If the index is greater than or equal to the
 length of the array, the whole array will be searched. If negative, it is taken
@@ -2824,7 +3145,7 @@ Creates a new array with all elements that pass the test implemented by the
 provided function.
 
 <code><em>array</em>.filter(<em>callback</em>[, <em>thisObject</em>])</code>
-@param callback thisObject  Function to test each element of the array.Object to
+@param callback thisObject  Function to test each element of the array.Object to
 use as this when executing callback.
 @name filter
 @methodOf Array#
@@ -2833,7 +3154,7 @@ use as this when executing callback.
 Executes a provided function once per array element.
 
 <code><em>array</em>.forEach(<em>callback</em>[, <em>thisObject</em>])</code>
-@param callback thisObject  Function to execute for each element.Object to use
+@param callback thisObject  Function to execute for each element.Object to use
 as this when executing callback.
 @name forEach
 @methodOf Array#
@@ -2864,7 +3185,7 @@ Tests whether some element in the array passes the test implemented by the
 provided function.
 
 <code><em>array</em>.some(<em>callback</em>[, <em>thisObject</em>])</code>
-@param callback thisObject  Function to test for each element.Object to use as
+@param callback thisObject  Function to test for each element.Object to use as
 this when executing callback.
 @name some
 @methodOf Array#
@@ -2884,7 +3205,7 @@ Apply a function simultaneously against two values of the array (from
 right-to-left) as to reduce it to a single value.
 
 <code><em>array</em>.reduceRight(<em>callback</em>[, <em>initialValue</em>])</code>
-@param callback initialValue  Function to execute on each value in the
+@param callback initialValue  Function to execute on each value in the
 array.Object to use as the first argument to the first call of the callback.
 @name reduceRight
 @methodOf Array#
@@ -2901,13 +3222,13 @@ Returns a boolean indicating whether the object has the specified property.
 Calls a function with a given this value and arguments provided as an array.
 
 <code><em>fun</em>.apply(<em>thisArg</em>[, <em>argsArray</em>])</code>
-@param thisArg  Determines the value of this inside fun. If thisArg is null or
+@param thisArg  Determines the value of this inside fun. If thisArg is null or
 undefined, this will be the global object. Otherwise, this will be equal to
 Object(thisArg) (which is thisArg if thisArg is already an object, or a String,
 Boolean, or Number if thisArg is a primitive value of the corresponding type).
 Therefore, it is always true that typeof this == "object" when the function
 executes.
-@param argsArray  An argument array for the object, specifying the arguments
+@param argsArray  An argument array for the object, specifying the arguments
 with which fun should be called, or null or undefined if no arguments should be
 provided to the function.
 @name apply
@@ -2920,7 +3241,7 @@ any provided when the new function was called.
 
 <code><em>fun</em>.bind(<em>thisArg</em>[, <em>arg1</em>[, <em>arg2</em>[, ...]]])</code>
 @param thisValuearg1, arg2, ... The value to be passed as the this parameter to
-the target function when the bound function is called.  The value is ignored if
+the target function when the bound function is called.  The value is ignored if
 the bound function is constructed using the new operator.Arguments to prepend to
 arguments provided to the bound function when invoking the target function.
 @name bind
@@ -2930,13 +3251,13 @@ arguments provided to the bound function when invoking the target function.
 Calls a function with a given this value and arguments provided individually.
 
 <code><em>fun</em>.call(<em>thisArg</em>[, <em>arg1</em>[, <em>arg2</em>[, ...]]])</code>
-@param thisArg  Determines the value of this inside fun. If thisArg is null or
+@param thisArg  Determines the value of this inside fun. If thisArg is null or
 undefined, this will be the global object. Otherwise, this will be equal to
 Object(thisArg) (which is thisArg if thisArg is already an object, or a String,
 Boolean, or Number if thisArg is a primitive value of the corresponding type).
 Therefore, it is always true that typeof this == "object" when the function
 executes.
-@param arg1, arg2, ...  Arguments for the object.
+@param arg1, arg2, ...  Arguments for the object.
 @name call
 @methodOf Function#
 */
@@ -2963,9 +3284,9 @@ Executes a search for a match in a specified string. Returns a result array, or
 null.
 
 
-@param regexp  The name of the regular expression. It can be a variable name or
+@param regexp  The name of the regular expression. It can be a variable name or
 a literal.
-@param str  The string against which to match the regular expression.
+@param str  The string against which to match the regular expression.
 @name exec
 @methodOf RegExp#
 */
@@ -2974,9 +3295,9 @@ Executes the search for a match between a regular expression and a specified
 string. Returns true or false.
 
 <code> <em>regexp</em>.test([<em>str</em>]) </code>
-@param regexp  The name of the regular expression. It can be a variable name or
+@param regexp  The name of the regular expression. It can be a variable name or
 a literal.
-@param str  The string against which to match the regular expression.
+@param str  The string against which to match the regular expression.
 @name test
 @methodOf RegExp#
 */
@@ -3196,7 +3517,7 @@ Deprecated
 Sets the day of the month for a specified date according to local time.
 
 <code> setDate(<em>dayValue</em>) </code>
-@param dayValue  An integer from 1 to 31, representing the day of the month.
+@param dayValue  An integer from 1 to 31, representing the day of the month.
 @name setDate
 @methodOf Date#
 */
@@ -3206,11 +3527,11 @@ Sets the full year for a specified date according to local time.
 <code>
 setFullYear(<i>yearValue</i>[, <i>monthValue</i>[, <em>dayValue</em>]])
 </code>
-@param  yearValue   An integer specifying the numeric value of the year, for
+@param  yearValue   An integer specifying the numeric value of the year, for
 example, 1995.
-@param  monthValue   An integer between 0 and 11 representing the months January
+@param  monthValue   An integer between 0 and 11 representing the months January
 through December.
-@param  dayValue   An integer between 1 and 31 representing the day of the
+@param  dayValue   An integer between 1 and 31 representing the day of the
 month. If you specify the dayValue parameter, you must also specify the
 monthValue.
 @name setFullYear
@@ -3222,11 +3543,11 @@ Sets the hours for a specified date according to local time.
 <code>
 setHours(<i>hoursValue</i>[, <i>minutesValue</i>[, <i>secondsValue</i>[, <em>msValue</em>]]])
 </code>
-@param  hoursValue   An integer between 0 and 23, representing the hour. 
-@param  minutesValue   An integer between 0 and 59, representing the minutes. 
-@param  secondsValue   An integer between 0 and 59, representing the seconds. If
+@param  hoursValue   An integer between 0 and 23, representing the hour. 
+@param  minutesValue   An integer between 0 and 59, representing the minutes. 
+@param  secondsValue   An integer between 0 and 59, representing the seconds. If
 you specify the secondsValue parameter, you must also specify the minutesValue.
-@param  msValue   A number between 0 and 999, representing the milliseconds. If
+@param  msValue   A number between 0 and 999, representing the milliseconds. If
 you specify the msValue parameter, you must also specify the minutesValue and
 secondsValue.
 @name setHours
@@ -3238,7 +3559,7 @@ Sets the milliseconds for a specified date according to local time.
 <code>
 setMilliseconds(<i>millisecondsValue</i>)
 </code>
-@param  millisecondsValue   A number between 0 and 999, representing the
+@param  millisecondsValue   A number between 0 and 999, representing the
 milliseconds.
 @name setMilliseconds
 @methodOf Date#
@@ -3249,10 +3570,10 @@ Sets the minutes for a specified date according to local time.
 <code>
 setMinutes(<i>minutesValue</i>[, <i>secondsValue</i>[, <em>msValue</em>]])
 </code>
-@param  minutesValue   An integer between 0 and 59, representing the minutes. 
-@param  secondsValue   An integer between 0 and 59, representing the seconds. If
+@param  minutesValue   An integer between 0 and 59, representing the minutes. 
+@param  secondsValue   An integer between 0 and 59, representing the seconds. If
 you specify the secondsValue parameter, you must also specify the minutesValue.
-@param  msValue   A number between 0 and 999, representing the milliseconds. If
+@param  msValue   A number between 0 and 999, representing the milliseconds. If
 you specify the msValue parameter, you must also specify the minutesValue and
 secondsValue.
 @name setMinutes
@@ -3264,9 +3585,9 @@ Set the month for a specified date according to local time.
 <code>
 setMonth(<i>monthValue</i>[, <em>dayValue</em>])
 </code>
-@param  monthValue   An integer between 0 and 11 (representing the months
+@param  monthValue   An integer between 0 and 11 (representing the months
 January through December).
-@param  dayValue   An integer from 1 to 31, representing the day of the month.
+@param  dayValue   An integer from 1 to 31, representing the day of the month.
 @name setMonth
 @methodOf Date#
 */
@@ -3276,8 +3597,8 @@ Sets the seconds for a specified date according to local time.
 <code>
 setSeconds(<i>secondsValue</i>[, <em>msValue</em>])
 </code>
-@param  secondsValue   An integer between 0 and 59. 
-@param  msValue   A number between 0 and 999, representing the milliseconds.
+@param  secondsValue   An integer between 0 and 59. 
+@param  msValue   A number between 0 and 999, representing the milliseconds.
 @name setSeconds
 @methodOf Date#
 */
@@ -3288,7 +3609,7 @@ January 1, 1970, 00:00:00 UTC.
 <code>
 setTime(<i>timeValue</i>)
 </code>
-@param  timeValue   An integer representing the number of milliseconds since 1
+@param  timeValue   An integer representing the number of milliseconds since 1
 January 1970, 00:00:00 UTC.
 @name setTime
 @methodOf Date#
@@ -3299,7 +3620,7 @@ Sets the day of the month for a specified date according to universal time.
 <code>
 setUTCDate(<i>dayValue</i>)
 </code>
-@param  dayValue   An integer from 1 to 31, representing the day of the month.
+@param  dayValue   An integer from 1 to 31, representing the day of the month.
 @name setUTCDate
 @methodOf Date#
 */
@@ -3309,11 +3630,11 @@ Sets the full year for a specified date according to universal time.
 <code>
 setUTCFullYear(<i>yearValue</i>[, <i>monthValue</i>[, <em>dayValue</em>]])
 </code>
-@param  yearValue   An integer specifying the numeric value of the year, for
+@param  yearValue   An integer specifying the numeric value of the year, for
 example, 1995.
-@param  monthValue   An integer between 0 and 11 representing the months January
+@param  monthValue   An integer between 0 and 11 representing the months January
 through December.
-@param  dayValue   An integer between 1 and 31 representing the day of the
+@param  dayValue   An integer between 1 and 31 representing the day of the
 month. If you specify the dayValue parameter, you must also specify the
 monthValue.
 @name setUTCFullYear
@@ -3325,11 +3646,11 @@ Sets the hour for a specified date according to universal time.
 <code>
 setUTCHours(<i>hoursValue</i>[, <i>minutesValue</i>[, <i>secondsValue</i>[, <em>msValue</em>]]])
 </code>
-@param  hoursValue   An integer between 0 and 23, representing the hour. 
-@param  minutesValue   An integer between 0 and 59, representing the minutes. 
-@param  secondsValue   An integer between 0 and 59, representing the seconds. If
+@param  hoursValue   An integer between 0 and 23, representing the hour. 
+@param  minutesValue   An integer between 0 and 59, representing the minutes. 
+@param  secondsValue   An integer between 0 and 59, representing the seconds. If
 you specify the secondsValue parameter, you must also specify the minutesValue.
-@param  msValue   A number between 0 and 999, representing the milliseconds. If
+@param  msValue   A number between 0 and 999, representing the milliseconds. If
 you specify the msValue parameter, you must also specify the minutesValue and
 secondsValue.
 @name setUTCHours
@@ -3341,7 +3662,7 @@ Sets the milliseconds for a specified date according to universal time.
 <code>
 setUTCMilliseconds(<i>millisecondsValue</i>)
 </code>
-@param  millisecondsValue   A number between 0 and 999, representing the
+@param  millisecondsValue   A number between 0 and 999, representing the
 milliseconds.
 @name setUTCMilliseconds
 @methodOf Date#
@@ -3352,10 +3673,10 @@ Sets the minutes for a specified date according to universal time.
 <code>
 setUTCMinutes(<i>minutesValue</i>[, <i>secondsValue</i>[, <em>msValue</em>]])
 </code>
-@param  minutesValue   An integer between 0 and 59, representing the minutes. 
-@param  secondsValue   An integer between 0 and 59, representing the seconds. If
+@param  minutesValue   An integer between 0 and 59, representing the minutes. 
+@param  secondsValue   An integer between 0 and 59, representing the seconds. If
 you specify the secondsValue parameter, you must also specify the minutesValue.
-@param  msValue   A number between 0 and 999, representing the milliseconds. If
+@param  msValue   A number between 0 and 999, representing the milliseconds. If
 you specify the msValue parameter, you must also specify the minutesValue and
 secondsValue.
 @name setUTCMinutes
@@ -3367,9 +3688,9 @@ Sets the month for a specified date according to universal time.
 <code>
 setUTCMonth(<i>monthValue</i>[, <em>dayValue</em>])
 </code>
-@param  monthValue   An integer between 0 and 11, representing the months
+@param  monthValue   An integer between 0 and 11, representing the months
 January through December.
-@param  dayValue   An integer from 1 to 31, representing the day of the month.
+@param  dayValue   An integer from 1 to 31, representing the day of the month.
 @name setUTCMonth
 @methodOf Date#
 */
@@ -3379,8 +3700,8 @@ Sets the seconds for a specified date according to universal time.
 <code>
 setUTCSeconds(<i>secondsValue</i>[, <em>msValue</em>])
 </code>
-@param  secondsValue   An integer between 0 and 59. 
-@param  msValue   A number between 0 and 999, representing the milliseconds.
+@param  secondsValue   An integer between 0 and 59. 
+@param  msValue   A number between 0 and 999, representing the milliseconds.
 @name setUTCSeconds
 @methodOf Date#
 */
@@ -3510,25 +3831,26 @@ Dual licensed under the MIT and GPL licenses.
 /**
 Generate a random uuid.
 
-USAGE: Math.uuid(length, radix)
+<code><pre>
+   // No arguments  - returns RFC4122, version 4 ID
+   Math.uuid()
+=> "92329D39-6F5C-4520-ABFC-AAB64544E172"
 
-EXAMPLES:
-  // No arguments  - returns RFC4122, version 4 ID
-  Math.uuid()
-  "92329D39-6F5C-4520-ABFC-AAB64544E172"
+   // One argument - returns ID of the specified length
+   Math.uuid(15)     // 15 character ID (default base=62)
+=> "VcydxgltxrVZSTV"
 
-  // One argument - returns ID of the specified length
-  Math.uuid(15)     // 15 character ID (default base=62)
-  "VcydxgltxrVZSTV"
+   // Two arguments - returns ID of the specified length, and radix. (Radix must be <= 62)
+   Math.uuid(8, 2)  // 8 character ID (base=2)
+=> "01001010"
 
-  // Two arguments - returns ID of the specified length, and radix. (Radix must be <= 62)
-  Math.uuid(8, 2)  // 8 character ID (base=2)
-  "01001010"
-  Math.uuid(8, 10) // 8 character ID (base=10)
-  "47473046"
-  Math.uuid(8, 16) // 8 character ID (base=16)
-  "098F4D35"
-  
+   Math.uuid(8, 10) // 8 character ID (base=10)
+=> "47473046"
+
+   Math.uuid(8, 16) // 8 character ID (base=16)
+=> "098F4D35"
+</pre></code>
+
 @name uuid
 @methodOf Math
 @param length The desired number of characters
@@ -3597,15 +3919,36 @@ EXAMPLES:
 ;
 /**
 The Bounded module is used to provide basic data about the
-location and dimensions of the including object
+location and dimensions of the including object. This module is included
+by default in <code>GameObject</code>.
+
+<code><pre>
+player = Core
+  x: 10
+  y: 50
+  width: 20
+  height: 20
+  other: "stuff"
+  more: "properties"
+
+player.position()
+# => Uncaught TypeError: Object has no method 'position'
+
+player.include(Bounded)
+
+# now player has all the methods provided by this module
+player.position()
+# => {x: 10, y: 50}
+</pre></code>
+
+@see GameObject
 
 Bounded module
 @name Bounded
 @module
 @constructor
-
 @param {Object} I Instance variables
-@param {Object} self Reference to including object
+@param {Core} self Reference to including object
 */var Bounded;
 Bounded = function(I, self) {
   I || (I = {});
@@ -3620,13 +3963,46 @@ Bounded = function(I, self) {
     /**
     The position of this game object. By default it is the top left point.
     Redefining the center method will change the relative position.
-    
-    @returns The position of this object
-    @type Point
+
+    <code><pre>
+    player = Core
+      x: 50
+      y: 40
+
+    player.include(Bounded)      
+
+    player.position()
+    # => {x: 50, y: 40}
+    </pre></code>
+
+    @name position
+    @methodOf Bounded#
+    @returns {Point} The position of this object
     */
     position: function() {
       return Point(I.x, I.y);
     },
+    /**
+    Does a check to see if this object is overlapping
+    with the bounds passed in.
+
+    <code><pre>
+    player = Core
+      x: 4
+      y: 6
+      width: 20
+      height: 20
+
+    player.include(Bounded)  
+
+    player.collides({x: 5, y: 7, width: 20, height: 20})
+    # => true
+    </pre></code>
+
+    @name collides
+    @methodOf Bounded#
+    @returns {Point} The position of this object
+    */
     collides: function(bounds) {
       return Collision.rectangular(I, bounds);
     },
@@ -3634,12 +4010,31 @@ Bounded = function(I, self) {
     This returns a modified bounds based on the collision margin.
     The area of the bounds is reduced if collision margin is positive
     and increased if collision margin is negative.
-    
+
+    <code><pre>
+    player = Core
+      collisionMargin: 
+        x: -2
+        y: -4
+      x: 50
+      y: 50
+      width: 20
+      height: 20
+
+    player.include(Bounded)
+
+    player.collisionBounds()
+    # => {x: 38, y: 36, height: 28, width: 24}
+
+    player.collisionBounds(10, 10)
+    # => {x: 48, y: 46, height: 28, width: 24}
+    </pre></code>
+
     @name collisionBounds
     @methodOf Bounded#
-    
-    @param {number} xOffset the amount to shift the x position 
-    @param {number} yOffset the amount to shift the y position
+    @param {Number} xOffset the amount to shift the x position 
+    @param {Number} yOffset the amount to shift the y position
+    @returns {Object} The collision bounds
     */
     collisionBounds: function(xOffset, yOffset) {
       var bounds;
@@ -3653,12 +4048,27 @@ Bounded = function(I, self) {
     /**
     The bounds method returns infomation about the location 
     of the object and its dimensions with optional offsets.
-    
+
+    <code><pre>
+    player = Core
+      x: 3
+      y: 6
+      width: 2
+      height: 2
+
+    player.include(Bounded)
+
+    player.bounds()
+    # => {x: 3, y: 6, width: 2, height: 2}
+
+    player.bounds(7, 4)
+    # => {x: 10, y: 10, width: 2, height: 2}   
+    </pre></code>
+
     @name bounds
     @methodOf Bounded#
-    
-    @param {number} xOffset the amount to shift the x position 
-    @param {number} yOffset the amount to shift the y position
+    @param {Number} xOffset the amount to shift the x position 
+    @param {Number} yOffset the amount to shift the y position
     */
     bounds: function(xOffset, yOffset) {
       var center;
@@ -3673,7 +4083,20 @@ Bounded = function(I, self) {
     /**
     The centeredBounds method returns infomation about the center
     of the object along with the midpoint of the width and height.
-    
+
+    <code><pre>
+    player = Core
+      x: 3
+      y: 6
+      width: 2
+      height: 2
+
+    player.include(Bounded)
+
+    player.centeredBounds()
+    # => {x: 4, y: 7, xw: 1, yw: 1}
+    </pre></code>
+
     @name centeredBounds
     @methodOf Bounded#
     */
@@ -3690,9 +4113,23 @@ Bounded = function(I, self) {
     /**
     The center method returns the {@link Point} that is
     the center of the object.
-    
+
+    <code><pre>
+    player = Core
+      x: 50
+      y: 40
+      width: 10
+      height: 30
+
+    player.include(Bounded)  
+
+    player.center()
+    # => {x: 30, y: 35}
+    </pre></code>
+
     @name center
     @methodOf Bounded#
+    @returns {Point} The middle of the calling object
     */
     center: function() {
       return self.position();
@@ -3700,9 +4137,23 @@ Bounded = function(I, self) {
     /**
     Return the circular bounds of the object. The circle is
     centered at the midpoint of the object.
-    
+
+    <code><pre>
+    player = Core
+      radius: 5
+      x: 50
+      y: 50
+      other: "stuff"
+
+    player.include(Bounded)
+
+    player.circle()
+    # => {radius: 5, x: 50, y: 50}
+    </pre></code>
+
     @name circle
     @methodOf Bounded#
+    @returns {Object} An object with a position and a radius
     */
     circle: function() {
       var circle;
@@ -3713,7 +4164,7 @@ Bounded = function(I, self) {
   };
 };;
 /**
-Collision holds many useful methods for checking geometric overlap of various objects.
+Collision holds many useful class methods for checking geometric overlap of various objects.
 
 @name Collision
 @namespace
@@ -3722,12 +4173,32 @@ Collision = {
   /**
     Takes two bounds objects and returns true if they collide (overlap), false otherwise.
     Bounds objects have x, y, width and height properties.
-  
+
+    <code><pre>
+    player = GameObject
+      x: 0
+      y: 0
+      width: 10
+      height: 10
+
+    enemy = GameObject
+      x: 5
+      y: 5
+      width: 10
+      height: 10
+
+    Collision.rectangular(player, enemy)
+    # => true
+
+    Collision.rectangular(player, {x: 50, y: 40, width: 30, height: 30})
+    # => false
+    </pre></code>
+
     @name rectangular
     @methodOf Collision
-  
-    @param a
-    @param b
+    @param {Object} a The first rectangle
+    @param {Object} b The second rectangle
+    @returns {Boolean} true if the rectangles overlap, false otherwise
     */
   rectangular: function(a, b) {
     return a.x < b.x + b.width && a.x + a.width > b.x && a.y < b.y + b.height && a.y + a.height > b.y;
@@ -3735,12 +4206,35 @@ Collision = {
   /**
   Takes two circle objects and returns true if they collide (overlap), false otherwise.
   Circle objects have x, y, and radius.
-  
+
+  <code><pre>
+  player = GameObject
+    x: 5
+    y: 5
+    radius: 10
+
+  enemy = GameObject
+    x: 10
+    y: 10
+    radius: 10
+
+  farEnemy = GameObject
+    x: 500
+    y: 500
+    radius: 30
+
+  Collision.circular(player, enemy)
+  # => true
+
+  Collision.circular(player, farEnemy)
+  # => false
+  </pre></code>
+
   @name circular
   @methodOf Collision
-  
-  @param a
-  @param b
+  @param {Object} a The first circle
+  @param {Object} b The second circle
+  @returns {Boolean} true is the circles overlap, false otherwise
   */
   circular: function(a, b) {
     var dx, dy, r;
@@ -3749,6 +4243,27 @@ Collision = {
     dy = b.y - a.y;
     return r * r >= dx * dx + dy * dy;
   },
+  /**
+  Detects whether a line intersects a circle.
+
+  <code><pre>
+  circle = engine.add
+    class: "circle"
+    x: 50
+    y: 50
+    radius: 10
+
+  Collision.rayCircle(Point(0, 0), Point(1, 0), circle)
+  # => true
+  </pre></code>
+
+  @name rayCircle
+  @methodOf Collision
+  @param {Point} source The starting position
+  @param {Point} direction A vector from the point
+  @param {Object} target The circle 
+  @returns {Boolean} true if the line intersects the circle, false otherwise
+  */
   rayCircle: function(source, direction, target) {
     var dt, hit, intersection, intersectionToTarget, intersectionToTargetLength, laserToTarget, projection, projectionLength, radius;
     radius = target.radius();
@@ -3770,6 +4285,28 @@ Collision = {
       return hit = direction.scale(projectionLength - dt).add(source);
     }
   },
+  /**
+  Detects whether a line intersects a rectangle.
+
+  <code><pre>
+  rect = engine.add
+    class: "circle"
+    x: 50
+    y: 50
+    width: 20
+    height: 20
+
+  Collision.rayRectangle(Point(0, 0), Point(1, 0), rect)
+  # => true
+  </pre></code>
+
+  @name rayRectangle
+  @methodOf Collision
+  @param {Point} source The starting position
+  @param {Point} direction A vector from the point
+  @param {Object} target The rectangle
+  @returns {Boolean} true if the line intersects the rectangle, false otherwise
+  */
   rayRectangle: function(source, direction, target) {
     var areaPQ0, areaPQ1, hit, p0, p1, t, tX, tY, xval, xw, yval, yw, _ref, _ref2;
     xw = target.xw;
@@ -4165,7 +4702,7 @@ var __slice = Array.prototype.slice;
   };
   return (typeof exports !== "undefined" && exports !== null ? exports : this)["Color"] = Color;
 })();;
-/*
+/**
 The Drawable module is used to provide a simple draw method to the including
 object.
 
@@ -4175,20 +4712,55 @@ Binds a step listener to update the transform of the object.
 
 Autoloads the sprite specified in I.spriteName, if any.
 
+<code><pre>
+player = Core
+  x: 15
+  y: 30
+  width: 5
+  height: 5
+  sprite: "my_cool_sprite"
+
+engine.bind 'draw', (canvas) ->
+  player.draw(canvas) 
+# => Uncaught TypeError: Object has no method 'draw'
+
+player.include(Drawable)
+
+engine.bind 'draw', (canvas) ->
+  player.draw(canvas)
+# => if you have a sprite named "my_cool_sprite" in your images folder
+# then it will be drawn. Otherwise, a rectangle positioned at x: 15 and
+# y: 30 with width and height 5 will be drawn.
+</pre></code>
+
 @name Drawable
 @module
 @constructor
-
 @param {Object} I Instance variables
-@param {Object} self Reference to including object
+@param {Core} self Reference to including object
 */
 /**
 Triggered every time the object should be drawn. A canvas is passed as
-the first argument.
+the first argument. 
+
+<code><pre>
+player = Core
+  x: 0
+  y: 10
+  width: 5
+  height: 5
+
+player.bind "draw", (canvas) ->
+  canvas.fillColor("white")
+
+  # Text will be drawn positioned relatively to the object.
+  canvas.fillText("Hey, drawing stuff is pretty easy.", 5, 5)
+</pre></code>
 
 @name draw
 @methodOf Drawable#
 @event
+@param {PowerCanvas} canvas A reference to the canvas to draw on.
 */var Drawable;
 Drawable = function(I, self) {
   var _ref;
@@ -4232,7 +4804,7 @@ Drawable = function(I, self) {
     /**
     Draw does not actually do any drawing itself, instead it triggers all of the draw events.
     Listeners on the events do the actual drawing.
-    
+
     @name draw
     @methodOf Drawable#
     @returns self
@@ -4247,10 +4819,10 @@ Drawable = function(I, self) {
     },
     /**
     Returns the current transform, with translation, rotation, and flipping applied.
-    
+
     @name transform
     @methodOf Drawable#
-    @type Matrix
+    @returns {Matrix} The current transform
     */
     transform: function() {
       var center, transform;
@@ -4274,15 +4846,33 @@ Drawable = function(I, self) {
   };
 };;
 /**
-The Durable module deactives GameObjects after a specified duration.
+The Durable module deactives a <code>GameObject</code> after a specified duration.
 If a duration is specified the object will update that many times. If -1 is
 specified the object will have an unlimited duration.
+
+<code><pre>
+enemy = GameObject
+  x: 50
+  y: 30
+  duration: 5
+
+enemy.include(Durable)
+
+enemy.I.active
+# => true
+
+5.times ->
+  enemy.update()
+
+enemy.I.active
+# => false
+</pre></code>
 
 @name Durable
 @module
 @constructor
-
 @param {Object} I Instance variables
+@param {Core} self Reference to including object
 */var Durable;
 Durable = function(I) {
   Object.reverseMerge(I, {
@@ -4390,18 +4980,18 @@ Emitterable = function(I, self) {
   /**
   The Engine controls the game world and manages game state. Once you 
   set it up and let it run it pretty much takes care of itself.
-  
+
   You can use the engine to add or remove objects from the game world.
-  
+
   There are several modules that can include to add additional capabilities 
   to the engine.
-  
+
   The engine fires events that you  may bind listeners to. Event listeners 
   may be bound with <code>engine.bind(eventName, callback)</code>
-  
+
   @name Engine
   @constructor
-  @param I
+  @param {Object} I Instance variables of the engine 
   */
   /**
   Observe or modify the 
@@ -4409,7 +4999,6 @@ Emitterable = function(I, self) {
   @name beforeAdd
   @methodOf Engine#
   @event
-  
   @param {Object} entityData
   */
   /**
@@ -4418,13 +5007,12 @@ Emitterable = function(I, self) {
   @name afterAdd
   @methodOf Engine#
   @event
-  
   @param {GameObject} object The object that has just been added to the
   engine.
   */
   /**
   Called when the engine updates all the game objects.
-  
+
   @name update
   @methodOf Engine#
   @event
@@ -4432,38 +5020,51 @@ Emitterable = function(I, self) {
   /**
   Called after the engine completes an update. Here it is 
   safe to modify the game objects array.
-  
+
   @name afterUpdate
   @methodOf Engine#
   @event
   */
   /**
-  Called before the engine draws the game objects on the canvas.
-  
-  The current camera transform is applied.
-  
+  Called before the engine draws the game objects on the canvas. The current camera transform is applied.
+
   @name beforeDraw
   @methodOf Engine#
   @event
+  @params {PowerCanvas} canvas A reference to the canvas to draw on.
   */
   /**
-  Called after the engine draws on the canvas.
-  
-  The current camera transform is applied.
-  
+  Called after the engine draws on the canvas. The current camera transform is applied.
+
+  <code><pre>
+  engine.bind "draw", (canvas) ->
+    # print some directions for the player
+    canvas.fillText("Go this way =>", 200, 200) 
+  </pre></code>
+
   @name draw
   @methodOf Engine#
   @event
+  @params {PowerCanvas} canvas A reference to the canvas to draw on.
   */
   /**
   Called after the engine draws.
-  
+
   The current camera transform is not applied. This is great for
   adding overlays.
-  
+
+  <code><pre>
+  engine.bind "overlay", (canvas) ->
+    # print the player's health. This will be
+    # positioned absolutely according to the viewport.
+    canvas.fillText("HEALTH:", 20, 20)
+    canvas.fillText(player.health(), 50, 20)
+  </pre></code>
+
   @name overlay
   @methodOf Engine#
   @event
+  @params {PowerCanvas} canvas A reference to the canvas to draw on. 
   */
   Engine = function(I) {
     var animLoop, defaultModules, draw, frameAdvance, lastStepTime, modules, queuedObjects, running, self, startTime, step, update;
@@ -4534,16 +5135,25 @@ Emitterable = function(I, self) {
     };
     self = Core(I).extend({
       /**
-      The add method creates and adds an object to the game world.
-      
-      Events triggered:
-      <code>beforeAdd(entityData)</code>
-      <code>afterAdd(gameObject)</code>
-      
+      The add method creates and adds an object to the game world. Two
+      other events are triggered around this one: beforeAdd and afterAdd.
+
+      <code><pre>
+      # you can add arbitrary entityData and
+      # the engine will make it into a GameObject
+      engine.add 
+        x: 50
+        y: 30
+        color: "red"
+
+      player = engine.add
+        class: "Player"
+      </pre></code>
+
       @name add
       @methodOf Engine#
-      @param entityData The data used to create the game object.
-      @type GameObject
+      @param {Object} entityData The data used to create the game object.
+      @returns {GameObject}
       */
       add: function(entityData) {
         var obj;
@@ -4578,6 +5188,11 @@ Emitterable = function(I, self) {
       },
       /**
       Start the game simulation.
+
+      <code><pre>
+      engine.start()
+      </pre></code>
+
       @methodOf Engine#
       @name start
       */
@@ -4589,32 +5204,90 @@ Emitterable = function(I, self) {
       },
       /**
       Stop the simulation.
+
+      <code><pre>
+      engine.stop()
+      </pre></code>
+
       @methodOf Engine#
       @name stop
       */
       stop: function() {
         return running = false;
       },
+      /**
+      Pause the game and step through 1 update of the engine.
+
+      <code><pre>
+      engine.frameAdvance()
+      </pre></code>
+
+      @methodOf Engine#
+      @name frameAdvance
+      */
       frameAdvance: function() {
         I.paused = true;
         frameAdvance = true;
         step();
         return frameAdvance = false;
       },
+      /**
+      Resume the game.
+
+      <code><pre>
+      engine.play()
+      </pre></code>
+
+      @methodOf Engine#
+      @name play
+      */
       play: function() {
         return I.paused = false;
       },
       /**
-      Pause the simulation
+      Pause the simulation.
+
+      <code><pre>
+      engine.pause()
+      </pre></code>
+
       @methodOf Engine#
       @name pause
       */
       pause: function() {
         return I.paused = true;
       },
+      /**
+      Query the engine to see if it is paused.
+
+      <code><pre>
+         engine.pause()
+
+         engine.paused()
+      => true
+
+         engine.play()
+
+         engine.paused()
+      => false
+      </pre></code>
+
+      @methodOf Engine#
+      @name paused
+      */
       paused: function() {
         return I.paused;
       },
+      /**
+      Change the framerate of the game. The default framerate is 30 fps.
+
+      <code><pre>
+      engine.setFramerate(60)
+      </pre></code>
+
+      @methodOf Engine#
+      @name setFramerate
+      */
       setFramerate: function(newFPS) {
         I.FPS = newFPS;
         self.stop();
@@ -4645,18 +5318,18 @@ The <code>Collision</code> module provides some simple collision detection metho
 @name Collision
 @fieldOf Engine
 @module
-
 @param {Object} I Instance variables
 @param {Object} self Reference to the engine
 */Engine.Collision = function(I, self) {
   return {
     /**
     Detects collisions between a bounds and the game objects.
-    
+
     @name collides
-    @methodOf Engine.Collision#
+    @methodOf Engine#
     @param bounds The bounds to check collisions with.
     @param [sourceObject] An object to exclude from the results.
+    @returns {Boolean} true if the bounds object collides with any of the game objects, false otherwise.
     */
     collides: function(bounds, sourceObject) {
       return I.objects.inject(false, function(collided, object) {
@@ -4666,11 +5339,12 @@ The <code>Collision</code> module provides some simple collision detection metho
     /**
     Detects collisions between a bounds and the game objects. 
     Returns an array of objects colliding with the bounds provided.
-    
+
     @name collidesWith
-    @methodOf Engine.Collision#
+    @methodOf Engine#
     @param bounds The bounds to check collisions with.
     @param [sourceObject] An object to exclude from the results.
+    @returns {Array} An array of objects that collide with the given bounds.
     */
     collidesWith: function(bounds, sourceObject) {
       var collided;
@@ -4689,9 +5363,9 @@ The <code>Collision</code> module provides some simple collision detection metho
     },
     /**
     Detects collisions between a ray and the game objects.
-    
+
     @name rayCollides
-    @methodOf Engine.Collision#
+    @methodOf Engine#
     @param source The origin point
     @param direction A point representing the direction of the ray
     @param [sourceObject] An object to exclude from the results.
@@ -4725,7 +5399,6 @@ The <code>SaveState</code> module provides methods to save and restore the curre
 @name SaveState
 @fieldOf Engine
 @module
-
 @param {Object} I Instance variables
 @param {Object} self Reference to the engine
 */Engine.SaveState = function(I, self) {
@@ -4735,9 +5408,16 @@ The <code>SaveState</code> module provides methods to save and restore the curre
     rewind: function() {},
     /**
     Save the current game state and returns a JSON object representing that state.
-    
+
+    <code><pre>
+    engine.bind 'step', ->
+      if justPressed.s
+        engine.saveState()
+    </pre></code>
+
     @name saveState
-    @methodOf Engine.SaveState#
+    @methodOf Engine#
+    @returns {Array} An array of the instance data of all objects in the game
     */
     saveState: function() {
       return savedState = I.objects.map(function(object) {
@@ -4746,9 +5426,21 @@ The <code>SaveState</code> module provides methods to save and restore the curre
     },
     /**
     Loads the game state passed in, or the last saved state, if any.
-    
+
+    <code><pre>
+    engine.bind 'step', ->
+      if justPressed.l
+        # loads the last saved state
+        engine.loadState()
+
+      if justPressed.o
+        # removes all game objects, then reinstantiates 
+        # them with the entityData passed in
+        engine.loadState([{x: 40, y: 50, class: "Player"}, {x: 0, y: 0, class: "Enemy"}, {x: 500, y: 400, class: "Boss"}])
+    </pre></code>
+
     @name loadState
-    @methodOf Engine.SaveState#
+    @methodOf Engine#
     @param [newState] The game state to load.
     */
     loadState: function(newState) {
@@ -4762,9 +5454,20 @@ The <code>SaveState</code> module provides methods to save and restore the curre
     },
     /**
     Reloads the current engine state, useful for hotswapping code.
-    
+
+    <code><pre>
+    engine.I.objects.each (object) ->
+      # bring all objects to (0, 0) for some reason
+      object.I.x = 0
+      object.I.y = 0
+
+    # reload all objects to make sure
+    # they are at (0, 0)  
+    engine.reload()
+    </pre></code>
+
     @name reload
-    @methodOf Engine.SaveState#
+    @methodOf Engine#
     */
     reload: function() {
       var oldObjects;
@@ -4783,7 +5486,6 @@ The <code>Selector</code> module provides methods to query the engine to find ga
 @name Selector
 @fieldOf Engine
 @module
-
 @param {Object} I Instance variables
 @param {Object} self Reference to the engine
 */Engine.Selector = function(I, self) {
@@ -4798,20 +5500,48 @@ The <code>Selector</code> module provides methods to query the engine to find ga
   return {
     /**
     Get a selection of GameObjects that match the specified selector criteria. The selector language
-    can select objects by id, class, or attributes.
-    
-    To select an object by id use "#anId"
-    
-    To select objects by class use "MyClass"
-    
-    To select objects by properties use ".someProperty" or ".someProperty=someValue"
-    
-    You may mix and match selectors. "Wall.x=0" to select all objects of class Wall with an x property of 0.
-    
+    can select objects by id, class, or attributes. Note that this method always returns an Array,
+    so if you are trying to find only one object you will need something like <code>engine.find("Enemy").first()</code>.
+
+    <code><pre>
+    player = engine.add
+      class: "Player"
+
+    enemy = engine.add
+      class: "Enemy"
+      speed: 5
+      x: 0
+
+    distantEnemy = engine.add
+      class "Enemy"
+      x: 500
+
+    boss = engine.add
+      class: "Enemy"
+      id: "Boss"
+      x: 0
+
+    # to select an object by id use "#anId"
+    engine.find "#Boss"
+    # => [boss]
+
+    # to select an object by class use "MyClass"
+    engine.find "Enemy"
+    # => [enemy, distantEnemy, boss]
+
+    # to select an object by properties use ".someProperty" or ".someProperty=someValue"
+    engine.find ".speed=5"
+    # => [enemy]
+
+    # You may mix and match selectors.
+    engine.find "Enemy.x=0"
+    # => [enemy, boss] # doesn't return distantEnemy
+    </pre></code>
+
     @name find
     @methodOf Engine#
     @param {String} selector
-    @type Array
+    @returns {Array} An array of the objects found
     */
     find: function(selector) {
       var matcher, results;
@@ -4889,6 +5619,17 @@ may be bound with <code>object.bind(eventName, callback)</code>
 */
 /**
 Triggered when the object is created.
+
+<code><pre>
+enemyCount = 0
+
+enemy = engine.add
+  class: "Enemy"
+
+enemy.bind 'create', ->
+  enemyCount++
+</pre></code>
+
 @name create
 @methodOf GameObject#
 @event
@@ -4897,6 +5638,14 @@ Triggered when the object is created.
 Triggered when object is destroyed. Use 
 the destroy event to add particle effects, play sounds, etc.
 
+<code><pre>
+bomb = GameObject()
+
+bomb.bind 'destroy', ->
+  bomb.explode()
+  Sound.play "Kaboom"
+</pre></code>
+
 @name destroy
 @methodOf GameObject#
 @event
@@ -4904,12 +5653,42 @@ the destroy event to add particle effects, play sounds, etc.
 /**
 Triggered during every update step.
 
+<code><pre>
+player = GameObject()
+
+player.bind 'step', ->
+  # check to see if keys are being pressed and 
+  # change the player's velocity
+  if keydown.left
+    player.velocity(Point(-1, 0))
+  else if keydown.right
+    player.velocity(Point(1, 0))
+  else
+    player.velocity(Point(0, 0))
+</pre></code>
+
 @name step
 @methodOf GameObject#
 @event
 */
 /**
-Triggered every update after the `step` event is triggered.
+Triggered every update after the <code>step</code> event is triggered.
+
+<code><pre>
+player = GameObject()
+
+# we can really use the update and 
+# step events almost interchangebly
+player.bind 'update', ->
+  # check to see if keys are being pressed and 
+  # change the player's velocity
+  if keydown.left
+    player.velocity(Point(-1, 0))
+  else if keydown.right
+    player.velocity(Point(1, 0))
+  else
+    player.velocity(Point(0, 0))
+</pre></code>
 
 @name update
 @methodOf GameObject#
@@ -4919,6 +5698,13 @@ Triggered every update after the `step` event is triggered.
 Triggered when the object is removed from
 the engine. Use the remove event to handle any clean up.
 
+<code><pre>
+boss = GameObject()
+
+boss.bind 'remove', ->
+  unlockDoorToLevel2()
+</pre></code>
+
 @name remove
 @methodOf GameObject#
 @event
@@ -4927,7 +5713,7 @@ GameObject = function(I) {
   var autobindEvents, defaultModules, modules, self;
   I || (I = {});
   /**
-  @name I
+  @name {Object} I Instance variables 
   @memberOf GameObject#
   */
   Object.reverseMerge(I, {
@@ -4942,7 +5728,7 @@ GameObject = function(I) {
   self = Core(I).extend({
     /**
     Update the game object. This is generally called by the engine.
-    
+
     @name update
     @methodOf GameObject#
     */
@@ -4955,8 +5741,8 @@ GameObject = function(I) {
       return I.active;
     },
     /**
-    Destroys the object and triggers the destroyed callback.
-    
+    Destroys the object and triggers the destroyed event.
+
     @name destroy
     @methodOf GameObject#
     */
@@ -5010,11 +5796,34 @@ The Movable module automatically updates the position and velocity of
 GameObjects based on the velocity and acceleration. It does not check
 collisions so is probably best suited to particle effect like things.
 
+<code><pre>
+player = GameObject
+  x: 0
+  y: 0
+  velocity: Point(0, 0)
+  acceleration: Point(1, 0)
+  maxSpeed: 2
+
+player.include(Movable)
+
+# => `velocity is {x: 0, y: 0} and position is {x: 0, y: 0}`
+
+player.update()
+# => `velocity is {x: 1, y: 0} and position is {x: 1, y: 0}` 
+
+player.update()
+# => `velocity is {x: 2, y: 0} and position is {x: 3, y: 0}`   
+
+# we've hit our maxSpeed so our velocity won't increase
+player.update()
+# => `velocity is {x: 2, y: 0} and position is {x: 5, y: 0}`
+</pre></code>
+
 @name Movable
 @module
 @constructor
-
 @param {Object} I Instance variables
+@param {Core} self Reference to including object
 */var Movable;
 Movable = function(I) {
   Object.reverseMerge(I, {
@@ -5040,12 +5849,32 @@ Movable = function(I) {
     }
   };
 };;
-(function() {
+/**
+@name ResourceLoader
+@namespace
+
+Helps access the assets in your game.
+*/(function() {
   var ResourceLoader, typeTable;
   typeTable = {
     images: "png"
   };
   ResourceLoader = {
+    /**
+      Return the url for a particular asset.
+
+      <code><pre>
+      ResourceLoader.urlFor("images", "player")
+      # => This returns the url for the file "player.png" in your images directory.
+      </pre></code>
+
+      @name urlFor
+      @methodOf ResourceLoader#
+      @param {String} directory The directory your file is in.
+      @param {String} name The name of the file.
+      @returns {String} The full url of your asset
+
+      */
     urlFor: function(directory, name) {
       var type, _ref;
       directory = (typeof App !== "undefined" && App !== null ? (_ref = App.directories) != null ? _ref[directory] : void 0 : void 0) || directory;
@@ -5055,7 +5884,38 @@ Movable = function(I) {
   };
   return (typeof exports !== "undefined" && exports !== null ? exports : this)["ResourceLoader"] = ResourceLoader;
 })();;
-var Rotatable;
+/**
+The Rotatable module rotates the object
+based on its rotational velocity.
+
+<code><pre>
+player = GameObject
+  x: 0
+  y: 0
+  rotationalVelocity: Math.PI / 64
+
+player.include(Rotatable)
+
+player.I.rotation
+# => 0
+
+player.update()
+
+player.I.rotation
+# => 0.04908738521234052 # Math.PI / 64
+
+player.update()
+
+player.I.rotation
+# => 0.09817477042468103 # 2 * (Math.PI / 64)
+</pre></code>
+
+@name Rotatable
+@module
+@constructor
+@param {Object} I Instance variables
+@param {Core} self Reference to including object
+*/var Rotatable;
 Rotatable = function(I) {
   I || (I = {});
   Object.reverseMerge(I, {
@@ -5074,7 +5934,7 @@ Rotatable = function(I) {
 The Sprite class provides a way to load images for use in games.
 
 By default, images are loaded asynchronously. A proxy object is 
-returned immediately but though it has a draw method it will not
+returned immediately. Even though it has a draw method it will not
 draw anything to the screen until the image has been loaded.
 
 @name Sprite
@@ -5099,13 +5959,12 @@ draw anything to the screen until the image has been loaded.
     return {
       /**
       Draw this sprite on the given canvas at the given position.
-      
+
       @name draw
       @methodOf Sprite#
-      
-      @param canvas
-      @param x
-      @param y
+      @param {PowerCanvas} canvas Reference to the canvas to draw the sprite on
+      @param {Number} x Position on the x axis to draw the sprite
+      @param {Number} y Position on the y axis to draw the sprite
       */
       draw: function(canvas, x, y) {
         return canvas.drawImage(image, sourceX, sourceY, width, height, x, y, width, height);
@@ -5128,6 +5987,17 @@ draw anything to the screen until the image has been loaded.
       height: height
     };
   };
+  /**
+  Loads all sprites from a sprite sheet found in
+  your images directory, specified by the name passed in.
+
+  @name loadSheet
+  @methodOf Sprite
+  @param {String} name Name of the spriteSheet image in your images directory
+  @param {Number} tileWidth Width of each sprite in the sheet
+  @param {Number} tileHeight Height of each sprite in the sheet
+  @returns {Array} An array of sprite objects
+  */
   Sprite.loadSheet = function(name, tileWidth, tileHeight) {
     var image, sprites, url;
     url = ResourceLoader.urlFor("images", name);
@@ -5145,6 +6015,15 @@ draw anything to the screen until the image has been loaded.
     image.src = url;
     return sprites;
   };
+  /**
+  Loads a sprite from a given url.
+
+  @name load
+  @methodOf Sprite
+  @param {String} url
+  @param {Function} [loadedCallback]
+  @returns {Sprite} A sprite object
+  */
   Sprite.load = function(url, loadedCallback) {
     var img, proxy;
     img = new Image();
@@ -5162,57 +6041,51 @@ draw anything to the screen until the image has been loaded.
   };
   /**
   Loads a sprite with the given pixie id.
-  
+
   @name fromPixieId
   @methodOf Sprite
-  
-  @param id
-  @param [callback]
-  
-  @type Sprite
+  @param {Number} id Pixie Id of the sprite to load
+  @param {Function} [callback] Function to execute once the image is loaded. The sprite proxy data is passed to this as a parameter.
+  @returns {Sprite}
   */
   Sprite.fromPixieId = function(id, callback) {
     return Sprite.load("http://pixieengine.com/s3/sprites/" + id + "/original.png", callback);
   };
   /**
   A sprite that draws nothing.
-  
+
   @name EMPTY
   @fieldOf Sprite
   @constant
-  @type Sprite
+  @returns {Sprite}
   */
   /**
   A sprite that draws nothing.
-  
+
   @name NONE
   @fieldOf Sprite
   @constant
-  @type Sprite
+  @returns {Sprite}
   */
   Sprite.EMPTY = Sprite.NONE = LoaderProxy();
   /**
   Loads a sprite from a given url.
-  
+
   @name fromURL
   @methodOf Sprite
-  
-  @param {String} url
-  @param [callback]
-  
-  @type Sprite
+  @param {String} url The url where the image to load is located
+  @param {Function} [callback] Function to execute once the image is loaded. The sprite proxy data is passed to this as a parameter.
+  @returns {Sprite}
   */
   Sprite.fromURL = Sprite.load;
   /**
   Loads a sprite with the given name.
-  
+
   @name loadByName
   @methodOf Sprite
-  
-  @param {String} name
-  @param [callback]
-  
-  @type Sprite
+  @param {String} name The name of the image in your images directory
+  @param {Function} [callback] Function to execute once the image is loaded. The sprite proxy data is passed to this as a parameter.
+  @returns {Sprite}
   */
   Sprite.loadByName = function(name, callback) {
     return Sprite.load(ResourceLoader.urlFor("images", name), callback);

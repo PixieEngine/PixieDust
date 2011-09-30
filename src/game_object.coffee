@@ -12,6 +12,17 @@ may be bound with <code>object.bind(eventName, callback)</code>
 
 ###*
 Triggered when the object is created.
+
+<code><pre>
+enemyCount = 0
+
+enemy = engine.add
+  class: "Enemy"
+
+enemy.bind 'create', ->
+  enemyCount++
+</pre></code>
+
 @name create
 @methodOf GameObject#
 @event
@@ -21,6 +32,14 @@ Triggered when the object is created.
 Triggered when object is destroyed. Use 
 the destroy event to add particle effects, play sounds, etc.
 
+<code><pre>
+bomb = GameObject()
+
+bomb.bind 'destroy', ->
+  bomb.explode()
+  Sound.play "Kaboom"
+</pre></code>
+
 @name destroy
 @methodOf GameObject#
 @event
@@ -29,13 +48,43 @@ the destroy event to add particle effects, play sounds, etc.
 ###*
 Triggered during every update step.
 
+<code><pre>
+player = GameObject()
+
+player.bind 'step', ->
+  # check to see if keys are being pressed and 
+  # change the player's velocity
+  if keydown.left
+    player.velocity(Point(-1, 0))
+  else if keydown.right
+    player.velocity(Point(1, 0))
+  else
+    player.velocity(Point(0, 0))
+</pre></code>
+
 @name step
 @methodOf GameObject#
 @event
 ###
 
 ###*
-Triggered every update after the `step` event is triggered.
+Triggered every update after the <code>step</code> event is triggered.
+
+<code><pre>
+player = GameObject()
+
+# we can really use the update and 
+# step events almost interchangebly
+player.bind 'update', ->
+  # check to see if keys are being pressed and 
+  # change the player's velocity
+  if keydown.left
+    player.velocity(Point(-1, 0))
+  else if keydown.right
+    player.velocity(Point(1, 0))
+  else
+    player.velocity(Point(0, 0))
+</pre></code>
 
 @name update
 @methodOf GameObject#
@@ -46,6 +95,13 @@ Triggered every update after the `step` event is triggered.
 Triggered when the object is removed from
 the engine. Use the remove event to handle any clean up.
 
+<code><pre>
+boss = GameObject()
+
+boss.bind 'remove', ->
+  unlockDoorToLevel2()
+</pre></code>
+
 @name remove
 @methodOf GameObject#
 @event
@@ -55,7 +111,7 @@ GameObject = (I) ->
   I ||= {}
 
   ###*
-  @name I
+  @name {Object} I Instance variables 
   @memberOf GameObject#
   ###
   Object.reverseMerge I,
@@ -83,7 +139,7 @@ GameObject = (I) ->
       I.active
 
     ###*
-    Destroys the object and triggers the destroyed callback.
+    Destroys the object and triggers the destroyed event.
 
     @name destroy
     @methodOf GameObject#

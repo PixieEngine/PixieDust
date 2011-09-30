@@ -2,7 +2,7 @@
 The Sprite class provides a way to load images for use in games.
 
 By default, images are loaded asynchronously. A proxy object is 
-returned immediately but though it has a draw method it will not
+returned immediately. Even though it has a draw method it will not
 draw anything to the screen until the image has been loaded.
 
 @name Sprite
@@ -29,10 +29,9 @@ draw anything to the screen until the image has been loaded.
 
     @name draw
     @methodOf Sprite#
-
-    @param canvas
-    @param x
-    @param y
+    @param {PowerCanvas} canvas Reference to the canvas to draw the sprite on
+    @param {Number} x Position on the x axis to draw the sprite
+    @param {Number} y Position on the y axis to draw the sprite
     ###
     draw: (canvas, x, y) ->
       canvas.drawImage(
@@ -54,6 +53,17 @@ draw anything to the screen until the image has been loaded.
     width: width
     height: height
 
+  ###*
+  Loads all sprites from a sprite sheet found in
+  your images directory, specified by the name passed in.
+
+  @name loadSheet
+  @methodOf Sprite
+  @param {String} name Name of the spriteSheet image in your images directory
+  @param {Number} tileWidth Width of each sprite in the sheet
+  @param {Number} tileHeight Height of each sprite in the sheet
+  @returns {Array} An array of sprite objects
+  ###
   Sprite.loadSheet = (name, tileWidth, tileHeight) ->
     url = ResourceLoader.urlFor("images", name)
 
@@ -70,6 +80,15 @@ draw anything to the screen until the image has been loaded.
 
     return sprites
 
+  ###*
+  Loads a sprite from a given url.
+
+  @name load
+  @methodOf Sprite
+  @param {String} url
+  @param {Function} [loadedCallback]
+  @returns {Sprite} A sprite object
+  ###
   Sprite.load = (url, loadedCallback) ->
     img = new Image()
     proxy = LoaderProxy()
@@ -91,15 +110,12 @@ draw anything to the screen until the image has been loaded.
 
   @name fromPixieId
   @methodOf Sprite
-
-  @param id
-  @param [callback]
-
-  @type Sprite
+  @param {Number} id Pixie Id of the sprite to load
+  @param {Function} [callback] Function to execute once the image is loaded. The sprite proxy data is passed to this as a parameter.
+  @returns {Sprite}
   ###
   Sprite.fromPixieId = (id, callback) ->
     Sprite.load("http://pixieengine.com/s3/sprites/#{id}/original.png", callback)
-
 
   ###*
   A sprite that draws nothing.
@@ -107,7 +123,7 @@ draw anything to the screen until the image has been loaded.
   @name EMPTY
   @fieldOf Sprite
   @constant
-  @type Sprite
+  @returns {Sprite}
   ###
   ###*
   A sprite that draws nothing.
@@ -115,7 +131,7 @@ draw anything to the screen until the image has been loaded.
   @name NONE
   @fieldOf Sprite
   @constant
-  @type Sprite
+  @returns {Sprite}
   ###
   Sprite.EMPTY = Sprite.NONE = LoaderProxy()
 
@@ -124,11 +140,9 @@ draw anything to the screen until the image has been loaded.
 
   @name fromURL
   @methodOf Sprite
-
-  @param {String} url
-  @param [callback]
-
-  @type Sprite
+  @param {String} url The url where the image to load is located
+  @param {Function} [callback] Function to execute once the image is loaded. The sprite proxy data is passed to this as a parameter.
+  @returns {Sprite}
   ###
   Sprite.fromURL = Sprite.load
 
@@ -137,11 +151,9 @@ draw anything to the screen until the image has been loaded.
 
   @name loadByName
   @methodOf Sprite
-
-  @param {String} name
-  @param [callback]
-
-  @type Sprite
+  @param {String} name The name of the image in your images directory
+  @param {Function} [callback] Function to execute once the image is loaded. The sprite proxy data is passed to this as a parameter.
+  @returns {Sprite}
   ###
   Sprite.loadByName = (name, callback) ->
     Sprite.load(ResourceLoader.urlFor("images", name), callback)
