@@ -104,7 +104,7 @@
     parsedColor = 
       switch args.length
         when 0
-          [0, 0, 0, 1]
+          [0, 0, 0, 0]
         when 1
           channelize(args.first())
         when 2
