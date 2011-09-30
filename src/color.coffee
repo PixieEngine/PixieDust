@@ -221,6 +221,17 @@
 
       return this    
 
+    saturation: (newVal) ->
+      hsl = @toHsl()
+      if newVal?
+        hsl[1] = newVal
+
+        [@r, @g, @b, @a] = hslToRgb(hsl)
+
+        return this
+      else
+        return hsl[1]
+
     toHex: (leadingHash) ->
       padString = (hexString) ->        
         if hexString.length == 1 then pad = "0" else pad = "" 
