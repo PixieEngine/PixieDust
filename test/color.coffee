@@ -458,13 +458,5 @@ test "accepts named colors", ->
   equalEnough piPink.b, 153
   equalEnough piPink.a, 1.0
 
-test "fromHue", ->
-  red = Color.fromHue(60)
-
-  equalEnough red.r, 255
-  equalEnough red.g, 0
-  equalEnough red.b, 0
-  equalEnough red.a, 1
-
 module()
 
