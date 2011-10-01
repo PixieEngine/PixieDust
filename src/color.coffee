@@ -2826,6 +2826,14 @@
   names.each (element) ->
     lookup[normalizeKey(element[1])] = parseHex(element[0])
 
+  Color.fromHue = (hue) ->
+    color = Color(0, 0, 0, 1)
+    color.hue(hue)
+    color.saturation(1)
+    color.lightness(0.5)
+
+    return color
+
   Color.random = ->
     Color(rand(256), rand(256), rand(256)) 
 
