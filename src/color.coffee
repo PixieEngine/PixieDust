@@ -58,8 +58,7 @@
 
     hueToRgb = (p, q, hue) ->
       hue += 360 if hue < 0
-      hue -= 360 if hue > 360
-
+      hue -= 360 if hue > 360      
 
       return p + (q - p) * (hue / 60) if hue < 60
       return q if hue < 180
