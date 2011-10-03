@@ -49,7 +49,7 @@
     return hslToRgb(parsedColor)
 
   hslToRgb = (hsl) ->    
-    [h, s, l, a] = (channel for channel in hsl)
+    [h, s, l, a] = hsl
 
     h = h % 360
     a ||= 1
