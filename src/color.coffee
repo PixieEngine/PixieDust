@@ -48,10 +48,56 @@
 
     return hslToRgb(parsedColor)
 
+  hslToRgb = (hsl) ->
+    [hue, saturation, lightness, alpha] = (parseFloat(channel) for channel in hsl)
+
+    if saturation == 0
+      r = g = b = lightness
+    else
+      hue = (hue % 360) / 60
+      hue_floor = hue.floor
+      hue_diff = hue - hue_floor
+
+      p = lightness * (1 - saturation)
+      q = lightness * (1 - saturation * hue_diff)
+      t = lightness * (1 - saturation * (1 - hue_diff))
+
+      switch hue_floor
+        when 0
+          r = lightness
+          g = t
+          b = p
+        when 1
+          r = q
+          g = lightness
+          b = p
+        when 2
+          r = p
+          g = lightness
+          b = t
+        when 3
+          r = p
+          g = q
+          b = lightness
+        when 4
+          r = t
+          g = p
+          b = lightness
+        else
+          r = lightness
+          g = p
+          b = q
+
+    red = (r * 255 + 0.5).floor()
+    green = (g * 255 + 0.5).floor()
+    blue = (b * 255 + 0.5).floor()
+
+    return (red, green, blue, alpha)
+
   hslToRgb = (hsl) ->    
     [h, s, l, a] = (parseFloat(channel) for channel in hsl)
 
-    h /= 360
+    h = (h % 360) / 360
     a ||= 1
 
     r = g = b = null
