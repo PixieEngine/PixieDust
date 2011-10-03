@@ -4526,7 +4526,7 @@ var __slice = Array.prototype.slice;
     parsedColor = (function() {
       switch (args.length) {
         case 0:
-          return [0, 0, 0, 1];
+          return [0, 0, 0, 0];
         case 1:
           return channelize(args.first());
         case 2:
@@ -4554,7 +4554,7 @@ var __slice = Array.prototype.slice;
       return this.copy().complement$();
     },
     complement$: function() {
-      return this.hue$(180);
+      return this.shiftHue$(180);
     },
     copy: function() {
       return Color(this.r, this.g, this.b, this.a);
@@ -4592,10 +4592,32 @@ var __slice = Array.prototype.slice;
       this.r = this.g = this.b = g;
       return this;
     },
-    hue: function(degrees) {
-      return this.copy().hue$(degrees);
+    hue: function(newVal) {
+      var hsl, _ref;
+      hsl = this.toHsl();
+      if (newVal != null) {
+        hsl[0] = newVal;
+        _ref = hslToRgb(hsl), this.r = _ref[0], this.g = _ref[1], this.b = _ref[2], this.a = _ref[3];
+        return this;
+      } else {
+        return hsl[0];
+      }
     },
-    hue$: function(degrees) {
+    lightness: function(newVal) {
+      var hsl, _ref;
+      hsl = this.toHsl();
+      if (newVal != null) {
+        hsl[2] = newVal;
+        _ref = hslToRgb(hsl), this.r = _ref[0], this.g = _ref[1], this.b = _ref[2], this.a = _ref[3];
+        return this;
+      } else {
+        return hsl[2];
+      }
+    },
+    shiftHue: function(degrees) {
+      return this.copy().shiftHue$(degrees);
+    },
+    shiftHue$: function(degrees) {
       var hsl, _ref;
       hsl = this.toHsl();
       hsl[0] = (hsl[0] + degrees).mod(360);
@@ -4635,6 +4657,17 @@ var __slice = Array.prototype.slice;
       hsl[1] += amount;
       _ref = hslToRgb(hsl), this.r = _ref[0], this.g = _ref[1], this.b = _ref[2], this.a = _ref[3];
       return this;
+    },
+    saturation: function(newVal) {
+      var hsl, _ref;
+      hsl = this.toHsl();
+      if (newVal != null) {
+        hsl[1] = newVal;
+        _ref = hslToRgb(hsl), this.r = _ref[0], this.g = _ref[1], this.b = _ref[2], this.a = _ref[3];
+        return this;
+      } else {
+        return hsl[1];
+      }
     },
     toHex: function(leadingHash) {
       var hexFromNumber, padString;
