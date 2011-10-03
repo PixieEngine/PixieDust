@@ -56,13 +56,13 @@
 
     r = g = b = null
 
-    hueToRgb = (p, q, t) ->
-      t += 1 if t < 0
-      t -= 1 if t > 1
+    hueToRgb = (p, q, hue) ->
+      hue += 1 if hue < 0
+      hue -= 1 if hue > 1
 
-      return p + (q - p) * 6 * t if t < 1/6
-      return q if t < 1/2
-      return p + (q - p) * (2/3 - t) * 6 if t < 2/3
+      return p + (q - p) * 6 * hue if hue < 1/6
+      return q if hue < 1/2
+      return p + (q - p) * (2/3 - hue) * 6 if hue < 2/3
       return p
 
     if s == 0
