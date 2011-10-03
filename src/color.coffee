@@ -274,12 +274,11 @@
       {min, max} = [r, g, b].extremes()
 
       hue = saturation = lightness = (max + min) / 2
+      chroma = max - min
 
-      if max == min
+      if chroma.abs() < 0.00001
         hue = saturation = 0
       else
-        chroma = max - min
-
         saturation =
           if lightness > 0.5
             chroma / (1 - lightness)
