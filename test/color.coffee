@@ -1,4 +1,4 @@
-equalEnough = (actual, expected, tolerance=3, message) ->
+equalEnough = (actual, expected, tolerance=2, message) ->
   message ||= "" + expected + " within " + tolerance + " of " + actual
   ok(expected + tolerance >= actual && expected - tolerance <= actual, message)
 
