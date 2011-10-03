@@ -55,7 +55,7 @@
       r = g = b = lightness
     else
       hue = (hue % 360) / 60
-      hue_floor = hue.floor
+      hue_floor = hue.floor()
       hue_diff = hue - hue_floor
 
       p = lightness * (1 - saturation)
@@ -289,29 +289,24 @@
 
       {min, max} = [r, g, b].extremes()
 
-      hue = saturation = lightness = (max + min) / 2
+      delta = max - min
+      hue = 0
+      lightness = max
+      saturation = (if max == 0 then 0 else delta / max)
 
-      if max == min
-        hue = saturation = 0
-      else
-        chroma = max - min
+      if delta != 0
+        if r == max
+          hue = (g - b) / delta
+        else if g == max
+          hue = 2 + (b - r) / delta
+        else
+          hue = 4 + (r - g) / delta
 
-        saturation =
-          if lightness > 0.5
-            chroma / (1 - lightness)
-          else 
-            chroma / lightness
+      hue *= 60
 
-        saturation /= 2
+      hue += 360 if hue < 0
 
-        switch max
-          when r then hue = ((g - b) / chroma) + 0
-          when g then hue = ((b - r) / chroma) + 2
-          when b then hue = ((r - g) / chroma) + 4
-
-        hue *= 60
-
-      return [hue, saturation, lightness, @a]      
+      return [hue, saturation, lightness, @a]
 
     toString: ->
       "rgba(#{@r}, #{@g}, #{@b}, #{@a})"
