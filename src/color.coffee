@@ -201,7 +201,7 @@
     shiftHue$: (degrees) ->
       hsl = @toHsl()
 
-      hsl[0] = (hsl[0] + degrees).mod 360
+      hsl[0] = (hsl[0] + degrees.round()).mod 360
 
       [@r, @g, @b, @a] = hslToRgb(hsl)
 
