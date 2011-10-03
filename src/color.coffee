@@ -92,37 +92,7 @@
     green = (g * 255 + 0.5).floor()
     blue = (b * 255 + 0.5).floor()
 
-    return (red, green, blue, alpha)
-
-  hslToRgb = (hsl) ->    
-    [h, s, l, a] = (parseFloat(channel) for channel in hsl)
-
-    h = (h % 360) / 360
-    a ||= 1
-
-    r = g = b = null
-
-    hueToRgb = (p, q, t) ->
-      t += 1 if t < 0
-      t -= 1 if t > 1
-
-      return p + (q - p) * 6 * t if t < 1/6
-      return q if t < 1/2
-      return p + (q - p) * (2/3 - t) * 6 if t < 2/3
-      return p
-
-    if s == 0
-      r = g = b = l
-    else
-      q = (if l < 0.5 then l * (1 + s) else l + s - l * s)
-      p = 2 * l - q
-      r = hueToRgb(p, q, h + 1/3)
-      g = hueToRgb(p, q, h)
-      b = hueToRgb(p, q, h - 1/3)
-
-      rgbMap = ((channel * 0xFF).round() for channel in [r, g, b])
-
-    return rgbMap.concat(a)
+    return [red, green, blue, alpha]
 
   normalizeKey = (key) ->
     key.toString().toLowerCase().split(' ').join('')
