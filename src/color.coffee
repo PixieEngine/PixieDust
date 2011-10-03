@@ -51,7 +51,7 @@
   hslToRgb = (hsl) ->    
     [h, s, l, a] = (parseFloat(channel) for channel in hsl)
 
-    h = (h % 360) / 360
+    h = h % 360
     a ||= 1
 
     r = g = b = null
