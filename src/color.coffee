@@ -48,51 +48,35 @@
 
     return hslToRgb(parsedColor)
 
-  hslToRgb = (hsl) ->
-    [hue, saturation, lightness, alpha] = (parseFloat(channel) for channel in hsl)
+  hslToRgb = (hsl) ->    
+    [h, s, l, a] = (parseFloat(channel) for channel in hsl)
 
-    if saturation == 0
-      r = g = b = lightness
+    h = (h % 360) / 360
+    a ||= 1
+
+    r = g = b = null
+
+    hueToRgb = (p, q, t) ->
+      t += 1 if t < 0
+      t -= 1 if t > 1
+
+      return p + (q - p) * 6 * t if t < 1/6
+      return q if t < 1/2
+      return p + (q - p) * (2/3 - t) * 6 if t < 2/3
+      return p
+
+    if s == 0
+      r = g = b = l
     else
-      hue = (hue % 360) / 60
-      hue_floor = hue.floor()
-      hue_diff = hue - hue_floor
+      q = (if l < 0.5 then l * (1 + s) else l + s - l * s)
+      p = 2 * l - q
+      r = hueToRgb(p, q, h + 1/3)
+      g = hueToRgb(p, q, h)
+      b = hueToRgb(p, q, h - 1/3)
 
-      p = lightness * (1 - saturation)
-      q = lightness * (1 - saturation * hue_diff)
-      t = lightness * (1 - saturation * (1 - hue_diff))
+      rgbMap = ((channel * 0xFF).round() for channel in [r, g, b])
 
-      switch hue_floor
-        when 0
-          r = lightness
-          g = t
-          b = p
-        when 1
-          r = q
-          g = lightness
-          b = p
-        when 2
-          r = p
-          g = lightness
-          b = t
-        when 3
-          r = p
-          g = q
-          b = lightness
-        when 4
-          r = t
-          g = p
-          b = lightness
-        else
-          r = lightness
-          g = p
-          b = q
-
-    red = (r * 255 + 0.5).floor()
-    green = (g * 255 + 0.5).floor()
-    blue = (b * 255 + 0.5).floor()
-
-    return [red, green, blue, alpha]
+    return rgbMap.concat(a)
 
   normalizeKey = (key) ->
     key.toString().toLowerCase().split(' ').join('')
@@ -289,24 +273,29 @@
 
       {min, max} = [r, g, b].extremes()
 
-      delta = max - min
-      hue = 0
-      lightness = max
-      saturation = (if max == 0 then 0 else delta / max)
+      hue = saturation = lightness = (max + min) / 2
 
-      if delta != 0
-        if r == max
-          hue = (g - b) / delta
-        else if g == max
-          hue = 2 + (b - r) / delta
-        else
-          hue = 4 + (r - g) / delta
+      if max == min
+        hue = saturation = 0
+      else
+        chroma = max - min
 
-      hue *= 60
+        saturation =
+          if lightness > 0.5
+            chroma / (1 - lightness)
+          else 
+            chroma / lightness
 
-      hue += 360 if hue < 0
+        saturation /= 2
 
-      return [hue, saturation, lightness, @a]
+        switch max
+          when r then hue = ((g - b) / chroma) + 0
+          when g then hue = ((b - r) / chroma) + 2
+          when b then hue = ((r - g) / chroma) + 4
+
+        hue *= 60
+
+      return [hue, saturation, lightness, @a]    
 
     toString: ->
       "rgba(#{@r}, #{@g}, #{@b}, #{@a})"
