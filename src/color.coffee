@@ -74,7 +74,7 @@
       g = hueToRgb(p, q, h)
       b = hueToRgb(p, q, h - 120)
 
-      rgbMap = ((channel * 0xFF).round() for channel in [r, g, b])
+      rgbMap = ((channel * 255).round() for channel in [r, g, b])
 
     return rgbMap.concat(a)
 
