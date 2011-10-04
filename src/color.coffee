@@ -290,7 +290,7 @@
           when g then hue = ((b - r) / chroma) + 2
           when b then hue = ((r - g) / chroma) + 4
 
-        hue *= 60
+        hue = (hue * 60).mod(360)
 
       return [hue, saturation, lightness, @a]    
 
