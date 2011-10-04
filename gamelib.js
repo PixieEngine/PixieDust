@@ -4711,6 +4711,16 @@ var __slice = Array.prototype.slice;
       this.r = this.g = this.b = g;
       return this;
     },
+    /**
+    A getter / setter for the hue value of the color. Passing no argument returns the 
+    current hue value. Passing a value will set the hue to that value and return the color.
+
+    @name hue
+    @methodOf Color#
+    @param {Number} [newVal] the new hue value
+
+    @returns {Color|Number} returns the color object if you pass a new hue value and returns the hue otherwise 
+    */
     hue: function(newVal) {
       var hsl, _ref;
       hsl = this.toHsl();
@@ -4722,6 +4732,16 @@ var __slice = Array.prototype.slice;
         return hsl[0];
       }
     },
+    /**
+    A getter / setter for the lightness value of the color. Passing no argument returns the 
+    current lightness value. Passing a value will set the lightness to that value and return the color.
+
+    @name lightness
+    @methodOf Color#
+    @param {Number} [newVal] the new lightness value
+
+    @returns {Color|Number} returns the color object if you pass a new lightness value and returns the lightness otherwise 
+    */
     lightness: function(newVal) {
       var hsl, _ref;
       hsl = this.toHsl();
@@ -4777,6 +4797,16 @@ var __slice = Array.prototype.slice;
       _ref = hslToRgb(hsl), this.r = _ref[0], this.g = _ref[1], this.b = _ref[2], this.a = _ref[3];
       return this;
     },
+    /**
+    A getter / setter for the saturation value of the color. Passing no argument returns the 
+    current saturation value. Passing a value will set the saturation to that value and return the color.
+
+    @name saturation
+    @methodOf Color#
+    @param {Number} [newVal] the new saturation value
+
+    @returns {Color|Number} returns the color object if you pass a new saturation value and returns the saturation otherwise 
+    */
     saturation: function(newVal) {
       var hsl, _ref;
       hsl = this.toHsl();
