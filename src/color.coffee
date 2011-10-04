@@ -98,6 +98,29 @@
 
     return result
 
+  ###*
+  Create a new color. The constructor is very flexible. It accepts arrays of r, g, b
+  values, hex strings, hsl strings, and other Color objects If no arguments are given,
+  defaults to transparent.
+
+  <code><pre>
+  color = Color()
+
+  color.toString()
+  # => 'rgba(0, 0, 0, 0)'
+
+  color = Color('Sky Blue')
+
+  color.toHex()
+  # => '#75bbfd'
+
+  </pre></code>
+
+  @name Color
+  @param {Array|Number|String|Color} args Either an Array or r, g, b values, 
+  a sequence of numbers defining r, g, b values, a hex or hsl string, or another Color object
+  @constructor
+  ###
   Color = (args...) ->
     parsedColor = 
       switch args.length
