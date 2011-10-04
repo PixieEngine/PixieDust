@@ -405,9 +405,29 @@
 
       return this 
 
+    ###*
+    A new color. The calling color mixed with `other` using `amount` as the mixing ratio. If amount is not passed, then the colors are mixed evenly.
+
+    @name mixWith
+    @methodOf Color#
+    @param {Color} other the other color to mix
+    @param {Number} [amount] the mixing ratio of the calling color to `other`
+
+    @returns {Color} A new color that is a mix of the calling color and `other`
+    ###
     mixWith: (other, amount) ->
       @copy().mixWith$(other, amount) 
 
+    ###*
+    A new color. The calling color mixed with `other` using `amount` as the mixing ratio. If amount is not passed, then the colors are mixed evenly.
+
+    @name mixWith$
+    @methodOf Color#
+    @param {Color} other the other color to mix
+    @param {Number} [amount] the mixing ratio of the calling color to `other`
+
+    @returns {Color} The modified calling color after mixing it with `other`
+    ###
     mixWith$: (other, amount) ->
       amount ||= 0.5
 
