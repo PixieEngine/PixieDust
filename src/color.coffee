@@ -276,9 +276,25 @@
       other.b == @b &&
       other.a == @a
 
+    ###*
+    A new color. A copy of the calling color converted to grayscale.
+
+    @name grayscale
+    @methodOf Color#
+
+    @returns {Color} A copy of the calling color converted to grayscale.
+    ###
     grayscale: ->
       @copy().grayscale$()
 
+    ###*
+    The calling color converted to grayscale.
+
+    @name grayscale$
+    @methodOf Color#
+
+    @returns {Color} The calling color converted to grayscale.
+    ###
     grayscale$: ->
       hsl = @toHsl()
 
