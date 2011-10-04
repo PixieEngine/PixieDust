@@ -489,6 +489,15 @@
       else
         return hsl[1]
 
+    ###*
+    returns the Hex representation of the color. Exclude the leading `#` by passing false. 
+
+    @name toHex
+    @methodOf Color#
+    @param {Boolean} [leadingHash] if passed as false excludes the leading `#` from the string
+
+    @returns {String} returns the Hex representation of the color 
+    ###
     toHex: (leadingHash) ->
       padString = (hexString) ->        
         if hexString.length == 1 then pad = "0" else pad = "" 
