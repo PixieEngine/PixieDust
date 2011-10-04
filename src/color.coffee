@@ -512,6 +512,14 @@
       else
         "##{hexFromNumber(@r)}#{hexFromNumber(@g)}#{hexFromNumber(@b)}"  
 
+    ###*
+    returns an array of the hue, saturation, lightness, and alpha values of the color. 
+
+    @name toHsl
+    @methodOf Color#
+
+    @returns {Array} An array of the hue, saturation, lightness, and alpha values of the color. 
+    ###
     toHsl: ->
       [r, g, b] = (channel / 255 for channel in [@r, @g, @b])
 
