@@ -43,7 +43,6 @@
     return undefined unless channels = hslParser.exec(colorString)
 
     parsedColor = (parseFloat channel for channel in channels[1..3])
-    parsedColor[0] = parsedColor[0]
     parsedColor[3] ||= 1
 
     return hslToRgb(parsedColor)
