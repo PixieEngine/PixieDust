@@ -143,7 +143,7 @@
 
   Color:: =
     ###*
-    Returns the color channels (red, green, blue, and alpha) in an array
+    Returns the color channels (red, green, blue, and alpha) in an array.
 
     <code><pre>
     transparent =  Color()
@@ -170,15 +170,47 @@
     channels: ->
       [@r, @g, @b, @a]
 
+    ###*
+    Returns a new color that is the complement of the calling color.
+
+    @name complement
+    @methodOf Color#
+
+    @returns {Color} new color that is a copy of the calling color with its hue shifted by 180 degrees on the color wheel
+    ### 
     complement: ->
       @copy().complement$() 
 
+    ###*
+    Modifies the calling color to make it the complement of its previous value.
+
+    @name complement$
+    @methodOf Color#
+
+    @returns {Color} the color hue shifted by 180 degrees on the color wheel. Modifies the existing color.
+    ### 
     complement$: ->
       @shiftHue$(180)
 
+    ###*
+    A copy of the calling color.
+
+    @name copy
+    @methodOf Color#
+
+    @returns {Color} A new color. A copy of the calling color
+    ### 
     copy: ->
       Color(@r, @g, @b, @a)
 
+    ###*
+    Returns a new color that is a copy of the calling color darkened by `amount` (Lightness of the color ranges from 0 - 1).
+
+    @name darken
+    @methodOf Color#
+
+    @returns {Color} A new color. A copy of the calling color
+    ###
     darken: (amount) ->
       @copy().darken$(amount)
 
