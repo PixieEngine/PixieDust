@@ -4753,9 +4753,27 @@ var __slice = Array.prototype.slice;
         return hsl[2];
       }
     },
+    /**
+    A copy of the calling color with its hue shifted by `degrees`. This differs from the hue setter in that it adds to the existing hue value and will wrap around 0 and 360.
+
+    @name shiftHue
+    @methodOf Color#
+    @param {Number} degrees number of degrees to shift the hue on the color wheel.
+
+    @returns {Color} A copy of the color with its hue shifted by `degrees`
+    */
     shiftHue: function(degrees) {
       return this.copy().shiftHue$(degrees);
     },
+    /**
+    The calling color with its hue shifted by `degrees`. This differs from the hue setter in that it adds to the existing hue value and will wrap around 0 and 360.
+
+    @name shiftHue$
+    @methodOf Color#
+    @param {Number} degrees number of degrees to shift the hue on the color wheel.
+
+    @returns {Color} The color with its hue shifted by `degrees`
+    */
     shiftHue$: function(degrees) {
       var hsl, _ref;
       hsl = this.toHsl();
@@ -4763,9 +4781,27 @@ var __slice = Array.prototype.slice;
       _ref = hslToRgb(hsl), this.r = _ref[0], this.g = _ref[1], this.b = _ref[2], this.a = _ref[3];
       return this;
     },
+    /**
+    Returns a new color that is a copy of the calling color lightened by `amount` (Lightness of the color ranges from 0 - 1).
+
+    @name lighten
+    @methodOf Color#
+    @param {Number} amount Amount to lighten color by (between 0 - 1)
+
+    @returns {Color} A new color. The lightness value is increased by `amount` from the original.
+    */
     lighten: function(amount) {
       return this.copy().lighten$(amount);
     },
+    /**
+    The calling color lightened by `amount` (Lightness of the color ranges from 0 - 1).
+
+    @name lighten$
+    @methodOf Color#
+    @param {Number} amount Amount to lighten color by (between 0 - 1)
+
+    @returns {Color} The calling color with its lightness value increased by `amount`.
+    */
     lighten$: function(amount) {
       var hsl, _ref;
       hsl = this.toHsl();
@@ -4773,9 +4809,29 @@ var __slice = Array.prototype.slice;
       _ref = hslToRgb(hsl), this.r = _ref[0], this.g = _ref[1], this.b = _ref[2], this.a = _ref[3];
       return this;
     },
+    /**
+    A new color. The calling color mixed with `other` using `amount` as the mixing ratio. If amount is not passed, then the colors are mixed evenly.
+
+    @name mixWith
+    @methodOf Color#
+    @param {Color} other the other color to mix
+    @param {Number} [amount] the mixing ratio of the calling color to `other`
+
+    @returns {Color} A new color that is a mix of the calling color and `other`
+    */
     mixWith: function(other, amount) {
       return this.copy().mixWith$(other, amount);
     },
+    /**
+    A new color. The calling color mixed with `other` using `amount` as the mixing ratio. If amount is not passed, then the colors are mixed evenly.
+
+    @name mixWith$
+    @methodOf Color#
+    @param {Color} other the other color to mix
+    @param {Number} [amount] the mixing ratio of the calling color to `other`
+
+    @returns {Color} The modified calling color after mixing it with `other`
+    */
     mixWith$: function(other, amount) {
       var _ref, _ref2;
       amount || (amount = 0.5);
@@ -4787,9 +4843,27 @@ var __slice = Array.prototype.slice;
       }), this.r = _ref2[0], this.g = _ref2[1], this.b = _ref2[2];
       return this;
     },
+    /**
+    A new color. A copy of the calling color with its saturation increased by `amount`
+
+    @name saturate
+    @methodOf Color#
+    @param {Number} amount the amount to increase saturation by
+
+    @returns {Color} A copy of the calling color with its saturation increased by `amount`
+    */
     saturate: function(amount) {
       return this.copy().saturate$(amount);
     },
+    /**
+    The calling color with its saturation increased by `amount`
+
+    @name saturate$
+    @methodOf Color#
+    @param {Number} amount the amount to increase saturation by
+
+    @returns {Color} The calling color with its saturation increased by `amount`
+    */
     saturate$: function(amount) {
       var hsl, _ref;
       hsl = this.toHsl();
@@ -4818,6 +4892,15 @@ var __slice = Array.prototype.slice;
         return hsl[1];
       }
     },
+    /**
+    returns the Hex representation of the color. Exclude the leading `#` by passing false. 
+
+    @name toHex
+    @methodOf Color#
+    @param {Boolean} [leadingHash] if passed as false excludes the leading `#` from the string
+
+    @returns {String} returns the Hex representation of the color 
+    */
     toHex: function(leadingHash) {
       var hexFromNumber, padString;
       padString = function(hexString) {
@@ -4838,6 +4921,14 @@ var __slice = Array.prototype.slice;
         return "#" + (hexFromNumber(this.r)) + (hexFromNumber(this.g)) + (hexFromNumber(this.b));
       }
     },
+    /**
+    returns an array of the hue, saturation, lightness, and alpha values of the color. 
+
+    @name toHsl
+    @methodOf Color#
+
+    @returns {Array} An array of the hue, saturation, lightness, and alpha values of the color. 
+    */
     toHsl: function() {
       var b, channel, chroma, g, hue, lightness, max, min, r, saturation, _ref, _ref2;
       _ref = (function() {
@@ -4872,6 +4963,14 @@ var __slice = Array.prototype.slice;
       }
       return [hue, saturation, lightness, this.a];
     },
+    /**
+    returns string rgba representation of the color. 
+
+    @name toString
+    @methodOf Color#
+
+    @returns {String} The rgba string representation of the color 
+    */
     toString: function() {
       return "rgba(" + this.r + ", " + this.g + ", " + this.b + ", " + this.a + ")";
     }
@@ -4881,9 +4980,29 @@ var __slice = Array.prototype.slice;
   names.each(function(element) {
     return lookup[normalizeKey(element[1])] = parseHex(element[0]);
   });
+  /**
+  returns a random color.
+
+  @name random
+  @methodOf Color
+
+  @returns {Color} A random color. 
+  */
   Color.random = function() {
     return Color(rand(256), rand(256), rand(256));
   };
+  /**
+  Mix two colors. Behaves just like `#mixWith` except that you are passing two colors.
+
+  @name mix
+  @methodOf Color
+  @see mixWith
+  @param {Color} color1 the first color to mix
+  @param {Color} color2 the second color to mix
+  @param {Number} amount the ratio to mix the colors 
+
+  @returns {Color} A new color that is the two colors mixed at the ratio defined by `amount` 
+  */
   Color.mix = function(color1, color2, amount) {
     var newColors;
     amount || (amount = 0.5);
