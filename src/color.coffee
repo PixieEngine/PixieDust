@@ -346,6 +346,15 @@
       else
         return hsl[2]
 
+    ###*
+    A copy of the calling color with its hue shifted by `degrees`. This differs from the hue setter in that it will wrap around 0 and 360.
+
+    @name shiftHue
+    @methodOf Color#
+    @param {Number} degrees number of degrees to shift the hue on the color wheel.
+
+    @returns {Color} returns the color object if you pass a new lightness value and returns the lightness otherwise 
+    ###
     shiftHue: (degrees) ->
       @copy().shiftHue$(degrees)
 
