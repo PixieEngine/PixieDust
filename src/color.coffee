@@ -208,6 +208,7 @@
 
     @name darken
     @methodOf Color#
+    @param {Number} amount Amount to darken color by (between 0 - 1)
 
     @returns {Color} A new color. The lightness value is reduced by `amount` from the original.
     ###
@@ -217,8 +218,9 @@
     ###*
     Modifies the color so that it is darkened by `amount` (Lightness of the color ranges from 0 - 1).
 
-    @name darken
+    @name darken$
     @methodOf Color#
+    @param {Number} amount Amount to darken color by (between 0 - 1)
 
     @returns {Color} the color with the lightness value reduced by `amount`
     ###
@@ -230,9 +232,27 @@
 
       return this      
 
+    ###*
+    A new color that is a copy of the calling color with its saturation reduced by `amount`.
+
+    @name desaturate
+    @methodOf Color#
+    @param {Number} amount Amount to reduce color saturation by (between 0 - 1)
+
+    @returns {Color} A copy of the color with the saturation value reduced by `amount`
+    ###
     desaturate: (amount) ->
       @copy().desaturate$(amount) 
 
+    ###*
+    The modified color with its saturation reduced by `amount`.
+
+    @name desaturate$
+    @methodOf Color#
+    @param {Number} amount Amount to reduce color saturation by (between 0 - 1)
+
+    @returns {Color} the color with the saturation value reduced by `amount`
+    ###
     desaturate$: (amount) ->
       hsl = @toHsl()
       hsl[1] -= amount
@@ -241,6 +261,15 @@
 
       return this    
 
+    ###*
+    Determine whether two colors are equal. Compares their r, g, b, and alpha values.
+
+    @name equal
+    @methodOf Color#
+    @param {Color} other the color to compare to the calling color
+
+    @returns {Boolean} true if the r, g, b, a values of the colors agree, false otherwise
+    ###
     equal: (other) ->
       other.r == @r &&
       other.g == @g &&
