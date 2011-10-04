@@ -3085,9 +3085,29 @@
   names.each (element) ->
     lookup[normalizeKey(element[1])] = parseHex(element[0])
 
+  ###*
+  returns a random color.
+
+  @name random
+  @methodOf Color
+
+  @returns {Color} A random color. 
+  ###
   Color.random = ->
     Color(rand(256), rand(256), rand(256)) 
 
+  ###*
+  Mix two colors. Behaves just like `#mixWith` except that you are passing two colors.
+
+  @name mix
+  @methodOf Color
+  @see mixWith
+  @param {Color} color1 the first color to mix
+  @param {Color} color2 the second color to mix
+  @param {Number} amount the ratio to mix the colors 
+
+  @returns {Color} A new color that is the two colors mixed at the ratio defined by `amount` 
+  ###
   Color.mix = (color1, color2, amount) ->
     amount ||= 0.5
 
