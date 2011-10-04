@@ -440,18 +440,26 @@
       return this 
 
     ###*
-    A new color. The calling color mixed with `other` using `amount` as the mixing ratio. If amount is not passed, then the colors are mixed evenly.
+    A new color. A copy of the calling color with its saturation increased by `amount`
 
     @name saturate
     @methodOf Color#
-    @param {Color} other the other color to mix
-    @param {Number} [amount] the mixing ratio of the calling color to `other`
+    @param {Number} amount the amount to increase saturation by
 
-    @returns {Color} The modified calling color after mixing it with `other`
+    @returns {Color} A copy of the calling color with its saturation increased by `amount`
     ###
     saturate: (amount) ->
       @copy().saturate$(amount) 
 
+    ###*
+    The calling color with its saturation increased by `amount`
+
+    @name saturate$
+    @methodOf Color#
+    @param {Number} amount the amount to increase saturation by
+
+    @returns {Color} The calling color with its saturation increased by `amount`
+    ###
     saturate$: (amount) ->
       hsl = @toHsl()
       hsl[1] += amount
