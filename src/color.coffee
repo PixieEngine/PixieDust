@@ -209,7 +209,7 @@
     @name darken
     @methodOf Color#
 
-    @returns {Color} A new color. It's lightness value is reduced by `amount` from the original.
+    @returns {Color} A new color. The lightness value is reduced by `amount` from the original.
     ###
     darken: (amount) ->
       @copy().darken$(amount)
