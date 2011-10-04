@@ -4557,7 +4557,7 @@ var __slice = Array.prototype.slice;
   };
   Color.prototype = {
     /**
-      Returns the color channels (red, green, blue, and alpha) in an array
+      Returns the color channels (red, green, blue, and alpha) in an array.
 
       <code><pre>
       transparent =  Color()
@@ -4584,18 +4584,58 @@ var __slice = Array.prototype.slice;
     channels: function() {
       return [this.r, this.g, this.b, this.a];
     },
+    /**
+    Returns a new color that is the complement of the calling color.
+
+    @name complement
+    @methodOf Color#
+
+    @returns {Color} new color that is a copy of the calling color with its hue shifted by 180 degrees on the color wheel
+    */
     complement: function() {
       return this.copy().complement$();
     },
+    /**
+    Modifies the calling color to make it the complement of its previous value.
+
+    @name complement$
+    @methodOf Color#
+
+    @returns {Color} the color hue shifted by 180 degrees on the color wheel. Modifies the existing color.
+    */
     complement$: function() {
       return this.shiftHue$(180);
     },
+    /**
+    A copy of the calling color.
+
+    @name copy
+    @methodOf Color#
+
+    @returns {Color} A new color. A copy of the calling color
+    */
     copy: function() {
       return Color(this.r, this.g, this.b, this.a);
     },
+    /**
+    Returns a new color that is a copy of the calling color darkened by `amount` (Lightness of the color ranges from 0 - 1).
+
+    @name darken
+    @methodOf Color#
+
+    @returns {Color} A new color. The lightness value is reduced by `amount` from the original.
+    */
     darken: function(amount) {
       return this.copy().darken$(amount);
     },
+    /**
+    Modifies the color so that it is darkened by `amount` (Lightness of the color ranges from 0 - 1).
+
+    @name darken
+    @methodOf Color#
+
+    @returns {Color} the color with the lightness value reduced by `amount`
+    */
     darken$: function(amount) {
       var hsl, _ref;
       hsl = this.toHsl();
