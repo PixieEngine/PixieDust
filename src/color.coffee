@@ -100,19 +100,34 @@
 
   ###*
   Create a new color. The constructor is very flexible. It accepts arrays of r, g, b
-  values, hex strings, hsl strings, other Color objects, and even the named colors 
+  values, hex strings, rgb strings, hsl strings, other Color objects, and even the named colors 
   from the xkcd survey: http://blog.xkcd.com/2010/05/03/color-survey-results/. 
   If no arguments are given, defaults to transparent.
 
   <code><pre>
-  color = Color()
+  transparent = Color()
 
-  color.toString()
+  transparent.toString()
   # => 'rgba(0, 0, 0, 0)'
 
-  color = Color('Sky Blue')
+  hex = Color('#ff0000')
 
-  color.toHex()
+  hex.toString()
+  # => 'rgba(255, 0, 0, 1)'
+
+  rgb = Color('rgb(0, 255, 0)')
+
+  rgb.toString()
+  # => 'rgba(0, 255, 0, 1)'
+
+  hsl = Color('hsl(180, 1, 0.5)')
+
+  hsl.toString()
+  # => 'rgba(0, 255, 255, 1)'
+
+  skyBlue = Color('Sky Blue')
+
+  skyBlue.toHex()
   # => '#75bbfd'
 
   </pre></code>
