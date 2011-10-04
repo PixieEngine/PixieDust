@@ -214,6 +214,14 @@
     darken: (amount) ->
       @copy().darken$(amount)
 
+    ###*
+    Modifies the color so that it is darkened by `amount` (Lightness of the color ranges from 0 - 1).
+
+    @name darken
+    @methodOf Color#
+
+    @returns {Color} the color with the lightness value reduced by `amount`
+    ###
     darken$: (amount) ->
       hsl = @toHsl()
       hsl[2] -= amount
