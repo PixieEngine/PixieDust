@@ -4429,39 +4429,25 @@ var __slice = Array.prototype.slice;
       }
       return _results;
     })();
-    parsedColor[0] = parsedColor[0];
     parsedColor[3] || (parsedColor[3] = 1);
     return hslToRgb(parsedColor);
   };
   hslToRgb = function(hsl) {
-    var a, b, channel, g, h, hueToRgb, l, p, q, r, rgbMap, s, _ref;
-    _ref = (function() {
-      var _i, _len, _results;
-      _results = [];
-      for (_i = 0, _len = hsl.length; _i < _len; _i++) {
-        channel = hsl[_i];
-        _results.push(parseFloat(channel));
-      }
-      return _results;
-    })(), h = _ref[0], s = _ref[1], l = _ref[2], a = _ref[3];
-    h /= 360;
+    var a, b, channel, g, h, hueToRgb, l, p, q, r, rgbMap, s;
+    h = hsl[0], s = hsl[1], l = hsl[2], a = hsl[3];
+    h = h % 360;
     a || (a = 1);
     r = g = b = null;
-    hueToRgb = function(p, q, t) {
-      if (t < 0) {
-        t += 1;
+    hueToRgb = function(p, q, hue) {
+      hue = hue.mod(360);
+      if (hue < 60) {
+        return p + (q - p) * (hue / 60);
       }
-      if (t > 1) {
-        t -= 1;
-      }
-      if (t < 1 / 6) {
-        return p + (q - p) * 6 * t;
-      }
-      if (t < 1 / 2) {
+      if (hue < 180) {
         return q;
       }
-      if (t < 2 / 3) {
-        return p + (q - p) * (2 / 3 - t) * 6;
+      if (hue < 240) {
+        return p + (q - p) * ((240 - hue) / 60);
       }
       return p;
     };
@@ -4470,20 +4456,20 @@ var __slice = Array.prototype.slice;
     } else {
       q = (l < 0.5 ? l * (1 + s) : l + s - l * s);
       p = 2 * l - q;
-      r = hueToRgb(p, q, h + 1 / 3);
+      r = hueToRgb(p, q, h + 120);
       g = hueToRgb(p, q, h);
-      b = hueToRgb(p, q, h - 1 / 3);
-      rgbMap = (function() {
-        var _i, _len, _ref2, _results;
-        _ref2 = [r, g, b];
-        _results = [];
-        for (_i = 0, _len = _ref2.length; _i < _len; _i++) {
-          channel = _ref2[_i];
-          _results.push((channel * 0xFF).round());
-        }
-        return _results;
-      })();
+      b = hueToRgb(p, q, h - 120);
     }
+    rgbMap = (function() {
+      var _i, _len, _ref, _results;
+      _ref = [r, g, b];
+      _results = [];
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        channel = _ref[_i];
+        _results.push((channel * 255).round());
+      }
+      return _results;
+    })();
     return rgbMap.concat(a);
   };
   normalizeKey = function(key) {
@@ -4520,6 +4506,29 @@ var __slice = Array.prototype.slice;
     }
     return result;
   };
+  /**
+  Create a new color. The constructor is very flexible. It accepts arrays of r, g, b
+  values, hex strings, hsl strings, and other Color objects If no arguments are given,
+  defaults to transparent.
+
+  <code><pre>
+  color = Color()
+
+  color.toString()
+  # => 'rgba(0, 0, 0, 0)'
+
+  color = Color('Sky Blue')
+
+  color.toHex()
+  # => '#75bbfd'
+
+  </pre></code>
+
+  @name Color
+  @param {Array|Number|String|Color} args Either an Array or r, g, b values, 
+  a sequence of numbers defining r, g, b values, a hex or hsl string, or another Color object
+  @constructor
+  */
   Color = function() {
     var args, parsedColor;
     args = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
@@ -4547,6 +4556,31 @@ var __slice = Array.prototype.slice;
     };
   };
   Color.prototype = {
+    /**
+      Returns the color channels (red, green, blue, and alpha) in an array
+
+      <code><pre>
+      transparent =  Color()
+
+      transparent.channels()
+      # => [0, 0, 0, 0]
+
+      red = Color("#FF0000")
+
+      red.channels()
+      # => [255, 0, 0, 1]
+
+      rgb = Color(200, 34, 2)
+
+      rgb.channels()
+      # => [200, 34, 2, 1]
+      </pre></code>
+
+      @name channels
+      @methodOf Color#
+
+      @returns {Array} Array of r, g, b, and alpha values of the color
+      */
     channels: function() {
       return [this.r, this.g, this.b, this.a];
     },
@@ -4620,7 +4654,7 @@ var __slice = Array.prototype.slice;
     shiftHue$: function(degrees) {
       var hsl, _ref;
       hsl = this.toHsl();
-      hsl[0] = (hsl[0] + degrees).mod(360);
+      hsl[0] = (hsl[0] + degrees.round()).mod(360);
       _ref = hslToRgb(hsl), this.r = _ref[0], this.g = _ref[1], this.b = _ref[2], this.a = _ref[3];
       return this;
     },
@@ -4703,10 +4737,10 @@ var __slice = Array.prototype.slice;
       }).call(this), r = _ref[0], g = _ref[1], b = _ref[2];
       _ref2 = [r, g, b].extremes(), min = _ref2.min, max = _ref2.max;
       hue = saturation = lightness = (max + min) / 2;
-      if (max === min) {
+      chroma = max - min;
+      if (chroma.abs() < 0.00001) {
         hue = saturation = 0;
       } else {
-        chroma = max - min;
         saturation = lightness > 0.5 ? chroma / (1 - lightness) : chroma / lightness;
         saturation /= 2;
         switch (max) {
@@ -4719,7 +4753,7 @@ var __slice = Array.prototype.slice;
           case b:
             hue = ((r - g) / chroma) + 4;
         }
-        hue *= 60;
+        hue = (hue * 60).mod(360);
       }
       return [hue, saturation, lightness, this.a];
     },
@@ -4736,12 +4770,12 @@ var __slice = Array.prototype.slice;
     return Color(rand(256), rand(256), rand(256));
   };
   Color.mix = function(color1, color2, amount) {
-    var new_colors;
+    var newColors;
     amount || (amount = 0.5);
-    new_colors = [color1.r, color1.g, color1.b, color1.a].zip([color2.r, color2.g, color2.b, color2.a]).map(function(array) {
+    newColors = [color1.r, color1.g, color1.b, color1.a].zip([color2.r, color2.g, color2.b, color2.a]).map(function(array) {
       return (array[0] * amount) + (array[1] * (1 - amount));
     });
-    return Color(new_colors);
+    return Color(newColors);
   };
   return (typeof exports !== "undefined" && exports !== null ? exports : this)["Color"] = Color;
 })();;
