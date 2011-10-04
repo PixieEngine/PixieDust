@@ -99,12 +99,22 @@
     return result
 
   ###*
-  Create a new color. The constructor is very flexible. It accepts individual r, g, b, a values, arrays of r, g, b
-  values, hex strings, rgb strings, hsl strings, other Color objects, and even the named colors 
-  from the xkcd survey: http://blog.xkcd.com/2010/05/03/color-survey-results/. 
+  Create a new color. The constructor is very flexible. It accepts individual r, g, b, a values,
+  arrays of r, g, b values, hex strings, rgb strings, hsl strings, other Color objects, 
+  and even the named colors from the xkcd survey: http://blog.xkcd.com/2010/05/03/color-survey-results/. 
   If no arguments are given, defaults to transparent.
 
   <code><pre>
+  individualRgb = Color(23, 56, 49, 0.4)
+
+  individualRgb.toString()
+  # => 'rgba(23, 56, 49, 0.4)'
+
+  arrayRgb = Color([59, 100, 230])
+
+  arrayRgb.toString()
+  # => 'rgba(59, 100, 230, 1)'
+
   hex = Color('#ff0000')
 
   hex.toString()
