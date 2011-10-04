@@ -548,6 +548,14 @@
 
       return [hue, saturation, lightness, @a]    
 
+    ###*
+    returns string rgba representation of the color. 
+
+    @name toString
+    @methodOf Color#
+
+    @returns {String} The rgba string representation of the color 
+    ###
     toString: ->
       "rgba(#{@r}, #{@g}, #{@b}, #{@a})"
 
