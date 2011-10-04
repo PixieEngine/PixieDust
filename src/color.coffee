@@ -329,11 +329,11 @@
     A getter / setter for the lightness value of the color. Passing no argument returns the 
     current lightness value. Passing a value will set the lightness to that value and return the color.
 
-    @name hue
+    @name lightness
     @methodOf Color#
-    @param {Number} [newVal] the new hue value
+    @param {Number} [newVal] the new lightness value
 
-    @returns {Color|Number} returns the color object if you pass a new hue value and returns the hue otherwise 
+    @returns {Color|Number} returns the color object if you pass a new lightness value and returns the lightness otherwise 
     ###
     lightness: (newVal) ->
       hsl = @toHsl()
