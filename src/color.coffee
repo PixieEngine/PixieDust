@@ -306,7 +306,7 @@
 
     ###*
     A getter / setter for the hue value of the color. Passing no argument returns the 
-    current hue value. Passing a value will set the hue to that value.
+    current hue value. Passing a value will set the hue to that value and return the color.
 
     @name hue
     @methodOf Color#
@@ -325,6 +325,16 @@
       else
         return hsl[0]
 
+    ###*
+    A getter / setter for the lightness value of the color. Passing no argument returns the 
+    current lightness value. Passing a value will set the lightness to that value and return the color.
+
+    @name hue
+    @methodOf Color#
+    @param {Number} [newVal] the new hue value
+
+    @returns {Color|Number} returns the color object if you pass a new hue value and returns the hue otherwise 
+    ###
     lightness: (newVal) ->
       hsl = @toHsl()
       if newVal?
