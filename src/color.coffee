@@ -347,7 +347,7 @@
         return hsl[2]
 
     ###*
-    A copy of the calling color with its hue shifted by `degrees`. This differs from the hue setter in that it will wrap around 0 and 360.
+    A copy of the calling color with its hue shifted by `degrees`. This differs from the hue setter in that it adds to the existing hue value and will wrap around 0 and 360.
 
     @name shiftHue
     @methodOf Color#
@@ -359,7 +359,7 @@
       @copy().shiftHue$(degrees)
 
     ###*
-    The calling color with its hue shifted by `degrees`. This differs from the hue setter in that it will wrap around 0 and 360.
+    The calling color with its hue shifted by `degrees`. This differs from the hue setter in that it adds to the existing hue value and will wrap around 0 and 360.
 
     @name shiftHue$
     @methodOf Color#
@@ -439,6 +439,16 @@
 
       return this 
 
+    ###*
+    A new color. The calling color mixed with `other` using `amount` as the mixing ratio. If amount is not passed, then the colors are mixed evenly.
+
+    @name mixWith$
+    @methodOf Color#
+    @param {Color} other the other color to mix
+    @param {Number} [amount] the mixing ratio of the calling color to `other`
+
+    @returns {Color} The modified calling color after mixing it with `other`
+    ###
     saturate: (amount) ->
       @copy().saturate$(amount) 
 
