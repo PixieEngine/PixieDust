@@ -376,9 +376,27 @@
 
       return this
 
+    ###*
+    Returns a new color that is a copy of the calling color lightened by `amount` (Lightness of the color ranges from 0 - 1).
+
+    @name lighten
+    @methodOf Color#
+    @param {Number} amount Amount to lighten color by (between 0 - 1)
+
+    @returns {Color} A new color. The lightness value is increased by `amount` from the original.
+    ###
     lighten: (amount) ->
       @copy().lighten$(amount)
 
+    ###*
+    The calling color lightened by `amount` (Lightness of the color ranges from 0 - 1).
+
+    @name lighten$
+    @methodOf Color#
+    @param {Number} amount Amount to lighten color by (between 0 - 1)
+
+    @returns {Color} The calling color with its lightness value increased by `amount`.
+    ###
     lighten$: (amount) ->
       hsl = @toHsl()
       hsl[2] += amount
