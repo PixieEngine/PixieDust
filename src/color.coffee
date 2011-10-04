@@ -353,11 +353,20 @@
     @methodOf Color#
     @param {Number} degrees number of degrees to shift the hue on the color wheel.
 
-    @returns {Color} returns the color object if you pass a new lightness value and returns the lightness otherwise 
+    @returns {Color} A copy of the color with its hue shifted by `degrees`
     ###
     shiftHue: (degrees) ->
       @copy().shiftHue$(degrees)
 
+    ###*
+    The calling color with its hue shifted by `degrees`. This differs from the hue setter in that it will wrap around 0 and 360.
+
+    @name shiftHue$
+    @methodOf Color#
+    @param {Number} degrees number of degrees to shift the hue on the color wheel.
+
+    @returns {Color} The color with its hue shifted by `degrees`
+    ###      
     shiftHue$: (degrees) ->
       hsl = @toHsl()
 
