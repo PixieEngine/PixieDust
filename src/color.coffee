@@ -142,6 +142,31 @@
     a: parsedColor[3] 
 
   Color:: =
+    ###*
+    Returns the color channels (red, green, blue, and alpha) in an array
+
+    <code><pre>
+    transparent =  Color()
+
+    transparent.channels()
+    # => [0, 0, 0, 0]
+
+    red = Color("#FF0000")
+
+    red.channels()
+    # => [255, 0, 0, 1]
+
+    rgb = Color(200, 34, 2)
+
+    rgb.channels()
+    # => [200, 34, 2, 1]
+    </pre></code>
+
+    @name channels
+    @methodOf Color#
+
+    @returns {Array} Array of r, g, b, and alpha values of the color
+    ###  
     channels: ->
       [@r, @g, @b, @a]
 
