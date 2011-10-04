@@ -394,6 +394,16 @@
 
       return this    
 
+    ###*
+    A getter / setter for the saturation value of the color. Passing no argument returns the 
+    current saturation value. Passing a value will set the saturation to that value and return the color.
+
+    @name saturation
+    @methodOf Color#
+    @param {Number} [newVal] the new saturation value
+
+    @returns {Color|Number} returns the color object if you pass a new saturation value and returns the saturation otherwise 
+    ###
     saturation: (newVal) ->
       hsl = @toHsl()
       if newVal?
