@@ -137,7 +137,8 @@
 
   # You have access to all sorts of weird colors.
   # We give you all the named colors the browser recognizes
-  # and the ones from this survey http://blog.xkcd.com/2010/05/03/color-survey-results/
+  # and the ones from this survey 
+  # http://blog.xkcd.com/2010/05/03/color-survey-results/
   namedBrown = Color('Fuzzy Wuzzy Brown')
 
   namedBrown.toHex()
