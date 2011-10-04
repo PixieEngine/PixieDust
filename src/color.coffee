@@ -442,7 +442,7 @@
     ###*
     A new color. The calling color mixed with `other` using `amount` as the mixing ratio. If amount is not passed, then the colors are mixed evenly.
 
-    @name mixWith$
+    @name saturate
     @methodOf Color#
     @param {Color} other the other color to mix
     @param {Number} [amount] the mixing ratio of the calling color to `other`
