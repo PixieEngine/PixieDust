@@ -4509,7 +4509,7 @@ var __slice = Array.prototype.slice;
   /**
   Create a new color. The constructor is very flexible. It accepts arrays of r, g, b
   values, hex strings, hsl strings, other Color objects, and even the named colors 
-  from the xkcd survey: @link http://blog.xkcd.com/2010/05/03/color-survey-results/. 
+  from the xkcd survey: http://blog.xkcd.com/2010/05/03/color-survey-results/. 
   If no arguments are given, defaults to transparent.
 
   <code><pre>
