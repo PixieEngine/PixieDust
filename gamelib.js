@@ -4622,6 +4622,7 @@ var __slice = Array.prototype.slice;
 
     @name darken
     @methodOf Color#
+    @param {Number} amount Amount to darken color by (between 0 - 1)
 
     @returns {Color} A new color. The lightness value is reduced by `amount` from the original.
     */
@@ -4631,8 +4632,9 @@ var __slice = Array.prototype.slice;
     /**
     Modifies the color so that it is darkened by `amount` (Lightness of the color ranges from 0 - 1).
 
-    @name darken
+    @name darken$
     @methodOf Color#
+    @param {Number} amount Amount to darken color by (between 0 - 1)
 
     @returns {Color} the color with the lightness value reduced by `amount`
     */
@@ -4643,9 +4645,27 @@ var __slice = Array.prototype.slice;
       _ref = hslToRgb(hsl), this.r = _ref[0], this.g = _ref[1], this.b = _ref[2], this.a = _ref[3];
       return this;
     },
+    /**
+    A new color that is a copy of the calling color with its saturation reduced by `amount`.
+
+    @name desaturate
+    @methodOf Color#
+    @param {Number} amount Amount to reduce color saturation by (between 0 - 1)
+
+    @returns {Color} A copy of the color with the saturation value reduced by `amount`
+    */
     desaturate: function(amount) {
       return this.copy().desaturate$(amount);
     },
+    /**
+    The modified color with its saturation reduced by `amount`.
+
+    @name desaturate$
+    @methodOf Color#
+    @param {Number} amount Amount to reduce color saturation by (between 0 - 1)
+
+    @returns {Color} the color with the saturation value reduced by `amount`
+    */
     desaturate$: function(amount) {
       var hsl, _ref;
       hsl = this.toHsl();
@@ -4653,12 +4673,37 @@ var __slice = Array.prototype.slice;
       _ref = hslToRgb(hsl), this.r = _ref[0], this.g = _ref[1], this.b = _ref[2], this.a = _ref[3];
       return this;
     },
+    /**
+    Determine whether two colors are equal. Compares their r, g, b, and alpha values.
+
+    @name equal
+    @methodOf Color#
+    @param {Color} other the color to compare to the calling color
+
+    @returns {Boolean} true if the r, g, b, a values of the colors agree, false otherwise
+    */
     equal: function(other) {
       return other.r === this.r && other.g === this.g && other.b === this.b && other.a === this.a;
     },
+    /**
+    A new color. A copy of the calling color converted to grayscale.
+
+    @name grayscale
+    @methodOf Color#
+
+    @returns {Color} A copy of the calling color converted to grayscale.
+    */
     grayscale: function() {
       return this.copy().grayscale$();
     },
+    /**
+    The calling color converted to grayscale.
+
+    @name grayscale$
+    @methodOf Color#
+
+    @returns {Color} The calling color converted to grayscale.
+    */
     grayscale$: function() {
       var g, hsl;
       hsl = this.toHsl();
