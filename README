@@ -9,7 +9,7 @@ Mixins
 - Drawable: provides a simple draw method to the including object.
 - Durable: cause GameObjects to be destroyed after a given duration.
 - Emitter / Emitterable: A parameterizable system for creating particles
-- Movable: Provides a basic position update according to velocity and acceleration. Best suited to things whose movement isn't very complex, like particles.
+- Movable: Provides a basic position update according to velocity and acceleration.
 - Rotatable: Rotate a GameObject based on a rotational velocity you define.
 
 Common helper classes are included as well such as basic collisions, sprites, a drawing helper, and a particle system.
