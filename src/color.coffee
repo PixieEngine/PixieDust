@@ -152,8 +152,8 @@
   </pre></code>
 
   @name Color
-  @param {Array|Number|String|Color} args... Either an Array or r, g, b values, 
-  a sequence of numbers defining r, g, b values, a hex or hsl string, or another Color object
+  @param {Array|Number|String|Color} args... An Array, r, g, b values, 
+  a sequence of numbers defining r, g, b values, a hex or hsl string, another Color object, or a named color
   @constructor
   ###
   Color = (args...) ->
