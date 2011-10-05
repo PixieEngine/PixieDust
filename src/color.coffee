@@ -557,6 +557,15 @@
     ###*
     Returns a new color that is a copy of the calling color lightened by `amount` (Lightness of the color ranges from 0 - 1).
 
+    <code><pre>
+    green = Color(0, 255, 0)
+
+    lightGreen = green.lighten(0.2)
+
+    lightGreen.toString()
+    # => 'rgba(102, 255, 102, 1)'
+    </pre></code>
+
     @name lighten
     @methodOf Color#
     @param {Number} amount Amount to lighten color by (between 0 - 1)
@@ -568,6 +577,17 @@
 
     ###*
     The calling color lightened by `amount` (Lightness of the color ranges from 0 - 1).
+
+    <code><pre>
+    green = Color(0, 255, 0)
+
+    green.lighten(0.2)
+
+    # we have modified green in place
+    # to become lightGreen
+    green.toString()
+    # => 'rgba(102, 255, 102, 1)'
+    </pre></code>
 
     @name lighten$
     @methodOf Color#
