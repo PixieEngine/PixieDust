@@ -5139,7 +5139,7 @@ var __slice = Array.prototype.slice;
 
   @name mix
   @methodOf Color
-  @see mixWith
+  @see Color#mixWith
   @param {Color} color1 the first color to mix
   @param {Color} color2 the second color to mix
   @param {Number} amount the ratio to mix the colors 
