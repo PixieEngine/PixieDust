@@ -505,7 +505,8 @@
     yellow.hue()
     # => 60
 
-    # => 'rgba(0, 255, 255, 1)'
+    yellow.toString()
+    # => 'rgba(255, 255, 0, 1)'
     </pre></code>
 
     @name shiftHue
