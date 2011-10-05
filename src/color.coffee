@@ -3387,6 +3387,14 @@
   ###*
   returns a random color.
 
+  <code><pre>
+  Color.random().toString()
+  # => 'rgba(213, 144, 202, 1)'
+
+  Color.random().toString()
+  # => 'rgba(1, 211, 24, 1)'
+  </pre></code>
+
   @name random
   @methodOf Color
 
