@@ -270,7 +270,7 @@
       Color(@r, @g, @b, @a)
 
     ###*
-    Returns a new color that is a copy of the calling color darkened by `amount` (Lightness of the color ranges from 0 - 1).
+    Returns a copy of the calling color darkened by `amount` (Lightness of the color ranges from 0 to 1).
 
     <code><pre>
     green = Color(0, 255, 0)
@@ -291,7 +291,7 @@
       @copy().darken$(amount)
 
     ###*
-    Modifies the color so that it is darkened by `amount` (Lightness of the color ranges from 0 - 1).
+    Modifies the color so that it is darkened by `amount` (Lightness of the color ranges from 0 to 1).
 
     <code><pre>
     green = Color(0, 255, 0)
@@ -318,7 +318,7 @@
       return this      
 
     ###*
-    A new color that is a copy of the calling color with its saturation reduced by `amount`.
+    A copy of the calling color with its saturation reduced by `amount`.
 
     <code><pre>
     blue = Color(0, 0, 255)
@@ -392,7 +392,7 @@
       other.a == @a
 
     ###*
-    A new color. A copy of the calling color converted to grayscale.
+    A copy of the calling color converted to grayscale.
 
     <code><pre>
     color = Color(255, 255, 0)
@@ -555,7 +555,7 @@
       return this
 
     ###*
-    Returns a new color that is a copy of the calling color lightened by `amount` (Lightness of the color ranges from 0 - 1).
+    Returns a copy of the calling color lightened by `amount` (Lightness of the color ranges from 0 to 1).
 
     <code><pre>
     green = Color(0, 255, 0)
@@ -568,7 +568,7 @@
 
     @name lighten
     @methodOf Color#
-    @param {Number} amount Amount to lighten color by (between 0 - 1)
+    @param {Number} amount Amount to lighten color by (between 0 to 1)
 
     @returns {Color} A new color. The lightness value is increased by `amount` from the original.
     ###
@@ -576,7 +576,7 @@
       @copy().lighten$(amount)
 
     ###*
-    The calling color lightened by `amount` (Lightness of the color ranges from 0 - 1).
+    The calling color lightened by `amount` (Lightness of the color ranges from 0 to 1).
 
     <code><pre>
     green = Color(0, 255, 0)
@@ -604,7 +604,8 @@
       return this 
 
     ###*
-    A new color. The calling color mixed with `other` using `amount` as the mixing ratio. If amount is not passed, then the colors are mixed evenly.
+    A copy of the calling color mixed with `other` using `amount` as the 
+    mixing ratio. If amount is not passed, then the colors are mixed evenly.
 
     <code><pre>
     red = Color(255, 0, 0)
@@ -634,7 +635,8 @@
       @copy().mixWith$(other, amount) 
 
     ###*
-    A new color. The calling color mixed with `other` using `amount` as the mixing ratio. If amount is not passed, then the colors are mixed evenly.
+    A copy of the calling color mixed with `other` using `amount` as the 
+    mixing ratio. If amount is not passed, then the colors are mixed evenly.
 
     <code><pre>
     red = Color(255, 0, 0)
