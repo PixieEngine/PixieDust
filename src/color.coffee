@@ -442,6 +442,15 @@
     A getter / setter for the hue value of the color. Passing no argument returns the 
     current hue value. Passing a value will set the hue to that value and return the color.
 
+    <code><pre>
+    magenta = Color(255, 0, 255)
+
+    yellow = color.hue(60)
+
+    yellow.toString()
+    # => 'rgba(255, 255, 0, 1)'
+    </pre></code>  
+
     @name hue
     @methodOf Color#
     @param {Number} [newVal] the new hue value
