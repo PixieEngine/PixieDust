@@ -178,7 +178,7 @@
 
   Color:: =
     ###*
-    Returns the color channels (red, green, blue, and alpha) in an array.
+    Returns the rgba color channels in an array.
 
     <code><pre>
     transparent =  Color()
