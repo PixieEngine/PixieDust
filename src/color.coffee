@@ -414,6 +414,16 @@
     ###*
     The calling color converted to grayscale.
 
+    <code><pre>
+    color = Color(255, 255, 0)
+
+    # modifies color into gray
+    color.grayscale$()
+
+    color.toString()
+    # => 'rgba(128, 128, 128, 1)'
+    </pre></code>  
+
     @name grayscale$
     @methodOf Color#
 
