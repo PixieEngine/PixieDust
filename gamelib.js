@@ -4592,7 +4592,7 @@ var __slice = Array.prototype.slice;
   };
   Color.prototype = {
     /**
-      Returns the color channels (red, green, blue, and alpha) in an array.
+      Returns the rgba color channels in an array.
 
       <code><pre>
       transparent =  Color()
@@ -4620,7 +4620,7 @@ var __slice = Array.prototype.slice;
       return [this.r, this.g, this.b, this.a];
     },
     /**
-    Returns a new color that is the complement of the calling color.
+    A copy of the calling color that is its complementary color on the color wheel.
 
     <code><pre>
     red = Color(255, 0, 0)
@@ -4852,7 +4852,7 @@ var __slice = Array.prototype.slice;
     <code><pre>
     magenta = Color(255, 0, 255)
 
-    yellow = color.hue(60)
+    yellow = magenta.hue(60)
 
     yellow.toString()
     # => 'rgba(255, 255, 0, 1)'
@@ -4878,6 +4878,18 @@ var __slice = Array.prototype.slice;
     /**
     A getter / setter for the lightness value of the color. Passing no argument returns the 
     current lightness value. Passing a value will set the lightness to that value and return the color.
+
+    <code><pre>
+    magenta = Color(255, 0, 255)
+
+    magenta.lightness()
+    # => 0.9
+
+    darkerMagenta = magenta.lightness(0.75)
+
+    darkerMagenta.lightness()
+    # => 0.75
+    </pre></code>  
 
     @name lightness
     @methodOf Color#
