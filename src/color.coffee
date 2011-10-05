@@ -610,13 +610,13 @@
     red = Color(255, 0, 0)
     yellow = Color(255, 255, 0)
 
-    # With no arguments the colors are mixed evenly
+    # With no amount argument the colors are mixed evenly
     orange = red.mixWith(yellow)
 
     orange.toString()
     # => 'rgba(255, 128, 0, 1)'    
 
-    # With this argument we are mixing the color 30% red and 70% yellow
+    # With an amount of 0.3 we are mixing the color 30% red and 70% yellow
     somethingCloseToOrange = red.mixWith(yellow, 0.3)
 
     somethingCloseToOrange.toString()
@@ -641,14 +641,14 @@
     yellow = Color(255, 255, 0)
     anotherRed = Color(255, 0, 0)
 
-    # With no arguments the colors are mixed evenly
+    # With no amount argument the colors are mixed evenly
     red.mixWith$(yellow)
 
     # We have modified red in place to be orange 
     red.toString()
     # => 'rgba(255, 128, 0, 1)'    
 
-    # With this argument we are mixing the color 30% red and 70% yellow
+    # With an amount of 0.3 we are mixing the color 30% red and 70% yellow
     anotherRed.mixWith$(yellow, 0.3)
 
     # We have modified `anotherRed` in place to be somethingCloseToOrange 
@@ -3405,6 +3405,23 @@
 
   ###*
   Mix two colors. Behaves just like `#mixWith` except that you are passing two colors.
+
+  <code><pre>
+  red = Color(255, 0, 0)
+  yellow = Color(255, 255, 0)
+
+  # With no amount argument the colors are mixed evenly
+  orange = Color.mix(red, yellow)
+
+  orange.toString()
+  # => 'rgba(255, 128, 0, 1)'    
+
+  # With an amount of 0.3 we are mixing the color 30% red and 70% yellow
+  somethingCloseToOrange = Color.mix(red, yellow, 0.3)
+
+  somethingCloseToOrange.toString()
+  # => rgba(255, 179, 0, 1)
+  </pre></code>
 
   @name mix
   @methodOf Color
