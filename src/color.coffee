@@ -805,8 +805,7 @@
 
     magenta.toHsl()
     # => [300, 1, 0.5, 1]
-    </pre></code>
-
+    </pre></code>  
 
     @name toHsl
     @methodOf Color#
@@ -843,6 +842,13 @@
 
     ###*
     returns string rgba representation of the color. 
+
+    <code><pre>
+    red = Color('#ff0000')
+
+    red.toString()
+    # => 'rgba(255, 0, 0, 1)'
+    </pre></code>
 
     @name toString
     @methodOf Color#
