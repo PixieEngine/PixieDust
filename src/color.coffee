@@ -685,7 +685,9 @@
 
     saturatedColor = color.saturate(0.2)
 
-    # We have modified `anotherRed` in place to be somethingCloseToOrange 
+    saturatedColor.saturation()
+    # => 0.8
+
     saturatedColor.toString()
     # => rgba(25, 25, 225, 1)
     </pre></code>
@@ -701,6 +703,22 @@
 
     ###*
     The calling color with its saturation increased by `amount`.
+
+    <code><pre>
+    color = Color(50, 50, 200)
+
+    color.saturation()
+    # => 0.6
+
+    color.saturate$(0.2)
+
+    # We have modified color in place and increased its saturation to 0.8
+    color.saturation()
+    # => 0.8
+
+    color.toString()
+    # => rgba(25, 25, 225, 1)
+    </pre></code>
 
     @name saturate$
     @methodOf Color#
