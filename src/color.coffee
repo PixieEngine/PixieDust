@@ -206,7 +206,7 @@
       [@r, @g, @b, @a]
 
     ###*
-    Returns a new color that is the complement of the calling color.
+    A copy of the calling color that is its complementary color on the color wheel.
 
     <code><pre>
     red = Color(255, 0, 0)
