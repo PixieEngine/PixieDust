@@ -738,6 +738,13 @@
     A getter / setter for the saturation value of the color. Passing no argument returns the 
     current saturation value. Passing a value will set the saturation to that value and return the color.
 
+    <code><pre>
+    hslColor = Color('hsl(60, 0.5, 0.5)')
+
+    hslColor.saturation()
+    # => 0.5
+    </pre></code>
+
     @name saturation
     @methodOf Color#
     @param {Number} [newVal] the new saturation value
