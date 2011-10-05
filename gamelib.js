@@ -4507,27 +4507,61 @@ var __slice = Array.prototype.slice;
     return result;
   };
   /**
-  Create a new color. The constructor is very flexible. It accepts arrays of r, g, b
-  values, hex strings, hsl strings, other Color objects, and even the named colors 
-  from the xkcd survey: http://blog.xkcd.com/2010/05/03/color-survey-results/. 
+  Create a new color. The constructor is very flexible. It accepts individual r, g, b, a values,
+  arrays of r, g, b values, hex strings, rgb strings, hsl strings, other Color objects, 
+  and even the named colors from the xkcd survey: http://blog.xkcd.com/2010/05/03/color-survey-results/. 
   If no arguments are given, defaults to transparent.
 
   <code><pre>
-  color = Color()
+  individualRgb = Color(23, 56, 49, 0.4)
 
-  color.toString()
-  # => 'rgba(0, 0, 0, 0)'
+  individualRgb.toString()
+  # => 'rgba(23, 56, 49, 0.4)'
 
-  color = Color('Sky Blue')
+  arrayRgb = Color([59, 100, 230])
 
-  color.toHex()
-  # => '#75bbfd'
+  arrayRgb.toString()
+  # => 'rgba(59, 100, 230, 1)'
 
+  hex = Color('#ff0000')
+
+  hex.toString()
+  # => 'rgba(255, 0, 0, 1)'
+
+  rgb = Color('rgb(0, 255, 0)')
+
+  rgb.toString()
+  # => 'rgba(0, 255, 0, 1)'
+
+  hsl = Color('hsl(180, 1, 0.5)')
+
+  hsl.toString()
+  # => 'rgba(0, 255, 255, 1)'
+
+  anotherColor = Color('blue')
+
+  Color(anotherColor)
+  # => a new color with the same r, g, b, and alpha values as `anotherColor`
+
+  # You have access to all sorts of weird colors.
+  # We give you all the named colors the browser recognizes
+  # and the ones from this survey 
+  # http://blog.xkcd.com/2010/05/03/color-survey-results/
+  namedBrown = Color('Fuzzy Wuzzy Brown')
+
+  namedBrown.toHex()
+  # => '#c45655'
+
+  # Default behavior
+  transparent = Color()
+
+  transparent.toString()
+  # => 'rgba(0, 0, 0, 0)'  
   </pre></code>
 
   @name Color
-  @param {Array|Number|String|Color} args Either an Array or r, g, b values, 
-  a sequence of numbers defining r, g, b values, a hex or hsl string, or another Color object
+  @param {Array|Number|String|Color} args... An Array, r, g, b values, 
+  a sequence of numbers defining r, g, b values, a hex or hsl string, another Color object, or a named color
   @constructor
   */
   Color = function() {
@@ -4588,6 +4622,15 @@ var __slice = Array.prototype.slice;
     /**
     Returns a new color that is the complement of the calling color.
 
+    <code><pre>
+    red = Color(255, 0, 0)
+
+    cyan = red.complement()
+
+    cyan.toString()
+    # => 'rgba(0, 255, 255, 1)'
+    </pre></code>
+
     @name complement
     @methodOf Color#
 
@@ -4599,6 +4642,16 @@ var __slice = Array.prototype.slice;
     /**
     Modifies the calling color to make it the complement of its previous value.
 
+    <code><pre>
+    red = Color(255, 0, 0)
+
+    # modifies red in place to make it into cyan
+    red.complement$()
+
+    red.toString()
+    # => 'rgba(0, 255, 255, 1)'
+    </pre></code>
+
     @name complement$
     @methodOf Color#
 
@@ -4609,6 +4662,18 @@ var __slice = Array.prototype.slice;
     },
     /**
     A copy of the calling color.
+
+    <code><pre>
+    color = Color(0, 100, 200)
+
+    copy = color.copy()
+
+    color == copy
+    # => false
+
+    color.equal(copy)
+    # => true
+    </pre></code>
 
     @name copy
     @methodOf Color#
