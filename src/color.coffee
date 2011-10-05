@@ -211,7 +211,9 @@
     <code><pre>
     red = Color(255, 0, 0)
 
-    red.complement().toString()
+    cyan = red.complement()
+
+    cyan.toString()
     # => 'rgba(0, 255, 255, 1)'
     </pre></code>
 
@@ -225,6 +227,16 @@
 
     ###*
     Modifies the calling color to make it the complement of its previous value.
+
+    <code><pre>
+    red = Color(255, 0, 0)
+
+    # modifies red in place to make it into cyan
+    red.complement()
+
+    red.toString()
+    # => 'rgba(0, 255, 255, 1)'
+    </pre></code>
 
     @name complement$
     @methodOf Color#
