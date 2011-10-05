@@ -249,6 +249,18 @@
     ###*
     A copy of the calling color.
 
+    <code><pre>
+    color = Color(0, 100, 200)
+
+    copy = color.copy()
+
+    color == copy
+    # => false
+
+    color.equal(copy)
+    # => true
+    </pre></code>
+
     @name copy
     @methodOf Color#
 
