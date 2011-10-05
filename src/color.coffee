@@ -445,7 +445,7 @@
     <code><pre>
     magenta = Color(255, 0, 255)
 
-    yellow = color.hue(60)
+    yellow = magenta.hue(60)
 
     yellow.toString()
     # => 'rgba(255, 255, 0, 1)'
@@ -471,6 +471,18 @@
     ###*
     A getter / setter for the lightness value of the color. Passing no argument returns the 
     current lightness value. Passing a value will set the lightness to that value and return the color.
+
+    <code><pre>
+    magenta = Color(255, 0, 255)
+
+    magenta.lightness()
+    # => 0.9
+
+    darkerMagenta = magenta.lightness(0.75)
+
+    darkerMagenta.lightness()
+    # => 0.75
+    </pre></code>  
 
     @name lightness
     @methodOf Color#
