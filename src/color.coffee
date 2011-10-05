@@ -636,6 +636,26 @@
     ###*
     A new color. The calling color mixed with `other` using `amount` as the mixing ratio. If amount is not passed, then the colors are mixed evenly.
 
+    <code><pre>
+    red = Color(255, 0, 0)
+    yellow = Color(255, 255, 0)
+    anotherRed = Color(255, 0, 0)
+
+    # With no arguments the colors are mixed evenly
+    red.mixWith$(yellow)
+
+    # We have modified red in place to be orange 
+    red.toString()
+    # => 'rgba(255, 128, 0, 1)'    
+
+    # With this argument we are mixing the color 30% red and 70% yellow
+    anotherRed.mixWith$(yellow, 0.3)
+
+    # We have modified `anotherRed` in place to be somethingCloseToOrange 
+    anotherRed.toString()
+    # => rgba(255, 179, 0, 1)
+    </pre></code>
+
     @name mixWith$
     @methodOf Color#
     @param {Color} other the other color to mix
