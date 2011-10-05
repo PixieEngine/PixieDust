@@ -521,6 +521,24 @@
     ###*
     The calling color with its hue shifted by `degrees`. This differs from the hue setter in that it adds to the existing hue value and will wrap around 0 and 360.
 
+    <code><pre>
+    magenta = Color(255, 0, 255)
+
+    magenta.hue()
+    # => 300
+
+    magenta.shiftHue$(120)
+
+    # since magenta's hue is 300 we have wrapped
+    # around 360 to end up at 60. Also we have 
+    # modified magenta in place to become yellow
+    magenta.hue()
+    # => 60
+
+    magenta.toString()
+    # => 'rgba(255, 255, 0, 1)'
+    </pre></code>
+
     @name shiftHue$
     @methodOf Color#
     @param {Number} degrees number of degrees to shift the hue on the color wheel.
