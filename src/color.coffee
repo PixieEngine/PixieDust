@@ -272,6 +272,15 @@
     ###*
     Returns a new color that is a copy of the calling color darkened by `amount` (Lightness of the color ranges from 0 - 1).
 
+    <code><pre>
+    green = Color(0, 255, 0)
+
+    darkGreen = green.darken(0.3)
+
+    darkGreen.toString()
+    # => 'rgba(0, 102, 0, 1)'
+    </pre></code>
+
     @name darken
     @methodOf Color#
     @param {Number} amount Amount to darken color by (between 0 - 1)
@@ -283,6 +292,16 @@
 
     ###*
     Modifies the color so that it is darkened by `amount` (Lightness of the color ranges from 0 - 1).
+
+    <code><pre>
+    green = Color(0, 255, 0)
+
+    # Modifies green to be darkGreen
+    green.darken$(0.3)
+
+    green.toString()
+    # => 'rgba(0, 102, 0, 1)'
+    </pre></code>
 
     @name darken$
     @methodOf Color#
@@ -301,6 +320,15 @@
     ###*
     A new color that is a copy of the calling color with its saturation reduced by `amount`.
 
+    <code><pre>
+    blue = Color(0, 0, 255)
+
+    desaturatedBlue = blue.desaturate(0.3)
+
+    desaturatedBlue.toString()
+    # => 'rgba(38, 38, 217, 1)'
+    </pre></code>
+
     @name desaturate
     @methodOf Color#
     @param {Number} amount Amount to reduce color saturation by (between 0 - 1)
@@ -312,6 +340,16 @@
 
     ###*
     The modified color with its saturation reduced by `amount`.
+
+    <code><pre>
+    blue = Color(0, 0, 255)
+
+    # modifies blue to be desaturatedBlue
+    blue.desaturate$(0.3)
+
+    blue.toString()
+    # => 'rgba(38, 38, 217, 1)'
+    </pre></code>
 
     @name desaturate$
     @methodOf Color#
@@ -329,6 +367,17 @@
 
     ###*
     Determine whether two colors are equal. Compares their r, g, b, and alpha values.
+
+    <code><pre>
+    hex = Color('#ffff00')
+    rgb = Color(255, 255, 0)
+
+    hex == rgb
+    # => false
+
+    hex.equal(rgb)
+    # => true
+    </pre></code>
 
     @name equal
     @methodOf Color#
