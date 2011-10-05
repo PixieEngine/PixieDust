@@ -208,6 +208,13 @@
     ###*
     Returns a new color that is the complement of the calling color.
 
+    <code><pre>
+    red = Color(255, 0, 0)
+
+    red.complement().toString()
+    # => 'rgba(0, 255, 255, 1)'
+    </pre></code>
+
     @name complement
     @methodOf Color#
 
