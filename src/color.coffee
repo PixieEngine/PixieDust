@@ -800,6 +800,14 @@
     ###*
     returns an array of the hue, saturation, lightness, and alpha values of the color. 
 
+    <code><pre>
+    magenta = Color(255, 0, 255)
+
+    magenta.toHsl()
+    # => [300, 1, 0.5, 1]
+    </pre></code>
+
+
     @name toHsl
     @methodOf Color#
 
