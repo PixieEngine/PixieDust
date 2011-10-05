@@ -232,7 +232,7 @@
     red = Color(255, 0, 0)
 
     # modifies red in place to make it into cyan
-    red.complement()
+    red.complement$()
 
     red.toString()
     # => 'rgba(0, 255, 255, 1)'
