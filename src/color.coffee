@@ -394,6 +394,15 @@
     ###*
     A new color. A copy of the calling color converted to grayscale.
 
+    <code><pre>
+    color = Color(255, 255, 0)
+
+    gray = color.grayscale()
+
+    gray.toString()
+    # => 'rgba(128, 128, 128, 1)'
+    </pre></code>    
+
     @name grayscale
     @methodOf Color#
 
