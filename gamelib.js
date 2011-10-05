@@ -4684,7 +4684,7 @@ var __slice = Array.prototype.slice;
       return Color(this.r, this.g, this.b, this.a);
     },
     /**
-    Returns a new color that is a copy of the calling color darkened by `amount` (Lightness of the color ranges from 0 - 1).
+    Returns a copy of the calling color darkened by `amount` (Lightness of the color ranges from 0 to 1).
 
     <code><pre>
     green = Color(0, 255, 0)
@@ -4705,7 +4705,7 @@ var __slice = Array.prototype.slice;
       return this.copy().darken$(amount);
     },
     /**
-    Modifies the color so that it is darkened by `amount` (Lightness of the color ranges from 0 - 1).
+    Modifies the color so that it is darkened by `amount` (Lightness of the color ranges from 0 to 1).
 
     <code><pre>
     green = Color(0, 255, 0)
@@ -4731,7 +4731,7 @@ var __slice = Array.prototype.slice;
       return this;
     },
     /**
-    A new color that is a copy of the calling color with its saturation reduced by `amount`.
+    A copy of the calling color with its saturation reduced by `amount`.
 
     <code><pre>
     blue = Color(0, 0, 255)
@@ -4801,7 +4801,7 @@ var __slice = Array.prototype.slice;
       return other.r === this.r && other.g === this.g && other.b === this.b && other.a === this.a;
     },
     /**
-    A new color. A copy of the calling color converted to grayscale.
+    A copy of the calling color converted to grayscale.
 
     <code><pre>
     color = Color(255, 255, 0)
@@ -4960,7 +4960,7 @@ var __slice = Array.prototype.slice;
       return this;
     },
     /**
-    Returns a new color that is a copy of the calling color lightened by `amount` (Lightness of the color ranges from 0 - 1).
+    Returns a copy of the calling color lightened by `amount` (Lightness of the color ranges from 0 to 1).
 
     <code><pre>
     green = Color(0, 255, 0)
@@ -4973,7 +4973,7 @@ var __slice = Array.prototype.slice;
 
     @name lighten
     @methodOf Color#
-    @param {Number} amount Amount to lighten color by (between 0 - 1)
+    @param {Number} amount Amount to lighten color by (between 0 to 1)
 
     @returns {Color} A new color. The lightness value is increased by `amount` from the original.
     */
@@ -4981,7 +4981,7 @@ var __slice = Array.prototype.slice;
       return this.copy().lighten$(amount);
     },
     /**
-    The calling color lightened by `amount` (Lightness of the color ranges from 0 - 1).
+    The calling color lightened by `amount` (Lightness of the color ranges from 0 to 1).
 
     <code><pre>
     green = Color(0, 255, 0)
@@ -5008,19 +5008,20 @@ var __slice = Array.prototype.slice;
       return this;
     },
     /**
-    A new color. The calling color mixed with `other` using `amount` as the mixing ratio. If amount is not passed, then the colors are mixed evenly.
+    A copy of the calling color mixed with `other` using `amount` as the 
+    mixing ratio. If amount is not passed, then the colors are mixed evenly.
 
     <code><pre>
     red = Color(255, 0, 0)
     yellow = Color(255, 255, 0)
 
-    # With no arguments the colors are mixed evenly
+    # With no amount argument the colors are mixed evenly
     orange = red.mixWith(yellow)
 
     orange.toString()
     # => 'rgba(255, 128, 0, 1)'    
 
-    # With this argument we are mixing the color 30% red and 70% yellow
+    # With an amount of 0.3 we are mixing the color 30% red and 70% yellow
     somethingCloseToOrange = red.mixWith(yellow, 0.3)
 
     somethingCloseToOrange.toString()
@@ -5038,21 +5039,22 @@ var __slice = Array.prototype.slice;
       return this.copy().mixWith$(other, amount);
     },
     /**
-    A new color. The calling color mixed with `other` using `amount` as the mixing ratio. If amount is not passed, then the colors are mixed evenly.
+    A copy of the calling color mixed with `other` using `amount` as the 
+    mixing ratio. If amount is not passed, then the colors are mixed evenly.
 
     <code><pre>
     red = Color(255, 0, 0)
     yellow = Color(255, 255, 0)
     anotherRed = Color(255, 0, 0)
 
-    # With no arguments the colors are mixed evenly
+    # With no amount argument the colors are mixed evenly
     red.mixWith$(yellow)
 
     # We have modified red in place to be orange 
     red.toString()
     # => 'rgba(255, 128, 0, 1)'    
 
-    # With this argument we are mixing the color 30% red and 70% yellow
+    # With an amount of 0.3 we are mixing the color 30% red and 70% yellow
     anotherRed.mixWith$(yellow, 0.3)
 
     # We have modified `anotherRed` in place to be somethingCloseToOrange 
@@ -5079,7 +5081,22 @@ var __slice = Array.prototype.slice;
       return this;
     },
     /**
-    A new color. A copy of the calling color with its saturation increased by `amount`
+    A copy of the calling color with its saturation increased by `amount`.
+
+    <code><pre>
+    color = Color(50, 50, 200)
+
+    color.saturation()
+    # => 0.6
+
+    saturatedColor = color.saturate(0.2)
+
+    saturatedColor.saturation()
+    # => 0.8
+
+    saturatedColor.toString()
+    # => rgba(25, 25, 225, 1)
+    </pre></code>
 
     @name saturate
     @methodOf Color#
@@ -5091,7 +5108,23 @@ var __slice = Array.prototype.slice;
       return this.copy().saturate$(amount);
     },
     /**
-    The calling color with its saturation increased by `amount`
+    The calling color with its saturation increased by `amount`.
+
+    <code><pre>
+    color = Color(50, 50, 200)
+
+    color.saturation()
+    # => 0.6
+
+    color.saturate$(0.2)
+
+    # We have modified color in place and increased its saturation to 0.8
+    color.saturation()
+    # => 0.8
+
+    color.toString()
+    # => rgba(25, 25, 225, 1)
+    </pre></code>
 
     @name saturate$
     @methodOf Color#
@@ -5109,6 +5142,13 @@ var __slice = Array.prototype.slice;
     /**
     A getter / setter for the saturation value of the color. Passing no argument returns the 
     current saturation value. Passing a value will set the saturation to that value and return the color.
+
+    <code><pre>
+    hslColor = Color('hsl(60, 0.5, 0.5)')
+
+    hslColor.saturation()
+    # => 0.5
+    </pre></code>
 
     @name saturation
     @methodOf Color#
@@ -5129,6 +5169,18 @@ var __slice = Array.prototype.slice;
     },
     /**
     returns the Hex representation of the color. Exclude the leading `#` by passing false. 
+
+    <code><pre>
+    color = Color('hsl(60, 1, 0.5)')
+
+    # passing nothing will leave the `#` intact
+    color.toHex()
+    # => '#ffff00'
+
+    # passing false will remove the `#`
+    color.toHex(false)
+    # => 'ffff00'
+    </pre></code>
 
     @name toHex
     @methodOf Color#
@@ -5158,6 +5210,13 @@ var __slice = Array.prototype.slice;
     },
     /**
     returns an array of the hue, saturation, lightness, and alpha values of the color. 
+
+    <code><pre>
+    magenta = Color(255, 0, 255)
+
+    magenta.toHsl()
+    # => [300, 1, 0.5, 1]
+    </pre></code>  
 
     @name toHsl
     @methodOf Color#
@@ -5201,6 +5260,13 @@ var __slice = Array.prototype.slice;
     /**
     returns string rgba representation of the color. 
 
+    <code><pre>
+    red = Color('#ff0000')
+
+    red.toString()
+    # => 'rgba(255, 0, 0, 1)'
+    </pre></code>
+
     @name toString
     @methodOf Color#
 
@@ -5218,6 +5284,14 @@ var __slice = Array.prototype.slice;
   /**
   returns a random color.
 
+  <code><pre>
+  Color.random().toString()
+  # => 'rgba(213, 144, 202, 1)'
+
+  Color.random().toString()
+  # => 'rgba(1, 211, 24, 1)'
+  </pre></code>
+
   @name random
   @methodOf Color
 
@@ -5228,6 +5302,23 @@ var __slice = Array.prototype.slice;
   };
   /**
   Mix two colors. Behaves just like `#mixWith` except that you are passing two colors.
+
+  <code><pre>
+  red = Color(255, 0, 0)
+  yellow = Color(255, 255, 0)
+
+  # With no amount argument the colors are mixed evenly
+  orange = Color.mix(red, yellow)
+
+  orange.toString()
+  # => 'rgba(255, 128, 0, 1)'    
+
+  # With an amount of 0.3 we are mixing the color 30% red and 70% yellow
+  somethingCloseToOrange = Color.mix(red, yellow, 0.3)
+
+  somethingCloseToOrange.toString()
+  # => rgba(255, 179, 0, 1)
+  </pre></code>
 
   @name mix
   @methodOf Color
