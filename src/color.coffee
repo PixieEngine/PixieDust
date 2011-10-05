@@ -765,6 +765,18 @@
     ###*
     returns the Hex representation of the color. Exclude the leading `#` by passing false. 
 
+    <code><pre>
+    color = Color('hsl(60, 1, 0.5)')
+
+    # passing nothing will leave the `#` intact
+    color.toHex()
+    # => '#ffff00'
+
+    # passing false will remove the `#`
+    color.toHex(false)
+    # => 'ffff00'
+    </pre></code>
+
     @name toHex
     @methodOf Color#
     @param {Boolean} [leadingHash] if passed as false excludes the leading `#` from the string
