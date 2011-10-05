@@ -4899,6 +4899,23 @@ var __slice = Array.prototype.slice;
     /**
     A copy of the calling color with its hue shifted by `degrees`. This differs from the hue setter in that it adds to the existing hue value and will wrap around 0 and 360.
 
+    <code><pre>
+    magenta = Color(255, 0, 255)
+
+    magenta.hue()
+    # => 300
+
+    yellow = magenta.shiftHue(120)
+
+    # since magenta's hue is 300 we have wrapped
+    # around 360 to end up at 60
+    yellow.hue()
+    # => 60
+
+    yellow.toString()
+    # => 'rgba(255, 255, 0, 1)'
+    </pre></code>
+
     @name shiftHue
     @methodOf Color#
     @param {Number} degrees number of degrees to shift the hue on the color wheel.
@@ -4910,6 +4927,24 @@ var __slice = Array.prototype.slice;
     },
     /**
     The calling color with its hue shifted by `degrees`. This differs from the hue setter in that it adds to the existing hue value and will wrap around 0 and 360.
+
+    <code><pre>
+    magenta = Color(255, 0, 255)
+
+    magenta.hue()
+    # => 300
+
+    magenta.shiftHue$(120)
+
+    # since magenta's hue is 300 we have wrapped
+    # around 360 to end up at 60. Also we have 
+    # modified magenta in place to become yellow
+    magenta.hue()
+    # => 60
+
+    magenta.toString()
+    # => 'rgba(255, 255, 0, 1)'
+    </pre></code>
 
     @name shiftHue$
     @methodOf Color#
@@ -4927,6 +4962,15 @@ var __slice = Array.prototype.slice;
     /**
     Returns a new color that is a copy of the calling color lightened by `amount` (Lightness of the color ranges from 0 - 1).
 
+    <code><pre>
+    green = Color(0, 255, 0)
+
+    lightGreen = green.lighten(0.2)
+
+    lightGreen.toString()
+    # => 'rgba(102, 255, 102, 1)'
+    </pre></code>
+
     @name lighten
     @methodOf Color#
     @param {Number} amount Amount to lighten color by (between 0 - 1)
@@ -4938,6 +4982,17 @@ var __slice = Array.prototype.slice;
     },
     /**
     The calling color lightened by `amount` (Lightness of the color ranges from 0 - 1).
+
+    <code><pre>
+    green = Color(0, 255, 0)
+
+    green.lighten(0.2)
+
+    # we have modified green in place
+    # to become lightGreen
+    green.toString()
+    # => 'rgba(102, 255, 102, 1)'
+    </pre></code>
 
     @name lighten$
     @methodOf Color#
@@ -4955,6 +5010,23 @@ var __slice = Array.prototype.slice;
     /**
     A new color. The calling color mixed with `other` using `amount` as the mixing ratio. If amount is not passed, then the colors are mixed evenly.
 
+    <code><pre>
+    red = Color(255, 0, 0)
+    yellow = Color(255, 255, 0)
+
+    # With no arguments the colors are mixed evenly
+    orange = red.mixWith(yellow)
+
+    orange.toString()
+    # => 'rgba(255, 128, 0, 1)'    
+
+    # With this argument we are mixing the color 30% red and 70% yellow
+    somethingCloseToOrange = red.mixWith(yellow, 0.3)
+
+    somethingCloseToOrange.toString()
+    # => rgba(255, 179, 0, 1)
+    </pre></code>
+
     @name mixWith
     @methodOf Color#
     @param {Color} other the other color to mix
@@ -4967,6 +5039,26 @@ var __slice = Array.prototype.slice;
     },
     /**
     A new color. The calling color mixed with `other` using `amount` as the mixing ratio. If amount is not passed, then the colors are mixed evenly.
+
+    <code><pre>
+    red = Color(255, 0, 0)
+    yellow = Color(255, 255, 0)
+    anotherRed = Color(255, 0, 0)
+
+    # With no arguments the colors are mixed evenly
+    red.mixWith$(yellow)
+
+    # We have modified red in place to be orange 
+    red.toString()
+    # => 'rgba(255, 128, 0, 1)'    
+
+    # With this argument we are mixing the color 30% red and 70% yellow
+    anotherRed.mixWith$(yellow, 0.3)
+
+    # We have modified `anotherRed` in place to be somethingCloseToOrange 
+    anotherRed.toString()
+    # => rgba(255, 179, 0, 1)
+    </pre></code>
 
     @name mixWith$
     @methodOf Color#
