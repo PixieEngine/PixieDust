@@ -90,12 +90,19 @@ Drawable = (I, self) ->
       else
         warn?("Sprite has no draw method!")
     else
-      canvas.drawRect
-        x: 0
-        y: 0
-        width: I.width
-        height: I.height
-        color: I.color
+      if I.radius?
+        canvas.drawCircle
+          x: I.width/2
+          y: I.height/2
+          radius: I.radius
+          color: I.color
+      else
+        canvas.drawRect
+          x: 0
+          y: 0
+          width: I.width
+          height: I.height
+          color: I.color
 
   ###*
   Draw does not actually do any drawing itself, instead it triggers all of the draw events.
