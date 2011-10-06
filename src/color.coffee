@@ -951,6 +951,15 @@
 
     transparentColor.a
     # => 0.5
+
+    # to see what they look like
+    for color, index in [color, transparentColor]
+      canvas.drawRect
+        color: color
+        x: 20 + (60 * index)
+        y: 20 + (60 * index)
+        width: 60
+        height: 60     
     </pre></code>
 
     @name transparentize
