@@ -809,16 +809,16 @@
     current saturation value. Passing a value will set the saturation to that value and return the color.
 
     <code class="run"><pre>
-    hslColor = Color('hsl(60, 0.5, 0.5)')
+    yellow = Color('hsl(60, 0.5, 0.5)')
 
-    hslColor.saturation()
+    yellow.saturation()
     # => 0.5
 
-    hslColor.saturation(0.8)
+    yellow.saturation(0.8)
 
     # to see what it looks like
     canvas.drawRect
-      color: hslColor
+      color: yellow
       x: 50 
       y: 30 
       width: 80
