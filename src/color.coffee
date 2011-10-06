@@ -944,6 +944,27 @@
     opacify: (amount) ->
       @copy().opacify$(amount)   
 
+    ###*
+    The calling color with its alpha increased by `amount`.
+
+    <code><pre>
+    color = Color(0, 0, 0, 0)
+
+    color.a
+    # => 1
+
+    # We modify color in place
+    color.opacify$(0.25)
+
+    color.a
+    # => 0.25
+    </pre></code>
+
+    @name opacify$
+    @methodOf Color#
+
+    @returns {Color} The calling color with its alpha increased by `amount`   
+    ###
     opacify$: (amount) ->
       @a += amount
 
