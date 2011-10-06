@@ -466,5 +466,31 @@ test "#transparentize", ->
   equal color.a, 1
   equal transparentColor.a, 0.5
 
+test "#transparentize$", ->
+  color = Color(0, 0, 0, 1)
+
+  equal color.a, 1
+
+  color.transparentize$(0.5)
+
+  equal color.a, 0.5
+
+test "#opacify", ->
+  color = Color(0, 0, 0, 0)
+
+  opaqueColor = color.opacify(0.5)
+
+  equal color.a, 0
+  equal opaqueColor.a, 0.5
+
+test "#opacify$", ->
+  color = Color(0, 0, 0, 0)
+
+  equal color.a, 0
+
+  color.opacify$(0.5)
+
+  equal color.a, 0.5
+
 module()
 
