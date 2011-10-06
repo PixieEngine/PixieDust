@@ -808,7 +808,7 @@
     A getter / setter for the saturation value of the color. Passing no argument returns the 
     current saturation value. Passing a value will set the saturation to that value and return the color.
 
-    <code><pre>
+    <code class="run"><pre>
     hslColor = Color('hsl(60, 0.5, 0.5)')
 
     hslColor.saturation()
