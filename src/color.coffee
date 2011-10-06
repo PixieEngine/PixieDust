@@ -895,6 +895,27 @@
     transparentize: (amount) ->
       @copy().transparentize$(amount) 
 
+    ###*
+    The calling color with its alpha reduced by `amount`.
+
+    <code><pre>
+    color = Color(0, 0, 0, 1)
+
+    color.a
+    # => 1
+
+    # We modify color in place
+    color.transparentize$(0.5)
+
+    color.a
+    # => 0.5
+    </pre></code>
+
+    @name transparentize
+    @methodOf Color#
+
+    @returns {Color} A copy of the calling color with its alpha reduced by `amount`   
+    ###
     transparentize$: (amount) ->
       @a = (@a - amount).clamp(0, 1) 
 
