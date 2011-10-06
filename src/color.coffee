@@ -144,7 +144,7 @@
     canvas.centerText
       color: color
       text: "Look at me"
-      y: 20 + (index * 20) 
+      y: 20 * (index + 1) 
 
   </pre></code>
 
