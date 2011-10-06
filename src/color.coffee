@@ -941,7 +941,7 @@
     ###*
     A copy of the calling color with its alpha reduced by `amount`.
 
-    <code><pre>
+    <code class="run"><pre>
     color = Color(0, 0, 0, 1)
 
     color.a
