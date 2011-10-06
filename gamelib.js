@@ -4600,13 +4600,20 @@ var __slice = Array.prototype.slice;
     /**
       Returns the rgba color channels in an array.
 
-      <code><pre>
+      <code class="run"><pre>
       transparent =  Color()
 
       transparent.channels()
       # => [0, 0, 0, 0]
 
       red = Color("#FF0000")
+
+      canvas.drawRect
+        x: 20
+        y: 20
+        width: 10
+        height: 10
+        color: red
 
       red.channels()
       # => [255, 0, 0, 1]
