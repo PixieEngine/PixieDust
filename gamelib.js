@@ -4552,12 +4552,11 @@ var __slice = Array.prototype.slice;
 
   # let's print out the colors on a canvas to see what they look like
   canvas.font('14px Helvetica')
-  for color, index in [individualRgb, arrayRgb, hex, rgb, hsl, anotherColor, namedBrown]
+  for color, index in ['individualRgb', 'arrayRgb', 'hex', 'rgb', 'hsl', 'anotherColor', 'namedBrown']
     canvas.centerText
-      color: color
-      text: "Look at me"
-      y: 20 * (index + 1) 
-
+      color: eval(color)
+      text: color
+      y: 20 * (index + 1)  
   </pre></code>
 
   @name Color
