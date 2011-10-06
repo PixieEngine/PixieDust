@@ -873,19 +873,24 @@
       "rgba(#{@r}, #{@g}, #{@b}, #{@a})"
 
     ###*
-    returns string rgba representation of the color. 
+    A copy of the calling color with its alpha reduced by `amount`.
 
     <code><pre>
-    red = Color('#ff0000')
+    color = Color(0, 0, 0, 1)
 
-    red.toString()
-    # => 'rgba(255, 0, 0, 1)'
+    color.a
+    # => 1
+
+    transparentColor = color.transparentize(0.5)
+
+    transparentColor.a
+    # => 0.5
     </pre></code>
 
-    @name toString
+    @name transparentize
     @methodOf Color#
 
-    @returns {String} The rgba string representation of the color 
+    @returns {Color} A copy of the calling color with its alpha reduced by `amount`   
     ###
     transparentize: (amount) ->
       @copy().transparentize$(amount) 
