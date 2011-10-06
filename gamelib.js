@@ -4363,7 +4363,7 @@ var __slice = Array.prototype.slice;
     }
     parsedColor = (function() {
       var _i, _len, _ref, _results;
-      _ref = channels.slice(1, 4);
+      _ref = channels.slice(1, 5);
       _results = [];
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         channel = _ref[_i];
@@ -4371,7 +4371,9 @@ var __slice = Array.prototype.slice;
       }
       return _results;
     })();
-    parsedColor[3] || (parsedColor[3] = 1);
+    if (isNaN(parsedColor[3])) {
+      parsedColor[3] = 1;
+    }
     return parsedColor;
   };
   parseHex = function(hexString) {
@@ -4421,7 +4423,7 @@ var __slice = Array.prototype.slice;
     }
     parsedColor = (function() {
       var _i, _len, _ref, _results;
-      _ref = channels.slice(1, 4);
+      _ref = channels.slice(1, 5);
       _results = [];
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         channel = _ref[_i];
@@ -4429,14 +4431,18 @@ var __slice = Array.prototype.slice;
       }
       return _results;
     })();
-    parsedColor[3] || (parsedColor[3] = 1);
+    if (isNaN(parsedColor[3])) {
+      parsedColor[3] = 1;
+    }
     return hslToRgb(parsedColor);
   };
   hslToRgb = function(hsl) {
     var a, b, channel, g, h, hueToRgb, l, p, q, r, rgbMap, s;
     h = hsl[0], s = hsl[1], l = hsl[2], a = hsl[3];
     h = h % 360;
-    a || (a = 1);
+    if (a == null) {
+      a = 1;
+    }
     r = g = b = null;
     hueToRgb = function(p, q, hue) {
       hue = hue.mod(360);
@@ -5380,7 +5386,7 @@ var __slice = Array.prototype.slice;
     @returns {Color} The calling color with its alpha increased by `amount`   
     */
     opacify$: function(amount) {
-      this.a += amount;
+      this.a = (this.a + amount).clamp(0, 1);
       return this;
     }
   };
