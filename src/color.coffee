@@ -465,10 +465,11 @@
     <code class="run"><pre>
     magenta = Color(255, 0, 255)
 
-    yellow = magenta.hue(60)
+    # modifies the color to be yellow
+    magenta.hue(60)
 
     # to see what they look like
-    for color, index in ['magenta', 'yellow']
+    for color, index in ['magenta']
       canvas.drawRect
         color: eval(color)
         x: 20 + (60 * index)
