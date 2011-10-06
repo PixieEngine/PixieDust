@@ -1,5 +1,12 @@
 module "Engine"
 
+MockCanvas = ->
+  clear: ->
+  drawRect: ->
+  fill: ->
+  withTransform: (t, fn) ->
+    fn(@)
+
 test "#play, #pause, and #paused", ->
   engine = Engine()
 
@@ -36,10 +43,9 @@ test "before add event", 1, ->
   engine.add
     test: "test"
 
-###
 test "zSort", ->
   engine = Engine
-    backgroundColor: false
+    canvas: MockCanvas()
     zSort: true
 
   n = 0
@@ -60,7 +66,6 @@ test "zSort", ->
 
   equals o1.I.drawnAt, 1, "Object with zIndex #{o1.I.zIndex} should be drawn first"
   equals o2.I.drawnAt, 2, "Object with zIndex #{o2.I.zIndex} should be drawn second"
-###
 
 test "invalid module throws error", ->
   raises ->
@@ -74,9 +79,9 @@ test "excluded modules", ->
   engine = Engine
     excludedModules: ["Developer"]
 
-###
 test "draw events", 2, ->
   engine = Engine
+    canvas: MockCanvas()
     backgroundColor: false
 
   engine.bind "beforeDraw", ->
@@ -98,7 +103,6 @@ test "Remove event", 1, ->
     ok true, "remove called"
 
   engine.frameAdvance()
-###
 
 test "#find", ->
   engine = Engine()

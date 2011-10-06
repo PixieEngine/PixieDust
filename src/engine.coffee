@@ -164,6 +164,8 @@
       self.trigger "afterUpdate"
 
     draw = ->
+      return unless I.canvas
+
       if I.clear
         I.canvas.clear()
       else if I.backgroundColor
@@ -356,7 +358,7 @@
     self.attrAccessor "ambientLight", "backgroundColor", "cameraTransform", "clear"
     self.include Bindable
 
-    defaultModules = ["SaveState", "Selector", "Collision"]
+    defaultModules = ["Delay", "SaveState", "Selector", "Collision"]
     modules = defaultModules.concat(I.includedModules)
     modules = modules.without([].concat(I.excludedModules))
 
