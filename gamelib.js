@@ -4883,7 +4883,7 @@ var __slice = Array.prototype.slice;
     canvas.drawRect
       color: magenta
       x: 50 
-      y: 50 
+      y: 30 
       width: 80
       height: 80 
     </pre></code>  
