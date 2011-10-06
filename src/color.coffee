@@ -104,7 +104,7 @@
   and even the named colors from the xkcd survey: http://blog.xkcd.com/2010/05/03/color-survey-results/. 
   If no arguments are given, defaults to transparent.
 
-  <code class="run"><pre>
+  <code><pre>
   individualRgb = Color(23, 56, 49, 0.4)
 
   individualRgb.toString()
