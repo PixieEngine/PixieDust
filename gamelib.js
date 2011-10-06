@@ -5215,11 +5215,21 @@ var __slice = Array.prototype.slice;
     A getter / setter for the saturation value of the color. Passing no argument returns the 
     current saturation value. Passing a value will set the saturation to that value and return the color.
 
-    <code><pre>
+    <code class="run"><pre>
     hslColor = Color('hsl(60, 0.5, 0.5)')
 
     hslColor.saturation()
     # => 0.5
+
+    hslColor.saturation(0.8)
+
+    # to see what it looks like
+    canvas.drawRect
+      color: hslColor
+      x: 50 
+      y: 30 
+      width: 80
+      height: 80     
     </pre></code>
 
     @name saturation
