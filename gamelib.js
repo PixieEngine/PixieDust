@@ -4873,13 +4873,19 @@ var __slice = Array.prototype.slice;
     A getter / setter for the hue value of the color. Passing no argument returns the 
     current hue value. Passing a value will set the hue to that value and return the color.
 
-    <code><pre>
+    <code class="run"><pre>
     magenta = Color(255, 0, 255)
 
     yellow = magenta.hue(60)
 
-    yellow.toString()
-    # => 'rgba(255, 255, 0, 1)'
+    # to see what they look like
+    for color, index in ['magenta', 'yellow']
+      canvas.drawRect
+        color: eval(color)
+        x: 20 + (60 * index)
+        y: 20 + (60 * index)
+        width: 60
+        height: 60 
     </pre></code>  
 
     @name hue
