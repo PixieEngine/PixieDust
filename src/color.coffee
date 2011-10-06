@@ -123,7 +123,7 @@
     y: 20
     width: 20
     height: 20
-    color: individualRgb
+    color: arrayRgb
 
   hex = Color('#ff0000')
 
@@ -132,12 +132,12 @@
     y: 20
     width: 20
     height: 20
-    color: individualRgb
+    color: hex
 
   rgb = Color('rgb(0, 255, 0)')
 
   canvas.drawRect
-    x: 130
+    x: 110
     y: 20
     width: 20
     height: 20
@@ -146,7 +146,7 @@
   hsl = Color('hsl(180, 1, 0.5)')
 
   canvas.drawRect
-    x: 160
+    x: 140
     y: 20
     width: 20
     height: 20
