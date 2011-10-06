@@ -4628,9 +4628,9 @@ var __slice = Array.prototype.slice;
     cyan = red.complement()
 
     # to see what they look like
-    for color, index in ['red', 'cyan']
+    for color, index in [red, cyan]
       canvas.drawRect
-        color: eval(color)
+        color: color
         x: 20 + (60 * index)
         y: 20 + (60 * index)
         width: 60
@@ -4698,9 +4698,9 @@ var __slice = Array.prototype.slice;
     darkGreen = green.darken(0.3)
 
     # to see what they look like
-    for color, index in ['green', 'darkGreen']
+    for color, index in [green, darkGreen]
       canvas.drawRect
-        color: eval(color)
+        color: color
         x: 20 + (60 * index)
         y: 20 + (60 * index)
         width: 60
@@ -4751,9 +4751,9 @@ var __slice = Array.prototype.slice;
     desaturatedBlue = blue.desaturate(0.4)
 
     # to see what they look like
-    for color, index in ['blue', 'desaturatedBlue']
+    for color, index in [blue, desaturatedBlue]
       canvas.drawRect
-        color: eval(color)
+        color: color
         x: 20 + (60 * index)
         y: 20 + (60 * index)
         width: 60
@@ -4827,9 +4827,9 @@ var __slice = Array.prototype.slice;
     gray = yellow.grayscale()
 
     # to see what they look like
-    for color, index in ['yellow', 'gray']
+    for color, index in [yellow, gray]
       canvas.drawRect
-        color: eval(color)
+        color: color
         x: 20 + (60 * index)
         y: 20 + (60 * index)
         width: 60
@@ -4964,9 +4964,9 @@ var __slice = Array.prototype.slice;
     # => 60
 
     # to see what they look like
-    for color, index in ['magenta', 'yellow']
+    for color, index in [magenta, yellow]
       canvas.drawRect
-        color: eval(color)
+        color: color
         x: 20 + (60 * index)
         y: 20 + (60 * index)
         width: 60
@@ -5025,9 +5025,9 @@ var __slice = Array.prototype.slice;
     lightGreen = green.lighten(0.3)
 
     # to see what they look like
-    for color, index in ['green', 'lightGreen']
+    for color, index in [green, lightGreen]
       canvas.drawRect
-        color: eval(color)
+        color: color
         x: 20 + (60 * index)
         y: 20 + (60 * index)
         width: 60
@@ -5216,16 +5216,16 @@ var __slice = Array.prototype.slice;
     current saturation value. Passing a value will set the saturation to that value and return the color.
 
     <code class="run"><pre>
-    hslColor = Color('hsl(60, 0.5, 0.5)')
+    yellow = Color('hsl(60, 0.5, 0.5)')
 
-    hslColor.saturation()
+    yellow.saturation()
     # => 0.5
 
-    hslColor.saturation(0.8)
+    yellow.saturation(0.8)
 
     # to see what it looks like
     canvas.drawRect
-      color: hslColor
+      color: yellow
       x: 50 
       y: 30 
       width: 80
