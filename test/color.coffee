@@ -458,5 +458,13 @@ test "accepts named colors", ->
   equalEnough piPink.b, 153
   equalEnough piPink.a, 1.0
 
+test "#transparentize", ->
+  color = Color(0, 0, 0, 1)
+
+  transparentColor = color.transparentize(0.5)
+
+  equal color.a, 1
+  equal transparentColor.a, 0.5
+
 module()
 
