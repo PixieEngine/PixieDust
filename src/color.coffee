@@ -613,7 +613,7 @@
     <code class="run"><pre>
     green = Color(0, 255, 0)
 
-    lightGreen = green.lighten(0.2)
+    lightGreen = green.lighten(0.3)
 
     # to see what they look like
     for color, index in ['green', 'lightGreen']
@@ -640,7 +640,7 @@
     <code><pre>
     green = Color(0, 255, 0)
 
-    green.lighten(0.2)
+    green.lighten$(0.2)
 
     # we have modified green in place
     # to become lightGreen
