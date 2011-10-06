@@ -274,13 +274,19 @@
     ###*
     Returns a copy of the calling color darkened by `amount` (Lightness of the color ranges from 0 to 1).
 
-    <code><pre>
+    <code class="run"><pre>
     green = Color(0, 255, 0)
 
     darkGreen = green.darken(0.3)
 
-    darkGreen.toString()
-    # => 'rgba(0, 102, 0, 1)'
+    # to see what they look like
+    for color, index in ['green', 'darkGreen']
+      canvas.drawRect
+        color: eval(color)
+        x: 20 + (60 * index)
+        y: 20 + (60 * index)
+        width: 60
+        height: 60         
     </pre></code>
 
     @name darken
