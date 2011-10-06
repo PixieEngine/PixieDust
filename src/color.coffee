@@ -109,39 +109,73 @@
   <code><pre>
   individualRgb = Color(23, 56, 49, 0.4)
 
-  individualRgb.toString()
-  # => 'rgba(23, 56, 49, 0.4)'
+  canvas.drawRect
+    x: 20
+    y: 20
+    width: 20
+    height: 20
+    color: individualRgb
 
   arrayRgb = Color([59, 100, 230])
 
-  arrayRgb.toString()
-  # => 'rgba(59, 100, 230, 1)'
+  canvas.drawRect
+    x: 50
+    y: 20
+    width: 20
+    height: 20
+    color: individualRgb
 
   hex = Color('#ff0000')
 
-  hex.toString()
-  # => 'rgba(255, 0, 0, 1)'
+  canvas.drawRect
+    x: 80
+    y: 20
+    width: 20
+    height: 20
+    color: individualRgb
 
   rgb = Color('rgb(0, 255, 0)')
 
-  rgb.toString()
-  # => 'rgba(0, 255, 0, 1)'
+  canvas.drawRect
+    x: 130
+    y: 20
+    width: 20
+    height: 20
+    color: rgb
 
   hsl = Color('hsl(180, 1, 0.5)')
 
-  hsl.toString()
-  # => 'rgba(0, 255, 255, 1)'
+  canvas.drawRect
+    x: 160
+    y: 20
+    width: 20
+    height: 20
+    color: hsl
 
   anotherColor = Color('blue')
 
   Color(anotherColor)
   # => a new color with the same r, g, b, and alpha values as `anotherColor`
 
+  canvas.drawRect
+    x: 20
+    y: 60
+    width: 20
+    height: 20
+    color: anotherColor
+
   # You have access to all sorts of weird colors.
   # We give you all the named colors the browser recognizes
   # and the ones from this survey 
   # http://blog.xkcd.com/2010/05/03/color-survey-results/
   namedBrown = Color('Fuzzy Wuzzy Brown')
+
+  canvas.drawRect
+    x: 50
+    y: 60
+    width: 20
+    height: 20
+    color: namedBrown
 
   namedBrown.toHex()
   # => '#c45655'
