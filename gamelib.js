@@ -4876,6 +4876,9 @@ var __slice = Array.prototype.slice;
     <code class="run"><pre>
     magenta = Color(255, 0, 255)
 
+    magenta.hue()
+    # => 300
+
     # modifies the color to be yellow
     magenta.hue(60)
 
@@ -4909,16 +4912,22 @@ var __slice = Array.prototype.slice;
     A getter / setter for the lightness value of the color. Passing no argument returns the 
     current lightness value. Passing a value will set the lightness to that value and return the color.
 
-    <code><pre>
+    <code class="run"><pre>
     magenta = Color(255, 0, 255)
 
     magenta.lightness()
     # => 0.9
 
-    darkerMagenta = magenta.lightness(0.75)
+    # modifies magenta in place
+    magenta.lightness(0.75)
 
-    darkerMagenta.lightness()
-    # => 0.75
+    # to see what it looks like
+    canvas.drawRect
+      color: magenta
+      x: 50 
+      y: 30 
+      width: 80
+      height: 80 
     </pre></code>  
 
     @name lightness
