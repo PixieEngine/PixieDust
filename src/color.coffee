@@ -209,6 +209,7 @@
 
     cyan = red.complement()
 
+    # to see what they look like
     for color, index in ['red', 'cyan']
       canvas.drawRect
         color: eval(color)
