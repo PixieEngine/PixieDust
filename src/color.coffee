@@ -210,9 +210,9 @@
     cyan = red.complement()
 
     # to see what they look like
-    for color, index in ['red', 'cyan']
+    for color, index in [red, cyan]
       canvas.drawRect
-        color: eval(color)
+        color: color
         x: 20 + (60 * index)
         y: 20 + (60 * index)
         width: 60
@@ -280,9 +280,9 @@
     darkGreen = green.darken(0.3)
 
     # to see what they look like
-    for color, index in ['green', 'darkGreen']
+    for color, index in [green, darkGreen]
       canvas.drawRect
-        color: eval(color)
+        color: color
         x: 20 + (60 * index)
         y: 20 + (60 * index)
         width: 60
@@ -334,9 +334,9 @@
     desaturatedBlue = blue.desaturate(0.4)
 
     # to see what they look like
-    for color, index in ['blue', 'desaturatedBlue']
+    for color, index in [blue, desaturatedBlue]
       canvas.drawRect
-        color: eval(color)
+        color: color
         x: 20 + (60 * index)
         y: 20 + (60 * index)
         width: 60
@@ -414,9 +414,9 @@
     gray = yellow.grayscale()
 
     # to see what they look like
-    for color, index in ['yellow', 'gray']
+    for color, index in [yellow, gray]
       canvas.drawRect
-        color: eval(color)
+        color: color
         x: 20 + (60 * index)
         y: 20 + (60 * index)
         width: 60
@@ -553,9 +553,9 @@
     # => 60
 
     # to see what they look like
-    for color, index in ['magenta', 'yellow']
+    for color, index in [magenta, yellow]
       canvas.drawRect
-        color: eval(color)
+        color: color
         x: 20 + (60 * index)
         y: 20 + (60 * index)
         width: 60
@@ -616,9 +616,9 @@
     lightGreen = green.lighten(0.3)
 
     # to see what they look like
-    for color, index in ['green', 'lightGreen']
+    for color, index in [green, lightGreen]
       canvas.drawRect
-        color: eval(color)
+        color: color
         x: 20 + (60 * index)
         y: 20 + (60 * index)
         width: 60
