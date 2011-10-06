@@ -4556,7 +4556,7 @@ var __slice = Array.prototype.slice;
     canvas.centerText
       color: color
       text: "Look at me"
-      y: index + 20
+      y: 20 * (index + 1) 
 
   </pre></code>
 
