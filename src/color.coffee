@@ -681,7 +681,7 @@
       canvas.drawRect
         color: eval(color)
         x: 20 + (60 * index)
-        y: 20 + (60 * (if index > 1 then 1 else 0))
+        y: 20 + (60 * (if index > 1 then index - 2 else 0))
         width: 60
         height: 60 
     </pre></code>
