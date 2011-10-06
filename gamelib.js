@@ -4824,7 +4824,7 @@ var __slice = Array.prototype.slice;
     <code class="run"><pre>
     yellow = Color(255, 255, 0)
 
-    gray = color.grayscale()
+    gray = yellow.grayscale()
 
     # to see what they look like
     for color, index in ['yellow', 'gray']
