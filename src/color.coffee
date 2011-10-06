@@ -911,10 +911,10 @@
     # => 0.5
     </pre></code>
 
-    @name transparentize
+    @name transparentize$
     @methodOf Color#
 
-    @returns {Color} A copy of the calling color with its alpha reduced by `amount`   
+    @returns {Color} The calling color with its alpha reduced by `amount`   
     ###
     transparentize$: (amount) ->
       @a = (@a - amount).clamp(0, 1) 
