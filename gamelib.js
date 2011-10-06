@@ -4821,13 +4821,19 @@ var __slice = Array.prototype.slice;
     /**
     A copy of the calling color converted to grayscale.
 
-    <code><pre>
-    color = Color(255, 255, 0)
+    <code class="run"><pre>
+    yellow = Color(255, 255, 0)
 
     gray = color.grayscale()
 
-    gray.toString()
-    # => 'rgba(128, 128, 128, 1)'
+    # to see what they look like
+    for color, index in ['yellow', 'gray']
+      canvas.drawRect
+        color: eval(color)
+        x: 20 + (60 * index)
+        y: 20 + (60 * index)
+        width: 60
+        height: 60 
     </pre></code>    
 
     @name grayscale
