@@ -215,8 +215,7 @@
         x: 20 + (60 * index)
         y: 20 + (60 * index)
         width: 60
-        height: 60
-
+        height: 60         
     </pre></code>
 
     @name complement
