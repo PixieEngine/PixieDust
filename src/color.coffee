@@ -53,7 +53,7 @@
     [h, s, l, a] = hsl
 
     h = h % 360
-    a ||= 1
+    a = 1 unless a?
 
     r = g = b = null
 
