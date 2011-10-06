@@ -5149,7 +5149,7 @@ var __slice = Array.prototype.slice;
     /**
     A copy of the calling color with its saturation increased by `amount`.
 
-    <code><pre>
+    <code class="run"><pre>
     color = Color(50, 50, 200)
 
     color.saturation()
@@ -5160,8 +5160,14 @@ var __slice = Array.prototype.slice;
     saturatedColor.saturation()
     # => 0.8
 
-    saturatedColor.toString()
-    # => rgba(25, 25, 225, 1)
+    # to see what they look like
+    for color, index in [color, saturatedColor]
+      canvas.drawRect
+        color: color
+        x: 20 + (60 * index)
+        y: 20 + (60 * index)
+        width: 60
+        height: 60 
     </pre></code>
 
     @name saturate
