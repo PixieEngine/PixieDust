@@ -54,10 +54,18 @@ test "accepts an rgb string as the first argument and an alpha value as the seco
 test "accepts an rgba string as the first argument and an alpha value as the second. The alpha value takes precedence over the alpha from the rgba string", ->
   color = Color('rgba(30, 20, 15, 0.8)', 0.35)
 
-  equalEnough color.r, 30
-  equalEnough color.g, 20
-  equalEnough color.b, 15
-  equalEnough color.a, 0.35
+  equal color.r, 30
+  equal color.g, 20
+  equal color.b, 15
+  equal color.a, 0.35
+
+test "parses rgba(0, 0, 0, 0) correctly", ->
+  color = Color('rgba(0, 0, 0, 0)')
+
+  equal color.r, 0
+  equal color.g, 0
+  equal color.b, 0
+  equal color.a, 0
 
 test "accepts an hsl string as the first argument and an alpha value as the second", ->
   color = Color('hsl(63, 0.4, 0.3)', 0.21)
