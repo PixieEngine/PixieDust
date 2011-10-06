@@ -333,8 +333,14 @@
 
     desaturatedBlue = blue.desaturate(0.3)
 
-    desaturatedBlue.toString()
-    # => 'rgba(38, 38, 217, 1)'
+    # to see what they look like
+    for color, index in ['blue', 'desaturatedBlue']
+      canvas.drawRect
+        color: eval(color)
+        x: 20 + (60 * index)
+        y: 20 + (60 * index)
+        width: 60
+        height: 60  
     </pre></code>
 
     @name desaturate
