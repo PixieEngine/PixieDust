@@ -4611,17 +4611,18 @@ var __slice = Array.prototype.slice;
       canvas.drawRect
         x: 20
         y: 20
-        width: 10
-        height: 10
+        width: 30
+        height: 30
         color: red
-
-      red.channels()
-      # => [255, 0, 0, 1]
 
       rgb = Color(200, 34, 2)
 
-      rgb.channels()
-      # => [200, 34, 2, 1]
+      canvas.drawRect
+        x: 80
+        y: 80
+        width: 30
+        height: 30
+        color: rgb
       </pre></code>
 
       @name channels
