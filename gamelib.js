@@ -5326,18 +5326,59 @@ var __slice = Array.prototype.slice;
     # => 0.5
     </pre></code>
 
-    @name transparentize
+    @name transparentize$
     @methodOf Color#
 
-    @returns {Color} A copy of the calling color with its alpha reduced by `amount`   
+    @returns {Color} The calling color with its alpha reduced by `amount`   
     */
     transparentize$: function(amount) {
       this.a = (this.a - amount).clamp(0, 1);
       return this;
     },
+    /**
+    A copy of the calling color with its alpha increased by `amount`.
+
+    <code><pre>
+    color = Color(0, 0, 0, 0)
+
+    color.a
+    # => 1
+
+    opaqueColor = color.opacify(0.25)
+
+    opaqueColor.a
+    # => 0.25
+    </pre></code>
+
+    @name opacify
+    @methodOf Color#
+
+    @returns {Color} A copy of the calling color with its alpha increased by `amount`   
+    */
     opacify: function(amount) {
       return this.copy().opacify$(amount);
     },
+    /**
+    The calling color with its alpha increased by `amount`.
+
+    <code><pre>
+    color = Color(0, 0, 0, 0)
+
+    color.a
+    # => 1
+
+    # We modify color in place
+    color.opacify$(0.25)
+
+    color.a
+    # => 0.25
+    </pre></code>
+
+    @name opacify$
+    @methodOf Color#
+
+    @returns {Color} The calling color with its alpha increased by `amount`   
+    */
     opacify$: function(amount) {
       this.a += amount;
       return this;
