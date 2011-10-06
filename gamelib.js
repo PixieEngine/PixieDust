@@ -4550,6 +4550,7 @@ var __slice = Array.prototype.slice;
   transparent.toString()
   # => 'rgba(0, 0, 0, 0)' 
 
+  # let's print out the colors on a canvas to see what they look like
   canvas.font('14px Helvetica')
   for color, index in [individualRgb, arrayRgb, hex, rgb, hsl, anotherColor, namedBrown]
     canvas.centerText
