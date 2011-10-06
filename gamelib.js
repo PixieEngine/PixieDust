@@ -4521,60 +4521,18 @@ var __slice = Array.prototype.slice;
   <code class="run"><pre>
   individualRgb = Color(23, 56, 49, 0.4)
 
-  canvas.drawRect
-    x: 20
-    y: 20
-    width: 20
-    height: 20
-    color: individualRgb
-
   arrayRgb = Color([59, 100, 230])
-
-  canvas.drawRect
-    x: 50
-    y: 20
-    width: 20
-    height: 20
-    color: arrayRgb
 
   hex = Color('#ff0000')
 
-  canvas.drawRect
-    x: 80
-    y: 20
-    width: 20
-    height: 20
-    color: hex
-
   rgb = Color('rgb(0, 255, 0)')
 
-  canvas.drawRect
-    x: 110
-    y: 20
-    width: 20
-    height: 20
-    color: rgb
-
   hsl = Color('hsl(180, 1, 0.5)')
-
-  canvas.drawRect
-    x: 140
-    y: 20
-    width: 20
-    height: 20
-    color: hsl
 
   anotherColor = Color('blue')
 
   Color(anotherColor)
   # => a new color with the same r, g, b, and alpha values as `anotherColor`
-
-  canvas.drawRect
-    x: 20
-    y: 60
-    width: 20
-    height: 20
-    color: anotherColor
 
   # You have access to all sorts of weird colors.
   # We give you all the named colors the browser recognizes
@@ -4582,13 +4540,7 @@ var __slice = Array.prototype.slice;
   # http://blog.xkcd.com/2010/05/03/color-survey-results/
   namedBrown = Color('Fuzzy Wuzzy Brown')
 
-  canvas.drawRect
-    x: 50
-    y: 60
-    width: 20
-    height: 20
-    color: namedBrown
-
+  # Uutput color in Hex format 
   namedBrown.toHex()
   # => '#c45655'
 
@@ -4596,7 +4548,15 @@ var __slice = Array.prototype.slice;
   transparent = Color()
 
   transparent.toString()
-  # => 'rgba(0, 0, 0, 0)'  
+  # => 'rgba(0, 0, 0, 0)' 
+
+  canvas.font('14px Helvetica')
+  for color, index in [individualRgb, arrayRgb, hex, rgb, hsl, anotherColor, namedBrown]
+    canvas.centerText
+      color: color
+      text: "Look at me"
+      y: index + 20
+
   </pre></code>
 
   @name Color
