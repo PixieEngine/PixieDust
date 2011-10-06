@@ -507,16 +507,16 @@
     magenta.lightness()
     # => 0.9
 
-    darkerMagenta = magenta.lightness(0.75)
+    # modifies magenta in place to be lighter
+    magenta.lightness(0.75)
 
-    # to see what they look like
-    for color, index in ['yellow', 'gray']
-      canvas.drawRect
-        color: eval(color)
-        x: 20 + (60 * index)
-        y: 20 + (60 * index)
-        width: 60
-        height: 60 
+    # to see what it looks like
+    canvas.drawRect
+      color: magenta
+      x: 50 
+      y: 30 
+      width: 80
+      height: 80 
     </pre></code>  
 
     @name lightness
