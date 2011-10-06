@@ -872,6 +872,22 @@
     toString: ->
       "rgba(#{@r}, #{@g}, #{@b}, #{@a})"
 
+    transparentize: (amount) ->
+      @copy().transparentize$(amount)   
+
+    transparentize$: (amount) ->
+      @a -= amount
+
+      return this  
+
+    opacify: (amount) ->
+      @copy().opacify$(amount)   
+
+    opacify$: (amount) ->
+      @a += amount
+
+      return this    
+
   lookup = {}
 
   names = [
