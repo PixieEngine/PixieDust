@@ -968,7 +968,7 @@
     @returns {Color} The calling color with its alpha increased by `amount`   
     ###
     opacify$: (amount) ->
-      @a += amount
+      @a = (@a + amount).clamp(0, 1) 
 
       return this    
 
