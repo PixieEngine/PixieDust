@@ -610,13 +610,19 @@
     ###*
     Returns a copy of the calling color lightened by `amount` (Lightness of the color ranges from 0 to 1).
 
-    <code><pre>
+    <code class="run"><pre>
     green = Color(0, 255, 0)
 
     lightGreen = green.lighten(0.2)
 
-    lightGreen.toString()
-    # => 'rgba(102, 255, 102, 1)'
+    # to see what they look like
+    for color, index in ['green', 'lightGreen']
+      canvas.drawRect
+        color: eval(color)
+        x: 20 + (60 * index)
+        y: 20 + (60 * index)
+        width: 60
+        height: 60 
     </pre></code>
 
     @name lighten
