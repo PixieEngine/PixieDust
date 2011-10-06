@@ -67,6 +67,14 @@ test "parses rgba(0, 0, 0, 0) correctly", ->
   equal color.b, 0
   equal color.a, 0
 
+test "parses rgb(0, 0, 0) correctly", ->
+  color = Color('rgba(0, 0, 0)')
+
+  equal color.r, 0
+  equal color.g, 0
+  equal color.b, 0
+  equal color.a, 1
+
 test "accepts an hsl string as the first argument and an alpha value as the second", ->
   color = Color('hsl(63, 0.4, 0.3)', 0.21)
 
