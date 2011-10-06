@@ -507,7 +507,7 @@
     magenta.lightness()
     # => 0.9
 
-    # modifies magenta in place
+    # modifies magenta in place to be lighter
     magenta.lightness(0.75)
 
     # to see what it looks like
