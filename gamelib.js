@@ -4745,7 +4745,7 @@ var __slice = Array.prototype.slice;
     /**
     A copy of the calling color with its saturation reduced by `amount`.
 
-    <code><pre>
+    <code class="run"><pre>
     blue = Color(0, 0, 255)
 
     desaturatedBlue = blue.desaturate(0.3)
@@ -4762,7 +4762,7 @@ var __slice = Array.prototype.slice;
 
     @name desaturate
     @methodOf Color#
-    @param {Number} amount Amount to reduce color saturation by (between 0 - 1)
+    @param {Number} amount Amount to reduce color saturation by (between 0 and 1)
 
     @returns {Color} A copy of the color with the saturation value reduced by `amount`
     */
@@ -4784,7 +4784,7 @@ var __slice = Array.prototype.slice;
 
     @name desaturate$
     @methodOf Color#
-    @param {Number} amount Amount to reduce color saturation by (between 0 - 1)
+    @param {Number} amount Amount to reduce color saturation by (between 0 and 1)
 
     @returns {Color} the color with the saturation value reduced by `amount`
     */
