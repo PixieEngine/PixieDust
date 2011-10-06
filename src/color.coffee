@@ -331,7 +331,7 @@
     <code class="run"><pre>
     blue = Color(0, 0, 255)
 
-    desaturatedBlue = blue.desaturate(0.3)
+    desaturatedBlue = blue.desaturate(0.4)
 
     # to see what they look like
     for color, index in ['blue', 'desaturatedBlue']
@@ -359,7 +359,7 @@
     blue = Color(0, 0, 255)
 
     # modifies blue to be desaturatedBlue
-    blue.desaturate$(0.3)
+    blue.desaturate$(0.4)
 
     blue.toString()
     # => 'rgba(38, 38, 217, 1)'
