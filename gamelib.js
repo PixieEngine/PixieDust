@@ -5288,23 +5288,49 @@ var __slice = Array.prototype.slice;
       return "rgba(" + this.r + ", " + this.g + ", " + this.b + ", " + this.a + ")";
     },
     /**
-    returns string rgba representation of the color. 
+    A copy of the calling color with its alpha reduced by `amount`.
 
     <code><pre>
-    red = Color('#ff0000')
+    color = Color(0, 0, 0, 1)
 
-    red.toString()
-    # => 'rgba(255, 0, 0, 1)'
+    color.a
+    # => 1
+
+    transparentColor = color.transparentize(0.5)
+
+    transparentColor.a
+    # => 0.5
     </pre></code>
 
-    @name toString
+    @name transparentize
     @methodOf Color#
 
-    @returns {String} The rgba string representation of the color 
+    @returns {Color} A copy of the calling color with its alpha reduced by `amount`   
     */
     transparentize: function(amount) {
       return this.copy().transparentize$(amount);
     },
+    /**
+    The calling color with its alpha reduced by `amount`.
+
+    <code><pre>
+    color = Color(0, 0, 0, 1)
+
+    color.a
+    # => 1
+
+    # We modify color in place
+    color.transparentize$(0.5)
+
+    color.a
+    # => 0.5
+    </pre></code>
+
+    @name transparentize
+    @methodOf Color#
+
+    @returns {Color} A copy of the calling color with its alpha reduced by `amount`   
+    */
     transparentize$: function(amount) {
       this.a = (this.a - amount).clamp(0, 1);
       return this;
@@ -5803,9 +5829,6 @@ Emitterable = function(I, self) {
       return self.trigger("afterUpdate");
     };
     draw = function() {
-      if (!I.canvas) {
-        return;
-      }
       if (I.clear) {
         I.canvas.clear();
       } else if (I.backgroundColor) {
@@ -5998,7 +6021,7 @@ Emitterable = function(I, self) {
     });
     self.attrAccessor("ambientLight", "backgroundColor", "cameraTransform", "clear");
     self.include(Bindable);
-    defaultModules = ["Delay", "SaveState", "Selector", "Collision"];
+    defaultModules = ["SaveState", "Selector", "Collision"];
     modules = defaultModules.concat(I.includedModules);
     modules = modules.without([].concat(I.excludedModules));
     modules.each(function(moduleName) {
