@@ -666,21 +666,24 @@
     A copy of the calling color mixed with `other` using `amount` as the 
     mixing ratio. If amount is not passed, then the colors are mixed evenly.
 
-    <code><pre>
+    <code class="run"><pre>
     red = Color(255, 0, 0)
     yellow = Color(255, 255, 0)
 
     # With no amount argument the colors are mixed evenly
     orange = red.mixWith(yellow)
 
-    orange.toString()
-    # => 'rgba(255, 128, 0, 1)'    
-
     # With an amount of 0.3 we are mixing the color 30% red and 70% yellow
     somethingCloseToOrange = red.mixWith(yellow, 0.3)
 
-    somethingCloseToOrange.toString()
-    # => rgba(255, 179, 0, 1)
+    # to see what they look like
+    for color, index in ['red', 'yellow', 'orange', 'somethingCloseToOrange']
+      canvas.drawRect
+        color: eval(color)
+        x: 20 + (60 * index)
+        y: 20 + (60 * (if index > 1 then 1 else 0))
+        width: 60
+        height: 60 
     </pre></code>
 
     @name mixWith
