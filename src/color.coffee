@@ -677,11 +677,11 @@
     somethingCloseToOrange = red.mixWith(yellow, 0.3)
 
     # to see what they look like
-    for color, index in ['red', 'yellow', 'orange', 'somethingCloseToOrange']
+    for color, index in [red, yellow, orange, somethingCloseToOrange]
       canvas.drawRect
-        color: eval(color)
-        x: 20 + (60 * index)
-        y: 20 + (60 * (if index > 1 then index - 2 else 0))
+        color: color
+        x: 20 + (60 * (index % 2))
+        y: 20 + (60 * (if index > 1 then 1 else 0))
         width: 60
         height: 60 
     </pre></code>
