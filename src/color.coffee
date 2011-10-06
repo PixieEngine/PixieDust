@@ -813,6 +813,16 @@
 
     hslColor.saturation()
     # => 0.5
+
+    hslColor.saturation(0.8)
+
+    # to see what it looks like
+    canvas.drawRect
+      color: hslColor
+      x: 50 
+      y: 30 
+      width: 80
+      height: 80     
     </pre></code>
 
     @name saturation
