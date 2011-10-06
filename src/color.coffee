@@ -204,13 +204,19 @@
     ###*
     A copy of the calling color that is its complementary color on the color wheel.
 
-    <code><pre>
+    <code class="run"><pre>
     red = Color(255, 0, 0)
 
     cyan = red.complement()
 
-    cyan.toString()
-    # => 'rgba(0, 255, 255, 1)'
+    for color, index in ['red', 'cyan']
+      canvas.drawRect
+        color: eval(color)
+        x: 20 + (60 * index)
+        y: 20 + (60 * index)
+        width: 60
+        height: 60
+
     </pre></code>
 
     @name complement
