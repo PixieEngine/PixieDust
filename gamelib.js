@@ -5870,6 +5870,9 @@ Emitterable = function(I, self) {
       return self.trigger("afterUpdate");
     };
     draw = function() {
+      if (!I.canvas) {
+        return;
+      }
       if (I.clear) {
         I.canvas.clear();
       } else if (I.backgroundColor) {
@@ -6062,7 +6065,7 @@ Emitterable = function(I, self) {
     });
     self.attrAccessor("ambientLight", "backgroundColor", "cameraTransform", "clear");
     self.include(Bindable);
-    defaultModules = ["SaveState", "Selector", "Collision"];
+    defaultModules = ["Delay", "SaveState", "Selector", "Collision"];
     modules = defaultModules.concat(I.includedModules);
     modules = modules.without([].concat(I.excludedModules));
     modules.each(function(moduleName) {
