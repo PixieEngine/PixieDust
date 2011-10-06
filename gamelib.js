@@ -4516,11 +4516,14 @@ var __slice = Array.prototype.slice;
   individualRgb = Color(23, 56, 49, 0.4)
 
   canvas.drawRect
-    color: individualRgb
     x: 20
     y: 20
     width: 10
     height: 10
+    color: 'red'
+
+  individualRgb.toString()
+  # => 'rgba(23, 56, 49, 0.4)'
 
   arrayRgb = Color([59, 100, 230])
 
