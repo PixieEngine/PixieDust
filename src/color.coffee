@@ -144,8 +144,7 @@
     canvas.centerText
       color: eval(color)
       text: color
-      y: 20 * (index + 1) 
-
+      y: 20 * (index + 1)  
   </pre></code>
 
   @name Color
