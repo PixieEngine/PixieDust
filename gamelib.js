@@ -5360,7 +5360,7 @@ var __slice = Array.prototype.slice;
     /**
     A copy of the calling color with its alpha reduced by `amount`.
 
-    <code><pre>
+    <code class="run"><pre>
     color = Color(0, 0, 0, 1)
 
     color.a
@@ -5370,6 +5370,15 @@ var __slice = Array.prototype.slice;
 
     transparentColor.a
     # => 0.5
+
+    # to see what they look like
+    for color, index in [color, transparentColor]
+      canvas.drawRect
+        color: color
+        x: 20 + (60 * index)
+        y: 20 + (60 * index)
+        width: 60
+        height: 60     
     </pre></code>
 
     @name transparentize
@@ -5408,16 +5417,25 @@ var __slice = Array.prototype.slice;
     /**
     A copy of the calling color with its alpha increased by `amount`.
 
-    <code><pre>
-    color = Color(0, 0, 0, 0)
+    <code class="run"><pre>
+    color = Color(0, 0, 0, 0.25)
 
     color.a
-    # => 1
+    # => 0.25
 
-    opaqueColor = color.opacify(0.25)
+    opaqueColor = color.opacify(0.5)
 
     opaqueColor.a
-    # => 0.25
+    # => 0.75
+
+    # to see what they look like
+    for color, index in [color, opaqueColor]
+      canvas.drawRect
+        color: color
+        x: 20 + (60 * index)
+        y: 20 + (60 * index)
+        width: 60
+        height: 60     
     </pre></code>
 
     @name opacify
@@ -5435,7 +5453,7 @@ var __slice = Array.prototype.slice;
     color = Color(0, 0, 0, 0)
 
     color.a
-    # => 1
+    # => 0
 
     # We modify color in place
     color.opacify$(0.25)
