@@ -5286,6 +5286,20 @@ var __slice = Array.prototype.slice;
     */
     toString: function() {
       return "rgba(" + this.r + ", " + this.g + ", " + this.b + ", " + this.a + ")";
+    },
+    transparentize: function(amount) {
+      return this.copy().transparentize$(amount);
+    },
+    transparentize$: function(amount) {
+      this.a -= amount;
+      return this;
+    },
+    opacify: function(amount) {
+      return this.copy().opacify$(amount);
+    },
+    opacify$: function(amount) {
+      this.a += amount;
+      return this;
     }
   };
   lookup = {};
@@ -6062,6 +6076,51 @@ The <code>Collision</code> module provides some simple collision detection metho
   };
 };;
 /**
+The <code>Delay</code> module provides methods to trigger events after a number of steps have passed.
+
+@name Delay
+@fieldOf Engine
+@module
+@param {Object} I Instance variables
+@param {Object} self Reference to the engine
+*/Engine.Delay = function(I, self) {
+  var delayedEvents;
+  delayedEvents = [];
+  self.bind('afterUpdate', function() {
+    var firingEvents, _ref;
+    _ref = delayedEvents.partition(function(event) {
+      return (event.delay -= 1) >= 0;
+    }), delayedEvents = _ref[0], firingEvents = _ref[1];
+    firingEvents.each(function(event) {
+      return event.callback();
+    });
+  });
+  return {
+    /**
+    Execute a callback after a number of steps have passed.
+
+    <code><pre>
+    engine.delay 5, ->
+
+    </pre></code>
+
+    @name delay
+    @methodOf Engine#
+    @param {Number} steps The number of steps to wait before executing the callback
+    @param {Function} callback The callback to be executed.
+
+    @returns {Engine} self
+    */
+    delay: function(steps, callback) {
+      delayedEvents.push({
+        delay: steps,
+        callback: callback
+      });
+      return self;
+    }
+  };
+};;
+/**
 The <code>SaveState</code> module provides methods to save and restore the current engine state.
 
 @name SaveState
@@ -6760,49 +6819,4 @@ draw anything to the screen until the image has been loaded.
   };
   return (typeof exports !== "undefined" && exports !== null ? exports : this)["Sprite"] = Sprite;
 })();;
-/**
-The <code>Delay</code> module provides methods to trigger events after a number of steps have passed.
-
-@name Delay
-@fieldOf Engine
-@module
-@param {Object} I Instance variables
-@param {Object} self Reference to the engine
-*/Engine.Delay = function(I, self) {
-  var delayedEvents;
-  delayedEvents = [];
-  self.bind('afterUpdate', function() {
-    var firingEvents, _ref;
-    _ref = delayedEvents.partition(function(event) {
-      return (event.delay -= 1) >= 0;
-    }), delayedEvents = _ref[0], firingEvents = _ref[1];
-    firingEvents.each(function(event) {
-      return event.callback();
-    });
-  });
-  return {
-    /**
-    Execute a callback after a number of steps have passed.
-
-    <code><pre>
-    engine.delay 5, ->
-
-    </pre></code>
-
-    @name delay
-    @methodOf Engine#
-    @param {Number} steps The number of steps to wait before executing the callback
-    @param {Function} callback The callback to be executed.
-
-    @returns {Engine} self
-    */
-    delay: function(steps, callback) {
-      delayedEvents.push({
-        delay: steps,
-        callback: callback
-      });
-      return self;
-    }
-  };
-};;
 ;
