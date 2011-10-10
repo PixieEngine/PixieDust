@@ -536,6 +536,18 @@
       else
         return hsl[2]
 
+    value: (newVal) ->
+      hsv = @toHsv()
+
+      if newVal?
+        hsv[2] = newVal
+
+        [@r, @g, @b, @a] = hsvToRgb(hsv)
+
+        return this
+      else
+        return hsv[2]
+
     ###*
     A copy of the calling color with its hue shifted by `degrees`. This differs from the hue setter in that it adds to the existing hue value and will wrap around 0 and 360.
 
