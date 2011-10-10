@@ -918,7 +918,34 @@
 
         hue = (hue * 60).mod(360)
 
-      return [hue, saturation, lightness, @a]    
+      return [hue, saturation, lightness, @a] 
+
+    toHsv: ->
+      r = @r / 255
+      g = @g / 255
+      b = @b / 255
+
+      {min, max} = [r, g, b].extremes()
+
+      h = s = v = max
+
+      d = max - min
+      s = (if max == 0 then 0 else d / max)
+
+      if max == min
+        h = 0
+      else
+        switch max
+          when r
+            h = (g - b) / d + (if g < b then 6 else 0)
+          when g
+            h = (b - r) / d + 2
+          when b
+            h = (r - g) / d + 4
+
+        h *= 60
+
+      return [h, s, v]
 
     ###*
     returns string rgba representation of the color. 
