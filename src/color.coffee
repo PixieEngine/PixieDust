@@ -90,7 +90,7 @@
 
     rgb = [(r * 255).round(), (g * 255).round(), (b * 255).round()]
 
-    return rgb.contact(a)
+    return rgb.concat(a)
 
   hslToRgb = (hsl) ->    
     [h, s, l, a] = hsl
