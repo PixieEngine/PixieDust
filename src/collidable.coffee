@@ -109,6 +109,8 @@
           bMass = b.mass()
           totalMass = bMass + aMass
 
+          normal = overlap.norm()
+
           pushA = normal.scale(-2 * (relativeVelocity.dot(normal) * (bMass / totalMass)))
           pushB = normal.scale(+2 * (relativeVelocity.dot(normal) * (aMass / totalMass)))
           average = pushA.add(pushB).scale(0.5)
