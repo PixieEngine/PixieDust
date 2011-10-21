@@ -66,6 +66,12 @@ Bounded = (I={}, self) ->
     else
       Point(I.x, I.y)
 
+  changePosition: (delta) ->
+    I.x += delta.x
+    I.y += delta.y
+
+    self
+
   ###*
   Does a check to see if this object is overlapping
   with the bounds passed in.
