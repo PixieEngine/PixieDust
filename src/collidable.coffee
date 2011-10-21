@@ -13,10 +13,14 @@
       immovable: false
       touching: NONE
       velocity: Point(0, 0)
+      mass: 1
+      elasticity: 1
 
     self.attrAccessor(
-      "immovable"
-      "velocity"
+      "immovable",
+      "velocity",
+      "mass",
+      "elasticity",
     )
 
     solid: (newSolid) ->
