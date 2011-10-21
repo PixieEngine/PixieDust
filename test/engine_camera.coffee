@@ -11,8 +11,6 @@ test "Camera", ->
     x: 50
     y: 100
 
-  engine.I.cameraTransform
-
   equal engine.I.cameraTransform.a, 1
   equal engine.I.cameraTransform.b, 0
   equal engine.I.cameraTransform.c, 0
