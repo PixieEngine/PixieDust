@@ -14,7 +14,7 @@
       touching: NONE
 
     self.attrAccessor(
-      "immovable",
+      "immovable"
       "velocity"
     )
 
@@ -53,7 +53,7 @@
       bBounds = b.bounds()
 
       aVelocity = a.velocity()
-      bVelecity = b.velocity()
+      bVelocity = b.velocity()
 
       deltaVelocity = aVelocity.subtract(bVelocity)
 
