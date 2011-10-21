@@ -12,6 +12,7 @@
       allowCollisions: ANY
       immovable: false
       touching: NONE
+      velocity: Point(0, 0)
 
     self.attrAccessor(
       "immovable"
