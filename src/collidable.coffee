@@ -14,7 +14,7 @@
       touching: NONE
 
     self.attrAccessor(
-      "immovable"
+      "immovable",
       "velocity"
     )
 
