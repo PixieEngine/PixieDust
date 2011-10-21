@@ -4163,14 +4163,66 @@ Bounded = function(I, self) {
     }
   };
 };;
-/**
-Collision holds many useful class methods for checking geometric overlap of various objects.
-
-@name Collision
-@namespace
-*/var Collision;
-Collision = {
+(function() {
+  var Collision, collides;
+  collides = function(a, b) {
+    return Collision.rectangular(a.bounds(), b.bounds());
+  };
   /**
+  Collision holds many useful class methods for checking geometric overlap of various objects.
+
+  @name Collision
+  @namespace
+  */
+  Collision = {
+    /**
+      Collision holds many useful class methods for checking geometric overlap of various objects.
+
+      <code><pre>
+      player = GameObject
+        x: 0
+        y: 0
+        width: 10
+        height: 10
+
+      enemy = GameObject
+        x: 5
+        y: 5
+        width: 10
+        height: 10
+
+      enemy2 = GameObject
+        x: -5
+        y: -5
+        width: 10
+        height: 10
+
+      Collision.collide(player, enemy, (p, e) -> ...)
+      # => callback is called once
+
+      Collision.collide(player, [enemy, enemy2], (p, e) -> ...)
+      # => callback is called twice
+      </pre></code>
+
+      @name collide
+      @methodOf Collision
+      @param {Object|Array} groupA An object or set of objects to check collisions with
+      @param {Object|Array} groupB An objcet or set of objects to check collisions with
+      @param {callback} The callback to call when an object of group a collides with an 
+      object of group b. `(a, b) ->`
+      */
+    collide: function(groupA, groupB, callback) {
+      groupA = [].concat(groupA);
+      groupB = [].concat(groupB);
+      return groupA.each(function(a) {
+        return groupB.each(function(b) {
+          if (collides(a, b)) {
+            return callback(a, b);
+          }
+        });
+      });
+    },
+    /**
     Takes two bounds objects and returns true if they collide (overlap), false otherwise.
     Bounds objects have x, y, width and height properties.
 
@@ -4200,160 +4252,162 @@ Collision = {
     @param {Object} b The second rectangle
     @returns {Boolean} true if the rectangles overlap, false otherwise
     */
-  rectangular: function(a, b) {
-    return a.x < b.x + b.width && a.x + a.width > b.x && a.y < b.y + b.height && a.y + a.height > b.y;
-  },
-  /**
-  Takes two circle objects and returns true if they collide (overlap), false otherwise.
-  Circle objects have x, y, and radius.
+    rectangular: function(a, b) {
+      return a.x < b.x + b.width && a.x + a.width > b.x && a.y < b.y + b.height && a.y + a.height > b.y;
+    },
+    /**
+    Takes two circle objects and returns true if they collide (overlap), false otherwise.
+    Circle objects have x, y, and radius.
 
-  <code><pre>
-  player = GameObject
-    x: 5
-    y: 5
-    radius: 10
+    <code><pre>
+    player = GameObject
+      x: 5
+      y: 5
+      radius: 10
 
-  enemy = GameObject
-    x: 10
-    y: 10
-    radius: 10
+    enemy = GameObject
+      x: 10
+      y: 10
+      radius: 10
 
-  farEnemy = GameObject
-    x: 500
-    y: 500
-    radius: 30
+    farEnemy = GameObject
+      x: 500
+      y: 500
+      radius: 30
 
-  Collision.circular(player, enemy)
-  # => true
+    Collision.circular(player, enemy)
+    # => true
 
-  Collision.circular(player, farEnemy)
-  # => false
-  </pre></code>
+    Collision.circular(player, farEnemy)
+    # => false
+    </pre></code>
 
-  @name circular
-  @methodOf Collision
-  @param {Object} a The first circle
-  @param {Object} b The second circle
-  @returns {Boolean} true is the circles overlap, false otherwise
-  */
-  circular: function(a, b) {
-    var dx, dy, r;
-    r = a.radius + b.radius;
-    dx = b.x - a.x;
-    dy = b.y - a.y;
-    return r * r >= dx * dx + dy * dy;
-  },
-  /**
-  Detects whether a line intersects a circle.
+    @name circular
+    @methodOf Collision
+    @param {Object} a The first circle
+    @param {Object} b The second circle
+    @returns {Boolean} true is the circles overlap, false otherwise
+    */
+    circular: function(a, b) {
+      var dx, dy, r;
+      r = a.radius + b.radius;
+      dx = b.x - a.x;
+      dy = b.y - a.y;
+      return r * r >= dx * dx + dy * dy;
+    },
+    /**
+    Detects whether a line intersects a circle.
 
-  <code><pre>
-  circle = engine.add
-    class: "circle"
-    x: 50
-    y: 50
-    radius: 10
+    <code><pre>
+    circle = engine.add
+      class: "circle"
+      x: 50
+      y: 50
+      radius: 10
 
-  Collision.rayCircle(Point(0, 0), Point(1, 0), circle)
-  # => true
-  </pre></code>
+    Collision.rayCircle(Point(0, 0), Point(1, 0), circle)
+    # => true
+    </pre></code>
 
-  @name rayCircle
-  @methodOf Collision
-  @param {Point} source The starting position
-  @param {Point} direction A vector from the point
-  @param {Object} target The circle 
-  @returns {Boolean} true if the line intersects the circle, false otherwise
-  */
-  rayCircle: function(source, direction, target) {
-    var dt, hit, intersection, intersectionToTarget, intersectionToTargetLength, laserToTarget, projection, projectionLength, radius;
-    radius = target.radius();
-    target = target.position();
-    laserToTarget = target.subtract(source);
-    projectionLength = direction.dot(laserToTarget);
-    if (projectionLength < 0) {
-      return false;
-    }
-    projection = direction.scale(projectionLength);
-    intersection = source.add(projection);
-    intersectionToTarget = target.subtract(intersection);
-    intersectionToTargetLength = intersectionToTarget.length();
-    if (intersectionToTargetLength < radius) {
-      hit = true;
-    }
-    if (hit) {
-      dt = Math.sqrt(radius * radius - intersectionToTargetLength * intersectionToTargetLength);
-      return hit = direction.scale(projectionLength - dt).add(source);
-    }
-  },
-  /**
-  Detects whether a line intersects a rectangle.
+    @name rayCircle
+    @methodOf Collision
+    @param {Point} source The starting position
+    @param {Point} direction A vector from the point
+    @param {Object} target The circle 
+    @returns {Boolean} true if the line intersects the circle, false otherwise
+    */
+    rayCircle: function(source, direction, target) {
+      var dt, hit, intersection, intersectionToTarget, intersectionToTargetLength, laserToTarget, projection, projectionLength, radius;
+      radius = target.radius();
+      target = target.position();
+      laserToTarget = target.subtract(source);
+      projectionLength = direction.dot(laserToTarget);
+      if (projectionLength < 0) {
+        return false;
+      }
+      projection = direction.scale(projectionLength);
+      intersection = source.add(projection);
+      intersectionToTarget = target.subtract(intersection);
+      intersectionToTargetLength = intersectionToTarget.length();
+      if (intersectionToTargetLength < radius) {
+        hit = true;
+      }
+      if (hit) {
+        dt = Math.sqrt(radius * radius - intersectionToTargetLength * intersectionToTargetLength);
+        return hit = direction.scale(projectionLength - dt).add(source);
+      }
+    },
+    /**
+    Detects whether a line intersects a rectangle.
 
-  <code><pre>
-  rect = engine.add
-    class: "circle"
-    x: 50
-    y: 50
-    width: 20
-    height: 20
+    <code><pre>
+    rect = engine.add
+      class: "circle"
+      x: 50
+      y: 50
+      width: 20
+      height: 20
 
-  Collision.rayRectangle(Point(0, 0), Point(1, 0), rect)
-  # => true
-  </pre></code>
+    Collision.rayRectangle(Point(0, 0), Point(1, 0), rect)
+    # => true
+    </pre></code>
 
-  @name rayRectangle
-  @methodOf Collision
-  @param {Point} source The starting position
-  @param {Point} direction A vector from the point
-  @param {Object} target The rectangle
-  @returns {Boolean} true if the line intersects the rectangle, false otherwise
-  */
-  rayRectangle: function(source, direction, target) {
-    var areaPQ0, areaPQ1, hit, p0, p1, t, tX, tY, xval, xw, yval, yw, _ref, _ref2;
-    xw = target.xw;
-    yw = target.yw;
-    if (source.x < target.x) {
-      xval = target.x - xw;
-    } else {
-      xval = target.x + xw;
-    }
-    if (source.y < target.y) {
-      yval = target.y - yw;
-    } else {
-      yval = target.y + yw;
-    }
-    if (direction.x === 0) {
-      p0 = Point(target.x - xw, yval);
-      p1 = Point(target.x + xw, yval);
-      t = (yval - source.y) / direction.y;
-    } else if (direction.y === 0) {
-      p0 = Point(xval, target.y - yw);
-      p1 = Point(xval, target.y + yw);
-      t = (xval - source.x) / direction.x;
-    } else {
-      tX = (xval - source.x) / direction.x;
-      tY = (yval - source.y) / direction.y;
-      if ((tX < tY || ((-xw < (_ref = source.x - target.x) && _ref < xw))) && !((-yw < (_ref2 = source.y - target.y) && _ref2 < yw))) {
+    @name rayRectangle
+    @methodOf Collision
+    @param {Point} source The starting position
+    @param {Point} direction A vector from the point
+    @param {Object} target The rectangle
+    @returns {Boolean} true if the line intersects the rectangle, false otherwise
+    */
+    rayRectangle: function(source, direction, target) {
+      var areaPQ0, areaPQ1, hit, p0, p1, t, tX, tY, xval, xw, yval, yw, _ref, _ref2;
+      xw = target.xw;
+      yw = target.yw;
+      if (source.x < target.x) {
+        xval = target.x - xw;
+      } else {
+        xval = target.x + xw;
+      }
+      if (source.y < target.y) {
+        yval = target.y - yw;
+      } else {
+        yval = target.y + yw;
+      }
+      if (direction.x === 0) {
         p0 = Point(target.x - xw, yval);
         p1 = Point(target.x + xw, yval);
-        t = tY;
-      } else {
+        t = (yval - source.y) / direction.y;
+      } else if (direction.y === 0) {
         p0 = Point(xval, target.y - yw);
         p1 = Point(xval, target.y + yw);
-        t = tX;
+        t = (xval - source.x) / direction.x;
+      } else {
+        tX = (xval - source.x) / direction.x;
+        tY = (yval - source.y) / direction.y;
+        if ((tX < tY || ((-xw < (_ref = source.x - target.x) && _ref < xw))) && !((-yw < (_ref2 = source.y - target.y) && _ref2 < yw))) {
+          p0 = Point(target.x - xw, yval);
+          p1 = Point(target.x + xw, yval);
+          t = tY;
+        } else {
+          p0 = Point(xval, target.y - yw);
+          p1 = Point(xval, target.y + yw);
+          t = tX;
+        }
+      }
+      if (t > 0) {
+        areaPQ0 = direction.cross(p0.subtract(source));
+        areaPQ1 = direction.cross(p1.subtract(source));
+        if (areaPQ0 * areaPQ1 < 0) {
+          return hit = direction.scale(t).add(source);
+        }
       }
     }
-    if (t > 0) {
-      areaPQ0 = direction.cross(p0.subtract(source));
-      areaPQ1 = direction.cross(p1.subtract(source));
-      if (areaPQ0 * areaPQ1 < 0) {
-        return hit = direction.scale(t).add(source);
-      }
-    }
-  }
-};;
+  };
+  return (typeof exports !== "undefined" && exports !== null ? exports : this)["Collision"] = Collision;
+})();;
 var __slice = Array.prototype.slice;
 (function() {
-  var Color, channelize, hslParser, hslToRgb, lookup, names, normalizeKey, parseHSL, parseHex, parseRGB, rgbParser;
+  var Color, channelize, hslParser, hslToRgb, hsvToRgb, lookup, names, normalizeKey, parseHSL, parseHex, parseRGB, rgbParser;
   rgbParser = /^rgba?\((\d{1,3}),\s*(\d{1,3}),\s*(\d{1,3}),?\s*(\d?\.?\d*)?\)$/;
   hslParser = /^hsla?\((\d{1,3}),\s*(\d?\.?\d*),\s*(\d?\.?\d*),?\s*(\d?\.?\d*)?\)$/;
   parseRGB = function(colorString) {
@@ -4435,6 +4489,52 @@ var __slice = Array.prototype.slice;
       parsedColor[3] = 1;
     }
     return hslToRgb(parsedColor);
+  };
+  hsvToRgb = function(hsv) {
+    var a, b, f, g, h, i, p, q, r, rgb, s, t, v;
+    r = g = b = null;
+    h = hsv[0], s = hsv[1], v = hsv[2], a = hsv[3];
+    if (a == null) {
+      a = 1;
+    }
+    i = (h / 60).floor();
+    f = h / 60 - i;
+    p = v * (1 - s);
+    q = v * (1 - f * s);
+    t = v * (1 - (1 - f) * s);
+    switch (i % 6) {
+      case 0:
+        r = v;
+        g = t;
+        b = p;
+        break;
+      case 1:
+        r = q;
+        g = v;
+        b = p;
+        break;
+      case 2:
+        r = p;
+        g = v;
+        b = t;
+        break;
+      case 3:
+        r = p;
+        g = q;
+        b = v;
+        break;
+      case 4:
+        r = t;
+        g = p;
+        b = v;
+        break;
+      case 5:
+        r = v;
+        g = p;
+        b = q;
+    }
+    rgb = [(r * 255).round(), (g * 255).round(), (b * 255).round()];
+    return rgb.concat(a);
   };
   hslToRgb = function(hsl) {
     var a, b, channel, g, h, hueToRgb, l, p, q, r, rgbMap, s;
@@ -4947,6 +5047,17 @@ var __slice = Array.prototype.slice;
         return hsl[2];
       }
     },
+    value: function(newVal) {
+      var hsv, _ref;
+      hsv = this.toHsv();
+      if (newVal != null) {
+        hsv[2] = newVal;
+        _ref = hsvToRgb(hsv), this.r = _ref[0], this.g = _ref[1], this.b = _ref[2], this.a = _ref[3];
+        return this;
+      } else {
+        return hsv[2];
+      }
+    },
     /**
     A copy of the calling color with its hue shifted by `degrees`. This differs from the hue setter in that it adds to the existing hue value and will wrap around 0 and 360.
 
@@ -5238,15 +5349,26 @@ var __slice = Array.prototype.slice;
 
     @returns {Color|Number} returns the color object if you pass a new saturation value and returns the saturation otherwise 
     */
-    saturation: function(newVal) {
-      var hsl, _ref;
-      hsl = this.toHsl();
-      if (newVal != null) {
-        hsl[1] = newVal;
-        _ref = hslToRgb(hsl), this.r = _ref[0], this.g = _ref[1], this.b = _ref[2], this.a = _ref[3];
-        return this;
+    saturation: function(newVal, mode) {
+      var hsl, hsv, _ref, _ref2;
+      if (mode === 'hsv') {
+        hsv = this.toHsv();
+        if (newVal != null) {
+          hsv[1] = newVal;
+          _ref = hsvToRgb(hsv), this.r = _ref[0], this.g = _ref[1], this.b = _ref[2], this.a = _ref[3];
+          return this;
+        } else {
+          return hsv[1];
+        }
       } else {
-        return hsl[1];
+        hsl = this.toHsl();
+        if (newVal != null) {
+          hsl[1] = newVal;
+          _ref2 = hslToRgb(hsl), this.r = _ref2[0], this.g = _ref2[1], this.b = _ref2[2], this.a = _ref2[3];
+          return this;
+        } else {
+          return hsl[1];
+        }
       }
     },
     /**
@@ -5338,6 +5460,32 @@ var __slice = Array.prototype.slice;
         hue = (hue * 60).mod(360);
       }
       return [hue, saturation, lightness, this.a];
+    },
+    toHsv: function() {
+      var b, d, g, h, max, min, r, s, v, _ref;
+      r = this.r / 255;
+      g = this.g / 255;
+      b = this.b / 255;
+      _ref = [r, g, b].extremes(), min = _ref.min, max = _ref.max;
+      h = s = v = max;
+      d = max - min;
+      s = (max === 0 ? 0 : d / max);
+      if (max === min) {
+        h = 0;
+      } else {
+        switch (max) {
+          case r:
+            h = (g - b) / d + (g < b ? 6 : 0);
+            break;
+          case g:
+            h = (b - r) / d + 2;
+            break;
+          case b:
+            h = (r - g) / d + 4;
+        }
+        h *= 60;
+      }
+      return [h, s, v];
     },
     /**
     returns string rgba representation of the color. 
@@ -6506,6 +6654,26 @@ Object.extend(Engine.Selector, {
     };
   }
 });;
+/**
+The <code>Stats</code> module provides methods to query the engine to find game objects.
+
+@name Stats
+@fieldOf Engine
+@module
+@param {Object} I Instance variables
+@param {Object} self Reference to the engine
+*/Engine.Stats = function(I, self) {
+  return {
+    measure: function(objects, field, frequency) {
+      if (frequency == null) {
+        frequency = 30;
+      }
+    },
+    gatherData: function() {
+      return self.find();
+    }
+  };
+};;
 /**
 The default base class for all objects you can add to the engine.
 
