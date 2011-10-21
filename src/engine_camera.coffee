@@ -13,7 +13,7 @@ Engine.Camera = (I, self) ->
 
       options = Object.extend(defaults, currentOptions)
 
-      Matrix.translation(App.width / 2 - options.x + options.width, App.height / 2 - options.y - options.height)  
+      Matrix.translation(App.width / 2 - options.x, App.height / 2 - options.y)  
 
   self.bind "afterUpdate", ->
     if currentObject
