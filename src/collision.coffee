@@ -44,8 +44,8 @@
     @methodOf Collision
     @param {Object|Array} groupA An object or set of objects to check collisions with
     @param {Object|Array} groupB An objcet or set of objects to check collisions with
-    @param {callback} The callback to call when an object of group a collides with an 
-    object of group b. `(a, b) ->`
+    @param {Function} callback The callback to call when an object of groupA collides 
+    with an object of groupB: (a, b) ->
     ###
     collide: (groupA, groupB, callback) ->
       groupA = [].concat(groupA)
