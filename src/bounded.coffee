@@ -32,9 +32,7 @@ Bounded module
 @param {Core} self Reference to including object
 ###
 
-Bounded = (I, self) ->
-  I ||= {}
-
+Bounded = (I={}, self) ->
   Object.reverseMerge I,
     x: 0
     y: 0
