@@ -3951,7 +3951,9 @@ Bounded module
 @param {Core} self Reference to including object
 */var Bounded;
 Bounded = function(I, self) {
-  I || (I = {});
+  if (I == null) {
+    I = {};
+  }
   Object.reverseMerge(I, {
     x: 0,
     y: 0,
@@ -3979,8 +3981,18 @@ Bounded = function(I, self) {
     @methodOf Bounded#
     @returns {Point} The position of this object
     */
-    position: function() {
-      return Point(I.x, I.y);
+    position: function(newPosition) {
+      if (newPosition != null) {
+        I.x = newPosition.x;
+        return I.y = newPosition.y;
+      } else {
+        return Point(I.x, I.y);
+      }
+    },
+    changePosition: function(delta) {
+      I.x += delta.x;
+      I.y += delta.y;
+      return self;
     },
     /**
     Does a check to see if this object is overlapping
@@ -4131,8 +4143,8 @@ Bounded = function(I, self) {
     @methodOf Bounded#
     @returns {Point} The middle of the calling object
     */
-    center: function() {
-      return self.position();
+    center: function(newCenter) {
+      return self.position(newCenter);
     },
     /**
     Return the circular bounds of the object. The circle is
@@ -4163,6 +4175,131 @@ Bounded = function(I, self) {
     }
   };
 };;
+(function() {
+  /**
+  Use this to handle generic rectangular collisions among game object a-la Flixel.
+
+  @name Collidable
+  @module
+  @constructor
+  */  var ANY, CEILING, Collidable, DOWN, FLOOR, LEFT, NONE, RIGHT, UP, WALL, _ref, _ref2;
+  Collidable = function(I, self) {
+    Object.reverseMerge(I, {
+      allowCollisions: ANY,
+      immovable: false,
+      touching: NONE,
+      velocity: Point(0, 0),
+      mass: 1,
+      elasticity: 1
+    });
+    self.attrAccessor("immovable", "velocity", "mass", "elasticity");
+    return {
+      solid: function(newSolid) {
+        if (newSolid != null) {
+          if (newSolid) {
+            return I.allowCollisions = ANY;
+          } else {
+            return I.allowCollisions = NONE;
+          }
+        } else {
+          return I.allowCollisions;
+        }
+      }
+    };
+  };
+  (typeof exports !== "undefined" && exports !== null ? exports : this)["Collidable"] = Collidable;
+  /**
+
+  */
+  _ref = Object.extend(Collidable, {
+    NONE: 0x0000,
+    LEFT: 0x0001,
+    RIGHT: 0x0010,
+    UP: 0x0100,
+    DOWN: 0x1000
+  }), NONE = _ref.NONE, LEFT = _ref.LEFT, RIGHT = _ref.RIGHT, UP = _ref.UP, DOWN = _ref.DOWN;
+  _ref2 = Object.extend(Collidable, {
+    FLOOR: DOWN,
+    WALL: LEFT | RIGHT,
+    CEILING: UP,
+    ANY: LEFT | RIGHT | UP | DOWN
+  }), ANY = _ref2.ANY, FLOOR = _ref2.FLOOR, WALL = _ref2.WALL, CEILING = _ref2.CEILING;
+  return Object.extend(Collidable, {
+    separate: function(a, b) {
+      var aBounds, aMass, aVelocity, average, bBounds, bMass, bVelocity, deltaVelocity, normal, overlap, pushA, pushB, relativeVelocity, totalMass;
+      if (a.immovable() && b.immovable()) {
+        return;
+      }
+      aBounds = a.bounds();
+      bBounds = b.bounds();
+      aVelocity = a.velocity();
+      bVelocity = b.velocity();
+      deltaVelocity = aVelocity.subtract(bVelocity);
+      overlap = Point(0, 0);
+      if (Collision.rectangular(aBounds, bBounds)) {
+        if (deltaVelocity.x > 0) {
+          overlap.x = aBounds.x + aBounds.width - bBounds.x;
+          if (!(a.I.allowCollisions & RIGHT) || !(b.I.allowCollisions & LEFT)) {
+            overlap.x = 0;
+          } else {
+            a.I.touching |= RIGHT;
+            b.I.touching |= LEFT;
+          }
+        } else if (deltaVelocity.x < 0) {
+          overlap.x = aBounds.x - bBounds.width - bBounds.x;
+          if (!(a.I.allowCollisions & LEFT) || !(b.I.allowCollisions & RIGHT)) {
+            overlap.x = 0;
+          } else {
+            a.I.touching |= LEFT;
+            b.I.touching |= RIGHT;
+          }
+        }
+        if (deltaVelocity.y > 0) {
+          overlap.y = aBounds.y + aBounds.height - bBounds.y;
+          if (!(a.I.allowCollisions & DOWN) || !(b.I.allowCollisions & UP)) {
+            overlap.y = 0;
+          } else {
+            a.I.touching |= DOWN;
+            b.I.touching |= UP;
+          }
+        } else if (deltaVelocity.y < 0) {
+          overlap.x = aBounds.y - bBounds.height - bBounds.y;
+          if (!(a.I.allowCollisions & UP) || !(b.I.allowCollisions & DOWN)) {
+            overlap.y = 0;
+          } else {
+            a.I.touching |= UP;
+            b.I.touching |= DOWN;
+          }
+        }
+      }
+      if (!overlap.equal(Point.ZERO)) {
+        if (!a.immovable() && !a.immovable()) {
+          a.changePosition(overlap.scale(-0.5));
+          b.changePosition(overlap.scale(+0.5));
+          relativeVelocity = aVelocity.subtract(bVelocity);
+          aMass = a.mass();
+          bMass = b.mass();
+          totalMass = bMass + aMass;
+          normal = overlap.norm();
+          pushA = normal.scale(-2 * (relativeVelocity.dot(normal) * (bMass / totalMass)));
+          pushB = normal.scale(+2 * (relativeVelocity.dot(normal) * (aMass / totalMass)));
+          average = pushA.add(pushB).scale(0.5);
+          pushA.subtract$(average).scale(a.elasticity());
+          pushB.subtract$(average).scale(b.elasticity());
+          a.I.velocity = average.add(pushA);
+          b.I.velocity = average.add(pushB);
+        } else if (!a.immovable()) {
+          a.changePosition(overlap.scale(-1));
+          a.I.velocity = bVelocity.subtract(aVelocity.scale(a.elasticity()));
+        } else if (!b.immovable()) {
+          b.changePosition(overlap);
+          b.I.velocity = aVelocity.subtract(bVelocity.scale(b.elasticity()));
+        }
+        return true;
+      }
+    }
+  });
+})();;
 (function() {
   var Collision, collides;
   collides = function(a, b) {
@@ -4208,8 +4345,8 @@ Bounded = function(I, self) {
       @methodOf Collision
       @param {Object|Array} groupA An object or set of objects to check collisions with
       @param {Object|Array} groupB An objcet or set of objects to check collisions with
-      @param {callback} The callback to call when an object of group a collides with an 
-      object of group b. `(a, b) ->`
+      @param {Function} callback The callback to call when an object of groupA collides 
+      with an object of groupB: (a, b) ->
       */
     collide: function(groupA, groupB, callback) {
       groupA = [].concat(groupA);
