@@ -1,6 +1,9 @@
 module "Engine"
 
 test "Camera", ->
+  App.width = 800
+  App.height = 640
+
   engine = Engine
     includedModules: ["Camera"]
 
