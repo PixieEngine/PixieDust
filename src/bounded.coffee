@@ -59,8 +59,12 @@ Bounded = (I={}, self) ->
   @methodOf Bounded#
   @returns {Point} The position of this object
   ###
-  position: ->
-    Point(I.x, I.y)
+  position: (newPosition) ->
+    if newPosition?
+      I.x = newPosition.x
+      I.y = newPosition.y
+    else
+      Point(I.x, I.y)
 
   ###*
   Does a check to see if this object is overlapping
@@ -208,8 +212,8 @@ Bounded = (I={}, self) ->
   @methodOf Bounded#
   @returns {Point} The middle of the calling object
   ###  
-  center: () ->
-    self.position()
+  center: (newCenter) ->
+    self.position(newCenter)
 
   ###*
   Return the circular bounds of the object. The circle is
