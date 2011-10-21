@@ -7,6 +7,7 @@ test "#separate", ->
     y: 50
     width: 20
     height: 20
+    velocity: Point(1, 0)
 
   rightObject = GameObject
     includedModules: ["Collidable"]
