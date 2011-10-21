@@ -6315,6 +6315,29 @@ Emitterable = function(I, self) {
   };
   return (typeof exports !== "undefined" && exports !== null ? exports : this)["Engine"] = Engine;
 })();;
+Engine.Camera = function(I, self) {
+  var currentObject, currentOptions, currentType, followTypes;
+  currentType = "centered";
+  currentOptions = {};
+  currentObject = null;
+  followTypes = {
+    centered: function(object, options) {
+      return Matrix.translation(App.width / 2 - object.I.x, App.height / 2 - object.I.y);
+    }
+  };
+  self.bind("afterUpdate", function() {
+    if (currentObject) {
+      return I.cameraTransform = followTypes[currentType](currentObject, currentOptions);
+    }
+  });
+  return {
+    follow: function(object, type, options) {
+      currentObject = object;
+      currentType = type;
+      return currentOptions = options;
+    }
+  };
+};;
 /**
 The <code>Collision</code> module provides some simple collision detection methods to engine.
 
