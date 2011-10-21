@@ -246,5 +246,6 @@
         if areaPQ0 * areaPQ1 < 0
           hit = direction.scale(t).add(source)
 
+  (exports ? this)["Collision"] = Collision
 )()
 
