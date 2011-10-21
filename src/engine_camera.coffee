@@ -19,6 +19,8 @@ Engine.Camera = (I, self) ->
     if currentObject
       I.cameraTransform = followTypes[currentType](currentObject, currentOptions)  
 
+      log I.cameraTransform
+
   follow: (object, type, options) ->
     currentObject = object
     currentType = type
