@@ -56,25 +56,42 @@
 
       deltaVelocity = aVelocity.subtract(bVelocity)
 
-      if Collision.rectangular(aBounds, bBounds)
+      overlap = Point(0, 0)
 
+      if Collision.rectangular(aBounds, bBounds)
         if deltaVelocity.x > 0
-          overlap = aBounds.x + aBounds.width - bBounds.x
+          overlap.x = aBounds.x + aBounds.width - bBounds.x
           if !(a.I.allowCollisions & RIGHT) || !(b.I.allowCollisions & LEFT)
-            overlap = 0
+            overlap.x = 0
           else
             a.I.touching |= RIGHT
             b.I.touching |= LEFT
 
         else if deltaVelocity.x < 0
-          overlap = aBounds.x - bBounds.width - bBounds.x
+          overlap.x = aBounds.x - bBounds.width - bBounds.x
           if !(a.I.allowCollisions & LEFT) || !(b.I.allowCollisions & RIGHT)
-            overlap = 0
+            overlap.x = 0
           else
             a.I.touching |= LEFT
             b.I.touching |= RIGHT
 
-      if overlap
+        if deltaVelocity.y > 0
+          overlap.y = aBounds.y + aBounds.height - bBounds.y
+          if !(a.I.allowCollisions & DOWN) || !(b.I.allowCollisions & UP)
+            overlap.y = 0
+          else
+            a.I.touching |= DOWN
+            b.I.touching |= UP
+
+        else if deltaVelocity.y < 0
+          overlap.x = aBounds.y - bBounds.height - bBounds.y
+          if !(a.I.allowCollisions & UP) || !(b.I.allowCollisions & DOWN)
+            overlap.y = 0
+          else
+            a.I.touching |= UP
+            b.I.touching |= DOWN
+
+      unless overlap.equal(Point.ZERO)
         if !a.immovable() and !a.immovable()
           a.changePosition(overlap.scale(-0.5))
           b.changePosition(overlap.scale(+0.5))
