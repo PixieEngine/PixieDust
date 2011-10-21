@@ -19,6 +19,4 @@ test "Camera", ->
 
   engine.update()
 
-  log engine.I.cameraTransform
-
 module()
