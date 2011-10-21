@@ -15,6 +15,7 @@ test "#separate", ->
     y: 50
     width: 20
     height: 20  
+    velocity: Point(0, 0)
 
   Collidable.separate(leftObject, rightObject)
 
