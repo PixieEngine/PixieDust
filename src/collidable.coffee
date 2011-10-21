@@ -15,6 +15,7 @@
 
     self.attrAccessor(
       "immovable"
+      "velocity"
     )
 
     solid: (newSolid) ->
