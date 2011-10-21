@@ -5,7 +5,15 @@ Engine.Camera = (I, self) ->
 
   followTypes =
     centered: (object, options) ->  
-      Matrix.translation(App.width / 2 - object.I.x, App.height / 2 - object.I.y)  
+      defaults = 
+        x: object.I.x
+        y: object.I.y
+        width: 0
+        height: 0
+
+      options = Object.extend(defaults, currentOptions)
+
+      Matrix.translation(App.width / 2 - options.x, App.height / 2 - options.y)  
 
   self.bind "afterUpdate", ->
     if currentObject
