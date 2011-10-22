@@ -5881,6 +5881,24 @@ player.bind "draw", (canvas) ->
 @methodOf Drawable#
 @event
 @param {PowerCanvas} canvas A reference to the canvas to draw on.
+*/
+/**
+Triggered before the object should be drawn. A canvas is passed as
+the first argument. This does not apply the current transform.
+
+@name beforeDraw
+@methodOf Drawable#
+@event
+@param {PowerCanvas} canvas A reference to the canvas to draw on.
+*/
+/**
+Triggered after the object should be drawn. A canvas is passed as
+the first argument. This does not apply the current transform.
+
+@name afterDraw
+@methodOf Drawable#
+@event
+@param {PowerCanvas} canvas A reference to the canvas to draw on.
 */var Drawable;
 Drawable = function(I, self) {
   var _ref;
