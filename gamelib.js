@@ -5886,16 +5886,16 @@ player.bind "draw", (canvas) ->
 Triggered before the object should be drawn. A canvas is passed as
 the first argument. This does not apply the current transform.
 
-@name beforeDraw
+@name beforeTransform
 @methodOf Drawable#
 @event
 @param {PowerCanvas} canvas A reference to the canvas to draw on.
 */
 /**
 Triggered after the object should be drawn. A canvas is passed as
-the first argument. This does not apply the current transform.
+the first argument. This applies the current transform.
 
-@name afterDraw
+@name afterTransform
 @methodOf Drawable#
 @event
 @param {PowerCanvas} canvas A reference to the canvas to draw on.
