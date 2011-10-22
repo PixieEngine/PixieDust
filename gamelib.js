@@ -4273,7 +4273,7 @@ Bounded = function(I, self) {
         }
       }
       if (!overlap.equal(Point.ZERO)) {
-        if (!a.immovable() && !a.immovable()) {
+        if (!a.immovable() && !b.immovable()) {
           a.changePosition(overlap.scale(-0.5));
           b.changePosition(overlap.scale(+0.5));
           relativeVelocity = aVelocity.subtract(bVelocity);
