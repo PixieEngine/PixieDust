@@ -4190,7 +4190,7 @@ Bounded = function(I, self) {
       touching: NONE,
       velocity: Point(0, 0),
       mass: 1,
-      elasticity: 1
+      elasticity: 0
     });
     self.attrAccessor("immovable", "velocity", "mass", "elasticity");
     return {
