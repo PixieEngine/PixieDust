@@ -98,7 +98,7 @@
             b.I.touching |= DOWN
 
       unless overlap.equal(Point.ZERO)
-        if !a.immovable() and !a.immovable()
+        if !a.immovable() and !b.immovable()
           a.changePosition(overlap.scale(-0.5))
           b.changePosition(overlap.scale(+0.5))
 
