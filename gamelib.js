@@ -1135,6 +1135,16 @@ Gives you some convenience methods for outputting data while developing.
       return this.concat(Matrix.scale(sx, sy, aboutPoint));
     },
     /**
+    Returns a string representation of this matrix.
+
+    @name toString
+    @methodOf Matrix#
+    @returns {String} A string reperesentation of this matrix.
+    */
+    toString: function() {
+      return "Matrix(" + this.a + ", " + this.b + ", " + this.c + ", " + this.d + ", " + this.tx + ", " + this.ty + ")";
+    },
+    /**
     Returns the result of applying the geometric transformation represented by the 
     Matrix object to the specified point.
     @name transformPoint
@@ -2246,6 +2256,14 @@ Object.isObject = function(object) {
     */
     distance: function(other) {
       return Point.distance(this, other);
+    },
+    /**
+    @name toString
+    @methodOf Point#
+    @returns {String} A string representation of this point.
+    */
+    toString: function() {
+      return "Point(" + this.x + ", " + this.y + ")";
     }
     /**
     Compute the Euclidean distance between two points.
@@ -6449,7 +6467,7 @@ Emitterable = function(I, self) {
         return I.paused = false;
       },
       /**
-      Pause the simulation.
+      Toggle the paused state of the simulation.
 
       <code><pre>
       engine.pause()
@@ -6457,9 +6475,14 @@ Emitterable = function(I, self) {
 
       @methodOf Engine#
       @name pause
+      @param {Boolean} [setTo] Force to pause by passing true or unpause by passing false.
       */
-      pause: function() {
-        return I.paused = true;
+      pause: function(setTo) {
+        if (setTo != null) {
+          return I.paused = setTo;
+        } else {
+          return I.paused = !I.paused;
+        }
       },
       /**
       Query the engine to see if it is paused.
