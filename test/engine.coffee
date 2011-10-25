@@ -16,6 +16,17 @@ test "#play, #pause, and #paused", ->
   engine.play()
   equal engine.paused(), false
 
+  engine.pause()
+  equal engine.paused(), true
+  engine.pause()
+  equal engine.paused(), false
+
+  engine.pause(false)
+  equal engine.paused(), false
+
+  engine.pause(true)
+  equal engine.paused(), true
+
 test "#save and #restore", ->
   engine = Engine()
 
