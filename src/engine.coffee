@@ -303,7 +303,7 @@
         I.paused = false
 
       ###*
-      Pause the simulation.
+      Toggle the paused state of the simulation.
 
       <code><pre>
       engine.pause()
@@ -311,9 +311,13 @@
 
       @methodOf Engine#
       @name pause
+      @param {Boolean} [setTo] Force to pause by passing true or unpause by passing false.
       ###
-      pause: ->
-        I.paused = true
+      pause: (setTo) ->
+        if setTo?
+          I.paused = setTo
+        else
+          I.paused = !I.paused
 
       ###*
       Query the engine to see if it is paused.
