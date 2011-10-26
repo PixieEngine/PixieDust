@@ -4435,10 +4435,12 @@ Bounded = function(I, self) {
 
       @name collide
       @methodOf Collision
-      @param {Object|Array} groupA An object or set of objects to check collisions with
-      @param {Object|Array} groupB An objcet or set of objects to check collisions with
-      @param {Function} callback The callback to call when an object of groupA collides 
+      @param {Object|Array|String} groupA An object or set of objects to check collisions with
+      @param {Object|Array|String} groupB An objcet or set of objects to check collisions with
+      @param {Function} callback The callback to call when an object of groupA collides
       with an object of groupB: (a, b) ->
+      @param {Function} [detectionMethod] An optional detection method to determine when two 
+      objects are colliding.
       */
     collide: function(groupA, groupB, callback, detectionMethod) {
       if (detectionMethod == null) {
