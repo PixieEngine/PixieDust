@@ -17,7 +17,7 @@ Engine.SaveState = (I, self) ->
   Save the current game state and returns a JSON object representing that state.
 
   <code><pre>
-  engine.bind 'step', ->
+  engine.bind 'update', ->
     if justPressed.s
       engine.saveState()
   </pre></code>
@@ -34,7 +34,7 @@ Engine.SaveState = (I, self) ->
   Loads the game state passed in, or the last saved state, if any.
 
   <code><pre>
-  engine.bind 'step', ->
+  engine.bind 'update', ->
     if justPressed.l
       # loads the last saved state
       engine.loadState()
