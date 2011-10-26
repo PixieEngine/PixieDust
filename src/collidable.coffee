@@ -90,7 +90,7 @@
             b.I.touching |= UP
 
         else if deltaVelocity.y < 0
-          overlap.x = aBounds.y - bBounds.height - bBounds.y
+          overlap.y = aBounds.y - bBounds.height - bBounds.y
           if !(a.I.allowCollisions & UP) || !(b.I.allowCollisions & DOWN)
             overlap.y = 0
           else
