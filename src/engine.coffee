@@ -218,16 +218,17 @@
       add: (entityData) ->
         self.trigger "beforeAdd", entityData
 
-        obj = GameObject.construct entityData
+        object = GameObject.construct entityData
+        object.create()
 
-        self.trigger "afterAdd", obj
+        self.trigger "afterAdd", object
 
         if running && !I.paused
-          queuedObjects.push obj
+          queuedObjects.push object
         else
-          I.objects.push obj
+          I.objects.push object
 
-        return obj
+        return object
 
       objectAt: (x, y) ->
         targetObject = null
