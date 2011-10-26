@@ -139,6 +139,16 @@ GameObject = (I) ->
       I.active
 
     ###*
+    Triggers the create event if the object has not already been created.
+
+    @name create
+    @methodOf GameObject#
+    ###
+    create: ->
+      self.trigger('create') unless I.created
+      I.created = true
+
+    ###*
     Destroys the object and triggers the destroyed event.
 
     @name destroy
@@ -167,9 +177,6 @@ GameObject = (I) ->
         self.bind(eventName, event)
       else
         self.bind(eventName, eval( "(function() {#{event}})" ))
-
-  self.trigger('create') unless I.created
-  I.created = true
 
   self
 
