@@ -1668,7 +1668,29 @@ Object.isArray({key: "value"})
 @returns {Boolean} A boolean expressing whether the object is an instance of Array 
 */var __slice = Array.prototype.slice;
 Object.isArray = function(object) {
-  return Object.prototype.toString.call(object) === '[object Array]';
+  return Object.prototype.toString.call(object) === "[object Array]";
+};
+/**
+Checks whether an object is a string.
+
+<code><pre>
+Object.isString("a string")
+# => true
+
+Object.isString([1, 2, 4])
+# => false
+
+Object.isString({key: "value"})
+# => false
+</pre></code>
+
+@name isString
+@methodOf Object
+@param {Object} object The object to check for string-ness.
+@returns {Boolean} A boolean expressing whether the object is an instance of String 
+*/
+Object.isString = function(object) {
+  return Object.prototype.toString.call(object) === "[object String]";
 };
 /**
 Merges properties from objects into target without overiding.
@@ -4327,7 +4349,7 @@ Bounded = function(I, self) {
             b.I.touching |= UP;
           }
         } else if (deltaVelocity.y < 0) {
-          overlap.x = aBounds.y - bBounds.height - bBounds.y;
+          overlap.y = aBounds.y - bBounds.height - bBounds.y;
           if (!(a.I.allowCollisions & UP) || !(b.I.allowCollisions & DOWN)) {
             overlap.y = 0;
           } else {
@@ -4381,18 +4403,21 @@ Bounded = function(I, self) {
 
       <code><pre>
       player = GameObject
+        class: "Player"
         x: 0
         y: 0
         width: 10
         height: 10
 
       enemy = GameObject
+        class: "Enemy"
         x: 5
         y: 5
         width: 10
         height: 10
 
       enemy2 = GameObject
+        class: "Enemy"
         x: -5
         y: -5
         width: 10
@@ -4403,6 +4428,9 @@ Bounded = function(I, self) {
 
       Collision.collide(player, [enemy, enemy2], (p, e) -> ...)
       # => callback is called twice
+
+      Collision.collide("Player", "Enemy", (p, e) -> ...)
+      # => callback is also called twice
       </pre></code>
 
       @name collide
@@ -4412,12 +4440,23 @@ Bounded = function(I, self) {
       @param {Function} callback The callback to call when an object of groupA collides 
       with an object of groupB: (a, b) ->
       */
-    collide: function(groupA, groupB, callback) {
-      groupA = [].concat(groupA);
-      groupB = [].concat(groupB);
+    collide: function(groupA, groupB, callback, detectionMethod) {
+      if (detectionMethod == null) {
+        detectionMethod = collides;
+      }
+      if (Object.isString(groupA)) {
+        groupA = engine.find(groupA);
+      } else {
+        groupA = [].concat(groupA);
+      }
+      if (Object.isString(groupB)) {
+        groupB = engine.find(groupB);
+      } else {
+        groupB = [].concat(groupB);
+      }
       return groupA.each(function(a) {
         return groupB.each(function(b) {
-          if (collides(a, b)) {
+          if (detectionMethod(a, b)) {
             return callback(a, b);
           }
         });
@@ -6378,16 +6417,17 @@ Emitterable = function(I, self) {
       @returns {GameObject}
       */
       add: function(entityData) {
-        var obj;
+        var object;
         self.trigger("beforeAdd", entityData);
-        obj = GameObject.construct(entityData);
-        self.trigger("afterAdd", obj);
+        object = GameObject.construct(entityData);
+        object.create();
+        self.trigger("afterAdd", object);
         if (running && !I.paused) {
-          queuedObjects.push(obj);
+          queuedObjects.push(object);
         } else {
-          I.objects.push(obj);
+          I.objects.push(object);
         }
-        return obj;
+        return object;
       },
       objectAt: function(x, y) {
         var bounds, targetObject;
@@ -6705,7 +6745,7 @@ The <code>SaveState</code> module provides methods to save and restore the curre
     Save the current game state and returns a JSON object representing that state.
 
     <code><pre>
-    engine.bind 'step', ->
+    engine.bind 'update', ->
       if justPressed.s
         engine.saveState()
     </pre></code>
@@ -6723,7 +6763,7 @@ The <code>SaveState</code> module provides methods to save and restore the curre
     Loads the game state passed in, or the last saved state, if any.
 
     <code><pre>
-    engine.bind 'step', ->
+    engine.bind 'update', ->
       if justPressed.l
         # loads the last saved state
         engine.loadState()
@@ -7056,6 +7096,18 @@ GameObject = function(I) {
       return I.active;
     },
     /**
+    Triggers the create event if the object has not already been created.
+
+    @name create
+    @methodOf GameObject#
+    */
+    create: function() {
+      if (!I.created) {
+        self.trigger('create');
+      }
+      return I.created = true;
+    },
+    /**
     Destroys the object and triggers the destroyed event.
 
     @name destroy
@@ -7087,10 +7139,6 @@ GameObject = function(I) {
       }
     }
   });
-  if (!I.created) {
-    self.trigger('create');
-  }
-  I.created = true;
   return self;
 };
 /**
