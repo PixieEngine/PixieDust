@@ -15,21 +15,21 @@
     Collision holds many useful class methods for checking geometric overlap of various objects.
 
     <code><pre>
-    player = GameObject
+    player = engine.add
       class: "Player"
       x: 0
       y: 0
       width: 10
       height: 10
 
-    enemy = GameObject
+    enemy = engine.add
       class: "Enemy"
       x: 5
       y: 5
       width: 10
       height: 10
 
-    enemy2 = GameObject
+    enemy2 = engine.add
       class: "Enemy"
       x: -5
       y: -5
