@@ -16,18 +16,21 @@
 
     <code><pre>
     player = GameObject
+      class: "Player"
       x: 0
       y: 0
       width: 10
       height: 10
 
     enemy = GameObject
+      class: "Enemy"
       x: 5
       y: 5
       width: 10
       height: 10
 
     enemy2 = GameObject
+      class: "Enemy"
       x: -5
       y: -5
       width: 10
@@ -38,6 +41,9 @@
 
     Collision.collide(player, [enemy, enemy2], (p, e) -> ...)
     # => callback is called twice
+
+    Collision.collide("Player", "Enemy", (p, e) -> ...)
+    # => callback is also called twice
     </pre></code>
 
     @name collide
@@ -47,13 +53,20 @@
     @param {Function} callback The callback to call when an object of groupA collides 
     with an object of groupB: (a, b) ->
     ###
-    collide: (groupA, groupB, callback) ->
-      groupA = [].concat(groupA)
-      groupB = [].concat(groupB)
+    collide: (groupA, groupB, callback, detectionMethod=collides) ->
+      if Object.isString(groupA)
+        groupA = engine.find(groupA)
+      else
+        groupA = [].concat(groupA)
+
+      if Object.isString(groupB)
+        groupB = engine.find(groupB)
+      else
+        groupB = [].concat(groupB)
 
       groupA.each (a) ->
         groupB.each (b) ->
-          callback(a, b) if collides(a, b)
+          callback(a, b) if detectionMethod(a, b)
 
     ###*
     Takes two bounds objects and returns true if they collide (overlap), false otherwise.
