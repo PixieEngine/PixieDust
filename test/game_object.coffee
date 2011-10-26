@@ -19,9 +19,11 @@ test "[event] create", 2, ->
   GameObject
     create: ->
       ok true, "created event is fired on create"
+  .create()
 
   GameObject
     create: 'ok(true, "created event is fired on create")'
+  .create()
 
 test "[event] step", 2, ->
   gameObject = GameObject
