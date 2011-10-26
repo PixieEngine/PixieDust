@@ -24,7 +24,8 @@ Engine.Delay = (I, self) ->
 
   <code><pre>
   engine.delay 5, ->
-
+    engine.add
+      class: "Ghost"
   </pre></code>
 
   @name delay
