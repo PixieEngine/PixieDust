@@ -4402,21 +4402,21 @@ Bounded = function(I, self) {
       Collision holds many useful class methods for checking geometric overlap of various objects.
 
       <code><pre>
-      player = GameObject
+      player = engine.add
         class: "Player"
         x: 0
         y: 0
         width: 10
         height: 10
 
-      enemy = GameObject
+      enemy = engine.add
         class: "Enemy"
         x: 5
         y: 5
         width: 10
         height: 10
 
-      enemy2 = GameObject
+      enemy2 = engine.add
         class: "Enemy"
         x: -5
         y: -5
@@ -6027,24 +6027,25 @@ Drawable = function(I, self) {
     });
   }
   self.bind('draw', function(canvas) {
-    if (I.sprite) {
-      if (I.sprite.draw != null) {
-        return I.sprite.draw(canvas, 0, 0);
+    var sprite;
+    if (sprite = I.sprite) {
+      if (sprite.draw != null) {
+        return sprite.draw(canvas, -sprite.width / 2, -sprite.height / 2);
       } else {
         return typeof warn === "function" ? warn("Sprite has no draw method!") : void 0;
       }
     } else {
       if (I.radius != null) {
         return canvas.drawCircle({
-          x: I.width / 2,
-          y: I.height / 2,
+          x: 0,
+          y: 0,
           radius: I.radius,
           color: I.color
         });
       } else {
         return canvas.drawRect({
-          x: 0,
-          y: 0,
+          x: -I.width / 2,
+          y: -I.height / 2,
           width: I.width,
           height: I.height,
           color: I.color
@@ -6089,7 +6090,6 @@ Drawable = function(I, self) {
       if (I.vflip) {
         transform = transform.concat(Matrix.VERTICAL_FLIP);
       }
-      transform = transform.concat(Matrix.translation(-I.width / 2, -I.height / 2));
       if (I.spriteOffset) {
         transform = transform.concat(Matrix.translation(I.spriteOffset.x, I.spriteOffset.y));
       }
@@ -6711,7 +6711,8 @@ The <code>Delay</code> module provides methods to trigger events after a number 
 
     <code><pre>
     engine.delay 5, ->
-
+      engine.add
+        class: "Ghost"
     </pre></code>
 
     @name delay
