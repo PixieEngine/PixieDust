@@ -16,7 +16,7 @@ Engine.Flash = (I, self) ->
   self.bind 'overlay', (canvas) ->
     canvas.fill(I.flashColor)
 
-  flash: (color, targetAlpha, duration) ->
+  flash: (color, duration, targetAlpha) ->
     I.flashColor = Color(color || 'white') 
     I.flashTargetAlpha = (targetAlpha || 0)
     I.flashCooldown = (duration || 12)
