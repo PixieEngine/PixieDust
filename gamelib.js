@@ -7496,9 +7496,9 @@ This is nice for lightning type effects or to accentuate major game events.
 
     @name flash
     @methodOf Engine#
-    @param {Color} [color="white"] The flash color
-    @param {Number} [duration=12] How long the effect lasts
-    @returns {Number} [targetAlpha=0] The alpha value to fade to. By default, this is set to 0, which fades the color to transparent.
+    @param {Color} [color] The flash color
+    @param {Number} [duration] How long the effect lasts
+    @returns {Number} [targetAlpha] The alpha value to fade to. By default, this is set to 0, which fades the color to transparent.
     */
     flash: function(color, duration, targetAlpha) {
       I.flashColor = Color(color || 'white');
