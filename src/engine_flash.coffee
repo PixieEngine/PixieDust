@@ -1,3 +1,13 @@
+###*
+The <code>Flash</code> module allows you to flash a color onscreen and then fade to transparent over a time period. 
+This is nice for lightning type effects or to accentuate major game events.
+
+@name Flash
+@fieldOf Engine
+@module
+@param {Object} I Instance variables
+@param {Object} self Reference to the engine
+###
 Engine.Flash = (I, self) ->
   Object.reverseMerge I,
     flashColor: Color(0, 0, 0, 0)
@@ -16,6 +26,16 @@ Engine.Flash = (I, self) ->
   self.bind 'overlay', (canvas) ->
     canvas.fill(I.flashColor)
 
+  ###*
+  A convenient way to set the flash effect instance variables. Alternatively, you can modify them by hand, but
+  using Engine#flash is the suggested approach.
+
+  @name flash
+  @methodOf Engine#
+  @param {Color} [color="white"] The flash color
+  @param {Number} [duration=12] How long the effect lasts
+  @returns {Number} [targetAlpha=0] The alpha value to fade to. By default, this is set to 0, which fades the color to transparent.
+  ###
   flash: (color, duration, targetAlpha) ->
     I.flashColor = Color(color || 'white') 
     I.flashTargetAlpha = (targetAlpha || 0)
