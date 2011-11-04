@@ -20,8 +20,18 @@ test "Flash", ->
   engine.update()
 
   ok engine.I.flashColor.a < 1
-  equal engine.I.flashDuration, 12
   equal engine.I.flashCooldown, 11
-  equal engine.I.flashTargetAlpha, 0  
+
+  engine.flash(Color(255, 255, 255, 0), 30, 1)
+
+  ok engine.I.flashColor.equal(Color(255, 255, 255, 0))
+  equal engine.I.flashDuration, 30
+  equal engine.I.flashCooldown, 30
+  equal engine.I.flashTargetAlpha, 1  
+
+  engine.update()
+
+  ok engine.I.flashColor.a > 0
+  equal engine.I.flashCooldown, 29
 
 module()
