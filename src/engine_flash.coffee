@@ -32,9 +32,9 @@ Engine.Flash = (I, self) ->
 
   @name flash
   @methodOf Engine#
-  @param {Color} [color] The flash color
-  @param {Number} [duration] How long the effect lasts
-  @returns {Number} [targetAlpha] The alpha value to fade to. By default, this is set to 0, which fades the color to transparent.
+  @param {Color} [color="white"] The flash color
+  @param {Number} [duration=12] How long the effect lasts
+  @param {Number} [targetAlpha=0] The alpha value to fade to. By default, this is set to 0, which fades the color to transparent.
   ###
   flash: (color, duration, targetAlpha) ->
     I.flashColor = Color(color || 'white') 
