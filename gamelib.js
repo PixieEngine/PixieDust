@@ -7218,7 +7218,7 @@ Fadeable = function(I, self) {
     </pre></code>
 
     @name fadeOut
-    @methodOf GameObject#
+    @methodOf Fadeable#
     @param {Number} [duration=30] How long the effect lasts
     @param {Function} [callback=null] The function to execute when the sprite has finished fading.
     */
