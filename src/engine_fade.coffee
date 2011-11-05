@@ -15,7 +15,7 @@ Engine.Fade = (I, self) ->
 
   <code><pre>
   engine.fadeIn()
-  # => Sets the effect variables to their default state. This will the screen to fade to black over the next 30 frames.
+  # => Sets the effect variables to their default state. This will the screen to go from black to transparent over the next 30 frames.
 
   engine.fadeIn('blue', 50)
   # => This effect will start off blue and fade to transparent over 50 frames.
@@ -38,7 +38,7 @@ Engine.Fade = (I, self) ->
 
   <code><pre>
   engine.fadeOut()
-  # => Sets the effect variables to their default state. This will the screen to fade from black to transparent over the next 30 frames.
+  # => Sets the effect variables to their default state. This will the screen to fade from ransparent to black over the next 30 frames.
 
   engine.fadeOut('blue', 50)
   # => This effect will start off transparent and change to blue over 50 frames.
