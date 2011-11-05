@@ -47,7 +47,7 @@ Engine.Fade = (I, self) ->
   @name fadeOut
   @methodOf Engine#
   @param {Number} [duration=30] How long the effect lasts
-  @param {Color} [color="black"] The color to fade to
+  @param {Color} [color="transparent"] The color to fade to
   ###
   fadeOut: (duration = 30, color = 'transparent') ->
     I.flashColor = Color(color)
