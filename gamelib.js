@@ -7512,10 +7512,90 @@ This is nice for lightning type effects or to accentuate major game events.
     @param {Number} [targetAlpha=0] The alpha value to fade to. By default, this is set to 0, which fades the color to transparent.
     */
     flash: function(color, duration, targetAlpha) {
-      I.flashColor = Color(color || 'white');
-      I.flashTargetAlpha = targetAlpha || 0;
-      I.flashCooldown = duration || 12;
-      return I.flashDuration = duration || 12;
+      if (color == null) {
+        color = 'white';
+      }
+      if (duration == null) {
+        duration = 12;
+      }
+      if (targetAlpha == null) {
+        targetAlpha = 0;
+      }
+      I.flashColor = Color(color);
+      I.flashTargetAlpha = targetAlpha;
+      I.flashCooldown = duration;
+      return I.flashDuration = duration;
+    }
+  };
+};;
+/**
+The <code>Fade</code> module provides convenience methods for accessing common Engine.Flash presets.
+
+@name Fade
+@fieldOf Engine
+@module
+@param {Object} I Instance variables
+@param {Object} self Reference to the engine
+@see Engine.Flash
+*/Engine.Fade = function(I, self) {
+  return {
+    /**
+    A convenient way to set the flash effect instance variables. This provides a shorthand for fading the screen in 
+    from a given color over a specified duration.
+
+    <code><pre>
+    engine.fadeIn()
+    # => Sets the effect variables to their default state. This will the screen to go from black to transparent over the next 30 frames.
+
+    engine.fadeIn('blue', 50)
+    # => This effect will start off blue and fade to transparent over 50 frames.
+    </pre></code>  
+
+    @name fadeIn
+    @methodOf Engine#
+    @param {Number} [duration=30] How long the effect lasts
+    @param {Color} [color="black"] The color to fade from
+    */
+    fadeIn: function(duration, color) {
+      if (duration == null) {
+        duration = 30;
+      }
+      if (color == null) {
+        color = 'black';
+      }
+      I.flashColor = Color(color);
+      I.flashCooldown = duration;
+      I.flashDuration = duration;
+      return I.flashTargetAlpha = 0;
+    },
+    /**
+    A convenient way to set the flash effect instance variables. This provides a shorthand for fading 
+    the screen to a given color over a specified duration.
+
+    <code><pre>
+    engine.fadeOut()
+    # => Sets the effect variables to their default state. This will the screen to fade from ransparent to black over the next 30 frames.
+
+    engine.fadeOut('blue', 50)
+    # => This effect will start off transparent and change to blue over 50 frames.
+    </pre></code>  
+
+    @name fadeOut
+    @methodOf Engine#
+    @param {Number} [duration=30] How long the effect lasts
+    @param {Color} [color="transparent"] The color to fade to
+    */
+    fadeOut: function(duration, color) {
+      if (duration == null) {
+        duration = 30;
+      }
+      if (color == null) {
+        color = 'transparent';
+      }
+      I.flashColor = Color(color);
+      I.flashCooldown = duration;
+      I.flashDuration = duration;
+      return I.flashTargetAlpha = 1;
     }
   };
 };;
