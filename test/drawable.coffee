@@ -21,5 +21,15 @@ test "should apply hflip and vflip transformations", ->
   equal transform.c, Matrix.VERTICAL_FLIP.c
   equal transform.d, Matrix.VERTICAL_FLIP.d
 
+test "alpha", ->
+  object = GameObject()
+
+  equal object.I.alpha, 1
+
+  object2 = GameObject
+    alpha: 0.5
+
+  equal object2.I.alpha, 0.5
+
 module()
 
