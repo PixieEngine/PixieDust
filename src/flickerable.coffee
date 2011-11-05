@@ -1,3 +1,12 @@
+###*
+The <code>Flickerable</code> module provides a method to flicker a sprite between solid and 50% opacity. 
+
+@name Flickerable
+@module
+@constructor
+@param {Object} I Instance variables
+@param {Core} self Reference to including object
+###
 Flickerable = (I, self) ->
   Object.reverseMerge I,
     flickerAlpha: 0.5
