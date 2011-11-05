@@ -30,6 +30,17 @@ Engine.Flash = (I, self) ->
   A convenient way to set the flash effect instance variables. Alternatively, you can modify them by hand, but
   using Engine#flash is the suggested approach.
 
+  <code><pre>
+  engine.flash()
+  # => Sets the flash effect variables to their default state. This will cause a white flash that will turn transparent in the next 12 frames.
+
+  engine.flash('green', 30)
+  # => This flash effect will start off green and fade to transparent over 30 frames.
+
+  engine.flash(Color(255, 0, 0, 0), 20, 1)
+  # => This flash effect will start off transparent and move toward red over 20 frames 
+  </pre></code>  
+
   @name flash
   @methodOf Engine#
   @param {Color} [color="white"] The flash color
