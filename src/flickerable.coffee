@@ -36,10 +36,12 @@ Flickerable = (I, self) ->
   player.include(Flickerable)
 
   player.flicker()
-  # => This causes the sprite to flicker between full opacity and 50% opacity every 3 frames for 30 frames
+  # => This causes the sprite to flicker between full opacity 
+  # => and 50% opacity every 3 frames for 30 frames
 
   player.flicker(90, 5, 0.3)
-  # => This causes the sprite to flicker between full opacity and 30% opacity every 5 frames for 90 frames
+  # => This causes the sprite to flicker between full opacity
+  # => and 30% opacity every 5 frames for 90 frames
   </pre></code>
 
   @name flicker
