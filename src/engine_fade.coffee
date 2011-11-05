@@ -24,7 +24,7 @@ Engine.Fade = (I, self) ->
   @name fadeIn
   @methodOf Engine#
   @param {Number} [duration=30] How long the effect lasts
-  @param {Color} [color="black"] The color to fade to
+  @param {Color} [color="black"] The color to fade from
   ###
   fadeIn: (duration = 30, color = 'black') ->
     I.flashColor = Color(color) 
@@ -44,10 +44,10 @@ Engine.Fade = (I, self) ->
   # => This effect will start off transparent and change to blue over 50 frames.
   </pre></code>  
 
-  @name fadeIn
+  @name fadeOut
   @methodOf Engine#
   @param {Number} [duration=30] How long the effect lasts
-  @param {Color} [color="black"] The color to fade from
+  @param {Color} [color="black"] The color to fade to
   ###
   fadeOut: (duration = 30, color = 'transparent') ->
     I.flashColor = Color(color)
