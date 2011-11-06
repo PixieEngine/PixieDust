@@ -6079,14 +6079,14 @@ Drawable = function(I, self) {
     });
   }
   self.bind('draw', function(canvas) {
-    var previousAlpha;
-    if (I.alpha && I.alpha !== 1) {
-      previousAlpha = I.alpha;
+    var previousAlpha, sprite;
+    if ((I.alpha != null) && I.alpha !== 1) {
+      previousAlpha = canvas.context().globalAlpha;
       canvas.context().globalAlpha = I.alpha;
     }
-    if (I.sprite) {
-      if (I.sprite.draw != null) {
-        I.sprite.draw(canvas, 0, 0);
+    if (sprite = I.sprite) {
+      if (sprite.draw != null) {
+        sprite.draw(canvas, -sprite.width / 2, -sprite.height / 2);
       } else {
         if (typeof warn === "function") {
           warn("Sprite has no draw method!");
@@ -6095,23 +6095,23 @@ Drawable = function(I, self) {
     } else {
       if (I.radius != null) {
         canvas.drawCircle({
-          x: I.width / 2,
-          y: I.height / 2,
+          x: 0,
+          y: 0,
           radius: I.radius,
           color: I.color
         });
       } else {
         canvas.drawRect({
-          x: 0,
-          y: 0,
+          x: -I.width / 2,
+          y: -I.height / 2,
           width: I.width,
           height: I.height,
           color: I.color
         });
       }
     }
-    if (I.alpha && I.alpha !== 1) {
-      return I.alpha = previousAlpha;
+    if ((I.alpha != null) && I.alpha !== 1) {
+      return canvas.context().globalAlpha = previousAlpha;
     }
   });
   return {
@@ -6151,7 +6151,6 @@ Drawable = function(I, self) {
       if (I.vflip) {
         transform = transform.concat(Matrix.VERTICAL_FLIP);
       }
-      transform = transform.concat(Matrix.translation(-I.width / 2, -I.height / 2));
       if (I.spriteOffset) {
         transform = transform.concat(Matrix.translation(I.spriteOffset.x, I.spriteOffset.y));
       }
@@ -7233,6 +7232,77 @@ Fadeable = function(I, self) {
   };
 };;
 /**
+The <code>Flickerable</code> module provides a method to flicker a sprite between solid and 50% opacity. 
+
+@name Flickerable
+@module
+@constructor
+@param {Object} I Instance variables
+@param {Core} self Reference to including object
+*/var Flickerable;
+Flickerable = function(I, self) {
+  var originalAlpha;
+  Object.reverseMerge(I, {
+    flickerAlpha: 0.5,
+    flickerDuration: 0,
+    flickerFrequency: 3
+  });
+  originalAlpha = I.alpha;
+  return {
+    before: {
+      draw: function(canvas) {
+        I.flickerDuration = I.flickerDuration.approach(0, 1);
+        if ((I.age % I.flickerFrequency === 0) && I.flickerDuration > 0) {
+          return I.alpha = I.flickerAlpha;
+        }
+      }
+    },
+    after: {
+      draw: function(canvas) {
+        return I.alpha = originalAlpha;
+      }
+    },
+    /**
+    A convenient way to set the flicker instance variables on a sprite. You can modify the
+    instance variables by hand but the suggested way to do it is through this method.
+
+    <code><pre>
+    player = GameObject()
+
+    player.include(Flickerable)
+
+    player.flicker()
+    # => This causes the sprite to flicker between full opacity 
+    # => and 50% opacity every 3 frames for 30 frames
+
+    player.flicker(90, 5, 0.3)
+    # => This causes the sprite to flicker between full opacity
+    # => and 30% opacity every 5 frames for 90 frames
+    </pre></code>
+
+    @name flicker
+    @methodOf Flickerable#
+    @param {Number} [duration=30] How long the effect lasts
+    @param {Number} [frequency=3] The number of frames in between opacity changes
+    @param {Number} [alpha=0.5] The alpha value to flicker to
+    */
+    flicker: function(duration, frequency, alpha) {
+      if (duration == null) {
+        duration = 30;
+      }
+      if (frequency == null) {
+        frequency = 3;
+      }
+      if (alpha == null) {
+        alpha = 0.5;
+      }
+      I.flickerDuration = duration;
+      I.flickerFrequency = frequency;
+      return I.flickerAlpha = alpha;
+    }
+  };
+};;
+/**
 The default base class for all objects you can add to the engine.
 
 GameObjects fire events that you may bind listeners to. Event listeners 
@@ -7726,75 +7796,4 @@ draw anything to the screen until the image has been loaded.
   };
   return (typeof exports !== "undefined" && exports !== null ? exports : this)["Sprite"] = Sprite;
 })();;
-/**
-The <code>Flickerable</code> module provides a method to flicker a sprite between solid and 50% opacity. 
-
-@name Flickerable
-@module
-@constructor
-@param {Object} I Instance variables
-@param {Core} self Reference to including object
-*/var Flickerable;
-Flickerable = function(I, self) {
-  var originalAlpha;
-  Object.reverseMerge(I, {
-    flickerAlpha: 0.5,
-    flickerDuration: 0,
-    flickerFrequency: 3
-  });
-  originalAlpha = I.alpha;
-  return {
-    before: {
-      draw: function(canvas) {
-        I.flickerDuration = I.flickerDuration.approach(0, 1);
-        if ((I.age % I.flickerFrequency === 0) && I.flickerDuration > 0) {
-          return I.alpha = I.flickerAlpha;
-        }
-      }
-    },
-    after: {
-      draw: function(canvas) {
-        return I.alpha = originalAlpha;
-      }
-    },
-    /**
-    A convenient way to set the flicker instance variables on a sprite. You can modify the
-    instance variables by hand but the suggested way to do it is through this method.
-
-    <code><pre>
-    player = GameObject()
-
-    player.include(Flickerable)
-
-    player.flicker()
-    # => This causes the sprite to flicker between full opacity 
-    # => and 50% opacity every 3 frames for 30 frames
-
-    player.flicker(90, 5, 0.3)
-    # => This causes the sprite to flicker between full opacity
-    # => and 30% opacity every 5 frames for 90 frames
-    </pre></code>
-
-    @name flicker
-    @methodOf Flickerable#
-    @param {Number} [duration=30] How long the effect lasts
-    @param {Number} [frequency=3] The number of frames in between opacity changes
-    @param {Number} [alpha=0.5] The alpha value to flicker to
-    */
-    flicker: function(duration, frequency, alpha) {
-      if (duration == null) {
-        duration = 30;
-      }
-      if (frequency == null) {
-        frequency = 3;
-      }
-      if (alpha == null) {
-        alpha = 0.5;
-      }
-      I.flickerDuration = duration;
-      I.flickerFrequency = frequency;
-      return I.flickerAlpha = alpha;
-    }
-  };
-};;
 ;
