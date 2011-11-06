@@ -2386,9 +2386,37 @@ Object.isObject = function(object) {
   @fieldOf Point
   @returns {Point} The point (0, 0)
   */
-  Point.ZERO = Point();
+  Point.ZERO = Point(0, 0);
+  /**
+  @name LEFT
+  @fieldOf Point
+  @returns {Point} The point (-1, 0)
+  */
+  Point.LEFT = Point(-1, 0);
+  /**
+  @name RIGHT
+  @fieldOf Point
+  @returns {Point} The point (1, 0)
+  */
+  Point.RIGHT = Point(1, 0);
+  /**
+  @name UP
+  @fieldOf Point
+  @returns {Point} The point (0, -1)
+  */
+  Point.UP = Point(0, -1);
+  /**
+  @name DOWN
+  @fieldOf Point
+  @returns {Point} The point (0, 1)
+  */
+  Point.DOWN = Point(0, 1);
   if (Object.freeze) {
     Object.freeze(Point.ZERO);
+    Object.freeze(Point.LEFT);
+    Object.freeze(Point.RIGHT);
+    Object.freeze(Point.UP);
+    Object.freeze(Point.DOWN);
   }
   return (typeof exports !== "undefined" && exports !== null ? exports : this)["Point"] = Point;
 })();;
