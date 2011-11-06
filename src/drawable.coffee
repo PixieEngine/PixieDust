@@ -105,9 +105,8 @@ Drawable = (I, self) ->
     )
 
   self.bind 'draw', (canvas) ->
-    if I.alpha && I.alpha != 1
-      previousAlpha = I.alpha
-
+    if I.alpha? and I.alpha != 1
+      previousAlpha = canvas.context().globalAlpha
       canvas.context().globalAlpha = I.alpha
 
     if sprite = I.sprite
@@ -130,8 +129,8 @@ Drawable = (I, self) ->
           height: I.height
           color: I.color
 
-    if I.alpha && I.alpha != 1
-      I.alpha = previousAlpha
+    if I.alpha? and I.alpha != 1
+      canvas.context().globalAlpha = previousAlpha
 
   ###*
   Draw does not actually do any drawing itself, instead it triggers all of the draw events.
