@@ -110,22 +110,22 @@ Drawable = (I, self) ->
 
       canvas.context().globalAlpha = I.alpha
 
-    if I.sprite
-      if I.sprite.draw? 
-        I.sprite.draw(canvas, 0, 0)
+    if sprite = I.sprite
+      if sprite.draw? 
+        sprite.draw(canvas, -sprite.width / 2, -sprite.height / 2)
       else
         warn?("Sprite has no draw method!")
     else
       if I.radius?
         canvas.drawCircle
-          x: I.width/2
-          y: I.height/2
+          x: 0
+          y: 0
           radius: I.radius
           color: I.color
       else
         canvas.drawRect
-          x: 0
-          y: 0
+          x: -I.width/2
+          y: -I.height/2
           width: I.width
           height: I.height
           color: I.color
@@ -167,8 +167,6 @@ Drawable = (I, self) ->
     transform = transform.concat(Matrix.rotation(I.rotation)) if I.rotation
     transform = transform.concat(Matrix.HORIZONTAL_FLIP) if I.hflip
     transform = transform.concat(Matrix.VERTICAL_FLIP) if I.vflip
-
-    transform = transform.concat(Matrix.translation(-I.width/2, -I.height/2))
 
     if I.spriteOffset
       transform = transform.concat(Matrix.translation(I.spriteOffset.x, I.spriteOffset.y))
