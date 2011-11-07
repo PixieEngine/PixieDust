@@ -141,11 +141,12 @@ Drawable = (I, self) ->
   @returns self
   ###
   draw: (canvas) ->
-
     self.trigger 'beforeTransform', canvas
 
     canvas.withTransform self.transform(), (canvas) ->
+      self.trigger 'beforeDraw', canvas
       self.trigger 'draw', canvas
+      self.trigger 'afterDraw', canvas
 
     self.trigger 'afterTransform', canvas
 
