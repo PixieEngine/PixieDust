@@ -2,8 +2,6 @@
   defaults =
     FPS: 30
     age: 0
-    ambientLight: 1
-    cameraTransform: Matrix.IDENTITY
     excludedModules: []
     includedModules: []
     paused: false
@@ -161,18 +159,7 @@
       return unless canvas = I.canvas
 
       self.trigger "beforeDraw", canvas
-
-      I.canvas.withTransform I.cameraTransform, (canvas) ->
-        if I.zSort
-          drawObjects = I.objects.copy().sort (a, b) ->
-            a.I.zIndex - b.I.zIndex
-        else
-          drawObjects = I.objects
-
-        drawObjects.invoke("draw", canvas)
-
-        self.trigger "draw", I.canvas
-
+      self.trigger "draw", canvas
       self.trigger "overlay", I.canvas
 
     step = ->
@@ -218,6 +205,12 @@
           I.objects.push object
 
         return object
+
+      ###*
+      Returns a copy of the objects array. This prevents unwanted side effects.
+      ###
+      objects: ->
+        I.objects.copy()
 
       eachObject: (iterator) ->
         I.objects.each iterator
@@ -336,10 +329,9 @@
       draw: draw
     }
 
-    self.attrAccessor "ambientLight", "cameraTransform"
     self.include Bindable
 
-    defaultModules = ["Keyboard", "Clear", "Delay", "SaveState", "Selector", "Collision"]
+    defaultModules = ["Keyboard", "Clear", "Delay", "SaveState", "Selector", "SingleCamera", "Collision"]
     modules = defaultModules.concat(I.includedModules)
     modules = modules.without([].concat(I.excludedModules))
 
