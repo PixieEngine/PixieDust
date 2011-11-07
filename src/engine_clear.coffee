@@ -13,6 +13,8 @@ Engine.Clear = (I, self) ->
     backgroundColor: "#00010D"
     clear: false
 
+  self.attrAccessor "clear", "backgroundColor"
+
   self.bind "beforeDraw", ->
     if I.clear
       I.canvas.clear()
