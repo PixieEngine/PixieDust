@@ -311,15 +311,15 @@
       Query the engine to see if it is paused.
 
       <code><pre>
-         engine.pause()
+      engine.pause()
 
-         engine.paused()
-      => true
+      engine.paused()
+      # true
 
-         engine.play()
+      engine.play()
 
-         engine.paused()
-      => false
+      engine.paused()
+      # false
       </pre></code>
 
       @methodOf Engine#
