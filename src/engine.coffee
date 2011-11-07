@@ -146,11 +146,7 @@
         window.requestAnimationFrame(animLoop)
 
     update = ->
-      # TODO: Move this update keys into a keyboard engine module
-      # Make a Gamepad/Keyboard input module that has web and XNA
-      # implementations
-      updateKeys?()
-
+      self.trigger "beforeUpdate"
       self.trigger "update"
 
       [I.objects, toRemove] = I.objects.partition (object) ->
@@ -350,7 +346,7 @@
     self.attrAccessor "ambientLight", "backgroundColor", "cameraTransform", "clear"
     self.include Bindable
 
-    defaultModules = ["Delay", "SaveState", "Selector", "Collision"]
+    defaultModules = ["Keyboard", "Delay", "SaveState", "Selector", "Collision"]
     modules = defaultModules.concat(I.includedModules)
     modules = modules.without([].concat(I.excludedModules))
 
