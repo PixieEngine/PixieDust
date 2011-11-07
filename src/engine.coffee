@@ -145,6 +145,8 @@
       self.trigger "beforeUpdate"
       self.trigger "update"
 
+      # TODO Extract this into an Objects or States module
+      # and bind it to the 'update' event
       [I.objects, toRemove] = I.objects.partition (object) ->
         object.update()
 
