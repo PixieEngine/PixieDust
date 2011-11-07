@@ -3,9 +3,7 @@
     FPS: 30
     age: 0
     ambientLight: 1
-    backgroundColor: "#00010D"
     cameraTransform: Matrix.IDENTITY
-    clear: false
     excludedModules: []
     includedModules: []
     paused: false
@@ -162,13 +160,10 @@
     draw = ->
       return unless I.canvas
 
-      if I.clear
-        I.canvas.clear()
-      else if I.backgroundColor
-        I.canvas.fill(I.backgroundColor)
+      self.trigger "beforeDraw", canvas
 
       I.canvas.withTransform I.cameraTransform, (canvas) ->
-        self.trigger "beforeDraw", canvas
+
 
         if I.zSort
           drawObjects = I.objects.copy().sort (a, b) ->
@@ -343,10 +338,10 @@
       draw: draw
     }
 
-    self.attrAccessor "ambientLight", "backgroundColor", "cameraTransform", "clear"
+    self.attrAccessor "ambientLight", "cameraTransform"
     self.include Bindable
 
-    defaultModules = ["Keyboard", "Delay", "SaveState", "Selector", "Collision"]
+    defaultModules = ["Keyboard", "Clear", "Delay", "SaveState", "Selector", "Collision"]
     modules = defaultModules.concat(I.includedModules)
     modules = modules.without([].concat(I.excludedModules))
 
