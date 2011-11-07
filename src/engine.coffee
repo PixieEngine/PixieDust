@@ -214,9 +214,6 @@
       objects: ->
         I.objects.copy()
 
-      eachObject: (iterator) ->
-        I.objects.each iterator
-
       ###*
       Start the game simulation.
 
