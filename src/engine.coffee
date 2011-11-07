@@ -210,6 +210,9 @@
 
       ###*
       Returns a copy of the objects array. This prevents unwanted side effects.
+
+      @methodOf Engine#
+      @name objects
       ###
       objects: ->
         I.objects.copy()
