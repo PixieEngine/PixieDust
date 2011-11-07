@@ -6154,7 +6154,9 @@ Drawable = function(I, self) {
     draw: function(canvas) {
       self.trigger('beforeTransform', canvas);
       canvas.withTransform(self.transform(), function(canvas) {
-        return self.trigger('draw', canvas);
+        self.trigger('beforeDraw', canvas);
+        self.trigger('draw', canvas);
+        return self.trigger('afterDraw', canvas);
       });
       self.trigger('afterTransform', canvas);
       return self;
@@ -6520,22 +6522,6 @@ Emitterable = function(I, self) {
         }
         return object;
       },
-      objectAt: function(x, y) {
-        var bounds, targetObject;
-        targetObject = null;
-        bounds = {
-          x: x,
-          y: y,
-          width: 1,
-          height: 1
-        };
-        self.eachObject(function(object) {
-          if (object.collides(bounds)) {
-            return targetObject = object;
-          }
-        });
-        return targetObject;
-      },
       eachObject: function(iterator) {
         return I.objects.each(iterator);
       },
@@ -6619,15 +6605,15 @@ Emitterable = function(I, self) {
       Query the engine to see if it is paused.
 
       <code><pre>
-         engine.pause()
+      engine.pause()
 
-         engine.paused()
-      => true
+      engine.paused()
+      # true
 
-         engine.play()
+      engine.play()
 
-         engine.paused()
-      => false
+      engine.paused()
+      # false
       </pre></code>
 
       @methodOf Engine#
