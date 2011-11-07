@@ -8,9 +8,10 @@ Engine.SingleCamera = (I, self) ->
   # Add events and methods here
   self.bind "draw", ->
     I.canvas.withTransform I.cameraTransform, (canvas) ->
-      # TODO Turn this zSort into a per camera object stream filter
       drawObjects = self.objects()
 
+      # TODO Turn this zSort into a per camera object stream filter
+      # This will also enable filters like clipping region tests
       if I.zSort
         drawObjects.sort (a, b) ->
           a.I.zIndex - b.I.zIndex
