@@ -158,13 +158,11 @@
       self.trigger "afterUpdate"
 
     draw = ->
-      return unless I.canvas
+      return unless canvas = I.canvas
 
       self.trigger "beforeDraw", canvas
 
       I.canvas.withTransform I.cameraTransform, (canvas) ->
-
-
         if I.zSort
           drawObjects = I.objects.copy().sort (a, b) ->
             a.I.zIndex - b.I.zIndex
