@@ -1,16 +1,29 @@
 # TODO: This is a work in progress
 Engine.GameState = (I, self) ->
-  # Default Game State
-  currentState = GameState()
+  Object.reverseMerge I,
+    currentState: GameState()
+
+  requestedState = null
 
   # The idea is that all the engine#beforeUpdate triggers happen
   # before the state beforeUpdate triggers, then the state update
   # then the state after update, then the engine after update
   # like a layered cake with states in the middle.
   self.bind "update", ->
-    currentState.trigger "beforeUpdate"
-    currentState.trigger "update"
-    currentState.trigger "afterUpdate"
+    I.currentState.trigger "beforeUpdate"
+    I.currentState.trigger "update"
+    I.currentState.trigger "afterUpdate"
+
+  self.bind "afterUpdate", ->
+    if requestedState?
+      I.currentState.trigger "exit", requestedState
+
+      previousState = I.currentState
+      I.currentState = requestedState
+
+      I.currentState.trigger "enter", previousState
+
+      requestedState = null
 
   # TODO: Drawing, cameras??
 
@@ -18,8 +31,10 @@ Engine.GameState = (I, self) ->
   return {
     # Just passs through to the current state
     add: (entityData) ->
-      currentState.add(entityData)
+      I.currentState.add(entityData)
     objects: ->
-      currentState.objects()
+      I.currentState.objects()
+    setState: (newState) ->
+      requestedState = newState
   }
 
