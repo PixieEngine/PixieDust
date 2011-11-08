@@ -3,12 +3,12 @@ The <code>SingleCamera</code> module provides provides a single camera view of t
 Its transform can be adjusted to view different areas and provide various camera effects.
 
 @name SingleCamera
-@fieldOf Engine
+@fieldOf GameState
 @module
 @param {Object} I Instance variables
 @param {Object} self Reference to the engine
 ###
-Engine.SingleCamera = (I, self) ->
+GameState.SingleCamera = (I, self) ->
   # Set some default properties
   Object.reverseMerge I,
     cameraTransform: Matrix.IDENTITY
