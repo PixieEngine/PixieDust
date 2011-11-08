@@ -64,8 +64,8 @@ GameState = (I={}) ->
     I.objects = I.objects.concat(queuedObjects)
     queuedObjects = []
 
-    #TODO Include GameState modules like cameras,
-    # save states, etc.
+  #TODO Include GameState modules like cameras,
+  # save states, etc.
 
   # We must always return self as the last line
   return self
