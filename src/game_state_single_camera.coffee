@@ -16,8 +16,8 @@ GameState.SingleCamera = (I, self) ->
   self.attrAccessor "cameraTransform"
 
   # Add events and methods here
-  self.bind "draw", ->
-    I.canvas.withTransform I.cameraTransform, (canvas) ->
+  self.bind "draw", (canvas) ->
+    canvas.withTransform I.cameraTransform, (canvas) ->
       drawObjects = self.objects()
 
       # TODO Turn this zSort into a per camera object stream filter
