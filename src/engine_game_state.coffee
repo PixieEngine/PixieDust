@@ -15,6 +15,7 @@ Engine.GameState = (I, self) ->
     I.currentState.trigger "afterUpdate"
 
   self.bind "afterUpdate", ->
+    # Handle state change
     if requestedState?
       I.currentState.trigger "exit", requestedState
 
