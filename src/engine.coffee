@@ -144,17 +144,6 @@
     update = ->
       self.trigger "beforeUpdate"
       self.trigger "update"
-
-      # TODO Extract this into an Objects or States module
-      # and bind it to the 'update' event
-      [I.objects, toRemove] = I.objects.partition (object) ->
-        object.update()
-
-      toRemove.invoke "trigger", "remove"
-
-      I.objects = I.objects.concat(queuedObjects)
-      queuedObjects = []
-
       self.trigger "afterUpdate"
 
     draw = ->
@@ -172,51 +161,6 @@
       draw()
 
     self = Core(I).extend {
-      ###*
-      The add method creates and adds an object to the game world. Two
-      other events are triggered around this one: beforeAdd and afterAdd.
-
-      <code><pre>
-      # you can add arbitrary entityData and
-      # the engine will make it into a GameObject
-      engine.add 
-        x: 50
-        y: 30
-        color: "red"
-
-      player = engine.add
-        class: "Player"
-      </pre></code>
-
-      @name add
-      @methodOf Engine#
-      @param {Object} entityData The data used to create the game object.
-      @returns {GameObject}
-      ###
-      add: (entityData) ->
-        self.trigger "beforeAdd", entityData
-
-        object = GameObject.construct entityData
-        object.create()
-
-        self.trigger "afterAdd", object
-
-        if running && !I.paused
-          queuedObjects.push object
-        else
-          I.objects.push object
-
-        return object
-
-      ###*
-      Returns a copy of the objects array. This prevents unwanted side effects.
-
-      @methodOf Engine#
-      @name objects
-      ###
-      objects: ->
-        I.objects.copy()
-
       ###*
       Start the game simulation.
 
@@ -333,7 +277,7 @@
 
     self.include Bindable
 
-    defaultModules = ["Keyboard", "Clear", "Delay", "SaveState", "Selector", "SingleCamera", "Collision"]
+    defaultModules = ["Keyboard", "Clear", "Delay", "GameState", "SaveState", "Selector", "Collision"]
     modules = defaultModules.concat(I.includedModules)
     modules = modules.without([].concat(I.excludedModules))
 
