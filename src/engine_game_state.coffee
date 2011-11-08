@@ -26,6 +26,17 @@ Engine.GameState = (I, self) ->
       requestedState = null
 
   # TODO: Drawing, cameras??
+  # Cameras should be components of GameStates
+  # Draw will pass through and trigger all the
+  # events in the game state
+  # Engine will still respond to beforeDraw
+  # and overlay to add overlays that apply to any
+  # game state
+
+  self.bind "draw", (canvas) ->
+    I.currentState.trigger "beforeDraw", canvas
+    I.currentState.trigger "draw", canvas
+    I.currentState.trigger "overlay", canvas
 
   # We must always return self as the last line
   return {
