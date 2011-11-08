@@ -64,7 +64,7 @@ Engine.Selector = (I, self) ->
 
     matcher = Engine.Selector.generate(selector)
 
-    I.objects.each (object) ->
+    self.objects().each (object) ->
       results.push object if matcher.match object
 
     Object.extend results, instanceMethods
