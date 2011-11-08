@@ -6,7 +6,7 @@ GameState = (I={}) ->
 
   queuedObjects = []
 
-  self = Core(I).extend
+  self = Core(I).extend {
     ###*
     The add method creates and adds an object to the game world. Two
     other events are triggered around this one: beforeAdd and afterAdd.
@@ -45,6 +45,7 @@ GameState = (I={}) ->
 
     objects: ->
       I.objects.copy()
+  }
 
   self.include Bindable
 
