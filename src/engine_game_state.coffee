@@ -52,5 +52,11 @@ Engine.GameState = (I, self) ->
       I.currentState.objects()
     setState: (newState) ->
       requestedState = newState
+    saveState: ->
+      I.currentState.saveState()
+    loadState: (newState) ->
+      I.currentState.loadState(newState)
+    reload: ->
+      I.currentState.reload()
   }
 
