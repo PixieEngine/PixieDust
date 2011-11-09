@@ -6,12 +6,13 @@ Its transform can be adjusted to view different areas and provide various camera
 @fieldOf GameState
 @module
 @param {Object} I Instance variables
-@param {Object} self Reference to the engine
+@param {Object} self Reference to the game state
 ###
 GameState.SingleCamera = (I, self) ->
   # Set some default properties
   Object.reverseMerge I,
     cameraTransform: Matrix.IDENTITY
+    zSort: true
 
   self.attrAccessor "cameraTransform"
 
