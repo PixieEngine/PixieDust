@@ -43,7 +43,11 @@ Engine.GameState = (I, self) ->
   return {
     # Just passs through to the current state
     add: (entityData) ->
-      I.currentState.add(entityData)
+      self.trigger "beforeAdd", entityData
+      object = I.currentState.add(entityData)
+      self.trigger "afterAdd", object
+
+      return object
     objects: ->
       I.currentState.objects()
     setState: (newState) ->
