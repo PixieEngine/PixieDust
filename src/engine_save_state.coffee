@@ -1,17 +1,14 @@
 ###*
-The <code>SaveState</code> module provides methods to save and restore the current engine state.
+The <code>SaveState</code> module provides methods to save and restore the current game state.
 
 @name SaveState
-@fieldOf Engine
+@fieldOf GameState
 @module
 @param {Object} I Instance variables
-@param {Object} self Reference to the engine
+@param {Object} self Reference to the game state
 ###
-Engine.SaveState = (I, self) ->
+GameState.SaveState = (I, self) ->
   savedState = null
-
-  #TODO      
-  rewind: ->
 
   ###*
   Save the current game state and returns a JSON object representing that state.
@@ -23,8 +20,8 @@ Engine.SaveState = (I, self) ->
   </pre></code>
 
   @name saveState
-  @methodOf Engine#
-  @returns {Array} An array of the instance data of all objects in the game
+  @methodOf GameState#
+  @returns {Array} An array of the instance data of all objects in the game state
   ###
   saveState: ->
     savedState = I.objects.map (object) ->
@@ -46,8 +43,8 @@ Engine.SaveState = (I, self) ->
   </pre></code>
 
   @name loadState
-  @methodOf Engine#
-  @param [newState] The game state to load.
+  @methodOf GameState#
+  @param [newState] An arraf of object instance data to load.
   ###
   loadState: (newState) ->
     if newState ||= savedState
@@ -58,7 +55,7 @@ Engine.SaveState = (I, self) ->
         self.add Object.extend({}, objectData)
 
   ###*
-  Reloads the current engine state, useful for hotswapping code.
+  Reloads the current game state, useful for hotswapping code.
 
   <code><pre>
   engine.I.objects.each (object) ->
@@ -72,7 +69,7 @@ Engine.SaveState = (I, self) ->
   </pre></code>
 
   @name reload
-  @methodOf Engine#
+  @methodOf GameState#
   ###
   reload: ->
     oldObjects = I.objects
