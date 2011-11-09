@@ -33,17 +33,17 @@ test "#save and #restore", ->
   engine.add {}
   engine.add {}
 
-  equals(engine.I.objects.length, 2)
+  equals(engine.objects().length, 2)
 
   engine.saveState()
 
   engine.add {}
 
-  equals(engine.I.objects.length, 3)
+  equals(engine.objects().length, 3)
 
   engine.loadState()
 
-  equals(engine.I.objects.length, 2)
+  equals(engine.objects().length, 2)
 
 test "before add event", 1, ->
   engine = Engine()
