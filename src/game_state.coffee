@@ -68,6 +68,7 @@ GameState = (I={}) ->
   #TODO Include GameState modules like cameras,
   # save states, etc.
   self.include GameState.SingleCamera
+  self.include GameState.SaveState
 
   # We must always return self as the last line
   return self
