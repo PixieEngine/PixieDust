@@ -6310,10 +6310,6 @@ Emitterable = function(I, self) {
   defaults = {
     FPS: 30,
     age: 0,
-    ambientLight: 1,
-    backgroundColor: "#00010D",
-    cameraTransform: Matrix.IDENTITY,
-    clear: false,
     excludedModules: [],
     includedModules: [],
     paused: false,
@@ -6443,41 +6439,17 @@ Emitterable = function(I, self) {
       }
     };
     update = function() {
-      var toRemove, _ref;
-      if (typeof updateKeys === "function") {
-        updateKeys();
-      }
+      self.trigger("beforeUpdate");
       self.trigger("update");
-      _ref = I.objects.partition(function(object) {
-        return object.update();
-      }), I.objects = _ref[0], toRemove = _ref[1];
-      toRemove.invoke("trigger", "remove");
-      I.objects = I.objects.concat(queuedObjects);
-      queuedObjects = [];
       return self.trigger("afterUpdate");
     };
     draw = function() {
-      if (!I.canvas) {
+      var canvas;
+      if (!(canvas = I.canvas)) {
         return;
       }
-      if (I.clear) {
-        I.canvas.clear();
-      } else if (I.backgroundColor) {
-        I.canvas.fill(I.backgroundColor);
-      }
-      I.canvas.withTransform(I.cameraTransform, function(canvas) {
-        var drawObjects;
-        self.trigger("beforeDraw", canvas);
-        if (I.zSort) {
-          drawObjects = I.objects.copy().sort(function(a, b) {
-            return a.I.zIndex - b.I.zIndex;
-          });
-        } else {
-          drawObjects = I.objects;
-        }
-        drawObjects.invoke("draw", canvas);
-        return self.trigger("draw", I.canvas);
-      });
+      self.trigger("beforeDraw", canvas);
+      self.trigger("draw", canvas);
       return self.trigger("overlay", I.canvas);
     };
     step = function() {
@@ -6488,43 +6460,6 @@ Emitterable = function(I, self) {
       return draw();
     };
     self = Core(I).extend({
-      /**
-      The add method creates and adds an object to the game world. Two
-      other events are triggered around this one: beforeAdd and afterAdd.
-
-      <code><pre>
-      # you can add arbitrary entityData and
-      # the engine will make it into a GameObject
-      engine.add 
-        x: 50
-        y: 30
-        color: "red"
-
-      player = engine.add
-        class: "Player"
-      </pre></code>
-
-      @name add
-      @methodOf Engine#
-      @param {Object} entityData The data used to create the game object.
-      @returns {GameObject}
-      */
-      add: function(entityData) {
-        var object;
-        self.trigger("beforeAdd", entityData);
-        object = GameObject.construct(entityData);
-        object.create();
-        self.trigger("afterAdd", object);
-        if (running && !I.paused) {
-          queuedObjects.push(object);
-        } else {
-          I.objects.push(object);
-        }
-        return object;
-      },
-      eachObject: function(iterator) {
-        return I.objects.each(iterator);
-      },
       /**
       Start the game simulation.
 
@@ -6640,9 +6575,8 @@ Emitterable = function(I, self) {
       update: update,
       draw: draw
     });
-    self.attrAccessor("ambientLight", "backgroundColor", "cameraTransform", "clear");
     self.include(Bindable);
-    defaultModules = ["Delay", "SaveState", "Selector", "Collision"];
+    defaultModules = ["Keyboard", "Clear", "Delay", "GameState", "Selector", "Collision"];
     modules = defaultModules.concat(I.includedModules);
     modules = modules.without([].concat(I.excludedModules));
     modules.each(function(moduleName) {
@@ -6656,28 +6590,28 @@ Emitterable = function(I, self) {
   };
   return (typeof exports !== "undefined" && exports !== null ? exports : this)["Engine"] = Engine;
 })();;
-Engine.Camera = function(I, self) {
-  var currentObject, currentOptions, currentType, followTypes;
-  currentType = "centered";
-  currentOptions = {};
-  currentObject = null;
-  followTypes = {
-    centered: function(object, options) {
-      return Matrix.translation(App.width / 2 - object.I.x, App.height / 2 - object.I.y);
-    }
-  };
-  self.bind("afterUpdate", function() {
-    if (currentObject) {
-      return I.cameraTransform = followTypes[currentType](currentObject, currentOptions);
+/**
+This module clears or fills the canvas before drawing the scene.
+
+@name Clear
+@fieldOf Engine
+@module
+@param {Object} I Instance variables
+@param {Object} self Reference to the engine
+*/Engine.Clear = function(I, self) {
+  Object.reverseMerge(I, {
+    backgroundColor: "#00010D",
+    clear: false
+  });
+  self.attrAccessor("clear", "backgroundColor");
+  self.bind("beforeDraw", function() {
+    if (I.clear) {
+      return I.canvas.clear();
+    } else if (I.backgroundColor) {
+      return I.canvas.fill(I.backgroundColor);
     }
   });
-  return {
-    follow: function(object, type, options) {
-      currentObject = object;
-      currentType = type;
-      return currentOptions = options;
-    }
-  };
+  return {};
 };;
 /**
 The <code>Collision</code> module provides some simple collision detection methods to engine.
@@ -6947,92 +6881,70 @@ This is nice for lightning type effects or to accentuate major game events.
     }
   };
 };;
+Engine.GameState = function(I, self) {
+  var requestedState;
+  Object.reverseMerge(I, {
+    currentState: GameState()
+  });
+  requestedState = null;
+  self.bind("update", function() {
+    I.currentState.trigger("beforeUpdate");
+    I.currentState.trigger("update");
+    return I.currentState.trigger("afterUpdate");
+  });
+  self.bind("afterUpdate", function() {
+    var previousState;
+    if (requestedState != null) {
+      I.currentState.trigger("exit", requestedState);
+      previousState = I.currentState;
+      I.currentState = requestedState;
+      I.currentState.trigger("enter", previousState);
+      return requestedState = null;
+    }
+  });
+  self.bind("draw", function(canvas) {
+    I.currentState.trigger("beforeDraw", canvas);
+    I.currentState.trigger("draw", canvas);
+    return I.currentState.trigger("overlay", canvas);
+  });
+  return {
+    add: function(entityData) {
+      var object;
+      self.trigger("beforeAdd", entityData);
+      object = I.currentState.add(entityData);
+      self.trigger("afterAdd", object);
+      return object;
+    },
+    objects: function() {
+      return I.currentState.objects();
+    },
+    setState: function(newState) {
+      return requestedState = newState;
+    },
+    saveState: function() {
+      return I.currentState.saveState();
+    },
+    loadState: function(newState) {
+      return I.currentState.loadState(newState);
+    },
+    reload: function() {
+      return I.currentState.reload();
+    }
+  };
+};;
 /**
-The <code>SaveState</code> module provides methods to save and restore the current engine state.
+This module sets up the keyboard inputs for each engine update.
 
-@name SaveState
+@name Keyboard
 @fieldOf Engine
 @module
 @param {Object} I Instance variables
 @param {Object} self Reference to the engine
-*/Engine.SaveState = function(I, self) {
-  var savedState;
-  savedState = null;
-  return {
-    rewind: function() {},
-    /**
-    Save the current game state and returns a JSON object representing that state.
-
-    <code><pre>
-    engine.bind 'update', ->
-      if justPressed.s
-        engine.saveState()
-    </pre></code>
-
-    @name saveState
-    @methodOf Engine#
-    @returns {Array} An array of the instance data of all objects in the game
-    */
-    saveState: function() {
-      return savedState = I.objects.map(function(object) {
-        return Object.extend({}, object.I);
-      });
-    },
-    /**
-    Loads the game state passed in, or the last saved state, if any.
-
-    <code><pre>
-    engine.bind 'update', ->
-      if justPressed.l
-        # loads the last saved state
-        engine.loadState()
-
-      if justPressed.o
-        # removes all game objects, then reinstantiates 
-        # them with the entityData passed in
-        engine.loadState([{x: 40, y: 50, class: "Player"}, {x: 0, y: 0, class: "Enemy"}, {x: 500, y: 400, class: "Boss"}])
-    </pre></code>
-
-    @name loadState
-    @methodOf Engine#
-    @param [newState] The game state to load.
-    */
-    loadState: function(newState) {
-      if (newState || (newState = savedState)) {
-        I.objects.invoke("trigger", "remove");
-        I.objects = [];
-        return newState.each(function(objectData) {
-          return self.add(Object.extend({}, objectData));
-        });
-      }
-    },
-    /**
-    Reloads the current engine state, useful for hotswapping code.
-
-    <code><pre>
-    engine.I.objects.each (object) ->
-      # bring all objects to (0, 0) for some reason
-      object.I.x = 0
-      object.I.y = 0
-
-    # reload all objects to make sure
-    # they are at (0, 0)  
-    engine.reload()
-    </pre></code>
-
-    @name reload
-    @methodOf Engine#
-    */
-    reload: function() {
-      var oldObjects;
-      oldObjects = I.objects;
-      I.objects = [];
-      return oldObjects.each(function(object) {
-        object.trigger("remove");
-        return self.add(object.I);
-      });
-    }
-  };
+*/Engine.Keyboard = function(I, self) {
+  self.bind("beforeUpdate", function() {
+    return typeof updateKeys === "function" ? updateKeys() : void 0;
+  });
+  return {};
 };;
 /**
 The <code>Selector</code> module provides methods to query the engine to find game objects.
@@ -7101,7 +7013,7 @@ The <code>Selector</code> module provides methods to query the engine to find ga
       var matcher, results;
       results = [];
       matcher = Engine.Selector.generate(selector);
-      I.objects.each(function(object) {
+      self.objects().each(function(object) {
         if (matcher.match(object)) {
           return results.push(object);
         }
@@ -7508,6 +7420,186 @@ GameObject.construct = function(entityData) {
   } else {
     return GameObject(entityData);
   }
+};;
+var GameState;
+GameState = function(I) {
+  var queuedObjects, self;
+  if (I == null) {
+    I = {};
+  }
+  Object.reverseMerge(I, {
+    objects: []
+  });
+  queuedObjects = [];
+  self = Core(I).extend({
+    /**
+    The add method creates and adds an object to the game world. Two
+    other events are triggered around this one: beforeAdd and afterAdd.
+
+    <code><pre>
+    # you can add arbitrary entityData and
+    # the engine will make it into a GameObject
+    engine.add 
+      x: 50
+      y: 30
+      color: "red"
+
+    player = engine.add
+      class: "Player"
+    </pre></code>
+
+    @name add
+    @methodOf Engine#
+    @param {Object} entityData The data used to create the game object.
+    @returns {GameObject}
+    */
+    add: function(entityData) {
+      var object;
+      self.trigger("beforeAdd", entityData);
+      object = GameObject.construct(entityData);
+      object.create();
+      self.trigger("afterAdd", object);
+      if (I.updating) {
+        queuedObjects.push(object);
+      } else {
+        I.objects.push(object);
+      }
+      return object;
+    },
+    objects: function() {
+      return I.objects.copy();
+    }
+  });
+  self.include(Bindable);
+  self.bind("update", function() {
+    var toRemove, _ref;
+    I.updating = true;
+    _ref = I.objects.partition(function(object) {
+      return object.update();
+    }), I.objects = _ref[0], toRemove = _ref[1];
+    toRemove.invoke("trigger", "remove");
+    I.updating = false;
+    I.objects = I.objects.concat(queuedObjects);
+    return queuedObjects = [];
+  });
+  self.include(GameState.SingleCamera);
+  self.include(GameState.SaveState);
+  return self;
+};;
+/**
+The <code>SaveState</code> module provides methods to save and restore the current game state.
+
+@name SaveState
+@fieldOf GameState
+@module
+@param {Object} I Instance variables
+@param {Object} self Reference to the game state
+*/GameState.SaveState = function(I, self) {
+  var savedState;
+  savedState = null;
+  return {
+    /**
+    Save the current game state and returns a JSON object representing that state.
+
+    <code><pre>
+    engine.bind 'update', ->
+      if justPressed.s
+        engine.saveState()
+    </pre></code>
+
+    @name saveState
+    @methodOf GameState#
+    @returns {Array} An array of the instance data of all objects in the game state
+    */
+    saveState: function() {
+      return savedState = I.objects.map(function(object) {
+        return Object.extend({}, object.I);
+      });
+    },
+    /**
+    Loads the game state passed in, or the last saved state, if any.
+
+    <code><pre>
+    engine.bind 'update', ->
+      if justPressed.l
+        # loads the last saved state
+        engine.loadState()
+
+      if justPressed.o
+        # removes all game objects, then reinstantiates 
+        # them with the entityData passed in
+        engine.loadState([{x: 40, y: 50, class: "Player"}, {x: 0, y: 0, class: "Enemy"}, {x: 500, y: 400, class: "Boss"}])
+    </pre></code>
+
+    @name loadState
+    @methodOf GameState#
+    @param [newState] An arraf of object instance data to load.
+    */
+    loadState: function(newState) {
+      if (newState || (newState = savedState)) {
+        I.objects.invoke("trigger", "remove");
+        I.objects = [];
+        return newState.each(function(objectData) {
+          return self.add(Object.extend({}, objectData));
+        });
+      }
+    },
+    /**
+    Reloads the current game state, useful for hotswapping code.
+
+    <code><pre>
+    engine.I.objects.each (object) ->
+      # bring all objects to (0, 0) for some reason
+      object.I.x = 0
+      object.I.y = 0
+
+    # reload all objects to make sure
+    # they are at (0, 0)  
+    engine.reload()
+    </pre></code>
+
+    @name reload
+    @methodOf GameState#
+    */
+    reload: function() {
+      var oldObjects;
+      oldObjects = I.objects;
+      I.objects = [];
+      return oldObjects.each(function(object) {
+        object.trigger("remove");
+        return self.add(object.I);
+      });
+    }
+  };
+};;
+/**
+The <code>SingleCamera</code> module provides provides a single camera view of the game.
+Its transform can be adjusted to view different areas and provide various camera effects.
+
+@name SingleCamera
+@fieldOf GameState
+@module
+@param {Object} I Instance variables
+@param {Object} self Reference to the game state
+*/GameState.SingleCamera = function(I, self) {
+  Object.reverseMerge(I, {
+    cameraTransform: Matrix.IDENTITY,
+    zSort: true
+  });
+  self.attrAccessor("cameraTransform");
+  self.bind("draw", function(canvas) {
+    return canvas.withTransform(I.cameraTransform, function(canvas) {
+      var drawObjects;
+      drawObjects = self.objects();
+      if (I.zSort) {
+        drawObjects.sort(function(a, b) {
+          return a.I.zIndex - b.I.zIndex;
+        });
+      }
+      return drawObjects.invoke("draw", canvas);
+    });
+  });
+  return {};
 };;
 /**
 The Movable module automatically updates the position and velocity of
