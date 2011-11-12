@@ -2,6 +2,7 @@ module "GameObject"
 
 test "()", ->
   gameObject = GameObject()
+  ok gameObject
 
 test "construct", ->
   gameObject = GameObject.construct
