@@ -107,7 +107,7 @@ Camera = (I={}) ->
       canvas.context().clip()
 
       objects = filterObjects(objects)
-      transform = filterTransform(self.transform())
+      transform = filterTransform(self.transform().copy())
 
       canvas.withTransform transform, (canvas) ->
         self.trigger "beforeDraw", canvas
@@ -123,3 +123,4 @@ Camera = (I={}) ->
   self.include(Camera.Fade)
 
   return self
+
