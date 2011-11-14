@@ -56,6 +56,8 @@ Engine.GameState = (I, self) ->
       I.currentState.objects()
     setState: (newState) ->
       requestedState = newState
+    shake: ->
+      I.currentState.shake()
     saveState: ->
       I.currentState.saveState()
     loadState: (newState) ->
