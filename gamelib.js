@@ -7258,6 +7258,12 @@ Engine.GameState = function(I, self) {
       self.trigger("afterAdd", object);
       return object;
     },
+    cameras: function() {
+      return I.currentState.cameras();
+    },
+    flash: function() {
+      return I.currentState.flash();
+    },
     objects: function() {
       return I.currentState.objects();
     },
@@ -8274,6 +8280,9 @@ GameState.Cameras = function(I, self) {
     */
     cameras: function() {
       return cameras;
+    },
+    flash: function() {
+      return cameras.first().flash();
     }
   };
 };;
