@@ -1083,6 +1083,15 @@ Gives you some convenience methods for outputting data while developing.
       return Matrix(this.a * matrix.a + this.c * matrix.b, this.b * matrix.a + this.d * matrix.b, this.a * matrix.c + this.c * matrix.d, this.b * matrix.c + this.d * matrix.d, this.a * matrix.tx + this.c * matrix.ty + this.tx, this.b * matrix.tx + this.d * matrix.ty + this.ty);
     },
     /**
+    Copy this matrix.
+    @name copy
+    @methodOf Matrix#
+    @returns {Matrix} A copy of this matrix.
+    */
+    copy: function() {
+      return Matrix(this.a, this.b, this.c, this.d, this.tx, this.ty);
+    },
+    /**
     Given a point in the pretransform coordinate space, returns the coordinates of 
     that point after the transformation occurs. Unlike the standard transformation 
     applied using the transformPoint() method, the deltaTransformPoint() method 
@@ -4080,41 +4089,6 @@ Generate a random uuid.
     }).toUpperCase();
   };
 })();;
-(function() {
-  var Rectangle;
-  Rectangle = function(_arg) {
-    var height, width, x, y;
-    x = _arg.x, y = _arg.y, width = _arg.width, height = _arg.height;
-    return {
-      __proto__: Rectangle.prototype,
-      x: x || 0,
-      y: y || 0,
-      width: width || 0,
-      height: height || 0
-    };
-  };
-  Rectangle.prototype = {
-    center: function() {
-      return Point(this.x + this.width / 2, this.y + this.height / 2);
-    },
-    equal: function(other) {
-      return this.x === other.x && this.y === other.y && this.width === other.width && this.height === other.height;
-    }
-  };
-  Rectangle.prototype.__defineGetter__('left', function() {
-    return this.x;
-  });
-  Rectangle.prototype.__defineGetter__('right', function() {
-    return this.x + this.width;
-  });
-  Rectangle.prototype.__defineGetter__('top', function() {
-    return this.y;
-  });
-  Rectangle.prototype.__defineGetter__('bottom', function() {
-    return this.y + this.height;
-  });
-  return (typeof exports !== "undefined" && exports !== null ? exports : this)["Rectangle"] = Rectangle;
-})();;
 ;
 ;
 /**
@@ -4480,7 +4454,7 @@ Camera = function(I) {
       canvas.context().rect(0, 0, I.screen.width, I.screen.height);
       canvas.context().clip();
       objects = filterObjects(objects);
-      transform = filterTransform(self.transform());
+      transform = filterTransform(self.transform().copy());
       canvas.withTransform(transform, function(canvas) {
         self.trigger("beforeDraw", canvas);
         return objects.invoke("draw", canvas);
