@@ -3,8 +3,8 @@ Camera = (I={}) ->
     cameraBounds: Rectangle
       x: 0
       y: 0
-      width: 1200
-      height: 622
+      width: App.width
+      height: App.height
     screen: Rectangle
       x: 0
       y: 0 
