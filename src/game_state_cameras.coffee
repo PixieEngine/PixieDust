@@ -26,4 +26,6 @@ GameState.Cameras = (I, self) ->
       return cameras
     flash: ->
       cameras.first().flash()
+    shake: ->
+      cameras.first().shake()
   }
