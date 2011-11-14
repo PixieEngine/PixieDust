@@ -7270,6 +7270,9 @@ Engine.GameState = function(I, self) {
     setState: function(newState) {
       return requestedState = newState;
     },
+    shake: function() {
+      return I.currentState.shake();
+    },
     saveState: function() {
       return I.currentState.saveState();
     },
@@ -7867,6 +7870,9 @@ GameState.Cameras = function(I, self) {
     },
     flash: function() {
       return cameras.first().flash();
+    },
+    shake: function() {
+      return cameras.first().shake();
     }
   };
 };;
