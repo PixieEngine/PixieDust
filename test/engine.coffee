@@ -2,6 +2,10 @@ module "Engine"
 
 MockCanvas = ->
   clear: ->
+  context: ->
+    beginPath: ->
+    clip: ->
+    rect: ->
   drawRect: ->
   fill: ->
   withTransform: (t, fn) ->
