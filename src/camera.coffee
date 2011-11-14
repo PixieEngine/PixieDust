@@ -15,6 +15,7 @@ Camera = (I={}) ->
     cameraRotation: 0
     transform: Matrix()
     scroll: Point(0, 0)
+    zSort: true
 
   currentType = "centered"
   currentObject = null
@@ -91,6 +92,12 @@ Camera = (I={}) ->
       canvas.context().beginPath()
       canvas.context().rect(0, 0, I.screen.width, I.screen.height);
       canvas.context().clip()
+
+      # TODO Turn this zSort into a per camera object stream filter
+      # This will also enable filters like clipping region tests
+      if I.zSort
+        objects.sort (a, b) ->
+          a.I.zIndex - b.I.zIndex
 
       canvas.withTransform self.transform(), (canvas) ->
         self.trigger "beforeDraw", canvas
