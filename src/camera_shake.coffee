@@ -4,11 +4,14 @@ Camera.Shake = (I, self) ->
     shakeCooldown: 0
 
   self.bind "afterUpdate", ->
-    if I.shakeCooldown > 0
-      I.shakeCooldown = I.shakeCooldown.approach(0, 1)
+    I.shakeCooldown = I.shakeCooldown.approach(0, 1)
 
+  self.transformFilterChain (transform) ->
+    if I.shakeCooldown > 0
       I.transform.tx += signedRand(I.shakeIntensity)
       I.transform.ty += signedRand(I.shakeIntensity)
+
+    return transform
 
   shake: (duration = 10, intensity = 20) ->
     I.shakeCooldown = duration * I.zoom
