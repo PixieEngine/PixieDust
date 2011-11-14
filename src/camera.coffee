@@ -20,7 +20,6 @@ Camera = (I={}) ->
   currentObject = null
 
   objectFilters = []
-
   filterObjects = (objects) ->
     for filter in objectFilters
       objects = filter(objects)
@@ -28,7 +27,6 @@ Camera = (I={}) ->
     return objects
 
   transformFilters = []
-
   filterTransform = (transform) ->
     for filter in transformFilters
       transform = filter(transform)
@@ -51,8 +49,9 @@ Camera = (I={}) ->
     I.scroll = Point(
       I.scroll.x.clamp(centerRect.left, centerRect.right).clamp(I.cameraBounds.left, I.cameraBounds.right - I.screen.width)
       I.scroll.y.clamp(centerRect.top, centerRect.bottom).clamp(I.cameraBounds.top, I.cameraBounds.bottom - I.screen.height)
-    )    
+    )
 
+    # TODO Maybe these can go into transformFilters
     I.transform = Matrix.translate(-I.scroll.x, -I.scroll.y)
       .scale(I.zoom, I.zoom, objectCenter)
       .rotate(I.cameraRotation, objectCenter)
@@ -108,8 +107,9 @@ Camera = (I={}) ->
       canvas.context().clip()
 
       objects = filterObjects(objects)
+      transform = filterTransform(self.transform())
 
-      canvas.withTransform self.transform(), (canvas) ->
+      canvas.withTransform transform, (canvas) ->
         self.trigger "beforeDraw", canvas
         objects.invoke "draw", canvas
 
