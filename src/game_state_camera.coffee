@@ -1,4 +1,4 @@
-Engine.Camera = (I, self) ->
+GameState.Camera = (I, self) ->
   self.bind 'afterUpdate', ->
     self.cameras().each (camera) ->
       camera.trigger('afterUpdate')
