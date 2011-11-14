@@ -83,7 +83,7 @@ Camera = (I={}) ->
     canvas.withTransform Matrix.translate(I.screen.x, I.screen.y), (canvas) ->
       # TODO: Make a clip method on PixieCanvas
       canvas.context().beginPath()
-      canvas.context().rect(0, 0, I.screen.width, I.screen.height);
+      canvas.context().rect(0, 0, I.screen.width, I.screen.height)
       canvas.context().clip()
 
       # TODO Turn this zSort into a per camera object stream filter
