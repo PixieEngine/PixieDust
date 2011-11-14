@@ -7835,6 +7835,41 @@ GameState = function(I) {
   self.include(GameState.SaveState);
   return self;
 };;
+GameState.Cameras = function(I, self) {
+  var cameras;
+  cameras = [Camera()];
+  self.bind('afterUpdate', function() {
+    return self.cameras().each(function(camera) {
+      return camera.trigger('afterUpdate');
+    });
+  });
+  self.bind('draw', function(canvas) {
+    return self.cameras().invoke('trigger', 'draw', canvas, self.objects());
+  });
+  self.bind('overlay', function(canvas) {
+    return self.cameras().each(function(camera) {
+      return camera.trigger('overlay', canvas);
+    });
+  });
+  return {
+    addCamera: function(data) {
+      return cameras.push(Camera(data));
+    },
+    /**
+    Returns the array of camera objects.
+
+    @name cameras
+    @methodOf Engine#
+    @returns {Array}
+    */
+    cameras: function() {
+      return cameras;
+    },
+    flash: function() {
+      return cameras.first().flash();
+    }
+  };
+};;
 /**
 The <code>SaveState</code> module provides methods to save and restore the current game state.
 
@@ -8251,39 +8286,4 @@ draw anything to the screen until the image has been loaded.
   };
   return (typeof exports !== "undefined" && exports !== null ? exports : this)["Sprite"] = Sprite;
 })();;
-GameState.Cameras = function(I, self) {
-  var cameras;
-  cameras = [Camera()];
-  self.bind('afterUpdate', function() {
-    return self.cameras().each(function(camera) {
-      return camera.trigger('afterUpdate');
-    });
-  });
-  self.bind('draw', function(canvas) {
-    return self.cameras().invoke('trigger', 'draw', canvas, self.objects());
-  });
-  self.bind('overlay', function(canvas) {
-    return self.cameras().each(function(camera) {
-      return camera.trigger('overlay', canvas);
-    });
-  });
-  return {
-    addCamera: function(data) {
-      return cameras.push(Camera(data));
-    },
-    /**
-    Returns the array of camera objects.
-
-    @name cameras
-    @methodOf Engine#
-    @returns {Array}
-    */
-    cameras: function() {
-      return cameras;
-    },
-    flash: function() {
-      return cameras.first().flash();
-    }
-  };
-};;
 ;
