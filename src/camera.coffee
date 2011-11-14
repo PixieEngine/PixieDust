@@ -78,14 +78,8 @@ Camera = (I={}) ->
   self.bind "afterUpdate", ->
     if currentObject
       followTypes[currentType](currentObject)
-
-      if I.shakeCooldown > 0
-        I.shakeCooldown = I.shakeCooldown.approach(0, 1)
-
-        I.transform.tx += signedRand(I.shakeIntensity)
-        I.transform.ty += signedRand(I.shakeIntensity)
-      else
-        followTypes[currentType](currentObject)  
+    else
+      followTypes[currentType](currentObject)  
 
   self.bind "draw", (canvas, objects) ->
     canvas.withTransform Matrix.translate(I.screen.x, I.screen.y), (canvas) ->  
