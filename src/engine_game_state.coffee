@@ -41,13 +41,17 @@ Engine.GameState = (I, self) ->
 
   # We must always return self as the last line
   return {
-    # Just passs through to the current state
+    # Just pass through to the current state
     add: (entityData) ->
       self.trigger "beforeAdd", entityData
       object = I.currentState.add(entityData)
       self.trigger "afterAdd", object
 
       return object
+    cameras: ->
+      I.currentState.cameras()
+    flash: ->
+      I.currentState.flash()
     objects: ->
       I.currentState.objects()
     setState: (newState) ->
