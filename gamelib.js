@@ -4080,6 +4080,41 @@ Generate a random uuid.
     }).toUpperCase();
   };
 })();;
+(function() {
+  var Rectangle;
+  Rectangle = function(_arg) {
+    var height, width, x, y;
+    x = _arg.x, y = _arg.y, width = _arg.width, height = _arg.height;
+    return {
+      __proto__: Rectangle.prototype,
+      x: x || 0,
+      y: y || 0,
+      width: width || 0,
+      height: height || 0
+    };
+  };
+  Rectangle.prototype = {
+    center: function() {
+      return Point(this.x + this.width / 2, this.y + this.height / 2);
+    },
+    equal: function(other) {
+      return this.x === other.x && this.y === other.y && this.width === other.width && this.height === other.height;
+    }
+  };
+  Rectangle.prototype.__defineGetter__('left', function() {
+    return this.x;
+  });
+  Rectangle.prototype.__defineGetter__('right', function() {
+    return this.x + this.width;
+  });
+  Rectangle.prototype.__defineGetter__('top', function() {
+    return this.y;
+  });
+  Rectangle.prototype.__defineGetter__('bottom', function() {
+    return this.y + this.height;
+  });
+  return (typeof exports !== "undefined" && exports !== null ? exports : this)["Rectangle"] = Rectangle;
+})();;
 ;
 ;
 /**
@@ -4337,6 +4372,314 @@ Bounded = function(I, self) {
       circle = self.center();
       circle.radius = I.radius || I.width / 2 || I.height / 2;
       return circle;
+    }
+  };
+};;
+var Camera;
+Camera = function(I) {
+  var currentObject, currentType, followTypes, self, transformCamera;
+  if (I == null) {
+    I = {};
+  }
+  Object.reverseMerge(I, {
+    cameraBounds: Rectangle({
+      x: 0,
+      y: 0,
+      width: App.width,
+      height: App.height
+    }),
+    screen: Rectangle({
+      x: 0,
+      y: 0,
+      width: App.width / 2,
+      height: App.height
+    }),
+    deadzone: Point(0, 0),
+    zoom: 1,
+    cameraRotation: 0,
+    transform: Matrix(),
+    scroll: Point(0, 0),
+    zSort: true
+  });
+  currentType = "centered";
+  currentObject = null;
+  transformCamera = function(object) {
+    var centerOffset, centerRect, deadzone, objectCenter;
+    objectCenter = object.center();
+    centerOffset = objectCenter.subtract(I.screen.width / 2, I.screen.height / 2);
+    deadzone = I.deadzone.scale(1 / (2 * I.zoom));
+    centerRect = Rectangle({
+      x: centerOffset.x - deadzone.x,
+      y: centerOffset.y - deadzone.y,
+      width: 2 * deadzone.x,
+      height: 2 * deadzone.y
+    });
+    I.scroll = Point(I.scroll.x.clamp(centerRect.left, centerRect.right).clamp(I.cameraBounds.left, I.cameraBounds.right - I.screen.width), I.scroll.y.clamp(centerRect.top, centerRect.bottom).clamp(I.cameraBounds.top, I.cameraBounds.bottom - I.screen.height));
+    return I.transform = Matrix.translate(-I.scroll.x, -I.scroll.y).scale(I.zoom, I.zoom, objectCenter).rotate(I.cameraRotation, objectCenter);
+  };
+  followTypes = {
+    centered: function(object) {
+      I.deadzone = Point(0, 0);
+      return transformCamera(object);
+    },
+    topdown: function(object) {
+      var helper;
+      helper = Math.max(I.cameraBounds.width, I.cameraBounds.height) / 4;
+      I.deadzone = Point(helper, helper);
+      return transformCamera(object);
+    },
+    platformer: function(object) {
+      var height, width;
+      width = I.cameraBounds.width / 8;
+      height = I.cameraBounds.height / 3;
+      I.deadzone = Point(width, height);
+      return transformCamera(object);
+    }
+  };
+  self = Core(I).extend({
+    follow: function(object, type) {
+      currentObject = object;
+      currentType = type;
+      return I.scroll = object.center();
+    }
+  });
+  self.attrAccessor("transform");
+  self.include(Bindable);
+  self.bind("afterUpdate", function() {
+    if (currentObject) {
+      followTypes[currentType](currentObject);
+      if (I.shakeCooldown > 0) {
+        I.shakeCooldown = I.shakeCooldown.approach(0, 1);
+        I.transform.tx += signedRand(I.shakeIntensity);
+        return I.transform.ty += signedRand(I.shakeIntensity);
+      } else {
+        return followTypes[currentType](currentObject);
+      }
+    }
+  });
+  self.bind("draw", function(canvas, objects) {
+    return canvas.withTransform(Matrix.translate(I.screen.x, I.screen.y), function(canvas) {
+      canvas.context().beginPath();
+      canvas.context().rect(0, 0, I.screen.width, I.screen.height);
+      canvas.context().clip();
+      if (I.zSort) {
+        objects.sort(function(a, b) {
+          return a.I.zIndex - b.I.zIndex;
+        });
+      }
+      canvas.withTransform(self.transform(), function(canvas) {
+        self.trigger("beforeDraw", canvas);
+        return objects.invoke("draw", canvas);
+      });
+      return self.trigger('flash', canvas);
+    });
+  });
+  self.include(Camera.Rotate);
+  self.include(Camera.Zoom);
+  self.include(Camera.Shake);
+  self.include(Camera.Flash);
+  self.include(Camera.Fade);
+  return self;
+};;
+/**
+The <code>Fade</code> module provides convenience methods for accessing common Engine.Flash presets.
+
+@name Fade
+@fieldOf Camera
+@module
+@param {Object} I Instance variables
+@param {Object} self Reference to the engine
+@see Camera.Flash
+*/Camera.Fade = function(I, self) {
+  var configureFade;
+  configureFade = function(duration, color, alpha) {
+    I.flashDuration = duration;
+    I.flashCooldown = duration;
+    I.flashColor = Color(color);
+    return I.flashTargetAlpha = alpha;
+  };
+  return {
+    /**
+    A convenient way to set the flash effect instance variables. This provides a shorthand for fading the screen in 
+    from a given color over a specified duration.
+
+    <code><pre>
+    engine.fadeIn()
+    # => Sets the effect variables to their default state. This will the screen to go from black to transparent over the next 30 frames.
+
+    engine.fadeIn('blue', 50)
+    # => This effect will start off blue and fade to transparent over 50 frames.
+    </pre></code>  
+
+    @name fadeIn
+    @methodOf Camera#
+    @param {Number} [duration=30] How long the effect lasts
+    @param {Color} [color="black"] The color to fade from
+    */
+    fadeIn: function(duration, color) {
+      if (duration == null) {
+        duration = 30;
+      }
+      if (color == null) {
+        color = 'black';
+      }
+      return configureFade(duration, color, 0);
+    },
+    /**
+    A convenient way to set the flash effect instance variables. This provides a shorthand for fading 
+    the screen to a given color over a specified duration.
+
+    <code><pre>
+    camera.fadeOut()
+    # => Sets the effect variables to their default state. This will the screen to fade from ransparent to black over the next 30 frames.
+
+    camera.fadeOut('blue', 50)
+    # => This effect will start off transparent and change to blue over 50 frames.
+    </pre></code>  
+
+    @name fadeOut
+    @methodOf Camera#
+    @param {Number} [duration=30] How long the effect lasts
+    @param {Color} [color="transparent"] The color to fade to
+    */
+    fadeOut: function(duration, color) {
+      if (duration == null) {
+        duration = 30;
+      }
+      if (color == null) {
+        color = 'transparent';
+      }
+      return configureFade(duration, color, 1);
+    }
+  };
+};;
+/**
+The <code>Flash</code> module allows you to flash a color onscreen and then fade to transparent over a time period. 
+This is nice for lightning type effects or to accentuate major game events.
+
+@name Flash
+@fieldOf Camera
+@module
+@param {Object} I Instance variables
+@param {Object} self Reference to the camera
+*/Camera.Flash = function(I, self) {
+  Object.reverseMerge(I, {
+    flashColor: Color(0, 0, 0, 0),
+    flashDuration: 12,
+    flashCooldown: 0,
+    flashTargetAlpha: 0
+  });
+  self.bind('afterUpdate', function() {
+    if (I.flashCooldown > 0) {
+      I.flashColor.a = I.flashColor.a.approach(I.flashTargetAlpha, 1 / I.flashDuration).clamp(0, 1);
+      if (I.flashColor.a < 0.00001) {
+        I.flashColor.a = 0;
+      }
+      if (I.flashColor.a > 0.9999) {
+        I.flashColor.a = 1;
+      }
+      return I.flashCooldown = I.flashCooldown.approach(0, 1);
+    }
+  });
+  self.bind('flash', function(canvas) {
+    return canvas.fill(I.flashColor);
+  });
+  return {
+    /**
+    A convenient way to set the flash effect instance variables. Alternatively, you can modify them by hand, but
+    using Camera#flash is the suggested approach.
+
+    <code><pre>
+    camera.flash()
+    # => Sets the flash effect variables to their default state. This will cause a white flash that will turn transparent in the next 12 frames.
+
+    camera.flash('green', 30)
+    # => This flash effect will start off green and fade to transparent over 30 frames.
+
+    camera.flash(Color(255, 0, 0, 0), 20, 1)
+    # => This flash effect will start off transparent and move toward red over 20 frames 
+    </pre></code>  
+
+    @name flash
+    @methodOf Camera#
+    @param {Color} [color="white"] The flash color
+    @param {Number} [duration=12] How long the effect lasts
+    @param {Number} [targetAlpha=0] The alpha value to fade to. By default, this is set to 0, which fades the color to transparent.
+    */
+    flash: function(color, duration, targetAlpha) {
+      if (color == null) {
+        color = 'white';
+      }
+      if (duration == null) {
+        duration = 12;
+      }
+      if (targetAlpha == null) {
+        targetAlpha = 0;
+      }
+      I.flashColor = Color(color);
+      I.flashTargetAlpha = targetAlpha;
+      I.flashCooldown = duration;
+      return I.flashDuration = duration;
+    }
+  };
+};;
+Camera.Rotate = function(I, self) {
+  return {
+    rotate: function(amount) {
+      return self.rotation(I.cameraRotation + amount);
+    },
+    rotation: function(value) {
+      if (value != null) {
+        I.cameraRotation = value;
+        return self;
+      } else {
+        return I.cameraRotation;
+      }
+    }
+  };
+};;
+Camera.Shake = function(I, self) {
+  Object.reverseMerge(I, {
+    shakeIntensity: 20,
+    shakeCooldown: 0
+  });
+  return {
+    shake: function(duration, intensity) {
+      if (duration == null) {
+        duration = 10;
+      }
+      if (intensity == null) {
+        intensity = 20;
+      }
+      I.shakeCooldown = duration * I.zoom;
+      return I.shakeIntensity = intensity * I.zoom;
+    }
+  };
+};;
+Camera.Zoom = function(I, self) {
+  var clampZoom;
+  Object.reverseMerge(I, {
+    maxZoom: 10,
+    minZoom: 0.1,
+    zoom: 1
+  });
+  clampZoom = function(value) {
+    return value.clamp(I.minZoom, I.maxZoom);
+  };
+  return {
+    zoomIn: function(percentage) {
+      return self.zoom(clampZoom(I.zoom * (1 + percentage)));
+    },
+    zoomOut: function(percentage) {
+      return self.zoom(clampZoom(I.zoom * (1 - percentage)));
+    },
+    zoom: function(value) {
+      if (value != null) {
+        I.zoom = clampZoom(value);
+        return self;
+      } else {
+        return I.zoom;
+      }
     }
   };
 };;
@@ -7482,7 +7825,7 @@ GameState = function(I) {
     I.objects = I.objects.concat(queuedObjects);
     return queuedObjects = [];
   });
-  self.include(GameState.SingleCamera);
+  self.include(GameState.Cameras);
   self.include(GameState.SaveState);
   return self;
 };;
@@ -7902,4 +8245,36 @@ draw anything to the screen until the image has been loaded.
   };
   return (typeof exports !== "undefined" && exports !== null ? exports : this)["Sprite"] = Sprite;
 })();;
+GameState.Cameras = function(I, self) {
+  var cameras;
+  cameras = [Camera()];
+  self.bind('afterUpdate', function() {
+    return self.cameras().each(function(camera) {
+      return camera.trigger('afterUpdate');
+    });
+  });
+  self.bind('draw', function(canvas) {
+    return self.cameras().invoke('trigger', 'draw', canvas, self.objects());
+  });
+  self.bind('overlay', function(canvas) {
+    return self.cameras().each(function(camera) {
+      return camera.trigger('overlay', canvas);
+    });
+  });
+  return {
+    addCamera: function(data) {
+      return cameras.push(Camera(data));
+    },
+    /**
+    Returns the array of camera objects.
+
+    @name cameras
+    @methodOf Engine#
+    @returns {Array}
+    */
+    cameras: function() {
+      return cameras;
+    }
+  };
+};;
 ;
