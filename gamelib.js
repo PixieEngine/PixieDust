@@ -4637,8 +4637,8 @@ Camera.Shake = function(I, self) {
   });
   self.transformFilterChain(function(transform) {
     if (I.shakeCooldown > 0) {
-      I.transform.tx += signedRand(I.shakeIntensity);
-      I.transform.ty += signedRand(I.shakeIntensity);
+      transform.tx += signedRand(I.shakeIntensity);
+      transform.ty += signedRand(I.shakeIntensity);
     }
     return transform;
   });
