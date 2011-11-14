@@ -24,4 +24,6 @@ GameState.Cameras = (I, self) ->
     ###
     cameras: ->
       return cameras
+    flash: ->
+      cameras.first().flash()
   }
