@@ -330,6 +330,27 @@ Array.prototype.eachSlice = function(n, iterator, context) {
   return this;
 };
 /**
+Pipe the input through each function in the array in turn. For example, if you have a
+list of objects you can perform a series of selection, sorting, and other processing
+methods and then receive the processed list. This array must contain functions that
+accept a single input and return the processed input. The output of the first function
+is fed to the input of the second and so on until the final processed output is returned.
+
+@name pipeline
+@methodOf Array#
+
+@param {Object} input The initial input to pass to the first function in the pipeline.
+@returns {Object} The result of processing the input by each function in the array.
+*/
+Array.prototype.pipeline = function(input) {
+  var fn, _i, _len;
+  for (_i = 0, _len = this.length; _i < _len; _i++) {
+    fn = this[_i];
+    input = fn(input);
+  }
+  return input;
+};
+/**
 Returns a new array with the elements all shuffled up.
 
 <code><pre>
@@ -4351,7 +4372,7 @@ Bounded = function(I, self) {
 };;
 var Camera;
 Camera = function(I) {
-  var currentObject, currentType, filterObjects, filterTransform, followTypes, objectFilters, self, transformCamera, transformFilters;
+  var currentObject, currentType, followTypes, objectFilters, self, transformCamera, transformFilters;
   if (I == null) {
     I = {};
   }
@@ -4377,23 +4398,7 @@ Camera = function(I) {
   currentType = "centered";
   currentObject = null;
   objectFilters = [];
-  filterObjects = function(objects) {
-    var filter, _i, _len;
-    for (_i = 0, _len = objectFilters.length; _i < _len; _i++) {
-      filter = objectFilters[_i];
-      objects = filter(objects);
-    }
-    return objects;
-  };
   transformFilters = [];
-  filterTransform = function(transform) {
-    var filter, _i, _len;
-    for (_i = 0, _len = transformFilters.length; _i < _len; _i++) {
-      filter = transformFilters[_i];
-      transform = filter(transform);
-    }
-    return transform;
-  };
   transformCamera = function(object) {
     var centerOffset, centerRect, deadzone, objectCenter;
     objectCenter = object.center();
@@ -4453,8 +4458,8 @@ Camera = function(I) {
       canvas.context().beginPath();
       canvas.context().rect(0, 0, I.screen.width, I.screen.height);
       canvas.context().clip();
-      objects = filterObjects(objects);
-      transform = filterTransform(self.transform().copy());
+      objects = objectFilters.pipeline(objects);
+      transform = transformFilters.pipeline(self.transform().copy());
       canvas.withTransform(transform, function(canvas) {
         self.trigger("beforeDraw", canvas);
         return objects.invoke("draw", canvas);
