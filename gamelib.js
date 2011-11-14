@@ -4447,14 +4447,7 @@ Camera = function(I) {
   self.include(Bindable);
   self.bind("afterUpdate", function() {
     if (currentObject) {
-      followTypes[currentType](currentObject);
-      if (I.shakeCooldown > 0) {
-        I.shakeCooldown = I.shakeCooldown.approach(0, 1);
-        I.transform.tx += signedRand(I.shakeIntensity);
-        return I.transform.ty += signedRand(I.shakeIntensity);
-      } else {
-        return followTypes[currentType](currentObject);
-      }
+      return followTypes[currentType](currentObject);
     }
   });
   self.bind("draw", function(canvas, objects) {
@@ -4642,6 +4635,13 @@ Camera.Shake = function(I, self) {
   Object.reverseMerge(I, {
     shakeIntensity: 20,
     shakeCooldown: 0
+  });
+  self.bind("afterUpdate", function() {
+    if (I.shakeCooldown > 0) {
+      I.shakeCooldown = I.shakeCooldown.approach(0, 1);
+      I.transform.tx += signedRand(I.shakeIntensity);
+      return I.transform.ty += signedRand(I.shakeIntensity);
+    }
   });
   return {
     shake: function(duration, intensity) {
@@ -7080,147 +7080,6 @@ The <code>Delay</code> module provides methods to trigger events after a number 
         callback: callback
       });
       return self;
-    }
-  };
-};;
-/**
-The <code>Fade</code> module provides convenience methods for accessing common Engine.Flash presets.
-
-@name Fade
-@fieldOf Engine
-@module
-@param {Object} I Instance variables
-@param {Object} self Reference to the engine
-@see Engine.Flash
-*/Engine.Fade = function(I, self) {
-  return {
-    /**
-    A convenient way to set the flash effect instance variables. This provides a shorthand for fading the screen in 
-    from a given color over a specified duration.
-
-    <code><pre>
-    engine.fadeIn()
-    # => Sets the effect variables to their default state. This will the screen to go from black to transparent over the next 30 frames.
-
-    engine.fadeIn('blue', 50)
-    # => This effect will start off blue and fade to transparent over 50 frames.
-    </pre></code>  
-
-    @name fadeIn
-    @methodOf Engine#
-    @param {Number} [duration=30] How long the effect lasts
-    @param {Color} [color="black"] The color to fade from
-    */
-    fadeIn: function(duration, color) {
-      if (duration == null) {
-        duration = 30;
-      }
-      if (color == null) {
-        color = 'black';
-      }
-      I.flashColor = Color(color);
-      I.flashCooldown = duration;
-      I.flashDuration = duration;
-      return I.flashTargetAlpha = 0;
-    },
-    /**
-    A convenient way to set the flash effect instance variables. This provides a shorthand for fading 
-    the screen to a given color over a specified duration.
-
-    <code><pre>
-    engine.fadeOut()
-    # => Sets the effect variables to their default state. This will the screen to fade from ransparent to black over the next 30 frames.
-
-    engine.fadeOut('blue', 50)
-    # => This effect will start off transparent and change to blue over 50 frames.
-    </pre></code>  
-
-    @name fadeOut
-    @methodOf Engine#
-    @param {Number} [duration=30] How long the effect lasts
-    @param {Color} [color="transparent"] The color to fade to
-    */
-    fadeOut: function(duration, color) {
-      if (duration == null) {
-        duration = 30;
-      }
-      if (color == null) {
-        color = 'transparent';
-      }
-      I.flashColor = Color(color);
-      I.flashCooldown = duration;
-      I.flashDuration = duration;
-      return I.flashTargetAlpha = 1;
-    }
-  };
-};;
-/**
-The <code>Flash</code> module allows you to flash a color onscreen and then fade to transparent over a time period. 
-This is nice for lightning type effects or to accentuate major game events.
-
-@name Flash
-@fieldOf Engine
-@module
-@param {Object} I Instance variables
-@param {Object} self Reference to the engine
-*/Engine.Flash = function(I, self) {
-  Object.reverseMerge(I, {
-    flashColor: Color(0, 0, 0, 0),
-    flashDuration: 12,
-    flashCooldown: 0,
-    flashTargetAlpha: 0
-  });
-  self.bind('update', function() {
-    if (I.flashCooldown > 0) {
-      I.flashColor.a = I.flashColor.a.approach(I.flashTargetAlpha, 1 / I.flashDuration).clamp(0, 1);
-      if (I.flashColor.a < 0.00001) {
-        I.flashColor.a = 0;
-      }
-      if (I.flashColor.a > 0.9999) {
-        I.flashColor.a = 1;
-      }
-      return I.flashCooldown = I.flashCooldown.approach(0, 1);
-    }
-  });
-  self.bind('overlay', function(canvas) {
-    return canvas.fill(I.flashColor);
-  });
-  return {
-    /**
-    A convenient way to set the flash effect instance variables. Alternatively, you can modify them by hand, but
-    using Engine#flash is the suggested approach.
-
-    <code><pre>
-    engine.flash()
-    # => Sets the flash effect variables to their default state. This will cause a white flash that will turn transparent in the next 12 frames.
-
-    engine.flash('green', 30)
-    # => This flash effect will start off green and fade to transparent over 30 frames.
-
-    engine.flash(Color(255, 0, 0, 0), 20, 1)
-    # => This flash effect will start off transparent and move toward red over 20 frames 
-    </pre></code>  
-
-    @name flash
-    @methodOf Engine#
-    @param {Color} [color="white"] The flash color
-    @param {Number} [duration=12] How long the effect lasts
-    @param {Number} [targetAlpha=0] The alpha value to fade to. By default, this is set to 0, which fades the color to transparent.
-    */
-    flash: function(color, duration, targetAlpha) {
-      if (color == null) {
-        color = 'white';
-      }
-      if (duration == null) {
-        duration = 12;
-      }
-      if (targetAlpha == null) {
-        targetAlpha = 0;
-      }
-      I.flashColor = Color(color);
-      I.flashTargetAlpha = targetAlpha;
-      I.flashCooldown = duration;
-      return I.flashDuration = duration;
     }
   };
 };;
