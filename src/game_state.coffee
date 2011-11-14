@@ -1,4 +1,3 @@
-#TODO: Work in progress
 GameState = (I={}) ->
   # Set some default properties
   Object.reverseMerge I,
