@@ -4377,7 +4377,7 @@ Bounded = function(I, self) {
 };;
 var Camera;
 Camera = function(I) {
-  var currentObject, currentType, followTypes, self, transformCamera;
+  var currentObject, currentType, filterObjects, filterTransform, followTypes, objectFilters, self, transformCamera, transformFilters;
   if (I == null) {
     I = {};
   }
@@ -4398,11 +4398,28 @@ Camera = function(I) {
     zoom: 1,
     cameraRotation: 0,
     transform: Matrix(),
-    scroll: Point(0, 0),
-    zSort: true
+    scroll: Point(0, 0)
   });
   currentType = "centered";
   currentObject = null;
+  objectFilters = [];
+  filterObjects = function(objects) {
+    var filter, _i, _len;
+    for (_i = 0, _len = objectFilters.length; _i < _len; _i++) {
+      filter = objectFilters[_i];
+      objects = filter(objects);
+    }
+    return objects;
+  };
+  transformFilters = [];
+  filterTransform = function(transform) {
+    var filter, _i, _len;
+    for (_i = 0, _len = transformFilters.length; _i < _len; _i++) {
+      filter = transformFilters[_i];
+      transform = filter(transform);
+    }
+    return transform;
+  };
   transformCamera = function(object) {
     var centerOffset, centerRect, deadzone, objectCenter;
     objectCenter = object.center();
@@ -4441,6 +4458,12 @@ Camera = function(I) {
       currentObject = object;
       currentType = type;
       return I.scroll = object.center();
+    },
+    objectFilterChain: function(fn) {
+      return objectFilters.push(fn);
+    },
+    transformFilterChain: function(fn) {
+      return transformFilters.push(fn);
     }
   });
   self.attrAccessor("transform");
@@ -4452,21 +4475,20 @@ Camera = function(I) {
   });
   self.bind("draw", function(canvas, objects) {
     return canvas.withTransform(Matrix.translate(I.screen.x, I.screen.y), function(canvas) {
+      var transform;
       canvas.context().beginPath();
       canvas.context().rect(0, 0, I.screen.width, I.screen.height);
       canvas.context().clip();
-      if (I.zSort) {
-        objects.sort(function(a, b) {
-          return a.I.zIndex - b.I.zIndex;
-        });
-      }
-      canvas.withTransform(self.transform(), function(canvas) {
+      objects = filterObjects(objects);
+      transform = filterTransform(self.transform());
+      canvas.withTransform(transform, function(canvas) {
         self.trigger("beforeDraw", canvas);
         return objects.invoke("draw", canvas);
       });
       return self.trigger('flash', canvas);
     });
   });
+  self.include(Camera.ZSort);
   self.include(Camera.Rotate);
   self.include(Camera.Zoom);
   self.include(Camera.Shake);
@@ -4637,11 +4659,14 @@ Camera.Shake = function(I, self) {
     shakeCooldown: 0
   });
   self.bind("afterUpdate", function() {
+    return I.shakeCooldown = I.shakeCooldown.approach(0, 1);
+  });
+  self.transformFilterChain(function(transform) {
     if (I.shakeCooldown > 0) {
-      I.shakeCooldown = I.shakeCooldown.approach(0, 1);
       I.transform.tx += signedRand(I.shakeIntensity);
-      return I.transform.ty += signedRand(I.shakeIntensity);
+      I.transform.ty += signedRand(I.shakeIntensity);
     }
+    return transform;
   });
   return {
     shake: function(duration, intensity) {
@@ -4682,6 +4707,20 @@ Camera.Zoom = function(I, self) {
       }
     }
   };
+};;
+Camera.ZSort = function(I, self) {
+  Object.reverseMerge(I, {
+    zSort: true
+  });
+  self.objectFilterChain(function(objects) {
+    if (I.zSort) {
+      objects.sort(function(a, b) {
+        return a.I.zIndex - b.I.zIndex;
+      });
+    }
+    return objects;
+  });
+  return {};
 };;
 (function() {
   /**
