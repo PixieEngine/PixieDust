@@ -1,4 +1,6 @@
 GameState.Camera = (I, self) ->
+  cameras = [Camera()]
+
   self.bind 'afterUpdate', ->
     self.cameras().each (camera) ->
       camera.trigger('afterUpdate')
@@ -7,4 +9,7 @@ GameState.Camera = (I, self) ->
     self.cameras().each (camera) ->  
       camera.trigger 'overlay', canvas
 
-  return {}
+  return {
+    addCamera: ->
+      ;
+  }
