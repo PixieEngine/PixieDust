@@ -1,4 +1,4 @@
-GameState.Camera = (I, self) ->
+GameState.Cameras = (I, self) ->
   cameras = [Camera()]
 
   self.bind 'afterUpdate', ->
