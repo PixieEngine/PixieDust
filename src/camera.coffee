@@ -78,8 +78,6 @@ Camera = (I={}) ->
   self.bind "afterUpdate", ->
     if currentObject
       followTypes[currentType](currentObject)
-    else
-      followTypes[currentType](currentObject)  
 
   self.bind "draw", (canvas, objects) ->
     canvas.withTransform Matrix.translate(I.screen.x, I.screen.y), (canvas) ->  
