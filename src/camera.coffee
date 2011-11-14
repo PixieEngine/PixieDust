@@ -20,18 +20,7 @@ Camera = (I={}) ->
   currentObject = null
 
   objectFilters = []
-  filterObjects = (objects) ->
-    for filter in objectFilters
-      objects = filter(objects)
-
-    return objects
-
   transformFilters = []
-  filterTransform = (transform) ->
-    for filter in transformFilters
-      transform = filter(transform)
-
-    return transform
 
   transformCamera = (object) ->
     objectCenter = object.center()
@@ -106,8 +95,8 @@ Camera = (I={}) ->
       canvas.context().rect(0, 0, I.screen.width, I.screen.height)
       canvas.context().clip()
 
-      objects = filterObjects(objects)
-      transform = filterTransform(self.transform().copy())
+      objects = objectFilters.pipeline(objects)
+      transform = transformFilters.pipeline(self.transform().copy())
 
       canvas.withTransform transform, (canvas) ->
         self.trigger "beforeDraw", canvas
