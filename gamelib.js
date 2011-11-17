@@ -4434,6 +4434,9 @@ Camera = function(I) {
   };
   self = Core(I).extend({
     follow: function(object, type) {
+      if (type == null) {
+        type = "centered";
+      }
       currentObject = object;
       currentType = type;
       return I.scroll = object.center();
