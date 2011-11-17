@@ -67,7 +67,7 @@ Camera = (I={}) ->
       transformCamera(object)
 
   self = Core(I).extend
-    follow: (object, type) ->
+    follow: (object, type="centered") ->
       currentObject = object
       currentType = type
 
