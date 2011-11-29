@@ -4112,6 +4112,7 @@ Generate a random uuid.
 })();;
 ;
 ;
+
 /**
 The Bounded module is used to provide basic data about the
 location and dimensions of the including object. This module is included
@@ -4144,11 +4145,12 @@ Bounded module
 @constructor
 @param {Object} I Instance variables
 @param {Core} self Reference to including object
-*/var Bounded;
+*/
+
+var Bounded;
+
 Bounded = function(I, self) {
-  if (I == null) {
-    I = {};
-  }
+  if (I == null) I = {};
   Object.reverseMerge(I, {
     x: 0,
     y: 0,
@@ -4369,13 +4371,13 @@ Bounded = function(I, self) {
       return circle;
     }
   };
-};;
+};
+;
 var Camera;
+
 Camera = function(I) {
   var currentObject, currentType, followTypes, objectFilters, self, transformCamera, transformFilters;
-  if (I == null) {
-    I = {};
-  }
+  if (I == null) I = {};
   Object.reverseMerge(I, {
     cameraBounds: Rectangle({
       x: 0,
@@ -4434,9 +4436,7 @@ Camera = function(I) {
   };
   self = Core(I).extend({
     follow: function(object, type) {
-      if (type == null) {
-        type = "centered";
-      }
+      if (type == null) type = "centered";
       currentObject = object;
       currentType = type;
       return I.scroll = object.center();
@@ -4451,9 +4451,7 @@ Camera = function(I) {
   self.attrAccessor("transform");
   self.include(Bindable);
   self.bind("afterUpdate", function() {
-    if (currentObject) {
-      return followTypes[currentType](currentObject);
-    }
+    if (currentObject) return followTypes[currentType](currentObject);
   });
   self.bind("draw", function(canvas, objects) {
     return canvas.withTransform(Matrix.translate(I.screen.x, I.screen.y), function(canvas) {
@@ -4477,7 +4475,9 @@ Camera = function(I) {
   self.include(Camera.Flash);
   self.include(Camera.Fade);
   return self;
-};;
+};
+;
+
 /**
 The <code>Fade</code> module provides convenience methods for accessing common Engine.Flash presets.
 
@@ -4487,7 +4487,9 @@ The <code>Fade</code> module provides convenience methods for accessing common E
 @param {Object} I Instance variables
 @param {Object} self Reference to the engine
 @see Camera.Flash
-*/Camera.Fade = function(I, self) {
+*/
+
+Camera.Fade = function(I, self) {
   var configureFade;
   configureFade = function(duration, color, alpha) {
     I.flashDuration = duration;
@@ -4514,12 +4516,8 @@ The <code>Fade</code> module provides convenience methods for accessing common E
     @param {Color} [color="black"] The color to fade from
     */
     fadeIn: function(duration, color) {
-      if (duration == null) {
-        duration = 30;
-      }
-      if (color == null) {
-        color = 'black';
-      }
+      if (duration == null) duration = 30;
+      if (color == null) color = 'black';
       return configureFade(duration, color, 0);
     },
     /**
@@ -4540,16 +4538,14 @@ The <code>Fade</code> module provides convenience methods for accessing common E
     @param {Color} [color="transparent"] The color to fade to
     */
     fadeOut: function(duration, color) {
-      if (duration == null) {
-        duration = 30;
-      }
-      if (color == null) {
-        color = 'transparent';
-      }
+      if (duration == null) duration = 30;
+      if (color == null) color = 'transparent';
       return configureFade(duration, color, 1);
     }
   };
-};;
+};
+;
+
 /**
 The <code>Flash</code> module allows you to flash a color onscreen and then fade to transparent over a time period. 
 This is nice for lightning type effects or to accentuate major game events.
@@ -4559,7 +4555,9 @@ This is nice for lightning type effects or to accentuate major game events.
 @module
 @param {Object} I Instance variables
 @param {Object} self Reference to the camera
-*/Camera.Flash = function(I, self) {
+*/
+
+Camera.Flash = function(I, self) {
   Object.reverseMerge(I, {
     flashColor: Color(0, 0, 0, 0),
     flashDuration: 12,
@@ -4569,12 +4567,8 @@ This is nice for lightning type effects or to accentuate major game events.
   self.bind('afterUpdate', function() {
     if (I.flashCooldown > 0) {
       I.flashColor.a = I.flashColor.a.approach(I.flashTargetAlpha, 1 / I.flashDuration).clamp(0, 1);
-      if (I.flashColor.a < 0.00001) {
-        I.flashColor.a = 0;
-      }
-      if (I.flashColor.a > 0.9999) {
-        I.flashColor.a = 1;
-      }
+      if (I.flashColor.a < 0.00001) I.flashColor.a = 0;
+      if (I.flashColor.a > 0.9999) I.flashColor.a = 1;
       return I.flashCooldown = I.flashCooldown.approach(0, 1);
     }
   });
@@ -4604,22 +4598,18 @@ This is nice for lightning type effects or to accentuate major game events.
     @param {Number} [targetAlpha=0] The alpha value to fade to. By default, this is set to 0, which fades the color to transparent.
     */
     flash: function(color, duration, targetAlpha) {
-      if (color == null) {
-        color = 'white';
-      }
-      if (duration == null) {
-        duration = 12;
-      }
-      if (targetAlpha == null) {
-        targetAlpha = 0;
-      }
+      if (color == null) color = 'white';
+      if (duration == null) duration = 12;
+      if (targetAlpha == null) targetAlpha = 0;
       I.flashColor = Color(color);
       I.flashTargetAlpha = targetAlpha;
       I.flashCooldown = duration;
       return I.flashDuration = duration;
     }
   };
-};;
+};
+;
+
 Camera.Rotate = function(I, self) {
   return {
     rotate: function(amount) {
@@ -4634,7 +4624,9 @@ Camera.Rotate = function(I, self) {
       }
     }
   };
-};;
+};
+;
+
 Camera.Shake = function(I, self) {
   Object.reverseMerge(I, {
     shakeIntensity: 20,
@@ -4652,17 +4644,15 @@ Camera.Shake = function(I, self) {
   });
   return {
     shake: function(duration, intensity) {
-      if (duration == null) {
-        duration = 10;
-      }
-      if (intensity == null) {
-        intensity = 20;
-      }
+      if (duration == null) duration = 10;
+      if (intensity == null) intensity = 20;
       I.shakeCooldown = duration * I.zoom;
       return I.shakeIntensity = intensity * I.zoom;
     }
   };
-};;
+};
+;
+
 Camera.Zoom = function(I, self) {
   var clampZoom;
   Object.reverseMerge(I, {
@@ -4689,7 +4679,9 @@ Camera.Zoom = function(I, self) {
       }
     }
   };
-};;
+};
+;
+
 Camera.ZSort = function(I, self) {
   Object.reverseMerge(I, {
     zSort: true
@@ -4703,7 +4695,9 @@ Camera.ZSort = function(I, self) {
     return objects;
   });
   return {};
-};;
+};
+;
+
 (function() {
   /**
   Use this to handle generic rectangular collisions among game object a-la Flixel.
@@ -4711,7 +4705,8 @@ Camera.ZSort = function(I, self) {
   @name Collidable
   @module
   @constructor
-  */  var ANY, CEILING, Collidable, DOWN, FLOOR, LEFT, NONE, RIGHT, UP, WALL, _ref, _ref2;
+  */
+  var ANY, CEILING, Collidable, DOWN, FLOOR, LEFT, NONE, RIGHT, UP, WALL, _ref, _ref2;
   Collidable = function(I, self) {
     Object.reverseMerge(I, {
       allowCollisions: ANY,
@@ -4738,7 +4733,6 @@ Camera.ZSort = function(I, self) {
   };
   (typeof exports !== "undefined" && exports !== null ? exports : this)["Collidable"] = Collidable;
   /**
-
   */
   _ref = Object.extend(Collidable, {
     NONE: 0x0000,
@@ -4756,9 +4750,7 @@ Camera.ZSort = function(I, self) {
   return Object.extend(Collidable, {
     separate: function(a, b) {
       var aBounds, aMass, aVelocity, average, bBounds, bMass, bVelocity, deltaVelocity, normal, overlap, pushA, pushB, relativeVelocity, totalMass;
-      if (a.immovable() && b.immovable()) {
-        return;
-      }
+      if (a.immovable() && b.immovable()) return;
       aBounds = a.bounds();
       bBounds = b.bounds();
       aVelocity = a.velocity();
@@ -4828,7 +4820,9 @@ Camera.ZSort = function(I, self) {
       }
     }
   });
-})();;
+})();
+;
+
 (function() {
   var Collision, collides;
   collides = function(a, b) {
@@ -4842,53 +4836,51 @@ Camera.ZSort = function(I, self) {
   */
   Collision = {
     /**
-      Collision holds many useful class methods for checking geometric overlap of various objects.
+    Collision holds many useful class methods for checking geometric overlap of various objects.
 
-      <code><pre>
-      player = engine.add
-        class: "Player"
-        x: 0
-        y: 0
-        width: 10
-        height: 10
+    <code><pre>
+    player = engine.add
+      class: "Player"
+      x: 0
+      y: 0
+      width: 10
+      height: 10
 
-      enemy = engine.add
-        class: "Enemy"
-        x: 5
-        y: 5
-        width: 10
-        height: 10
+    enemy = engine.add
+      class: "Enemy"
+      x: 5
+      y: 5
+      width: 10
+      height: 10
 
-      enemy2 = engine.add
-        class: "Enemy"
-        x: -5
-        y: -5
-        width: 10
-        height: 10
+    enemy2 = engine.add
+      class: "Enemy"
+      x: -5
+      y: -5
+      width: 10
+      height: 10
 
-      Collision.collide(player, enemy, (p, e) -> ...)
-      # => callback is called once
+    Collision.collide(player, enemy, (p, e) -> ...)
+    # => callback is called once
 
-      Collision.collide(player, [enemy, enemy2], (p, e) -> ...)
-      # => callback is called twice
+    Collision.collide(player, [enemy, enemy2], (p, e) -> ...)
+    # => callback is called twice
 
-      Collision.collide("Player", "Enemy", (p, e) -> ...)
-      # => callback is also called twice
-      </pre></code>
+    Collision.collide("Player", "Enemy", (p, e) -> ...)
+    # => callback is also called twice
+    </pre></code>
 
-      @name collide
-      @methodOf Collision
-      @param {Object|Array|String} groupA An object or set of objects to check collisions with
-      @param {Object|Array|String} groupB An objcet or set of objects to check collisions with
-      @param {Function} callback The callback to call when an object of groupA collides
-      with an object of groupB: (a, b) ->
-      @param {Function} [detectionMethod] An optional detection method to determine when two 
-      objects are colliding.
-      */
+    @name collide
+    @methodOf Collision
+    @param {Object|Array|String} groupA An object or set of objects to check collisions with
+    @param {Object|Array|String} groupB An objcet or set of objects to check collisions with
+    @param {Function} callback The callback to call when an object of groupA collides
+    with an object of groupB: (a, b) ->
+    @param {Function} [detectionMethod] An optional detection method to determine when two 
+    objects are colliding.
+    */
     collide: function(groupA, groupB, callback, detectionMethod) {
-      if (detectionMethod == null) {
-        detectionMethod = collides;
-      }
+      if (detectionMethod == null) detectionMethod = collides;
       if (Object.isString(groupA)) {
         groupA = engine.find(groupA);
       } else {
@@ -4901,9 +4893,7 @@ Camera.ZSort = function(I, self) {
       }
       return groupA.each(function(a) {
         return groupB.each(function(b) {
-          if (detectionMethod(a, b)) {
-            return callback(a, b);
-          }
+          if (detectionMethod(a, b)) return callback(a, b);
         });
       });
     },
@@ -5007,16 +4997,12 @@ Camera.ZSort = function(I, self) {
       target = target.position();
       laserToTarget = target.subtract(source);
       projectionLength = direction.dot(laserToTarget);
-      if (projectionLength < 0) {
-        return false;
-      }
+      if (projectionLength < 0) return false;
       projection = direction.scale(projectionLength);
       intersection = source.add(projection);
       intersectionToTarget = target.subtract(intersection);
       intersectionToTargetLength = intersectionToTarget.length();
-      if (intersectionToTargetLength < radius) {
-        hit = true;
-      }
+      if (intersectionToTargetLength < radius) hit = true;
       if (hit) {
         dt = Math.sqrt(radius * radius - intersectionToTargetLength * intersectionToTargetLength);
         return hit = direction.scale(projectionLength - dt).add(source);
@@ -5082,24 +5068,22 @@ Camera.ZSort = function(I, self) {
       if (t > 0) {
         areaPQ0 = direction.cross(p0.subtract(source));
         areaPQ1 = direction.cross(p1.subtract(source));
-        if (areaPQ0 * areaPQ1 < 0) {
-          return hit = direction.scale(t).add(source);
-        }
+        if (areaPQ0 * areaPQ1 < 0) return hit = direction.scale(t).add(source);
       }
     }
   };
   return (typeof exports !== "undefined" && exports !== null ? exports : this)["Collision"] = Collision;
-})();;
+})();
+;
 var __slice = Array.prototype.slice;
+
 (function() {
   var Color, channelize, hslParser, hslToRgb, hsvToRgb, lookup, names, normalizeKey, parseHSL, parseHex, parseRGB, rgbParser;
   rgbParser = /^rgba?\((\d{1,3}),\s*(\d{1,3}),\s*(\d{1,3}),?\s*(\d?\.?\d*)?\)$/;
   hslParser = /^hsla?\((\d{1,3}),\s*(\d?\.?\d*),\s*(\d?\.?\d*),?\s*(\d?\.?\d*)?\)$/;
   parseRGB = function(colorString) {
     var channel, channels, parsedColor;
-    if (!(channels = rgbParser.exec(colorString))) {
-      return;
-    }
+    if (!(channels = rgbParser.exec(colorString))) return;
     parsedColor = (function() {
       var _i, _len, _ref, _results;
       _ref = channels.slice(1, 5);
@@ -5110,9 +5094,7 @@ var __slice = Array.prototype.slice;
       }
       return _results;
     })();
-    if (isNaN(parsedColor[3])) {
-      parsedColor[3] = 1;
-    }
+    if (isNaN(parsedColor[3])) parsedColor[3] = 1;
     return parsedColor;
   };
   parseHex = function(hexString) {
@@ -5157,9 +5139,7 @@ var __slice = Array.prototype.slice;
   };
   parseHSL = function(colorString) {
     var channel, channels, parsedColor;
-    if (!(channels = hslParser.exec(colorString))) {
-      return;
-    }
+    if (!(channels = hslParser.exec(colorString))) return;
     parsedColor = (function() {
       var _i, _len, _ref, _results;
       _ref = channels.slice(1, 5);
@@ -5170,18 +5150,14 @@ var __slice = Array.prototype.slice;
       }
       return _results;
     })();
-    if (isNaN(parsedColor[3])) {
-      parsedColor[3] = 1;
-    }
+    if (isNaN(parsedColor[3])) parsedColor[3] = 1;
     return hslToRgb(parsedColor);
   };
   hsvToRgb = function(hsv) {
     var a, b, f, g, h, i, p, q, r, rgb, s, t, v;
     r = g = b = null;
     h = hsv[0], s = hsv[1], v = hsv[2], a = hsv[3];
-    if (a == null) {
-      a = 1;
-    }
+    if (a == null) a = 1;
     i = (h / 60).floor();
     f = h / 60 - i;
     p = v * (1 - s);
@@ -5225,21 +5201,13 @@ var __slice = Array.prototype.slice;
     var a, b, channel, g, h, hueToRgb, l, p, q, r, rgbMap, s;
     h = hsl[0], s = hsl[1], l = hsl[2], a = hsl[3];
     h = h % 360;
-    if (a == null) {
-      a = 1;
-    }
+    if (a == null) a = 1;
     r = g = b = null;
     hueToRgb = function(p, q, hue) {
       hue = hue.mod(360);
-      if (hue < 60) {
-        return p + (q - p) * (hue / 60);
-      }
-      if (hue < 180) {
-        return q;
-      }
-      if (hue < 240) {
-        return p + (q - p) * ((240 - hue) / 60);
-      }
+      if (hue < 60) return p + (q - p) * (hue / 60);
+      if (hue < 180) return q;
+      if (hue < 240) return p + (q - p) * ((240 - hue) / 60);
       return p;
     };
     if (s === 0) {
@@ -5268,9 +5236,7 @@ var __slice = Array.prototype.slice;
   };
   channelize = function(color, alpha) {
     var channel, result;
-    if (color.channels != null) {
-      return color.channels();
-    }
+    if (color.channels != null) return color.channels();
     if (Object.isArray(color)) {
       if (alpha != null) {
         alpha = parseFloat(alpha);
@@ -5291,9 +5257,7 @@ var __slice = Array.prototype.slice;
       })()).concat(alpha);
     } else {
       result = lookup[normalizeKey(color)] || parseHex(color) || parseRGB(color) || parseHSL(color);
-      if (alpha != null) {
-        result[3] = parseFloat(alpha);
-      }
+      if (alpha != null) result[3] = parseFloat(alpha);
     }
     return result;
   };
@@ -5364,9 +5328,7 @@ var __slice = Array.prototype.slice;
           return channelize(args);
       }
     })();
-    if (!parsedColor) {
-      throw "" + (args.join(',')) + " is an unknown color";
-    }
+    if (!parsedColor) throw "" + (args.join(',')) + " is an unknown color";
     return {
       __proto__: Color.prototype,
       r: parsedColor[0].round(),
@@ -5377,30 +5339,30 @@ var __slice = Array.prototype.slice;
   };
   Color.prototype = {
     /**
-      Returns the rgba color channels in an array.
+    Returns the rgba color channels in an array.
 
-      <code><pre>
-      transparent =  Color()
+    <code><pre>
+    transparent =  Color()
 
-      transparent.channels()
-      # => [0, 0, 0, 0]
+    transparent.channels()
+    # => [0, 0, 0, 0]
 
-      red = Color("#FF0000")
+    red = Color("#FF0000")
 
-      red.channels()
-      # => [255, 0, 0, 1]
+    red.channels()
+    # => [255, 0, 0, 1]
 
-      rgb = Color(200, 34, 2)
+    rgb = Color(200, 34, 2)
 
-      rgb.channels()
-      # => [200, 34, 2, 1]
-      </pre></code>
+    rgb.channels()
+    # => [200, 34, 2, 1]
+    </pre></code>
 
-      @name channels
-      @methodOf Color#
+    @name channels
+    @methodOf Color#
 
-      @returns {Array} Array of r, g, b, and alpha values of the color
-      */
+    @returns {Array} Array of r, g, b, and alpha values of the color
+    */
     channels: function() {
       return [this.r, this.g, this.b, this.a];
     },
@@ -5680,7 +5642,7 @@ var __slice = Array.prototype.slice;
     @methodOf Color#
     @param {Number} [newVal] the new hue value
 
-    @returns {Color|Number} returns the color object if you pass a new hue value and returns the hue otherwise 
+    @returns {Color|Number} returns the color object if you pass a new hue value and returns the hue otherwise
     */
     hue: function(newVal) {
       var hsl, _ref;
@@ -5719,7 +5681,7 @@ var __slice = Array.prototype.slice;
     @methodOf Color#
     @param {Number} [newVal] the new lightness value
 
-    @returns {Color|Number} returns the color object if you pass a new lightness value and returns the lightness otherwise 
+    @returns {Color|Number} returns the color object if you pass a new lightness value and returns the lightness otherwise
     */
     lightness: function(newVal) {
       var hsl, _ref;
@@ -6032,7 +5994,7 @@ var __slice = Array.prototype.slice;
     @methodOf Color#
     @param {Number} [newVal] the new saturation value
 
-    @returns {Color|Number} returns the color object if you pass a new saturation value and returns the saturation otherwise 
+    @returns {Color|Number} returns the color object if you pass a new saturation value and returns the saturation otherwise
     */
     saturation: function(newVal, mode) {
       var hsl, hsv, _ref, _ref2;
@@ -6075,7 +6037,7 @@ var __slice = Array.prototype.slice;
     @methodOf Color#
     @param {Boolean} [leadingHash] if passed as false excludes the leading `#` from the string
 
-    @returns {String} returns the Hex representation of the color 
+    @returns {String} returns the Hex representation of the color
     */
     toHex: function(leadingHash) {
       var hexFromNumber, padString;
@@ -6110,7 +6072,7 @@ var __slice = Array.prototype.slice;
     @name toHsl
     @methodOf Color#
 
-    @returns {Array} An array of the hue, saturation, lightness, and alpha values of the color. 
+    @returns {Array} An array of the hue, saturation, lightness, and alpha values of the color.
     */
     toHsl: function() {
       var b, channel, chroma, g, hue, lightness, max, min, r, saturation, _ref, _ref2;
@@ -6185,7 +6147,7 @@ var __slice = Array.prototype.slice;
     @name toString
     @methodOf Color#
 
-    @returns {String} The rgba string representation of the color 
+    @returns {String} The rgba string representation of the color
     */
     toString: function() {
       return "rgba(" + this.r + ", " + this.g + ", " + this.b + ", " + this.a + ")";
@@ -6217,7 +6179,7 @@ var __slice = Array.prototype.slice;
     @name transparentize
     @methodOf Color#
 
-    @returns {Color} A copy of the calling color with its alpha reduced by `amount`   
+    @returns {Color} A copy of the calling color with its alpha reduced by `amount`
     */
     transparentize: function(amount) {
       return this.copy().transparentize$(amount);
@@ -6241,7 +6203,7 @@ var __slice = Array.prototype.slice;
     @name transparentize$
     @methodOf Color#
 
-    @returns {Color} The calling color with its alpha reduced by `amount`   
+    @returns {Color} The calling color with its alpha reduced by `amount`
     */
     transparentize$: function(amount) {
       this.a = (this.a - amount).clamp(0, 1);
@@ -6274,7 +6236,7 @@ var __slice = Array.prototype.slice;
     @name opacify
     @methodOf Color#
 
-    @returns {Color} A copy of the calling color with its alpha increased by `amount`   
+    @returns {Color} A copy of the calling color with its alpha increased by `amount`
     */
     opacify: function(amount) {
       return this.copy().opacify$(amount);
@@ -6298,7 +6260,7 @@ var __slice = Array.prototype.slice;
     @name opacify$
     @methodOf Color#
 
-    @returns {Color} The calling color with its alpha increased by `amount`   
+    @returns {Color} The calling color with its alpha increased by `amount`
     */
     opacify$: function(amount) {
       this.a = (this.a + amount).clamp(0, 1);
@@ -6324,7 +6286,7 @@ var __slice = Array.prototype.slice;
   @name random
   @methodOf Color
 
-  @returns {Color} A random color. 
+  @returns {Color} A random color.
   */
   Color.random = function() {
     return Color(rand(256), rand(256), rand(256));
@@ -6356,7 +6318,7 @@ var __slice = Array.prototype.slice;
   @param {Color} color2 the second color to mix
   @param {Number} amount the ratio to mix the colors 
 
-  @returns {Color} A new color that is the two colors mixed at the ratio defined by `amount` 
+  @returns {Color} A new color that is the two colors mixed at the ratio defined by `amount`
   */
   Color.mix = function(color1, color2, amount) {
     var newColors;
@@ -6367,7 +6329,9 @@ var __slice = Array.prototype.slice;
     return Color(newColors);
   };
   return (typeof exports !== "undefined" && exports !== null ? exports : this)["Color"] = Color;
-})();;
+})();
+;
+
 /**
 The Drawable module is used to provide a simple draw method to the including
 object.
@@ -6405,6 +6369,7 @@ engine.bind 'draw', (canvas) ->
 @param {Object} I Instance variables
 @param {Core} self Reference to including object
 */
+
 /**
 Triggered every time the object should be drawn. A canvas is passed as
 the first argument. 
@@ -6430,6 +6395,7 @@ player.bind "draw", (canvas) ->
 @event
 @param {PowerCanvas} canvas A reference to the canvas to draw on.
 */
+
 /**
 Triggered before the object should be drawn. A canvas is passed as
 the first argument. This does not apply the current transform.
@@ -6439,6 +6405,7 @@ the first argument. This does not apply the current transform.
 @event
 @param {PowerCanvas} canvas A reference to the canvas to draw on.
 */
+
 /**
 Triggered after the object should be drawn. A canvas is passed as
 the first argument. This applies the current transform.
@@ -6447,7 +6414,10 @@ the first argument. This applies the current transform.
 @methodOf Drawable#
 @event
 @param {PowerCanvas} canvas A reference to the canvas to draw on.
-*/var Drawable;
+*/
+
+var Drawable;
+
 Drawable = function(I, self) {
   var _ref;
   I || (I = {});
@@ -6480,9 +6450,7 @@ Drawable = function(I, self) {
       if (sprite.draw != null) {
         sprite.draw(canvas, -sprite.width / 2, -sprite.height / 2);
       } else {
-        if (typeof warn === "function") {
-          warn("Sprite has no draw method!");
-        }
+        if (typeof warn === "function") warn("Sprite has no draw method!");
       }
     } else {
       if (I.radius != null) {
@@ -6536,22 +6504,18 @@ Drawable = function(I, self) {
       var center, transform;
       center = self.center();
       transform = Matrix.translation(center.x, center.y);
-      if (I.rotation) {
-        transform = transform.concat(Matrix.rotation(I.rotation));
-      }
-      if (I.hflip) {
-        transform = transform.concat(Matrix.HORIZONTAL_FLIP);
-      }
-      if (I.vflip) {
-        transform = transform.concat(Matrix.VERTICAL_FLIP);
-      }
+      if (I.rotation) transform = transform.concat(Matrix.rotation(I.rotation));
+      if (I.hflip) transform = transform.concat(Matrix.HORIZONTAL_FLIP);
+      if (I.vflip) transform = transform.concat(Matrix.VERTICAL_FLIP);
       if (I.spriteOffset) {
         transform = transform.concat(Matrix.translation(I.spriteOffset.x, I.spriteOffset.y));
       }
       return transform;
     }
   };
-};;
+};
+;
+
 /**
 The Durable module deactives a <code>GameObject</code> after a specified duration.
 If a duration is specified the object will update that many times. If -1 is
@@ -6580,7 +6544,10 @@ enemy.I.active
 @constructor
 @param {Object} I Instance variables
 @param {Core} self Reference to including object
-*/var Durable;
+*/
+
+var Durable;
+
 Durable = function(I) {
   Object.reverseMerge(I, {
     duration: -1
@@ -6588,20 +6555,22 @@ Durable = function(I) {
   return {
     before: {
       update: function() {
-        if (I.duration !== -1 && I.age >= I.duration) {
-          return I.active = false;
-        }
+        if (I.duration !== -1 && I.age >= I.duration) return I.active = false;
       }
     }
   };
-};;
+};
+;
 var Emitter;
+
 Emitter = function(I) {
   var self;
   self = GameObject(I);
   return self.include(Emitterable);
-};;
+};
+;
 var Emitterable;
+
 Emitterable = function(I, self) {
   var n, particles;
   I || (I = {});
@@ -6662,13 +6631,13 @@ Emitterable = function(I, self) {
         particles = particles.select(function(particle) {
           return particle.update();
         });
-        if (n === I.particleCount && !particles.length) {
-          return I.active = false;
-        }
+        if (n === I.particleCount && !particles.length) return I.active = false;
       }
     }
   };
-};;
+};
+;
+
 (function() {
   var Engine, defaults;
   defaults = {
@@ -6694,7 +6663,7 @@ Emitterable = function(I, self) {
 
   @name Engine
   @constructor
-  @param {Object} I Instance variables of the engine 
+  @param {Object} I Instance variables of the engine
   */
   /**
   Observe or modify the 
@@ -6775,7 +6744,7 @@ Emitterable = function(I, self) {
   @name overlay
   @methodOf Engine#
   @event
-  @params {PixieCanvas} canvas A reference to the canvas to draw on. 
+  @params {PixieCanvas} canvas A reference to the canvas to draw on.
   */
   Engine = function(I) {
     var animLoop, defaultModules, draw, frameAdvance, lastStepTime, modules, queuedObjects, running, self, startTime, step, update;
@@ -6798,9 +6767,7 @@ Emitterable = function(I, self) {
         lastStepTime = timestamp - Math.min(remainder, msPerFrame);
         step();
       }
-      if (running) {
-        return window.requestAnimationFrame(animLoop);
-      }
+      if (running) return window.requestAnimationFrame(animLoop);
     };
     update = function() {
       self.trigger("beforeUpdate");
@@ -6809,9 +6776,7 @@ Emitterable = function(I, self) {
     };
     draw = function() {
       var canvas;
-      if (!(canvas = I.canvas)) {
-        return;
-      }
+      if (!(canvas = I.canvas)) return;
       self.trigger("beforeDraw", canvas);
       self.trigger("draw", canvas);
       return self.trigger("overlay", I.canvas);
@@ -6953,7 +6918,9 @@ Emitterable = function(I, self) {
     return self;
   };
   return (typeof exports !== "undefined" && exports !== null ? exports : this)["Engine"] = Engine;
-})();;
+})();
+;
+
 /**
 This module clears or fills the canvas before drawing the scene.
 
@@ -6962,7 +6929,9 @@ This module clears or fills the canvas before drawing the scene.
 @module
 @param {Object} I Instance variables
 @param {Object} self Reference to the engine
-*/Engine.Clear = function(I, self) {
+*/
+
+Engine.Clear = function(I, self) {
   Object.reverseMerge(I, {
     backgroundColor: "#00010D",
     clear: false
@@ -6976,7 +6945,9 @@ This module clears or fills the canvas before drawing the scene.
     }
   });
   return {};
-};;
+};
+;
+
 /**
 The <code>Collision</code> module provides some simple collision detection methods to engine.
 
@@ -6985,7 +6956,9 @@ The <code>Collision</code> module provides some simple collision detection metho
 @module
 @param {Object} I Instance variables
 @param {Object} self Reference to the engine
-*/Engine.Collision = function(I, self) {
+*/
+
+Engine.Collision = function(I, self) {
   return {
     /**
     Detects collisions between a bounds and the game objects.
@@ -7015,16 +6988,12 @@ The <code>Collision</code> module provides some simple collision detection metho
       var collided;
       collided = [];
       I.objects.each(function(object) {
-        if (!object.solid()) {
-          return;
-        }
+        if (!object.solid()) return;
         if (object !== sourceObject && object.collides(bounds)) {
           return collided.push(object);
         }
       });
-      if (collided.length) {
-        return collided;
-      }
+      if (collided.length) return collided;
     },
     /**
     Detects collisions between a ray and the game objects.
@@ -7040,9 +7009,7 @@ The <code>Collision</code> module provides some simple collision detection metho
       hits = I.objects.map(function(object) {
         var hit;
         hit = object.solid() && (object !== sourceObject) && Collision.rayRectangle(source, direction, object.centeredBounds());
-        if (hit) {
-          hit.object = object;
-        }
+        if (hit) hit.object = object;
         return hit;
       });
       nearestDistance = Infinity;
@@ -7057,7 +7024,9 @@ The <code>Collision</code> module provides some simple collision detection metho
       return nearestHit;
     }
   };
-};;
+};
+;
+
 /**
 The <code>Delay</code> module provides methods to trigger events after a number of steps have passed.
 
@@ -7066,7 +7035,9 @@ The <code>Delay</code> module provides methods to trigger events after a number 
 @module
 @param {Object} I Instance variables
 @param {Object} self Reference to the engine
-*/Engine.Delay = function(I, self) {
+*/
+
+Engine.Delay = function(I, self) {
   var delayedEvents;
   delayedEvents = [];
   self.bind('afterUpdate', function() {
@@ -7103,7 +7074,9 @@ The <code>Delay</code> module provides methods to trigger events after a number 
       return self;
     }
   };
-};;
+};
+;
+
 Engine.GameState = function(I, self) {
   var requestedState;
   Object.reverseMerge(I, {
@@ -7163,7 +7136,9 @@ Engine.GameState = function(I, self) {
       return I.currentState.reload();
     }
   };
-};;
+};
+;
+
 /**
 This module sets up the keyboard inputs for each engine update.
 
@@ -7172,12 +7147,16 @@ This module sets up the keyboard inputs for each engine update.
 @module
 @param {Object} I Instance variables
 @param {Object} self Reference to the engine
-*/Engine.Keyboard = function(I, self) {
+*/
+
+Engine.Keyboard = function(I, self) {
   self.bind("beforeUpdate", function() {
     return typeof updateKeys === "function" ? updateKeys() : void 0;
   });
   return {};
-};;
+};
+;
+
 /**
 The <code>Selector</code> module provides methods to query the engine to find game objects.
 
@@ -7186,7 +7165,9 @@ The <code>Selector</code> module provides methods to query the engine to find ga
 @module
 @param {Object} I Instance variables
 @param {Object} self Reference to the engine
-*/Engine.Selector = function(I, self) {
+*/
+
+Engine.Selector = function(I, self) {
   var instanceMethods;
   instanceMethods = {
     set: function(attr, value) {
@@ -7246,14 +7227,13 @@ The <code>Selector</code> module provides methods to query the engine to find ga
       results = [];
       matcher = Engine.Selector.generate(selector);
       self.objects().each(function(object) {
-        if (matcher.match(object)) {
-          return results.push(object);
-        }
+        if (matcher.match(object)) return results.push(object);
       });
       return Object.extend(results, instanceMethods);
     }
   };
 };
+
 Object.extend(Engine.Selector, {
   parse: function(selector) {
     return selector.split(",").invoke("trim");
@@ -7262,9 +7242,7 @@ Object.extend(Engine.Selector, {
     var result;
     result = /^(\w+)?#?([\w\-]+)?\.?([\w\-]+)?=?([\w\-]+)?/.exec(item);
     if (result) {
-      if (result[4]) {
-        result[4] = result[4].parse();
-      }
+      if (result[4]) result[4] = result[4].parse();
       return result.splice(1);
     } else {
       return [];
@@ -7295,15 +7273,15 @@ Object.extend(Engine.Selector, {
           } else {
             attrMatch = true;
           }
-          if (idMatch && typeMatch && attrMatch) {
-            return true;
-          }
+          if (idMatch && typeMatch && attrMatch) return true;
         }
         return false;
       }
     };
   }
-});;
+});
+;
+
 /**
 The <code>Stats</code> module provides methods to query the engine to find game objects.
 
@@ -7312,18 +7290,20 @@ The <code>Stats</code> module provides methods to query the engine to find game 
 @module
 @param {Object} I Instance variables
 @param {Object} self Reference to the engine
-*/Engine.Stats = function(I, self) {
+*/
+
+Engine.Stats = function(I, self) {
   return {
     measure: function(objects, field, frequency) {
-      if (frequency == null) {
-        frequency = 30;
-      }
+      if (frequency == null) frequency = 30;
     },
     gatherData: function() {
       return self.find();
     }
   };
-};;
+};
+;
+
 /**
 The <code>Fadeable</code> module provides a method to fade a sprite to transparent. 
 You may also provide a callback function that is executed when the sprite has finished fading out.
@@ -7333,7 +7313,10 @@ You may also provide a callback function that is executed when the sprite has fi
 @constructor
 @param {Object} I Instance variables
 @param {Core} self Reference to including object
-*/var Fadeable;
+*/
+
+var Fadeable;
+
 Fadeable = function(I, self) {
   Object.reverseMerge(I, {
     fadeDuration: 30,
@@ -7380,15 +7363,15 @@ Fadeable = function(I, self) {
     @param {Function} [callback=null] The function to execute when the sprite has finished fading.
     */
     fadeOut: function(duration, callback) {
-      if (duration == null) {
-        duration = 30;
-      }
+      if (duration == null) duration = 30;
       I.fadeDuration = duration;
       I.fadeCooldown = duration;
       return I.fadeCallback = callback;
     }
   };
-};;
+};
+;
+
 /**
 The <code>Flickerable</code> module provides a method to flicker a sprite between solid and 50% opacity. 
 
@@ -7397,7 +7380,10 @@ The <code>Flickerable</code> module provides a method to flicker a sprite betwee
 @constructor
 @param {Object} I Instance variables
 @param {Core} self Reference to including object
-*/var Flickerable;
+*/
+
+var Flickerable;
+
 Flickerable = function(I, self) {
   var originalAlpha;
   Object.reverseMerge(I, {
@@ -7445,21 +7431,17 @@ Flickerable = function(I, self) {
     @param {Number} [alpha=0.5] The alpha value to flicker to
     */
     flicker: function(duration, frequency, alpha) {
-      if (duration == null) {
-        duration = 30;
-      }
-      if (frequency == null) {
-        frequency = 3;
-      }
-      if (alpha == null) {
-        alpha = 0.5;
-      }
+      if (duration == null) duration = 30;
+      if (frequency == null) frequency = 3;
+      if (alpha == null) alpha = 0.5;
       I.flickerDuration = duration;
       I.flickerFrequency = frequency;
       return I.flickerAlpha = alpha;
     }
   };
-};;
+};
+;
+
 /**
 The default base class for all objects you can add to the engine.
 
@@ -7471,6 +7453,7 @@ may be bound with <code>object.bind(eventName, callback)</code>
 @constructor
 @instanceVariables age, active, created, destroyed, solid, includedModules, excludedModules
 */
+
 /**
 Triggered when the object is created.
 
@@ -7488,6 +7471,7 @@ enemy.bind 'create', ->
 @methodOf GameObject#
 @event
 */
+
 /**
 Triggered when object is destroyed. Use 
 the destroy event to add particle effects, play sounds, etc.
@@ -7504,6 +7488,7 @@ bomb.bind 'destroy', ->
 @methodOf GameObject#
 @event
 */
+
 /**
 Triggered during every update step.
 
@@ -7525,6 +7510,7 @@ player.bind 'step', ->
 @methodOf GameObject#
 @event
 */
+
 /**
 Triggered every update after the <code>step</code> event is triggered.
 
@@ -7548,6 +7534,7 @@ player.bind 'update', ->
 @methodOf GameObject#
 @event
 */
+
 /**
 Triggered when the object is removed from
 the engine. Use the remove event to handle any clean up.
@@ -7562,7 +7549,10 @@ boss.bind 'remove', ->
 @name remove
 @methodOf GameObject#
 @event
-*/var GameObject;
+*/
+
+var GameObject;
+
 GameObject = function(I) {
   var autobindEvents, defaultModules, modules, self;
   I || (I = {});
@@ -7601,9 +7591,7 @@ GameObject = function(I) {
     @methodOf GameObject#
     */
     create: function() {
-      if (!I.created) {
-        self.trigger('create');
-      }
+      if (!I.created) self.trigger('create');
       return I.created = true;
     },
     /**
@@ -7613,9 +7601,7 @@ GameObject = function(I) {
     @methodOf GameObject#
     */
     destroy: function() {
-      if (!I.destroyed) {
-        self.trigger('destroy');
-      }
+      if (!I.destroyed) self.trigger('destroy');
       I.destroyed = true;
       return I.active = false;
     }
@@ -7640,25 +7626,27 @@ GameObject = function(I) {
   });
   return self;
 };
+
 /**
 Construct an object instance from the given entity data.
 @name construct
 @memberOf GameObject
 @param {Object} entityData
 */
+
 GameObject.construct = function(entityData) {
   if (entityData["class"]) {
     return entityData["class"].constantize()(entityData);
   } else {
     return GameObject(entityData);
   }
-};;
+};
+;
 var GameState;
+
 GameState = function(I) {
   var queuedObjects, self;
-  if (I == null) {
-    I = {};
-  }
+  if (I == null) I = {};
   Object.reverseMerge(I, {
     objects: []
   });
@@ -7717,7 +7705,9 @@ GameState = function(I) {
   self.include(GameState.Cameras);
   self.include(GameState.SaveState);
   return self;
-};;
+};
+;
+
 GameState.Cameras = function(I, self) {
   var cameras;
   cameras = [Camera()];
@@ -7755,7 +7745,9 @@ GameState.Cameras = function(I, self) {
       return cameras.first().shake();
     }
   };
-};;
+};
+;
+
 /**
 The <code>SaveState</code> module provides methods to save and restore the current game state.
 
@@ -7764,7 +7756,9 @@ The <code>SaveState</code> module provides methods to save and restore the curre
 @module
 @param {Object} I Instance variables
 @param {Object} self Reference to the game state
-*/GameState.SaveState = function(I, self) {
+*/
+
+GameState.SaveState = function(I, self) {
   var savedState;
   savedState = null;
   return {
@@ -7841,7 +7835,9 @@ The <code>SaveState</code> module provides methods to save and restore the curre
       });
     }
   };
-};;
+};
+;
+
 /**
 The <code>SingleCamera</code> module provides provides a single camera view of the game.
 Its transform can be adjusted to view different areas and provide various camera effects.
@@ -7851,7 +7847,9 @@ Its transform can be adjusted to view different areas and provide various camera
 @module
 @param {Object} I Instance variables
 @param {Object} self Reference to the game state
-*/GameState.SingleCamera = function(I, self) {
+*/
+
+GameState.SingleCamera = function(I, self) {
   Object.reverseMerge(I, {
     cameraTransform: Matrix.IDENTITY,
     zSort: true
@@ -7870,7 +7868,9 @@ Its transform can be adjusted to view different areas and provide various camera
     });
   });
   return {};
-};;
+};
+;
+
 /**
 The Movable module automatically updates the position and velocity of
 GameObjects based on the velocity and acceleration. It does not check
@@ -7904,7 +7904,10 @@ player.update()
 @constructor
 @param {Object} I Instance variables
 @param {Core} self Reference to including object
-*/var Movable;
+*/
+
+var Movable;
+
 Movable = function(I) {
   Object.reverseMerge(I, {
     acceleration: Point(0, 0),
@@ -7928,33 +7931,36 @@ Movable = function(I) {
       }
     }
   };
-};;
+};
+;
+
 /**
 @name ResourceLoader
 @namespace
 
 Helps access the assets in your game.
-*/(function() {
+*/
+
+(function() {
   var ResourceLoader, typeTable;
   typeTable = {
     images: "png"
   };
   ResourceLoader = {
     /**
-      Return the url for a particular asset.
+    Return the url for a particular asset.
 
-      <code><pre>
-      ResourceLoader.urlFor("images", "player")
-      # => This returns the url for the file "player.png" in your images directory.
-      </pre></code>
+    <code><pre>
+    ResourceLoader.urlFor("images", "player")
+    # => This returns the url for the file "player.png" in your images directory.
+    </pre></code>
 
-      @name urlFor
-      @methodOf ResourceLoader#
-      @param {String} directory The directory your file is in.
-      @param {String} name The name of the file.
-      @returns {String} The full url of your asset
-
-      */
+    @name urlFor
+    @methodOf ResourceLoader#
+    @param {String} directory The directory your file is in.
+    @param {String} name The name of the file.
+    @returns {String} The full url of your asset
+    */
     urlFor: function(directory, name) {
       var type, _ref;
       directory = (typeof App !== "undefined" && App !== null ? (_ref = App.directories) != null ? _ref[directory] : void 0 : void 0) || directory;
@@ -7963,7 +7969,9 @@ Helps access the assets in your game.
     }
   };
   return (typeof exports !== "undefined" && exports !== null ? exports : this)["ResourceLoader"] = ResourceLoader;
-})();;
+})();
+;
+
 /**
 The Rotatable module rotates the object
 based on its rotational velocity.
@@ -7995,7 +8003,10 @@ player.I.rotation
 @constructor
 @param {Object} I Instance variables
 @param {Core} self Reference to including object
-*/var Rotatable;
+*/
+
+var Rotatable;
+
 Rotatable = function(I) {
   I || (I = {});
   Object.reverseMerge(I, {
@@ -8009,7 +8020,9 @@ Rotatable = function(I) {
       }
     }
   };
-};;
+};
+;
+
 /**
 The Sprite class provides a way to load images for use in games.
 
@@ -8019,7 +8032,9 @@ draw anything to the screen until the image has been loaded.
 
 @name Sprite
 @constructor
-*/(function() {
+*/
+
+(function() {
   var LoaderProxy, Sprite;
   LoaderProxy = function() {
     return {
@@ -8051,9 +8066,7 @@ draw anything to the screen until the image has been loaded.
       },
       fill: function(canvas, x, y, width, height, repeat) {
         var pattern;
-        if (repeat == null) {
-          repeat = "repeat";
-        }
+        if (repeat == null) repeat = "repeat";
         pattern = canvas.createPattern(image, repeat);
         return canvas.drawRect({
           x: x,
@@ -8112,9 +8125,7 @@ draw anything to the screen until the image has been loaded.
       var tile;
       tile = Sprite(this);
       Object.extend(proxy, tile);
-      if (loadedCallback) {
-        return loadedCallback(proxy);
-      }
+      if (loadedCallback) return loadedCallback(proxy);
     };
     img.src = url;
     return proxy;
@@ -8171,5 +8182,6 @@ draw anything to the screen until the image has been loaded.
     return Sprite.load(ResourceLoader.urlFor("images", name), callback);
   };
   return (typeof exports !== "undefined" && exports !== null ? exports : this)["Sprite"] = Sprite;
-})();;
+})();
+;
 ;
