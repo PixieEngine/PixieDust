@@ -1,4 +1,3 @@
-# TODO: This is a work in progress
 Engine.GameState = (I, self) ->
   Object.reverseMerge I,
     currentState: GameState()
@@ -25,14 +24,6 @@ Engine.GameState = (I, self) ->
       I.currentState.trigger "enter", previousState
 
       requestedState = null
-
-  # TODO: Drawing, cameras??
-  # Cameras should be components of GameStates
-  # Draw will pass through and trigger all the
-  # events in the game state
-  # Engine will still respond to beforeDraw
-  # and overlay to add overlays that apply to any
-  # game state
 
   self.bind "draw", (canvas) ->
     I.currentState.trigger "beforeDraw", canvas
