@@ -7135,8 +7135,13 @@ Engine.GameState = function(I, self) {
       if (n == null) n = 0;
       return self.cameras()[n];
     },
-    cameras: function() {
-      return I.currentState.cameras();
+    cameras: function(newCameras) {
+      if (newCameras != null) {
+        I.currentState.cameras(newCameras);
+        return self;
+      } else {
+        return I.currentState.cameras();
+      }
     },
     flash: function(options) {
       if (options == null) options = {};
@@ -7761,8 +7766,13 @@ GameState.Cameras = function(I, self) {
     @methodOf Engine#
     @returns {Array}
     */
-    cameras: function() {
-      return cameras;
+    cameras: function(newCameras) {
+      if (newCameras) {
+        cameras = newCameras;
+        return self;
+      } else {
+        return cameras;
+      }
     }
   };
 };
