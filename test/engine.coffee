@@ -169,61 +169,10 @@ test "Selector.process", ->
   equal attr, "baz"
   equal value, false
 
-###
-asyncTest "Running", ->
-  fps = 30
-  milliseconds = 1000
-  min = (fps * (milliseconds/1000)) * 0.9
-  max = (fps * (milliseconds/1000)) * 1.1
+test "#camera", ->
+  engine = Engine()
 
-  engine = Engine
-    FPS: fps
-    showFPS: true
-
-  engine.start()
-
-  setTimeout ->
-    engine.stop()
-    age = engine.I.age
-    ok(min <= age <= max, "Engine ran #{age} steps in #{milliseconds}ms")
-
-    start()
-  , milliseconds
-
-asyncTest "Adding objects to running engine", ->
-  fps = 60
-  milliseconds = 50
-  min = (fps * (milliseconds/1000)) * 0.9 + 1
-  max = (fps * (milliseconds/1000)) * 1.1 + 2
-
-  engine = Engine
-    FPS: fps
-    showFPS: true
-
-  # This makes the first object a spawner
-  createSpawnerOnce = ->
-    called = false
-    return (object) ->
-      if !called
-        object.bind "step", ->
-          engine.add {}
-        called = true
-
-  engine.bind "afterAdd", createSpawnerOnce()
-
-  engine.add({})
-
-  engine.start()
-
-  setTimeout ->
-    engine.stop()
-    objectCount = engine.I.objects.length
-    ok(min <= objectCount <= max, "Engine created #{objectCount} objects in #{milliseconds}ms")
-
-    start()
-  , milliseconds
-
-###
+  equal engine.camera(), engine.cameras().first()
 
 module()
 
