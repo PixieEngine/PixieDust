@@ -15,6 +15,11 @@ Camera.Flash = (I, self) ->
     flashCooldown: 0
     flashTargetAlpha: 0
 
+  defaultParams =
+    color: 'white'
+    duration: 12
+    targetAlpha: 0
+
   self.bind 'afterUpdate', ->
     if I.flashCooldown > 0
       I.flashColor.a = I.flashColor.a.approach(I.flashTargetAlpha, 1 / I.flashDuration).clamp(0, 1)      
@@ -34,10 +39,15 @@ Camera.Flash = (I, self) ->
   camera.flash()
   # => Sets the flash effect variables to their default state. This will cause a white flash that will turn transparent in the next 12 frames.
 
-  camera.flash('green', 30)
+  camera.flash
+    color: 'green'
+    duration: 30
   # => This flash effect will start off green and fade to transparent over 30 frames.
 
-  camera.flash(Color(255, 0, 0, 0), 20, 1)
+  camera.flash
+    color: Color(255, 0, 0, 0)
+    duration: 20
+    targetAlpha: 1
   # => This flash effect will start off transparent and move toward red over 20 frames 
   </pre></code>  
 
@@ -47,9 +57,15 @@ Camera.Flash = (I, self) ->
   @param {Number} [duration=12] How long the effect lasts
   @param {Number} [targetAlpha=0] The alpha value to fade to. By default, this is set to 0, which fades the color to transparent.
   ###
-  flash: (color = 'white', duration = 12, targetAlpha = 0) ->
+  flash: (options={}) ->
+    Object.reverseMerge(options, defaultParams)
+
+    {color, duration, targetAlpha} = options
+
     I.flashColor = Color(color) 
     I.flashTargetAlpha = targetAlpha
     I.flashCooldown = duration
     I.flashDuration = duration
+
+    self
 
