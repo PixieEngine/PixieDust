@@ -22,7 +22,12 @@ GameState.Cameras = (I, self) ->
     @methodOf Engine#
     @returns {Array}
     ###
-    cameras: ->
-      return cameras
+    cameras: (newCameras) ->
+      if newCameras
+        cameras = newCameras
+
+        return self
+      else
+        return cameras
   }
 
