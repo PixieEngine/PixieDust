@@ -41,8 +41,13 @@ Engine.GameState = (I, self) ->
       return object
     camera: (n=0) ->
       self.cameras()[n]
-    cameras: ->
-      I.currentState.cameras()
+    cameras: (newCameras) ->
+      if newCameras?
+        I.currentState.cameras(newCameras)
+
+        return self
+      else
+        I.currentState.cameras()
     flash: (options={}) ->
       self.camera(options.camera).flash(options)
     objects: ->
