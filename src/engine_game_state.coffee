@@ -39,16 +39,18 @@ Engine.GameState = (I, self) ->
       self.trigger "afterAdd", object
 
       return object
+    camera: (n=0) ->
+      self.cameras()[n]
     cameras: ->
       I.currentState.cameras()
-    flash: ->
-      I.currentState.flash()
+    flash: (options={}) ->
+      self.camera(options.camera).flash(options)
     objects: ->
       I.currentState.objects()
     setState: (newState) ->
       requestedState = newState
-    shake: ->
-      I.currentState.shake()
+    shake: (options={}) ->
+      self.camera(options.camera).shake(options)
     saveState: ->
       I.currentState.saveState()
     loadState: (newState) ->
