@@ -4558,12 +4558,18 @@ This is nice for lightning type effects or to accentuate major game events.
 */
 
 Camera.Flash = function(I, self) {
+  var defaultParams;
   Object.reverseMerge(I, {
     flashColor: Color(0, 0, 0, 0),
     flashDuration: 12,
     flashCooldown: 0,
     flashTargetAlpha: 0
   });
+  defaultParams = {
+    color: 'white',
+    duration: 12,
+    targetAlpha: 0
+  };
   self.bind('afterUpdate', function() {
     if (I.flashCooldown > 0) {
       I.flashColor.a = I.flashColor.a.approach(I.flashTargetAlpha, 1 / I.flashDuration).clamp(0, 1);
@@ -4584,10 +4590,15 @@ Camera.Flash = function(I, self) {
     camera.flash()
     # => Sets the flash effect variables to their default state. This will cause a white flash that will turn transparent in the next 12 frames.
 
-    camera.flash('green', 30)
+    camera.flash
+      color: 'green'
+      duration: 30
     # => This flash effect will start off green and fade to transparent over 30 frames.
 
-    camera.flash(Color(255, 0, 0, 0), 20, 1)
+    camera.flash
+      color: Color(255, 0, 0, 0)
+      duration: 20
+      targetAlpha: 1
     # => This flash effect will start off transparent and move toward red over 20 frames 
     </pre></code>  
 
@@ -4597,14 +4608,16 @@ Camera.Flash = function(I, self) {
     @param {Number} [duration=12] How long the effect lasts
     @param {Number} [targetAlpha=0] The alpha value to fade to. By default, this is set to 0, which fades the color to transparent.
     */
-    flash: function(color, duration, targetAlpha) {
-      if (color == null) color = 'white';
-      if (duration == null) duration = 12;
-      if (targetAlpha == null) targetAlpha = 0;
+    flash: function(options) {
+      var color, duration, targetAlpha;
+      if (options == null) options = {};
+      Object.reverseMerge(options, defaultParams);
+      color = options.color, duration = options.duration, targetAlpha = options.targetAlpha;
       I.flashColor = Color(color);
       I.flashTargetAlpha = targetAlpha;
       I.flashCooldown = duration;
-      return I.flashDuration = duration;
+      I.flashDuration = duration;
+      return self;
     }
   };
 };
@@ -4628,10 +4641,15 @@ Camera.Rotate = function(I, self) {
 ;
 
 Camera.Shake = function(I, self) {
+  var defaultParams;
   Object.reverseMerge(I, {
     shakeIntensity: 20,
     shakeCooldown: 0
   });
+  defaultParams = {
+    duration: 10,
+    intensity: 20
+  };
   self.bind("afterUpdate", function() {
     return I.shakeCooldown = I.shakeCooldown.approach(0, 1);
   });
@@ -4643,11 +4661,13 @@ Camera.Shake = function(I, self) {
     return transform;
   });
   return {
-    shake: function(duration, intensity) {
-      if (duration == null) duration = 10;
-      if (intensity == null) intensity = 20;
+    shake: function(options) {
+      var duration, intensity, _ref;
+      if (options == null) options = {};
+      _ref = Object.reverseMerge(options, defaultParams), duration = _ref.duration, intensity = _ref.intensity;
       I.shakeCooldown = duration * I.zoom;
-      return I.shakeIntensity = intensity * I.zoom;
+      I.shakeIntensity = intensity * I.zoom;
+      return self;
     }
   };
 };
@@ -7111,11 +7131,16 @@ Engine.GameState = function(I, self) {
       self.trigger("afterAdd", object);
       return object;
     },
+    camera: function(n) {
+      if (n == null) n = 0;
+      return self.cameras()[n];
+    },
     cameras: function() {
       return I.currentState.cameras();
     },
-    flash: function() {
-      return I.currentState.flash();
+    flash: function(options) {
+      if (options == null) options = {};
+      return self.camera(options.camera).flash(options);
     },
     objects: function() {
       return I.currentState.objects();
@@ -7123,8 +7148,9 @@ Engine.GameState = function(I, self) {
     setState: function(newState) {
       return requestedState = newState;
     },
-    shake: function() {
-      return I.currentState.shake();
+    shake: function(options) {
+      if (options == null) options = {};
+      return self.camera(options.camera).shake(options);
     },
     saveState: function() {
       return I.currentState.saveState();
@@ -7737,12 +7763,6 @@ GameState.Cameras = function(I, self) {
     */
     cameras: function() {
       return cameras;
-    },
-    flash: function() {
-      return cameras.first().flash();
-    },
-    shake: function() {
-      return cameras.first().shake();
     }
   };
 };
