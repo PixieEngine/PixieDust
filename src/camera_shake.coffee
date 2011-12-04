@@ -3,6 +3,10 @@ Camera.Shake = (I, self) ->
     shakeIntensity: 20
     shakeCooldown: 0
 
+  defaultParams =
+    duration: 10
+    intensity: 20
+
   self.bind "afterUpdate", ->
     I.shakeCooldown = I.shakeCooldown.approach(0, 1)
 
@@ -13,7 +17,11 @@ Camera.Shake = (I, self) ->
 
     return transform
 
-  shake: (duration = 10, intensity = 20) ->
+  shake: (options={}) ->
+    {duration, intensity} = Object.reverseMerge(options, defaultParams)
+
     I.shakeCooldown = duration * I.zoom
     I.shakeIntensity = intensity * I.zoom
+
+    self
 
