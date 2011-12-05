@@ -4376,7 +4376,7 @@ Bounded = function(I, self) {
 var Camera;
 
 Camera = function(I) {
-  var currentObject, currentType, followTypes, objectFilters, self, transformCamera, transformFilters;
+  var currentObject, currentType, focusOn, followTypes, objectFilters, self, transformFilters;
   if (I == null) I = {};
   Object.reverseMerge(I, {
     cameraBounds: Rectangle({
@@ -4393,7 +4393,6 @@ Camera = function(I) {
     }),
     deadzone: Point(0, 0),
     zoom: 1,
-    cameraRotation: 0,
     transform: Matrix(),
     scroll: Point(0, 0)
   });
@@ -4401,7 +4400,7 @@ Camera = function(I) {
   currentObject = null;
   objectFilters = [];
   transformFilters = [];
-  transformCamera = function(object) {
+  focusOn = function(object) {
     var centerOffset, centerRect, deadzone, objectCenter;
     objectCenter = object.center();
     centerOffset = objectCenter.subtract(I.screen.width / 2, I.screen.height / 2);
@@ -4412,26 +4411,25 @@ Camera = function(I) {
       width: 2 * deadzone.x,
       height: 2 * deadzone.y
     });
-    I.scroll = Point(I.scroll.x.clamp(centerRect.left, centerRect.right).clamp(I.cameraBounds.left, I.cameraBounds.right - I.screen.width), I.scroll.y.clamp(centerRect.top, centerRect.bottom).clamp(I.cameraBounds.top, I.cameraBounds.bottom - I.screen.height));
-    return I.transform = Matrix.translate(-I.scroll.x, -I.scroll.y).scale(I.zoom, I.zoom, objectCenter).rotate(I.cameraRotation, objectCenter);
+    return I.scroll = Point(I.scroll.x.clamp(centerRect.left, centerRect.right).clamp(I.cameraBounds.left, I.cameraBounds.right - I.screen.width), I.scroll.y.clamp(centerRect.top, centerRect.bottom).clamp(I.cameraBounds.top, I.cameraBounds.bottom - I.screen.height));
   };
   followTypes = {
     centered: function(object) {
       I.deadzone = Point(0, 0);
-      return transformCamera(object);
+      return focusOn(object);
     },
     topdown: function(object) {
       var helper;
       helper = Math.max(I.cameraBounds.width, I.cameraBounds.height) / 4;
       I.deadzone = Point(helper, helper);
-      return transformCamera(object);
+      return focusOn(object);
     },
     platformer: function(object) {
       var height, width;
       width = I.cameraBounds.width / 8;
       height = I.cameraBounds.height / 3;
       I.deadzone = Point(width, height);
-      return transformCamera(object);
+      return focusOn(object);
     }
   };
   self = Core(I).extend({
@@ -4448,10 +4446,11 @@ Camera = function(I) {
       return transformFilters.push(fn);
     }
   });
-  self.attrAccessor("transform");
+  self.attrAccessor("transform", "scroll");
   self.include(Bindable);
   self.bind("afterUpdate", function() {
-    if (currentObject) return followTypes[currentType](currentObject);
+    if (currentObject) followTypes[currentType](currentObject);
+    return I.transform = Matrix.translate(-I.scroll.x, -I.scroll.y);
   });
   self.bind("draw", function(canvas, objects) {
     return canvas.withTransform(Matrix.translate(I.screen.x, I.screen.y), function(canvas) {
@@ -4469,8 +4468,8 @@ Camera = function(I) {
     });
   });
   self.include(Camera.ZSort);
-  self.include(Camera.Rotate);
   self.include(Camera.Zoom);
+  self.include(Camera.Rotate);
   self.include(Camera.Shake);
   self.include(Camera.Flash);
   self.include(Camera.Fade);
@@ -4624,17 +4623,16 @@ Camera.Flash = function(I, self) {
 ;
 
 Camera.Rotate = function(I, self) {
+  Object.reverseMerge(I, {
+    rotation: 0
+  });
+  self.transformFilterChain(function(transform) {
+    return transform.rotate(I.rotation);
+  });
+  self.attrAccessor("rotation");
   return {
     rotate: function(amount) {
-      return self.rotation(I.cameraRotation + amount);
-    },
-    rotation: function(value) {
-      if (value != null) {
-        I.cameraRotation = value;
-        return self;
-      } else {
-        return I.cameraRotation;
-      }
+      return self.rotation(I.rotation + amount);
     }
   };
 };
@@ -4679,6 +4677,9 @@ Camera.Zoom = function(I, self) {
     maxZoom: 10,
     minZoom: 0.1,
     zoom: 1
+  });
+  self.transformFilterChain(function(transform) {
+    return transform.scale(I.zoom, I.zoom);
   });
   clampZoom = function(value) {
     return value.clamp(I.minZoom, I.maxZoom);
