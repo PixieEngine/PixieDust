@@ -12,7 +12,6 @@ Camera = (I={}) ->
       height: App.height
     deadzone: Point(0, 0)
     zoom: 1
-    cameraRotation: 0
     transform: Matrix()
     scroll: Point(0, 0)
 
@@ -22,7 +21,7 @@ Camera = (I={}) ->
   objectFilters = []
   transformFilters = []
 
-  transformCamera = (object) ->
+  focusOn = (object) ->
     objectCenter = object.center()
 
     centerOffset = objectCenter.subtract(I.screen.width / 2, I.screen.height / 2)
@@ -40,23 +39,18 @@ Camera = (I={}) ->
       I.scroll.y.clamp(centerRect.top, centerRect.bottom).clamp(I.cameraBounds.top, I.cameraBounds.bottom - I.screen.height)
     )
 
-    # TODO Maybe these can go into transformFilters
-    I.transform = Matrix.translate(-I.scroll.x, -I.scroll.y)
-      .scale(I.zoom, I.zoom, objectCenter)
-      .rotate(I.cameraRotation, objectCenter)
-
   followTypes =
     centered: (object) ->              
       I.deadzone = Point(0, 0)
 
-      transformCamera(object)
+      focusOn(object)
 
     topdown: (object) ->
       helper = Math.max(I.cameraBounds.width, I.cameraBounds.height) / 4
 
       I.deadzone = Point(helper, helper) 
 
-      transformCamera(object)
+      focusOn(object)
 
     platformer: (object) ->
       width = I.cameraBounds.width / 8
@@ -64,7 +58,7 @@ Camera = (I={}) ->
 
       I.deadzone = Point(width, height)
 
-      transformCamera(object)
+      focusOn(object)
 
   self = Core(I).extend
     follow: (object, type="centered") ->
@@ -80,13 +74,15 @@ Camera = (I={}) ->
     transformFilterChain: (fn) ->
       transformFilters.push fn
 
-  self.attrAccessor "transform" 
+  self.attrAccessor "transform", "scroll"
 
   self.include(Bindable)
 
   self.bind "afterUpdate", ->
     if currentObject
       followTypes[currentType](currentObject)
+
+    I.transform = Matrix.translate(-I.scroll.x, -I.scroll.y)
 
   self.bind "draw", (canvas, objects) ->
     canvas.withTransform Matrix.translate(I.screen.x, I.screen.y), (canvas) ->
@@ -105,8 +101,8 @@ Camera = (I={}) ->
       self.trigger 'flash', canvas
 
   self.include(Camera.ZSort)
-  self.include(Camera.Rotate)
   self.include(Camera.Zoom)
+  self.include(Camera.Rotate)
   self.include(Camera.Shake)
   self.include(Camera.Flash)
   self.include(Camera.Fade)
