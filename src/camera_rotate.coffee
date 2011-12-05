@@ -1,10 +1,12 @@
-Camera.Rotate = (I, self) ->      
-  rotate: (amount) ->
-    self.rotation(I.cameraRotation + amount)
+Camera.Rotate = (I, self) ->
+  Object.reverseMerge I,
+    rotation: 0
 
-  rotation: (value) ->
-    if value?
-      I.cameraRotation = value
-      return self
-    else
-      return I.cameraRotation
+  self.transformFilterChain (transform) ->
+    transform.rotate(I.rotation)
+
+  self.attrAccessor "rotation"
+
+  rotate: (amount) ->
+    self.rotation(I.rotation + amount)
+

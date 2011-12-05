@@ -4,6 +4,9 @@ Camera.Zoom = (I, self) ->
     minZoom: 0.1
     zoom: 1
 
+  self.transformFilterChain (transform) ->
+    transform.scale(I.zoom, I.zoom)
+
   clampZoom = (value) ->
     value.clamp(I.minZoom, I.maxZoom) 
 
