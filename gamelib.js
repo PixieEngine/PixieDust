@@ -4455,9 +4455,7 @@ Camera = function(I) {
   self.bind("draw", function(canvas, objects) {
     return canvas.withTransform(Matrix.translate(I.screen.x, I.screen.y), function(canvas) {
       var transform;
-      canvas.context().beginPath();
-      canvas.context().rect(0, 0, I.screen.width, I.screen.height);
-      canvas.context().clip();
+      canvas.clip(0, 0, I.screen.width, I.screen.height);
       objects = objectFilters.pipeline(objects);
       transform = transformFilters.pipeline(self.transform().copy());
       canvas.withTransform(transform, function(canvas) {
