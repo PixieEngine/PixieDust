@@ -10,6 +10,7 @@ MockCanvas = ->
   fill: ->
   withTransform: (t, fn) ->
     fn(@)
+  clip: ->
 
 test "#play, #pause, and #paused", ->
   engine = Engine()

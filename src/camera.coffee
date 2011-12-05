@@ -86,10 +86,7 @@ Camera = (I={}) ->
 
   self.bind "draw", (canvas, objects) ->
     canvas.withTransform Matrix.translate(I.screen.x, I.screen.y), (canvas) ->
-      # TODO: Make a clip method on PixieCanvas
-      canvas.context().beginPath()
-      canvas.context().rect(0, 0, I.screen.width, I.screen.height)
-      canvas.context().clip()
+      canvas.clip(0, 0, I.screen.width, I.screen.height)
 
       objects = objectFilters.pipeline(objects)
       transform = transformFilters.pipeline(self.transform().copy())
