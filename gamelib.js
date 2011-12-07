@@ -7976,7 +7976,8 @@ Helps access the assets in your game.
 (function() {
   var ResourceLoader, typeTable;
   typeTable = {
-    images: "png"
+    images: "png",
+    data: "json"
   };
   ResourceLoader = {
     /**
