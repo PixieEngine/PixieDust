@@ -7,6 +7,7 @@ Helps access the assets in your game.
 (->
   typeTable =
     images: "png"
+    data: "json"
 
   ResourceLoader =
     ###*
@@ -33,3 +34,4 @@ Helps access the assets in your game.
 
   (exports ? this)["ResourceLoader"] = ResourceLoader
 )()
+
