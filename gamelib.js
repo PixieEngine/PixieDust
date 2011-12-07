@@ -6523,6 +6523,9 @@ Drawable = function(I, self) {
       var center, transform;
       center = self.center();
       transform = Matrix.translation(center.x, center.y);
+      if ((I.scale != null) && I.scale !== 1) {
+        transform = transform.concat(Matrix.scale(I.scale));
+      }
       if (I.rotation) transform = transform.concat(Matrix.rotation(I.rotation));
       if (I.hflip) transform = transform.concat(Matrix.HORIZONTAL_FLIP);
       if (I.vflip) transform = transform.concat(Matrix.VERTICAL_FLIP);
