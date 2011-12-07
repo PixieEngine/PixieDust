@@ -164,6 +164,7 @@ Drawable = (I, self) ->
 
     transform = Matrix.translation(center.x, center.y)
 
+    transform = transform.concat(Matrix.scale(I.scale)) if I.scale? and I.scale != 1
     transform = transform.concat(Matrix.rotation(I.rotation)) if I.rotation
     transform = transform.concat(Matrix.HORIZONTAL_FLIP) if I.hflip
     transform = transform.concat(Matrix.VERTICAL_FLIP) if I.vflip
