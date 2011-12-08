@@ -27,14 +27,15 @@ enemy.I.active
 @param {Object} I Instance variables
 @param {Core} self Reference to including object
 ###
-Durable = (I) ->
+Durable = (I, self) ->
   Object.reverseMerge I,
     duration: -1
 
-  before:
-    update: () ->
-      # this check occurs before I.age is updated
-      # TODO: fix off by 1 error
-      if I.duration != -1 && I.age >= I.duration
-        I.active = false
+  self.bind "update", ->
+    # this check occurs before I.age is updated
+    # TODO: fix off by 1 error
+    if I.duration != -1 && I.age >= I.duration
+      I.active = false
+
+  return {}
 
