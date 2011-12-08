@@ -1,6 +1,7 @@
 ;
 ;
 ;
+
 /**
 Returns a copy of the array without null and undefined values.
 
@@ -12,12 +13,17 @@ Returns a copy of the array without null and undefined values.
 @name compact
 @methodOf Array#
 @returns {Array} A new array that contains only the non-null values.
-*/var __slice = Array.prototype.slice;
+*/
+
+var _base;
+var __slice = Array.prototype.slice;
+
 Array.prototype.compact = function() {
   return this.select(function(element) {
     return element != null;
   });
 };
+
 /**
 Creates and returns a copy of the array. The copy contains
 the same objects.
@@ -39,9 +45,11 @@ a === b
 @methodOf Array#
 @returns {Array} A new array that is a copy of the array
 */
+
 Array.prototype.copy = function() {
   return this.concat();
 };
+
 /**
 Empties the array of its contents. It is modified in place.
 
@@ -56,10 +64,12 @@ fullArray
 @methodOf Array#
 @returns {Array} this, now emptied.
 */
+
 Array.prototype.clear = function() {
   this.length = 0;
   return this;
 };
+
 /**
 Flatten out an array of arrays into a single array of elements.
 
@@ -77,11 +87,13 @@ Flatten out an array of arrays into a single array of elements.
 @methodOf Array#
 @returns {Array} A new array with all the sub-arrays flattened to the top.
 */
+
 Array.prototype.flatten = function() {
   return this.inject([], function(a, b) {
     return a.concat(b);
   });
 };
+
 /**
 Invoke the named method on each element in the array
 and return a new array containing the results of the invocation.
@@ -100,6 +112,7 @@ and return a new array containing the results of the invocation.
 @methodOf Array#
 @returns {Array} A new array containing the results of invoking the named method on each element.
 */
+
 Array.prototype.invoke = function() {
   var args, method;
   method = arguments[0], args = 2 <= arguments.length ? __slice.call(arguments, 1) : [];
@@ -107,6 +120,7 @@ Array.prototype.invoke = function() {
     return element[method].apply(element, args);
   });
 };
+
 /**
 Randomly select an element from the array.
 
@@ -119,9 +133,11 @@ Randomly select an element from the array.
 @methodOf Array#
 @returns {Object} A random element from an array
 */
+
 Array.prototype.rand = function() {
   return this[rand(this.length)];
 };
+
 /**
 Remove the first occurrence of the given object from the array if it is
 present. The array is modified in place.
@@ -140,6 +156,7 @@ a
 @param {Object} object The object to remove from the array if present.
 @returns {Object} The removed object if present otherwise undefined.
 */
+
 Array.prototype.remove = function(object) {
   var index;
   index = this.indexOf(object);
@@ -149,6 +166,7 @@ Array.prototype.remove = function(object) {
     return;
   }
 };
+
 /**
 Returns true if the element is present in the array.
 
@@ -165,9 +183,11 @@ Returns true if the element is present in the array.
 @param {Object} element The element to check if present.
 @returns {Boolean} true if the element is in the array, false otherwise.
 */
+
 Array.prototype.include = function(element) {
   return this.indexOf(element) !== -1;
 };
+
 /**
 Call the given iterator once for each element in the array,
 passing in the element as the first argument, the index of 
@@ -196,6 +216,7 @@ indices
 @param {Object} [context] Optional context parameter to be used as `this` when calling the iterator function.
 @returns {Array} this to enable method chaining.
 */
+
 Array.prototype.each = function(iterator, context) {
   var element, i, _len;
   if (this.forEach) {
@@ -208,6 +229,7 @@ Array.prototype.each = function(iterator, context) {
   }
   return this;
 };
+
 /**
 Call the given iterator once for each element in the array, 
 passing in the element as the first argument, the index of 
@@ -226,7 +248,8 @@ third argument.
 @param {Object} [context] Optional context parameter to be used as `this` when calling the iterator function.
 @returns {Array} An array of the results of the iterator function being called on the original array elements.
 */
-Array.prototype.map || (Array.prototype.map = function(iterator, context) {
+
+(_base = Array.prototype).map || (_base.map = function(iterator, context) {
   var element, i, results, _len;
   results = [];
   for (i = 0, _len = this.length; i < _len; i++) {
@@ -235,6 +258,7 @@ Array.prototype.map || (Array.prototype.map = function(iterator, context) {
   }
   return results;
 });
+
 /**
 Call the given iterator once for each pair of objects in the array.
 
@@ -253,6 +277,7 @@ Call the given iterator once for each pair of objects in the array.
 @param {Function} iterator Function to be called once for each pair of elements in the array.
 @param {Object} [context] Optional context parameter to be used as `this` when calling the iterator function.
 */
+
 Array.prototype.eachPair = function(iterator, context) {
   var a, b, i, j, length, _results;
   length = this.length;
@@ -275,6 +300,7 @@ Array.prototype.eachPair = function(iterator, context) {
   }
   return _results;
 };
+
 /**
 Call the given iterator once for each element in the array,
 passing in the element as the first argument and the given object
@@ -289,12 +315,14 @@ as the second argument. Additional arguments are passed similar to
 @param {Object} [context] Optional context parameter to be used as `this` when calling the iterator function.
 @returns {Array} this
 */
+
 Array.prototype.eachWithObject = function(object, iterator, context) {
   this.each(function(element, i, self) {
     return iterator.call(context, element, object, i, self);
   });
   return object;
 };
+
 /**
 Call the given iterator once for each group of elements in the array,
 passing in the elements in groups of n. Additional argumens are
@@ -318,6 +346,7 @@ results
 @param {Object} [context] Optional context parameter to be used as `this` when calling the iterator function.
 @returns {Array} this
 */
+
 Array.prototype.eachSlice = function(n, iterator, context) {
   var i, len;
   if (n > 0) {
@@ -329,6 +358,7 @@ Array.prototype.eachSlice = function(n, iterator, context) {
   }
   return this;
 };
+
 /**
 Pipe the input through each function in the array in turn. For example, if you have a
 list of objects you can perform a series of selection, sorting, and other processing
@@ -342,6 +372,7 @@ is fed to the input of the second and so on until the final processed output is 
 @param {Object} input The initial input to pass to the first function in the pipeline.
 @returns {Object} The result of processing the input by each function in the array.
 */
+
 Array.prototype.pipeline = function(input) {
   var fn, _i, _len;
   for (_i = 0, _len = this.length; _i < _len; _i++) {
@@ -350,6 +381,7 @@ Array.prototype.pipeline = function(input) {
   }
   return input;
 };
+
 /**
 Returns a new array with the elements all shuffled up.
 
@@ -366,6 +398,7 @@ a # => [1, 2, 3]
 @methodOf Array#
 @returns {Array} A new array that is randomly shuffled.
 */
+
 Array.prototype.shuffle = function() {
   var shuffledArray;
   shuffledArray = [];
@@ -374,6 +407,7 @@ Array.prototype.shuffle = function() {
   });
   return shuffledArray;
 };
+
 /**
 Returns the first element of the array, undefined if the array is empty.
 
@@ -386,9 +420,11 @@ Returns the first element of the array, undefined if the array is empty.
 @methodOf Array#
 @returns {Object} The first element, or undefined if the array is empty.
 */
+
 Array.prototype.first = function() {
   return this[0];
 };
+
 /**
 Returns the last element of the array, undefined if the array is empty.
 
@@ -401,9 +437,11 @@ Returns the last element of the array, undefined if the array is empty.
 @methodOf Array#
 @returns {Object} The last element, or undefined if the array is empty.
 */
+
 Array.prototype.last = function() {
   return this[this.length - 1];
 };
+
 /**
 Returns an object containing the extremes of this array.
 
@@ -417,6 +455,7 @@ Returns an object containing the extremes of this array.
 @param {Function} [fn] An optional funtion used to evaluate each element to calculate its value for determining extremes.
 @returns {Object} {min: minElement, max: maxElement}
 */
+
 Array.prototype.extremes = function(fn) {
   var max, maxResult, min, minResult;
   fn || (fn = function(n) {
@@ -451,6 +490,7 @@ Array.prototype.extremes = function(fn) {
     max: max
   };
 };
+
 /**
 Pretend the array is a circle and grab a new array containing length elements. 
 If length is not given return the element at start, again assuming the array 
@@ -473,6 +513,7 @@ is a circle.
 @param {Number} [length] Optional length determines how long result array should be.
 @returns {Object} or {Array} The element at start mod array.length, or an array of length elements, starting from start and wrapping.
 */
+
 Array.prototype.wrap = function(start, length) {
   var end, i, result;
   if (length != null) {
@@ -487,6 +528,7 @@ Array.prototype.wrap = function(start, length) {
     return this[start.mod(this.length)];
   }
 };
+
 /**
 Partitions the elements into two groups: those for which the iterator returns
 true, and those for which it returns false.
@@ -508,6 +550,7 @@ odds
 @param {Object} [context] Optional context parameter to be used as `this` when calling the iterator function.
 @returns {Array} An array in the form of [trueCollection, falseCollection]
 */
+
 Array.prototype.partition = function(iterator, context) {
   var falseCollection, trueCollection;
   trueCollection = [];
@@ -521,6 +564,7 @@ Array.prototype.partition = function(iterator, context) {
   });
   return [trueCollection, falseCollection];
 };
+
 /**
 Return the group of elements for which the return value of the iterator is true.
 
@@ -530,9 +574,11 @@ Return the group of elements for which the return value of the iterator is true.
 @param {Object} [context] Optional context parameter to be used as `this` when calling the iterator function.
 @returns {Array} An array containing the elements for which the iterator returned true.
 */
+
 Array.prototype.select = function(iterator, context) {
   return this.partition(iterator, context)[0];
 };
+
 /**
 Return the group of elements that are not in the passed in set.
 
@@ -546,11 +592,13 @@ Return the group of elements that are not in the passed in set.
 @param {Array} values List of elements to exclude.
 @returns {Array} An array containing the elements that are not passed in.
 */
+
 Array.prototype.without = function(values) {
   return this.reject(function(element) {
     return values.include(element);
   });
 };
+
 /**
 Return the group of elements for which the return value of the iterator is false.
 
@@ -560,9 +608,11 @@ Return the group of elements for which the return value of the iterator is false
 @param {Object} [context] Optional context parameter to be used as `this` when calling the iterator function.
 @returns {Array} An array containing the elements for which the iterator returned false.
 */
+
 Array.prototype.reject = function(iterator, context) {
   return this.partition(iterator, context)[1];
 };
+
 /**
 Combines all elements of the array by applying a binary operation.
 for each element in the arra the iterator is passed an accumulator 
@@ -572,12 +622,14 @@ value (memo) and the element.
 @methodOf Array#
 @returns {Object} The result of a
 */
+
 Array.prototype.inject = function(initial, iterator) {
   this.each(function(element) {
     return initial = iterator(initial, element);
   });
   return initial;
 };
+
 /**
 Add all the elements in the array.
 
@@ -590,11 +642,13 @@ Add all the elements in the array.
 @methodOf Array#
 @returns {Number} The sum of the elements in the array.
 */
+
 Array.prototype.sum = function() {
   return this.inject(0, function(sum, n) {
     return sum + n;
   });
 };
+
 /**
 Multiply all the elements in the array.
 
@@ -607,11 +661,13 @@ Multiply all the elements in the array.
 @methodOf Array#
 @returns {Number} The product of the elements in the array.
 */
+
 Array.prototype.product = function() {
   return this.inject(1, function(product, n) {
     return product * n;
   });
 };
+
 /**
 Merges together the values of each of the arrays with the values at the corresponding position.
 
@@ -624,6 +680,7 @@ Merges together the values of each of the arrays with the values at the correspo
 @methodOf Array#
 @returns {Array} Array groupings whose values are arranged by their positions in the original input arrays.
 */
+
 Array.prototype.zip = function() {
   var args;
   args = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
@@ -635,7 +692,9 @@ Array.prototype.zip = function() {
     output.unshift(element);
     return output;
   });
-};;
+};
+;
+
 /**
 Bindable module.
 
@@ -658,8 +717,11 @@ player.bind "update", ->
 @name Bindable
 @module
 @constructor
-*/var Bindable;
+*/
+
+var Bindable;
 var __slice = Array.prototype.slice;
+
 Bindable = function() {
   var eventCallbacks;
   eventCallbacks = {};
@@ -739,8 +801,11 @@ Bindable = function() {
     }
   };
 };
-(typeof exports !== "undefined" && exports !== null ? exports : this)["Bindable"] = Bindable;;
+
+(typeof exports !== "undefined" && exports !== null ? exports : this)["Bindable"] = Bindable;
+;
 var CommandStack;
+
 CommandStack = function() {
   var index, stack;
   stack = [];
@@ -776,7 +841,9 @@ CommandStack = function() {
       return stack[index] != null;
     }
   };
-};;
+};
+;
+
 /**
 The Core class is used to add extended functionality to objects without
 extending the object class directly. Inherit from Core to gain its utility
@@ -786,61 +853,64 @@ methods.
 @constructor
 
 @param {Object} I Instance variables
-*/var Core;
+*/
+
+var Core;
 var __slice = Array.prototype.slice;
+
 Core = function(I) {
   var self;
-  I || (I = {});
+  if (I == null) I = {};
   return self = {
     /**
-      External access to instance variables. Use of this property should be avoided
-      in general, but can come in handy from time to time.
+    External access to instance variables. Use of this property should be avoided
+    in general, but can come in handy from time to time.
 
-      <code><pre>
-      I =
-        r: 255
-        g: 0
-        b: 100
+    <code><pre>
+    I =
+      r: 255
+      g: 0
+      b: 100
 
-      myObject = Core(I)
+    myObject = Core(I)
 
-      # a bad idea most of the time, but it's 
-      # pretty convenient to have available.
-      myObject.I.r
-      # => 255
+    # a bad idea most of the time, but it's 
+    # pretty convenient to have available.
+    myObject.I.r
+    # => 255
 
-      myObject.I.g
-      # => 0
+    myObject.I.g
+    # => 0
 
-      myObject.I.b
-      # => 100
-      </pre></code>
+    myObject.I.b
+    # => 100
+    </pre></code>
 
-      @name I
-      @fieldOf Core#
-      */
+    @name I
+    @fieldOf Core#
+    */
     I: I,
     /**
-      Generates a public jQuery style getter / setter method for each 
-      String argument.
+    Generates a public jQuery style getter / setter method for each 
+    String argument.
 
-      <code><pre>
-      myObject = Core
-        r: 255
-        g: 0
-        b: 100
+    <code><pre>
+    myObject = Core
+      r: 255
+      g: 0
+      b: 100
 
-      myObject.attrAccessor "r", "g", "b"
+    myObject.attrAccessor "r", "g", "b"
 
-      myObject.r(254)
-      myObject.r()
+    myObject.r(254)
+    myObject.r()
 
-      => 254
-      </pre></code>
+    => 254
+    </pre></code>
 
-      @name attrAccessor
-      @methodOf Core#
-      */
+    @name attrAccessor
+    @methodOf Core#
+    */
     attrAccessor: function() {
       var attrNames;
       attrNames = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
@@ -922,27 +992,10 @@ Core = function(I) {
     @methodOf Core#
     */
     extend: function(options) {
-      var afterMethods, beforeMethods, fn, name;
-      afterMethods = options.after;
-      beforeMethods = options.before;
-      delete options.after;
-      delete options.before;
       Object.extend(self, options);
-      if (beforeMethods) {
-        for (name in beforeMethods) {
-          fn = beforeMethods[name];
-          self[name] = self[name].withBefore(fn);
-        }
-      }
-      if (afterMethods) {
-        for (name in afterMethods) {
-          fn = afterMethods[name];
-          self[name] = self[name].withAfter(fn);
-        }
-      }
       return self;
     },
-    /** 
+    /**
     Includes a module in this object.
 
     <code><pre>
@@ -962,7 +1015,9 @@ Core = function(I) {
       return self.extend(Module(I, self));
     }
   };
-};;
+};
+;
+
 Function.prototype.withBefore = function(interception) {
   var method;
   method = this;
@@ -971,6 +1026,7 @@ Function.prototype.withBefore = function(interception) {
     return method.apply(this, arguments);
   };
 };
+
 Function.prototype.withAfter = function(interception) {
   var method;
   method = this;
@@ -980,7 +1036,53 @@ Function.prototype.withAfter = function(interception) {
     interception.apply(this, arguments);
     return result;
   };
-};;
+};
+
+/**
+Calling a debounced function will postpone its execution until after 
+wait milliseconds have elapsed since the last time the function was 
+invoked. Useful for implementing behavior that should only happen after 
+the input has stopped arriving. For example: rendering a preview of a 
+Markdown comment, recalculating a layout after the window has stopped 
+being resized...
+
+<code><pre>
+lazyLayout = calculateLayout.debounce(300)
+$(window).resize(lazyLayout)
+</pre></code>
+
+@name debounce
+@methodOf Function#
+@returns {Function} The debounced version of this function.
+*/
+
+Function.prototype.debounce = function(wait) {
+  var func, timeout;
+  timeout = null;
+  func = this;
+  return function() {
+    var args, context, later;
+    context = this;
+    args = arguments;
+    later = function() {
+      timeout = null;
+      return func.apply(context, args);
+    };
+    clearTimeout(timeout);
+    return timeout = setTimeout(later, wait);
+  };
+};
+
+Function.prototype.returning = function(x) {
+  var func;
+  func = this;
+  return function() {
+    func.apply(this, arguments);
+    return x;
+  };
+};
+;
+
 /**
 @name Logging
 @namespace
@@ -993,17 +1095,19 @@ Gives you some convenience methods for outputting data while developing.
   warn "Be careful, this might be a problem"
   error "Kaboom!"
 </pre></code>
-*/["log", "info", "warn", "error"].each(function(name) {
+*/
+
+["log", "info", "warn", "error"].each(function(name) {
   if (typeof console !== "undefined") {
     return (typeof exports !== "undefined" && exports !== null ? exports : this)[name] = function(message) {
-      if (console[name]) {
-        return console[name](message);
-      }
+      if (console[name]) return console[name](message);
     };
   } else {
     return (typeof exports !== "undefined" && exports !== null ? exports : this)[name] = function() {};
   }
-});;
+});
+;
+
 /**
 * Matrix.js v1.3.0pre
 * 
@@ -1029,7 +1133,9 @@ Gives you some convenience methods for outputting data while developing.
 *
 * Loosely based on flash:
 * http://www.adobe.com/livedocs/flash/9.0/ActionScriptLangRefV3/flash/geom/Matrix.html
-*/(function() {
+*/
+
+(function() {
   /**
   <pre>
      _        _
@@ -1052,7 +1158,8 @@ Gives you some convenience methods for outputting data while developing.
   @param {Number} [tx]
   @param {Number} [ty]
   @constructor
-  */  var Matrix;
+  */
+  var Matrix;
   Matrix = function(a, b, c, d, tx, ty) {
     return {
       __proto__: Matrix.prototype,
@@ -1090,16 +1197,16 @@ Gives you some convenience methods for outputting data while developing.
   };
   Matrix.prototype = {
     /**
-      Returns the result of this matrix multiplied by another matrix
-      combining the geometric effects of the two. In mathematical terms, 
-      concatenating two matrixes is the same as combining them using matrix multiplication.
-      If this matrix is A and the matrix passed in is B, the resulting matrix is A x B
-      http://mathworld.wolfram.com/MatrixMultiplication.html
-      @name concat
-      @methodOf Matrix#
-      @param {Matrix} matrix The matrix to multiply this matrix by.
-      @returns {Matrix} The result of the matrix multiplication, a new matrix.
-      */
+    Returns the result of this matrix multiplied by another matrix
+    combining the geometric effects of the two. In mathematical terms, 
+    concatenating two matrixes is the same as combining them using matrix multiplication.
+    If this matrix is A and the matrix passed in is B, the resulting matrix is A x B
+    http://mathworld.wolfram.com/MatrixMultiplication.html
+    @name concat
+    @methodOf Matrix#
+    @param {Matrix} matrix The matrix to multiply this matrix by.
+    @returns {Matrix} The result of the matrix multiplication, a new matrix.
+    */
     concat: function(matrix) {
       return Matrix(this.a * matrix.a + this.c * matrix.b, this.b * matrix.a + this.d * matrix.b, this.a * matrix.c + this.c * matrix.d, this.b * matrix.c + this.d * matrix.d, this.a * matrix.tx + this.c * matrix.ty + this.tx, this.b * matrix.tx + this.d * matrix.ty + this.ty);
     },
@@ -1197,15 +1304,15 @@ Gives you some convenience methods for outputting data while developing.
     translate: function(tx, ty) {
       return this.concat(Matrix.translation(tx, ty));
     }
-    /**
-    Creates a matrix transformation that corresponds to the given rotation,
-    around (0,0) or the specified point.
-    @see Matrix#rotate
-    @param {Number} theta Rotation in radians.
-    @param {Point} [aboutPoint] The point about which this rotation occurs. Defaults to (0,0).
-    @returns {Matrix} A new matrix rotated by the given amount.
-    */
   };
+  /**
+  Creates a matrix transformation that corresponds to the given rotation,
+  around (0,0) or the specified point.
+  @see Matrix#rotate
+  @param {Number} theta Rotation in radians.
+  @param {Point} [aboutPoint] The point about which this rotation occurs. Defaults to (0,0).
+  @returns {Matrix} A new matrix rotated by the given amount.
+  */
   Matrix.rotate = Matrix.rotation = function(theta, aboutPoint) {
     var rotationMatrix;
     rotationMatrix = Matrix(Math.cos(theta), Math.sin(theta), -Math.sin(theta), Math.cos(theta));
@@ -1269,7 +1376,9 @@ Gives you some convenience methods for outputting data while developing.
     Object.freeze(Matrix.VERTICAL_FLIP);
   }
   return (typeof exports !== "undefined" && exports !== null ? exports : this)["Matrix"] = Matrix;
-})();;
+})();
+;
+
 /** 
 Returns the absolute value of this number.
 
@@ -1281,9 +1390,12 @@ Returns the absolute value of this number.
 @name abs
 @methodOf Number#
 @returns {Number} The absolute value of the number.
-*/Number.prototype.abs = function() {
+*/
+
+Number.prototype.abs = function() {
   return Math.abs(this);
 };
+
 /**
 Returns the mathematical ceiling of this number.
 
@@ -1302,9 +1414,11 @@ Returns the mathematical ceiling of this number.
 @methodOf Number#
 @returns {Number} The number truncated to the nearest integer of greater than or equal value.
 */
+
 Number.prototype.ceil = function() {
   return Math.ceil(this);
 };
+
 /**
 Returns the mathematical floor of this number.
 
@@ -1323,9 +1437,11 @@ Returns the mathematical floor of this number.
 @methodOf Number#
 @returns {Number} The number truncated to the nearest integer of less than or equal value.
 */
+
 Number.prototype.floor = function() {
   return Math.floor(this);
 };
+
 /**
 Returns this number rounded to the nearest integer.
 
@@ -1341,9 +1457,11 @@ Returns this number rounded to the nearest integer.
 @methodOf Number#
 @returns {Number} The number rounded to the nearest integer.
 */
+
 Number.prototype.round = function() {
   return Math.round(this);
 };
+
 /**
 Returns a number whose value is limited to the given range.
 
@@ -1359,9 +1477,11 @@ Returns a number whose value is limited to the given range.
 @param {Number} max The upper boundary of the output range
 @returns {Number} A number in the range [min, max]
 */
+
 Number.prototype.clamp = function(min, max) {
   return Math.min(Math.max(this, min), max);
 };
+
 /**
 A mod method useful for array wrapping. The range of the function is
 constrained to remain in bounds of array indices.
@@ -1376,14 +1496,14 @@ constrained to remain in bounds of array indices.
 @param {Number} base
 @returns {Number} An integer between 0 and (base - 1) if base is positive.
 */
+
 Number.prototype.mod = function(base) {
   var result;
   result = this % base;
-  if (result < 0 && base > 0) {
-    result += base;
-  }
+  if (result < 0 && base > 0) result += base;
   return result;
 };
+
 /**
 Get the sign of this number as an integer (1, -1, or 0).
 
@@ -1402,6 +1522,7 @@ Get the sign of this number as an integer (1, -1, or 0).
 @methodOf Number#
 @returns {Number} The sign of this number, 0 if the number is 0.
 */
+
 Number.prototype.sign = function() {
   if (this > 0) {
     return 1;
@@ -1411,6 +1532,7 @@ Number.prototype.sign = function() {
     return 0;
   }
 };
+
 /**
 Returns true if this number is even (evenly divisible by 2).
 
@@ -1429,9 +1551,11 @@ Returns true if this number is even (evenly divisible by 2).
 @methodOf Number#
 @returns {Boolean} true if this number is an even integer, false otherwise.
 */
+
 Number.prototype.even = function() {
   return this % 2 === 0;
 };
+
 /**
 Returns true if this number is odd (has remainder of 1 when divided by 2).
 
@@ -1450,6 +1574,7 @@ Returns true if this number is odd (has remainder of 1 when divided by 2).
 @methodOf Number#
 @returns {Boolean} true if this number is an odd integer, false otherwise.
 */
+
 Number.prototype.odd = function() {
   if (this > 0) {
     return this % 2 === 1;
@@ -1457,6 +1582,7 @@ Number.prototype.odd = function() {
     return this % 2 === -1;
   }
 };
+
 /**
 Calls iterator the specified number of times, passing in the number of the 
 current iteration as a parameter: 0 on first call, 1 on the second call, etc. 
@@ -1477,6 +1603,7 @@ output
 @param {Object} [context] The optional context parameter specifies an object to treat as <code>this</code> in the iterator block.
 @returns {Number} The number of times the iterator was called.
 */
+
 Number.prototype.times = function(iterator, context) {
   var i;
   i = -1;
@@ -1485,6 +1612,7 @@ Number.prototype.times = function(iterator, context) {
   }
   return i;
 };
+
 /**
 Returns the the nearest grid resolution less than or equal to the number. 
 
@@ -1504,12 +1632,14 @@ Returns the the nearest grid resolution less than or equal to the number.
 @param {Number} resolution The grid resolution to snap to.
 @returns {Number} The nearest multiple of resolution lower than the number.
 */
+
 Number.prototype.snap = function(resolution) {
   var n;
   n = this / resolution;
   1 / 1;
   return n.floor() * resolution;
 };
+
 /**
 In number theory, integer factorization or prime factorization is the
 breaking down of a composite number into smaller non-trivial divisors,
@@ -1529,13 +1659,12 @@ Floors the number for purposes of factorization.
 @methodOf Number#
 @returns {Array} An array containing the factorization of this number.
 */
+
 Number.prototype.primeFactors = function() {
   var factors, i, iSquared, n;
   factors = [];
   n = Math.floor(this);
-  if (n === 0) {
-    return;
-  }
+  if (n === 0) return;
   if (n < 0) {
     factors.push(-1);
     n /= -1;
@@ -1550,11 +1679,10 @@ Number.prototype.primeFactors = function() {
     i += 1;
     iSquared = i * i;
   }
-  if (n !== 1) {
-    factors.push(n);
-  }
+  if (n !== 1) factors.push(n);
   return factors;
 };
+
 /**
 Returns the two character hexidecimal 
 representation of numbers 0 through 255.
@@ -1574,14 +1702,14 @@ representation of numbers 0 through 255.
 @methodOf Number#
 @returns {String} Hexidecimal representation of the number
 */
+
 Number.prototype.toColorPart = function() {
   var s;
   s = parseInt(this.clamp(0, 255), 10).toString(16);
-  if (s.length === 1) {
-    s = '0' + s;
-  }
+  if (s.length === 1) s = '0' + s;
   return s;
 };
+
 /**
 Returns a number that is maxDelta closer to target.
 
@@ -1597,9 +1725,11 @@ Returns a number that is maxDelta closer to target.
 @methodOf Number#
 @returns {Number} A number maxDelta toward target
 */
+
 Number.prototype.approach = function(target, maxDelta) {
   return (target - this).clamp(-maxDelta, maxDelta) + this;
 };
+
 /**
 Returns a number that is closer to the target by the ratio.
 
@@ -1612,9 +1742,11 @@ Returns a number that is closer to the target by the ratio.
 @methodOf Number#
 @returns {Number} A number toward target by the ratio
 */
+
 Number.prototype.approachByRatio = function(target, ratio) {
   return this.approach(target, this * ratio);
 };
+
 /**
 Returns a number that is closer to the target angle by the delta.
 
@@ -1627,6 +1759,7 @@ Math.PI.approachRotation(0, Math.PI/4)
 @methodOf Number#
 @returns {Number} A number toward the target angle by maxDelta
 */
+
 Number.prototype.approachRotation = function(target, maxDelta) {
   while (target > this + Math.PI) {
     target -= Math.TAU;
@@ -1636,6 +1769,7 @@ Number.prototype.approachRotation = function(target, maxDelta) {
   }
   return (target - this).clamp(-maxDelta, maxDelta) + this;
 };
+
 /**
 Constrains a rotation to between -PI and PI.
 
@@ -1648,6 +1782,7 @@ Constrains a rotation to between -PI and PI.
 @methodOf Number#
 @returns {Number} This number constrained between -PI and PI.
 */
+
 Number.prototype.constrainRotation = function() {
   var target;
   target = this;
@@ -1659,6 +1794,7 @@ Number.prototype.constrainRotation = function() {
   }
   return target;
 };
+
 /**
 The mathematical d operator. Useful for simulating dice rolls.
 
@@ -1666,6 +1802,7 @@ The mathematical d operator. Useful for simulating dice rolls.
 @methodOf Number#
 @returns {Number} The sum of rolling <code>this</code> many <code>sides</code>-sided dice
 */
+
 Number.prototype.d = function(sides) {
   var sum;
   sum = 0;
@@ -1674,13 +1811,98 @@ Number.prototype.d = function(sides) {
   });
   return sum;
 };
+
+/**
+Utility method to convert a number to a duration of seconds.
+
+<code><pre>
+3.seconds
+# => 3000
+
+setTimout doSometing, 3.seconds
+</pre></code>
+
+@name seconds
+@propertyOf Number#
+@returns {Number} This number as a duration of seconds
+*/
+
+Object.defineProperty(Number.prototype, 'seconds', {
+  get: function() {
+    return this * 1000;
+  }
+});
+
+Object.defineProperty(Number.prototype, 'second', {
+  get: function() {
+    return this * 1000;
+  }
+});
+
+/**
+Utility method to convert a number to an amount of rotations.
+
+<code><pre>
+0.5.rotations
+# => 3.141592653589793
+
+I.rotation = 0.25.rotations
+</pre></code>
+
+@name rotations
+@propertyOf Number#
+@returns {Number} This number as an amount of rotations
+*/
+
+Object.defineProperty(Number.prototype, 'rotations', {
+  get: function() {
+    return this * Math.TAU;
+  }
+});
+
+Object.defineProperty(Number.prototype, 'rotation', {
+  get: function() {
+    return this * Math.TAU;
+  }
+});
+
+/**
+Utility method to convert a number to an amount of degrees.
+
+<code><pre>
+180.degrees
+# => 3.141592653589793
+
+I.rotation = 90.degrees
+</pre></code>
+
+@name degrees
+@propertyOf Number#
+@returns {Number} This number as an amount of degrees
+*/
+
+Object.defineProperty(Number.prototype, 'degrees', {
+  get: function() {
+    return this * Math.TAU / 360;
+  }
+});
+
+Object.defineProperty(Number.prototype, 'degree', {
+  get: function() {
+    return this * Math.TAU / 360;
+  }
+});
+
 /** 
 The mathematical circle constant of 1 turn.
 
 @name TAU
 @fieldOf Math
 */
-Math.TAU = 2 * Math.PI;;
+
+Math.TAU = 2 * Math.PI;
+;
+
 /**
 Checks whether an object is an array.
 
@@ -1695,11 +1917,15 @@ Object.isArray({key: "value"})
 @name isArray
 @methodOf Object
 @param {Object} object The object to check for array-ness.
-@returns {Boolean} A boolean expressing whether the object is an instance of Array 
-*/var __slice = Array.prototype.slice;
+@returns {Boolean} A boolean expressing whether the object is an instance of Array
+*/
+
+var __slice = Array.prototype.slice;
+
 Object.isArray = function(object) {
   return Object.prototype.toString.call(object) === "[object Array]";
 };
+
 /**
 Checks whether an object is a string.
 
@@ -1717,11 +1943,13 @@ Object.isString({key: "value"})
 @name isString
 @methodOf Object
 @param {Object} object The object to check for string-ness.
-@returns {Boolean} A boolean expressing whether the object is an instance of String 
+@returns {Boolean} A boolean expressing whether the object is an instance of String
 */
+
 Object.isString = function(object) {
   return Object.prototype.toString.call(object) === "[object String]";
 };
+
 /**
 Merges properties from objects into target without overiding.
 First come, first served.
@@ -1744,19 +1972,19 @@ First come, first served.
 @param {Object} target The object to merge the properties into.
 @returns {Object} target
 */
+
 Object.reverseMerge = function() {
   var name, object, objects, target, _i, _len;
   target = arguments[0], objects = 2 <= arguments.length ? __slice.call(arguments, 1) : [];
   for (_i = 0, _len = objects.length; _i < _len; _i++) {
     object = objects[_i];
     for (name in object) {
-      if (!target.hasOwnProperty(name)) {
-        target[name] = object[name];
-      }
+      if (!target.hasOwnProperty(name)) target[name] = object[name];
     }
   }
   return target;
 };
+
 /**
 Merges properties from sources into target with overiding.
 Last in covers earlier properties.
@@ -1779,6 +2007,7 @@ Last in covers earlier properties.
 @param {Object} target The object to merge the properties into.
 @returns {Object} target
 */
+
 Object.extend = function() {
   var name, source, sources, target, _i, _len;
   target = arguments[0], sources = 2 <= arguments.length ? __slice.call(arguments, 1) : [];
@@ -1790,6 +2019,7 @@ Object.extend = function() {
   }
   return target;
 };
+
 /**
 Helper method that tells you if something is an object.
 
@@ -1805,9 +2035,13 @@ Object.isObject(object)
 @param {Object} object Maybe this guy is an object.
 @returns {Boolean} true if this guy is an object.
 */
+
 Object.isObject = function(object) {
   return Object.prototype.toString.call(object) === '[object Object]';
-};;
+};
+;
+var __slice = Array.prototype.slice;
+
 (function() {
   /**
   Create a new point with given x and y coordinates. If no arguments are given
@@ -1835,7 +2069,8 @@ Object.isObject = function(object) {
   @param {Number} [x]
   @param {Number} [y]
   @constructor
-  */  var Point;
+  */
+  var Point;
   Point = function(x, y) {
     return {
       __proto__: Point.prototype,
@@ -1855,23 +2090,23 @@ Object.isObject = function(object) {
   };
   Point.prototype = {
     /**
-      Creates a copy of this point.
+    Creates a copy of this point.
 
-      @name copy
-      @methodOf Point#
-      @returns {Point} A new point with the same x and y value as this point.
+    @name copy
+    @methodOf Point#
+    @returns {Point} A new point with the same x and y value as this point.
 
-      <code><pre>
-      point = Point(1, 1)
-      pointCopy = point.copy()
+    <code><pre>
+    point = Point(1, 1)
+    pointCopy = point.copy()
 
-      point.equal(pointCopy)
-      # => true
+    point.equal(pointCopy)
+    # => true
 
-      point == pointCopy
-      # => false     
-      </pre></code>
-      */
+    point == pointCopy
+    # => false     
+    </pre></code>
+    */
     copy: function() {
       return Point(this.x, this.y);
     },
@@ -2106,9 +2341,7 @@ Object.isObject = function(object) {
     @returns {Point} The unit vector pointing in the same direction as this vector.
     */
     norm: function(length) {
-      if (length == null) {
-        length = 1.0;
-      }
+      if (length == null) length = 1.0;
       return this.copy().norm$(length);
     },
     /**
@@ -2139,9 +2372,7 @@ Object.isObject = function(object) {
     */
     norm$: function(length) {
       var m;
-      if (length == null) {
-        length = 1.0;
-      }
+      if (length == null) length = 1.0;
       if (m = this.length()) {
         return this.scale$(length / m);
       } else {
@@ -2317,24 +2548,24 @@ Object.isObject = function(object) {
     toString: function() {
       return "Point(" + this.x + ", " + this.y + ")";
     }
-    /**
-    Compute the Euclidean distance between two points.
-
-    <code><pre>
-    pointA = Point(2, 3)
-    pointB = Point(9, 2)
-
-    Point.distance(pointA, pointB)
-    # => 7.0710678118654755 # Math.sqrt(50)
-    </pre></code>
-
-    @name distance
-    @fieldOf Point
-    @param {Point} p1
-    @param {Point} p2
-    @returns {Number} The Euclidean distance between two points.
-    */
   };
+  /**
+  Compute the Euclidean distance between two points.
+
+  <code><pre>
+  pointA = Point(2, 3)
+  pointB = Point(9, 2)
+
+  Point.distance(pointA, pointB)
+  # => 7.0710678118654755 # Math.sqrt(50)
+  </pre></code>
+
+  @name distance
+  @fieldOf Point
+  @param {Point} p1
+  @param {Point} p2
+  @returns {Number} The Euclidean distance between two points.
+  */
   Point.distance = function(p1, p2) {
     return Math.sqrt(Point.distanceSquared(p1, p2));
   };
@@ -2412,6 +2643,20 @@ Object.isObject = function(object) {
     return Math.atan2(p2.y - p1.y, p2.x - p1.x);
   };
   /**
+  The centroid of a set of points is their arithmetic mean.
+
+  @name centroid
+  @methodOf Point
+  @param points... The points to find the centroid of.
+  */
+  Point.centroid = function() {
+    var points;
+    points = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
+    return points.inject(Point(0, 0), function(sumPoint, point) {
+      return sumPoint.add(point);
+    }).scale(1 / points.length);
+  };
+  /**
   @name ZERO
   @fieldOf Point
   @returns {Point} The point (0, 0)
@@ -2449,19 +2694,21 @@ Object.isObject = function(object) {
     Object.freeze(Point.DOWN);
   }
   return (typeof exports !== "undefined" && exports !== null ? exports : this)["Point"] = Point;
-})();;
+})();
+;
+
 (function() {
   /**
   @name Random
   @namespace Some useful methods for generating random things.
   */  (typeof exports !== "undefined" && exports !== null ? exports : this)["Random"] = {
     /**
-      Returns a random angle, uniformly distributed, between 0 and 2pi.
+    Returns a random angle, uniformly distributed, between 0 and 2pi.
 
-      @name angle
-      @methodOf Random
-      @returns {Number} A random angle between 0 and 2pi
-      */
+    @name angle
+    @methodOf Random
+    @returns {Number} A random angle between 0 and 2pi
+    */
     angle: function() {
       return rand() * Math.TAU;
     },
@@ -2493,16 +2740,16 @@ Object.isObject = function(object) {
     sometimes: function() {
       return !rand(3);
     }
-    /**
-    Returns random integers from [0, n) if n is given.
-    Otherwise returns random float between 0 and 1.
-
-    @name rand
-    @methodOf window
-    @param {Number} n
-    @returns {Number} A random integer from 0 to n - 1 if n is given. If n is not given, a random float between 0 and 1. 
-    */
   };
+  /**
+  Returns random integers from [0, n) if n is given.
+  Otherwise returns random float between 0 and 1.
+
+  @name rand
+  @methodOf window
+  @param {Number} n
+  @returns {Number} A random integer from 0 to n - 1 if n is given. If n is not given, a random float between 0 and 1.
+  */
   (typeof exports !== "undefined" && exports !== null ? exports : this)["rand"] = function(n) {
     if (n) {
       return Math.floor(n * Math.random());
@@ -2517,7 +2764,7 @@ Object.isObject = function(object) {
   @name signedRand
   @methodOf window
   @param {Number} n
-  @returns {Number} A random float from -n / 2 to n / 2 if n is given. If n is not given, a random float between -0.5 and 0.5. 
+  @returns {Number} A random float from -n / 2 to n / 2 if n is given. If n is not given, a random float between -0.5 and 0.5.
   */
   return (typeof exports !== "undefined" && exports !== null ? exports : this)["signedRand"] = function(n) {
     if (n) {
@@ -2526,7 +2773,9 @@ Object.isObject = function(object) {
       return Math.random() - 0.5;
     }
   };
-})();;
+})();
+;
+
 (function() {
   var Rectangle;
   Rectangle = function(_arg) {
@@ -2561,7 +2810,9 @@ Object.isObject = function(object) {
     return this.y + this.height;
   });
   return (typeof exports !== "undefined" && exports !== null ? exports : this)["Rectangle"] = Rectangle;
-})();;
+})();
+;
+
 /**
 Returns true if this string only contains whitespace characters.
 
@@ -2579,9 +2830,12 @@ Returns true if this string only contains whitespace characters.
 @name blank
 @methodOf String#
 @returns {Boolean} Whether or not this string is blank.
-*/String.prototype.blank = function() {
+*/
+
+String.prototype.blank = function() {
   return /^\s*$/.test(this);
 };
+
 /**
 Returns a new string that is a camelCase version.
 
@@ -2595,8 +2849,9 @@ Returns a new string that is a camelCase version.
 
 @name camelize
 @methodOf String#
-@returns {String} A new string. camelCase version of `this`. 
+@returns {String} A new string. camelCase version of `this`.
 */
+
 String.prototype.camelize = function() {
   return this.trim().replace(/(\-|_|\s)+(.)?/g, function(match, separator, chr) {
     if (chr) {
@@ -2606,6 +2861,7 @@ String.prototype.camelize = function() {
     }
   });
 };
+
 /**
 Returns a new string with the first letter capitalized and the rest lower cased.
 
@@ -2622,9 +2878,11 @@ Returns a new string with the first letter capitalized and the rest lower cased.
 @methodOf String#
 @returns {String} A new string. Capitalized version of `this`
 */
+
 String.prototype.capitalize = function() {
   return this.charAt(0).toUpperCase() + this.substring(1).toLowerCase();
 };
+
 /**
 Return the class or constant named in this string.
 
@@ -2639,6 +2897,7 @@ Return the class or constant named in this string.
 @methodOf String#
 @returns {Object} The class or constant named in this string.
 */
+
 String.prototype.constantize = function() {
   if (this.match(/[A-Z][A-Za-z0-9]*/)) {
     eval("var that = " + this);
@@ -2647,6 +2906,7 @@ String.prototype.constantize = function() {
     throw "String#constantize: '" + this + "' is not a valid constant name.";
   }
 };
+
 /**
 Returns a new string that is a more human readable version.
 
@@ -2662,9 +2922,11 @@ Returns a new string that is a more human readable version.
 @methodOf String#
 @returns {String} A new string. Replaces _id and _ with "" and capitalizes the word.
 */
+
 String.prototype.humanize = function() {
   return this.replace(/_id$/, "").replace(/_/g, " ").capitalize();
 };
+
 /**
 Returns true.
 
@@ -2672,9 +2934,11 @@ Returns true.
 @methodOf String#
 @returns {Boolean} true
 */
+
 String.prototype.isString = function() {
   return true;
 };
+
 /**
 Parse this string as though it is JSON and return the object it represents. If it
 is not valid JSON returns the string itself.
@@ -2694,6 +2958,7 @@ is not valid JSON returns the string itself.
 @methodOf String#
 @returns {Object} Returns an object from the JSON this string contains. If it is not valid JSON returns the string itself.
 */
+
 String.prototype.parse = function() {
   try {
     return JSON.parse(this.toString());
@@ -2701,6 +2966,7 @@ String.prototype.parse = function() {
     return this.toString();
   }
 };
+
 /**
 Returns a new string in Title Case.
 
@@ -2716,11 +2982,13 @@ Returns a new string in Title Case.
 @methodOf String#
 @returns {String} A new string. Title Cased.
 */
+
 String.prototype.titleize = function() {
   return this.split(/[- ]/).map(function(word) {
     return word.capitalize();
   }).join(' ');
 };
+
 /**
 Underscore a word, changing camelCased with under_scored.
 
@@ -2739,9 +3007,11 @@ Underscore a word, changing camelCased with under_scored.
 @methodOf String#
 @returns {String} A new string. Separated by _.
 */
+
 String.prototype.underscore = function() {
   return this.replace(/([A-Z]+)([A-Z][a-z])/g, '$1_$2').replace(/([a-z\d])([A-Z])/g, '$1_$2').replace(/-/g, '_').toLowerCase();
 };
+
 /**
 Assumes the string is something like a file name and returns the 
 contents of the string without the extension.
@@ -2755,15 +3025,19 @@ contents of the string without the extension.
 @methodOf String#
 @returns {String} A new string without the extension name.
 */
+
 String.prototype.withoutExtension = function() {
   return this.replace(/\.[^\.]*$/, '');
-};;
+};
+;
+
 /**
 Non-standard
 
 @name toSource
 @methodOf Boolean#
 */
+
 /**
 Returns a string representing the specified Boolean object.
 
@@ -2772,6 +3046,7 @@ Returns a string representing the specified Boolean object.
 @name toString
 @methodOf Boolean#
 */
+
 /**
 Returns the primitive value of a Boolean object.
 
@@ -2780,6 +3055,7 @@ Returns the primitive value of a Boolean object.
 @name valueOf
 @methodOf Boolean#
 */
+
 /**
 Returns a string representing the Number object in exponential notation
 
@@ -2790,6 +3066,7 @@ to as many digits as necessary to specify the number.
 @name toExponential
 @methodOf Number#
 */
+
 /**
 Formats a number using fixed-point notation
 
@@ -2801,12 +3078,14 @@ support a larger range of values. If this argument is omitted, it is treated as
 @name toFixed
 @methodOf Number#
 */
+
 /**
 number.toLocaleString();
 
 @name toLocaleString
 @methodOf Number#
 */
+
 /**
 Returns a string representing the Number object to the specified precision. 
 
@@ -2815,12 +3094,14 @@ Returns a string representing the Number object to the specified precision.
 @name toPrecision
 @methodOf Number#
 */
+
 /**
 Non-standard
 
 @name toSource
 @methodOf Number#
 */
+
 /**
 Returns a string representing the specified Number object
 
@@ -2831,12 +3112,14 @@ numeric values.
 @name toString
 @methodOf Number#
 */
+
 /**
 Returns the primitive value of a Number object.
 
 @name valueOf
 @methodOf Number#
 */
+
 /**
 Returns the specified character from a string.
 
@@ -2845,6 +3128,7 @@ Returns the specified character from a string.
 @name charAt
 @methodOf String#
 */
+
 /**
 Returns the numeric Unicode value of the character at the given index (except
 for unicode codepoints > 0x10000).
@@ -2855,6 +3139,7 @@ if it is not a number, it defaults to 0.
 @name charCodeAt
 @methodOf String#
 */
+
 /**
 Combines the text of two or more strings and returns a new string.
 
@@ -2863,6 +3148,7 @@ Combines the text of two or more strings and returns a new string.
 @name concat
 @methodOf String#
 */
+
 /**
 Returns the index within the calling String object of the first occurrence of
 the specified value, starting the search at fromIndex,
@@ -2876,6 +3162,7 @@ value is 0.
 @name indexOf
 @methodOf String#
 */
+
 /**
 Returns the index within the calling String object of the last occurrence of the
 specified value, or -1 if not found. The calling string is searched backward,
@@ -2889,6 +3176,7 @@ of the string. The default value is the length of the string.
 @name lastIndexOf
 @methodOf String#
 */
+
 /**
 Returns a number indicating whether a reference string comes before or after or
 is the same as the given string in sort order.
@@ -2898,6 +3186,7 @@ is the same as the given string in sort order.
 @name localeCompare
 @methodOf String#
 */
+
 /**
 Used to retrieve the matches when matching a string against a regular
 expression.
@@ -2908,6 +3197,7 @@ it is implicitly converted to a RegExp by using new RegExp(obj).
 @name match
 @methodOf String#
 */
+
 /**
 Non-standard
 
@@ -2916,6 +3206,7 @@ Non-standard
 @name quote
 @methodOf String#
 */
+
 /**
 Returns a new string with some or all matches of a pattern replaced by a
 replacement.  The pattern can be a string or a RegExp, and the replacement can
@@ -2942,6 +3233,7 @@ sticky global matchignore casematch over multiple linesNon-standard     sticky
 @name replace
 @methodOf String#
 */
+
 /**
 Executes the search for a match between a regular expression and this String
 object.
@@ -2952,6 +3244,7 @@ passed, it is implicitly converted to a RegExp by using new RegExp(obj).
 @name search
 @methodOf String#
 */
+
 /**
 Extracts a section of a string and returns a new string.
 
@@ -2962,6 +3255,7 @@ slice extracts to the end of the string.
 @name slice
 @methodOf String#
 */
+
 /**
 Splits a String object into an array of strings by separating the string into
 substrings.
@@ -2975,6 +3269,7 @@ string.
 @name split
 @methodOf String#
 */
+
 /**
 Returns the characters in a string beginning at the specified location through
 the specified number of characters.
@@ -2985,6 +3280,7 @@ the specified number of characters.
 @name substr
 @methodOf String#
 */
+
 /**
 Returns a subset of a string between one index and another, or through the end
 of the string.
@@ -2995,6 +3291,7 @@ of the string.
 @name substring
 @methodOf String#
 */
+
 /**
 Returns the calling string value converted to lower case, according to any
 locale-specific case mappings.
@@ -3004,6 +3301,7 @@ locale-specific case mappings.
 @name toLocaleLowerCase
 @methodOf String#
 */
+
 /**
 Returns the calling string value converted to upper case, according to any
 locale-specific case mappings.
@@ -3013,6 +3311,7 @@ locale-specific case mappings.
 @name toLocaleUpperCase
 @methodOf String#
 */
+
 /**
 Returns the calling string value converted to lowercase.
 
@@ -3021,6 +3320,7 @@ Returns the calling string value converted to lowercase.
 @name toLowerCase
 @methodOf String#
 */
+
 /**
 Non-standard
 
@@ -3029,6 +3329,7 @@ Non-standard
 @name toSource
 @methodOf String#
 */
+
 /**
 Returns a string representing the specified object.
 
@@ -3037,6 +3338,7 @@ Returns a string representing the specified object.
 @name toString
 @methodOf String#
 */
+
 /**
 Returns the calling string value converted to uppercase.
 
@@ -3045,6 +3347,7 @@ Returns the calling string value converted to uppercase.
 @name toUpperCase
 @methodOf String#
 */
+
 /**
 Removes whitespace from both ends of the string.
 
@@ -3053,6 +3356,7 @@ Removes whitespace from both ends of the string.
 @name trim
 @methodOf String#
 */
+
 /**
 Non-standard
 
@@ -3061,6 +3365,7 @@ Non-standard
 @name trimLeft
 @methodOf String#
 */
+
 /**
 Non-standard
 
@@ -3069,6 +3374,7 @@ Non-standard
 @name trimRight
 @methodOf String#
 */
+
 /**
 Returns the primitive value of a String object.
 
@@ -3077,6 +3383,7 @@ Returns the primitive value of a String object.
 @name valueOf
 @methodOf String#
 */
+
 /**
 Non-standard
 
@@ -3085,6 +3392,7 @@ Non-standard
 @name anchor
 @methodOf String#
 */
+
 /**
 Non-standard
 
@@ -3093,6 +3401,7 @@ Non-standard
 @name big
 @methodOf String#
 */
+
 /**
 Non-standard
 
@@ -3101,6 +3410,7 @@ Non-standard
 @name blink
 @methodOf String#
 */
+
 /**
 Non-standard
 
@@ -3109,6 +3419,7 @@ Non-standard
 @name bold
 @methodOf String#
 */
+
 /**
 Non-standard
 
@@ -3117,6 +3428,7 @@ Non-standard
 @name fixed
 @methodOf String#
 */
+
 /**
 Non-standard
 
@@ -3125,6 +3437,7 @@ Non-standard
 @name fontcolor
 @methodOf String#
 */
+
 /**
 Non-standard
 
@@ -3133,6 +3446,7 @@ Non-standard
 @name fontsize
 @methodOf String#
 */
+
 /**
 Non-standard
 
@@ -3141,6 +3455,7 @@ Non-standard
 @name italics
 @methodOf String#
 */
+
 /**
 Non-standard
 
@@ -3149,6 +3464,7 @@ Non-standard
 @name link
 @methodOf String#
 */
+
 /**
 Non-standard
 
@@ -3157,6 +3473,7 @@ Non-standard
 @name small
 @methodOf String#
 */
+
 /**
 Non-standard
 
@@ -3165,6 +3482,7 @@ Non-standard
 @name strike
 @methodOf String#
 */
+
 /**
 Non-standard
 
@@ -3173,6 +3491,7 @@ Non-standard
 @name sub
 @methodOf String#
 */
+
 /**
 Non-standard
 
@@ -3181,6 +3500,7 @@ Non-standard
 @name sup
 @methodOf String#
 */
+
 /**
 Removes the last element from an array and returns that element.
 
@@ -3191,6 +3511,7 @@ Removes the last element from an array and returns that element.
 @name pop
 @methodOf Array#
 */
+
 /**
 Mutates an array by appending the given elements and returning the new length of
 the array.
@@ -3200,6 +3521,7 @@ the array.
 @name push
 @methodOf Array#
 */
+
 /**
 Reverses an array in place.  The first array element becomes the last and the
 last becomes the first.
@@ -3209,6 +3531,7 @@ last becomes the first.
 @name reverse
 @methodOf Array#
 */
+
 /**
 Removes the first element from an array and returns that element. This method
 changes the length of the array.
@@ -3218,6 +3541,7 @@ changes the length of the array.
 @name shift
 @methodOf Array#
 */
+
 /**
 Sorts the elements of an array in place.
 
@@ -3228,6 +3552,7 @@ to the string conversion of each element.
 @name sort
 @methodOf Array#
 */
+
 /**
 Changes the content of an array, adding new elements while removing old
 elements.
@@ -3245,6 +3570,7 @@ specify any elements, splice simply removes elements from the array.
 @name splice
 @methodOf Array#
 */
+
 /**
 Adds one or more elements to the beginning of an array and returns the new
 length of the array.
@@ -3254,6 +3580,7 @@ length of the array.
 @name unshift
 @methodOf Array#
 */
+
 /**
 Returns a new array comprised of this array joined with other array(s) and/or
 value(s).
@@ -3263,6 +3590,7 @@ value(s).
 @name concat
 @methodOf Array#
 */
+
 /**
 Joins all elements of an array into a string.
 
@@ -3273,6 +3601,7 @@ are separated with a comma.
 @name join
 @methodOf Array#
 */
+
 /**
 Returns a one-level deep copy of a portion of an array.
 
@@ -3289,6 +3618,7 @@ extracts to the end of the sequence.
 @name slice
 @methodOf Array#
 */
+
 /**
 Non-standard
 
@@ -3297,6 +3627,7 @@ Non-standard
 @name toSource
 @methodOf Array#
 */
+
 /**
 Returns a string representing the specified array and its elements.
 
@@ -3305,6 +3636,7 @@ Returns a string representing the specified array and its elements.
 @name toString
 @methodOf Array#
 */
+
 /**
 Returns the first index at which a given element can be found in the array, or
 -1 if it is not present.
@@ -3320,6 +3652,7 @@ array is still searched from front to back. If the calculated index is less than
 @name indexOf
 @methodOf Array#
 */
+
 /**
 Returns the last index at which a given element can be found in the array, or -1
 if it is not present. The array is searched backwards, starting at fromIndex.
@@ -3335,6 +3668,7 @@ index is less than 0, -1 is returned, i.e. the array will not be searched.
 @name lastIndexOf
 @methodOf Array#
 */
+
 /**
 Creates a new array with all elements that pass the test implemented by the
 provided function.
@@ -3345,6 +3679,7 @@ use as this when executing callback.
 @name filter
 @methodOf Array#
 */
+
 /**
 Executes a provided function once per array element.
 
@@ -3354,6 +3689,7 @@ as this when executing callback.
 @name forEach
 @methodOf Array#
 */
+
 /**
 Tests whether all elements in the array pass the test implemented by the
 provided function.
@@ -3364,6 +3700,7 @@ this when executing callback.
 @name every
 @methodOf Array#
 */
+
 /**
 Creates a new array with the results of calling a provided function on every
 element in this array.
@@ -3375,6 +3712,7 @@ callback.
 @name map
 @methodOf Array#
 */
+
 /**
 Tests whether some element in the array passes the test implemented by the
 provided function.
@@ -3385,6 +3723,7 @@ this when executing callback.
 @name some
 @methodOf Array#
 */
+
 /**
 Apply a function against an accumulator and each value of the array (from
 left-to-right) as to reduce it to a single value.
@@ -3395,6 +3734,7 @@ array.Object to use as the first argument to the first call of the callback.
 @name reduce
 @methodOf Array#
 */
+
 /**
 Apply a function simultaneously against two values of the array (from
 right-to-left) as to reduce it to a single value.
@@ -3405,6 +3745,7 @@ array.Object to use as the first argument to the first call of the callback.
 @name reduceRight
 @methodOf Array#
 */
+
 /**
 Returns a boolean indicating whether the object has the specified property.
 
@@ -3413,6 +3754,7 @@ Returns a boolean indicating whether the object has the specified property.
 @name hasOwnProperty
 @methodOf Object#
 */
+
 /**
 Calls a function with a given this value and arguments provided as an array.
 
@@ -3429,6 +3771,7 @@ provided to the function.
 @name apply
 @methodOf Function#
 */
+
 /**
 Creates a new function that, when called, itself calls this function in the
 context of the provided this value, with a given sequence of arguments preceding
@@ -3442,6 +3785,7 @@ arguments provided to the bound function when invoking the target function.
 @name bind
 @methodOf Function#
 */
+
 /**
 Calls a function with a given this value and arguments provided individually.
 
@@ -3456,6 +3800,7 @@ executes.
 @name call
 @methodOf Function#
 */
+
 /**
 Non-standard
 
@@ -3464,6 +3809,7 @@ Non-standard
 @name toSource
 @methodOf Function#
 */
+
 /**
 Returns a string representing the source code of the function.
 
@@ -3474,6 +3820,7 @@ most unnecessary spaces are removed.
 @name toString
 @methodOf Function#
 */
+
 /**
 Executes a search for a match in a specified string. Returns a result array, or
 null.
@@ -3485,6 +3832,7 @@ a literal.
 @name exec
 @methodOf RegExp#
 */
+
 /**
 Executes the search for a match between a regular expression and a specified
 string. Returns true or false.
@@ -3496,6 +3844,7 @@ a literal.
 @name test
 @methodOf RegExp#
 */
+
 /**
 Non-standard
 
@@ -3504,6 +3853,7 @@ Non-standard
 @name toSource
 @methodOf RegExp#
 */
+
 /**
 Returns a string representing the specified object.
 
@@ -3512,6 +3862,7 @@ Returns a string representing the specified object.
 @name toString
 @methodOf RegExp#
 */
+
 /**
 Returns a reference to the Date function that created the instance's prototype.
 Note that the value of this property is a reference to the function itself, not
@@ -3522,6 +3873,7 @@ a string containing the function's name.
 @name constructor
 @methodOf Date#
 */
+
 /**
 Returns the day of the month for the specified date according to local time.
 
@@ -3532,6 +3884,7 @@ getDate()
 @name getDate
 @methodOf Date#
 */
+
 /**
 Returns the day of the week for the specified date according to local time.
 
@@ -3542,6 +3895,7 @@ getDay()
 @name getDay
 @methodOf Date#
 */
+
 /**
 Returns the year of the specified date according to local time.
 
@@ -3552,6 +3906,7 @@ getFullYear()
 @name getFullYear
 @methodOf Date#
 */
+
 /**
 Returns the hour for the specified date according to local time.
 
@@ -3562,6 +3917,7 @@ getHours()
 @name getHours
 @methodOf Date#
 */
+
 /**
 Returns the milliseconds in the specified date according to local time.
 
@@ -3572,6 +3928,7 @@ getMilliseconds()
 @name getMilliseconds
 @methodOf Date#
 */
+
 /**
 Returns the minutes in the specified date according to local time.
 
@@ -3582,6 +3939,7 @@ getMinutes()
 @name getMinutes
 @methodOf Date#
 */
+
 /**
 Returns the month in the specified date according to local time.
 
@@ -3592,6 +3950,7 @@ getMonth()
 @name getMonth
 @methodOf Date#
 */
+
 /**
 Returns the seconds in the specified date according to local time.
 
@@ -3602,6 +3961,7 @@ getSeconds()
 @name getSeconds
 @methodOf Date#
 */
+
 /**
 Returns the numeric value corresponding to the time for the specified date
 according to universal time.
@@ -3611,6 +3971,7 @@ according to universal time.
 @name getTime
 @methodOf Date#
 */
+
 /**
 Returns the time-zone offset from UTC, in minutes, for the current locale.
 
@@ -3619,6 +3980,7 @@ Returns the time-zone offset from UTC, in minutes, for the current locale.
 @name getTimezoneOffset
 @methodOf Date#
 */
+
 /**
 Returns the day (date) of the month in the specified date according to universal
 time.
@@ -3630,6 +3992,7 @@ getUTCDate()
 @name getUTCDate
 @methodOf Date#
 */
+
 /**
 Returns the day of the week in the specified date according to universal time.
 
@@ -3640,6 +4003,7 @@ getUTCDay()
 @name getUTCDay
 @methodOf Date#
 */
+
 /**
 Returns the year in the specified date according to universal time.
 
@@ -3650,6 +4014,7 @@ getUTCFullYear()
 @name getUTCFullYear
 @methodOf Date#
 */
+
 /**
 Returns the hours in the specified date according to universal time.
 
@@ -3660,6 +4025,7 @@ getUTCHours
 @name getUTCHours
 @methodOf Date#
 */
+
 /**
 Returns the milliseconds in the specified date according to universal time.
 
@@ -3670,6 +4036,7 @@ getUTCMilliseconds()
 @name getUTCMilliseconds
 @methodOf Date#
 */
+
 /**
 Returns the minutes in the specified date according to universal time.
 
@@ -3680,6 +4047,7 @@ getUTCMinutes()
 @name getUTCMinutes
 @methodOf Date#
 */
+
 /**
 Returns the month of the specified date according to universal time.
 
@@ -3690,6 +4058,7 @@ getUTCMonth()
 @name getUTCMonth
 @methodOf Date#
 */
+
 /**
 Returns the seconds in the specified date according to universal time.
 
@@ -3700,6 +4069,7 @@ getUTCSeconds()
 @name getUTCSeconds
 @methodOf Date#
 */
+
 /**
 Deprecated
 
@@ -3708,6 +4078,7 @@ Deprecated
 @name getYear
 @methodOf Date#
 */
+
 /**
 Sets the day of the month for a specified date according to local time.
 
@@ -3716,6 +4087,7 @@ Sets the day of the month for a specified date according to local time.
 @name setDate
 @methodOf Date#
 */
+
 /**
 Sets the full year for a specified date according to local time.
 
@@ -3732,6 +4104,7 @@ monthValue.
 @name setFullYear
 @methodOf Date#
 */
+
 /**
 Sets the hours for a specified date according to local time.
 
@@ -3748,6 +4121,7 @@ secondsValue.
 @name setHours
 @methodOf Date#
 */
+
 /**
 Sets the milliseconds for a specified date according to local time.
 
@@ -3759,6 +4133,7 @@ milliseconds.
 @name setMilliseconds
 @methodOf Date#
 */
+
 /**
 Sets the minutes for a specified date according to local time.
 
@@ -3774,6 +4149,7 @@ secondsValue.
 @name setMinutes
 @methodOf Date#
 */
+
 /**
 Set the month for a specified date according to local time.
 
@@ -3786,6 +4162,7 @@ January through December).
 @name setMonth
 @methodOf Date#
 */
+
 /**
 Sets the seconds for a specified date according to local time.
 
@@ -3797,6 +4174,7 @@ setSeconds(<i>secondsValue</i>[, <em>msValue</em>])
 @name setSeconds
 @methodOf Date#
 */
+
 /**
 Sets the Date object to the time represented by a number of milliseconds since
 January 1, 1970, 00:00:00 UTC.
@@ -3809,6 +4187,7 @@ January 1970, 00:00:00 UTC.
 @name setTime
 @methodOf Date#
 */
+
 /**
 Sets the day of the month for a specified date according to universal time.
 
@@ -3819,6 +4198,7 @@ setUTCDate(<i>dayValue</i>)
 @name setUTCDate
 @methodOf Date#
 */
+
 /**
 Sets the full year for a specified date according to universal time.
 
@@ -3835,6 +4215,7 @@ monthValue.
 @name setUTCFullYear
 @methodOf Date#
 */
+
 /**
 Sets the hour for a specified date according to universal time.
 
@@ -3851,6 +4232,7 @@ secondsValue.
 @name setUTCHours
 @methodOf Date#
 */
+
 /**
 Sets the milliseconds for a specified date according to universal time.
 
@@ -3862,6 +4244,7 @@ milliseconds.
 @name setUTCMilliseconds
 @methodOf Date#
 */
+
 /**
 Sets the minutes for a specified date according to universal time.
 
@@ -3877,6 +4260,7 @@ secondsValue.
 @name setUTCMinutes
 @methodOf Date#
 */
+
 /**
 Sets the month for a specified date according to universal time.
 
@@ -3889,6 +4273,7 @@ January through December.
 @name setUTCMonth
 @methodOf Date#
 */
+
 /**
 Sets the seconds for a specified date according to universal time.
 
@@ -3900,6 +4285,7 @@ setUTCSeconds(<i>secondsValue</i>[, <em>msValue</em>])
 @name setUTCSeconds
 @methodOf Date#
 */
+
 /**
 Deprecated
 
@@ -3908,6 +4294,7 @@ Deprecated
 @name setYear
 @methodOf Date#
 */
+
 /**
 Returns the date portion of a Date object in human readable form in American
 English.
@@ -3917,6 +4304,7 @@ English.
 @name toDateString
 @methodOf Date#
 */
+
 /**
 Returns a JSON representation of the Date object.
 
@@ -3925,6 +4313,7 @@ Returns a JSON representation of the Date object.
 @name toJSON
 @methodOf Date#
 */
+
 /**
 Deprecated
 
@@ -3933,6 +4322,7 @@ Deprecated
 @name toGMTString
 @methodOf Date#
 */
+
 /**
 Converts a date to a string, returning the "date" portion using the operating
 system's locale's conventions.
@@ -3944,6 +4334,7 @@ toLocaleDateString()
 @name toLocaleDateString
 @methodOf Date#
 */
+
 /**
 Non-standard
 
@@ -3952,6 +4343,7 @@ Non-standard
 @name toLocaleFormat
 @methodOf Date#
 */
+
 /**
 Converts a date to a string, using the operating system's locale's conventions.
 
@@ -3962,6 +4354,7 @@ toLocaleString()
 @name toLocaleString
 @methodOf Date#
 */
+
 /**
 Converts a date to a string, returning the "time" portion using the current
 locale's conventions.
@@ -3971,6 +4364,7 @@ locale's conventions.
 @name toLocaleTimeString
 @methodOf Date#
 */
+
 /**
 Non-standard
 
@@ -3979,6 +4373,7 @@ Non-standard
 @name toSource
 @methodOf Date#
 */
+
 /**
 Returns a string representing the specified Date object.
 
@@ -3987,6 +4382,7 @@ Returns a string representing the specified Date object.
 @name toString
 @methodOf Date#
 */
+
 /**
 Returns the time portion of a Date object in human readable form in American
 English.
@@ -3996,6 +4392,7 @@ English.
 @name toTimeString
 @methodOf Date#
 */
+
 /**
 Converts a date to a string, using the universal time convention.
 
@@ -4004,6 +4401,7 @@ Converts a date to a string, using the universal time convention.
 @name toUTCString
 @methodOf Date#
 */
+
 /**
 Returns the primitive value of a Date object.
 
@@ -4013,7 +4411,10 @@ valueOf()
 
 @name valueOf
 @methodOf Date#
-*/;
+*/
+
+
+;
 /*!
 Math.uuid.js (v1.4)
 http://www.broofa.com
@@ -6570,17 +6971,14 @@ enemy.I.active
 
 var Durable;
 
-Durable = function(I) {
+Durable = function(I, self) {
   Object.reverseMerge(I, {
     duration: -1
   });
-  return {
-    before: {
-      update: function() {
-        if (I.duration !== -1 && I.age >= I.duration) return I.active = false;
-      }
-    }
-  };
+  self.bind("update", function() {
+    if (I.duration !== -1 && I.age >= I.duration) return I.active = false;
+  });
+  return {};
 };
 ;
 var Emitter;
@@ -8040,19 +8438,16 @@ player.I.rotation
 
 var Rotatable;
 
-Rotatable = function(I) {
-  I || (I = {});
+Rotatable = function(I, self) {
+  if (I == null) I = {};
   Object.reverseMerge(I, {
     rotation: 0,
     rotationalVelocity: 0
   });
-  return {
-    before: {
-      update: function() {
-        return I.rotation += I.rotationalVelocity;
-      }
-    }
-  };
+  self.bind('update', function() {
+    return I.rotation += I.rotationalVelocity;
+  });
+  return {};
 };
 ;
 
