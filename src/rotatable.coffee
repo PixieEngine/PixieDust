@@ -30,14 +30,13 @@ player.I.rotation
 @param {Object} I Instance variables
 @param {Core} self Reference to including object
 ###
-Rotatable = (I) ->
-  I ||= {}
-
+Rotatable = (I={}, self) ->
   Object.reverseMerge I,
     rotation: 0
     rotationalVelocity: 0
 
-  before:
-    update: () ->
-      I.rotation += I.rotationalVelocity
+  self.bind 'update', ->
+    I.rotation += I.rotationalVelocity
+
+  return {}
 
