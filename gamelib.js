@@ -5293,7 +5293,7 @@ Camera.ZSort = function(I, self) {
     @name collide
     @methodOf Collision
     @param {Object|Array|String} groupA An object or set of objects to check collisions with
-    @param {Object|Array|String} groupB An objcet or set of objects to check collisions with
+    @param {Object|Array|String} groupB An object or set of objects to check collisions with
     @param {Function} callback The callback to call when an object of groupA collides
     with an object of groupB: (a, b) ->
     @param {Function} [detectionMethod] An optional detection method to determine when two 
@@ -7167,13 +7167,10 @@ Emitterable = function(I, self) {
   @params {PixieCanvas} canvas A reference to the canvas to draw on.
   */
   Engine = function(I) {
-    var animLoop, defaultModules, draw, frameAdvance, lastStepTime, modules, queuedObjects, running, self, startTime, step, update;
-    I || (I = {});
-    Object.reverseMerge(I, {
-      objects: []
-    }, defaults);
+    var animLoop, defaultModules, draw, frameAdvance, lastStepTime, modules, running, self, startTime, step, update;
+    if (I == null) I = {};
+    Object.reverseMerge(I, defaults);
     frameAdvance = false;
-    queuedObjects = [];
     running = false;
     startTime = +new Date();
     lastStepTime = -Infinity;
@@ -7390,7 +7387,7 @@ Engine.Collision = function(I, self) {
     @returns {Boolean} true if the bounds object collides with any of the game objects, false otherwise.
     */
     collides: function(bounds, sourceObject) {
-      return I.objects.inject(false, function(collided, object) {
+      return self.objects().inject(false, function(collided, object) {
         return collided || (object.solid() && (object !== sourceObject) && object.collides(bounds));
       });
     },
@@ -7407,7 +7404,7 @@ Engine.Collision = function(I, self) {
     collidesWith: function(bounds, sourceObject) {
       var collided;
       collided = [];
-      I.objects.each(function(object) {
+      self.objects().each(function(object) {
         if (!object.solid()) return;
         if (object !== sourceObject && object.collides(bounds)) {
           return collided.push(object);
@@ -7426,7 +7423,7 @@ Engine.Collision = function(I, self) {
     */
     rayCollides: function(source, direction, sourceObject) {
       var hits, nearestDistance, nearestHit;
-      hits = I.objects.map(function(object) {
+      hits = self.objects().map(function(object) {
         var hit;
         hit = object.solid() && (object !== sourceObject) && Collision.rayRectangle(source, direction, object.centeredBounds());
         if (hit) hit.object = object;
