@@ -113,16 +113,10 @@
   @params {PixieCanvas} canvas A reference to the canvas to draw on. 
   ###
 
-  Engine = (I) ->
-    I ||= {}
-
-    Object.reverseMerge I, {
-      objects: []
-    }, defaults
+  Engine = (I={}) ->
+    Object.reverseMerge I, defaults
 
     frameAdvance = false
-
-    queuedObjects = []
 
     running = false
     startTime = +new Date()
