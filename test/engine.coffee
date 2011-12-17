@@ -175,5 +175,10 @@ test "#camera", ->
 
   equal engine.camera(), engine.cameras().first()
 
+test "#collides", ->
+  engine = Engine()
+
+  engine.collides(Rectangle(0, 0, 10, 10), null)
+
 module()
 
