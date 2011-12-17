@@ -18,7 +18,7 @@ Engine.Collision = (I, self) ->
   @returns {Boolean} true if the bounds object collides with any of the game objects, false otherwise.
   ###
   collides: (bounds, sourceObject) ->
-    I.objects.inject false, (collided, object) ->
+    self.objects().inject false, (collided, object) ->
       collided || (object.solid() && (object != sourceObject) && object.collides(bounds))
 
   ###*
@@ -34,7 +34,7 @@ Engine.Collision = (I, self) ->
   collidesWith: (bounds, sourceObject) ->
     collided = []
 
-    I.objects.each (object) ->
+    self.objects().each (object) ->
       return unless object.solid()
       if object != sourceObject && object.collides(bounds)
         collided.push(object)
@@ -51,7 +51,7 @@ Engine.Collision = (I, self) ->
   @param [sourceObject] An object to exclude from the results.
   ###
   rayCollides: (source, direction, sourceObject) ->
-    hits = I.objects.map (object) ->
+    hits = self.objects().map (object) ->
       hit = object.solid() && (object != sourceObject) && Collision.rayRectangle(source, direction, object.centeredBounds())
       hit.object = object if hit
 
