@@ -4614,7 +4614,7 @@ Bounded = function(I, self) {
     @returns {Point} The position of this object
     */
     collides: function(bounds) {
-      return Collision.rectangular(I, bounds);
+      return Collision.rectangular(self.bounds(), bounds);
     },
     /**
     This returns a modified bounds based on the collision margin.
