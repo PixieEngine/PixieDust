@@ -94,7 +94,7 @@ Bounded = (I={}, self) ->
   @returns {Point} The position of this object
   ###
   collides: (bounds) ->
-    Collision.rectangular(I, bounds)
+    Collision.rectangular(self.bounds(), bounds)
 
   ###*
   This returns a modified bounds based on the collision margin.
