@@ -15,15 +15,12 @@ Flickerable = (I, self) ->
 
   originalAlpha = I.alpha
 
-  before:
-    draw: (canvas) ->
-      I.flickerDuration = I.flickerDuration.approach(0, 1)
+  self.bind 'update', ->
+    I.flickerDuration = I.flickerDuration.approach(0, 1)
 
-      if (I.age % I.flickerFrequency == 0) && I.flickerDuration > 0
-        I.alpha = I.flickerAlpha
-
-  after:
-    draw: (canvas) ->
+    if (I.age % I.flickerFrequency == 0) && I.flickerDuration > 0
+      I.alpha = I.flickerAlpha
+    else
       I.alpha = originalAlpha
 
   ###*
@@ -54,3 +51,4 @@ Flickerable = (I, self) ->
     I.flickerDuration = duration
     I.flickerFrequency = frequency
     I.flickerAlpha = alpha
+
