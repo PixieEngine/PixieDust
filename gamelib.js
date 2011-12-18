@@ -6993,7 +6993,7 @@ var Emitterable;
 
 Emitterable = function(I, self) {
   var n, particles;
-  I || (I = {});
+  if (I == null) I = {};
   Object.reverseMerge(I, {
     batchSize: 1,
     emissionRate: 1,
@@ -7022,7 +7022,7 @@ Emitterable = function(I, self) {
   self.bind('draw', function(canvas) {
     return particles.invoke("draw", canvas);
   });
-  return self.bind('update', function() {
+  self.bind('update', function() {
     I.batchSize.times(function() {
       var center, key, particleProperties, value, _ref;
       if (n < I.particleCount && rand() < I.emissionRate) {
@@ -7051,6 +7051,7 @@ Emitterable = function(I, self) {
     });
     if (n === I.particleCount && !particles.length) return I.active = false;
   });
+  return {};
 };
 ;
 
