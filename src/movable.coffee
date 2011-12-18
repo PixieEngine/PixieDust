@@ -32,7 +32,7 @@ player.update()
 @param {Object} I Instance variables
 @param {Core} self Reference to including object
 ###
-Movable = (I) ->
+Movable = (I={}, self) ->
   Object.reverseMerge I,
     acceleration: Point(0, 0)
     velocity: Point(0, 0)
