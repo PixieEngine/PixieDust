@@ -33,10 +33,7 @@ Emitterable = (I={}, self) ->
       if n < I.particleCount && rand() < I.emissionRate
         center = self.center()
 
-        particleProperties = Object.reverseMerge {
-          x: center.x
-          y: center.y
-        }, I.particleData
+        particleProperties = Object.reverseMerge {}, I.particleData
 
         for key, value of I.generator
           if I.generator[key].call
