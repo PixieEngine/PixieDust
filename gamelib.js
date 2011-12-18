@@ -7815,20 +7815,15 @@ Flickerable = function(I, self) {
     flickerFrequency: 3
   });
   originalAlpha = I.alpha;
+  self.bind('update', function() {
+    I.flickerDuration = I.flickerDuration.approach(0, 1);
+    if ((I.age % I.flickerFrequency === 0) && I.flickerDuration > 0) {
+      return I.alpha = I.flickerAlpha;
+    } else {
+      return I.alpha = originalAlpha;
+    }
+  });
   return {
-    before: {
-      draw: function(canvas) {
-        I.flickerDuration = I.flickerDuration.approach(0, 1);
-        if ((I.age % I.flickerFrequency === 0) && I.flickerDuration > 0) {
-          return I.alpha = I.flickerAlpha;
-        }
-      }
-    },
-    after: {
-      draw: function(canvas) {
-        return I.alpha = originalAlpha;
-      }
-    },
     /**
     A convenient way to set the flicker instance variables on a sprite. You can modify the
     instance variables by hand but the suggested way to do it is through this method.
