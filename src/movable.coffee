@@ -42,15 +42,14 @@ Movable = (I) ->
   I.acceleration = Point(I.acceleration.x, I.acceleration.y)
   I.velocity = Point(I.velocity.x, I.velocity.y)
 
-  before:
-    update: () ->
-      I.velocity = I.velocity.add(I.acceleration)
+  self.bind 'update', ->
+    I.velocity = I.velocity.add(I.acceleration)
 
-      if I.maxSpeed? 
-        currentSpeed = I.velocity.magnitude()
-        if currentSpeed > I.maxSpeed
-          I.velocity = I.velocity.scale(I.maxSpeed / currentSpeed)
+    if I.maxSpeed? 
+      currentSpeed = I.velocity.magnitude()
+      if currentSpeed > I.maxSpeed
+        I.velocity = I.velocity.scale(I.maxSpeed / currentSpeed)
 
-      I.x += I.velocity.x
-      I.y += I.velocity.y
+    I.x += I.velocity.x
+    I.y += I.velocity.y
 
