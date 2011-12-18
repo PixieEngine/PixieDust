@@ -4821,14 +4821,14 @@ Camera = function(I) {
     },
     topdown: function(object) {
       var helper;
-      helper = Math.max(I.cameraBounds.width, I.cameraBounds.height) / 4;
+      helper = Math.max(I.screen.width, I.screen.height) / 4;
       I.deadzone = Point(helper, helper);
       return focusOn(object);
     },
     platformer: function(object) {
       var height, width;
-      width = I.cameraBounds.width / 8;
-      height = I.cameraBounds.height / 3;
+      width = I.screen.width / 8;
+      height = I.screen.height / 3;
       I.deadzone = Point(width, height);
       return focusOn(object);
     }
