@@ -7019,42 +7019,38 @@ Emitterable = function(I, self) {
   });
   particles = [];
   n = 0;
-  return {
-    before: {
-      draw: function(canvas) {
-        return particles.invoke("draw", canvas);
-      },
-      update: function() {
-        I.batchSize.times(function() {
-          var center, key, particleProperties, value, _ref;
-          if (n < I.particleCount && rand() < I.emissionRate) {
-            center = self.center();
-            particleProperties = Object.reverseMerge({
-              x: center.x,
-              y: center.y
-            }, I.particleData);
-            _ref = I.generator;
-            for (key in _ref) {
-              value = _ref[key];
-              if (I.generator[key].call) {
-                particleProperties[key] = I.generator[key](n, I);
-              } else {
-                particleProperties[key] = I.generator[key];
-              }
-            }
-            particleProperties.x += particleProperties.offset.x;
-            particleProperties.y += particleProperties.offset.y;
-            particles.push(GameObject(particleProperties));
-            return n += 1;
+  self.bind('draw', function(canvas) {
+    return particles.invoke("draw", canvas);
+  });
+  return self.bind('update', function() {
+    I.batchSize.times(function() {
+      var center, key, particleProperties, value, _ref;
+      if (n < I.particleCount && rand() < I.emissionRate) {
+        center = self.center();
+        particleProperties = Object.reverseMerge({
+          x: center.x,
+          y: center.y
+        }, I.particleData);
+        _ref = I.generator;
+        for (key in _ref) {
+          value = _ref[key];
+          if (I.generator[key].call) {
+            particleProperties[key] = I.generator[key](n, I);
+          } else {
+            particleProperties[key] = I.generator[key];
           }
-        });
-        particles = particles.select(function(particle) {
-          return particle.update();
-        });
-        if (n === I.particleCount && !particles.length) return I.active = false;
+        }
+        particleProperties.x += particleProperties.offset.x;
+        particleProperties.y += particleProperties.offset.y;
+        particles.push(GameObject(particleProperties));
+        return n += 1;
       }
-    }
-  };
+    });
+    particles = particles.select(function(particle) {
+      return particle.update();
+    });
+    if (n === I.particleCount && !particles.length) return I.active = false;
+  });
 };
 ;
 
