@@ -7024,10 +7024,9 @@ Emitterable = function(I, self) {
   });
   self.bind('update', function() {
     I.batchSize.times(function() {
-      var center, key, particleProperties, value, _ref;
+      var key, particleProperties, value, _ref;
       if (n < I.particleCount && rand() < I.emissionRate) {
-        center = self.center();
-        particleProperties = Object.reverseMerge({}, I.particleData);
+        particleProperties = Object.extend({}, I.particleData);
         _ref = I.generator;
         for (key in _ref) {
           value = _ref[key];
@@ -8336,22 +8335,18 @@ Movable = function(I) {
   });
   I.acceleration = Point(I.acceleration.x, I.acceleration.y);
   I.velocity = Point(I.velocity.x, I.velocity.y);
-  return {
-    before: {
-      update: function() {
-        var currentSpeed;
-        I.velocity = I.velocity.add(I.acceleration);
-        if (I.maxSpeed != null) {
-          currentSpeed = I.velocity.magnitude();
-          if (currentSpeed > I.maxSpeed) {
-            I.velocity = I.velocity.scale(I.maxSpeed / currentSpeed);
-          }
-        }
-        I.x += I.velocity.x;
-        return I.y += I.velocity.y;
+  return self.bind('update', function() {
+    var currentSpeed;
+    I.velocity = I.velocity.add(I.acceleration);
+    if (I.maxSpeed != null) {
+      currentSpeed = I.velocity.magnitude();
+      if (currentSpeed > I.maxSpeed) {
+        I.velocity = I.velocity.scale(I.maxSpeed / currentSpeed);
       }
     }
-  };
+    I.x += I.velocity.x;
+    return I.y += I.velocity.y;
+  });
 };
 ;
 
