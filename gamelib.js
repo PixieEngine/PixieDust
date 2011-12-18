@@ -8328,7 +8328,8 @@ player.update()
 
 var Movable;
 
-Movable = function(I) {
+Movable = function(I, self) {
+  if (I == null) I = {};
   Object.reverseMerge(I, {
     acceleration: Point(0, 0),
     velocity: Point(0, 0)
