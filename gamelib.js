@@ -7027,10 +7027,7 @@ Emitterable = function(I, self) {
       var center, key, particleProperties, value, _ref;
       if (n < I.particleCount && rand() < I.emissionRate) {
         center = self.center();
-        particleProperties = Object.reverseMerge({
-          x: center.x,
-          y: center.y
-        }, I.particleData);
+        particleProperties = Object.reverseMerge({}, I.particleData);
         _ref = I.generator;
         for (key in _ref) {
           value = _ref[key];
