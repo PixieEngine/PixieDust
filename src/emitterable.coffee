@@ -1,7 +1,5 @@
 # TODO: LOL at name
-Emitterable = (I, self) ->
-  I ||= {}
-
+Emitterable = (I={}, self) ->
   Object.reverseMerge I,
     batchSize: 1
     emissionRate: 1
@@ -58,4 +56,6 @@ Emitterable = (I, self) ->
 
     if n == I.particleCount && !particles.length
       I.active = false
+
+  return {}
 
