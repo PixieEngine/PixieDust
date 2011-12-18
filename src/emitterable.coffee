@@ -7,6 +7,7 @@ Emitterable = (I={}, self) ->
     width: 0
     height: 0
     generator: {}
+    particles: []
     particleCount: Infinity
     particleData:
       acceleration: Point(0, 0.1)
@@ -21,12 +22,13 @@ Emitterable = (I={}, self) ->
       spriteName: false
       velocity: Point(-0.25, 1)
       width: 2
+      x: 0
+      y: 0
 
-  particles = []
   n = 0
 
   self.bind 'draw', (canvas) ->
-    particles.invoke "draw", canvas
+    I.particles.invoke "draw", canvas
 
   self.bind 'update', ->
     I.batchSize.times ->
@@ -42,14 +44,14 @@ Emitterable = (I={}, self) ->
         particleProperties.x += particleProperties.offset.x
         particleProperties.y += particleProperties.offset.y
 
-        particles.push(GameObject(particleProperties))
+        I.particles.push(GameObject(particleProperties))
 
         n += 1
 
-    particles = particles.select (particle) ->
+    I.particles = I.particles.select (particle) ->
       particle.update()
 
-    if n == I.particleCount && !particles.length
+    if n == I.particleCount && !I.particles.length
       I.active = false
 
   return {}
