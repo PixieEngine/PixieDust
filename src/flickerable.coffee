@@ -18,7 +18,7 @@ Flickerable = (I, self) ->
   self.bind 'update', ->
     I.flickerDuration = I.flickerDuration.approach(0, 1)
 
-    if (I.age % I.flickerFrequency == 0) && I.flickerDuration > 0
+    if I.flickerDuration > 0 && (I.age / I.flickerFrequency).floor() % 2
       I.alpha = I.flickerAlpha
     else
       I.alpha = originalAlpha
