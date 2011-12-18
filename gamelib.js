@@ -6992,7 +6992,7 @@ Emitter = function(I) {
 var Emitterable;
 
 Emitterable = function(I, self) {
-  var n, particles;
+  var n;
   if (I == null) I = {};
   Object.reverseMerge(I, {
     batchSize: 1,
@@ -7001,6 +7001,7 @@ Emitterable = function(I, self) {
     width: 0,
     height: 0,
     generator: {},
+    particles: [],
     particleCount: Infinity,
     particleData: {
       acceleration: Point(0, 0.1),
@@ -7014,13 +7015,14 @@ Emitterable = function(I, self) {
       sprite: false,
       spriteName: false,
       velocity: Point(-0.25, 1),
-      width: 2
+      width: 2,
+      x: 0,
+      y: 0
     }
   });
-  particles = [];
   n = 0;
   self.bind('draw', function(canvas) {
-    return particles.invoke("draw", canvas);
+    return I.particles.invoke("draw", canvas);
   });
   self.bind('update', function() {
     I.batchSize.times(function() {
@@ -7038,14 +7040,14 @@ Emitterable = function(I, self) {
         }
         particleProperties.x += particleProperties.offset.x;
         particleProperties.y += particleProperties.offset.y;
-        particles.push(GameObject(particleProperties));
+        I.particles.push(GameObject(particleProperties));
         return n += 1;
       }
     });
-    particles = particles.select(function(particle) {
+    I.particles = I.particles.select(function(particle) {
       return particle.update();
     });
-    if (n === I.particleCount && !particles.length) return I.active = false;
+    if (n === I.particleCount && !I.particles.length) return I.active = false;
   });
   return {};
 };
