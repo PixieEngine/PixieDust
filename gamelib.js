@@ -7817,7 +7817,7 @@ Flickerable = function(I, self) {
   originalAlpha = I.alpha;
   self.bind('update', function() {
     I.flickerDuration = I.flickerDuration.approach(0, 1);
-    if ((I.age % I.flickerFrequency === 0) && I.flickerDuration > 0) {
+    if (I.flickerDuration > 0 && (I.age / I.flickerFrequency).floor() % 2) {
       return I.alpha = I.flickerAlpha;
     } else {
       return I.alpha = originalAlpha;
