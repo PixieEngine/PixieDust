@@ -27,36 +27,35 @@ Emitterable = (I, self) ->
   particles = []
   n = 0
 
-  before:
-    draw: (canvas) ->
-      particles.invoke "draw", canvas
+  self.bind 'draw', (canvas) ->
+    particles.invoke "draw", canvas
 
-    update: () ->
-      I.batchSize.times ->
-        if n < I.particleCount && rand() < I.emissionRate
-          center = self.center()
+  self.bind 'update', ->
+    I.batchSize.times ->
+      if n < I.particleCount && rand() < I.emissionRate
+        center = self.center()
 
-          particleProperties = Object.reverseMerge {
-            x: center.x
-            y: center.y
-          }, I.particleData
+        particleProperties = Object.reverseMerge {
+          x: center.x
+          y: center.y
+        }, I.particleData
 
-          for key, value of I.generator
-            if I.generator[key].call
-              particleProperties[key] = I.generator[key](n, I)
-            else
-              particleProperties[key] = I.generator[key]
+        for key, value of I.generator
+          if I.generator[key].call
+            particleProperties[key] = I.generator[key](n, I)
+          else
+            particleProperties[key] = I.generator[key]
 
-          particleProperties.x += particleProperties.offset.x
-          particleProperties.y += particleProperties.offset.y
+        particleProperties.x += particleProperties.offset.x
+        particleProperties.y += particleProperties.offset.y
 
-          particles.push(GameObject(particleProperties))
+        particles.push(GameObject(particleProperties))
 
-          n += 1
+        n += 1
 
-      particles = particles.select (particle) ->
-        particle.update()
+    particles = particles.select (particle) ->
+      particle.update()
 
-      if n == I.particleCount && !particles.length
-        I.active = false
+    if n == I.particleCount && !particles.length
+      I.active = false
 
