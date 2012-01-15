@@ -120,10 +120,7 @@
     rgbMap = ((channel * 255).round() for channel in [r, g, b])
 
     return rgbMap.concat(a)
-
-  normalizeKey = (key) ->
-    key.toString().toLowerCase().split(' ').join('')
-
+    
   channelize = (color, alpha) ->
     return color.channels() if color.channels?
     if Object.isArray color
