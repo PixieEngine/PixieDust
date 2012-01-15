@@ -136,7 +136,7 @@
 
       result = (parseFloat(channel) for channel in color[0..2]).concat(alpha)
     else
-      result = lookup[normalizeKey(color)] || parseHex(color) || parseRGB(color) || parseHSL(color)
+      result = Color.lookup?(color) || parseHex(color) || parseRGB(color) || parseHSL(color)
 
       if alpha?
         result[3] = parseFloat(alpha)
@@ -1147,11 +1147,6 @@
       @a = (@a + amount).clamp(0, 1) 
 
       return this    
-
-  lookup = {}
-
-  names.each (element) ->
-    lookup[normalizeKey(element[1])] = parseHex(element[0])
 
   ###*
   returns a random color.
