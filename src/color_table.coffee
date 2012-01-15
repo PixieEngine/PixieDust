@@ -2527,7 +2527,7 @@
     key.toString().toLowerCase().split(' ').join('')  
   
   names.each (element) ->
-    lookup[normalizeKey(element[1])] = parseHex(element[0])
+    lookup[normalizeKey(element[1])] = element[0].parseHex()
     
   Color.lookup = (color) ->
     lookup[normalizeKey(color)]
