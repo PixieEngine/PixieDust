@@ -11,35 +11,6 @@
 
     return parsedColor
 
-  parseHex = (hexString) ->
-    hexString = hexString.replace(/#/, '')
-
-    switch hexString.length
-      when 3, 4
-        if hexString.length == 4
-          alpha = ((parseInt(hexString.substr(3, 1), 16) * 0x11) / 255)
-        else
-          alpha = 1
-
-        rgb = (parseInt(hexString.substr(i, 1), 16) * 0x11 for i in [0..2])      
-        rgb.push(alpha)    
-
-        return rgb
-
-      when 6, 8
-        if hexString.length == 8
-          alpha = (parseInt(hexString.substr(6, 2), 16) / 255)
-        else
-          alpha = 1
-
-        rgb = (parseInt(hexString.substr(2 * i, 2), 16) for i in [0..2])          
-        rgb.push(alpha)
-
-        return rgb
-
-      else
-        return undefined
-
   parseHSL = (colorString) ->
     return undefined unless channels = hslParser.exec(colorString)
 
@@ -133,7 +104,7 @@
 
       result = (parseFloat(channel) for channel in color[0..2]).concat(alpha)
     else
-      result = Color.lookup?(color) || parseHex(color) || parseRGB(color) || parseHSL(color)
+      result = Color.lookup?(color) || color.parseHex() || parseRGB(color) || parseHSL(color)
 
       if alpha?
         result[3] = parseFloat(alpha)
