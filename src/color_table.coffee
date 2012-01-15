@@ -2519,3 +2519,8 @@ names = [
   ["87b84a", "peridot"]
   ["00000000", "transparent"]
 ]
+
+lookup = {}
+
+names.each (element) ->
+  lookup[normalizeKey(element[1])] = parseHex(element[0])
