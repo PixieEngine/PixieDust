@@ -2528,4 +2528,7 @@
   
   names.each (element) ->
     lookup[normalizeKey(element[1])] = parseHex(element[0])
+    
+  Color.lookup = (color) ->
+    lookup[normalizeKey(color)]
 )()
