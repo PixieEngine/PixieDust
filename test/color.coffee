@@ -107,6 +107,11 @@ test "accepts an hsla string as the first argument and an alpha value as the sec
   equalEnough color.b, 89
   equalEnough color.a, 0.47
 
+test "should have peridot", ->
+  color = Color('peridot')
+
+  equals color.toHex(), '#87b84a'
+
 test "accepts hex value of length 3 as first argument and alpha value as second argument", ->
   color = Color('#ff0', 0.5)
 
