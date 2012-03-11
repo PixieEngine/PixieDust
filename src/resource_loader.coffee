@@ -8,7 +8,7 @@ Helps access the assets in your game.
   typeTable =
     images: "png"
     data: "json"
-    tilemap: "tilemap"
+    tilemaps: "tilemap"
 
   ResourceLoader =
     ###*
@@ -35,4 +35,3 @@ Helps access the assets in your game.
 
   (exports ? this)["ResourceLoader"] = ResourceLoader
 )()
-
