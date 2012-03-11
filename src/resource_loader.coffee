@@ -8,6 +8,7 @@ Helps access the assets in your game.
   typeTable =
     images: "png"
     data: "json"
+    tilemap: "tilemap"
 
   ResourceLoader =
     ###*
