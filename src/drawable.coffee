@@ -93,16 +93,17 @@ Drawable = (I, self) ->
     spriteName: null
     zIndex: 0
 
+  setSizeCallback = (sprite) ->
+    I.width = sprite.width
+    I.height = sprite.height
+
   if I.sprite?.isString?()
-    I.sprite = Sprite.loadByName(I.sprite, (sprite) ->
-      I.width = sprite.width
-      I.height = sprite.height
-    )
+    if I.sprite.indexOf("data:") is 0
+      I.sprite = Sprite.fromURL(I.sprite, setSizeCallback)
+    else
+      I.sprite = Sprite.loadByName(I.sprite, setSizeCallback)
   else if I.spriteName
-    I.sprite = Sprite.loadByName(I.spriteName, (sprite) ->
-      I.width = sprite.width
-      I.height = sprite.height
-    )
+    I.sprite = Sprite.loadByName(I.spriteName, setSizeCallback)
 
   self.bind 'draw', (canvas) ->
     if I.alpha? and I.alpha != 1
@@ -174,3 +175,4 @@ Drawable = (I, self) ->
 
     return transform
 
+Drawable.setSizeCallback = (sprite) ->
