@@ -56,11 +56,13 @@ test "adding many cooldowns to defaults", ->
         target: 1000
         value: 0
 
+  obj.include(Approachable)
+
   4.times ->
     obj.update()
 
   equals obj.I.cooldowns.cool.value, 0
-  equals obj.I.cooldowns.rad.value, 0
+  equals obj.I.cooldowns.rad.value, 2
   equals obj.I.cooldowns.tubular.value, 4
 
 test "#addCooldown", 3, ->
