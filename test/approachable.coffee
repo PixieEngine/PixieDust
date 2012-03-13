@@ -6,14 +6,14 @@ test "objects count down each of their cooldowns", ->
       bullet:
         target: 0
         approachBy: 1
-        value: 100
+        value: 83
 
   obj.include(Approachable)
 
   5.times ->
     obj.update()
 
-  equals obj.I.cooldowns.bullet.value, 95, "bullet cooldown should decrease by 5"
+  equals obj.I.cooldowns.bullet.value, 78, "bullet cooldown should decrease by 5"
 
 test "should handle negative value", ->
   obj = GameObject
@@ -21,14 +21,14 @@ test "should handle negative value", ->
       bullet:
         target: 0
         approachBy: 1
-        value: -100
+        value: -70
 
   obj.include(Approachable)
 
   11.times ->
     obj.update()
 
-  equals obj.I.cooldowns.bullet.value, -89, "bullet cooldown should increase by 5"
+  equals obj.I.cooldowns.bullet.value, -59, "bullet cooldown should increase by 5"
 
 test "#addCooldown", ->
   obj = GameObject()
