@@ -84,8 +84,7 @@ test "#addCooldown", 3, ->
   4.times ->
     obj.update()
 
-  equals obj.I.cooldowns.health.value, 93, "health should continue of cool down when new cooldowns are added"
-
-  equals obj.I.cooldowns.turbo.value, 38, "turbo should cool down normally"
+  equals obj.I.health, 93, "health should continue of cool down when new cooldowns are added"
+  equals obj.I.turbo, 38, "turbo should cool down normally"
 
 module()
