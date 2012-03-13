@@ -2,11 +2,11 @@ module "Approachable"
 
 test "objects count down each of their cooldowns", ->
   obj = GameObject
+    bullet: 83
     cooldowns:
       bullet:
         target: 3
         approachBy: 1
-        value: 83
 
   obj.include(Approachable)
 
