@@ -25,9 +25,21 @@ test "should handle negative value", ->
 
   obj.include(Approachable)
 
-  5.times ->
+  11.times ->
     obj.update()
 
-  equals obj.I.cooldowns.bullet.value, -95, "bullet cooldown should increase by 5"
+  equals obj.I.cooldowns.bullet.value, -89, "bullet cooldown should increase by 5"
+
+test "#addCooldown", ->
+  obj = GameObject
+
+  obj.include(Approachable)
+
+  obj.addCooldown 'health'
+
+  3.times ->
+    obj.update()
+
+  equals obj.I.cooldowns.health.value, 97, "health cooldown should exist and equal 97"  
 
 module()
