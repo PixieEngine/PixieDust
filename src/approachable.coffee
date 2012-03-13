@@ -10,7 +10,8 @@ Approachable = (I, self) ->
       
       I.cooldowns[name].value = newValue
       
-      self.trigger "cooldown:#{name}", (newValue)
+      if (newValue isnt value) and (newValue is target)
+        self.trigger "cooldown:#{name}"
 
   addCooldown: (name, options={target: 0, approachBy: 1, value: 100}) ->
     unless I.cooldowns[name]
