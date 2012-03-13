@@ -40,6 +40,29 @@ test "should handle negative value", ->
 
   equals obj.I.cooldowns.powerup.value, 0, "powerup should not cooldown past target value"
 
+test "adding many cooldowns to defaults", ->
+  obj = GameObject
+    cooldowns:
+      cool:
+        approachBy: 5
+        target: -5
+        value: 20
+      rad:
+        approachBy: 0.5
+        target: 2
+        value: 0
+      tubular:
+        approachBy: 1
+        target: 1000
+        value: 0
+
+  4.times ->
+    obj.update()
+
+  equals obj.I.cooldowns.cool.value, 0
+  equals obj.I.cooldowns.rad.value, 0
+  equals obj.I.cooldowns.tubular.value, 4
+
 test "#addCooldown", 3, ->
   obj = GameObject()
 
