@@ -31,7 +31,7 @@ test "should handle negative value", ->
   equals obj.I.cooldowns.bullet.value, -89, "bullet cooldown should increase by 5"
 
 test "#addCooldown", ->
-  obj = GameObject
+  obj = GameObject()
 
   obj.include(Approachable)
 
