@@ -4,7 +4,7 @@ test "objects count down each of their cooldowns", ->
   obj = GameObject
     cooldowns:
       bullet:
-        target: 0
+        target: 3
         approachBy: 1
         value: 83
 
@@ -18,7 +18,7 @@ test "objects count down each of their cooldowns", ->
   100.times ->
     obj.update()
 
-  equals obj.I.cooldowns.bullet.value, 0, "bullet should not cool down part target value"
+  equals obj.I.cooldowns.bullet.value, 3, "bullet should not cool down part target value"
 
 test "should handle negative value", ->
   obj = GameObject
