@@ -22,11 +22,11 @@ test "objects count down each of their cooldowns", ->
 
 test "should handle negative value", ->
   obj = GameObject
+    powerup: -70
     cooldowns:
       powerup:
         target: 0
         approachBy: 1
-        value: -70
 
   obj.include(Approachable)
 
