@@ -13,11 +13,6 @@ test "objects count down each of their cooldowns", ->
   5.times ->
     obj.update()
 
-  equals obj.I.active, true, "object is active until duration is exceeded"
-
-  6.times ->
-    obj.update()
-
-  equals obj.I.active, false, "object is inactive after duration"
+  equals obj.I.cooldowns.bullet.value, 95, "bullet cooldown should decrease by 5"
 
 module()
