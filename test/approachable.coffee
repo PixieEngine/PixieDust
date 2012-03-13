@@ -30,6 +30,11 @@ test "should handle negative value", ->
 
   equals obj.I.cooldowns.bullet.value, -59, "bullet cooldown should increase by 5"
 
+  70.times ->
+    obj.update()
+
+  equals obj.I.cooldowns.bullet.value, 0, "bullet should not cooldown past target value"
+
 test "#addCooldown", ->
   obj = GameObject()
 
