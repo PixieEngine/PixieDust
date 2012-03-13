@@ -6,7 +6,7 @@ Approachable = (I, self) ->
     for name, cooldownOptions of I.cooldowns
       {approachBy, target} = cooldownOptions
       
-      newValue = I[name].approachBy(target, approachBy)
+      newValue = I[name].approach(target, approachBy)
       
       I[name] = newValue
 
