@@ -77,10 +77,9 @@ test "#addCooldown", 3, ->
 
   equals obj.I.health, 97, "health cooldown should exist and equal 97"  
 
-  obj.addCooldown 'turbo'
+  obj.addCooldown 'turbo', 50,
     target: 5
     approachBy: 3
-    value: 50
 
   4.times ->
     obj.update()
