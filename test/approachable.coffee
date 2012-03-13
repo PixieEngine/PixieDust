@@ -6,6 +6,7 @@ test "objects count down each of their cooldowns", ->
       bullet:
         target: 0
         approachBy: 1
+        value: 100
 
   obj.include(Approachable)
 
