@@ -23,7 +23,7 @@ test "objects count down each of their cooldowns", ->
 test "should handle negative value", ->
   obj = GameObject
     cooldowns:
-      bullet:
+      powerup:
         target: 0
         approachBy: 1
         value: -70
@@ -33,12 +33,12 @@ test "should handle negative value", ->
   11.times ->
     obj.update()
 
-  equals obj.I.cooldowns.bullet.value, -59, "bullet cooldown should increase by 5"
+  equals obj.I.cooldowns.powerup.value, -59, "powerup cooldown should increase by 5"
 
   70.times ->
     obj.update()
 
-  equals obj.I.cooldowns.bullet.value, 0, "bullet should not cooldown past target value"
+  equals obj.I.cooldowns.powerup.value, 0, "powerup should not cooldown past target value"
 
 test "#addCooldown", ->
   obj = GameObject()
