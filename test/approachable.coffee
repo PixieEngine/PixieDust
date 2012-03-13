@@ -40,7 +40,7 @@ test "should handle negative value", ->
 
   equals obj.I.cooldowns.powerup.value, 0, "powerup should not cooldown past target value"
 
-test "adding many cooldowns to defaults", ->
+test "adding many cooldowns to defaults", 3, ->
   obj = GameObject
     cooldowns:
       cool:
