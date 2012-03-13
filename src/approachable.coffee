@@ -4,9 +4,9 @@ Approachable = (I, self) ->
 
   self.bind "update", ->
     for name, cooldownOptions of I.cooldowns
-      {target, approachBy} = cooldownOptions
+      {approachBy, target, value} = cooldownOptions
       
-      I.cooldowns[name].value = I.cooldowns[name].value.approach(target, approachBy)
+      I.cooldowns[name].value = value.approach(target, approachBy)
 
   addCooldown: (name, options={target: 0, approachBy: 1, value: 100}) ->
     unless I.cooldowns[name]
