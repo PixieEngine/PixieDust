@@ -40,7 +40,7 @@ test "should handle negative value", ->
 
   equals obj.I.cooldowns.powerup.value, 0, "powerup should not cooldown past target value"
 
-test "#addCooldown", 6, ->
+test "#addCooldown", 3, ->
   obj = GameObject()
 
   obj.include(Approachable)
