@@ -52,4 +52,16 @@ test "#addCooldown", ->
 
   equals obj.I.cooldowns.health.value, 97, "health cooldown should exist and equal 97"  
 
+  obj.addCooldown 'turbo'
+    target: 5
+    approachBy: 3
+    value: 50
+
+  4.times ->
+    obj.update()
+
+  equals obj.I.cooldowns.health.value, 93, "health should continue of cool down when new cooldowns are added"
+
+  equals obj.I.cooldowns.turbo.value, 38, "turbo should cool down normally"
+
 module()
