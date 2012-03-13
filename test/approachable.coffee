@@ -33,12 +33,12 @@ test "should handle negative value", ->
   11.times ->
     obj.update()
 
-  equals obj.I.cooldowns.powerup.value, -59, "powerup cooldown should increase by 5"
+  equals obj.I.powerup, -59, "powerup cooldown should increase by 5"
 
   70.times ->
     obj.update()
 
-  equals obj.I.cooldowns.powerup.value, 0, "powerup should not cooldown past target value"
+  equals obj.I.powerup, 0, "powerup should not cooldown past target value"
 
 test "adding many cooldowns to defaults", 3, ->
   obj = GameObject
