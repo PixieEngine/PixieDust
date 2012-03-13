@@ -94,4 +94,6 @@ test "should not blow up if cooldowns don't exist", ->
 
   obj.update()
 
+  equals obj.I.age, 1, "should successfully update"
+
 module()
