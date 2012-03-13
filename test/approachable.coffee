@@ -15,6 +15,11 @@ test "objects count down each of their cooldowns", ->
 
   equals obj.I.cooldowns.bullet.value, 78, "bullet cooldown should decrease by 5"
 
+  100.times ->
+    obj.update()
+
+  equals obj.I.cooldowns.bullet.value, 0, "bullet should not cool down part target value"
+
 test "should handle negative value", ->
   obj = GameObject
     cooldowns:
