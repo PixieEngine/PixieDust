@@ -1,10 +1,10 @@
 module "Approachable",
   setup: ->
-    obj = GameObject()
-    obj.include Approachable
+    @obj = GameObject()
+    @obj.include Approachable
 
 test "objects count down each of their cooldowns", 2, ->
-  obj.I = 
+  @obj.I = 
     bullet: 83
     cooldowns:
       bullet:
@@ -12,14 +12,14 @@ test "objects count down each of their cooldowns", 2, ->
         approachBy: 1
 
   5.times ->
-    obj.update()
+    @obj.update()
 
-  equals obj.I.bullet, 78, "bullet should decrease by 5"
+  equals @obj.I.bullet, 78, "bullet should decrease by 5"
 
   100.times ->
-    obj.update()
+    @obj.update()
 
-  equals obj.I.bullet, 3, "bullet should not cool down part target value"
+  equals @obj.I.bullet, 3, "bullet should not cool down part target value"
 
 test "should handle negative value", ->
   obj.I = 
