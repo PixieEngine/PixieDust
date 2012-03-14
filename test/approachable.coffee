@@ -1,6 +1,6 @@
 module "Approachable"
 
-test "objects count down each of their cooldowns", ->
+test "objects count down each of their cooldowns", 2, ->
   obj = GameObject
     bullet: 83
     cooldowns:
