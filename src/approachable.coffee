@@ -8,7 +8,7 @@ Approachable = (I, self) ->
             
       I[name] = I[name].approach(target, approachBy)
 
-  addCooldown: (name, value=100, options={target: 0, approachBy: 1}) ->
+  addCooldown: (name, options={target: 0, approachBy: 1, value: 100}) ->
     unless I.cooldowns[name]
       I.cooldowns[name] = options
       I[name] = value
