@@ -91,7 +91,6 @@ test "should not blow up if cooldowns aren't specified", ->
 
   obj.include(Approachable)
 
-
   equals obj.I.age, 1, "should successfully update"
 
 module()
