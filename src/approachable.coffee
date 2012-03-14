@@ -12,8 +12,8 @@ Cooldown = (I, self) ->
     unless I.cooldowns[name]
       I.cooldowns[name] = options
       
-      if options
-        I[name] = value if options.value?
+      if options.value?
+        I[name] = options.value
       else
-        I[name] = 100 unless I[name]?
-      
+        I[name] = 100 unless I[name]
+            
