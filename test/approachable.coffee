@@ -30,6 +30,7 @@ test "should handle negative value", ->
 
   obj.include(Approachable)
 
+  11.times ->
     obj.update()
 
   equals obj.I.powerup, -59, "powerup should increase by 11"
