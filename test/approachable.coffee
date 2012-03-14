@@ -33,7 +33,7 @@ test "should handle negative value", ->
   11.times ->
     obj.update()
 
-  equals obj.I.powerup, -59, "powerup cooldown should increase by 5"
+  equals obj.I.powerup, -59, "powerup should increase by 5"
 
   70.times ->
     obj.update()
