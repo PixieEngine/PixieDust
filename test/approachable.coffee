@@ -13,7 +13,7 @@ test "objects count down each of their cooldowns", 2, ->
   5.times ->
     obj.update()
 
-  equals obj.I.bullet, 78, "bullet cooldown should decrease by 5"
+  equals obj.I.bullet, 78, "bullet should decrease by 5"
 
   100.times ->
     obj.update()
