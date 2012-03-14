@@ -80,7 +80,7 @@ test "#cooldown", 3, ->
   obj.cooldown 'turbo',
     target: 5
     approachBy: 3
-    value: 100
+    value: 50
 
   4.times ->
     obj.update()
