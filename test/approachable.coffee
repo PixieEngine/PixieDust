@@ -1,14 +1,15 @@
-module "Approachable"
+module "Approachable",
+  setup: ->
+    obj = GameObject()
+    obj.include Approachable
 
 test "objects count down each of their cooldowns", 2, ->
-  obj = GameObject
+  obj.I = 
     bullet: 83
     cooldowns:
       bullet:
         target: 3
         approachBy: 1
-
-  obj.include(Approachable)
 
   5.times ->
     obj.update()
@@ -21,14 +22,12 @@ test "objects count down each of their cooldowns", 2, ->
   equals obj.I.bullet, 3, "bullet should not cool down part target value"
 
 test "should handle negative value", ->
-  obj = GameObject
+  obj.I = 
     powerup: -70
     cooldowns:
       powerup:
         target: 0
         approachBy: 1
-
-  obj.include(Approachable)
 
   11.times ->
     obj.update()
@@ -41,7 +40,7 @@ test "should handle negative value", ->
   equals obj.I.powerup, 0, "powerup should not cooldown past target value"
 
 test "adding many cooldowns to default instance variables", 3, ->
-  obj = GameObject
+  obj.I = 
     cool: 20
     rad: 0
     tubular: 0
@@ -56,8 +55,6 @@ test "adding many cooldowns to default instance variables", 3, ->
         approachBy: 1
         target: 1000
 
-  obj.include(Approachable)
-
   4.times ->
     obj.update()
 
@@ -66,10 +63,6 @@ test "adding many cooldowns to default instance variables", 3, ->
   equals obj.I.tubular, 4
 
 test "#addCooldown", 3, ->
-  obj = GameObject()
-
-  obj.include(Approachable)
-
   obj.addCooldown 'health'
 
   3.times ->
@@ -88,10 +81,6 @@ test "#addCooldown", 3, ->
   equals obj.I.turbo, 38, "turbo should cool down normally"
 
 test "should not blow up if cooldowns aren't specified", ->
-  obj = GameObject()
-
-  obj.include(Approachable)
-
   obj.update()
 
   equals obj.I.age, 1, "should successfully update"
