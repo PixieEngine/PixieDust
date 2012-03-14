@@ -51,7 +51,7 @@ test "adding many cooldowns to default instance variables", 3, ->
         target: -5
       rad:
         approachBy: 0.5
-        target: 2
+        target: 1.5
       tubular:
         approachBy: 1
         target: 1000
@@ -62,7 +62,7 @@ test "adding many cooldowns to default instance variables", 3, ->
     obj.update()
 
   equals obj.I.cool, 0
-  equals obj.I.rad, 2
+  equals obj.I.rad, 1.5
   equals obj.I.tubular, 4
 
 test "#addCooldown", 3, ->
