@@ -8,7 +8,7 @@ test "objects count down each of their cooldowns", 2, ->
         target: 3
         approachBy: 1
 
-  obj.include(Approachable)
+  obj.include(Cooldown)
 
   5.times ->
     obj.update()
@@ -28,7 +28,7 @@ test "should handle negative value", ->
         target: 0
         approachBy: 1
 
-  obj.include(Approachable)
+  obj.include(Cooldown)
 
   11.times ->
     obj.update()
@@ -56,7 +56,7 @@ test "adding many cooldowns to default instance variables", 3, ->
         approachBy: 1
         target: 1000
 
-  obj.include(Approachable)
+  obj.include(Cooldown)
 
   4.times ->
     obj.update()
@@ -68,7 +68,7 @@ test "adding many cooldowns to default instance variables", 3, ->
 test "#addCooldown", 3, ->
   obj = GameObject()
 
-  obj.include(Approachable)
+  obj.include(Cooldown)
 
   obj.addCooldown 'health'
 
@@ -90,7 +90,7 @@ test "#addCooldown", 3, ->
 test "should not blow up if cooldowns aren't specified", ->
   obj = GameObject()
 
-  obj.include(Approachable)
+  obj.include(Cooldown)
 
   obj.update()
 
