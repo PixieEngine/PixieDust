@@ -42,6 +42,7 @@ test "should handle negative value", ->
 
 test "adding many cooldowns to default instance variables", 3, ->
   obj = GameObject
+    cool: 20
     rad: 0
     tubular: 0
     cooldowns:
