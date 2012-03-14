@@ -58,6 +58,7 @@ test "adding many cooldowns to default instance variables", 3, ->
 
   obj.include(Approachable)
 
+  4.times ->
     obj.update()
 
   equals obj.I.cool, 0
