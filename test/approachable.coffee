@@ -10,6 +10,7 @@ test "objects count down each of their cooldowns", 2, ->
 
   obj.include(Approachable)
 
+  4.times ->
     obj.update()
 
   equals obj.I.bullet, 78, "bullet should decrease by 5"
