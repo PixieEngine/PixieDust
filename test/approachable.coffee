@@ -41,7 +41,6 @@ test "should handle negative value", ->
   equals obj.I.powerup, 0, "powerup should not cooldown past target value"
 
 test "adding many cooldowns to default instance variables", 3, ->
-  obj.I = 
   obj = GameObject
     rad: 0
     tubular: 0
