@@ -65,21 +65,22 @@ test "adding many cooldowns to default instance variables", 3, ->
   equals obj.I.rad, 1.5
   equals obj.I.tubular, 4
 
-test "#addCooldown", 3, ->
+test "#cooldown", 3, ->
   obj = GameObject()
 
   obj.include(Cooldown)
 
-  obj.addCooldown 'health'
+  obj.cooldown 'health'
 
   3.times ->
     obj.update()
 
   equals obj.I.health, 97, "health cooldown should exist and equal 97"  
 
-  obj.addCooldown 'turbo', 50,
+  obj.addCooldown 'turbo',
     target: 5
     approachBy: 3
+    value: 100
 
   4.times ->
     obj.update()
