@@ -70,6 +70,7 @@ test "#addCooldown", 3, ->
 
   obj.include(Approachable)
 
+  obj.addCooldown 'health'
 
   3.times ->
     obj.update()
