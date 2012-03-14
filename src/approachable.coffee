@@ -1,4 +1,4 @@
-Approachable = (I, self) ->
+Cooldown = (I, self) ->
   Object.reverseMerge I,
     cooldowns: {}
 
