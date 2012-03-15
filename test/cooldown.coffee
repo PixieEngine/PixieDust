@@ -1,4 +1,4 @@
-module "Approachable"
+module "Cooldown"
 
 test "objects count down each of their cooldowns", 2, ->
   obj = GameObject
@@ -8,7 +8,7 @@ test "objects count down each of their cooldowns", 2, ->
         target: 3
         approachBy: 1
 
-  obj.include(Approachable)
+  obj.include(Cooldown)
 
   5.times ->
     obj.update()
@@ -28,7 +28,7 @@ test "should handle negative value", ->
         target: 0
         approachBy: 1
 
-  obj.include(Approachable)
+  obj.include(Cooldown)
 
   11.times ->
     obj.update()
@@ -56,7 +56,7 @@ test "adding many cooldowns to default instance variables", 3, ->
         approachBy: 1
         target: 1000
 
-  obj.include(Approachable)
+  obj.include(Cooldown)
 
   4.times ->
     obj.update()
@@ -65,21 +65,22 @@ test "adding many cooldowns to default instance variables", 3, ->
   equals obj.I.rad, 1.5
   equals obj.I.tubular, 4
 
-test "#addCooldown", 3, ->
+test "#cooldown", 3, ->
   obj = GameObject()
 
-  obj.include(Approachable)
+  obj.include(Cooldown)
 
-  obj.addCooldown 'health'
+  obj.cooldown 'health'
 
   3.times ->
     obj.update()
 
   equals obj.I.health, 97, "health cooldown should exist and equal 97"  
 
-  obj.addCooldown 'turbo', 50,
+  obj.cooldown 'turbo',
     target: 5
     approachBy: 3
+    value: 50
 
   4.times ->
     obj.update()
@@ -90,10 +91,13 @@ test "#addCooldown", 3, ->
 test "should not blow up if cooldowns aren't specified", ->
   obj = GameObject()
 
-  obj.include(Approachable)
+  obj.include(Cooldown)
 
   obj.update()
 
   equals obj.I.age, 1, "should successfully update"
+
+# TODO: tests to make sure value isn't overwritten if the instance variable already exists
+# TODO: tests to make sure value is defaulted to 100, but only if the instance variable doesn't exist
 
 module()
