@@ -1,7 +1,7 @@
 module "Oscillator"
 
 test "various values", ->
-  # 
+  # Cosine O
   o = Oscillator
     period: 30
     amplitude: 10
