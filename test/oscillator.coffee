@@ -5,8 +5,8 @@ test "various values", ->
     period: 30
     amplitude: 10
 
-  equals o(0), 0 # => 0
-  equals o(30), 0 # => 0
+  equals o(0), 10 # => 0
+  equals o(30), 10 # => 0
   o(15) # => 0
   o(7.5) #=> 10
   o(22.5) #=> -10
