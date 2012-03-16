@@ -14,7 +14,7 @@ test "various values", ->
   o = Oscillator
     period: 30
     amplitude: 10
-    offset: Math.
+    offset: Math.TAU /4
 
   o(0) # => 0
   o(30) # => 0
