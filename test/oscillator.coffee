@@ -18,7 +18,7 @@ test "various values", ->
     amplitude: 10
     offset: -(Math.TAU / 4)
 
-  equals o(0), 0
+  equals o(0).toFixed(), 0
   equals o(30), 0
   equals o(15), 0
   equals o(7.5), 10
