@@ -1,5 +1,5 @@
 Oscillator = (options={}) ->
-  {amplitude, period} = options
+  {amplitude, period, offset} = options
 
   amplitude = 1 unless amplitude?
   period = 1 unless period?
