@@ -9,7 +9,7 @@ test "various values", ->
   equals o(30), 10 # => 0
   equals o(15), 0 # => 0
   equals o(7.5), 10 #=> 10
-  equalo(22.5) #=> -10
+  equals o(22.5), -10 #=> -10
 
 
 # Clear out the module
