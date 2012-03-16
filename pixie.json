@@ -1,15 +1,1 @@
-{
-  "author": "STRd6",
-  "main": null,
-  "name": "gamelib",
-  "library": true,
-  "libs": {
-    "corelib.js": "https://raw.github.com/STRd6/corelib/pixie/corelib.js"
-  },
-  "directories": {
-    "lib": "lib",
-    "source": "src",
-    "test": "test"
-  }
-}
-
+{"author":"STRd6","main":null,"name":"gamelib","library":true,"libs":{"corelib.js":"https://raw.github.com/STRd6/corelib/pixie/corelib.js"},"directories":{"lib":"lib","source":"src","test":"test"},"autosave":true}
