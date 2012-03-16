@@ -19,8 +19,8 @@ test "various values", ->
     offset: -(Math.TAU / 4)
 
   equals o(0), 0
-  equao(30), 0
-  o(15) # => 0
+  equals o(30), 0
+  equals o(15) # => 0
   o(7.5) #=> 10
   o(22.5) #=> -10
 
