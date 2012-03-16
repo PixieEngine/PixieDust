@@ -1,6 +1,7 @@
 module "Oscillator"
 
 test "various values", ->
+  # 
   o = Oscillator
     period: 30
     amplitude: 10
