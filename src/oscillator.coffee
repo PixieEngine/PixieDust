@@ -6,4 +6,4 @@ Oscillator = (options={}) ->
   offset = 0 unless offset?
 
   return (t) ->
-    amplitude * Math.cos(Math.TAU * t / period + offs)
+    amplitude * Math.cos(Math.TAU * t / period + offset)
