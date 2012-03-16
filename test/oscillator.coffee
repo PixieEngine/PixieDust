@@ -1,6 +1,6 @@
 module "Oscillator"
 
-test "variou"
+test "various values"
 
 # Clear out the module
 module()
