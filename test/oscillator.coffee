@@ -1,7 +1,7 @@
 module "Oscillator"
 
 test "various values", ->
-  # Cosine O
+  # Cosine Oscillator
   o = Oscillator
     period: 30
     amplitude: 10
@@ -19,7 +19,7 @@ test "various values", ->
     offset: -(Math.TAU / 4)
 
   equals o(0), 0
-  o(30) # => 0
+  o(30), 
   o(15) # => 0
   o(7.5) #=> 10
   o(22.5) #=> -10
