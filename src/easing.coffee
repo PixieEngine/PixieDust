@@ -1,5 +1,4 @@
 ( ->
-
   Easing =
     sinusoidal: (begin, end) ->
       change = end - begin
