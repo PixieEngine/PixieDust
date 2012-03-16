@@ -11,5 +11,6 @@ test "various values", ->
   o(7.5) #=> 10
   o(22.5) #=> -10
 
+
 # Clear out the module
 module()
