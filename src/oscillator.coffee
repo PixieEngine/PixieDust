@@ -3,7 +3,7 @@ Oscillator = (options={}) ->
 
   amplitude = 1 unless amplitude?
   period = 1 unless period?
-  offset
+  offset = 0 unless
 
   return (t) ->
     amplitude * Math.cos(Math.TAU * t / period)
