@@ -21,8 +21,8 @@ test "various values", ->
   equals o(0).toFixed(6), 0
   equals o(30).toFixed(6), 0
   equals o(15).toFixed(6), 0
-  equals o(7.5), 10
-  equals o(22.5), -10
+  equals o(7.5).toFixed(6), 10
+  equals o(22.5).toFixed(6), -10
 
 # Clear out the module
 module()
