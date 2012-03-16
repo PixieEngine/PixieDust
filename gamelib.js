@@ -6636,6 +6636,44 @@ var __slice = Array.prototype.slice;
   };
 })();
 ;
+var Cooldown;
+
+Cooldown = function(I, self) {
+  Object.reverseMerge(I, {
+    cooldowns: {}
+  });
+  self.bind("update", function() {
+    var approachBy, cooldownOptions, name, target, _ref, _results;
+    _ref = I.cooldowns;
+    _results = [];
+    for (name in _ref) {
+      cooldownOptions = _ref[name];
+      approachBy = cooldownOptions.approachBy, target = cooldownOptions.target;
+      _results.push(I[name] = I[name].approach(target, approachBy));
+    }
+    return _results;
+  });
+  return {
+    cooldown: function(name, options) {
+      if (options == null) {
+        options = {
+          target: 0,
+          approachBy: 1,
+          value: null
+        };
+      }
+      if (!I.cooldowns[name]) {
+        I.cooldowns[name] = options;
+        if (options.value != null) {
+          return I[name] = options.value;
+        } else {
+          if (!I[name]) return I[name] = 100;
+        }
+      }
+    }
+  };
+};
+;
 /**
 The Drawable module is used to provide a simple draw method to the including
 object.
@@ -6862,6 +6900,63 @@ Durable = function(I, self) {
   });
   return {};
 };
+;
+
+(function() {
+  var Easing, polynomialEasings;
+  Easing = {
+    sinusoidal: function(begin, end) {
+      var change;
+      change = end - begin;
+      return function(t) {
+        return begin + change * (1 - Math.cos(t * Math.TAU / 4));
+      };
+    },
+    sinusoidalOut: function(begin, end) {
+      var change;
+      change = end - begin;
+      return function(t) {
+        return begin + change * (0 + Math.sin(t * Math.TAU / 4));
+      };
+    }
+  };
+  polynomialEasings = ["linear", "quadratic", "cubic", "quartic", "quintic"];
+  polynomialEasings.each(function(easing, i) {
+    var exponent, sign;
+    exponent = i + 1;
+    sign = exponent % 2 ? 1 : -1;
+    Easing[easing] = function(begin, end) {
+      var change;
+      change = end - begin;
+      return function(t) {
+        return begin + change * Math.pow(t, exponent);
+      };
+    };
+    return Easing["" + easing + "Out"] = function(begin, end) {
+      var change;
+      change = end - begin;
+      return function(t) {
+        return begin + change * (1 + sign * Math.pow(t - 1, exponent));
+      };
+    };
+  });
+  ["sinusoidal"].concat(polynomialEasings).each(function(easing) {
+    return Easing["" + easing + "InOut"] = function(begin, end) {
+      var easeIn, easeOut, midpoint;
+      midpoint = (begin + end) / 2;
+      easeIn = Easing[easing](begin, midpoint);
+      easeOut = Easing["" + easing + "Out"](midpoint, end);
+      return function(t) {
+        if (t < 0.5) {
+          return easeIn(2 * t);
+        } else {
+          return easeOut(2 * t - 1);
+        }
+      };
+    };
+  });
+  return (typeof exports !== "undefined" && exports !== null ? exports : this)["Easing"] = Easing;
+})();
 ;
 var Emitter;
 
@@ -8198,6 +8293,20 @@ Movable = function(I, self) {
     I.x += I.velocity.x;
     return I.y += I.velocity.y;
   });
+};
+;
+var Oscillator;
+
+Oscillator = function(options) {
+  var amplitude, offset, period;
+  if (options == null) options = {};
+  amplitude = options.amplitude, period = options.period, offset = options.offset;
+  if (amplitude == null) amplitude = 1;
+  if (period == null) period = 1;
+  if (offset == null) offset = 0;
+  return function(t) {
+    return amplitude * Math.cos(Math.TAU * t / period + offset);
+  };
 };
 ;
 /**
