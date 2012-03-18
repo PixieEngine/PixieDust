@@ -7294,7 +7294,7 @@ Emitterable = function(I, self) {
       draw: draw
     });
     self.include(Bindable);
-    defaultModules = ["Keyboard", "Clear", "Delay", "GameState", "Selector", "Collision"];
+    defaultModules = ["Keyboard", "Mouse", "Clear", "Delay", "GameState", "Selector", "Collision"];
     modules = defaultModules.concat(I.includedModules);
     modules = modules.without([].concat(I.excludedModules));
     modules.each(function(moduleName) {
@@ -7544,6 +7544,22 @@ This module sets up the keyboard inputs for each engine update.
 Engine.Keyboard = function(I, self) {
   self.bind("beforeUpdate", function() {
     return typeof updateKeys === "function" ? updateKeys() : void 0;
+  });
+  return {};
+};
+;
+/**
+This module sets up the mouse inputs for each engine update.
+
+@name Mouse
+@fieldOf Engine
+@module
+@param {Object} I Instance variables
+@param {Object} self Reference to the engine
+*/
+Engine.Mouse = function(I, self) {
+  self.bind("beforeUpdate", function() {
+    return typeof updateMouse === "function" ? updateMouse() : void 0;
   });
   return {};
 };
