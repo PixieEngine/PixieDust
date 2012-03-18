@@ -1,5 +1,5 @@
 ###*
-This module sets up the keyboard inputs for each engine update.
+This module sets up the mouse inputs for each engine update.
 
 @name Mouse
 @fieldOf Engine
