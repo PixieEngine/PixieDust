@@ -9,7 +9,7 @@ This module sets up the mouse inputs for each engine update.
 ###
 Engine.Mouse = (I, self) ->
   self.bind "beforeUpdate", ->
-    # TODO: Make a Gamepad/Keyboard input module that has web and XNA
+    # TODO: Make a Gamepad/Keyboard/ input module that has web and XNA
     # implementations
     updateMouse?()
 
