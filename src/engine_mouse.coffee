@@ -1,7 +1,7 @@
 ###*
 This module sets up the keyboard inputs for each engine update.
 
-@name Keyboard
+@name Mouse
 @fieldOf Engine
 @module
 @param {Object} I Instance variables
