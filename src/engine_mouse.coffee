@@ -11,6 +11,6 @@ Engine.Mouse = (I, self) ->
   self.bind "beforeUpdate", ->
     # TODO: Make a Gamepad/Keyboard input module that has web and XNA
     # implementations
-    updateKeys?()
+    updateK?()
 
   return {}
