@@ -23,7 +23,7 @@ player.I.shootTimer = 10 # => Pew! Pew!
 
 player.I.update()
 
-player.I.shoo
+player.I.shootTimer
 </pre></code>
 
 @name Cooldown
