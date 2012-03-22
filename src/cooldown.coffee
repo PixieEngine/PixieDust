@@ -10,6 +10,7 @@ Cooldown = (I, self) ->
 
   cooldown: (name, options={target: 0, approachBy: 1, value: null}) ->
 
+
     unless I.cooldowns[name]
       I.cooldowns[name] = options
 
