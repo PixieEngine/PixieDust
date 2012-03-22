@@ -1,7 +1,7 @@
 ###*
 The Cooldown module provides a declarative way to manage cooldowns on
 GameObject's properties.
-collisions so is probably best suited to particle effect like things.
+
 
 <code><pre>
 player = GameObject
