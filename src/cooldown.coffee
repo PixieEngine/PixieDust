@@ -1,5 +1,5 @@
 ###*
-The Movable module automatically updates the position and velocity of
+The Cool module automatically updates the position and velocity of
 GameObjects based on the velocity and acceleration. It does not check
 collisions so is probably best suited to particle effect like things.
 
