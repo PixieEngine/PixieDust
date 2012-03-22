@@ -21,6 +21,7 @@ Cooldown = (I, self) ->
       }
 
     if value?
+
       I[name] = options.value
     else
       # Initialize field if it doesn't exist
