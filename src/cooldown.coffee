@@ -17,8 +17,7 @@ player.update()
 # Shoot Timeout
 player = GameObject()
 
-player.cooldown "shootTimer",
-  target: 100
+player.cooldown "shootTimer"
 </pre></code>
 
 @name Cooldown
