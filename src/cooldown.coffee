@@ -23,5 +23,5 @@ Cooldown = (I, self) ->
     if value?
       I[name] = options.value
     else
-      # Initialize field if
+      # Initialize field if it doesn
       I[name] = 0 unless I[name]
