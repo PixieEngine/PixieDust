@@ -223,7 +223,7 @@
         else
           error "Bounds object isn't a rectangle"
 
-          return 
+          return
 
       xw = target.xw
       yw = target.yw
