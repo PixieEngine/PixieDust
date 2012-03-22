@@ -13,7 +13,7 @@ Cooldown = (I, self) ->
 
     target ||= 0
     approachBy = 1 unless approachBy?
-    value = 
+    value = op
 
     unless I.cooldowns[name]
       I.cooldowns[name] = {
