@@ -13,7 +13,8 @@ Cooldown = (I, self) ->
     options.approachBy = 1 unless options.approachBy?
 
     unless I.cooldowns[name]
-      I.cooldowns[name] = options
+      I.cooldowns[name] =
+
 
       if options.value?
         I[name] = options.value
