@@ -58,4 +58,3 @@ test "Collision.rayRectangle", ->
 
   Collision.rayRectangle 
 module()
-
