@@ -51,6 +51,6 @@ test "Collision.rayRectangle", ->
   rect = GameObject
     x: 25
     y: 0
-
+    width: 10
 module()
 
