@@ -103,7 +103,7 @@ test "use existing value of instance variable", ->
 
   obj.include(Cooldown)
 
-  obj
+  obj.I.health 
 
   obj.cooldown 'health',
     target: 10
