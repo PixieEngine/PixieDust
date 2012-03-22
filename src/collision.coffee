@@ -219,6 +219,7 @@
         if target.width? and target.height?
           xw = target.width/2
           yw = target.height/2
+
           # Convert from 
           return Collision.rayRectangle source, direction,
             x: target.x + xw
