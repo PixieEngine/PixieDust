@@ -111,6 +111,6 @@ test "initialize property to 0 if no current value", ->
   5.times ->
     obj.update()
 
-
+  equals
 
 module()
