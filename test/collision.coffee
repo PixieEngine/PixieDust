@@ -47,6 +47,6 @@ test "collides (single and array)", 2, ->
   Collision.collide player, [enemy, enemy2], (p, e) ->
     ok(true)
 
-
+test ""
 module()
 
