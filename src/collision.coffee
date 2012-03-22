@@ -221,7 +221,7 @@
             xw: target.width/2
             yw: target.height/2
         else
-          error
+          error()
           return 
 
       xw = target.xw
