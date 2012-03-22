@@ -4,7 +4,7 @@ GameObject's properties.
 
 <code><pre>
 player = GameObject
-  health: 
+  health: 50
 
 player.cooldown "health",
   target: 100
