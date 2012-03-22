@@ -98,7 +98,7 @@ test "should not blow up if cooldowns aren't specified", ->
 
   equals obj.I.age, 1, "should successfully update"
 
-test "use existing value of instance "
+test "use existing value of instance variab"
 
 test "initialize property to 0 if no current value", ->
   obj = GameObject()
