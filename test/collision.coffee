@@ -57,5 +57,5 @@ test "Collision.rayRectangle", ->
   start = Point(0, 0)
   direction = Point(1, 0)
 
-  Collision.rayRectangle start, 
+  Collision.rayRectangle start, rect.bounds
 module()
