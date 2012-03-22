@@ -15,7 +15,7 @@ Cooldown = (I, self) ->
     unless I.cooldowns[name]
       I.cooldowns[name] = {
         options.target
-        options.
+        options.appro
       }
 
 
