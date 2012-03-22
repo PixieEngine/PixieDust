@@ -101,6 +101,11 @@ test "should not blow up if cooldowns aren't specified", ->
 # TODO: tests to make sure value isn't overwritten if the instance variable already exists
 # TODO: tests to make sure value is defaulted to 0, but only if the instance variable doesn't exist
 test "initialize property to 0 if no current value", ->
+    obj = GameObject()
 
+  obj.include(Cooldown)
+
+  obj.cooldown 'health',
+    value: 100
 
 module()
