@@ -11,7 +11,7 @@ player.cooldown "health",
   target: 100
 
 player.update()
-
+</pre></code>
 player.I.health #=> 51
 
 player.update()
