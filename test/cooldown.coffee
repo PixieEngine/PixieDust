@@ -84,8 +84,6 @@ test "#cooldown", 3, ->
 test "should not blow up if cooldowns aren't specified", ->
   obj = GameObject()
 
-  obj.include(Cooldown)
-
   obj.update()
 
   equals obj.I.age, 1, "should successfully update"
