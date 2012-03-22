@@ -221,7 +221,7 @@
             xw: target.width/2
             yw: target.height/2
         else
-          error "Bounds object "
+          error "Bounds object isn't "
           return 
 
       xw = target.xw
