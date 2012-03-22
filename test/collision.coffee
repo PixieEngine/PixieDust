@@ -50,6 +50,7 @@ test "collides (single and array)", 2, ->
 test "Collision.rayRectangle", ->
   rect = GameObject
     x: 25
-    y: 
+    y: 0
+
 module()
 
