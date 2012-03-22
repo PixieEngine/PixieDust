@@ -98,7 +98,7 @@ test "should not blow up if cooldowns aren't specified", ->
 
   equals obj.I.age, 1, "should successfully update"
 
-# TODO: tests to make sure value isn't overwritten if the instance variable already exists
+t
 
 test "initialize property to 0 if no current value", ->
   obj = GameObject()
