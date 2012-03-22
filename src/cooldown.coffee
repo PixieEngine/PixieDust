@@ -18,7 +18,6 @@ Cooldown = (I, self) ->
         options.approachBy
       }
 
-
       if options.value?
         I[name] = options.value
       else
