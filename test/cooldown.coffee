@@ -111,6 +111,6 @@ test "initialize property to 0 if no current value", ->
   5.times ->
     obj.update()
 
-  equals obj.I.health
+  equals obj.I.health, 5
 
 module()
