@@ -14,7 +14,6 @@ Cooldown = (I, self) ->
     target ||= 0
     approachBy = 1 unless approachBy?
 
-    unless I.cooldowns[name]
       I.cooldowns[name] = {
         options.target
         options.approachBy
