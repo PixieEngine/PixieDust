@@ -14,7 +14,7 @@ player.update()
 </pre></code>
 
 <code><pre>
-#
+# Shoot
 </pre></code>
 
 @name Cooldown
