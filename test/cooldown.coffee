@@ -71,7 +71,7 @@ test "#cooldown", 3, ->
   obj.include(Cooldown)
 
   obj.cooldown 'health',
-
+    value: 1
 
   3.times ->
     obj.update()
