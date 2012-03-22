@@ -19,7 +19,7 @@ player = GameObject()
 
 player.cooldown "shootTimer"
 
-player.I.shootTimer
+player.I.shootTimer =
 </pre></code>
 
 @name Cooldown
