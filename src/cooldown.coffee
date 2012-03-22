@@ -14,10 +14,11 @@ Cooldown = (I, self) ->
     target ||= 0
     approachBy = 1 unless approachBy?
 
-      I.cooldowns[name] = {
-        options.target
-        options.approachBy
-      }
+
+    I.cooldowns[name] = {
+      options.target
+      options.approachBy
+    }
 
     if value?
       # Use the value given if any
