@@ -1,5 +1,5 @@
 ###*
-The Cooldown module provides a declarative way to manage cooldo
+The Cooldown module provides a declarative way to manage cooldowns
 GameObjects based on the velocity and acceleration. It does not check
 collisions so is probably best suited to particle effect like things.
 
