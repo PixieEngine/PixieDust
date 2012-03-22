@@ -4,7 +4,7 @@ GameObject's properties.
 
 <code><pre>
 player = GameObject
-  health:
+  health: 100
 
 player.include(Movable)
 
