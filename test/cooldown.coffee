@@ -100,6 +100,6 @@ test "should not blow up if cooldowns aren't specified", ->
 
 # TODO: tests to make sure value isn't overwritten if the instance variable already exists
 # TODO: tests to make sure value is defaulted to 0, but only if the instance variable doesn't exist
-test "ini"
+test "initialize"
 
 module()
