@@ -220,8 +220,8 @@
           xw = target.width/2
           yw = target.height/2
           return Collision.rayRectangle source, direction,
-            xw: 
-            yw: 
+            xw: xw
+            yw: yw
         else
           error "Bounds object isn't a rectangle"
 
