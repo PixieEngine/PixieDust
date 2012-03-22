@@ -18,6 +18,8 @@ player.update()
 player = GameObject()
 
 player.cooldown "shootTimer"
+
+pl
 </pre></code>
 
 @name Cooldown
