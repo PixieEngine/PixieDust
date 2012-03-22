@@ -58,7 +58,7 @@ test "Collision.rayRectangle", ->
   direction = Point(1, 0)
   bounds = rect.bounds()
 
-  debug
+  debugger
 
   p1 = Collision.rayRectangle start, bounds
 
