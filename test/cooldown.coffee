@@ -108,7 +108,7 @@ test "initialize property to 0 if no current value", ->
   obj.cooldown 'health',
     target: 10
 
-  5.ti
-  obj.update()
+  5.times ->
+    obj.update()
 
 module()
