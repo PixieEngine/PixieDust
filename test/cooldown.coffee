@@ -111,7 +111,7 @@ test "use existing value of instance variable", ->
   5.times ->
     obj.update()
 
-  equals obj.I.health, 5
+  equals obj.I.health, 8
 
 test "initialize property to 0 if no current value", ->
   obj = GameObject()
