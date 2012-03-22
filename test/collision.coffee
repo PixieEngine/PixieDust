@@ -58,7 +58,7 @@ test "Collision.rayRectangle", ->
   direction = Point(1, 0)
   bounds = rect.bounds()
 
-  p1 = Collision.rayRectangle start, 
+  p1 = Collision.rayRectangle start, bou
 
   equals p1.y, 0
   equals p1.x, 20
