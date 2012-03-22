@@ -15,4 +15,4 @@ Cooldown = (I, self) ->
       if options.value?
         I[name] = options.value
       else
-        I[name] = 100 unless I[name]
+        I[name] = 0 unless I[name]
