@@ -14,7 +14,7 @@ player.update()
 </pre></code>
 
 <code><pre>
-# Shoot
+# Shoot Timeout
 </pre></code>
 
 @name Cooldown
