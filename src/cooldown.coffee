@@ -21,7 +21,7 @@ player.cooldown "shootTimer"
 
 player.I.shootTimer = 10 # => Pew! Pew!
 
-pla
+player.I
 </pre></code>
 
 @name Cooldown
