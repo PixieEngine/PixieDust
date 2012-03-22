@@ -218,9 +218,10 @@
       unless target.xw? and target.yw?
         if target.width? and target.height?
           xw = target.width/2
+          y
           return Collision.rayRectangle source, direction,
             xw: 
-            yw: target.height/2
+            yw: 
         else
           error "Bounds object isn't a rectangle"
 
