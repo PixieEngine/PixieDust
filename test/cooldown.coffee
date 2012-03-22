@@ -8,8 +8,6 @@ test "objects count down each of their cooldowns", 2, ->
         target: 3
         approachBy: 1
 
-
-
   5.times ->
     obj.update()
 
