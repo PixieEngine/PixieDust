@@ -14,17 +14,7 @@ player.update()
 </pre></code>
 
 <code><pre>
-player.I.health #=> 51
 
-player.update()
-# => `velocity is {x: 1, y: 0} and position is {x: 1, y: 0}` 
-
-player.update()
-# => `velocity is {x: 2, y: 0} and position is {x: 3, y: 0}`   
-
-# we've hit our maxSpeed so our velocity won't increase
-player.update()
-# => `velocity is {x: 2, y: 0} and position is {x: 5, y: 0}`
 </pre></code>
 
 @name Cooldown
