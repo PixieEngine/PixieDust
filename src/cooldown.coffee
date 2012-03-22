@@ -12,6 +12,8 @@ player.cooldown "health",
 
 player.update()
 
+
+
 player.update()
 # => `velocity is {x: 1, y: 0} and position is {x: 1, y: 0}` 
 
