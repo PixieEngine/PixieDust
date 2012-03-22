@@ -15,7 +15,6 @@ player.update()
 
 <code><pre>
 # Shoot Timeout
-
 player = GameObject
   health: 50
 
