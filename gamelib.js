@@ -6636,6 +6636,40 @@ var __slice = Array.prototype.slice;
   };
 })();
 ;
+/**
+The Cooldown module provides a declarative way to manage cooldowns on
+GameObject's properties.
+
+<code><pre>
+# Health regeneration
+player = GameObject
+  health: 50
+
+player.cooldown "health",
+  target: 100
+
+player.update()
+</pre></code>
+
+<code><pre>
+# Shoot Timeout
+player = GameObject()
+
+player.cooldown "shootTimer"
+
+player.I.shootTimer = 10 # => Pew! Pew!
+
+player.I.update()
+
+player.I.shootTimer # => 9
+</pre></code>
+
+@name Cooldown
+@module
+@constructor
+@param {Object} I Instance variables
+@param {Core} self Reference to including object
+*/
 var Cooldown;
 
 Cooldown = function(I, self) {
@@ -6655,20 +6689,19 @@ Cooldown = function(I, self) {
   });
   return {
     cooldown: function(name, options) {
-      if (options == null) {
-        options = {
-          target: 0,
-          approachBy: 1,
-          value: null
-        };
-      }
-      if (!I.cooldowns[name]) {
-        I.cooldowns[name] = options;
-        if (options.value != null) {
-          return I[name] = options.value;
-        } else {
-          if (!I[name]) return I[name] = 100;
-        }
+      var approachBy, target, value;
+      if (options == null) options = {};
+      target = options.target, approachBy = options.approachBy, value = options.value;
+      target || (target = 0);
+      if (approachBy == null) approachBy = 1;
+      I.cooldowns[name] = {
+        target: target,
+        approachBy: approachBy
+      };
+      if (value != null) {
+        return I[name] = options.value;
+      } else {
+        if (!I[name]) return I[name] = 0;
       }
     }
   };
