@@ -47,7 +47,7 @@ test "collides (single and array)", 2, ->
   Collision.collide player, [enemy, enemy2], (p, e) ->
     ok(true)
 
-test "Collision.rayRectangle with ", ->
+test "Collision.rayRectangle with both types of", ->
   rect = GameObject
     x: 25
     y: 0
