@@ -1,6 +1,6 @@
 ###*
 The Cooldown module provides a declarative way to manage cooldowns on
-GameObjects based on the velocity and acceleration. It does not check
+GameObject's p
 collisions so is probably best suited to particle effect like things.
 
 <code><pre>
