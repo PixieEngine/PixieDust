@@ -6,7 +6,7 @@ GameObject's properties.
 player = GameObject
   health: 100
 
-player.coo
+player.cooldown
 
 # => `velocity is {x: 0, y: 0} and position is {x: 0, y: 0}`
 
