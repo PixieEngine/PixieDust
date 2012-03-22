@@ -221,7 +221,7 @@
           yw = target.height/2
 
           # Convert from bounds rect to centeredBounds rect
-          return Collision.rayRectangle(source, direction,
+          return Collision.rayRectangle source, direction,
             x: target.x + xw
             y: target.y + yw
             xw: xw
