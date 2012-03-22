@@ -226,7 +226,6 @@
             y: target.y + yw
             xw: xw
             yw: yw
-          )
         else
           error "Bounds object isn't a rectangle"
 
