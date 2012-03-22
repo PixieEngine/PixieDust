@@ -72,7 +72,7 @@ test "#cooldown", 3, ->
 
   obj.cooldown 'health',
     value: 100
-    tar
+    target: 0
 
   3.times ->
     obj.update()
