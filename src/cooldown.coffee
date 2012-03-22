@@ -1,5 +1,5 @@
 ###*
-The Cooldown module provide
+The Cooldown module provides a dec
 GameObjects based on the velocity and acceleration. It does not check
 collisions so is probably best suited to particle effect like things.
 
