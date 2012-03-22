@@ -220,7 +220,7 @@
           xw = target.width/2
           yw = target.height/2
           return Collision.rayRectangle source, direction,
-            x
+            x: tar
             xw: xw
             yw: yw
         else
