@@ -98,7 +98,7 @@ test "should not blow up if cooldowns aren't specified", ->
 
   equals obj.I.age, 1, "should successfully update"
 
-test "use existing value of instance variable", ->
+test "use existing value of instance variable as de", ->
   obj = GameObject()
 
   obj.include(Cooldown)
