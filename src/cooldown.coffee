@@ -1,5 +1,5 @@
 ###*
-The Cooldown module automatically updates the position and velocity of
+The Cooldown module provide
 GameObjects based on the velocity and acceleration. It does not check
 collisions so is probably best suited to particle effect like things.
 
