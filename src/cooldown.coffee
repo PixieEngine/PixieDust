@@ -15,6 +15,12 @@ player.update()
 
 <code><pre>
 # Shoot Timeout
+
+player = GameObject
+  health: 50
+
+player.cooldown "health",
+  target: 100
 </pre></code>
 
 @name Cooldown
