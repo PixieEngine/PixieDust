@@ -54,7 +54,7 @@ test "Collision.rayRectangle", ->
     width: 10
     height: 10
 
-
+  start = 
   Collision.rayRectangle 
 module()
 
