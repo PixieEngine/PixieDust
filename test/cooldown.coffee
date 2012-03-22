@@ -7,7 +7,7 @@ test "objects count down each of their cooldowns", 2, ->
       bullet:
         target: 3
         approachBy: 1
-        value: 
+        value: 95
 
   obj.include(Cooldown)
 
