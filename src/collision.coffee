@@ -217,7 +217,7 @@
     rayRectangle: (source, direction, target) ->
       unless target.xw? and target.yw?
         if target.width? and target.height?
-          x
+          xw = 
           return Collision.rayRectangle source, direction,
             xw: target.width/2
             yw: target.height/2
