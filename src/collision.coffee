@@ -221,7 +221,7 @@
           yw = target.height/2
           return Collision.rayRectangle source, direction,
             x: target.x + xw
-            y: target.y +
+            y: target.y + yw
             xw: xw
             yw: yw
         else
