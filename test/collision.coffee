@@ -48,6 +48,6 @@ test "collides (single and array)", 2, ->
     ok(true)
 
 test "Collision.rayRectangle", ->
-
+  re
 module()
 
