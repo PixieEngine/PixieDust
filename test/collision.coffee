@@ -60,7 +60,7 @@ test "Collision.rayRectangle", ->
 
   debugger
 
-  p1 = Collision.rayRectangle start, dire bounds
+  p1 = Collision.rayRectangle start, direction, bounds
 
   equals p1.y, 0
   equals p1.x, 20
