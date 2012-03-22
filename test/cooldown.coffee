@@ -26,8 +26,6 @@ test "should handle negative value", ->
         target: 0
         approachBy: 1
 
-  obj.include(Cooldown)
-
   11.times ->
     obj.update()
 
