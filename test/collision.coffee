@@ -62,7 +62,7 @@ test "Collision.rayRectangle", ->
   equals p1.y, 0
   equals p1.x, 20
 
-  p2 = Collision.rayRectangle start, rect.centered()
+  p2 = Collision.rayRectangle start, rect.centeredBounds()
 
   equals p1.y, 0
   equals p1.x, 20
