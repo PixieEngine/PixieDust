@@ -26,7 +26,7 @@ player.update()
 # => `velocity is {x: 2, y: 0} and position is {x: 5, y: 0}`
 </pre></code>
 
-@name Movable
+@name Cooldown
 @module
 @constructor
 @param {Object} I Instance variables
