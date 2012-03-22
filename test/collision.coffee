@@ -58,8 +58,6 @@ test "Collision.rayRectangle", ->
   direction = Point(1, 0)
   bounds = rect.bounds()
 
-  debugger
-
   p1 = Collision.rayRectangle start, direction, bounds
 
   equals p1.y, 0
