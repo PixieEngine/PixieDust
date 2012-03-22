@@ -13,7 +13,7 @@ player.cooldown "health",
 player.update()
 </pre></code>
 
-
+<code><pre>
 player.I.health #=> 51
 
 player.update()
