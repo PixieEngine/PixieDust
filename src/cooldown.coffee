@@ -10,7 +10,7 @@ Cooldown = (I, self) ->
 
   cooldown: (name, options={}) ->
     options.target ||= 0
-    ounless options.approachBy
+    options.appunless options.approachBy
 
     unless I.cooldowns[name]
       I.cooldowns[name] = options
