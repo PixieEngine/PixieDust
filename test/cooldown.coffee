@@ -106,6 +106,6 @@ test "initialize property to 0 if no current value", ->
   obj.include(Cooldown)
 
   obj.cooldown 'health',
-    target: 100
+    target: 10
 
 module()
