@@ -5369,6 +5369,21 @@ Camera.ZSort = function(I, self) {
     */
     rayRectangle: function(source, direction, target) {
       var areaPQ0, areaPQ1, hit, p0, p1, t, tX, tY, xval, xw, yval, yw, _ref, _ref2;
+      if (!((target.xw != null) && (target.yw != null))) {
+        if ((target.width != null) && (target.height != null)) {
+          xw = target.width / 2;
+          yw = target.height / 2;
+          return Collision.rayRectangle(source, direction, {
+            x: target.x + xw,
+            y: target.y + yw,
+            xw: xw,
+            yw: yw
+          });
+        } else {
+          error("Bounds object isn't a rectangle");
+          return;
+        }
+      }
       xw = target.xw;
       yw = target.yw;
       if (source.x < target.x) {
@@ -6658,10 +6673,6 @@ player = GameObject()
 player.cooldown "shootTimer"
 
 player.I.shootTimer = 10 # => Pew! Pew!
-
-player.I.update()
-
-player.I.shootTimer # => 9
 </pre></code>
 
 @name Cooldown
@@ -8027,7 +8038,7 @@ GameObject = function(I) {
       return I.active = false;
     }
   });
-  defaultModules = [Bindable, Bounded, Cooldown, Drawable, Durable];
+  defaultModules = [Bindable, Bounded, Drawable, Durable];
   modules = defaultModules.concat(I.includedModules.invoke('constantize'));
   modules = modules.without(I.excludedModules.invoke('constantize'));
   modules.each(function(Module) {
