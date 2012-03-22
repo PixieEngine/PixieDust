@@ -91,7 +91,6 @@ test "should not blow up if cooldowns aren't specified", ->
 test "use existing value of instance variable as starting value if no value param given", ->
   obj = GameObject()
 
-  obj.include(Cooldown)
 
   obj.I.health = 3
 
