@@ -62,5 +62,8 @@ test "Collision.rayRectangle", ->
   equals p1.y, 0
   equals p1.x, 20
 
+  p1 = Collision.rayRectangle start, rect.bounds()
 
+  equals p1.y, 0
+  equals p1.x, 20
 module()
