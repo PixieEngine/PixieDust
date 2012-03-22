@@ -23,5 +23,5 @@ Cooldown = (I, self) ->
     if value?
       I[name] = options.value
     else
-
+      # Initial
       I[name] = 0 unless I[name]
