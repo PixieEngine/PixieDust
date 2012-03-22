@@ -56,5 +56,5 @@ test "Collision.rayRectangle", ->
 
   start = Point(0, 0)
 
-  Collision.rayRectangle 
+  Collision.rayRectangle start, 
 module()
