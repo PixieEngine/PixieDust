@@ -32,7 +32,6 @@ player.update()
 @param {Object} I Instance variables
 @param {Core} self Reference to including object
 ###
-
 Cooldown = (I, self) ->
   Object.reverseMerge I,
     cooldowns: {}
