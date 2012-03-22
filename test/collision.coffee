@@ -61,5 +61,5 @@ test "Collision.rayRectangle", ->
 
   equals p1.y, 0
 
-  equals p2.x
+  equals p1
 module()
