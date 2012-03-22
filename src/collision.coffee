@@ -222,6 +222,7 @@
             yw: target.height/2
         else
           error "Bounds object isn't a rectangle"
+
           return 
 
       xw = target.xw
