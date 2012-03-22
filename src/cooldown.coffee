@@ -9,7 +9,7 @@ Cooldown = (I, self) ->
       I[name] = I[name].approach(target, approachBy)
 
   cooldown: (name, options={}) ->
-    {target, approach}
+    {target, approachBy, val}
     options.target ||= 0
     options.approachBy = 1 unless options.approachBy?
 
