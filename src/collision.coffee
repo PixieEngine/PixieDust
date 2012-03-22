@@ -215,7 +215,7 @@
     @returns {Boolean} true if the line intersects the rectangle, false otherwise
     ###
     rayRectangle: (source, direction, target) ->
-      unless target.xw? and target.y
+      unless target.xw? and target.yw?
 
       xw = target.xw
       yw = target.yw
