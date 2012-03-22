@@ -4,11 +4,7 @@ GameObject's properties.
 
 <code><pre>
 player = GameObject
-  x: 0
-  y: 0
-  velocity: Point(0, 0)
-  acceleration: Point(1, 0)
-  maxSpeed: 2
+  health:
 
 player.include(Movable)
 
