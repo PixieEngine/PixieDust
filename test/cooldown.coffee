@@ -104,8 +104,6 @@ test "use existing value of instance variable as starting value if no value para
 test "initialize property to 0 if no current value", ->
   obj = GameObject()
 
-  obj.include(Cooldown)
-
   obj.cooldown 'health',
     target: 10
 
