@@ -15,7 +15,7 @@ player.update()
 
 <code><pre>
 # Shoot Timeout
-player = GameObject
+player = GameObject()
 
 player.cooldown "health",
   target: 100
