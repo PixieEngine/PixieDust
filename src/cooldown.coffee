@@ -6,7 +6,7 @@ GameObject's properties.
 player = GameObject
   health: 100
 
-player.include(Movable)
+
 
 # => `velocity is {x: 0, y: 0} and position is {x: 0, y: 0}`
 
