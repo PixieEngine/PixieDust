@@ -216,7 +216,7 @@
     ###
     rayRectangle: (source, direction, target) ->
       unless target.xw? and target.yw?
-
+        re
       xw = target.xw
       yw = target.yw
 
