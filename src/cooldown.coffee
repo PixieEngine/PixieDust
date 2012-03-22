@@ -3,7 +3,7 @@ The Cooldown module provides a declarative way to manage cooldowns on
 GameObject's properties.
 
 <code><pre>
-
+# Hea
 player = GameObject
   health: 50
 
