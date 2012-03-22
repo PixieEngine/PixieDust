@@ -215,7 +215,6 @@
     @returns {Boolean} true if the line intersects the rectangle, false otherwise
     ###
     rayRectangle: (source, direction, target) ->
-      debugger
       unless target.xw? and target.yw?
         if target.width? and target.height?
           xw = target.width/2
