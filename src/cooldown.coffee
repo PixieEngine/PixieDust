@@ -7,7 +7,7 @@ player = GameObject
   health: 100
 
 player.cooldown "health",
-  target
+  target: 100
 
 # => `velocity is {x: 0, y: 0} and position is {x: 0, y: 0}`
 
