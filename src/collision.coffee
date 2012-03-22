@@ -220,7 +220,7 @@
           xw = target.width/2
           yw = target.height/2
 
-          # Convert from bound
+          # Convert from bounds rect t
           return Collision.rayRectangle source, direction,
             x: target.x + xw
             y: target.y + yw
