@@ -62,8 +62,6 @@ test "adding many cooldowns to default instance variables", 3, ->
 test "#cooldown", 3, ->
   obj = GameObject()
 
-  obj.include(Cooldown)
-
   obj.cooldown 'health',
     value: 100
 
