@@ -52,7 +52,6 @@ test "adding many cooldowns to default instance variables", 3, ->
         approachBy: 1
         target: 1000
 
-
   4.times ->
     obj.update()
 
