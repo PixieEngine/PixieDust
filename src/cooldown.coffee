@@ -16,8 +16,8 @@ Cooldown = (I, self) ->
 
     # Set the cooldown data
     I.cooldowns[name] = {
-      options.target
-      options.approachBy
+      target
+      approachBy
     }
 
     if value?
