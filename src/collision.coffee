@@ -216,7 +216,8 @@
     ###
     rayRectangle: (source, direction, target) ->
       unless target.xw? and target.yw?
-        return Collision.rayRectangl
+        return Collision.rayRectangle()
+
       xw = target.xw
       yw = target.yw
 
