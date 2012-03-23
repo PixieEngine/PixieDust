@@ -11,6 +11,7 @@ test "testing for equality", ->
     x: 0
     y: 50
     widht: 10
-    height: 
+    height: 10
+
 
 module()
