@@ -17,6 +17,6 @@ test "testing for equality", ->
 
   enemy.follow(player)
 
-  equals
+  equ
 
 module()
