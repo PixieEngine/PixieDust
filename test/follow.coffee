@@ -17,6 +17,6 @@ test "testing for equality", ->
 
   enemy.follow(player)
 
-  ok enemy.I.velocity.equa
+  ok enemy.I.velocity.equals(Poi)
 
 module()
