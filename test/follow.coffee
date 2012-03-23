@@ -16,7 +16,7 @@ test "testing for equality", ->
   enemy.include(Follow)
   enemy.follow(player)
 
-  ok enemy.I.velocity.equal(Point(1, 0)), 'enemy should head toward player with velocity '
+  ok enemy.I.velocity.equal(Point(1, 0)), 'enemy should head toward player with velocity Point'
 
   fastEnemy = GameObject
     x: 50
