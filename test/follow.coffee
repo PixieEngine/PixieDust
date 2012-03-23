@@ -31,6 +31,6 @@ test "testing for equality", ->
   ok fastEnemy.I.velocity.equal(Point(0, -5)), 'fastEnemy should head toward player with velocity Point(0, 5)'
 
   rightEnemy = GameObject
-
+    x: 
 
 module()
