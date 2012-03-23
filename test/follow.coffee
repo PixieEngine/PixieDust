@@ -39,6 +39,6 @@ test "testing for equality", ->
   rightEnemy.include(Follow)
   rightEnemy.follow(player)
 
-  ok rightEnemy.I.velocity.equ
+  ok rightEnemy.I.velocity.equalP()
 
 module()
