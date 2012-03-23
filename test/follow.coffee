@@ -9,6 +9,6 @@ test "testing for equality", ->
 
   enemy = GameObject
     x: 0
-
+    y: 50
 
 module()
