@@ -3,7 +3,7 @@ Follow = (I={}, self) ->
     color: "blue"
     height: 32
     width: 32
-    # spriteName: "block" # Use the name of a sprite in the images folder
+    velco
 
   # Inherit from game object
   self = GameObject(I)
