@@ -2,6 +2,7 @@ module "Follow"
 
 test "testing for equality", ->
   player = GameObject
-    x: 0
+    x: 50
+    y
 
 module()
