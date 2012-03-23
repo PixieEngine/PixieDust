@@ -3,7 +3,7 @@ Follow = (I={}, self) ->
     followSpeed: 1
     velocity: Point(0, 0) 
 
-  follow: (obj, followSpeed) ->
+  follow: (obj) ->
     I.velocity = obj.I.position().subtract(self.position()).norm().scale(I.followSpeed)
 
   return self
