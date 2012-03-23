@@ -1,8 +1,5 @@
 Follow = (I={}, self) ->
   Object.reverseMerge I,
-    color: "blue"
-    height: 32
-    width: 32
     velocity: Point(0, 0)
 
   # Inherit from game object
