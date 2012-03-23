@@ -1,6 +1,6 @@
 Follow = (I={}, self) ->
   Object.reverseMerge I,
-    followSpeed
+    followSpeed: 
     velocity: Point(0, 0) 
 
   follow: (obj) ->
