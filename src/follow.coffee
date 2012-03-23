@@ -3,7 +3,7 @@ Follow = (I={}, self) ->
     color: "blue"
     height: 32
     width: 32
-    velo
+    velocity: Point()
 
   # Inherit from game object
   self = GameObject(I)
