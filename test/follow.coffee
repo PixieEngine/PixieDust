@@ -23,7 +23,7 @@ test "testing for equality", ->
     y: 100
     width: 10
     height: 10
-
+    fol
 
   fastEnemy.include(Follow)
   fastEnemy.follow(player)
