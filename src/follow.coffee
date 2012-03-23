@@ -1,4 +1,4 @@
-Follow = (I={}) ->
+Follow = (I={}, self) ->
   Object.reverseMerge I,
     color: "blue"
     height: 32
