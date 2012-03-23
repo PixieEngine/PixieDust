@@ -5,6 +5,6 @@ Follow = (I={}, self) ->
   self = GameObject(I)
 
   self.bind "update", ->
-    ; # Add update method behavior
+
 
   return self
