@@ -13,6 +13,6 @@ test "testing for equality", ->
     widht: 10
     height: 10
 
-  enemy.include
+  enemy.include(Follow)
 
 module()
