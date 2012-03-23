@@ -13,5 +13,6 @@ test "testing for equality", ->
     widht: 10
     height: 10
 
+  enemy
 
 module()
