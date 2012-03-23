@@ -21,4 +21,5 @@ test "testing for equality", ->
   fastEnemy = GameObject
     x: 50
 
+
 module()
