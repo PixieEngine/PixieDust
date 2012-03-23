@@ -6,4 +6,3 @@ Follow = (I={}, self) ->
   follow: (obj) ->
     I.velocity = obj.I.position().subtract(self.position()).norm().scale(I.followSpeed)
 
-  return self
