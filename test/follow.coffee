@@ -27,5 +27,6 @@ test "testing for equality", ->
   fastEnemy.include(Follow)
   fastEnemy.follow(player)
 
+  ok ene
 
 module()
