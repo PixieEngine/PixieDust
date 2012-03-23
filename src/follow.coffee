@@ -3,7 +3,7 @@ Follow = (I={}, self) ->
     velocity: Point(0, 0)
 
   follow: (obj) ->
-    I.velocity = 
+    I.velocity = obj.I.po
 
   self.bind "update", ->
     I.velocity = player.position().subtract(self.position()).norm().scale(5)
