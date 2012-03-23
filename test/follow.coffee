@@ -33,6 +33,6 @@ test "testing for equality", ->
   rightEnemy = GameObject
     x: 100
     y: 50
-    he
+    height: 1
 
 module()
