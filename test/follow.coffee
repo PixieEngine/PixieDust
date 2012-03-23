@@ -1,6 +1,6 @@
 module "Follow"
 
 test "testing for equality", ->
-  obj = Game
+  player = Game
 
 module()
