@@ -25,6 +25,7 @@ test "testing for equality", ->
     height: 10
 
   fastEnemy.include(Follow)
-  fastEnemy.foll
+  fastEnemy.follow(player)
+
 
 module()
