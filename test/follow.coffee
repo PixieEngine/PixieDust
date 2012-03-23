@@ -17,6 +17,6 @@ test "testing for equality", ->
 
   enemy.follow(player)
 
-  ok enemy.I.veloci
+  ok enemy.I.velocity,
 
 module()
