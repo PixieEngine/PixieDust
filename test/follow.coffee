@@ -18,6 +18,7 @@ test "testing for equality", ->
 
   ok enemy.I.velocity.equal(Point(1, 0))
 
-  fastEnemy = Gam
+  fastEnemy = GameObject
+    x
 
 module()
