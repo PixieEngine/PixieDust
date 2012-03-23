@@ -21,6 +21,7 @@ test "testing for equality", ->
   fastEnemy = GameObject
     x: 50
     y: 100
-    width:
+    width: 10
+    height: 10
 
 module()
