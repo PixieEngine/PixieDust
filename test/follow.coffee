@@ -36,5 +36,6 @@ test "testing for equality", ->
     width: 10
     height: 10
 
+  ok
 
 module()
