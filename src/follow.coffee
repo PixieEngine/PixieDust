@@ -2,6 +2,7 @@ Follow = (I={}, self) ->
   Object.reverseMerge I,
     velocity: Point(0, 0)
 
+
   follow: (obj) ->
     I.velocity = obj.I.position().subtract(self.position()).norm()
 
