@@ -37,6 +37,6 @@ test "testing for equality", ->
     height: 10
 
   rightEnemy.include(Follow)
-  rightEne
+  rightEnemy.follow(p)
 
 module()
