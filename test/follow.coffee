@@ -8,7 +8,7 @@ test "testing for equality", ->
     height: 10
 
   enemy = GameObject
-    x: 50
-    y
+    x: 0
+
 
 module()
