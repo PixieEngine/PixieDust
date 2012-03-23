@@ -14,7 +14,6 @@ test "testing for equality", ->
     height: 10
 
   enemy.include(Follow)
-
   enemy.follow(player)
 
   ok enemy.I.velocity.equal(Point(1, 0))
