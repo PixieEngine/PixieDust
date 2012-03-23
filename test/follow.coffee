@@ -5,5 +5,6 @@ test "testing for equality", ->
     x: 50
     y: 50
     width: 10
+    height: 20
 
 module()
