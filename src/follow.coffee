@@ -3,7 +3,7 @@ Follow = (I={}, self) ->
     color: "blue"
     height: 32
     width: 32
-    velco
+    velo
 
   # Inherit from game object
   self = GameObject(I)
