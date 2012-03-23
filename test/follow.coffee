@@ -15,6 +15,6 @@ test "testing for equality", ->
 
   enemy.include(Follow)
 
-  enemy.follow
+  enemy.follow(pllay)
 
 module()
