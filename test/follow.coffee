@@ -27,6 +27,6 @@ test "testing for equality", ->
   fastEnemy.include(Follow)
   fastEnemy.follow(player)
 
-  ok fastTnemy.I.velocity
+  ok fastEnemy.I.velocity
 
 module()
