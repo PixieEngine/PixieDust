@@ -28,6 +28,6 @@ test "testing for equality", ->
   fastEnemy.include(Follow)
   fastEnemy.follow(player)
 
-  ok fastEnemy.I.velocity.equal(Point(0, -5)), 'fastEnemy should head toward player with velocity Point()'
+  ok fastEnemy.I.velocity.equal(Point(0, -5)), 'fastEnemy should head toward player with velocity Point(0, 5)'
 
 module()
