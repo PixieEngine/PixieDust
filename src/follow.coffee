@@ -5,6 +5,6 @@ Follow = (I={}, self) ->
   self = GameObject(I)
 
   self.bind "update", ->
-
+     I.velocity = player.position().subtract(self.position()).norm().scale(5)
 
   return self
