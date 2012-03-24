@@ -180,7 +180,7 @@ test "#collides", ->
 
   engine.collides(Rectangle(0, 0, 10, 10), null)
 
-test "#setState", ->
+test "#setState", 3, ->
   engine = Engine()
 
   nextState = GameState()
