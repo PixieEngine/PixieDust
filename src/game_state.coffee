@@ -52,7 +52,7 @@ GameState = (I={}) ->
   self.bind "update", ->
     I.updating = true
 
-    I.objects.in
+    I.objects.invoke ""
 
     [I.objects, toRemove] = I.objects.partition (object) ->
       object.update()
