@@ -6673,6 +6673,10 @@ player = GameObject()
 player.cooldown "shootTimer"
 
 player.I.shootTimer = 10 # => Pew! Pew!
+
+player.I.update()
+
+player.I.shootTimer # => 9
 </pre></code>
 
 @name Cooldown
@@ -7880,6 +7884,21 @@ Flickerable = function(I, self) {
   };
 };
 ;
+var Follow;
+
+Follow = function(I, self) {
+  if (I == null) I = {};
+  Object.reverseMerge(I, {
+    followSpeed: 1,
+    velocity: Point(0, 0)
+  });
+  return {
+    follow: function(obj) {
+      return I.velocity = obj.position().subtract(self.position()).norm().scale(I.followSpeed);
+    }
+  };
+};
+;
 /**
 The default base class for all objects you can add to the engine.
 
@@ -8038,7 +8057,7 @@ GameObject = function(I) {
       return I.active = false;
     }
   });
-  defaultModules = [Bindable, Bounded, Drawable, Durable];
+  defaultModules = [Bindable, Bounded, Cooldown, Drawable, Durable];
   modules = defaultModules.concat(I.includedModules.invoke('constantize'));
   modules = modules.without(I.excludedModules.invoke('constantize'));
   modules.each(function(Module) {
