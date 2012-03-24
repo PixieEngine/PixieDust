@@ -28,6 +28,8 @@ Camera.Flash = (I, self) ->
 
       I.flashCooldown = I.flashCooldown.approach(0, 1)
 
+
+
   ###*
   A convenient way to set the flash effect instance variables. Alternatively, you can modify them by hand, but
   using Camera#flash is the suggested approach.
