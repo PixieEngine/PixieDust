@@ -50,6 +50,7 @@ Engine.GameState = (I, self) ->
         return self
       else
         I.currentState.cameras()
+
     flash: (options={}) ->
       self.camera(options.camera).flash(options)
     objects: ->
