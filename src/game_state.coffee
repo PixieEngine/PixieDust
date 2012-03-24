@@ -57,8 +57,6 @@ GameState = (I={}) ->
 
     toRemove.invoke "trigger", "remove"
 
-    I.updating = false
-
     I.objects = I.objects.concat(queuedObjects)
     queuedObjects = []
 
