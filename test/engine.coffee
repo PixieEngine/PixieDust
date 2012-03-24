@@ -187,6 +187,7 @@ test "#setState", 3, ->
 
   engine.setState nextState
 
+  # Test 
   engine.bind "stateEntered", ->
     ok true
   engine.bind "stateExited", ->
