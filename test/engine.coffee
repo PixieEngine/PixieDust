@@ -181,6 +181,6 @@ test "#collides", ->
   engine.collides(Rectangle(0, 0, 10, 10), null)
 
 test "#setState", ->
-
+  engine
 
 module()
