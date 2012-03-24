@@ -189,6 +189,7 @@ test "#setState", ->
 
   engine.bind "stateEntered", ->
     ok true
+  engine.bi
 
   engine.update()
 
