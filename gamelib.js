@@ -7523,9 +7523,11 @@ Engine.GameState = function(I, self) {
     var previousState;
     if (requestedState != null) {
       I.currentState.trigger("exit", requestedState);
+      self.trigger('stateExited', I.currentState);
       previousState = I.currentState;
       I.currentState = requestedState;
       I.currentState.trigger("enter", previousState);
+      self.trigger('stateEntered', I.currentState);
       return requestedState = null;
     }
   });
