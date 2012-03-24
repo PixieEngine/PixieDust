@@ -18,6 +18,7 @@ Engine.GameState = (I, self) ->
     if requestedState?
       I.currentState.trigger "exit", requestedState
 
+
       previousState = I.currentState
       I.currentState = requestedState
 
