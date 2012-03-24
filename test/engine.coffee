@@ -189,6 +189,6 @@ test "#setState", ->
 
   engine.update()
 
-  equal engine.
+  equal engine.I.currentState
 
 module()
