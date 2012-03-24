@@ -23,7 +23,7 @@ Engine.GameState = (I, self) ->
       I.currentState = requestedState
 
       I.currentState.trigger "enter", previousState
-      self.trigger '', I.currentState
+      self.trigger 'stateEnt', I.currentState
 
       requestedState = null
 
