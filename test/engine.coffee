@@ -188,7 +188,7 @@ test "#setState", ->
   engine.setState nextState
 
   engine.bind "stateEntered", ->
-    ok
+    ok true
 
   engine.update()
 
