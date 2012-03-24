@@ -57,7 +57,7 @@ GameState = (I={}) ->
     [I.objects, toRemove] = I.objects.partition (object) ->
       object.update()
 
-    I.ob
+    I.objects.invoke
 
     toRemove.invoke "trigger", "remove"
 
