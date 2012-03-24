@@ -185,6 +185,6 @@ test "#setState", ->
 
   nextState = GameState()
 
-  engine.setState nex
+  engine.setState nextState
 
 module()
