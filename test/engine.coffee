@@ -183,6 +183,8 @@ test "#collides", ->
 test "#setState", ->
   engine = Engine()
 
+  n
+
   engine.setState 
 
 module()
