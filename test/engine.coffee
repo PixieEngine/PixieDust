@@ -190,7 +190,7 @@ test "#setState", ->
   engine.bind "stateEntered", ->
     ok true
   engine.bind "stateExited", ->
-
+    ok true
 
   engine.update()
 
