@@ -183,7 +183,7 @@ test "#collides", ->
 test "#setState", ->
   engine = Engine()
 
-  n
+  nextState
 
   engine.setState 
 
