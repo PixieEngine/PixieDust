@@ -183,4 +183,6 @@ test "#collides", ->
 test "#setState", ->
   engine = Engine()
 
+  engine.se
+
 module()
