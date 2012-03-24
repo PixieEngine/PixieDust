@@ -24,6 +24,7 @@ Engine.GameState = (I, self) ->
 
       I.currentState.trigger "enter", previousState
 
+
       requestedState = null
 
   self.bind "draw", (canvas) ->
