@@ -28,7 +28,7 @@ Camera.Flash = (I, self) ->
 
       I.flashCooldown = I.flashCooldown.approach(0, 1)
 
-  self.bind('flash', function(canvas) {
+  self.bind 'flash', function(canvas) {
     canvas.fill(I.flashColor)      
 
   ###*
