@@ -52,8 +52,6 @@ GameState = (I={}) ->
   self.bind "update", ->
     I.updating = true
 
-    I.objects.invoke "trigger", "beforeUpdate"
-
     [I.objects, toRemove] = I.objects.partition (object) ->
       object.update()
 
