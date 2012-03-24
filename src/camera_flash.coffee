@@ -29,7 +29,7 @@ Camera.Flash = (I, self) ->
       I.flashCooldown = I.flashCooldown.approach(0, 1)
 
   self.bind 'flash', (canvas) ->
-    canvas.fill(I.flashColor      
+    canvas.fill I.flashColor      
 
   ###*
   A convenient way to set the flash effect instance variables. Alternatively, you can modify them by hand, but
