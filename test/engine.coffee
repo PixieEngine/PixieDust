@@ -187,6 +187,8 @@ test "#setState", ->
 
   engine.setState nextState
 
+  engine
+
   engine.update()
 
   equal engine.I.currentState, nextState
