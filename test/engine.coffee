@@ -180,6 +180,6 @@ test "#collides", ->
 
   engine.collides(Rectangle(0, 0, 10, 10), null)
 
-test "
+test "" ->
 
 module()
