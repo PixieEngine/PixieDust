@@ -52,8 +52,6 @@ GameState = (I={}) ->
   self.bind "update", ->
     I.updating = true
 
-    # TODO Extract this into an Objects or States module
-    # and bind it to the 'update' event
     [I.objects, toRemove] = I.objects.partition (object) ->
       object.update()
 
