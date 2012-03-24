@@ -28,7 +28,7 @@ Camera.Flash = (I, self) ->
 
       I.flashCooldown = I.flashCooldown.approach(0, 1)
 
-  self.bind 'flash', fu(canvas)
+  self.bind 'flash', (canvas)
     canvas.fill(I.flashColor)      
 
   ###*
