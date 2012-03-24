@@ -7555,11 +7555,11 @@ Engine.GameState = function(I, self) {
     },
     fadeIn: function(options) {
       if (options == null) options = {};
-      return self.cameras.invoke('fadeIn', options);
+      return self.cameras().invoke('fadeIn', options);
     },
     fadeOut: function(options) {
       if (options == null) options = {};
-      return self.cameras.invoke('fadeOut', options);
+      return self.cameras().invoke('fadeOut', options);
     },
     flash: function(options) {
       if (options == null) options = {};
