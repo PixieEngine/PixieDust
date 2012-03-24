@@ -17,7 +17,7 @@ Engine.GameState = (I, self) ->
     # Handle state change
     if requestedState?
       I.currentState.trigger "exit", requestedState
-      self.trigger 'stateEntered', 
+      self.trigger 'stateExited', 
 
       previousState = I.currentState
       I.currentState = requestedState
