@@ -187,6 +187,6 @@ test "#setState", ->
 
   engine.setState nextState
 
-  engine.u
+  engine.update
 
 module()
