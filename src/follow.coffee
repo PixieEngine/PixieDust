@@ -1,3 +1,4 @@
+
 Follow = (I={}, self) ->
   Object.reverseMerge I,
     followSpeed: 1
