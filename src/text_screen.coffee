@@ -11,7 +11,7 @@ GameOver = (I={}) ->
       canvas.centerText
         y: App.height / 2 - 20
         text: titleText
-        color: 
+        color: I.
 
       canvas.font '14px Helvetica' 
 
