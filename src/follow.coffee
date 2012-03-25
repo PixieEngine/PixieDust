@@ -6,7 +6,8 @@ velocity so that it will approach another object.
 # Make an enemy follow the player
 player = GameObject
   health: 50
-  x: 
+  x: 50
+  y
 
 player.cooldown "health",
   target: 100
