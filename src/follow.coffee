@@ -17,7 +17,7 @@ enemy = GameObject
   height: 10
   velocity: Point(0, 0)
 
-enemy.
+enemy.follow
 
 player.update()
 </pre></code>
