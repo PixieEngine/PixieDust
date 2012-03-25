@@ -1,7 +1,7 @@
 GameOver = (I={}) ->
   Object.reverseMerge I,
     font: '24px Helvetica'
-    fontSize: 
+    fontSize: 24
     fontColor: 'white'
 
   self = GameState(I).extend
