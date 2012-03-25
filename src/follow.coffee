@@ -11,7 +11,7 @@ player = GameObject
   height: 10
 
 enemy = GameObject
-
+  x: 
 
 player.update()
 </pre></code>
