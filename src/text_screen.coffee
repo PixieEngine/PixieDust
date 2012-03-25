@@ -1,4 +1,4 @@
-GameOver = (I={}) ->
+T = (I={}) ->
   Object.reverseMerge I,
     font: 'Helvetica'
     fontSize: 24
