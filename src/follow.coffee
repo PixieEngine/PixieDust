@@ -26,7 +26,7 @@ enemy.I.velocity
 enemy.update()
 
 enemy.I.x
-# => 
+# => 99
 </pre></code>
 
 <code><pre>
