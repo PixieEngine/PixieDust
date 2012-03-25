@@ -40,7 +40,7 @@ Camera.Fade = (I, self) ->
   @param {Color} [color="black"] The color to fade from
   ###
   fadeIn: (options={}) ->
-    {duration, color, } = Object.reverseMerge(options, defaultParams)
+    {duration} = Object.reverseMerge(options, defaultParams)
 
     configureFade(duration, color, 0)
 
