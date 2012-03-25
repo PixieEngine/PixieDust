@@ -1,5 +1,5 @@
 ###*
-The Follow module provides a simple method to set 
+The Follow module provides a simple method to set an object
 
 <code><pre>
 # Health regeneration
