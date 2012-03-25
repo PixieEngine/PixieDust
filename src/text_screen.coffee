@@ -15,7 +15,7 @@ GameOver = (I={}) ->
       canvas.font "#{size}px #{font}"
 
       canvas.centerText
-        y: I.yPosition
+        y: yPos
         text: text
         color: color
 
