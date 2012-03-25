@@ -19,7 +19,7 @@ enemy = GameObject
 
 enemy.follow(player)
 
-# now the enemy's veloci
+# now the enemy's velocity will b
 
 player.update()
 </pre></code>
