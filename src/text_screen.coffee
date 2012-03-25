@@ -6,7 +6,7 @@ GameOver = (I={}) ->
 
   self = GameState(I).extend
     centerText: (canvas, options={}) ->
-      font =
+      font = 
       canvas.font I.font
 
       canvas.centerText
