@@ -11,8 +11,7 @@ player = GameObject
   width: 10
   height: 10
 
-player.cooldown "health",
-  target: 100
+
 
 player.update()
 </pre></code>
