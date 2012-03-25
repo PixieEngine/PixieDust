@@ -28,16 +28,3 @@ Engine.Levels = (I, self) ->
     #TODO Handle integer levels?
     loadLevel level
 
-LevelState = (I={}) ->
-  Object.reverseMerge I,
-    level: 'level1'
-
-  self = GameState(I)
-
-  self.bind "enter", ->
-    engine.camera().fadeIn 10
-
-    engine.loadMap I.level, ->
-      engine.I.transitioning = false
-
-  return self
