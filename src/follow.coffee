@@ -25,7 +25,7 @@ enemy.I.velocity
 
 enemy.update()
 
-enemy.I.
+enemy.I.x
 </pre></code>
 
 <code><pre>
