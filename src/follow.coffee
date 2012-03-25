@@ -29,7 +29,6 @@ enemy.I.x
 # => 99
 </pre></code>
 
-
 @name Follow
 @module
 @constructor
