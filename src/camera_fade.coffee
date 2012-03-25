@@ -39,7 +39,7 @@ Camera.Fade = (I, self) ->
   @param {Number} [duration=30] How long the effect lasts
   @param {Color} [color="black"] The color to fade from
   ###
-  fadeIn: (duration = 30, color = 'black') ->
+  fadeIn: (options={}) ->
     configureFade(duration, color, 0)
 
   ###*
