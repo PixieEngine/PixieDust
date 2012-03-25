@@ -14,6 +14,7 @@ enemy = GameObject
   x: 100
   y: 50
 
+
 player.update()
 </pre></code>
 
