@@ -6,7 +6,7 @@ LevelState = (I={}) ->
 
   self.bind "enter", ->
     # TODO: Adjustable Fade In
-    engine.camera().fadeIn 10
+    engine..fadeIn 10
 
     engine.loadMap I.level, ->
       engine.I.transitioning = false
