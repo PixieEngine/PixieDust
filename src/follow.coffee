@@ -1,5 +1,5 @@
 ###*
-The Follow module 
+The Follow module provides a 
 
 <code><pre>
 # Health regeneration
