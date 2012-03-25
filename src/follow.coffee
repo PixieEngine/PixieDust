@@ -5,7 +5,6 @@ velocity so that it will approach another object.
 <code><pre>
 # Make an enemy follow the player
 player = GameObject
-  health: 50
   x: 50
   y: 50
   width: 10
