@@ -1,6 +1,6 @@
 ###*
 The Follow module provides a simple method to set an object's
-so that it will approach d
+so that it will approach ano
 
 <code><pre>
 # Health regeneration
