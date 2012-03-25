@@ -1,7 +1,7 @@
 ###*
 The Follow module provides a simple method to set an object's
 velocity so that it will approach another object. This method
-relies on bo objects having `bounds` methods. GameObject
+relies on both objects having `bounds` methods. GameObject
 
 
 <code><pre>
