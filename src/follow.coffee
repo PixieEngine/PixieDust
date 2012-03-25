@@ -8,6 +8,7 @@ player = GameObject
   health: 50
   x: 50
   y: 50
+  width: 10
 
 
 player.cooldown "health",
