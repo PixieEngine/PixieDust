@@ -2,7 +2,7 @@
 The Follow module provides a simple method to set an object's
 velocity so that it will approach another object. This method
 relies on both objects having `position` methods. GameObject
-provides this method by default
+provides this method by default.
 
 <code><pre>
 player = GameObject
