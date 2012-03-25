@@ -67,5 +67,5 @@ Camera.Fade = (I, self) ->
   fadeOut: (options={}) ->
     {alpha, color, duration} = Object.reverseMerge(options, fadeOutDefaults)
 
-    configureFade(duration, color, 1)
+    configureFade(duration, color, alpha)
 
