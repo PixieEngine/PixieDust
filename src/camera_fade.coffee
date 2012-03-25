@@ -14,7 +14,7 @@ Camera.Fade = (I, self) ->
     shakeCooldown: 0
 
   defaultParams =
-    duration: 10
+    duration: 30
     intensity: 20
 
   configureFade = (duration, color, alpha) ->
