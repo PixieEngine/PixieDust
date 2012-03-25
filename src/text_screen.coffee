@@ -10,7 +10,7 @@ GameOver = (I={}) ->
       font = options.font || I.font
       size = options.size || I.fontSize
       color = options.color || I.fontColor
-      yPosition = options.
+      yPosition = options.y || 
 
       canvas.font "#{size}px #{font}"
 
