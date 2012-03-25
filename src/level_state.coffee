@@ -5,6 +5,7 @@ LevelState = (I={}) ->
   self = GameState(I)
 
   self.bind "enter", ->
+    # 
     engine.camera().fadeIn 10
 
     engine.loadMap I.level, ->
