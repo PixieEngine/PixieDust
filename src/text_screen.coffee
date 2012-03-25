@@ -5,7 +5,7 @@ GameOver = (I={}) ->
   self = GameState(I).extend
     drawTitleText: (canvas, titleText, subtitleText) ->
       canvas.fillColor 'white'
-      canvas.font '24px Helvetica'
+      canvas.font ''
 
       canvas.centerText
         y: App.height / 2 - 20
