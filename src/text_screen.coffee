@@ -5,7 +5,7 @@ GameOver = (I={}) ->
     fontColor: 'white'
 
   self = GameState(I).extend
-    centerText: (canvas, ) ->
+    centerText: (canvas, option) ->
       canvas.font I.font
 
       canvas.centerText
