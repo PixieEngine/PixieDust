@@ -3,7 +3,7 @@ GameOver = (I={}) ->
     font: 'Helvetica'
     fontSize: 24
     fontColor: 'white'
-    yPosition: App.height
+    yPosition: App.height / 2
 
   self = GameState(I).extend
     centerText: (canvas, options={}) ->
