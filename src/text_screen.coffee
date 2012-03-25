@@ -1,5 +1,5 @@
 GameOver = (I={}) ->
-  self = GameState(I)
+  self = GameState(I).ext
   drawTitleText = (canvas, titleText, subtitleText) ->
     canvas.fillColor 'white'
     canvas.font '24px Helvetica'
