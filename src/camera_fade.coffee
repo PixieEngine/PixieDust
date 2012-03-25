@@ -12,7 +12,7 @@ Camera.Fade = (I, self) ->
   Object.reverseMerge I,
     flashTargetAlpha: 0
 
-  defaultP =
+  fadeIndefault =
     duration: 30
     color: 'black'
 
