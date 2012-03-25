@@ -4869,7 +4869,7 @@ Camera.Fade = function(I, self) {
       var alpha, color, duration, _ref;
       if (options == null) options = {};
       _ref = Object.reverseMerge(options, fadeOutDefaults), alpha = _ref.alpha, color = _ref.color, duration = _ref.duration;
-      return configureFade(duration, color, 1);
+      return configureFade(duration, color, alpha);
     }
   };
 };
@@ -7618,6 +7618,42 @@ Engine.Keyboard = function(I, self) {
   return {};
 };
 ;
+
+Engine.Levels = function(I, self) {
+  var loadLevel;
+  Object.reverseMerge(I, {
+    levels: [],
+    currentLevel: -1
+  });
+  I.transitioning = false;
+  loadLevel = function(level) {
+    var levelState;
+    if (!I.transitioning) {
+      I.transitioning = true;
+      levelState = LevelState({
+        level: level
+      });
+      return engine.setState(levelState);
+    }
+  };
+  return {
+    nextLevel: function() {
+      var level;
+      if (!I.transitioning) {
+        I.currentLevel += 1;
+        if (level = I.levels[I.currentLevel]) {
+          return loadLevel(level);
+        } else {
+          return engine.setState(GameOver());
+        }
+      }
+    },
+    goToLevel: function(level) {
+      return loadLevel(level);
+    }
+  };
+};
+;
 /**
 This module sets up the mouse inputs for each engine update.
 
@@ -8158,6 +8194,29 @@ GameObject.construct = function(entityData) {
   }
 };
 ;
+var GameOver;
+
+GameOver = function(I) {
+  var self;
+  if (I == null) I = {};
+  self = GameState(I);
+  self.bind('update', function() {
+    if (justPressed.any) {
+      return engine.delay(15, function() {
+        return engine.setState(TitleScreen());
+      });
+    }
+  });
+  self.bind("overlay", function(canvas) {
+    self.centerText(canvas, "Game Over");
+    return self.centerText(canvas, "Press any key to restart", {
+      size: 12,
+      y: App.height / 2 + 30
+    });
+  });
+  return self;
+};
+;
 var GameState;
 
 GameState = function(I) {
@@ -8379,6 +8438,24 @@ GameState.SingleCamera = function(I, self) {
     });
   });
   return {};
+};
+;
+var LevelState;
+
+LevelState = function(I) {
+  var self;
+  if (I == null) I = {};
+  Object.reverseMerge(I, {
+    level: 'level1'
+  });
+  self = GameState(I);
+  self.bind("enter", function() {
+    engine.camera().fadeIn(10);
+    return engine.loadMap(I.level, function() {
+      return engine.I.transitioning = false;
+    });
+  });
+  return self;
 };
 ;
 /**
@@ -8696,5 +8773,53 @@ draw anything to the screen until the image has been loaded.
   };
   return (typeof exports !== "undefined" && exports !== null ? exports : this)["Sprite"] = Sprite;
 })();
+;
+var TextScreen;
+
+TextScreen = function(I) {
+  var self;
+  if (I == null) I = {};
+  Object.reverseMerge(I, {
+    font: 'Helvetica',
+    fontSize: 24,
+    fontColor: 'white',
+    yPosition: App.height / 2
+  });
+  return self = GameState(I).extend({
+    centerText: function(canvas, text, options) {
+      var color, font, size, yPosition;
+      if (options == null) options = {};
+      font = options.font || I.font;
+      size = options.size || I.fontSize;
+      color = options.color || I.fontColor;
+      yPosition = options.y || I.yPosition;
+      canvas.font("" + size + "px " + font);
+      return canvas.centerText({
+        y: yPosition,
+        text: text,
+        color: color
+      });
+    }
+  });
+};
+;
+var TitleScreen;
+
+TitleScreen = function(I) {
+  var self;
+  if (I == null) I = {};
+  self = TextScreen(I);
+  self.bind('update', function() {
+    if (justPressed.any) return engine.nextLevel();
+  });
+  self.bind("overlay", function(canvas) {
+    self.centerText(canvas, App.name);
+    return self.centerText(canvas, "Press any key to start", {
+      size: 12,
+      y: App.height / 2 + 30
+    });
+  });
+  return self;
+};
 ;
 ;
