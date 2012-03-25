@@ -15,6 +15,5 @@ GameOver = (I={}) ->
       size: 12
       y: App.height / 2 + 30
 
-    drawTitleText canvas, titleText, "Press any key to start over"
 
   return self
