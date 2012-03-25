@@ -16,7 +16,7 @@ enemy = GameObject
   width: 10
   height: 10
 
-enemy.vol
+enemy.
 
 player.update()
 </pre></code>
