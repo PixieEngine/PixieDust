@@ -3,7 +3,7 @@ The Follow module provides a simple method to set an object's
 velocity so that it will approach another object.
 
 <code><pre>
-# follow relies on an object having a 
+# follow relies on an object having a bounds m
 player = GameObject
   x: 50
   y: 50
