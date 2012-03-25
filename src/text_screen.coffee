@@ -1,6 +1,6 @@
 GameOver = (I={}) ->
   Object.reverseMerge I,
-    font: 'level1'
+    font: '24px Helvetica'
 
   self = GameState(I).extend
     drawTitleText: (canvas, titleText, subtitleText) ->
