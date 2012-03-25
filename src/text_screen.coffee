@@ -3,7 +3,7 @@ GameOver = (I={}) ->
     font: 'Helvetica'
     fontSize: 24
     fontColor: 'white'
-
+    y: 
 
   self = GameState(I).extend
     centerText: (canvas, options={}) ->
