@@ -7,6 +7,6 @@ TitleScreen = (I={}) ->
   self.bind "overlay", (canvas) ->
     self.centerText canvas, App.name
 
-    self.centerText canvas, ""
+    self.centerText canvas, "Press "
 
   return self
