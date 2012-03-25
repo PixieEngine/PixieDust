@@ -1,5 +1,5 @@
 GameOver = (I={}) ->
-  self = Text(I)
+  self = TextScreen(I)
 
   self.bind 'update', ->
     if justPressed.any
