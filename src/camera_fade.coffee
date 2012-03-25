@@ -10,7 +10,7 @@ The <code>Fade</code> module provides convenience methods for accessing common E
 ###
 Camera.Fade = (I, self) ->  
   Object.reverseMerge I,
-    alpha: 0
+    flalpha: 0
 
   defaultParams =
     duration: 30
