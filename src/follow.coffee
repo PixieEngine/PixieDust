@@ -2,7 +2,7 @@
 The Follow module provides a simple method to set an object's
 velocity so that it will approach another object. 
 
-The calculated velocity is based on the center points of 
+The calculated velocity is based on the center point of 
 both objects.
 
 This method relies on both objects having `position` methods. 
