@@ -15,6 +15,7 @@ enemy = GameObject
   y: 50
   width: 10
   height: 10
+  ve
 
 enemy.
 
