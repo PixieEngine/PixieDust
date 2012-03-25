@@ -6,7 +6,8 @@ LevelState = (I={}) ->
 
   self.bind "enter", ->
     # TODO: Adjustable Fade In
-    engine.fadeIn()
+    engine.fadeIn
+      dur
 
     engine.loadMap I.level, ->
       engine.I.transitioning = false
