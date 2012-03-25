@@ -8450,7 +8450,9 @@ LevelState = function(I) {
   });
   self = GameState(I);
   self.bind("enter", function() {
-    engine.fadeIn();
+    engine.fadeIn({
+      duration: 10
+    });
     return engine.loadMap(I.level, function() {
       return engine.I.transitioning = false;
     });
