@@ -1,5 +1,5 @@
 ###*
-The Follow module provides a simple method to set an object's velocity to one point
+The Follow module provides a simple method to set an object's velocity to one pointing tow
 
 <code><pre>
 # Health regeneration
