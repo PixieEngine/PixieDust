@@ -17,6 +17,7 @@ enemy = GameObject
   height: 10
   velocity: Point(0, 0)
 
+# Make an enemy follow the player
 enemy.follow(player)
 
 # now the enemy's velocity will point toward the player
