@@ -1,3 +1,4 @@
+
 drawTitleText = (canvas, titleText, subtitleText) ->
   canvas.fillColor 'white'
   canvas.font '24px Helvetica'
