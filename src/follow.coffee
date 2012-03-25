@@ -21,7 +21,7 @@ enemy.follow(player)
 
 # now the enemy's velocity will point toward the player
 enemy.I.velocity
-# => Point(-1, )
+# => Point(-1, 0)
 
 player.update()
 </pre></code>
