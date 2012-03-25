@@ -4807,7 +4807,17 @@ The <code>Fade</code> module provides convenience methods for accessing common E
 @see Camera.Flash
 */
 Camera.Fade = function(I, self) {
-  var configureFade;
+  var configureFade, fadeInDefaults, fadeOutDefaults;
+  fadeInDefaults = {
+    alpha: 0,
+    color: 'black',
+    duration: 30
+  };
+  fadeOutDefaults = {
+    alpha: 1,
+    color: 'transparent',
+    duration: 30
+  };
   configureFade = function(duration, color, alpha) {
     I.flashDuration = duration;
     I.flashCooldown = duration;
@@ -4832,10 +4842,11 @@ Camera.Fade = function(I, self) {
     @param {Number} [duration=30] How long the effect lasts
     @param {Color} [color="black"] The color to fade from
     */
-    fadeIn: function(duration, color) {
-      if (duration == null) duration = 30;
-      if (color == null) color = 'black';
-      return configureFade(duration, color, 0);
+    fadeIn: function(options) {
+      var alpha, color, duration, _ref;
+      if (options == null) options = {};
+      _ref = Object.reverseMerge(options, fadeInDefaults), alpha = _ref.alpha, color = _ref.color, duration = _ref.duration;
+      return configureFade(duration, color, alpha);
     },
     /**
     A convenient way to set the flash effect instance variables. This provides a shorthand for fading 
@@ -4854,9 +4865,10 @@ Camera.Fade = function(I, self) {
     @param {Number} [duration=30] How long the effect lasts
     @param {Color} [color="transparent"] The color to fade to
     */
-    fadeOut: function(duration, color) {
-      if (duration == null) duration = 30;
-      if (color == null) color = 'transparent';
+    fadeOut: function(options) {
+      var alpha, color, duration, _ref;
+      if (options == null) options = {};
+      _ref = Object.reverseMerge(options, fadeOutDefaults), alpha = _ref.alpha, color = _ref.color, duration = _ref.duration;
       return configureFade(duration, color, 1);
     }
   };
