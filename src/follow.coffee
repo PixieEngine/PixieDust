@@ -15,7 +15,7 @@ enemy = GameObject
   y: 50
   width: 10
   height: 10
-  velocity: 
+  velocity: Point(0, 0)
 
 enemy.
 
