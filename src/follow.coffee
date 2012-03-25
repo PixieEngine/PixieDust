@@ -13,6 +13,7 @@ player = GameObject
 enemy = GameObject
   x: 100
   y: 50
+  width: 10
 
 
 player.update()
