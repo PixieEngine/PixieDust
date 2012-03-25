@@ -10,6 +10,7 @@ The <code>Fade</code> module provides convenience methods for accessing common E
 ###
 Camera.Fade = (I, self) ->  
   fadeInDefaults =
+
     color: 'black'
     duration: 30
 
