@@ -11,7 +11,7 @@ GameOver = (I={}) ->
 
     self.centerText canvas, "Game Over"
 
-    self.centerText canvas, "Press any key to start",
+    self.centerText canvas, "Press any key to restart",
       size: 12
       y: App.height / 2 + 30
 
