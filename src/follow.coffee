@@ -1,5 +1,5 @@
 ###*
-The Follow module provides a simple method to set an object
+The Follow module provides a simple method to set an object's velocity
 
 <code><pre>
 # Health regeneration
