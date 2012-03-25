@@ -6,7 +6,7 @@ TextScreen = (I={}) ->
     yPosition: App.height / 2
 
   self = GameState(I).extend
-    centerText: (canvas, options={}) ->
+    centerText: (canvas, teoptions={}) ->
       font = options.font || I.font
       size = options.size || I.fontSize
       color = options.color || I.fontColor
