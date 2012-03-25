@@ -8,7 +8,8 @@ GameOver = (I={}) ->
     centerText: (canvas, options={}) ->
       font = options.font || I.font
       size = options.size || I.fontSize
-      color = options.color || I.fontCo
+      color = options.color || I.fontColor
+
       canvas.font "#{size}px #{font}"
 
       canvas.centerText
