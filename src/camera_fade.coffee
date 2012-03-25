@@ -8,7 +8,9 @@ The <code>Fade</code> module provides convenience methods for accessing common E
 @param {Object} self Reference to the engine
 @see Camera.Flash
 ###
-Camera.Fade = (I, self) ->   
+Camera.Fade = (I, self) ->  
+
+
   configureFade = (duration, color, alpha) ->
     I.flashDuration = duration
     I.flashCooldown = duration
