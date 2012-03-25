@@ -19,7 +19,7 @@ enemy = GameObject
 
 enemy.follow(player)
 
-# 
+# now the enemy
 
 player.update()
 </pre></code>
