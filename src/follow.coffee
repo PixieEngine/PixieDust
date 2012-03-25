@@ -7,7 +7,8 @@ velocity so that it will approach another object.
 player = GameObject
   health: 50
   x: 50
-  y
+  y: 50
+
 
 player.cooldown "health",
   target: 100
