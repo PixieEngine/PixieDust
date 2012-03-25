@@ -1,21 +1,17 @@
 GameOver = (I={}) ->
-  self = GameState(I)
+  # Set some default properties
+  Object.reverseMerge I,
+    color: "blue"
+    height: 32
+    width: 32
+    # spriteName: "block" # Use the name of a sprite in the images folder
 
-  self.bind 'update', ->
-    if justPressed.any
-      engine.delay 15, ->
-        engine.setState TitleScreen()
+  # Inherit from game object
+  self = GameObject(I)
 
-  self.bind "overlay", (canvas) ->
-    titleText = "Game Over"
-    titleText = "You Win!" if I.won
+  # Add events and methods here
+  self.bind "update", ->
+    ; # Add update method behavior
 
-    self.centerText canvas, App.name
-
-    self.centerText canvas, "Press any key to start",
-      size: 12
-      y: App.height / 2 + 30
-
-    drawTitleText canvas, titleText, "Press any key to start over"
-
+  # We must always return self as the last line
   return self
