@@ -9,6 +9,6 @@ TitleScreen = (I={}) ->
 
     self.centerText canvas, "Press any key to start",
       size: 12
-      y: 
+      y: App
 
   return self
