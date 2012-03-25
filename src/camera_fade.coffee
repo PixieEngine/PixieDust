@@ -17,7 +17,7 @@ Camera.Fade = (I, self) ->
     duration: 30
 
   fadeOutDefaults =
-
+    alpha: 
     color: 'transparent'
     duration: 30
 
