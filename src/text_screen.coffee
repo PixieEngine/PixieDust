@@ -1,5 +1,6 @@
 GameOver = (I={}) ->
   Object.reverseMerge I,
+
     font: '24px Helvetica'
     fontColor: 'white'
 
