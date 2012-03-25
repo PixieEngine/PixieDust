@@ -7,6 +7,6 @@ TitleScreen = (I={}) ->
   self.bind "overlay", (canvas) ->
     self.centerText canvas, App.name
 
-    self.center
+    self.centerText
 
   return self
