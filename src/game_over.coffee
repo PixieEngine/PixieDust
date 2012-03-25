@@ -7,7 +7,6 @@ GameOver = (I={}) ->
         engine.setState TitleScreen()
 
   self.bind "overlay", (canvas) ->
-
     titleText = "You Win!" if I.won
 
     self.centerText canvas, "Game Over"
