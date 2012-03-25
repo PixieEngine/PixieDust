@@ -5,6 +5,6 @@ TitleScreen = (I={}) ->
     engine.nextLevel() if justPressed.any
 
   self.bind "overlay", (canvas) ->
-    self. canvas, window.title, "Press any key to start"
+    self.centerText canvas, window.title, "Press any key to start"
 
   return self
