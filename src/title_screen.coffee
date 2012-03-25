@@ -1,5 +1,5 @@
 TitleScreen = (I={}) ->
-  self = text(I)
+  self = Tex(I)
 
   self.bind 'update', ->
     engine.nextLevel() if justPressed.any
