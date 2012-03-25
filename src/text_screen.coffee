@@ -1,4 +1,5 @@
 GameOver = (I={}) ->
+
   self = GameState(I).extend
     drawTitleText: (canvas, titleText, subtitleText) ->
       canvas.fillColor 'white'
