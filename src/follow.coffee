@@ -1,6 +1,6 @@
 ###*
 The Follow module provides a simple method to set an object's
-t
+so that it is
 
 <code><pre>
 # Health regeneration
