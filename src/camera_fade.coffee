@@ -65,5 +65,7 @@ Camera.Fade = (I, self) ->
   @param {Color} [color="transparent"] The color to fade to
   ###
   fadeOut: (duration = 30, color = 'transparent') ->
+    {alpha, color, duration} = Object.reverseMerge(options, fadeInDefaults)
+
     configureFade(duration, color, 1)
 
