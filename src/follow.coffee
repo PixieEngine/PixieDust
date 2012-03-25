@@ -12,7 +12,7 @@ player = GameObject
 
 enemy = GameObject
   x: 100
-  y
+  y: 
 
 player.update()
 </pre></code>
