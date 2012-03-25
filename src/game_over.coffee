@@ -10,7 +10,7 @@ GameOver = (I={}) ->
     titleText = 
     titleText = "You Win!" if I.won
 
-    self.centerText canvas, App.name
+    self.centerText canvas, "Game Over"
 
     self.centerText canvas, "Press any key to start",
       size: 12
