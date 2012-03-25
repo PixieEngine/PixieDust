@@ -14,6 +14,7 @@ Camera.Fade = (I, self) ->
     flashTargetAlpha: 0
 
   fadeInDefaults =
+    dur
     color: 'black'
 
   fadeOutDefaults =
