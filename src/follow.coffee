@@ -26,7 +26,7 @@ player.I.update()
 player.I.shootTimer # => 9
 </pre></code>
 
-@name Cooldown
+@name Follow
 @module
 @constructor
 @param {Object} I Instance variables
