@@ -15,5 +15,4 @@ GameOver = (I={}) ->
       size: 12
       y: App.height / 2 + 30
 
-
   return self
