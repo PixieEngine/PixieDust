@@ -18,9 +18,3 @@ GameOver = (I={}) ->
         y: yPosition
         text: text
         color: color
-
-      canvas.font '14px Helvetica'
-
-      canvas.centerText
-        y: App.height / 2
-        text: subtitleText
