@@ -41,6 +41,7 @@ Camera.Fade = (I, self) ->
   ###
   fadeIn: (options={}) ->
     {duration, intensity} = Object.reverseMerge(options, defaultParams)
+
     configureFade(duration, color, 0)
 
   ###*
