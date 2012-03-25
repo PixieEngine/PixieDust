@@ -20,7 +20,7 @@ enemy = GameObject
 enemy.follow(player)
 
 # now the enemy's velocity will point toward the player
-enemy
+enemy.I.vel
 
 player.update()
 </pre></code>
