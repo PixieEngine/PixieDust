@@ -7894,6 +7894,49 @@ Flickerable = function(I, self) {
   };
 };
 ;
+/**
+The Follow module provides a simple method to set an object's
+velocity so that it will approach another object. 
+
+The calculated velocity is based on the center point of 
+each object.
+
+This method relies on both objects having `position` methods. 
+All GameObjects have this method by default.
+
+<code><pre>
+player = GameObject
+  x: 50
+  y: 50
+  width: 10
+  height: 10
+
+enemy = GameObject
+  x: 100
+  y: 50
+  width: 10
+  height: 10
+  velocity: Point(0, 0)
+
+# Make an enemy follow the player
+enemy.follow(player)
+
+# now the enemy's velocity will point toward the player
+enemy.I.velocity
+# => Point(-1, 0)
+
+enemy.update()
+
+enemy.I.x
+# => 99
+</pre></code>
+
+@name Follow
+@module
+@constructor
+@param {Object} I Instance variables
+@param {Core} self Reference to including object
+*/
 var Follow;
 
 Follow = function(I, self) {
@@ -8159,9 +8202,9 @@ GameState = function(I) {
       return object.update();
     }), I.objects = _ref[0], toRemove = _ref[1];
     toRemove.invoke("trigger", "remove");
-    I.updating = false;
     I.objects = I.objects.concat(queuedObjects);
-    return queuedObjects = [];
+    queuedObjects = [];
+    return I.updating = false;
   });
   self.include(GameState.Cameras);
   self.include(GameState.SaveState);
