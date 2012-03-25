@@ -8199,7 +8199,7 @@ var GameOver;
 GameOver = function(I) {
   var self;
   if (I == null) I = {};
-  self = GameState(I);
+  self = TextScreen(I);
   self.bind('update', function() {
     if (justPressed.any) {
       return engine.delay(15, function() {
@@ -8450,7 +8450,7 @@ LevelState = function(I) {
   });
   self = GameState(I);
   self.bind("enter", function() {
-    engine.camera().fadeIn(10);
+    engine.fadeIn();
     return engine.loadMap(I.level, function() {
       return engine.I.transitioning = false;
     });
