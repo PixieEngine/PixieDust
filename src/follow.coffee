@@ -3,7 +3,7 @@ The Follow module provides a simple method to set an object's
 velocity so that it will approach another object.
 
 <code><pre>
-# Make an en
+# Make an enemy fol
 player = GameObject
   health: 50
 
