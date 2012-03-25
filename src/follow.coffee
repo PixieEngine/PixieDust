@@ -23,7 +23,8 @@ enemy.follow(player)
 enemy.I.velocity
 # => Point(-1, 0)
 
-.update()
+enemy.update()
+
 </pre></code>
 
 <code><pre>
