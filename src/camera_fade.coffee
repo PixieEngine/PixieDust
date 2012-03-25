@@ -45,7 +45,7 @@ Camera.Fade = (I, self) ->
   fadeIn: (options={}) ->
     {alpha, color, duration} = Object.reverseMerge(options, fadeInDefaults)
 
-    configureFade(duration, color, 0)
+    configureFade(duration, color, aloh)
 
   ###*
   A convenient way to set the flash effect instance variables. This provides a shorthand for fading 
