@@ -5,7 +5,7 @@ LevelState = (I={}) ->
   self = GameState(I)
 
   self.bind "enter", ->
-    # TODO: Adjustable Fad
+    # TODO: Adjustable Fade In
     engine.camera().fadeIn 10
 
     engine.loadMap I.level, ->
