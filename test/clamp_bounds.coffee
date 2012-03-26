@@ -14,7 +14,7 @@ test "should clamp the x-axis", ->
 
   equals player.I.x, App.width - player.I.width / 2
 
-test "should clamp the -axis", ->
+test "should clamp the y-axis", ->
   player = GameObject
     includedModules: ["ClampBounds"]
 
