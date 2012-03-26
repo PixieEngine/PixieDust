@@ -2,7 +2,7 @@ module "Controllable"
 
 # sets up player object before each test
 QUnit.testStart = ->
-  player = GameObject
+  window.player = GameObject
     x: 10
     y: 20
     width: 10
