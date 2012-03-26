@@ -1,6 +1,6 @@
 ###*
 The Controllable module adds simple movement
-when up, down, left, right are 
+when up, down, left, right are helf
 
 <code><pre>
   # create a player and include ClampBounds
