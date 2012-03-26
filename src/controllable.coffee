@@ -1,10 +1,7 @@
 Controllable = (I={}) ->
   # Set some default properties
   Object.reverseMerge I,
-    color: "blue"
-    height: 32
-    width: 32
-    # spriteName: "block" # Use the name of a sprite in the images folder
+    speed: 1
 
   # Inherit from game object
   self = GameObject(I)
