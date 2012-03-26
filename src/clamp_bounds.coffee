@@ -6,7 +6,7 @@ ClampBounds = (I={}, self) ->
     height: 32
 
   # This is kind of gross, but we need to make sure
-  # App.width and App.height is around for the tests.
+  # App.width and App.height are around for the tests.
   App ||= {}
   App.width ||= 480
   App.height ||= 320
