@@ -5,7 +5,8 @@ ClampBounds = (I={}, self) ->
     width: 32
     height: 32
 
-  # This is kind of gross, but we need to ma
+  # This is kind of gross, but we need to make sure
+  # a
   App ||= {}
   App.width ||= 480
   App.height ||= 320
