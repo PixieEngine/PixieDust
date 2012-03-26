@@ -1,6 +1,6 @@
 module "ClampBounds"
 
-test "should clamp thte", ->
+test "should clamp the x", ->
   one = 1
 
   # Test for equality of two objects
