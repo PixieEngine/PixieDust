@@ -1,6 +1,6 @@
 module "Controllable"
 
-test "should move player left wh", ->
+test "should move player left while ke", ->
   one = 1
 
   # Test for equality of two objects
