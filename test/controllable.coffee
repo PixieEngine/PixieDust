@@ -92,4 +92,6 @@ test "should move player according to their speed", ->
 
   window.keydown.down = true
 
+
+
 module()
