@@ -9,6 +9,7 @@ Controllable = (I={}, self) ->
 
 
 
+
   self.bind "update", ->
     # Handle player movement in response to arrow keys
     if keydown.left
