@@ -4,14 +4,7 @@ that the including GameObject doesn't move outside
 the viewport.
 
 <code><pre>
-# Health regeneration
-player = GameObject
-  health: 50
 
-player.cooldown "health",
-  target: 100
-
-player.update()
 </pre></code>
 
 <code><pre>
