@@ -1,6 +1,6 @@
 ###*
 The ClampBounds module adds a check to make sure
-that the including GameObject doe 
+that the including GameObject doesn't  
 
 <code><pre>
 # Health regeneration
