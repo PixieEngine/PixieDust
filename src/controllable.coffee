@@ -9,7 +9,7 @@ when up, down, left, or right are held.
     width: 5
     height: 17
     x: 15
-
+    y: 
 
   # put the player outside the viewport
   player.I.x = -400
