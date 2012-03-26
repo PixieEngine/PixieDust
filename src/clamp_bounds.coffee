@@ -1,6 +1,6 @@
 ###*
 The ClampBounds module adds a check to make sure
-
+that 
 
 <code><pre>
 # Health regeneration
