@@ -98,6 +98,8 @@ test "should move player according to their speed", ->
 
 test "should stay in place if two different directions are held", ->
   window.keydown.left = true
-  window.keydown.rig
+  window.keydown.right = true
+
+
 
 module()
