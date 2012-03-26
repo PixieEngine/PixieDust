@@ -11,9 +11,7 @@ when up, down, left, or right are held.
     x: 15
     y: 30
 
-  # put the player outside the viewport
-  player.I.x = -400
-  player.I.y = 1000
+
 
   # update the player so ClampBounds can set 
   # his position back inside the viewport.
