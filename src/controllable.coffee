@@ -1,5 +1,5 @@
 Controllable = (I={}) ->
-  # Set some default properties
+
   Object.reverseMerge I,
     speed: 1
 
