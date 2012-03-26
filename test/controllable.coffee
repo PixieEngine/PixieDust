@@ -81,7 +81,7 @@ test "should move player back and forth when keys are changed", ->
   equals player.I.y, 21
 
   window.keydown.down = false
-  dinw
+  window.key
 
 test "should move player according to their speed", ->
   ;
