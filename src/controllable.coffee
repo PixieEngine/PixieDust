@@ -2,7 +2,6 @@ Controllable = (I={}) ->
   Object.reverseMerge I,
     speed: 1
 
-  # Inherit from game object
   self = GameObject(I)
 
   # Add events and methods here
