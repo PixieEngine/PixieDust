@@ -10,6 +10,8 @@ test "should clamp the x-axis", ->
   equals player.I.x, player.I.width / 2
 
   player.I.x = 800
-  player
+  player.update()
+
+
 
 module()
