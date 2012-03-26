@@ -14,8 +14,6 @@ when up, down, left, or right are held.
   # hold one of the movement keys
 
 
-  # update the player so ClampBounds can set 
-  # his position back inside the viewport.
   player.update()
 
   # x, y position is based on the center point so
