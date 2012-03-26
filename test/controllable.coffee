@@ -11,7 +11,7 @@ test "should move player left while key is pressed", ->
 
 
   window.keydown = {}
-  keydown.left = true
+  window.keydown.left = true
 
   player.update()
 
