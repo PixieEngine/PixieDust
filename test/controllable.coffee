@@ -63,7 +63,7 @@ test "should move player down while key is pressed", ->
 
   player.update()
 
-  equals player.I.y, 19
+  equals player.I.y, 21
 
   player.update()
 
