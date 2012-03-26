@@ -10,7 +10,7 @@ the viewport.
     width: 5
     height: 17
 
-  # put
+  # put the player
   player.I.x = -400
   player.update()
 </pre></code>
