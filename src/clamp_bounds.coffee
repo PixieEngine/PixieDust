@@ -6,7 +6,7 @@ ClampBounds = (I={}, self) ->
     height: 32
 
   App ||= {}
-  App.width ||
+  App.width ||= 480
 
   self.bind "update", ->
     I.x = I.x.clamp(I.width / 2, App.width - I.width / 2)
