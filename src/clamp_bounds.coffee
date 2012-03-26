@@ -22,7 +22,7 @@ the viewport.
   # the position the player is set to is based on
   # half their width and height
   player.I.x
-  # => 2.5 # half w
+  # => 2.5 # half the playe
 </pre></code>
 
 <code><pre>
