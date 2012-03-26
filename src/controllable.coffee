@@ -11,7 +11,7 @@ when up, down, left, or right are held.
     x: 15
     y: 30
 
-  # hold the , then
+  # hold the left arrow key, then
   # update the player
   player.update()
 
