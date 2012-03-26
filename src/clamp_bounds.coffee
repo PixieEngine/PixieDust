@@ -14,6 +14,7 @@ the viewport.
   player.I.x = -400
 
   # update the player so ClampBounds can set 
+
   player.update()
 </pre></code>
 
