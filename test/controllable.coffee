@@ -102,6 +102,6 @@ test "should stay in place if two different directions are held", ->
 
   player.update()
 
-  equals player.I.x, 
+  equals player.I.x, 10
 
 module()
