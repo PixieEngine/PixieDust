@@ -2,8 +2,7 @@ module "ClampBounds"
 
 test "should clamp the x-axis", ->
   # Mock the App dimensions
-
-  windApp ||= {}
+  window.App ||= {}
   App.width ||= 480
   App.height ||= 320
 
