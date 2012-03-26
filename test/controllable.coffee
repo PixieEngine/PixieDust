@@ -39,7 +39,7 @@ test "should move player right while key is pressed", ->
 
   equals player.I.x, 12
 
-    window.keydown.left = false
+  window.keydown.left = false
 
 test "should move player up while key is pressed", ->
   ;
