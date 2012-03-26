@@ -5,7 +5,7 @@ when up, down, left, or right are held.
 <code><pre>
   # create a player and include Controllable
   player = GameObject
-    includedModules: ["ClampBounds"]
+    includedModules: ["Controllable"]
     width: 5
     height: 17
 
