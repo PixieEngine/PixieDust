@@ -4,7 +4,7 @@ test "should clamp the x-axis", ->
   player = GameObject
     includedModules: ["ClampBounds"]
     width: 5
-    height: 1
+    height: 17
 
   player.I.x = -400
   player.update()
