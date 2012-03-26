@@ -2,7 +2,7 @@ module "ClampBounds"
 
 test "should clamp the x-axis", ->
   player = GameObject()
-  player.include
+  player.include(Clam)
 
   player.I.x = - 400
   player.update()
