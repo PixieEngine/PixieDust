@@ -5,8 +5,6 @@ Controllable = (I={}) ->
   self.bind "update", ->
     ; # Add update method behavior
 
-  # We must always return self as the last line
-  return self
 
 
   self.bind "update", ->
