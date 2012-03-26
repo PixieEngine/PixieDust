@@ -13,8 +13,6 @@ QUnit.testStart = ->
 test "should move player left while key is pressed", ->  
 
 
-  # Mock the keydown object
-  window.keydown = {}
   window.keydown.left = true
 
   player.update()
