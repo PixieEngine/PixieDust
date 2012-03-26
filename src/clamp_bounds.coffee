@@ -14,7 +14,7 @@ the viewport.
   player.I.x = -400
 
   # update the player so ClampBounds can set 
-  # his position back inside the view
+  # his position back inside the viewport.
   player.update()
 </pre></code>
 
