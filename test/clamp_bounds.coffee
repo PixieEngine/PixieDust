@@ -7,7 +7,7 @@ test "should clamp the x-axis", ->
   # Hack in App.width, App.height
   App = {}
   App.width = 480
-  Ap
+  App.height = 32
 
   player.I.x = - 400
   player.update()
