@@ -1,7 +1,5 @@
 ###*
-The Controllable module adds a check to make sure
-that the including GameObject doesn't move outside
-the viewport.
+The Controllable module adds 
 
 <code><pre>
   # create a player and include ClampBounds
