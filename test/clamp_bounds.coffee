@@ -1,7 +1,7 @@
 module "ClampBounds"
 
 test "should clamp the x-axis", ->
-  one = 1
+  play
 
   # Test for equality of two objects
   equals one, 1
