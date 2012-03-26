@@ -19,9 +19,6 @@ when up, down, left, or right are held.
   # the player is moved left according to his speed
   player.I.x
   # => 13
-
-  player.I.y
-  # => 311.5 # The default App.height (320) - half the player's height
 </pre></code>
 
 @name Cooldown
