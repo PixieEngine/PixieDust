@@ -16,7 +16,7 @@ when up, down, left, or right are held.
   # update the player
   player.update()
 
-  # the player is moved left according to his 
+  # the player is moved left according to his speed.
   player.I.x
   # => 2.5 # half the player's width
 
