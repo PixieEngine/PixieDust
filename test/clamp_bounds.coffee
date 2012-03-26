@@ -1,7 +1,8 @@
 module "ClampBounds"
 
 test "should clamp the x-axis", ->
-  # Mock the 
+  # Mock the App dimensions
+
 
   player = GameObject
     includedModules: ["ClampBounds"]
