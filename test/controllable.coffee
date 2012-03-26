@@ -100,6 +100,8 @@ test "should stay in place if two different directions are held", ->
   window.keydown.left = true
   window.keydown.right = true
 
-  playe
+  player.update()
+
+
 
 module()
