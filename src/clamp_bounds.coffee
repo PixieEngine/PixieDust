@@ -13,7 +13,7 @@ the viewport.
   # put the player outside the viewport
   player.I.x = -400
 
-  #
+  # updat t
   player.update()
 </pre></code>
 
