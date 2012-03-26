@@ -12,6 +12,6 @@ test "should clamp the x-axis", ->
   player.I.x = 800
   player.update()
 
-  equals player.I.x, App.width - playeI.width / 2
+  equals player.I.x, App.width - player.I.width / 2
 
 module()
