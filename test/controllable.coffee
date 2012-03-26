@@ -2,9 +2,7 @@ module "Controllable"
 
 # sets up player object before each test
 QUnit.testStart = ->
-  window.animation = GameObject
-    data: animationData
-    includedModules: ["Animated"]
+
 
 test "should move player left while key is pressed", ->  
   player.include(Controllable)
