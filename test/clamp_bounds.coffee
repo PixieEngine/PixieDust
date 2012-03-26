@@ -28,6 +28,6 @@ test "should clamp the y-axis", ->
   player.I.y = 800
   player.update()
 
-  equals player.I.x, App.height - player.I.width / 2  
+  equals player.I.x, App.height - player.I.height / 2  
 
 module()
