@@ -1,7 +1,4 @@
 ClampBounds = (I={}) ->
-  self = GameObject(I)
-
-  # Add events and methods here
   self.bind "update", ->
     ; # Add update method behavior
 
