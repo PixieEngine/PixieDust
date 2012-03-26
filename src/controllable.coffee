@@ -10,6 +10,7 @@ when up, down, left, or right are held.
     height: 17
     x: 15
     y: 30
+  s
 
   # hold the left arrow key, then
   # update the player
