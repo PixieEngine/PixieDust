@@ -52,7 +52,7 @@ test "should move player up while key is pressed", ->
 
   player.update()
 
-  equals player.I.x, 12
+  equals player.I.y, 
 
   window.keydown.right = false
 
