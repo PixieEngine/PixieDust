@@ -11,8 +11,6 @@ QUnit.testStart = ->
   player.include(Controllable)    
 
 test "should move player left while key is pressed", ->  
-
-
   window.keydown.left = true
 
   player.update()
