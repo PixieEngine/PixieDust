@@ -1,5 +1,5 @@
 ###*
-The Controllable module adds 
+The Controllable module adds simple 
 
 <code><pre>
   # create a player and include ClampBounds
