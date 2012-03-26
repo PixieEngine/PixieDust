@@ -1,7 +1,7 @@
 ###*
 The ClampBounds module adds a check to make sure
 that the including GameObject doesn't move outside
-the 
+the viewport.
 
 <code><pre>
 # Health regeneration
