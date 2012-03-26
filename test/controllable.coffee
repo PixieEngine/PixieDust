@@ -13,7 +13,7 @@ test "should move player left while key is pressed", ->
   window.keydown.left = true
   player.update()
 
-  equals player.I.x, 
+  equals player.I.x, 9
 
 
 module()
