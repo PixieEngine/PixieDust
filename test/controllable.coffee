@@ -6,8 +6,7 @@ QUnit.testStart = ->
     data: animationData
     includedModules: ["Animated"]
 
-test "should move player left while key is pressed", ->
-
+test "should move player left while key is pressed", ->  
   player.include(Controllable)
 
   # Mock the keydown object
