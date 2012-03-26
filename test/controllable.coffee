@@ -9,7 +9,7 @@ test "should move player left while key is pressed", ->
 
   player.include(Controllable)
 
-  # Mock the keydown objec
+  # Mock the keydown object
   window.keydown = {}
   window.keydown.left = true
 
