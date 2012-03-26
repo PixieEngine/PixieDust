@@ -3,7 +3,7 @@ The Controllable module adds simple movement
 when up, down, left, or right are held.
 
 <code><pre>
-  # create a player and include ClampBounds
+  # create a player and include Con
   player = GameObject
     includedModules: ["ClampBounds"]
     width: 5
