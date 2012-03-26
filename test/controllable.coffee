@@ -74,7 +74,7 @@ test "should move player down while key is pressed", ->
   equals player.I.y, 22 
 
 test "should move player back and forth when keys are changed", ->
-  ;
+
 
 test "should move player according to their speed", ->
   ;
