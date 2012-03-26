@@ -4,7 +4,7 @@ that the including GameObject doesn't move outside
 the viewport.
 
 <code><pre>
-  # create a player and include 
+  # create a player and include ClampBounds
   player = GameObject
     includedModules: ["ClampBounds"]
     width: 5
