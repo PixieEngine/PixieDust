@@ -11,7 +11,7 @@ when up, down, left, or right are held.
     x: 15
     y: 30
 
-  # hold one of the movement keys
+  # hold one of the movement keys, t
 
 
   player.update()
