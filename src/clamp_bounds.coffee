@@ -1,5 +1,5 @@
 ###*
-The Cooldown module provides a declarative way to manage cooldowns on
+The Cl module provides a declarative way to manage cooldowns on
 GameObject's properties.
 
 <code><pre>
