@@ -21,7 +21,7 @@ when up, down, left, or right are held.
   # => 13
 </pre></code>
 
-@name Cont
+@name Controllable
 @module
 @constructor
 @param {Object} I Instance variables
