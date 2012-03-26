@@ -1,6 +1,5 @@
 ###*
-The ClampBounds module provides a declarative way to manage cooldowns on
-GameObject's properties.
+The ClampBounds module 
 
 <code><pre>
 # Health regeneration
