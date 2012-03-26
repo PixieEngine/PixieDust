@@ -44,7 +44,7 @@ test "should move player right while key is pressed", ->
   equals player.I.x, 12
 
 test "should move player up while key is pressed", ->
-  ;
+
 
 test "should move player down while key is pressed", ->
   ;  
