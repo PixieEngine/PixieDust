@@ -4,7 +4,7 @@ test "should clamp the x-axis", ->
   player = GameObject()
   player.include(ClampBounds)
 
-  # Hack in App.width, 
+  # Hack in App.width, App 
 
   player.I.x = - 400
   player.update()
