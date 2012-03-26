@@ -69,7 +69,7 @@ test "should move player down while key is pressed", ->
 
   equals player.I.y, 22
 
-  window.keydown.up = false
+  window.keydown.down = false
 
   equals player.I.y, 18 
 
