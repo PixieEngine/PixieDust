@@ -9,7 +9,7 @@ QUnit.testStart = ->
     height: 20
 
 test "should move player left while key is pressed", ->  
-  player.include(Controllable)
+
 
   # Mock the keydown object
   window.keydown = {}
