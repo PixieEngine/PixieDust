@@ -21,7 +21,7 @@ test "should move player left while key is pressed", ->
 
   equals player.I.x, 8
 
-test "should move "
+test "should move player right while"
 
 
 module()
