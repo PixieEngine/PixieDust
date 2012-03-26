@@ -1,6 +1,6 @@
 ###*
 The Controllable module adds simple movement
-when up, down
+when up, down, left, right ar
 
 <code><pre>
   # create a player and include ClampBounds
