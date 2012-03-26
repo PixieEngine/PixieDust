@@ -13,7 +13,7 @@ the viewport.
   # put the player outside the viewport
   player.I.x = -400
 
-  # update the player so 
+  # update the player so ClampB
   player.update()
 </pre></code>
 
