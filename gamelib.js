@@ -5092,9 +5092,6 @@ ClampBounds = function(I, self) {
     width: 32,
     height: 32
   });
-  App || (App = {});
-  App.width || (App.width = 480);
-  App.height || (App.height = 320);
   return self.bind("update", function() {
     I.x = I.x.clamp(I.width / 2, App.width - I.width / 2);
     return I.y = I.y.clamp(I.height / 2, App.height - I.height / 2);
@@ -6717,6 +6714,50 @@ var __slice = Array.prototype.slice;
     return lookup[normalizeKey(color)];
   };
 })();
+;
+/**
+The Controllable module adds simple movement
+when up, down, left, or right are held.
+
+<code><pre>
+  # create a player and include Controllable
+  player = GameObject
+    includedModules: ["Controllable"]
+    width: 5
+    height: 17
+    x: 15
+    y: 30
+    speed:  2
+
+  # hold the left arrow key, then
+  # update the player
+  player.update()
+
+  # the player is moved left according to his speed
+  player.I.x
+  # => 13
+</pre></code>
+
+@name Controllable
+@module
+@constructor
+@param {Object} I Instance variables
+@param {Core} self Reference to including object
+*/
+var Controllable;
+
+Controllable = function(I, self) {
+  if (I == null) I = {};
+  Object.reverseMerge(I, {
+    speed: 1
+  });
+  return self.bind("update", function() {
+    if (keydown.left) I.x -= I.speed;
+    if (keydown.right) I.x += I.speed;
+    if (keydown.up) I.y -= I.speed;
+    if (keydown.down) return I.y += I.speed;
+  });
+};
 ;
 /**
 The Cooldown module provides a declarative way to manage cooldowns on
