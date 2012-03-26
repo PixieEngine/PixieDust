@@ -17,7 +17,7 @@ test "should move player left while key is pressed", ->
 
   player.update()
 
-  eq
+  equals player.
 
 
 module()
