@@ -28,18 +28,6 @@ the viewport.
   # => 311.5 # The default App.height (320) - half the player's height
 </pre></code>
 
-<code><pre>
-# Shoot Timeout
-player = GameObject()
-
-player.cooldown "shootTimer"
-
-player.I.shootTimer = 10 # => Pew! Pew!
-
-player.I.update()
-
-player.I.shootTimer # => 9
-</pre></code>
 
 @name Cooldown
 @module
