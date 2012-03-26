@@ -8,6 +8,8 @@ QUnit.testStart = ->
     width: 10
     height: 20
 
+  player.include(Controllable)    
+
 test "should move player left while key is pressed", ->  
 
 
