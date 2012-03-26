@@ -4,7 +4,8 @@ Controllable = (I={}, self) ->
 
   self.bind "update", ->
     if keydown.left
-      I.x -= I.spe
+      I.x -= I.speed
+
 
 
 
