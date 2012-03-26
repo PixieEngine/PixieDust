@@ -96,6 +96,6 @@ test "should move player according to their speed", ->
 
   equals player.I.y, 23
 
-test "should have net zero "
+test "should have net zero mo"
 
 module()
