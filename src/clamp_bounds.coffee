@@ -19,7 +19,7 @@ the viewport.
   player.update()
 
   # x, y position is based on the center point so
-  # the position the 
+  # the position the player is set
   player.I.x
   # => 2.5
 </pre></code>
