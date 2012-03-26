@@ -1,5 +1,6 @@
 ###*
 The Controllable module adds simple movement
+when
 
 <code><pre>
   # create a player and include ClampBounds
