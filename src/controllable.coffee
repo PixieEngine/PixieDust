@@ -13,8 +13,6 @@ when up, down, left, or right are held.
 
   # hold one of the movement keys, then
   # update the player
-
-
   player.update()
 
   # x, y position is based on the center point so
