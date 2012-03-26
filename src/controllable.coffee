@@ -11,7 +11,8 @@ when up, down, left, or right are held.
     x: 15
     y: 30
 
-  # hold one of the movement key
+  # hold one of the movement keys
+
 
   # update the player so ClampBounds can set 
   # his position back inside the viewport.
