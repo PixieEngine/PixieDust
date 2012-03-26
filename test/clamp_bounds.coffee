@@ -18,7 +18,7 @@ test "should clamp the y-axis", ->
   player = GameObject
     includedModules: ["ClampBounds"]
 
-  player.I.x = -400
+  player.I.y = -400
   player.update()
 
   equals player.I.x, player.I.width / 2
