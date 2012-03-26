@@ -56,7 +56,7 @@ test "should move player up while key is pressed", ->
 
   window.keydown.up = false
 
-  equals player.I.x, 
+  equals player.I.x, 18
 
 test "should move player down while key is pressed", ->
   ;  
