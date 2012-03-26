@@ -41,11 +41,7 @@ ClampBounds = (I={}, self) ->
     width: 32
     height: 32
 
-  # This is kind of gross, but we need to make sure
-  # App.width and App.height are around for the tests.
-  App ||= {}
-  App.width ||= 480
-  App.height ||= 320
+
 
   self.bind "update", ->
     I.x = I.x.clamp(I.width / 2, App.width - I.width / 2)
