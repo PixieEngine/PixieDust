@@ -85,7 +85,7 @@ test "should move player back and forth when keys are changed", ->
 
   player.update()
 
-  e
+  equals player.
 
 test "should move player according to their speed", ->
   ;
