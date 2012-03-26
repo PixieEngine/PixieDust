@@ -21,7 +21,7 @@ test "should clamp the y-axis", ->
   player.I.y = -400
   player.update()
 
-  equals player.I.y, player.I.width / 2
+  equals player.I.y, player.I.he / 2
 
   player.I.x = 800
   player.update()
