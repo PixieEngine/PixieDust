@@ -12,7 +12,7 @@ when up, down, left, or right are held.
     y: 30
 
   # hold one of the movement keys, then
-  # upd
+  # update the player
 
 
   player.update()
