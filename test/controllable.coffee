@@ -41,7 +41,7 @@ test "should move player right while key is pressed", ->
 
   window.keydown.right = false
 
-  equals player.I.x, 1
+  equals player.I.x, 12
 
 test "should move player up while key is pressed", ->
   ;
