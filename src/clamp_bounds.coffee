@@ -16,6 +16,8 @@ the viewport.
   # update the player so ClampBounds can set 
   # his position back inside the viewport.
   player.update()
+
+
 </pre></code>
 
 <code><pre>
