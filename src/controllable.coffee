@@ -16,7 +16,7 @@ when up, down, left, or right are held.
   # update the player
   player.update()
 
-  # the p
+  # the player is moved 
   player.I.x
   # => 2.5 # half the player's width
 
