@@ -24,6 +24,7 @@ the viewport.
   player.I.x
   # => 2.5 # half the player's width
 
+  pla
 </pre></code>
 
 <code><pre>
