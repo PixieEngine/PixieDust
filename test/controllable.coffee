@@ -33,6 +33,6 @@ test "should move player down while key is pressed", ->
 test "should move player back and forth when keys are changed", ->
   ;
 
-test "should move paye"
+test "should move player faste"
 
 module()
