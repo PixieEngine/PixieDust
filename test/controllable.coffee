@@ -1,5 +1,11 @@
 module "Controllable"
 
+# overwrites window.animation before each test is run
+QUnit.testStart = ->
+  window.animation = GameObject
+    data: animationData
+    includedModules: ["Animated"]
+
 test "should move player left while key is pressed", ->
   player = GameObject
     x: 10
