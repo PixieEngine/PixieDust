@@ -1,6 +1,6 @@
 module "Controllable"
 
-# overwrites window.animation before each test is run
+# sets up pla
 QUnit.testStart = ->
   window.animation = GameObject
     data: animationData
