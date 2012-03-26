@@ -25,7 +25,7 @@ the viewport.
   # => 2.5 # half the player's width
 
   player.I.y
-  # => 311.5 # The default App.height (320) - 
+  # => 311.5 # The default App.height (320) - half the play
 </pre></code>
 
 <code><pre>
