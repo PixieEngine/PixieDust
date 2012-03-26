@@ -80,13 +80,7 @@ test "should move player back and forth when keys are changed", ->
 
   equals player.I.y, 21
 
-  player.update()
 
-  equals player.I.y, 22
-
-  window.keydown.down = false
-
-  equals player.I.y, 22 
 
 test "should move player according to their speed", ->
   ;
