@@ -2,7 +2,7 @@ module "ClampBounds"
 
 test "should clamp the x-axis", ->
   player = GameObject
-    includedMo
+    includedModules: {}
   player.include(ClampBounds)
 
   # Mock App.width, App.height
