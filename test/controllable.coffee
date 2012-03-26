@@ -88,6 +88,6 @@ test "should move player back and forth when keys are changed", ->
   equals player.I.y, 20
 
 test "should move player according to their speed", ->
-  ;
+
 
 module()
