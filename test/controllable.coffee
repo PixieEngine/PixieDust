@@ -26,7 +26,7 @@ test "should move player left while key is pressed", ->
 
   window.keydown.left = false
 
-  equa
+  equals player,
 
 test "should move player right while key is pressed", ->
   window.keydown.right = true
