@@ -14,4 +14,6 @@ test "should clamp the x-axis", ->
 
   equals player.I.x, App.width - player.I.width / 2
 
+
+
 module()
