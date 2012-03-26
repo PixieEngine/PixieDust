@@ -20,7 +20,7 @@ the viewport.
 
   # x, y position is based on the center point so
   # the position the player is set to is based on
-  # half their width and 
+  # half their width and height
   player.I.x
   # => 2.5
 </pre></code>
