@@ -27,5 +27,7 @@ test "should move player right while key is pressed", ->
 test "should move player up while key is pressed", ->
   ;
 
+test ""
+
 
 module()
