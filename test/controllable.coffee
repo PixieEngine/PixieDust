@@ -7,6 +7,7 @@ test "should move player left while key is pressed", ->
     width: 10
     height: 20
 
-  player.include(C)
+  player.include(Controllable)
+
 
 module()
