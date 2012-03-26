@@ -17,7 +17,7 @@ the viewport.
   # his position back inside the viewport.
   player.update()
 
-  player.I.
+  player.I.x
 </pre></code>
 
 <code><pre>
