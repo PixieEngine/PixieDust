@@ -1,4 +1,4 @@
-Controllable = (I={}) ->
+Controllable = (I={},) ->
   Object.reverseMerge I,
     speed: 1
 
