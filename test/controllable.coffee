@@ -94,6 +94,6 @@ test "should move player according to their speed", ->
 
   player.update()
 
-  equals player.I.y, 
+  equals player.I.y, 23
 
 module()
