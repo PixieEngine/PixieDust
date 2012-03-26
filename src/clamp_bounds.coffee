@@ -25,7 +25,7 @@ the viewport.
   # => 2.5 # half the player's width
 
   player.I.y
-  # => 320 - (17 / 2)
+  # => 311
 </pre></code>
 
 <code><pre>
