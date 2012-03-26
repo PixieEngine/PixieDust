@@ -5,6 +5,7 @@ test "should move player left while key is pressed", ->
     x: 10
     y: 20
     width: 10
-    height: 
+    height: 20
+
 
 module()
