@@ -12,7 +12,7 @@ the viewport.
 
   # put the player outside the viewport
   player.I.x = -400
-
+  player.I.y
 
   # update the player so ClampBounds can set 
   # his position back inside the viewport.
