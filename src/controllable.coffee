@@ -21,7 +21,7 @@ when up, down, left, or right are held.
   # => 13
 </pre></code>
 
-@name Cooldown
+@name Cont
 @module
 @constructor
 @param {Object} I Instance variables
