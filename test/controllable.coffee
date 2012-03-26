@@ -97,6 +97,6 @@ test "should move player according to their speed", ->
   equals player.I.y, 23
 
 test "should stay in place if two different directions are held", ->
-  player
+  window.
 
 module()
