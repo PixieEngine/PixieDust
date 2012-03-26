@@ -1,5 +1,6 @@
 ClampBounds = (I={}, self) ->
-  Object.reverseMerg
+  Object.reverseMerge I,
+
 
   self.bind "update", ->
     I.x = I.x.clamp()
