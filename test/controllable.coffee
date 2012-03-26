@@ -10,4 +10,5 @@ test "should move player left while key is pressed", ->
   player.include(Controllable)
 
 
+
 module()
