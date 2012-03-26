@@ -83,6 +83,7 @@ test "should move player back and forth when keys are changed", ->
   window.keydown.down = false
   window.keydown.up = true
 
+  player.up
 
 test "should move player according to their speed", ->
   ;
