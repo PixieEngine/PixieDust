@@ -2,7 +2,11 @@ module "Controllable"
 
 # sets up player object before each test
 QUnit.testStart = ->
-
+    player = GameObject
+    x: 10
+    y: 20
+    width: 10
+    height: 20
 
 test "should move player left while key is pressed", ->  
   player.include(Controllable)
