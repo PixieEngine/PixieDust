@@ -25,7 +25,7 @@ the viewport.
   # => 2.5 # half the player's width
 
   player.I.y
-  # => 311.5 # The defa
+  # => 311.5 # The default App
 </pre></code>
 
 <code><pre>
