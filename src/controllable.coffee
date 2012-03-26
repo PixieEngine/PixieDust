@@ -8,7 +8,7 @@ when up, down, left, or right are held.
     includedModules: ["Controllable"]
     width: 5
     height: 17
-    x 15
+    x: 15
 
 
   # put the player outside the viewport
