@@ -1,6 +1,6 @@
 module "Controllable"
 
-# sets up player object 
+# sets up player object before eac
 QUnit.testStart = ->
   window.animation = GameObject
     data: animationData
