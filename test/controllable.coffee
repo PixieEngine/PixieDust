@@ -71,7 +71,7 @@ test "should move player down while key is pressed", ->
 
   window.keydown.down = false
 
-  equals player.I.y, 2 
+  equals player.I.y, 22 
 
 test "should move player back and forth when keys are changed", ->
   ;
