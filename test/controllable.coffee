@@ -1,6 +1,6 @@
 module "Controllable"
 
-# sets up pla
+# sets up player object 
 QUnit.testStart = ->
   window.animation = GameObject
     data: animationData
