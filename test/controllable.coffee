@@ -9,7 +9,7 @@ test "should move player left while key is pressed", ->
 
   player.include(Controllable)
 
-  window.keyd
+  window.keydown = {}
   window.keydown.left = true
   player.update()
 
