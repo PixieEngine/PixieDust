@@ -90,6 +90,6 @@ test "should move player back and forth when keys are changed", ->
 test "should move player according to their speed", ->
   player.I.speed = 3
 
-  window.
+  window.keydown.
 
 module()
