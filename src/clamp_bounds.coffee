@@ -28,7 +28,6 @@ the viewport.
   # => 311.5 # The default App.height (320) - half the player's height
 </pre></code>
 
-
 @name Cooldown
 @module
 @constructor
