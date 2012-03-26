@@ -19,6 +19,7 @@ the viewport.
   player.update()
 
   player.I.x
+
 </pre></code>
 
 <code><pre>
