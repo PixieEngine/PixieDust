@@ -1,5 +1,5 @@
 ###*
-The Cont module adds a check to make sure
+The Controllable module adds a check to make sure
 that the including GameObject doesn't move outside
 the viewport.
 
