@@ -94,6 +94,6 @@ test "should move player according to their speed", ->
 
   player.update()
 
-  e
+  equals play
 
 module()
