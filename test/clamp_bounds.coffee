@@ -9,7 +9,7 @@ test "should clamp the x-axis", ->
   App.width = 480
   App.height = 320
 
-  player.I.x = - 400
+  player.I.x = -400
   player.update()
 
   equals player.I.x, player.I.width / 2
