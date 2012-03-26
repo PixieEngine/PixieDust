@@ -3,7 +3,7 @@ Controllable = (I={}, self) ->
     speed: 1
 
   self.bind "update", ->
-    if ke
+    if keydown.left
 
 
 
