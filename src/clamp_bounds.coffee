@@ -19,7 +19,7 @@ the viewport.
   player.update()
 
   player.I.x
-  # => 
+  # => 2.5
 </pre></code>
 
 <code><pre>
