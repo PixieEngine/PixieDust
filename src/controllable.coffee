@@ -2,9 +2,6 @@ Controllable = (I={}) ->
   Object.reverseMerge I,
     speed: 1
 
-  self = GameObject(I)
-
-  # Add events and methods here
   self.bind "update", ->
     ; # Add update method behavior
 
