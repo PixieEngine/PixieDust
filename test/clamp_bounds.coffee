@@ -12,6 +12,6 @@ test "should clamp the x-axis", ->
   player.I.x = 800
   player.update()
 
-  equals.
+  equals player.I.x
 
 module()
