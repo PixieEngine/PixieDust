@@ -7910,6 +7910,49 @@ Engine.Stats = function(I, self) {
 };
 ;
 /**
+The <code>Tilemap</code> module provides a way to load tilemaps in the engine.
+
+@name Tilemap
+@fieldOf Engine
+@module
+
+@param {Object} I Instance variables
+@param {Object} self Reference to the engine
+*/
+Engine.Tilemap = function(I, self) {
+  var clearObjects, map, updating;
+  map = null;
+  updating = false;
+  clearObjects = false;
+  self.bind("update", function() {
+    return updating = true;
+  });
+  self.bind("afterUpdate", function() {
+    updating = false;
+    if (clearObjects) {
+      self.objects().clear();
+      return clearObjects = false;
+    }
+  });
+  return {
+    /**
+    Loads a new may and unloads any existing map or entities.
+
+    @name loadMap
+    @methodOf Engine#
+    */
+    loadMap: function(name, complete) {
+      clearObjects = updating;
+      return map = Tilemap.load({
+        name: name,
+        complete: complete,
+        entity: self.add
+      });
+    }
+  };
+};
+;
+/**
 The <code>Fadeable</code> module provides a method to fade a sprite to transparent. 
 You may also provide a callback function that is executed when the sprite has finished fading out.
 
@@ -8900,6 +8943,67 @@ TextScreen = function(I) {
     }
   });
 };
+;
+
+(function() {
+  var Map, Tilemap, loadByName;
+  Map = function(data, entityCallback) {
+    var entity, loadEntities, spriteLookup, tileHeight, tileWidth, uuid, _ref;
+    tileHeight = data.tileHeight;
+    tileWidth = data.tileWidth;
+    spriteLookup = {};
+    _ref = App.entities;
+    for (uuid in _ref) {
+      entity = _ref[uuid];
+      spriteLookup[uuid] = Sprite.fromURL(entity.tileSrc);
+    }
+    loadEntities = function() {
+      if (!entityCallback) return;
+      console.log(data);
+      return data.layers.each(function(layer, layerIndex) {
+        var instance, instanceData, instances, x, y, _i, _len, _results;
+        if (instances = layer.instances) {
+          _results = [];
+          for (_i = 0, _len = instances.length; _i < _len; _i++) {
+            instance = instances[_i];
+            x = instance.x, y = instance.y, uuid = instance.uuid;
+            instanceData = Object.extend({
+              layer: layerIndex,
+              sprite: spriteLookup[uuid],
+              x: x + tileWidth / 2,
+              y: y + tileHeight / 2
+            }, App.entities[uuid], instance.properties);
+            _results.push(entityCallback(instanceData));
+          }
+          return _results;
+        }
+      });
+    };
+    loadEntities();
+    return data;
+  };
+  Tilemap = function(name, callback, entityCallback) {
+    return fromPixieId(App.Tilemaps[name], callback, entityCallback);
+  };
+  loadByName = function(name, callback, entityCallback) {
+    var proxy, url;
+    url = ResourceLoader.urlFor("tilemaps", name);
+    proxy = {};
+    $.getJSON(url, function(data) {
+      Object.extend(proxy, Map(data, entityCallback));
+      return typeof callback === "function" ? callback(proxy) : void 0;
+    });
+    return proxy;
+  };
+  Tilemap.load = function(options) {
+    if (options.pixieId) {
+      return fromPixieId(options.pixieId, options.complete, options.entity);
+    } else if (options.name) {
+      return loadByName(options.name, options.complete, options.entity);
+    }
+  };
+  return (typeof exports !== "undefined" && exports !== null ? exports : this)["Tilemap"] = Tilemap;
+})();
 ;
 var TitleScreen;
 
