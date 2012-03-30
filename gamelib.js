@@ -7633,6 +7633,43 @@ Engine.Delay = function(I, self) {
   };
 };
 ;
+/**
+The <code>FPSCounter</code> module tracks and displays the framerate.
+
+<code><pre>
+window.engine = Engine
+  ...
+  includedModules: ["FPSCounter"]
+  FPSColor: "#080"
+</pre></code>
+
+@name FPSCounter
+@fieldOf Engine
+@module
+
+@param {Object} I Instance variables
+@param {Object} self Reference to the engine
+*/
+Engine.FPSCounter = function(I, self) {
+  var framerate;
+  Object.reverseMerge(I, {
+    showFPS: true,
+    FPSColor: "#FFF"
+  });
+  framerate = Framerate();
+  return self.bind("overlay", function(canvas) {
+    if (I.showFPS) {
+      canvas.font("bold 9pt consolas, 'Courier New', 'andale mono', 'lucida console', monospace");
+      canvas.drawText({
+        color: I.FPSColor,
+        position: Point(6, 18),
+        text: "fps: " + framerate.fps
+      });
+    }
+    return framerate.rendered();
+  });
+};
+;
 
 Engine.GameState = function(I, self) {
   var requestedState;
@@ -8153,6 +8190,53 @@ Follow = function(I, self) {
   return {
     follow: function(obj) {
       return I.velocity = obj.position().subtract(self.position()).norm().scale(I.followSpeed);
+    }
+  };
+};
+;
+/**
+This object keeps track of framerate and displays it by creating and appending an
+html element to the DOM.
+
+Once created you call snapshot at the end of every rendering cycle.
+
+@name Framerate
+@constructor
+*/
+var Framerate;
+
+Framerate = function(options) {
+  var framerateUpdateInterval, framerates, numFramerates, renderTime, self, updateFramerate;
+  if (options == null) options = {};
+  numFramerates = 15;
+  framerateUpdateInterval = 250;
+  renderTime = -1;
+  framerates = [];
+  updateFramerate = function() {
+    return self.fps = framerates.average().round();
+  };
+  setInterval(updateFramerate, framerateUpdateInterval);
+  /**
+  Call this method everytime you render.
+
+  @name rendered
+  @methodOf Framerate#
+  */
+  return self = {
+    rendered: function() {
+      var framerate, newTime, t;
+      if (renderTime < 0) {
+        return renderTime = new Date().getTime();
+      } else {
+        newTime = new Date().getTime();
+        t = newTime - renderTime;
+        framerate = 1000 / t;
+        framerates.push(framerate);
+        while (framerates.length > numFramerates) {
+          framerates.shift();
+        }
+        return renderTime = newTime;
+      }
     }
   };
 };
