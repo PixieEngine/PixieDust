@@ -21,7 +21,6 @@ Engine.FPSCounter = (I, self) ->
     FPSColor: "#FFF"
 
   framerate = Framerate()
-    noDOM: true
 
   self.bind "overlay", (canvas) ->
     if I.showFPS
