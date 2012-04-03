@@ -6848,6 +6848,35 @@ Cooldown = function(I, self) {
   };
 };
 ;
+var DebugVelocity;
+
+DebugVelocity = function(I, self) {
+  if (I == null) I = {};
+  Object.reverseMerge(I, {
+    velocity: Point(0, 0)
+  });
+  return self.bind('afterTransform', function(canvas) {
+    if (engine.I.debugEnabled) {
+      return canvas.withTransform(Matrix.translation(I.x, I.y), function(canvas) {
+        canvas.drawRect({
+          x: 0,
+          y: -2,
+          width: I.velocity.x * 10,
+          height: 4,
+          color: 'rgba(255, 255, 255, 0.75)'
+        });
+        return canvas.drawRect({
+          x: -2,
+          y: 0,
+          width: 4,
+          height: I.velocity.y * 10,
+          color: 'rgba(255, 255, 255, 0.75)'
+        });
+      });
+    }
+  });
+};
+;
 /**
 The Drawable module is used to provide a simple draw method to the including
 object.
