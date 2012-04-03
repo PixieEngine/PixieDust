@@ -7585,6 +7585,127 @@ Engine.Collision = function(I, self) {
   };
 };
 ;
+
+Engine.Debug = function(I, self) {
+  var COL_HEIGHT, FONT_SIZE, ROW_HEIGHT, debugX, debugY, drawDebugLine, getPropertyRow, processValue;
+  COL_HEIGHT = 175;
+  ROW_HEIGHT = 9;
+  FONT_SIZE = 9;
+  debugX = 0;
+  debugY = 0;
+  Object.reverseMerge(I, {
+    debuggedObjects: [],
+    debugEnabled: false,
+    debugColor: 'white'
+  });
+  drawDebugLine = function(text, canvas, x, y) {
+    canvas.drawText({
+      color: I.debugColor,
+      x: x,
+      y: y,
+      text: text
+    });
+    return debugY += ROW_HEIGHT;
+  };
+  getPropertyRow = function(key, value, canvas) {
+    var k, toStringArray, v;
+    if (typeof value === 'function') {} else if (Object.isObject(value)) {
+      drawDebugLine(key, canvas, debugX, debugY);
+      debugX += 8;
+      for (k in value) {
+        v = value[k];
+        getPropertyRow(k, v, canvas);
+      }
+      return debugX -= 8;
+    } else if (Object.isArray(value)) {
+      toStringArray = (function() {
+        var _i, _len, _results;
+        _results = [];
+        for (_i = 0, _len = value.length; _i < _len; _i++) {
+          v = value[_i];
+          if (Object.isObject(v)) {
+            _results.push(v.I["class"] || v.toString());
+          } else {
+            _results.push(v);
+          }
+        }
+        return _results;
+      })();
+      return drawDebugLine("" + key + "(" + value.length + "): " + toStringArray, canvas, debugX, debugY);
+    } else {
+      value = processValue(value);
+      return drawDebugLine("" + key + ": " + value, canvas, debugX, debugY);
+    }
+  };
+  processValue = function(value) {
+    var output, parsedNumber;
+    output = value;
+    try {
+      parsedNumber = parseFloat(value);
+    } catch (_error) {}
+    if (parsedNumber) {
+      if (typeof value !== 'string' && parsedNumber !== parseInt(value)) {
+        output = value.toFixed(3);
+      }
+    }
+    return output;
+  };
+  self.bind("update", function() {
+    if (justPressed['0']) return I.debugEnabled = !I.debugEnabled;
+  });
+  self.bind("draw", function(canvas) {
+    var obj, _i, _len, _ref, _results;
+    if (I.debugEnabled) {
+      _ref = I.debuggedObjects;
+      _results = [];
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        obj = _ref[_i];
+        _results.push(canvas.drawRect({
+          color: 'rgba(255, 0, 255, 0.4)',
+          x: obj.I.x - obj.I.width / 2,
+          y: obj.I.y - obj.I.height / 2,
+          width: obj.I.width,
+          height: obj.I.height
+        }));
+      }
+      return _results;
+    }
+  });
+  self.bind("overlay", function(canvas) {
+    var key, obj, value, _i, _len, _ref, _ref2, _results;
+    if (I.debugEnabled) {
+      canvas.font("" + FONT_SIZE + "px Monaco");
+      debugX = 0;
+      debugY = ROW_HEIGHT;
+      _ref = I.debuggedObjects;
+      _results = [];
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        obj = _ref[_i];
+        _ref2 = obj.I;
+        for (key in _ref2) {
+          value = _ref2[key];
+          getPropertyRow(key, value, canvas);
+        }
+        debugX += COL_HEIGHT;
+        _results.push(debugY = ROW_HEIGHT);
+      }
+      return _results;
+    }
+  });
+  return {
+    addDebug: function(obj) {
+      return I.debuggedObjects.push(obj);
+    },
+    debugBySelector: function(selector) {
+      I.debuggedObjects.clear();
+      return I.debuggedObjects = engine.find(selector);
+    },
+    removeDebug: function(obj) {
+      return I.debuggedObjects.remove(obj);
+    }
+  };
+};
+;
 /**
 The <code>Delay</code> module provides methods to trigger events after a number of steps have passed.
 
