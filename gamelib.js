@@ -8035,6 +8035,11 @@ Engine.Selector = function(I, self) {
     @param {String} selector
     @returns {Array} An array of the objects found
     */
+    each: function(selector, fn) {
+      return self.find(selector).each(function(obj, index) {
+        return fn(obj, index);
+      });
+    },
     find: function(selector) {
       var matcher, results;
       results = [];
@@ -8043,6 +8048,9 @@ Engine.Selector = function(I, self) {
         if (matcher.match(object)) return results.push(object);
       });
       return Object.extend(results, instanceMethods);
+    },
+    first: function(selector) {
+      return self.find(selector).first();
     }
   };
 };
