@@ -1,5 +1,5 @@
 module "ActiveBounds"
 
-test "should remove objects"
+test "should remove objects outside of active"
 
 module()
