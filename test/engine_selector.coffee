@@ -19,7 +19,8 @@ test "#each", ->
     y: 10
 
   obj4 = engine.add
-    rad: "Awe
+    rad: "Awesome"
+    x:
 
   indexSum = 0
 
