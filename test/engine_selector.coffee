@@ -3,6 +3,7 @@ module "Engine"
 test "#each", ->
   engine = Engine()
 
+  engine.add
 
 
 test "#find", ->
