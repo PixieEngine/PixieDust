@@ -4454,6 +4454,28 @@ Generate a random uuid.
 })();;
 ;
 ;
+var ActiveBounds;
+
+ActiveBounds = function(I, self) {
+  if (I == null) I = {};
+  Object.reverseMerge(I, {
+    x: 0,
+    y: 0,
+    width: 8,
+    height: 8,
+    activeBounds: Rectangle(0, 0, App.width, App.height)
+  });
+  return self.bind('update', function() {
+    var _ref, _ref2;
+    if (!((I.activeBounds.left <= (_ref = I.x) && _ref <= I.activeBounds.right))) {
+      self.destroy();
+    }
+    if (!((I.activeBounds.top <= (_ref2 = I.y) && _ref2 <= I.activeBounds.bottom))) {
+      return self.destroy();
+    }
+  });
+};
+;
 /**
 The Bounded module is used to provide basic data about the
 location and dimensions of the including object. This module is included
