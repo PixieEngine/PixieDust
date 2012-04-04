@@ -20,7 +20,7 @@ test "#each", ->
 
   indexSum = 0
 
-  engine.each '.rad=Awe', (obj, index) ->
+  engine.each '.rad=Awesome', (obj, index) ->
     if index is 0
       equals obj, obj1
     else if index is 1
