@@ -19,7 +19,7 @@ test "#each", ->
     y: 10
 
   obj4 = engine.add
-    class:
+    class: "Awesome"
 
   indexSum = 0
 
