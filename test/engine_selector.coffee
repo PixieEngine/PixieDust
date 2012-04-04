@@ -21,7 +21,7 @@ test "#each", ->
   indexSum = 0
 
   engine.each (obj, index) ->
-    index
+    indexSum += 
 
     if index is 0
       equals obj, obj1
