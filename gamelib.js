@@ -4726,8 +4726,8 @@ Camera = function(I) {
       height: App.height
     }),
     screen: Rectangle({
-      x: 0,
-      y: 0,
+      x: App.width / 2,
+      y: App.height / 2,
       width: App.width,
       height: App.height
     }),
