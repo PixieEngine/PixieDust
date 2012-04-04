@@ -25,7 +25,7 @@ test "#each", ->
 
   indexSum = 0
 
-  engine.each '.rad=A', (obj, index) ->
+  engine.each '.rad=Awesome', (obj, index) ->
     indexSum += index
 
     if index is 0
