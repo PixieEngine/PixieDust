@@ -18,7 +18,7 @@ test "#each", ->
     x: 5
     y: 10
 
-  engine.each (obj, index) 
+  engine.each (obj, index) -
 
 test "#find", ->
   engine = Engine()
