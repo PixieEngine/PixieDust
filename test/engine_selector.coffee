@@ -10,6 +10,7 @@ test "#each", ->
 
   engine.add
     class: "Awesome"
+    x: 
 
 test "#find", ->
   engine = Engine()
