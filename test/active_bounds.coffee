@@ -37,6 +37,6 @@ test "should remove objects outside of activeBounds", ->
 
   obj2.update()
 
-  ok destroySpy, 'obj2 should be destroyed when it goes outside the x bounds'
+  ok destroySpy, 'obj2 should be destroyed when it goes outside the y bounds'
 
 module()
