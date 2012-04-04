@@ -15,6 +15,6 @@ test "#find", ->
     x: 50
     y: 30
 
-  equals engine.find('')
+  equals engine.find('.finable')
 
 module()
