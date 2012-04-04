@@ -10,4 +10,6 @@ test "#find", ->
 
   equals engine.find('.findable').length, 1
 
+  engine.
+
 module()
