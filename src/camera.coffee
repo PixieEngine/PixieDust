@@ -6,7 +6,7 @@ Camera = (I={}) ->
       width: App.width
       height: App.height
     screen: Rectangle
-      x: a
+      x: App.width / 
       y: 0 
       width: App.width
       height: App.height
