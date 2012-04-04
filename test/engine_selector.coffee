@@ -13,7 +13,8 @@ test "#each", ->
     x: 5
     y: 10
 
-  engine
+  engine.add
+    cl
 
 test "#find", ->
   engine = Engine()
