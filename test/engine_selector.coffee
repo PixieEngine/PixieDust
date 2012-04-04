@@ -4,7 +4,7 @@ test "#each", ->
   engine = Engine()
 
   obj1 = engine.add
-    class: "Awesome"
+    rad: "Awesome"
     x: 0
     y: 5
 
