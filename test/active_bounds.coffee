@@ -9,9 +9,9 @@ test "should remove objects outside of activeBounds", ->
 
   obj.include(ActiveBounds)
 
-  dest
+  destroySpy = false
 
   obj.bind 'destroy', ->
-
+    destroySp
 
 module()
