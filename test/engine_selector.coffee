@@ -32,6 +32,6 @@ test "#first", ->
     x: 9
     y: 10
 
-  equals engine.first('.type=testObj'), obj1, "should only f"
+  equals engine.first('.type=testObj'), obj1, "should only find the first obj"
 
 module()
