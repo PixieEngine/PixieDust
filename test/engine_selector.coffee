@@ -3,7 +3,8 @@ module "EngineSelector"
 test "engine#find", ->
   engine = Engine()
 
-  e
+  engine.add
+
 
 
 module()
