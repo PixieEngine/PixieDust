@@ -15,6 +15,6 @@ test "#find", ->
     x: 50
     y: 30
 
-  equals en
+  equals engine.fi
 
 module()
