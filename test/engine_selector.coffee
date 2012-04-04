@@ -8,6 +8,7 @@ test "#each", ->
     x: 0
     y: 5
 
+  engine.add
 
 
 test "#find", ->
