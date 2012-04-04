@@ -5,6 +5,7 @@ test "engine#find", ->
 
   engine.add
     findable: true
+    x: 0
 
 
 
