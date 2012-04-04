@@ -7,7 +7,7 @@ Camera = (I={}) ->
       height: App.height
     screen: Rectangle
       x: App.width / 2
-      y: App.
+      y: App.height / 2
       width: App.width
       height: App.height
     deadzone: Point(0, 0)
