@@ -70,7 +70,7 @@ Engine.Selector = (I, self) ->
     Object.extend results, instanceMethods
 
   first: (selector) ->
-    self.find()
+    self.find(selector)
 
 Object.extend Engine.Selector,
   parse: (selector) ->
