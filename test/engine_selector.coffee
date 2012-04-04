@@ -22,7 +22,7 @@ test "#each", ->
 
   engine.each (obj, index) ->
     if index is 0
-      equal 
+      equal obj, obj1
 
 test "#find", ->
   engine = Engine()
