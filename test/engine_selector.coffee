@@ -29,6 +29,7 @@ test "#first", ->
 
   obj2 = engine.add
     type: 'testObj'
-    x: 
+    x: 9
+    y
 
 module()
