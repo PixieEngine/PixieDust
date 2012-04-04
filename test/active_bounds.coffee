@@ -20,9 +20,9 @@ test "should remove objects outside of activeBounds", ->
   obj.update()
 
   obj2 = GameObject
-    x: 50
-    y: 50
-    width: 32
+    x: 100
+    y: 250
+    width: 16
     height: 32
 
   obj2.include(ActiveBounds)
