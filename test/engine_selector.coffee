@@ -19,7 +19,7 @@ test "#each", ->
     y: 20
 
   obj4 = engine.add
-    class: "Awesome"
+    rad: "Awesome"
     x: 9
     y: 80
 
