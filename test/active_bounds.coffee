@@ -19,6 +19,8 @@ test "should remove objects outside of activeBounds", ->
 
   obj.update()
 
+
+
   obj2 = GameObject
     x: 100
     y: 250
