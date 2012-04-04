@@ -28,6 +28,6 @@ test "#first", ->
   equals engine.first('.type=testObj'), obj1, "should find obj1"
 
   obj2 = engine.add
-    type: ''
+    type: 'testObj'
 
 module()
