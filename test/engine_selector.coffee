@@ -3,7 +3,7 @@ module "Engine"
 test "#each", ->
   engine = Engine()
 
-  engine.add
+  objengine.add
     class: "Awesome"
     x: 0
     y: 5
