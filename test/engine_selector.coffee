@@ -26,6 +26,6 @@ test "#first", ->
     y: 20
 
   equals engine.first('type=testObj').length, 1
-  equals engine.first('type=te')
+  equals engine.first('type=testObj')
 
 module()
