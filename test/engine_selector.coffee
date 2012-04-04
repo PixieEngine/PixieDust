@@ -8,7 +8,7 @@ test "engine#find", ->
     x: 0
     y: 50
 
-  engine.find()
+  engine.find('find')
 
 
 module()
