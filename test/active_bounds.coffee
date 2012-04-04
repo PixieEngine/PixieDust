@@ -6,6 +6,7 @@ test "should remove objects outside of activeBounds", ->
     y: 50
     width: 32
     height: 32
-    activeBounds: Re
+
+  obj.inclu
 
 module()
