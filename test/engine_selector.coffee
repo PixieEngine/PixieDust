@@ -19,6 +19,6 @@ test "#find", ->
 
 test "#first", ->
   engine.add
-
+    type
 
 module()
