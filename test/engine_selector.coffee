@@ -12,6 +12,6 @@ test "#find", ->
 
   engine.add
     findable: true
-
+    x: 50
 
 module()
