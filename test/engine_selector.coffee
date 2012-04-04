@@ -1,7 +1,7 @@
 module "EngineSelector"
 
 test "engine#find", ->
-  engine = window.
+  engine = w
 
 
 module()
