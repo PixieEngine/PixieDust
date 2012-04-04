@@ -13,5 +13,6 @@ test "#find", ->
   engine.add
     findable: true
     x: 50
+    y: 30
 
 module()
