@@ -29,11 +29,11 @@ test "should remove objects outside of activeBounds", ->
 
   destroySpy = false
 
-  obj.bind 'destroy', ->
+  obj2.bind 'destroy', ->
     destroySpy = true
 
-  obj.I.x = 10000
-  obj.I.y = 50
+  obj2.I.x = 10000
+  obj2.I.y = 50
 
   obj.update()
 
