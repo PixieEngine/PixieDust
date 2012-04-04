@@ -11,7 +11,9 @@ test "#each", ->
   engine.add
     class: "Awesome"
     x: 5
-    y: 
+    y: 10
+
+  engine
 
 test "#find", ->
   engine = Engine()
