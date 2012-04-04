@@ -4,7 +4,7 @@ test "#each", ->
   engine = Engine()
 
   engine.add
-
+    x: 
 
 test "#find", ->
   engine = Engine()
