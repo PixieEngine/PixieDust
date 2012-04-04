@@ -19,7 +19,7 @@ test "#each", ->
     y: 10
 
   counter = 0
-  indexSu
+  indexSum = 0
 
   engine.each (obj, index) ->
 
