@@ -35,8 +35,8 @@ test "should remove objects outside of activeBounds", ->
   obj2.I.x = 100
   obj2.I.y = 50000
 
-  obj.update()
+  obj2.update()
 
-  ok destroySpy, 'obj should be destroyed when it goes outside the x bounds'
+  ok destroySpy, 'obj2 should be destroyed when it goes outside the x bounds'
 
 module()
