@@ -18,7 +18,7 @@ test "#each", ->
     x: 5
     y: 10
 
-  obj4 = eng
+  obj4 = engine.
 
   indexSum = 0
 
