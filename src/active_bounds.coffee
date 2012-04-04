@@ -4,7 +4,7 @@ ActiveBounds = (I={}, self) ->
     y: 0
     width: 8
     height: 8
-    activeBounds: Rectangle(0, 0, App.width, App,)
+    activeBounds: Rectangle(0, 0, App.width, App.height)
 
 
   position: (newPosition) ->
