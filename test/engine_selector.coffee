@@ -9,35 +9,24 @@ test "#each", ->
     y: 5
 
   obj2 = engine.add
-    rad: "Awesome"
+    class: "Awesome"
     x: 5
     y: 10
 
   obj3 = engine.add
-    rad: "Awesome"
-    x: 15
-    y: 20
-
-  obj4 = engine.add
-    rad: "Awesome"
-    x: 9
-    y: 80
+    class: "Awesome"
+    x: 5
+    y: 10
 
   indexSum = 0
 
-  engine.each '.rad=Awesome', (obj, index) ->
-    indexSum += index
-
+  engine.each (obj, index) ->
     if index is 0
       equals obj, obj1
     else if index is 1
       equals obj, obj2
     else if index is 2
-      equals obj, obj3
-    else if index is 3
-      equals obj, obj4
-
-  equals indexSum, 6
+      equals obj, o
 
 test "#find", ->
   engine = Engine()
