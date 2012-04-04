@@ -8,7 +8,7 @@ test "#each", ->
     x: 0
     y: 5
 
-  engine.add
+  obj2engine.add
     class: "Awesome"
     x: 5
     y: 10
