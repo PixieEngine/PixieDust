@@ -9,7 +9,7 @@ test "#each", ->
     y: 5
 
   obj2 = engine.add
-    : "Awesome"
+    rad: "Awesome"
     x: 5
     y: 10
 
