@@ -15,8 +15,8 @@ test "#each", ->
 
   obj3 = engine.add
     class: "Awesome"
-    x: 5
-    y: 10
+    x: 15
+    y: 0
 
   obj4 = engine.add
     class: "Awesome"
