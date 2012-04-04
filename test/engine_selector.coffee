@@ -1,6 +1,7 @@
 module "EngineSelector"
 
-test "engine#find",
+test "engine#find", ->
+  engine
 
 
 module()
