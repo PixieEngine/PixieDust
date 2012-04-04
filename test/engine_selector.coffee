@@ -18,7 +18,7 @@ test "#each", ->
     x: 5
     y: 10
 
-  counter = 0
+
   indexSum = 0
 
   engine.each (obj, index) ->
