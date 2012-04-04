@@ -23,6 +23,6 @@ test "#first", ->
     x: 4
     y: 20
 
-  equals engine.first('type='te')
+  equals engine.first('type=')
 
 module()
