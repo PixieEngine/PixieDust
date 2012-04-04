@@ -35,7 +35,7 @@ test "#each", ->
     else if index is 2
       equals obj, obj3
     else if index is 3
-      equals obj,
+      equals obj, obj4
 
   equals indexSum, 3
 
