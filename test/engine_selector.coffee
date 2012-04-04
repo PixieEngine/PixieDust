@@ -26,6 +26,8 @@ test "#each", ->
   indexSum = 0
 
   engine.each '.rad=Awesome', (obj, index) ->
+    ind
+
     if index is 0
       equals obj, obj1
     else if index is 1
