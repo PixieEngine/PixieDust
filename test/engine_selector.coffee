@@ -32,6 +32,6 @@ test "#first", ->
     x: 9
     y: 10
 
-  equals engine.first('.ty')
+  equals engine.first('.type=testOb')
 
 module()
