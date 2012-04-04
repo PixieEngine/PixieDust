@@ -13,7 +13,7 @@ test "#each", ->
     x: 5
     y: 10
 
-  engine.add
+  obj engine.add
     class: "Awesome"
     x: 5
     y: 10
