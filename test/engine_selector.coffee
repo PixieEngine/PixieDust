@@ -18,6 +18,8 @@ test "#find", ->
   equals engine.find('.findable').length, 2
 
 test "#first", ->
+  engine = Engine()
+
   obj1 = engine.add
     type: 'testObj'
     x: 4
