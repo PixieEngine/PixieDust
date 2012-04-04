@@ -32,7 +32,7 @@ test "#each", ->
       equals obj, obj2
     else if index is 2
       equals obj, obj3
-    el
+    else if index i
 
 test "#find", ->
   engine = Engine()
