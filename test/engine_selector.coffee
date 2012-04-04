@@ -4,7 +4,8 @@ test "engine#find", ->
   engine = Engine()
 
   engine.add
-    findable: t
+    findable: true
+
 
 
 module()
