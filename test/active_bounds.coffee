@@ -15,6 +15,6 @@ test "should remove objects outside of activeBounds", ->
     destroySpy = true
 
   obj.I.x = 10000
-
+  obj.I.
 
 module()
