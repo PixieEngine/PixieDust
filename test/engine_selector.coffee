@@ -1,5 +1,7 @@
 module "Engine"
 
+test 
+
 test "#find", ->
   engine = Engine()
 
