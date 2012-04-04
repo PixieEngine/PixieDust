@@ -18,7 +18,7 @@ test "#find", ->
   equals engine.find('.findable').length, 2
 
 test "#first", ->
-  engine.add
+  obj1engine.add
     type: 'testObj'
     x: 4
     y: 20
