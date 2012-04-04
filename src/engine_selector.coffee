@@ -59,7 +59,7 @@ Engine.Selector = (I, self) ->
   @param {String} selector
   @returns {Array} An array of the objects found
   ### 
-  each: ()
+  each: (selector, fn)
 
   find: (selector) ->
     results = []
