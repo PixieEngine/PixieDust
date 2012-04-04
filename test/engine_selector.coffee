@@ -32,6 +32,6 @@ test "#first", ->
     x: 9
     y: 10
 
-  equ
+  equals engin
 
 module()
