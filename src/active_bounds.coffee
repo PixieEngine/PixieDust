@@ -7,4 +7,3 @@ ActiveBounds = (I={}, self) ->
     activeBounds: Rectangle(0, 0, App.width, App.height)
 
   
- 
