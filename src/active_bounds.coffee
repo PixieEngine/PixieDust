@@ -6,4 +6,5 @@ ActiveBounds = (I={}, self) ->
     height: 8
     activeBounds: Rectangle(0, 0, App.width, App.height)
 
-  
+  self.bind 'update', ->
+    
