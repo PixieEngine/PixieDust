@@ -1,5 +1,5 @@
 module "ActiveBounds"
 
-test
+test "should remove "
 
 module()
