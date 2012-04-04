@@ -69,7 +69,7 @@ Engine.Selector = (I, self) ->
 
     Object.extend results, instanceMethods
 
-  first: ()
+  first: (selector) -
 
 Object.extend Engine.Selector,
   parse: (selector) ->
