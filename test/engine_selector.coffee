@@ -1,4 +1,4 @@
-module "EngineSelector"
+module "EngineS"
 
 test "engine#find", ->
   engine = Engine()
