@@ -32,6 +32,6 @@ test "#first", ->
     x: 9
     y: 10
 
-  equals engin
+  equals engine.f
 
 module()
