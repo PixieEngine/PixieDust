@@ -19,6 +19,6 @@ test "should remove objects outside of activeBounds", ->
 
   obj.update()
 
-  ok destroySpy, 'obj should be d'
+  ok destroySpy, 'obj should be destroyed whe '
 
 module()
