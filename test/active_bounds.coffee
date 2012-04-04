@@ -15,10 +15,10 @@ test "should remove objects outside of activeBounds", ->
     destroySpy = true
 
   obj.I.x = 10000
-  obj.I.y = 4000
+  obj.I.y = 50
 
   obj.update()
 
-  ok destroySpy
+  ok destroySpy, 
 
 module()
