@@ -60,7 +60,7 @@ Engine.Selector = (I, self) ->
   @returns {Array} An array of the objects found
   ### 
   each: (selector, fn) ->
-    self.find(selector).ea
+    self.find(selector).each ()
 
   find: (selector) ->
     results = []
