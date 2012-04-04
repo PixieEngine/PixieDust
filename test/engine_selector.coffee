@@ -8,7 +8,7 @@ test "engine#find", ->
     x: 0
     y: 50
 
-  equals engine.find('.findable')leng,
+  equals engine.find('.findable').length, 
 
 
 module()
