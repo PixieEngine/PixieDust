@@ -37,7 +37,7 @@ test "#each", ->
     else if index is 3
       equals obj, obj4
 
-  equals indexSum, 
+  equals indexSum, 6
 
 test "#find", ->
   engine = Engine()
