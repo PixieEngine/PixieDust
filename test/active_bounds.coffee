@@ -7,6 +7,6 @@ test "should remove objects outside of activeBounds", ->
     width: 32
     height: 32
 
-  obj.inclu
+  obj.include()
 
 module()
