@@ -27,7 +27,7 @@ test "should remove objects outside of activeBounds", ->
 
   obj2.include(ActiveBounds)
 
-  obj2DestroySpy = false
+  obestroySpy = false
 
   obj.bind 'destroy', ->
     destroySpy = true
