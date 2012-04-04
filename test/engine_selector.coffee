@@ -25,7 +25,6 @@ test "#first", ->
     x: 4
     y: 20
 
-  equals engine.first('.type=testObj').length, 1
   equals engine.first('.type=testObj'), obj1
 
 module()
