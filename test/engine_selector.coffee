@@ -18,7 +18,7 @@ test "#each", ->
     x: 5
     y: 10
 
-
+  counter = 
 
   engine.each (obj, index) ->
 
