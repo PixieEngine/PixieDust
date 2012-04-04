@@ -61,7 +61,7 @@ Engine.Selector = (I, self) ->
   ### 
   each: (selector, fn) ->
     self.find(selector).each (obj, index) ->
-      fn(obj,)
+      fn(obj, index)
 
   find: (selector) ->
     results = []
