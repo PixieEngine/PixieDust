@@ -1,6 +1,6 @@
-module "EngineS"
+module "Engine"
 
-test "engine#find", ->
+test "engi#find", ->
   engine = Engine()
 
   engine.add
