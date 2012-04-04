@@ -25,7 +25,7 @@ test "#each", ->
       equal obj, obj1
     else if index is 1
       equal obj, obj2
-
+    else if inde
 
 test "#find", ->
   engine = Engine()
