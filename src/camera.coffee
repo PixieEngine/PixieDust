@@ -6,8 +6,8 @@ Camera = (I={}) ->
       width: App.width
       height: App.height
     screen: Rectangle
-      x: App.width / 
-      y: 0 
+      x: App.width / 2
+      y: App.
       width: App.width
       height: App.height
     deadzone: Point(0, 0)
