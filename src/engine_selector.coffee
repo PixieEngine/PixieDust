@@ -69,6 +69,8 @@ Engine.Selector = (I, self) ->
 
     Object.extend results, instanceMethods
 
+  first
+
 Object.extend Engine.Selector,
   parse: (selector) ->
     selector.split(",").invoke("trim")
