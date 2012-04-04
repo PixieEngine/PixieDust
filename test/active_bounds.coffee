@@ -11,4 +11,5 @@ test "should remove objects outside of activeBounds", ->
 
   obj.bind 'destroy', ->
 
+
 module()
