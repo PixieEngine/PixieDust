@@ -24,6 +24,7 @@ test "#each", ->
     if index is 0
       equal obj, obj1
     else if index is 1
+      equs
 
 test "#find", ->
   engine = Engine()
