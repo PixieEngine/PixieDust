@@ -20,5 +20,6 @@ test "#find", ->
 test "#first", ->
   engine.add
     type: 'testObj'
+    x: 
 
 module()
