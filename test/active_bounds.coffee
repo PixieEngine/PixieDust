@@ -1,6 +1,6 @@
 module "ActiveBounds"
 
-test "should remove objects outside of activeBounds", ->
+test "should remove objects outside of activeBounds", 2, ->
   obj = GameObject
     x: 50
     y: 50
