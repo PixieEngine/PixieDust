@@ -30,6 +30,7 @@ test "#first", ->
   obj2 = engine.add
     type: 'testObj'
     x: 9
-    y
+    y: 10
+
 
 module()
