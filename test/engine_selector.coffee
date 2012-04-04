@@ -1,7 +1,9 @@
 module "Engine"
 
 test "#each", ->
-  engine = En
+  engine = Engine()
+
+
 
 test "#find", ->
   engine = Engine()
