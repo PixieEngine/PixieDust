@@ -6,6 +6,8 @@ test "engine#find", ->
   engine.add
     findable: true
     x: 0
+    y: 50
+
 
 
 
