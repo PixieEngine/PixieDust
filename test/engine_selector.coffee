@@ -4,7 +4,7 @@ test "#each", ->
   engine = Engine()
 
   engine.add
-
+    class:
     x: 0
     y: 
 
