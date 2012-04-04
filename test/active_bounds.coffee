@@ -9,6 +9,6 @@ test "should remove objects outside of activeBounds", ->
 
   obj.include(ActiveBounds)
 
-  obj.bind 'destroy', -
+  obj.bind 'destroy', ->
 
 module()
