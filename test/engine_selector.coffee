@@ -20,7 +20,8 @@ test "#each", ->
 
   obj4 = engine.add
     rad: "Awesome"
-    x:
+    x: 40
+    y: 
 
   indexSum = 0
 
