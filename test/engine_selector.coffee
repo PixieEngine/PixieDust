@@ -18,6 +18,8 @@ test "#each", ->
     x: 5
     y: 10
 
+  obj
+
   indexSum = 0
 
   engine.each '.rad=Awesome', (obj, index) ->
