@@ -23,7 +23,7 @@ test "#each", ->
 
   engine.each (obj, index) ->
     counter += 1
-    indexSum 
+    indexSum += 
 
 test "#find", ->
   engine = Engine()
