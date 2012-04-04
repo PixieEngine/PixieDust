@@ -1,6 +1,7 @@
 module "Engine"
 
-test "#eac"
+test "#each", ->
+
 
 test "#find", ->
   engine = Engine()
