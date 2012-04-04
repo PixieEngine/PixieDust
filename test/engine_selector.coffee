@@ -4,7 +4,7 @@ test "engine#find", ->
   engine = Engine()
 
   engine.add
-    x:
+    t
 
 
 module()
