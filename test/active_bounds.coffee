@@ -17,6 +17,6 @@ test "should remove objects outside of activeBounds", ->
   obj.I.x = 10000
   obj.I.y = 4000
 
-
+  obj.
 
 module()
