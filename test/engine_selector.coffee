@@ -25,6 +25,6 @@ test "#first", ->
     x: 4
     y: 20
 
-  deeequals engine.first('.type=testObj'), obj1
+  deepEquals engine.first('.type=testObj'), obj1
 
 module()
