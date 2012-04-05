@@ -97,7 +97,7 @@ Camera = (I={}) ->
 
       self.trigger 'flash', canvas
 
-  self.bind 
+  self.bind "overla"
 
   self.include(Camera.ZSort)
   self.include(Camera.Zoom)
