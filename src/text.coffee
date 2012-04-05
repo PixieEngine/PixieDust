@@ -1,7 +1,7 @@
 Score = (I={}) ->
   Object.reverseMerge I,
     duration: 40
-    font: 'VT'
+    font: 'VT323'
     points: 500
     alpha: 1
 
