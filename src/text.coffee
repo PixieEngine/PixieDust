@@ -9,7 +9,6 @@ Text = (I={}) ->
 
   self.bind "update", ->
     I.y -= 1
-    log I.age / I.duration
     I.alpha = 1 - (I.age / I.duration)
 
   self.unbind "draw"
