@@ -23,6 +23,6 @@ test "text fades out", ->
 
   text.update()
 
-  eq
+  equals text.I
 
 module()
