@@ -11,8 +11,6 @@
     loadEntities = () ->
       return unless entityCallback
 
-      console.log data
-
       data.layers.each (layer, layerIndex) ->
         if instances = layer.instances
           for instance in instances
