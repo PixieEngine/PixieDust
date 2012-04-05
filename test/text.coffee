@@ -1,6 +1,6 @@
 module "Text"
 
-test ""
+test "text m"
 
 
 module()
