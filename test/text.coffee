@@ -21,6 +21,8 @@ test "text fades out", ->
 
   equals text.I.alpha, 1
 
-  text.
+  text.update()
+
+  eq
 
 module()
