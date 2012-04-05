@@ -3,8 +3,9 @@ module "Camera"
 test "create", ->
   ok Camera()
 
-test "overlay", ->
-  object = GameObject
+test "overlay", 1, ->
+  object = GameObject()
+
 
 # Clear out the module
 module()
