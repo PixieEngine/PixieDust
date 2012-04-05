@@ -8,7 +8,8 @@ test "text moves up vertically", ->
   equals text.I.x, 0
   equals text.I.y, -1
 
-  4
+  4.times ->
+
 
 test "text fades out", ->
   ;
