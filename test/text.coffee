@@ -1,7 +1,7 @@
 module "Text"
 
 test "text moves up vertically", ->
-  text = engi
+  text = Text
 
 test "text fades out", ->
   ;
