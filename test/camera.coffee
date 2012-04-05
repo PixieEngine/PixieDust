@@ -20,7 +20,7 @@ test "overlay", 1, ->
   object.bind 'overlay', ->
     ok true
 
-  canvas = MockCanvas(
+  canvas = MockCanvas()
 
   camera = Camera()
 
