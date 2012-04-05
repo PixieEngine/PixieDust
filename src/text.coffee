@@ -7,7 +7,7 @@ Text = (I={}) ->
 
   self = GameObject(I)
 
-  self.bind "update", ->
+  self.bind "afterUpdate", ->
     I.y -= 1
     I.alpha = 1 - (I.age / I.duration)
 
