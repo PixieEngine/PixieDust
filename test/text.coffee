@@ -17,6 +17,8 @@ test "text moves up vertically", ->
 test "text fades out", ->
   text = Text()
 
-  text.
+  text.update()
+
+
 
 module()
