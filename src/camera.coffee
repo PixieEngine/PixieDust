@@ -97,6 +97,8 @@ Camera = (I={}) ->
 
       self.trigger 'flash', canvas
 
+  self.bind 
+
   self.include(Camera.ZSort)
   self.include(Camera.Zoom)
   self.include(Camera.Rotate)
