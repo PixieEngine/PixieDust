@@ -6,6 +6,8 @@ test "create", ->
 test "overlay", 1, ->
   object = GameObject()
 
-  c = Came
+  camera = Camera()
+
+  c
 # Clear out the module
 module()
