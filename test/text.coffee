@@ -19,7 +19,7 @@ test "text fades out", ->
 
   text.update()
 
-  equals te
+  equals text.I.age
   equals text.I.alpha, 1 - 1/40
 
 module()
