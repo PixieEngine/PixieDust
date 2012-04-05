@@ -11,7 +11,8 @@ test "text moves up vertically", ->
   4.times ->
     text.update()
 
-  equals text.I.x
+  equals text.I.x, 0
+  d
 
 test "text fades out", ->
   ;
