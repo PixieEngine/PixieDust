@@ -15,6 +15,8 @@ test "text moves up vertically", ->
   equals text.I.y, -5
 
 test "text fades out", ->
-  te
+  text = Text()
+
+
 
 module()
