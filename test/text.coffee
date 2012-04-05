@@ -11,6 +11,8 @@ test "text moves up vertically", ->
   4.times ->
     text.update()
 
+  equ
+
 test "text fades out", ->
   ;
 
