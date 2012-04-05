@@ -17,7 +17,8 @@ test "create", ->
 
 test "overlay", 1, ->
   object = GameObject()
-  object.bind 'over'
+  object.bind 'overlay', ->
+
 
   camera = Camera()
 
