@@ -1,4 +1,4 @@
-Score = (I={}) ->
+Text = (I={}) ->
   Object.reverseMerge I,
     duration: 40
     font: 'VT323'
