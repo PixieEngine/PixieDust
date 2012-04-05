@@ -3,6 +3,8 @@ module "Camera"
 test "create", ->
   ok Camera()
 
-test "", -
+test "overlay", ->
+  object
+
 # Clear out the module
 module()
