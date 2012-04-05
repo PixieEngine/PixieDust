@@ -20,6 +20,6 @@ test "overlay", 1, ->
 
   camera = Camera()
 
-  camera.trigger 'overlay', 
+  camera.trigger 'overlay', canvas, [object]
 # Clear out the module
 module()
