@@ -6,7 +6,7 @@ test "text moves up vertically", ->
   text.update()
 
   equals text.I.x, 0
-  equals text.I.y, -
+  equals text.I.y, -1
 
 test "text fades out", ->
   ;
