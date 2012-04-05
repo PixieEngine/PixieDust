@@ -9,7 +9,7 @@ test "text moves up vertically", ->
   equals text.I.y, -1
 
   4.times ->
-
+    text.update()
 
 test "text fades out", ->
   ;
