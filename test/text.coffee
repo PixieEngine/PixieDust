@@ -1,7 +1,9 @@
 module "Text"
 
 test "text moves up vertically", ->
-  text = Text
+  text = Text()
+
+
 
 test "text fades out", ->
   ;
