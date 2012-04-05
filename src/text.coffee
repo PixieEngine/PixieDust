@@ -13,7 +13,7 @@ Score = (I={}) ->
 
   self.unbind "draw"
   self.bind "afterTransform", (canvas) ->
-    canvas.font "20px #{I.f}
+    canvas.font "20px #{I.font}"
     canvas.drawText
       color: "rgba(0, 0, 0, #{I.alpha})"
       x: I.x + 1
