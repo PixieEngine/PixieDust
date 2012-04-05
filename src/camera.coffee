@@ -99,10 +99,11 @@ Camera = (I={}) ->
 
   self.bind "overlay", (canvas, objects) ->
     canvas.withTransform Matrix.translate(I.screen.x, I.screen.y), (canvas) ->
+      debugge
       canvas.clip(0, 0, I.screen.width, I.screen.height)
-        objects = objectFilters.pipeline(objects)
+      objects = objectFilters.pipeline(objects)
 
-        objects.invoke "overlay", canvas
+      objects.invoke "overlay", canvas
 
   self.include(Camera.ZSort)
   self.include(Camera.Zoom)
