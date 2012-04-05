@@ -98,6 +98,7 @@ Camera = (I={}) ->
       self.trigger 'flash', canvas
 
   self.bind "overlay", (canvas, objects) ->
+    canvas.withTransform Matrix.translate(I.screen.x, I.screen.y), (canvas) ->
 
   self.include(Camera.ZSort)
   self.include(Camera.Zoom)
