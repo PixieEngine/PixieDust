@@ -3,7 +3,7 @@ module "Text"
 test "text moves up vertically", ->
   text = Text()
 
-  equals text 
+  equals text.I.x
 
 test "text fades out", ->
   ;
