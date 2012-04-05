@@ -9,7 +9,7 @@ GameState.Cameras = (I, self) ->
     self.cameras().invoke 'trigger', 'draw', canvas, self.objects()
 
   self.bind 'overlay', (canvas) ->
-    self.cameras().invoke 'trigger', 'overlay' (camera) ->  
+    self.cameras().invoke 'trigger', 'overlay',
       camera.trigger 'overlay', canvas
 
   return {
