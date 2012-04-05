@@ -6,6 +6,6 @@ test "create", ->
 test "overlay", 1, ->
   object = GameObject()
 
-
+  c = Came
 # Clear out the module
 module()
