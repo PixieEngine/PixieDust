@@ -102,7 +102,7 @@ Camera = (I={}) ->
       canvas.clip(0, 0, I.screen.width, I.screen.height)
         objects = objectFilters.pipeline(objects)
 
-        objects.invoke "overlay", canv
+        objects.invoke "overlay", canvas
 
   self.include(Camera.ZSort)
   self.include(Camera.Zoom)
