@@ -29,4 +29,3 @@ GameState.Cameras = (I, self) ->
       else
         return cameras
   }
-
