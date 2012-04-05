@@ -1,6 +1,16 @@
 module "Camera"
 
-
+MockCanvas = ->
+  clear: ->
+  context: ->
+    beginPath: ->
+    clip: ->
+    rect: ->
+  drawRect: ->
+  fill: ->
+  withTransform: (t, fn) ->
+    fn(@)
+  clip: ->
 
 test "create", ->
   ok Camera()
