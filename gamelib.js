@@ -4827,6 +4827,13 @@ Camera = function(I) {
       return self.trigger('flash', canvas);
     });
   });
+  self.bind("overlay", function(canvas, objects) {
+    return canvas.withTransform(Matrix.translate(I.screen.x, I.screen.y), function(canvas) {
+      canvas.clip(0, 0, I.screen.width, I.screen.height);
+      objects = objectFilters.pipeline(objects);
+      return objects.invoke("trigger", "overlay", canvas);
+    });
+  });
   self.include(Camera.ZSort);
   self.include(Camera.Zoom);
   self.include(Camera.Rotate);
@@ -8716,9 +8723,7 @@ GameState.Cameras = function(I, self) {
     return self.cameras().invoke('trigger', 'draw', canvas, self.objects());
   });
   self.bind('overlay', function(canvas) {
-    return self.cameras().each(function(camera) {
-      return camera.trigger('overlay', canvas);
-    });
+    return self.cameras().invoke('trigger', 'overlay', canvas, self.objects());
   });
   return {
     addCamera: function(data) {
