@@ -1,5 +1,5 @@
 module "Metered"
 
-test ""
+test "should exist"
 
 module()
