@@ -51,7 +51,7 @@ Metered = (I={}, self) ->
           color: borderColor
           width: 1.5  
     
-  addMeter: (options={}) ->
+  meter: (options={}) ->
     Object.reverseMerge options,
       borderColor: 'white'
       showName: false
