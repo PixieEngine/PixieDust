@@ -7,11 +7,12 @@ player = GameObject
   health: 100
   maxHealth: 100
 
+
 enemy = GameObject
   health: 500
 
 player.meter 'health'
-# => Uncaught TypeError: Object has no method 'position'
+# =>
 
 player.include(Bounded)
 
