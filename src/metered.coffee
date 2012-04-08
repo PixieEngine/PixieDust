@@ -21,7 +21,7 @@ Metered = (I={}, self) ->
       if not I[name]
         I[name] = 100
       
-      if not I["max#{name.capit}"]
+      if not I["max#{name.capitalize()}"]
       
       ratio = I[name] / I["max#{name.capitalize()}"]
       
