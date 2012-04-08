@@ -97,7 +97,7 @@ Metered = (I={}, self) ->
         radius: radius
         stroke:
           color: borderColor
-          width: 1.5  
+          width: borderWidth 
 
   ###*
   Configures a meter to be drawn each overlay event.
