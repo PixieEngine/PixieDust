@@ -147,7 +147,7 @@ Metered = (I={}, self) ->
       width: 100 
       
     if not I[options.name]
-      I[I.name] = 100
+      I[options.name] = 100
     
     if not I["max#{I.name.capitalize()}"]
       if I[I.name]
