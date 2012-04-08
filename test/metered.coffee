@@ -1,5 +1,6 @@
 module "Metered"
 
-test "should exist"
+test "should exist", ->
+  
 
 module()
