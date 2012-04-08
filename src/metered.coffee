@@ -95,7 +95,7 @@ Metered = (I={}, self) ->
           color: borderColor
           width: 1.5  
 
-###*
+  ###*
   The position of this game object. By default it is the top left point.
   Redefining the center method will change the relative position.
 
