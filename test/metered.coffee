@@ -12,4 +12,6 @@ test "should set max<Attribute> if one doesn't exist", ->
   
   obj.include Metered
 
+  obj.meter ''
+  
 module()
