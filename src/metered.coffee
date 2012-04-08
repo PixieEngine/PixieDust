@@ -125,6 +125,8 @@ Metered = (I={}, self) ->
 
   @name meter
   @methodOf Metered#
+  @param {Number} xOffset the amount to shift the x position 
+  @param {Number} yOffset the amount to shift the y position
   ###          
   meter: (options={}) ->
     Object.reverseMerge options,
