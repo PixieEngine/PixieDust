@@ -1,6 +1,6 @@
 ###*
 The Metered module provides a simple drop-in
-meter ui to track arbitrar
+meter ui to track arbitrary numer
 
 <code><pre>
 player = Core
