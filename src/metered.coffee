@@ -132,7 +132,7 @@ Metered = (I={}, self) ->
     color - Color of the meter's inner rectangle
     nameColor - Color of the property name displayed above the meter
     font - Size and style of the meter's font
-    height - Height of the 
+    height - Height of the meter
   ###          
   meter: (options={}) ->
     Object.reverseMerge options,
