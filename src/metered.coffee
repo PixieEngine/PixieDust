@@ -155,6 +155,6 @@ Metered = (I={}, self) ->
       if I[name]
         I["max#{name.capitalize()}"] = I[name]
       else
-        I["max#{options.name.capitalize()}"] = 100
+        I["max#{name.capitalize()}"] = 100
     
     I.meters.push options
