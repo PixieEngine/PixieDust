@@ -5,5 +5,7 @@ test "should exist", ->
   obj.include(Metered)
   
   ok obj.meter
+  
+test 
 
 module()
