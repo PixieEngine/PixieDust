@@ -98,11 +98,8 @@ Metered = (I={}, self) ->
   ###*
   Configures a meter to be drawn each overlay event.
 
-  The position of this game object. By default it is the top left point.
-  Redefining the center method will change the relative position.
-
   <code><pre>
-  player = Core
+  player = GameObj
     x: 50
     y: 40
 
