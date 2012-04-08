@@ -106,7 +106,7 @@ Metered = (I={}, self) ->
   player.meter 'health',
     
 
-  self.addMeter
+  .addMeter
     showName: true
     name: "health"
     position: 
