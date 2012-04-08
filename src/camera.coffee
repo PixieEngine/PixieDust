@@ -14,7 +14,7 @@ Camera = (I={}) ->
     zoom: 1
     transform: Matrix()
     scroll: Point(0, 0)
-    maxAcceleration: 3
+    maxSpeed: Point(Infinity, Infinity)
 
   currentType = "centered"
   currentObject = null
