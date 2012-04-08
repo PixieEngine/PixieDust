@@ -136,7 +136,7 @@ Metered = (I={}, self) ->
     position - An x, y object representing the position of the meter
     radius - Border radius of the meter
     showName - Boolean to toggle whether or not to show the attribute associated with the meter
-    text - A String to display over the meter. Will
+    text - A String to display over the meter. Overrides 
   ###          
   meter: (options={}) ->
     Object.reverseMerge options,
