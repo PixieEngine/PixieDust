@@ -6,6 +6,6 @@ test 'should exist', ->
   
   ok obj.meter
   
-test 'should set M', ->
+test 'should set max', ->
 
 module()
