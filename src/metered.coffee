@@ -125,7 +125,6 @@ Metered = (I={}, self) ->
 
   @name meter
   @methodOf Metered#
-  @returns {Point} The position of this object
   ###          
   meter: (options={}) ->
     Object.reverseMerge options,
