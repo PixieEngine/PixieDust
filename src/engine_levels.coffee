@@ -2,6 +2,7 @@ Engine.Levels = (I, self) ->
   Object.reverseMerge I,
     levels: []
     currentLevel: -1
+    currentLevelName: null
 
   I.transitioning = false
 
@@ -29,4 +30,4 @@ Engine.Levels = (I, self) ->
     loadLevel level
 
   reloadLevel: ->
-    loadLevel currentLev
+    loadLevel I.currentLevelName
