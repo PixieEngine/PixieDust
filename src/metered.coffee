@@ -118,6 +118,7 @@ Metered = (I={}, self) ->
     radius: 3
     showName: true
     text: 'Boss Health'
+    width: 150
 
   # => 
   </pre></code>
