@@ -126,7 +126,7 @@ Metered = (I={}, self) ->
   @name meter
   @methodOf Metered#
   @param {Object} options The meter configuration options
-    borderColor - The color of the bo
+    borderColor - The color of the border 
   ###          
   meter: (options={}) ->
     Object.reverseMerge options,
