@@ -108,7 +108,7 @@ Camera = (I={}) ->
 
       objects.invoke "trigger", "overlay", canvas
       
-  self.include Mova
+  self.include Movable
 
   self.include(Camera.ZSort)
   self.include(Camera.Zoom)
