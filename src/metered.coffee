@@ -148,8 +148,8 @@ Metered = (I={}, self) ->
     
     {name} = options
     
-    if not I[options.name]
-      I[options.name] = 100
+    if not I[name]
+      I[name] = 100
     
     if not I["max#{options.name.capitalize()}"]
       if I[options.name]
