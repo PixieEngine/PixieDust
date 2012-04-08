@@ -107,7 +107,7 @@ Metered = (I={}, self) ->
   player.include Metered      
 
   player.meter
-    borderColor: 'whi'
+    borderColor: 'brown'
     showName: true
     name: 'health'
     position: 
