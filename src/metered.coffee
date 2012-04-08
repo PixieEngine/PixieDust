@@ -8,7 +8,7 @@ player = GameObject
   maxHealth: 100
 
 enemy = GameObject
-  health: 100
+  health: 20
   
 
 player.position()
