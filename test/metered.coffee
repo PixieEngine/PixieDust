@@ -8,10 +8,11 @@ test "should exist", ->
   ok obj.meter
   
 test "should set max<Attribute> if one doesn't exist", ->
-  obj = GameObject()
+  obj = GameObject
+  
   
   obj.include Metered
 
-  obj.meter ''
+  obj.meter 'health'
   
 module()
