@@ -3,7 +3,7 @@ The Metered module provides a simple drop-in
 meter ui to track arbitrary numeric attributes.
 
 <code><pre>
-player = Ca
+player = GameO
   
 
 player.position()
