@@ -1,7 +1,6 @@
 Metered = (I={}, self) ->
   Object.reverseMerge I,
     meters: []
-
     
   self.bind 'overlay', (canvas) ->
     I.meters.each (meterData) ->
@@ -18,6 +17,8 @@ Metered = (I={}, self) ->
         text,
         width
       } = meterData
+      
+      if 
       
       ratio = I[name] / I["max#{name.capitalize()}"]
       
