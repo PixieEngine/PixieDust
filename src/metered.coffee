@@ -146,7 +146,7 @@ Metered = (I={}, self) ->
       text: null
       width: 100 
     
-    name 
+    name = 
     
     if not I[options.name]
       I[options.name] = 100
