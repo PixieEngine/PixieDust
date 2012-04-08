@@ -18,6 +18,6 @@ test "should set max<Attribute> if one doesn't exist", ->
   
   equals obj.I.maxHealth, 150
 
-test "should set both <attribute> and max<att>", ->
+test "should set both <attribute> and max<attribute>", ->
 
 module()
