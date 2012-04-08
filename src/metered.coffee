@@ -110,6 +110,7 @@ Metered = (I={}, self) ->
     borderColor: 'brown'
     color: 'pink'
     font: '30px Comic Sans'
+    height: 20
     name: 'health'
     position: 
       x: 5
