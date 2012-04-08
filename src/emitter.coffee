@@ -4,3 +4,4 @@ Emitter = (I={}) ->
   
   self.include Emitterable
 
+  return self
