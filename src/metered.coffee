@@ -134,7 +134,8 @@ Metered = (I={}, self) ->
     font - Size and style of the meter's font
     height - Height of the meter
     position - An x, y object representing the position of the meter
-    radius - Border radius of the 
+    radius - Border radius of the meter
+
   ###          
   meter: (options={}) ->
     Object.reverseMerge options,
