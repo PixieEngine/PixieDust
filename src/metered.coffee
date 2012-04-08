@@ -135,7 +135,7 @@ Metered = (I={}, self) ->
     height - Height of the meter
     position - An x, y object representing the position of the meter
     radius - Border radius of the meter
-    showName - Boolean to 
+    showName - Boolean to toggle whet
   ###          
   meter: (options={}) ->
     Object.reverseMerge options,
