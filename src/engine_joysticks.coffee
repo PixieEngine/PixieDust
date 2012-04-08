@@ -1,4 +1,3 @@
-
 ###*
 The <code>Joysticks</code> module gives the engine access to joysticks.
 
@@ -48,4 +47,3 @@ Engine.Joysticks = (I, self) ->
   ###
   controller: (i) ->
     Joysticks.getController(i)
-
