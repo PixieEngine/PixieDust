@@ -23,6 +23,6 @@ test "should set both <attribute> and max<attribute> if they aren't present in t
   
   obj.include Metered
   
-  
+  obj.meter
   
 module()
