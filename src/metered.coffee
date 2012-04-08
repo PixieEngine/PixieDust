@@ -94,7 +94,26 @@ Metered = (I={}, self) ->
         stroke:
           color: borderColor
           width: 1.5  
-    
+
+###*
+  The position of this game object. By default it is the top left point.
+  Redefining the center method will change the relative position.
+
+  <code><pre>
+  player = Core
+    x: 50
+    y: 40
+
+  player.include(Bounded)      
+
+  player.position()
+  # => {x: 50, y: 40}
+  </pre></code>
+
+  @name position
+  @methodOf Bounded#
+  @returns {Point} The position of this object
+  ###          
   meter: (options={}) ->
     Object.reverseMerge options,
       borderColor: 'white'
