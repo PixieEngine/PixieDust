@@ -9,7 +9,7 @@ test "should exist", ->
   
 test "should set max<Attribute> if one doesn't exist", ->
   obj = GameObject
-    health: 
+    health: 150
   
   obj.include Metered
 
