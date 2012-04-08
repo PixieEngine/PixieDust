@@ -107,7 +107,7 @@ Camera = (I={}) ->
       objects = objectFilters.pipeline(objects)
 
       objects.invoke "trigger", "overlay", canvas
-      
+
   self.include(Movable)
 
   self.include(Camera.ZSort)
