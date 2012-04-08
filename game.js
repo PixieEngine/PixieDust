@@ -8937,6 +8937,49 @@ LevelState = function(I) {
   return self;
 };
 ;
+/**
+The Metered module provides a simple drop-in
+meter ui to track arbitrary numeric attributes.
+
+<code><pre>
+player = GameObject
+  health: 100
+  maxHealth: 100
+
+player.include Metered
+
+enemy = GameObject
+  health: 500
+
+enemy.include Metered
+
+someOtherObject = GameObject
+
+someOtherObject.include Metered
+
+player.meter
+  name: 'health'
+# => Sets up a health meter that will be drawn during the player overlay event
+
+enemy.meter
+  name: 'health'
+# => Sets up a health meter that will be drawn during the enemy overlay event. 
+# Since maxHealth wasn't provided, it is set to the value of I.health (500)
+
+someOtherObject.meter
+  name: 'turbo'
+# => Sets up a turbo meter that will be drawn during the someOtherObject overlay event. 
+# Since neither turbo maxTurbo were provided, they are both set to 100.
+
+</pre></code>
+
+Metered module
+@name Module
+@module
+@constructor
+@param {Object} I Instance variables
+@param {GameObject} self Reference to including object
+*/
 var Metered;
 
 Metered = function(I, self) {
@@ -8946,10 +8989,8 @@ Metered = function(I, self) {
   });
   self.bind('overlay', function(canvas) {
     return I.meters.each(function(meterData) {
-      var borderColor, color, font, height, name, nameColor, radius, ratio, showName, text, width, x, y, _ref;
-      borderColor = meterData.borderColor, color = meterData.color, font = meterData.font, height = meterData.height, nameColor = meterData.nameColor, name = meterData.name, (_ref = meterData.position, x = _ref.x, y = _ref.y), radius = meterData.radius, showName = meterData.showName, text = meterData.text, width = meterData.width;
-      if (!I[name]) I[name] = 100;
-      if (!I["max" + (name.capitalize())]) I["max" + (name.capitalize())] = 100;
+      var borderColor, borderWidth, color, font, height, name, nameColor, radius, ratio, showName, text, width, x, y, _ref;
+      borderColor = meterData.borderColor, borderWidth = meterData.borderWidth, color = meterData.color, font = meterData.font, height = meterData.height, nameColor = meterData.nameColor, name = meterData.name, (_ref = meterData.position, x = _ref.x, y = _ref.y), radius = meterData.radius, showName = meterData.showName, text = meterData.text, width = meterData.width;
       ratio = I[name] / I["max" + (name.capitalize())];
       if (showName || text) {
         canvas.font(font);
@@ -8975,17 +9016,58 @@ Metered = function(I, self) {
         radius: radius,
         stroke: {
           color: borderColor,
-          width: 1.5
+          width: borderWidth
         }
       });
     });
   });
   return {
-    addMeter: function(options) {
+    /**
+    Configures a meter to be drawn each overlay event.
+    
+    <code><pre>
+    player = GameObject
+    
+    player.include Metered      
+    
+    player.meter
+      borderColor: 'brown'
+      color: 'pink'
+      font: '30px Comic Sans'
+      height: 20
+      name: 'health'
+      position: 
+        x: 5
+        y: 5
+      radius: 3
+      showName: true
+      text: 'Boss Health'
+      width: 150
+    
+    # => 
+    </pre></code>
+    
+    @name meter
+    @methodOf Metered#
+    @param {Object} options The meter configuration options
+      borderColor - Color of the meter's border
+      borderWidth - Width of the meter's border
+      color - Color of the meter's inner rectangle
+      nameColor - Color of the property name displayed above the meter
+      font - Size and style of the meter's font
+      height - Height of the meter
+      position - An x, y object representing the position of the meter
+      radius - Border radius of the meter
+      showName - Boolean to toggle whether or not to show the attribute associated with the meter
+      text - A String to display over the meter. Overrides default name attribute
+      width - How wide the meter is
+    */
+    meter: function(options) {
+      var name;
       if (options == null) options = {};
       Object.reverseMerge(options, {
         borderColor: 'white',
-        showName: false,
+        borderWidth: 1.5,
         color: 'green',
         nameColor: 'white',
         font: '14px Helvetica',
@@ -8995,9 +9077,19 @@ Metered = function(I, self) {
           y: 0
         },
         radius: 2,
+        showName: false,
         text: null,
         width: 100
       });
+      name = options.name;
+      if (!I[name]) I[name] = 100;
+      if (!I["max" + (name.capitalize())]) {
+        if (I[name]) {
+          I["max" + (name.capitalize())] = I[name];
+        } else {
+          I["max" + (name.capitalize())] = 100;
+        }
+      }
       return I.meters.push(options);
     }
   };
