@@ -7,5 +7,6 @@ test "should exist", ->
   ok obj.meter
   
 test "should set max<Attribute> if one doesn't exist", ->
+  obj = 
 
 module()
