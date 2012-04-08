@@ -10,8 +10,7 @@ player = GameObject
 enemy = GameObject
   health: 500
 
-
-
+player.
 # => Uncaught TypeError: Object has no method 'position'
 
 player.include(Bounded)
