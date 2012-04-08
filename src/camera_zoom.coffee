@@ -5,7 +5,7 @@ Camera.Zoom = (I, self) ->
     zoom: 1
 
   self.transformFilterChain (transform) ->
-    transform.scale(I.zoom, I.zoom)
+    transform.scale(I.zoom, I.zoom, self.position())
 
   clampZoom = (value) ->
     value.clamp(I.minZoom, I.maxZoom) 
@@ -23,4 +23,3 @@ Camera.Zoom = (I, self) ->
       return self
     else
       return I.zoom
-
