@@ -4,7 +4,7 @@ meter ui to track arbitrary numeric attributes.
 
 <code><pre>
 player = GameObject
-  health: 10
+  health: 100
   
 
 player.position()
