@@ -104,7 +104,7 @@ Metered = (I={}, self) ->
   player.include Metered      
 
   player.meter 'health'
-  # => {x: 50, y: 40}
+  # => 
   </pre></code>
 
   @name position
