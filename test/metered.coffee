@@ -17,5 +17,7 @@ test "should set max<Attribute> if one doesn't exist", ->
     name: 'health'
   
   equals obj.I.maxHealth, 150
-  
+
+tset 
+
 module()
