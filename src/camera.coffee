@@ -36,7 +36,7 @@ Camera = (I={}) ->
       height: 2 * deadzone.y
 
     if objectCenter.x > centerRect.right
-      I.scroll.x = I.scroll.x.approach(centerRect.RiI.maxVelocity.x)
+      I.scroll.x = I.scroll.x.approach(centerRect.right, I.maxVelocity.x)
     else if objectCenter.x < centerRect.left
       
     
