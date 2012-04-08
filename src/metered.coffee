@@ -1,7 +1,7 @@
 ###*
 The Metered module provides a simple drop-in
 meter ui to track arbitrary numeric attributes.
-
+If 
 
 <code><pre>
 player = Core
