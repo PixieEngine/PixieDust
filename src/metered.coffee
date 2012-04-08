@@ -126,6 +126,7 @@ Metered = (I={}, self) ->
   @name meter
   @methodOf Metered#
   @param {Object} options The meter configuration options
+    -
   ###          
   meter: (options={}) ->
     Object.reverseMerge options,
