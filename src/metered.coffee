@@ -19,7 +19,7 @@ Metered = (I={}, self) ->
       } = meterData
       
       if not I[name] || not I["max#{name.capitalize()}"]
-        warn "The mixin"
+        warn "The mixin Me"
       else
         ratio = I[name] / I["max#{name.capitalize()}"]
       
