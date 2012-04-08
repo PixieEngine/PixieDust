@@ -21,6 +21,8 @@ test "should set max<Attribute> if it isn't present in the including object", ->
 test "should set both <attribute> and max<attribute> if they aren't present in the including object", ->
   obj = GameObject()
   
-  obj.include
+  obj.include Metered
+  
+  
   
 module()
