@@ -12,7 +12,7 @@ player.include Metered
 enemy = GameObject
   health: 500
 
-enemy.incl
+enemy.include Metered
 
 player.meter 'health'
 # =>
