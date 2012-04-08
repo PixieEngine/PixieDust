@@ -7,7 +7,7 @@ test "should exist", ->
   
   ok obj.meter
   
-test "should set max<Attribute> if one doesn't exist", ->
+test "should set max<Attribute> if it isn't present in the in", ->
   obj = GameObject
     health: 150
   
