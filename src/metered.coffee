@@ -31,8 +31,6 @@ someOtherObject.meter 'turbo'
 
 </pre></code>
 
-@see GameObject
-
 Bounded module
 @name Bounded
 @module
