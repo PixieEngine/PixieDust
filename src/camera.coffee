@@ -1,4 +1,4 @@
-Camera = (I={}) -> 
+Camera = (I={}) ->
   Object.reverseMerge I,
     cameraBounds: Rectangle
       x: 0
