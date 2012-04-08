@@ -97,6 +97,7 @@ Metered = (I={}, self) ->
 
   ###*
   Configures a meter to be drawn 
+
   The position of this game object. By default it is the top left point.
   Redefining the center method will change the relative position.
 
