@@ -123,8 +123,8 @@ Metered = (I={}, self) ->
   # => 
   </pre></code>
 
-  @name position
-  @methodOf Bounded#
+  @name posi
+  @methodOf Metered#
   @returns {Point} The position of this object
   ###          
   meter: (options={}) ->
