@@ -28,4 +28,5 @@ Engine.Levels = (I, self) ->
     #TODO Handle integer levels?
     loadLevel level
 
-  reloadLevel: () 
+  reloadLevel: ->
+    loadLevel 
