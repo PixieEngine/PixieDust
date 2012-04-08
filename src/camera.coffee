@@ -23,6 +23,7 @@ Camera = (I={}) ->
   transformFilters = []
 
   focusOn = (object) ->
+    
     objectCenter = object.center()
 
     centerOffset = objectCenter.subtract(I.screen.width / 2, I.screen.height / 2)
