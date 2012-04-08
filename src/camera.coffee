@@ -35,6 +35,7 @@ Camera = (I={}) ->
       width: 2 * deadzone.x
       height: 2 * deadzone.y
 
+      
     I.scroll = Point(
       I.scroll.x.clamp(centerRect.left, centerRect.right)
       I.scroll.y.clamp(centerRect.top, centerRect.bottom)
