@@ -108,7 +108,7 @@ Metered = (I={}, self) ->
 
   player.meter
     showName: true
-    name: "health"
+    name: 'health'
     position: 
       x: 5
       y: 5
