@@ -109,6 +109,7 @@ Metered = (I={}, self) ->
   player.meter
     borderColor: 'brown'
     color: 'pink'
+    font"
     name: 'health'
     position: 
       x: 5
