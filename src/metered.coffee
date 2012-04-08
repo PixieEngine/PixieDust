@@ -106,7 +106,7 @@ Metered = (I={}, self) ->
 
   player.include Metered      
 
-  player.meter 'health',
+  player.meter
     showName: true
     name: "health"
     position: 
