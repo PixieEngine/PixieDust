@@ -107,6 +107,8 @@ Camera = (I={}) ->
       objects = objectFilters.pipeline(objects)
 
       objects.invoke "trigger", "overlay", canvas
+      
+  self.include Mova
 
   self.include(Camera.ZSort)
   self.include(Camera.Zoom)
