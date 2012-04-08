@@ -10,9 +10,6 @@ player = GameObject
 enemy = GameObject
   health: 500
 
-
-  
-
 player.position()
 # => Uncaught TypeError: Object has no method 'position'
 
