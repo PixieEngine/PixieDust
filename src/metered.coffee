@@ -14,7 +14,7 @@ enemy = GameObject
 
 enemy.include Metered
 
-someOt
+someOtherObject
 
 player.meter 'health'
 # => Sets up a health meter that will be drawn during the player overlay event
