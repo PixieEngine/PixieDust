@@ -35,10 +35,6 @@ Camera = (I={}) ->
       width: 2 * deadzone.x
       height: 2 * deadzone.y
 
-    if objectCenter.x > centerRect.right
-      
-    else if objectCenter.x < centerRect.left
-        
       
     I.scroll = Point(
       I.scroll.x.clamp(centerRect.left, centerRect.right)
