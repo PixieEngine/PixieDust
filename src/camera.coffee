@@ -132,6 +132,3 @@ Camera = (I={}) ->
   self.include(Camera.Fade)
 
   return self
-
-
-Object.extend(Camera, oldCamera)
