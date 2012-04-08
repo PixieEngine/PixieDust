@@ -99,7 +99,7 @@ Metered = (I={}, self) ->
   Configures a meter to be drawn each overlay event.
 
   <code><pre>
-  player = GameObj
+  player = GameObject
     x: 50
     y: 40
 
