@@ -123,7 +123,7 @@ Metered = (I={}, self) ->
   @param {String} color Color of the meter's inner rectangle
   @param {String} nameColor Color of the property name displayed above the meter
   @param {String} font Size and style of the meter's font
-    height - Height of the meter
+  @param {String}height - Height of the meter
     position - An x, y object representing the position of the meter
     radius - Border radius of the meter
     showName - Boolean to toggle whether or not to show the attribute associated with the meter
