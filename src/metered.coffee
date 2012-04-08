@@ -26,7 +26,7 @@ enemy.meter 'health'
 # Since maxHealth wasn't provided, it is set to the value of I.health (500)
 
 someOtherObject.meter 'turbo'
-# => Sets up a turbo meter that will be drawn during the enemy overlay event. 
+# => Sets up a turbo meter that will be drawn during the someOtherObject overlay event. 
 # Since maxHealth wasn't provided, it is set to the value of I.health (500)
 
 
