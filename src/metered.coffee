@@ -31,7 +31,7 @@ someOtherObject.meter 'turbo'
 
 </pre></code>
 
-Bounded module
+M module
 @name Bounded
 @module
 @constructor
