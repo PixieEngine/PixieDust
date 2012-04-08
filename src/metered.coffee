@@ -1,6 +1,6 @@
 ###*
 The Metered module provides a simple drop-in
-
+meter ui
 
 <code><pre>
 player = Core
