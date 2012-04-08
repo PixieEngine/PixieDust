@@ -6,6 +6,6 @@ test "should exist", ->
   
   ok obj.meter
   
-test "should set max<Attribute> if one does not exist", ->
+test "should set max<Attribute> if one doesn't exist", ->
 
 module()
