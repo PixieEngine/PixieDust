@@ -15,7 +15,7 @@ enemy = GameObject
 enemy.include Metered
 
 player.meter 'health'
-# => Sets up a health mete
+# => Sets up a health meter that wi
 
 player.include(Bounded)
 
