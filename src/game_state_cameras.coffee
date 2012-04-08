@@ -2,7 +2,7 @@ GameState.Cameras = (I, self) ->
   cameras = [Camera()]
 
   self.bind 'afterUpdate', ->
-    self.cameras().invoke 'trigger', 
+    self.cameras().invoke 'trigger', 'afterUpdate'
       camera.trigger('afterUpdate')
 
   self.bind 'draw', (canvas) ->
