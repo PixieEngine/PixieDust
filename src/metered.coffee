@@ -96,7 +96,7 @@ Metered = (I={}, self) ->
           width: 1.5  
 
   ###*
-  Configures a meter to be 
+  Configures a meter to be drawn 
   The position of this game object. By default it is the top left point.
   Redefining the center method will change the relative position.
 
