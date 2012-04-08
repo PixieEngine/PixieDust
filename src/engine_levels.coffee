@@ -29,4 +29,4 @@ Engine.Levels = (I, self) ->
     loadLevel level
 
   reloadLevel: ->
-    loadLevel 
+    loadLevel currentLev
