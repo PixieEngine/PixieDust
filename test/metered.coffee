@@ -3,7 +3,7 @@ module 'Metered'
 test "should exist", ->
   obj = GameObject()
   
-  obj.include(Metered)
+  obj.include Metered
   
   ok obj.meter
   
