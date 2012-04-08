@@ -37,7 +37,7 @@ Camera = (I={}) ->
 
     if objectCenter.x > centerRect.right
       
-    else if object
+    else if objectCenter.x 
       
     I.scroll = Point(
       I.scroll.x.clamp(centerRect.left, centerRect.right)
