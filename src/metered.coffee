@@ -1,7 +1,7 @@
 Metered = (I={}, self) ->
   Object.reverseMerge I,
     meters: []
-    
+
     
   self.bind 'overlay', (canvas) ->
     I.meters.each (meterData) ->
