@@ -1,4 +1,3 @@
-oldCamera = Camera
 Camera = (I={}) ->
   Object.reverseMerge I,
     cameraBounds: Rectangle # World Coordinates
