@@ -18,7 +18,7 @@ Metered = (I={}, self) ->
         width
       } = meterData
       
-      if not I[name] || not I[]
+      if not I[name] || not I["max"]
       ratio = I[name] / I["max#{name.capitalize()}"]
       
       if showName || text
