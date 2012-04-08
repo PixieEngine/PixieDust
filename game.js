@@ -1020,8 +1020,14 @@ Core = function(I) {
     @methodOf Core#
     @param {Module} Module the module to include. A module is a constructor that takes two parameters, I and self, and returns an object containing the public methods to extend the including object with.
     */
-    include: function(Module) {
-      return self.extend(Module(I, self));
+    include: function() {
+      var Module, modules, _i, _len;
+      modules = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
+      for (_i = 0, _len = modules.length; _i < _len; _i++) {
+        Module = modules[_i];
+        self.extend(Module(I, self));
+      }
+      return self;
     }
   };
 };
@@ -2165,6 +2171,24 @@ var __slice = Array.prototype.slice;
   };
   Point.prototype = {
     /**
+    Constrain the magnitude of a vector.
+    
+    @name clamp
+    @methodOf Point#
+    @param {Number} n Maximum value for magnitude.
+    @returns {Point} A new point whose magnitude has been clamped to the given value.
+    */
+    clamp: function(n) {
+      return this.copy().clamp$(n);
+    },
+    clamp$: function(n) {
+      if (this.magnitude() > n) {
+        return this.norm$(n);
+      } else {
+        return this;
+      }
+    },
+    /**
     Creates a copy of this point.
     
     @name copy
@@ -2730,6 +2754,14 @@ var __slice = Array.prototype.slice;
     return points.inject(Point(0, 0), function(sumPoint, point) {
       return sumPoint.add(point);
     }).scale(1 / points.length);
+  };
+  /**
+  Generate a random point on the unit circle.
+  
+  @returns {Point} A random point on the unit circle.
+  */
+  Point.random = function() {
+    return Point.fromAngle(Random.angle());
   };
   /**
   @name ZERO
@@ -4819,7 +4851,9 @@ Camera = function(I) {
       width: 2 * deadzone.x,
       height: 2 * deadzone.y
     });
-    return I.scroll = Point(I.scroll.x.clamp(centerRect.left, centerRect.right).clamp(I.cameraBounds.left, I.cameraBounds.right - I.screen.width), I.scroll.y.clamp(centerRect.top, centerRect.bottom).clamp(I.cameraBounds.top, I.cameraBounds.bottom - I.screen.height));
+    I.scroll = Point(I.scroll.x.clamp(centerRect.left, centerRect.right), I.scroll.y.clamp(centerRect.top, centerRect.bottom));
+    I.scroll.x = I.scroll.x.clamp(I.cameraBounds.left, I.cameraBounds.right - I.screen.width);
+    return I.scroll.y = I.scroll.y.clamp(I.cameraBounds.top, I.cameraBounds.bottom - I.screen.height);
   };
   followTypes = {
     centered: function(object) {
@@ -7240,8 +7274,10 @@ var Emitter;
 
 Emitter = function(I) {
   var self;
+  if (I == null) I = {};
   self = GameObject(I);
-  return self.include(Emitterable);
+  self.include(Emitterable);
+  return self;
 };
 ;
 var Emitterable;
@@ -7974,6 +8010,56 @@ Engine.GameState = function(I, self) {
     },
     reload: function() {
       return I.currentState.reload();
+    }
+  };
+};
+;
+/**
+The <code>Joysticks</code> module gives the engine access to joysticks.
+
+<code><pre>
+# First you need to add the joysticks module to the engine
+window.engine = Engine
+  ...
+  includedModules: ["Joysticks"]
+# Then you need to get a controller reference
+# id = 0 for player 1, etc.
+controller = engine.controller(id)
+
+# Point indicating direction primary axis is held
+direction = controller.position()
+
+# Check if buttons are held
+controller.actionDown("A")
+controller.actionDown("B")
+controller.actionDown("X")
+controller.actionDown("Y")
+</pre></code>
+
+@name Joysticks
+@fieldOf Engine
+@module
+
+@param {Object} I Instance variables
+@param {Object} self Reference to the engine
+*/
+Engine.Joysticks = function(I, self) {
+  Joysticks.init();
+  self.bind("update", function() {
+    Joysticks.init();
+    return Joysticks.update();
+  });
+  return {
+    /**
+    Get a controller for a given joystick id.
+    
+    @name controller
+    @methodOf Engine.Joysticks#
+    
+    @param {Number} i The joystick id to get the controller of.
+    */
+    controller: function(i) {
+      return Joysticks.getController(i);
     }
   };
 };
