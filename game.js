@@ -9044,23 +9044,23 @@ Metered = function(I, self) {
       text: 'Boss Health'
       width: 150
     
-    # => 
+    # => Sets up a health meter, using all the configuration options
     </pre></code>
     
     @name meter
     @methodOf Metered#
     @param {Object} options The meter configuration options
-      borderColor - Color of the meter's border
-      borderWidth - Width of the meter's border
-      color - Color of the meter's inner rectangle
-      nameColor - Color of the property name displayed above the meter
-      font - Size and style of the meter's font
-      height - Height of the meter
-      position - An x, y object representing the position of the meter
-      radius - Border radius of the meter
-      showName - Boolean to toggle whether or not to show the attribute associated with the meter
-      text - A String to display over the meter. Overrides default name attribute
-      width - How wide the meter is
+    @param {String} borderColor Color of the meter's border
+    @param {Number} borderWidth Width of the meter's border
+    @param {String} color Color of the meter's inner rectangle
+    @param {String} nameColor Color of the property name displayed above the meter
+    @param {String} font Size and style of the meter's font
+    @param {Number} height Height of the meter
+    @param {Object} position An x, y object representing the position of the meter
+    @param {Number} radius Border radius of the meter
+    @param {Boolean} showName Boolean to toggle whether or not to show the attribute associated with the meter
+    @param {String} text A String to display over the meter. Overrides default name attribute
+    @param {Number} width How wide the meter is
     */
     meter: function(options) {
       var name;
