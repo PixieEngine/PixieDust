@@ -4,6 +4,6 @@ test "should exist", ->
   obj = GameObject()
   obj.include(Metered)
   
-  ok obj.
+  ok obj.addMet
 
 module()
