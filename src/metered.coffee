@@ -19,9 +19,9 @@ Metered = (I={}, self) ->
       } = meterData
       
       if not I[name] || not I["max#{name.capitalize()}"]
-        warn ""
+        warn "The Mi"
       else
-      ratio = I[name] / I["max#{name.capitalize()}"]
+        ratio = I[name] / I["max#{name.capitalize()}"]
       
       if showName || text
         canvas.font(font)    
