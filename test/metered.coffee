@@ -25,5 +25,7 @@ test "should set both <attribute> and max<attribute> if they aren't present in t
   
   obj.meter
     name: 'turbo'
+    
+  equals obj.I.turbo, 100
   
 module()
