@@ -38,7 +38,7 @@ Camera = (I={}) ->
     if objectCenter.x > centerRect.right
       I.scroll.x = I.scroll.x.approach(centerRect.right, I.maxVelocity.x)
     else if objectCenter.x < centerRect.left
-      I.scroll.x = I.scroll.x.approach(centerRect.right, I.maxVelocity.x)
+      I.scroll.x = I.scroll.x.approach(centerRect.left, I.maxVelocity.x)
     
     I.scroll = Point(
       I.scroll.x.clamp(centerRect.left, centerRect.right)
