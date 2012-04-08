@@ -17,7 +17,7 @@ enemy.include Metered
 player.meter 'health'
 # => Sets up a health meter that will be drawn during the player overlay event
 
-player.include(Bounded)
+
 
 # now player has all the methods provided by this module
 player.position()
