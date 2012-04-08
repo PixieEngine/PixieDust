@@ -13,7 +13,7 @@ Engine.Levels = (I, self) ->
       levelState = LevelState
         level: level
 
-      I
+      I.currentLevelName = level
       engine.setState levelState
 
   # We must always return self as the last line
