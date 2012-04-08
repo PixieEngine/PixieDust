@@ -8,5 +8,6 @@ test "should exist", ->
   
 test "should set max<Attribute> if one doesn't exist", ->
   obj = GameObject()
+  
 
 module()
