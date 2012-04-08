@@ -112,7 +112,7 @@ Metered = (I={}, self) ->
     text: 'Boss Health'
     width: 150
 
-  # => Sets up a healt
+  # => Sets up a health meter, u
   </pre></code>
 
   @name meter
