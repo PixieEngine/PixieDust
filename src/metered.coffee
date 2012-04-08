@@ -115,6 +115,7 @@ Metered = (I={}, self) ->
     position: 
       x: 5
       y: 5
+    rad
     showName: true
 
   # => 
