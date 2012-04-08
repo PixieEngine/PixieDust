@@ -109,11 +109,11 @@ Metered = (I={}, self) ->
   player.meter
     borderColor: 'brown'
     color: 'pink'
-    showName: true
     name: 'health'
     position: 
       x: 5
       y: 5
+    showName: true
 
   # => 
   </pre></code>
