@@ -39,11 +39,11 @@ Camera = (I={}) ->
       I.scroll.x = I.scroll.x.approach(centerRect.right, I.maxVelocity.x)
     else if objectCenter.x < centerRect.left
       I.scroll.x = I.scroll.x.approach(centerRect.left, I.maxVelocity.x)
-
-    if objectCenter.y > centerRect.bottom
-      I.scroll.y = I.scroll.y.approach(centerRect.bottom, I.maxVelocity.y)
-    else if objectCenter.y < centerRect.top
-      I.scroll.y = I.scroll.y.approach(centerRect.top, I.maxVelocity.y)
+    
+    if objectCenter.x > centerRect.right
+      I.scroll.x = I.scroll.x.approach(centerRect.right, I.maxVelocity.x)
+    else if objectCenter.x < centerRect.left
+      I.scroll.x = I.scroll.x.approach(centerRect.left, I.maxVelocity.x)
 
     I.scroll.x = I.scroll.x.clamp(I.cameraBounds.left, I.cameraBounds.right - I.screen.width)
     I.scroll.y = I.scroll.y.clamp(I.cameraBounds.top, I.cameraBounds.bottom - I.screen.height)
