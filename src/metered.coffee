@@ -32,7 +32,7 @@ someOtherObject.meter 'turbo'
 </pre></code>
 
 Metered module
-@name Mo
+@name Module
 @module
 @constructor
 @param {Object} I Instance variables
