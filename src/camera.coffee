@@ -41,6 +41,7 @@ Camera = (I={}) ->
       
     
     
+    
     I.scroll = Point(
       I.scroll.x.clamp(centerRect.left, centerRect.right)
       I.scroll.y.clamp(centerRect.top, centerRect.bottom)
