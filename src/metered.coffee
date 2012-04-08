@@ -3,13 +3,8 @@ The Metered module provides a simple drop-in
 meter ui to track arbitrary numeric attributes.
 
 <code><pre>
-player = Core
-  x: 10
-  y: 50
-  width: 20
-  height: 20
-  other: "stuff"
-  more: "properties"
+player = Ca
+  
 
 player.position()
 # => Uncaught TypeError: Object has no method 'position'
