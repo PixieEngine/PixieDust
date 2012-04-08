@@ -104,6 +104,7 @@ Metered = (I={}, self) ->
   player.include Metered      
 
   player.meter 'health',
+    
 
   self.addMeter
     showName: true
