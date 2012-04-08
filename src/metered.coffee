@@ -7,7 +7,7 @@ player = GameObject
   health: 100
   maxHealth: 100
 
-player.include 
+player.include Metered
 
 enemy = GameObject
   health: 500
