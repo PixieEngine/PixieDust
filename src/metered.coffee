@@ -128,7 +128,7 @@ Metered = (I={}, self) ->
   @param {Number} radius Border radius of the meter
   @param {Boolean} showName Boolean to toggle whether or not to show the attribute associated with the meter
   @param {String} text A String to display over the meter. Overrides default name attribute
-    width - How wide the meter is
+  width - How wide the meter is
   ###          
   meter: (options={}) ->
     Object.reverseMerge options,
