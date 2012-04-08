@@ -15,6 +15,6 @@ test "should set max<Attribute> if one doesn't exist", ->
 
   obj.meter 'health'
   
-  equals obj.
+  equals obj.I.maxHealth, 15
   
 module()
