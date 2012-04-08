@@ -146,6 +146,13 @@ Metered = (I={}, self) ->
       text: null
       width: 100 
       
-
+      if not I[name]
+        I[name] = 100
+      
+      if not I["max#{name.capitalize()}"]
+        if I[name]
+          I["max#{name.capitalize()}"] = I[name]
+        else
+          I["max#{name.capitalize()}"] = 100
     
     I.meters.push options
