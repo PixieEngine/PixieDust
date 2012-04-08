@@ -130,7 +130,7 @@ Metered = (I={}, self) ->
     borderColor - Color of the meter's border
     borderWidth - Width of the meter's border
     color - Color of the meter's inner rectangle
-    nameColor - 
+    nameColor - Color of the property name
   ###          
   meter: (options={}) ->
     Object.reverseMerge options,
