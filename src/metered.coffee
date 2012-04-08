@@ -25,7 +25,8 @@ enemy.meter 'health'
 # => Sets up a health meter that will be drawn during the enemy overlay event. 
 # Since maxHealth wasn't provided, it is set to the value of I.health (500)
 
-someOtherObject.meter 'health'
+someOtherObject.meter 'he'
+
 
 # now player has all the methods provided by this module
 player.position()
