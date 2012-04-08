@@ -118,8 +118,8 @@ Metered = (I={}, self) ->
   @name meter
   @methodOf Metered#
   @param {Object} options The meter configuration options
-  @param {String} borderColor - Color of the meter's border
-  @param {Number} borderWidth - Width of the meter's border
+  @param {String} borderColor Color of the meter's border
+  @param {Number} borderWidth Width of the meter's border
     color - Color of the meter's inner rectangle
     nameColor - Color of the property name displayed above the meter
     font - Size and style of the meter's font
