@@ -8974,7 +8974,7 @@ someOtherObject.meter
 </pre></code>
 
 Metered module
-@name Module
+@name Metered
 @module
 @constructor
 @param {Object} I Instance variables
