@@ -4834,26 +4834,37 @@ Camera = function(I) {
     deadzone: Point(0, 0),
     zoom: 1,
     transform: Matrix(),
-    scroll: Point(0, 0)
+    x: App.width / 2,
+    y: App.height / 2,
+    velocity: Point.ZERO,
+    maxSpeed: 25,
+    t90: 2
   });
   currentType = "centered";
   currentObject = null;
   objectFilters = [];
   transformFilters = [];
   focusOn = function(object) {
-    var centerOffset, centerRect, deadzone, objectCenter;
-    objectCenter = object.center();
-    centerOffset = objectCenter.subtract(I.screen.width / 2, I.screen.height / 2);
-    deadzone = I.deadzone.scale(1 / (2 * I.zoom));
-    centerRect = Rectangle({
-      x: centerOffset.x - deadzone.x,
-      y: centerOffset.y - deadzone.y,
-      width: 2 * deadzone.x,
-      height: 2 * deadzone.y
-    });
-    I.scroll = Point(I.scroll.x.clamp(centerRect.left, centerRect.right), I.scroll.y.clamp(centerRect.top, centerRect.bottom));
-    I.scroll.x = I.scroll.x.clamp(I.cameraBounds.left, I.cameraBounds.right - I.screen.width);
-    return I.scroll.y = I.scroll.y.clamp(I.cameraBounds.top, I.cameraBounds.bottom - I.screen.height);
+    var c, dampingFactor, delta, dt, force, objectCenter, objectVelocity, target;
+    dt = 1 / 30;
+    dampingFactor = 2;
+    c = dt * 3.75 / I.t90;
+    if (c >= 1) {
+      self.position(target);
+      return I.velocity = Point.ZERO;
+    } else {
+      objectCenter = object.center();
+      objectVelocity = object.I.velocity;
+      if (objectVelocity) {
+        target = objectCenter.add(objectVelocity.scale(5));
+      } else {
+        target = objectCenter;
+      }
+      delta = target.subtract(self.position());
+      force = delta.subtract(I.velocity.scale(dampingFactor));
+      self.changePosition(I.velocity.scale(c).clamp(I.maxSpeed));
+      return I.velocity = I.velocity.add(force.scale(c));
+    }
   };
   followTypes = {
     centered: function(object) {
@@ -4878,8 +4889,7 @@ Camera = function(I) {
     follow: function(object, type) {
       if (type == null) type = "centered";
       currentObject = object;
-      currentType = type;
-      return I.scroll = object.center();
+      return currentType = type;
     },
     objectFilterChain: function(fn) {
       return objectFilters.push(fn);
@@ -4888,11 +4898,13 @@ Camera = function(I) {
       return transformFilters.push(fn);
     }
   });
-  self.attrAccessor("transform", "scroll");
   self.include(Bindable);
+  self.attrAccessor("transform");
   self.bind("afterUpdate", function() {
     if (currentObject) followTypes[currentType](currentObject);
-    return I.transform = Matrix.translate(-I.scroll.x, -I.scroll.y);
+    I.x = I.x.clamp(I.cameraBounds.left + I.screen.width / 2, I.cameraBounds.right - I.screen.width / 2);
+    I.y = I.y.clamp(I.cameraBounds.top + I.screen.height / 2, I.cameraBounds.bottom - I.screen.height / 2);
+    return I.transform = Matrix.translate(-I.x, -I.y);
   });
   self.bind("draw", function(canvas, objects) {
     return canvas.withTransform(Matrix.translate(I.screen.x, I.screen.y), function(canvas) {
@@ -4900,9 +4912,11 @@ Camera = function(I) {
       canvas.clip(0, 0, I.screen.width, I.screen.height);
       objects = objectFilters.pipeline(objects);
       transform = transformFilters.pipeline(self.transform().copy());
-      canvas.withTransform(transform, function(canvas) {
-        self.trigger("beforeDraw", canvas);
-        return objects.invoke("draw", canvas);
+      canvas.withTransform(Matrix.translation(I.screen.width / 2, I.screen.height / 2), function(canvas) {
+        return canvas.withTransform(transform, function(canvas) {
+          self.trigger("beforeDraw", canvas);
+          return objects.invoke("draw", canvas);
+        });
       });
       return self.trigger('flash', canvas);
     });
@@ -4914,6 +4928,7 @@ Camera = function(I) {
       return objects.invoke("trigger", "overlay", canvas);
     });
   });
+  self.include(Bounded);
   self.include(Camera.ZSort);
   self.include(Camera.Zoom);
   self.include(Camera.Rotate);
@@ -5082,7 +5097,7 @@ Camera.Rotate = function(I, self) {
     rotation: 0
   });
   self.transformFilterChain(function(transform) {
-    return transform.rotate(I.rotation);
+    return transform.rotate(I.rotation, self.position());
   });
   self.attrAccessor("rotation");
   return {
@@ -5134,7 +5149,7 @@ Camera.Zoom = function(I, self) {
     zoom: 1
   });
   self.transformFilterChain(function(transform) {
-    return transform.scale(I.zoom, I.zoom);
+    return transform.scale(I.zoom, I.zoom, self.position());
   });
   clampZoom = function(value) {
     return value.clamp(I.minZoom, I.maxZoom);
