@@ -40,7 +40,7 @@ Camera = (I={}) ->
       I.scroll.y.clamp(centerRect.top, centerRect.bottom).clamp(I.cameraBounds.top, I.cameraBounds.bottom - I.screen.height)
     )
     
-    I.scroll
+    I.scroll.x = I.scro
 
   followTypes =
     centered: (object) ->              
