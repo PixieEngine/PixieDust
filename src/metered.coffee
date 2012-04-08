@@ -1,5 +1,5 @@
 ###*
-The Metered module prov
+The Metered module provides simple
 
 <code><pre>
 player = Core
