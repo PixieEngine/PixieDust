@@ -48,4 +48,4 @@
     ###
     controller: (i) ->
       Joysticks.getController(i)
-)()
+
