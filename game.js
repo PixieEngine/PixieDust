@@ -8851,10 +8851,11 @@ GameState = function(I) {
 GameState.Cameras = function(I, self) {
   var cameras;
   cameras = [Camera()];
+  self.bind('update', function() {
+    return self.cameras().invoke('trigger', 'update');
+  });
   self.bind('afterUpdate', function() {
-    return self.cameras().each(function(camera) {
-      return camera.trigger('afterUpdate');
-    });
+    return self.cameras().invoke('trigger', 'afterUpdate');
   });
   self.bind('draw', function(canvas) {
     return self.cameras().invoke('trigger', 'draw', canvas, self.objects());
