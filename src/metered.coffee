@@ -27,7 +27,7 @@ enemy.meter 'health'
 
 someOtherObject.meter 'turbo'
 # => Sets up a turbo meter that will be drawn during the someOtherObject overlay event. 
-# Since maxHealt wasn't provided, it is set to the value of I.health (500)
+# Since neither maxTurbo wasn't provided, it is set to the value of I.health (500)
 
 
 # now player has all the methods provided by this module
