@@ -100,8 +100,6 @@ Metered = (I={}, self) ->
 
   <code><pre>
   player = GameObject
-    x: 50
-    y: 40
 
   player.include(Bounded)      
 
