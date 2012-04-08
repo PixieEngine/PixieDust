@@ -50,7 +50,7 @@ Metered = (I={}, self) ->
     I.meters.each (meterData) ->
       {
         borderColor,
-        bord
+        borderWidth,
         color,
         font, 
         height, 
