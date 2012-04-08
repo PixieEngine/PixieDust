@@ -7999,7 +7999,8 @@ Engine.Levels = function(I, self) {
   var loadLevel;
   Object.reverseMerge(I, {
     levels: [],
-    currentLevel: -1
+    currentLevel: -1,
+    currentLevelName: null
   });
   I.transitioning = false;
   loadLevel = function(level) {
@@ -8009,6 +8010,7 @@ Engine.Levels = function(I, self) {
       levelState = LevelState({
         level: level
       });
+      I.currentLevelName = level;
       return engine.setState(levelState);
     }
   };
@@ -8026,6 +8028,9 @@ Engine.Levels = function(I, self) {
     },
     goToLevel: function(level) {
       return loadLevel(level);
+    },
+    reloadLevel: function() {
+      return loadLevel(I.currentLevelName);
     }
   };
 };
@@ -8930,6 +8935,72 @@ LevelState = function(I) {
     });
   });
   return self;
+};
+;
+var Metered;
+
+Metered = function(I, self) {
+  if (I == null) I = {};
+  Object.reverseMerge(I, {
+    meters: []
+  });
+  self.bind('overlay', function(canvas) {
+    return I.meters.each(function(meterData) {
+      var borderColor, color, font, height, name, nameColor, radius, ratio, showName, text, width, x, y, _ref;
+      borderColor = meterData.borderColor, color = meterData.color, font = meterData.font, height = meterData.height, nameColor = meterData.nameColor, name = meterData.name, (_ref = meterData.position, x = _ref.x, y = _ref.y), radius = meterData.radius, showName = meterData.showName, text = meterData.text, width = meterData.width;
+      if (!I[name]) I[name] = 100;
+      if (!I["max" + (name.capitalize())]) I["max" + (name.capitalize())] = 100;
+      ratio = I[name] / I["max" + (name.capitalize())];
+      if (showName || text) {
+        canvas.font(font);
+        canvas.drawText({
+          color: nameColor,
+          x: x,
+          y: y + 10,
+          text: text || name.capitalize()
+        });
+      }
+      canvas.drawRect({
+        color: color,
+        x: x,
+        y: y + 15,
+        width: width * ratio,
+        height: height
+      });
+      return canvas.drawRoundRect({
+        x: x,
+        y: y + 15,
+        width: width,
+        height: height,
+        radius: radius,
+        stroke: {
+          color: borderColor,
+          width: 1.5
+        }
+      });
+    });
+  });
+  return {
+    addMeter: function(options) {
+      if (options == null) options = {};
+      Object.reverseMerge(options, {
+        borderColor: 'white',
+        showName: false,
+        color: 'green',
+        nameColor: 'white',
+        font: '14px Helvetica',
+        height: 10,
+        position: {
+          x: 0,
+          y: 0
+        },
+        radius: 2,
+        text: null,
+        width: 100
+      });
+      return I.meters.push(options);
+    }
+  };
 };
 ;
 /**
