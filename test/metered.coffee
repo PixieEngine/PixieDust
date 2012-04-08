@@ -1,6 +1,6 @@
 module 'Metered'
 
-test 'should exist', ->
+test "should exist", ->
   obj = GameObject()
   obj.include(Metered)
   
