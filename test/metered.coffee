@@ -1,4 +1,4 @@
-module "Metered'
+module 'Metered'
 
 test 'should exist', ->
   obj = GameObject()
