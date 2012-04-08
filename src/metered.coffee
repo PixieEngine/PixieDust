@@ -101,7 +101,7 @@ Metered = (I={}, self) ->
   <code><pre>
   player = GameObject
 
-  player.include(Me)      
+  player.include Metered      
 
   player.position()
   # => {x: 50, y: 40}
