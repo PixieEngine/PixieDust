@@ -133,6 +133,7 @@ Metered = (I={}, self) ->
         x: 0
         y: 0
       radius: 2
+      showName: false
       text: null
       width: 100 
     
