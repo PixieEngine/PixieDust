@@ -1,4 +1,4 @@
-( ($) ->
+
   ###*
   The <code>Joysticks</code> module gives the engine access to joysticks.
 
