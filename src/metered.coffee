@@ -129,7 +129,8 @@ Metered = (I={}, self) ->
   @param {Object} options The meter configuration options
     borderColor - Color of the meter's border
     borderWidth - Width of the meter's border
-    color - Color of
+    color - Color of the meter's inner rectangle
+    name
   ###          
   meter: (options={}) ->
     Object.reverseMerge options,
