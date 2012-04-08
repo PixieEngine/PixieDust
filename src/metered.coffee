@@ -145,5 +145,7 @@ Metered = (I={}, self) ->
       showName: false
       text: null
       width: 100 
+      
+
     
     I.meters.push options
