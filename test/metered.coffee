@@ -6,6 +6,6 @@ test 'should exist', ->
   
   ok obj.meter
   
-test '', ->
+test 'should set M', ->
 
 module()
