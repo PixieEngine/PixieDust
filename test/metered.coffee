@@ -19,7 +19,7 @@ test "should set max<Attribute> if it isn't present in the including object", ->
   equals obj.I.maxHealth, 150
 
 test "should set both <attribute> and max<attribute> if they aren't present in the including object", ->
-  obj = GameObject
+  obj = GameObject()
   
   
 module()
