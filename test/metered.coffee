@@ -13,7 +13,8 @@ test "should set max<Attribute> if one doesn't exist", ->
   
   obj.include Metered
 
-  obj.meter 'health'
+  obj.meter 
+    name: 'health'
   
   equals obj.I.maxHealth, 150
   
