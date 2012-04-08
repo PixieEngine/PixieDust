@@ -23,7 +23,7 @@ player.meter
 # => Sets up a health meter that will be drawn during the player overlay event
 
 enemy.meter
-'health'
+  na'health'
 # => Sets up a health meter that will be drawn during the enemy overlay event. 
 # Since maxHealth wasn't provided, it is set to the value of I.health (500)
 
