@@ -10,7 +10,7 @@ player = GameObject
 enemy = GameObject
   health: 500
 
-player.
+player.meter()
 # => Uncaught TypeError: Object has no method 'position'
 
 player.include(Bounded)
