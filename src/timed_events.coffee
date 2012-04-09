@@ -1,2 +1,3 @@
 TimedEvents = (I={}) ->
-  
+  every: (n) ->
+    
