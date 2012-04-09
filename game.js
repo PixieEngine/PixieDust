@@ -1500,6 +1500,27 @@ Number.prototype.round = function() {
 };
 
 /**
+Get a bunch of points equally spaced around the unit circle.
+
+<code><pre>
+4.circularPoints (p) ->
+
+# p gets Point(1, 0), Point(0, 1), Point(-1, 0), Point(0, -1)
+</pre></code>
+
+@name circularPoint
+@methodOf Number#
+*/
+
+Number.prototype.circularPoints = function(block) {
+  var n;
+  n = this;
+  return n.times(function(i) {
+    return block(Point.fromAngle((i / n).turns), i);
+  });
+};
+
+/**
 Returns a number whose value is limited to the given range.
 
 <code><pre>
@@ -2818,6 +2839,16 @@ var __slice = Array.prototype.slice;
     */
     angle: function() {
       return rand() * Math.TAU;
+    },
+    /**
+    Returns a random angle between the given angles.
+    
+    @name angleBetween
+    @methodOf Random
+    @returns {Number} A random angle between the angles given.
+    */
+    angleBetween: function(min, max) {
+      return rand() * (max - min) + min;
     },
     /**
     Returns a random color.
@@ -8738,7 +8769,7 @@ GameObject = function(I) {
       return I.active = false;
     }
   });
-  defaultModules = [Bindable, Bounded, Cooldown, Drawable, Durable];
+  defaultModules = [Bindable, Bounded, Cooldown, Drawable, Durable, Metered, TimedEvents];
   modules = defaultModules.concat(I.includedModules.invoke('constantize'));
   modules = modules.without(I.excludedModules.invoke('constantize'));
   modules.each(function(Module) {
@@ -9636,6 +9667,17 @@ TextScreen = function(I) {
   };
   return (typeof exports !== "undefined" && exports !== null ? exports : this)["Tilemap"] = Tilemap;
 })();
+;
+var TimedEvents;
+
+TimedEvents = function(I) {
+  if (I == null) I = {};
+  return {
+    every: function(n, fn) {
+      if (I.age.mod(n) === 0) return fn();
+    }
+  };
+};
 ;
 var TitleScreen;
 
