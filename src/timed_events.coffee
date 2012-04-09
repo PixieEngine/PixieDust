@@ -1,4 +1,4 @@
 TimedEvents = (I={}) ->
-  every: (n) ->
+  every: (n, fn) ->
     if I.age.mod(n) is 0
       doSomething()
