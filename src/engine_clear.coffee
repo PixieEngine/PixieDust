@@ -15,6 +15,8 @@ Engine.Clear = (I, self) ->
     clear: false
 
   self.attrAccessor "clear", "backgroundColor"
+  
+  
 
   self.bind "beforeDraw", ->
     if I.clear
