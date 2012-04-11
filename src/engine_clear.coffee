@@ -24,7 +24,7 @@ Engine.Clear = (I, self) ->
     if I.clear
       I.canvas.clear()
     else if I.background
-      I.background.fill()
+      I.background.fill(canvas, ), 
     else if I.backgroundColor
       I.canvas.fill(I.backgroundColor)
 
