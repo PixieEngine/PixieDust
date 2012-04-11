@@ -18,7 +18,7 @@ Engine.Clear = (I, self) ->
   
   self.bind "init", ->
     if I.background?.isString?()
-      I.background = 
+      I.background = Sprite.loadByName I.background
 
   self.bind "beforeDraw", ->
     if I.clear
