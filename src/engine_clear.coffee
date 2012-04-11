@@ -30,4 +30,3 @@ Engine.Clear = (I, self) ->
 
   # No public methods
   return {}
-
