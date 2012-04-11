@@ -1,6 +1,6 @@
 ###*
 This module clears or fills the canvas before drawing the scene.
-It 
+It can draw colors or background images.
 
 @name Background
 @fieldOf Engine
