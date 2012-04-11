@@ -15,7 +15,7 @@ Engine.Clear = (I, self) ->
     clear: false
 
   self.attrAccessor "clear", "backgroundColor"
-  
+
   self.bind "init", ->
     if I.background?.isString?()
       I.background = Sprite.loadByName I.background
