@@ -10,6 +10,7 @@ This module clears or fills the canvas before drawing the scene.
 
 Engine.Clear = (I, self) ->
   Object.reverseMerge I,
+    background: null
     backgroundColor: "#00010D"
     clear: false
 
@@ -18,6 +19,8 @@ Engine.Clear = (I, self) ->
   self.bind "beforeDraw", ->
     if I.clear
       I.canvas.clear()
+    else if I.background
+      
     else if I.backgroundColor
       I.canvas.fill(I.backgroundColor)
 
