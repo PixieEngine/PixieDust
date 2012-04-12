@@ -7671,6 +7671,40 @@ Emitterable = function(I, self) {
 ;
 /**
 This module clears or fills the canvas before drawing the scene.
+
+@name Clear
+@fieldOf Engine
+@module
+@param {Object} I Instance variables
+@param {Object} self Reference to the engine
+*/
+Engine.Clear = function(I, self) {
+  Object.reverseMerge(I, {
+    background: null,
+    backgroundColor: "#00010D",
+    clear: false
+  });
+  self.attrAccessor("clear", "backgroundColor");
+  self.bind("init", function() {
+    var _ref;
+    if ((_ref = I.background) != null ? typeof _ref.isString === "function" ? _ref.isString() : void 0 : void 0) {
+      return I.background = Sprite.loadByName(I.background);
+    }
+  });
+  self.bind("beforeDraw", function() {
+    if (I.clear) {
+      return I.canvas.clear();
+    } else if (I.background) {
+      return I.background.fill(I.canvas, 0, 0, App.width, App.height);
+    } else if (I.backgroundColor) {
+      return I.canvas.fill(I.backgroundColor);
+    }
+  });
+  return {};
+};
+;
+/**
+This module clears or fills the canvas before drawing the scene.
 It can draw colors or background images.
 
 @name Background
