@@ -173,7 +173,7 @@ Metered = (I={}, self) ->
   player.meter 'health'
     show: false
 
-  # enables visibility for the 'health' meter
+  # enables visibility for the meter named 'health'
   player.showMeter 'health'
   </pre></code>
 
