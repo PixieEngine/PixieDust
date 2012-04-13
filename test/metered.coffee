@@ -13,8 +13,7 @@ test "should set max<Attribute> if it isn't present in the including object", ->
   
   obj.include Metered
 
-  obj.meter 
-    name: 'health'
+  obj.meter 'health'
   
   equals obj.I.maxHealth, 150
 
