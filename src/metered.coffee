@@ -169,10 +169,11 @@ Metered = (I={}, self) ->
 
   player.include Metered      
 
+  
   player.meter 'health'
     show: false
 
-  player.showMet
+  player.showMeter 'health'
   </pre></code>
 
   @name meter
