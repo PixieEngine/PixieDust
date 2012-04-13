@@ -188,7 +188,7 @@ Metered = (I={}, self) ->
     setMeter(name, true)
  
   ###*
-  Shows the named meter
+  Hides the named meter
 
   <code><pre>
   player = GameObject
