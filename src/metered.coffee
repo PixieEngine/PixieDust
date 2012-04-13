@@ -186,7 +186,27 @@ Metered = (I={}, self) ->
   ###      
   showMeter: (name) ->
     setMeter(name, true)
-    
+ 
+  ###*
+  Shows the named meter
+
+  <code><pre>
+  player = GameObject
+
+  player.include Metered      
+
+  # creates a health meter but disables visibility
+  player.meter 'health'
+    show: false
+
+  # enables visibility for the meter named 'health'
+  player.showMeter 'health'
+  </pre></code>
+
+  @name meter
+  @methodOf Metered#
+  @param {String} name The name of the meter to toggle
+  ###          
   hideMeter: (name) ->
     setMeter(name, false)  
     
