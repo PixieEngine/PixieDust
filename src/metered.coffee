@@ -161,7 +161,46 @@ Metered = (I={}, self) ->
         I["max#{name.capitalize()}"] = 100
     
     I.meters[name] = options
-    
+  ###*
+  Configures a meter to be drawn each overlay event.
+
+  <code><pre>
+  player = GameObject
+
+  player.include Metered      
+
+  player.meter 'health',
+    borderColor: 'brown'
+    color: 'pink'
+    font: '30px Comic Sans'
+    height: 20
+    position: 
+      x: 5
+      y: 5
+    radius: 3
+    showName: true
+    text: 'Boss Health'
+    width: 150
+
+  # => Sets up a health meter, using all the configuration options
+  </pre></code>
+
+  @name meter
+  @methodOf Metered#
+  @param {String} name The name of the property to meter
+  @param {Object} options The meter configuration options
+  @param {String} borderColor Color of the meter's border
+  @param {Number} borderWidth Width of the meter's border
+  @param {String} color Color of the meter's inner rectangle
+  @param {String} nameColor Color of the property name displayed above the meter
+  @param {String} font Size and style of the meter's font
+  @param {Number} height Height of the meter
+  @param {Object} position An x, y object representing the position of the meter
+  @param {Number} radius Border radius of the meter
+  @param {Boolean} showName Boolean to toggle whether or not to show the attribute associated with the meter
+  @param {String} text A String to display over the meter. Overrides default name attribute
+  @param {Number} width How wide the meter is
+  ###      
   showMeter: (name) ->
     setMeter(name, true)
     
