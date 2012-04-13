@@ -8,7 +8,7 @@ This module clears or fills the canvas before drawing the scene.
 @param {Object} self Reference to the engine
 ###
 
-Engine.Clear = (I, self) ->
+Engine.Background = (I, self) ->
   Object.reverseMerge I,
     background: null
     backgroundColor: "#00010D"
