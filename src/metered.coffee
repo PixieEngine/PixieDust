@@ -169,7 +169,7 @@ Metered = (I={}, self) ->
 
   player.include Metered      
 
-  
+  # creates a health meter but di
   player.meter 'health'
     show: false
 
