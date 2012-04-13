@@ -170,19 +170,7 @@ Metered = (I={}, self) ->
   player.include Metered      
 
   player.meter 'health',
-    borderColor: 'brown'
-    color: 'pink'
-    font: '30px Comic Sans'
-    height: 20
-    position: 
-      x: 5
-      y: 5
-    radius: 3
-    showName: true
-    text: 'Boss Health'
-    width: 150
 
-  # => Sets up a health meter, using all the configuration options
   </pre></code>
 
   @name meter
