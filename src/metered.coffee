@@ -163,6 +163,7 @@ Metered = (I={}, self) ->
         I["max#{name.capitalize()}"] = 100
     
     I.meters[name] = options
+    
   ###*
   Configures a meter to be drawn each overlay event.
 
