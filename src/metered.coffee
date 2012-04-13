@@ -165,7 +165,7 @@ Metered = (I={}, self) ->
     I.meters[name] = options
     
   ###*
-  Configures a meter to be drawn each overlay event.
+  Shows 
 
   <code><pre>
   player = GameObject
