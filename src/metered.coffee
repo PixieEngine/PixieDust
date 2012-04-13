@@ -173,6 +173,7 @@ Metered = (I={}, self) ->
   player.meter 'health'
     show: false
 
+  # enabl
   player.showMeter 'health'
   </pre></code>
 
