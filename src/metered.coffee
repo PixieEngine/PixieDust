@@ -130,6 +130,7 @@ Metered = (I={}, self) ->
   @param {Number} height Height of the meter
   @param {Object} position An x, y object representing the position of the meter
   @param {Number} radius Border radius of the meter
+  @param 
   @param {Boolean} showName Boolean to toggle whether or not to show the attribute associated with the meter
   @param {String} text A String to display over the meter. Overrides default name attribute
   @param {Number} width How wide the meter is
