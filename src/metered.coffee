@@ -187,7 +187,7 @@ Metered = (I={}, self) ->
 
   @name meter
   @methodOf Metered#
-  @param {String} name The name of the property to meter
+  @param {String} name The name of the meter to toggle
   ###      
   showMeter: (name) ->
     setMeter(name, true)
