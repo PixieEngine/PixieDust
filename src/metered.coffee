@@ -111,6 +111,7 @@ Metered = (I={}, self) ->
       x: 5
       y: 5
     radius: 3
+    show: true
     showName: true
     text: 'Boss Health'
     width: 150
