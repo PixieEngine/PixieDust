@@ -195,11 +195,11 @@ Metered = (I={}, self) ->
 
   player.include Metered      
 
-  # creates a health meter but disables visibility
+  # creates a health meter
   player.meter 'health'
 
-  # enables visibility for the meter named 'health'
-  player.showMeter 'health'
+  # disables visibility for the meter named 'health'
+  player.hideMeter 'health'
   </pre></code>
 
   @name meter
