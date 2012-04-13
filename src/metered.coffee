@@ -165,7 +165,7 @@ Metered = (I={}, self) ->
     I.meters[name] = options
     
   ###*
-  Shows 
+  Shows the meter 
 
   <code><pre>
   player = GameObject
