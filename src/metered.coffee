@@ -18,17 +18,14 @@ someOtherObject = GameObject
 
 someOtherObject.include Metered
 
-player.meter
-  name: 'health'
+player.meter 'health'
 # => Sets up a health meter that will be drawn during the player overlay event
 
-enemy.meter
-  name: 'health'
+enemy.meter 'health'
 # => Sets up a health meter that will be drawn during the enemy overlay event. 
 # Since maxHealth wasn't provided, it is set to the value of I.health (500)
 
-someOtherObject.meter
-  name: 'turbo'
+someOtherObject.meter 'turbo'
 # => Sets up a turbo meter that will be drawn during the someOtherObject overlay event. 
 # Since neither turbo maxTurbo were provided, they are both set to 100.
 
@@ -44,10 +41,15 @@ Metered module
 
 Metered = (I={}, self) ->
   Object.reverseMerge I,
-    meters: []
+    meters: {}
+    
+  setMeter = (name, value) ->
+    for meterName, meterData of I.meters
+      if meterName is name
+        meterData.show = value    
     
   self.bind 'overlay', (canvas) ->
-    I.meters.each (meterData) ->
+    for name, meterData of I.meters
       {
         borderColor,
         borderWidth,
@@ -55,13 +57,15 @@ Metered = (I={}, self) ->
         font, 
         height, 
         nameColor, 
-        name,
         position: {x, y}
         radius,
+        show,
         showName,
         text,
         width
       } = meterData
+      
+      return unless show
           
       ratio = I[name] / I["max#{name.capitalize()}"]
       
@@ -98,12 +102,11 @@ Metered = (I={}, self) ->
 
   player.include Metered      
 
-  player.meter
+  player.meter 'health',
     borderColor: 'brown'
     color: 'pink'
     font: '30px Comic Sans'
     height: 20
-    name: 'health'
     position: 
       x: 5
       y: 5
@@ -117,6 +120,7 @@ Metered = (I={}, self) ->
 
   @name meter
   @methodOf Metered#
+  @param {String} name The name of the property to meter
   @param {Object} options The meter configuration options
   @param {String} borderColor Color of the meter's border
   @param {Number} borderWidth Width of the meter's border
@@ -130,7 +134,7 @@ Metered = (I={}, self) ->
   @param {String} text A String to display over the meter. Overrides default name attribute
   @param {Number} width How wide the meter is
   ###          
-  meter: (options={}) ->
+  meter: (name, options={}) ->
     Object.reverseMerge options,
       borderColor: 'white'
       borderWidth: 1.5
@@ -142,12 +146,11 @@ Metered = (I={}, self) ->
         x: 0
         y: 0
       radius: 2
+      show: true
       showName: false
       text: null
       width: 100 
-    
-    {name} = options
-    
+        
     if not I[name]
       I[name] = 100
     
@@ -157,4 +160,11 @@ Metered = (I={}, self) ->
       else
         I["max#{name.capitalize()}"] = 100
     
-    I.meters.push options
+    I.meters[name] = options
+    
+  showMeter: (name) ->
+    setMeter(name, true)
+    
+  hideMeter: (name) ->
+    setMeter(name, false)  
+    
