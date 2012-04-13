@@ -169,8 +169,9 @@ Metered = (I={}, self) ->
 
   player.include Metered      
 
-  player.meter 'health',
+  player.meter 'health'
 
+  player.
   </pre></code>
 
   @name meter
