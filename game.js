@@ -6922,13 +6922,17 @@ var Controllable;
 Controllable = function(I, self) {
   if (I == null) I = {};
   Object.reverseMerge(I, {
-    speed: 1
+    speed: 1,
+    velocity: Point(0, 0)
   });
   return self.bind("update", function() {
-    if (keydown.left) I.x -= I.speed;
-    if (keydown.right) I.x += I.speed;
-    if (keydown.up) I.y -= I.speed;
-    if (keydown.down) return I.y += I.speed;
+    I.velocity.x = 0;
+    I.velocity.y = 0;
+    if (keydown.left) I.velocity.x = -1;
+    if (keydown.right) I.velocity.x = 1;
+    if (keydown.up) I.velocity.y = -1;
+    if (keydown.down) I.velocity.y = 1;
+    return I.velocity = I.velocity.scale(I.speed);
   });
 };
 ;
