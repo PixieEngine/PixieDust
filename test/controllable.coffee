@@ -34,10 +34,6 @@ test "should move player right while key is pressed", ->
 
   equals player.I.velocity.x, 3
 
-  player.update()
-
-  equals player.I.x, 12
-
   window.keydown.right = false
 
   equals player.I.x, 12
