@@ -40,10 +40,10 @@ Controllable = (I={}, self) ->
       I.velocity.x = -1
 
     if keydown.right
-      I.x += I.speed
+      I.velocity.x = 1
 
     if keydown.up
-      I.y -= I.speed
+      I.ve
 
     if keydown.down
       I.y += I.speed
