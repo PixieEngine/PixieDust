@@ -8,7 +8,8 @@ test "should exist", ->
   ok obj.meter
   
 test "should respect 0 being set as the meter attribute", ->
-  
+  obj = GameObject
+    he
   
 test "should set max<Attribute> if it isn't present in the including object", ->
   obj = GameObject
