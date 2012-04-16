@@ -64,35 +64,4 @@ test "should move player down while key is pressed", ->
 
   equals player.I.velocity.y, 0
 
-test "should move player back and forth when keys are changed", ->
-  window.keydown.down = true
-
-  player.update()
-
-  equals player.I.y, 21
-
-  window.keydown.down = false
-  window.keydown.up = true
-
-  player.update()
-
-  equals player.I.y, 20
-
-test "should move player according to their speed", ->
-  player.I.speed = 3
-
-  window.keydown.down = true
-
-  player.update()
-
-  equals player.I.y, 23
-
-test "should stay in place if two different directions are held", ->
-  window.keydown.left = true
-  window.keydown.right = true
-
-  player.update()
-
-  equals player.I.x, 10
-
 module()
