@@ -14,7 +14,7 @@ QUnit.testStart = ->
   # Mock the keydown object
   window.keydown = {}
 
-test "should update ", ->  
+test "should update velocity while left is held", ->  
   window.keydown.left = true
 
   player.update()
