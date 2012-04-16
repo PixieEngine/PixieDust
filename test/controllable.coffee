@@ -8,7 +8,7 @@ QUnit.testStart = ->
     width: 10
     height: 20
 
-  player.include(Controllable)    
+  player.include Controllable   
 
   # Mock the keydown object
   window.keydown = {}
