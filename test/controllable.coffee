@@ -21,10 +21,6 @@ test "should update velocity while left is held", ->
 
   equals player.I.velocity.x, -3
 
-  player.update()
-
-  equals player.I.x, 8
-
   window.keydown.left = false
 
   equals player.I.x, 8
