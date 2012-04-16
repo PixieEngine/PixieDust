@@ -7,7 +7,7 @@ test "should exist", ->
   
   ok obj.meter
   
-test "should respect " 
+test "should respect 0 being set as the m" 
   
 test "should set max<Attribute> if it isn't present in the including object", ->
   obj = GameObject
