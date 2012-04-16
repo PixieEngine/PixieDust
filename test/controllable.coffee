@@ -23,7 +23,9 @@ test "should update velocity while left is held", ->
 
   window.keydown.left = false
 
-  equals player.I.x, 8
+  player.update()
+  
+  equals player.I.velocity.x, 0
 
 test "should move player right while key is pressed", ->
   window.keydown.right = true
