@@ -58,7 +58,7 @@ test "should move player down while key is pressed", ->
 
   player.update()
 
-  equals player.I.velocity.y, 21
+  equals player.I.velocity.y, 3
 
   player.update()
 
