@@ -19,7 +19,7 @@ test "should move player left while key is pressed", ->
 
   player.update()
 
-  equals player.I.velocity.x, 
+  equals player.I.velocity.x, -3
 
   player.update()
 
