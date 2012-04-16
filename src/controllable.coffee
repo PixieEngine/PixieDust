@@ -48,4 +48,4 @@ Controllable = (I={}, self) ->
     if keydown.down
       I.velocity.y = 1
       
-    I
+    I.velocity = I.velocity.scale(I.speed)
