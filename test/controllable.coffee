@@ -7,6 +7,7 @@ QUnit.testStart = ->
     y: 20
     width: 10
     height: 20
+    speed: 3
 
   player.include Controllable   
 
@@ -18,7 +19,7 @@ test "should move player left while key is pressed", ->
 
   player.update()
 
-  equals player.I.x, 9
+  equals player.I.velocity.x, 
 
   player.update()
 
