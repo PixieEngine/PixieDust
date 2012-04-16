@@ -16,7 +16,7 @@ test "should respect 0 being set as the meter attribute", ->
   
   obj.meter 'health'
   
-  equals.
+  equals obj.I.health, 0
   
 test "should set max<Attribute> if it isn't present in the including object", ->
   obj = GameObject
