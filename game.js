@@ -9244,7 +9244,7 @@ Metered = function(I, self) {
         text: null,
         width: 100
       });
-      if (!I[name]) I[name] = 100;
+      if (I[name] == null) I[name] = 100;
       if (!I["max" + (name.capitalize())]) {
         if (I[name]) {
           I["max" + (name.capitalize())] = I[name];
