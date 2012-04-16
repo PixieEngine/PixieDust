@@ -62,7 +62,7 @@ test "should move player down while key is pressed", ->
 
   window.keydown.down = false
 
-  equals player.I.velocity.y, 22 
+  equals player.I.velocity.y, 0
 
 test "should move player back and forth when keys are changed", ->
   window.keydown.down = true
