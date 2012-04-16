@@ -7,6 +7,8 @@ test "should exist", ->
   
   ok obj.meter
   
+test "shou"
+  
 test "should set max<Attribute> if it isn't present in the including object", ->
   obj = GameObject
     health: 150
