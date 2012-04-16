@@ -45,12 +45,9 @@ test "should move player up while key is pressed", ->
 
   player.update()
 
-  equals player.I.velocity.y, 19
+  equals player.I.velocity.y, -3
 
-  player.update()
-
-  equals player.I.y, 18
-
+  
   window.keydown.up = false
 
   equals player.I.y, 18
