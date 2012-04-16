@@ -33,7 +33,7 @@ Controllable = (I={}, self) ->
     velocity: Point(0, 0)
 
   self.bind "update", ->
-    I
+    I.velocity.x = 
     if keydown.left
       I.x -= I.speed
 
