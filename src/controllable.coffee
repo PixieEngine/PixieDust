@@ -30,8 +30,10 @@ when up, down, left, or right are held.
 Controllable = (I={}, self) ->
   Object.reverseMerge I,
     speed: 1
+    velocity: Point(0, 0)
 
   self.bind "update", ->
+    I
     if keydown.left
       I.x -= I.speed
 
