@@ -3,7 +3,7 @@ module "Bounds"
 test 'it should have #distance', ->
   player = GameObject()
   
-  player.include Distance
+  player.include Bounded
   
   ok player.distance
   
