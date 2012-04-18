@@ -67,7 +67,7 @@ Controllable = (I={}, self) ->
     if keydown.down
       I.velocity.y = 1
 
-    p = p.norm()
+    I.velocity = .norm()
 
     I.velocity = p.scale(I.speed)
     unless p.equal(Point.ZERO)
