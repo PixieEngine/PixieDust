@@ -74,6 +74,15 @@ test "should handle moving diagonally", ->
   
   equals player.I.velocity.x, Point(-1, -1).norm().x * player.I.speed
   equals player.I.velocity.y, Point(-1, -1).norm().y * player.I.speed
+
+test "should handle tracking ", ->
+  window.keydown.left = true
+  window.keydown.up = true
+  
+  player.update()
+  
+  equals player.I.velocity.x, Point(-1, -1).norm().x * player.I.speed
+  equals player.I.velocity.y, Point(-1, -1).norm().y * player.I.speed  
   
 test "should correctly track facing direction", ->
   ok player.I.facing.equal(Point(1, 0))
