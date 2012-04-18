@@ -42,7 +42,8 @@ Bounded = (I={}, self) ->
     
   distance: (otherObj) ->
     Point.distance(self.position(), otherObj.position())  
-  ###*
+
+    ###*
   The position of this game object. By default it is the top left point.
   Redefining the center method will change the relative position.
 
