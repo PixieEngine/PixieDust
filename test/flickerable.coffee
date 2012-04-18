@@ -24,6 +24,8 @@ test 'it should change the alpha value when the flicker duration has elapsed', -
     frequency: 5
     alpha: 0.2
     
+  5.  
+    
   player.update()
   equals player.I.alpha, 0.2
   
