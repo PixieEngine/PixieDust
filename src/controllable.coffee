@@ -22,7 +22,7 @@ when up, down, left, or right are held.
   # => 13
 
   # We keep track of the direction the object is
-  # facing in case you need that to shoot bullets
+  # facing in case you need that to for
 </pre></code>
 
 @name Controllable
