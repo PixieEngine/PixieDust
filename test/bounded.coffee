@@ -1,6 +1,6 @@
 module "Bounds"
 
-test 'it should have #', ->
+test 'it should have #distance', ->
   player = GameObject()
   
   player.include Distance
