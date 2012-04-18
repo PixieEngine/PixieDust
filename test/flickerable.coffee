@@ -11,7 +11,4 @@ QUnit.testStart = ->
 
   player.include Flickerable   
 
-  # Mock the keydown object
-  window.keydown = {}
-
 module()
