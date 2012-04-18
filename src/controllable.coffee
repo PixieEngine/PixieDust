@@ -31,6 +31,7 @@ Controllable = (I={}, self) ->
   Object.reverseMerge I,
     speed: 1
     velocity: Point(0, 0)
+    
 
   self.bind "update", ->
     I.velocity.x = 0
