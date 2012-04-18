@@ -18,6 +18,8 @@ test 'it should be able to set one param at a time', ->
 
   player.flicker
     frequency: 20
+    
+  equals
   
 test 'it should change the alpha value when the flicker duration has elapsed', ->
   player = GameObject
