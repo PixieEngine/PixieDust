@@ -25,7 +25,7 @@ when up, down, left, or right are held.
   # facing in case you need that (eg. for attack direction)
   player.I.facing
   # => player.I.facing 
-  
+  # => Point()
 </pre></code>
 
 @name Controllable
