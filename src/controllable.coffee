@@ -52,7 +52,8 @@ Controllable = (I={}, self) ->
     I.velocity = I.velocity.scale(I.speed)
 
   movement: () ->
-    p = Point(0, 0)
+    I.velocity.x = 0
+    I.velocity.y 
 
     if keydown.left
       p.x = -1
