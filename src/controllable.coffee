@@ -34,22 +34,7 @@ Controllable = (I={}, self) ->
     velocity: Point(0, 0)
 
   self.bind "update", ->
-    I.velocity.x = 0
-    I.velocity.y = 0
-    
-    if keydown.left
-      I.velocity.x = -1
-
-    if keydown.right
-      I.velocity.x = 1
-
-    if keydown.up
-      I.velocity.y = -1
-
-    if keydown.down
-      I.velocity.y = 1
-      
-    I.velocity = I.velocity.scale(I.speed)
+    self.movement()
 
   movement: ->
     I.velocity.x = 0
