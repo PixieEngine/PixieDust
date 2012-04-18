@@ -11,7 +11,7 @@ QUnit.testStart = ->
 
   player.include Flickerable   
 
-test 'it should change the alpha value', ->
+test 'it should change the alpha value when the flicker ', ->
   
   
 module()
