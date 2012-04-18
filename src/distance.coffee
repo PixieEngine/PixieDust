@@ -1,3 +1,3 @@
 Distance = (I={}, self) ->
   distance: (otherObj) ->
-    Point.distance()
+    Point.distance(self.position(), otherObj.position())
