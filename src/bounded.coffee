@@ -43,7 +43,7 @@ Bounded = (I={}, self) ->
   ###*
   Distance between two objects. Proxies to Point.distance.
   In order for this to work, `otherObj` must have a 
-  position 
+  position method.
 
   <code><pre>
   player = Core
