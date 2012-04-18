@@ -1,4 +1,4 @@
-Flickerable = (I={}, self) ->
+Distance = (I={}, self) ->
   originalAlpha = I.alpha
 
   self.bind 'update', ->
