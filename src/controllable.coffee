@@ -50,3 +50,5 @@ Controllable = (I={}, self) ->
       I.velocity.y = 1
       
     I.velocity = I.velocity.scale(I.speed)
+
+ 
