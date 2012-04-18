@@ -1,6 +1,7 @@
 module "Bounds"
 
-test 'should include Dist'
+test 'should include Distance module', ->
+  obj = Game
 
 test "#bounds returns correct x, y, width, height", ->
   x = 5
