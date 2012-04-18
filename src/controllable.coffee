@@ -71,5 +71,3 @@ Controllable = (I={}, self) ->
 
     I.velocity = I.velocity.scale(I.speed)
     
-    unless I.velocity.equal(Point.ZERO)
-      I.facing = I.velocity
