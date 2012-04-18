@@ -12,6 +12,8 @@ when up, down, left, or right are held.
     y: 30
     speed:  2
 
+  player.include Contro
+
   # hold the left arrow key, then
   # update the player
   player.update()
