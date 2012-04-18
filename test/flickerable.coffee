@@ -3,7 +3,7 @@ module "Flickerable"
 # sets up player object before each test
 QUnit.testStart = ->
   window.player = GameObject
-    alpha: 1
+    alpha: 0.9
 
   player.include Flickerable   
 
