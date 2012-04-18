@@ -12,7 +12,8 @@ test 'it should set up defaults', ->
   equals player.I.flickerDuration, 30
   
 test 'it should be able to set one param at a time', ->
-  player = GameObje
+  player = GameObject()
+  player.include F
 
 test 'it should change the alpha value when the flicker duration has elapsed', ->
   player = GameObject
