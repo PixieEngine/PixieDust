@@ -22,7 +22,8 @@ when up, down, left, or right are held.
   # => 13
 
   # We keep track of the direction the object is
-  # facing in case you need that (efor attack direction)
+  # facing in case you need that (eg. for attack direction)
+  
 </pre></code>
 
 @name Controllable
