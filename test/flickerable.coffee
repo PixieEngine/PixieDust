@@ -14,4 +14,5 @@ QUnit.testStart = ->
 test 'it should change the alpha value when the flicker duration has elapsed', ->
   
   
+  
 module()
