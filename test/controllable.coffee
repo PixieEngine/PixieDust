@@ -79,6 +79,6 @@ test "should correctly track facing direction", ->
   
   player.update()
   
-  window.k
+  ok player.I.facing
 
 module()
