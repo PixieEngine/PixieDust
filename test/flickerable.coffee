@@ -13,5 +13,8 @@ test 'it should change the alpha value when the flicker duration has elapsed', -
     frequency: 5
     alpha: 0.2
     
+  player.update()
+  
+  e
   
 module()
