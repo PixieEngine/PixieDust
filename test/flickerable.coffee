@@ -10,7 +10,7 @@ test 'it should change the alpha value when the flicker duration has elapsed', -
   
   player.flicker
     duration: 20
-    frequency:
-    alpha:
+    frequency: 5
+    alpha: 0.2
   
 module()
