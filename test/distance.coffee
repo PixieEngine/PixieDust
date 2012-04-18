@@ -1,6 +1,9 @@
 module "Distance"
 
 test 'it should be includable', ->
-  player = 
+  player = GameObject()
+  
+  player.include Distance
+  
 
 module()
