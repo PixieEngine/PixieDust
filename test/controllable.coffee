@@ -73,7 +73,7 @@ test "should handle moving diagonally", ->
   player.update()
   
   equals player.I.velocity.x, Point(-1, -1).norm().x * player.I.speed
-  equals player.I.velocity.y, -Math.sqrt(2)
+  equals player.I.velocity.y, Point(-1, -1).norm().y * player.I.speed
   
 test "should correctly track facing direction", ->
   ok player.I.facing.equal(Point(1, 0))
