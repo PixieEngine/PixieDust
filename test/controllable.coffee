@@ -84,6 +84,9 @@ test "should handle tracking facing direction diagonally", ->
   equals player.I.facing.x, Point(-1, -1).norm().x
   equals player.I.facing.y, Point(-1, -1).norm().y  
   
+  window.keydown.left = false
+  window.ke
+  
 test "should correctly track facing direction", ->
   ok player.I.facing.equal(Point(1, 0))
   
