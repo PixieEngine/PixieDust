@@ -15,6 +15,7 @@ test 'it should proxy to Point.distance', ->
     height: 10
     
   enemy = GameObject
-    
+    x: 110
+    y: 
 
 module()
