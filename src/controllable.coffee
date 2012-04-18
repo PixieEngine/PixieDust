@@ -29,9 +29,9 @@ when up, down, left, or right are held.
 ###
 Controllable = (I={}, self) ->
   Object.reverseMerge I,
+    facing: 
     speed: 1
     velocity: Point(0, 0)
-    
 
   self.bind "update", ->
     I.velocity.x = 0
