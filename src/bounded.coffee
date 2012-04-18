@@ -57,7 +57,7 @@ Bounded = (I={}, self) ->
 
   @name distance
   @methodOf Bounded#
-  @returns {Number} The position of this object
+  @returns {Number} Distan
   ###  
   distance: (otherObj) ->
     Point.distance(self.position(), otherObj.position())  
