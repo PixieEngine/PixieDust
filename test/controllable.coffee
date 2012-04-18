@@ -66,6 +66,7 @@ test "should move player down while key is pressed", ->
 
   equals player.I.velocity.y, 0
   
-test "should correctly track "
+test "should correctly track facing direction", ->
+  
 
 module()
