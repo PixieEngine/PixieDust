@@ -70,6 +70,10 @@ test "should handle moving diagonally", ->
   window.keydown.left = true
   window.keydown.up = true
   
+  player.update()
+  
+  
+  
 test "should correctly track facing direction", ->
   ok player.I.facing.equal(Point(1, 0))
   
