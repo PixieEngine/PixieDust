@@ -16,6 +16,8 @@ test 'it should proxy to Point.distance', ->
     
   enemy = GameObject
     x: 110
-    y: 
+    y: 120
+    width: 7
+    hei
 
 module()
