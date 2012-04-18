@@ -9,7 +9,7 @@ QUnit.testStart = ->
     height: 20
     speed: 3
 
-  player.include Controllable   
+  player.include Flickerable   
 
   # Mock the keydown object
   window.keydown = {}
