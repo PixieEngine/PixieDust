@@ -17,6 +17,6 @@ test 'it should change the alpha value when the flicker duration has elapsed', -
   4.times ->
     player.update()
     
-  equ
+  equals player.I.alpha, 0.9
   
 module()
