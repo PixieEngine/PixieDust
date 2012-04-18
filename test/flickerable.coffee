@@ -6,7 +6,8 @@ test 'it should set up defaults', ->
   player.include Flickerable
   
   equals player.I.flickerAlpha, 0.5
-  equals player.I.flickerFrequency, 
+  equals player.I.flickerFrequency, 3
+  equal
 
 test 'it should change the alpha value when the flicker duration has elapsed', ->
   player = GameObject
