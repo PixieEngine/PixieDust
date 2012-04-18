@@ -1,5 +1,7 @@
 module "Bounds"
 
+test 'should include Dist'
+
 test "#bounds returns correct x, y, width, height", ->
   x = 5
   y = 10
