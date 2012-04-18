@@ -7,10 +7,10 @@ QUnit.testStart = ->
   window.flicker.player = GameObject
     alpha: 0.9
 
-  player.include Flickerable   
+  flicker.player.include Flickerable   
 
 test 'it should change the alpha value when the flicker duration has elapsed', ->
-  equals player.I.alpha, 0.9 
+  equals flicker.player.I.alpha, 0.9 
   
   
 module()
