@@ -79,6 +79,6 @@ test "should correctly track facing direction", ->
   
   player.update()
   
-  ok player.I.facing
+  ok player.I.facing.equal(Point(-1, 0))
 
 module()
