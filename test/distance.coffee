@@ -1,5 +1,5 @@
 module "Distance"
 
-test 'it s'
+test 'it should be includa'
 
 module()
