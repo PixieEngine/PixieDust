@@ -65,7 +65,7 @@ Controllable = (I={}, self) ->
       I.velocity..y = -1
 
     if keydown.down
-      p.y = 1
+      I.velocity.y = 1
 
     p = p.norm()
 
