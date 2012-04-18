@@ -46,14 +46,21 @@ Bounded = (I={}, self) ->
   position method.
 
   <code><pre>
-  player = GameObject
+    player = GameObject
     x: 50
-    y: 40
-
-  player.include(Bounded)      
-
-  player.position()
-  # => {x: 50, y: 40}
+    y: 50
+    width: 10
+    height: 10
+  
+  player.include Bounded
+  
+  enemy = GameObject
+    x: 110
+    y: 120
+    width: 7
+    height: 20
+    
+  equals player.distance(enemy), Point.distance(player.position(), enemy.position())
   </pre></code>
 
   @name distance
