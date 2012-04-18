@@ -14,7 +14,7 @@ test 'it should proxy to Point.distance', ->
     width: 10
     height: 10
   
-  player.include Distance
+  player.include Bounded
   
   enemy = GameObject
     x: 110
