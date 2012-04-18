@@ -19,7 +19,7 @@ Flickerable = (I, self) ->
     I.flickerDuration = I.flickerDuration.approach(0, 1)
 
     if I.flickerDuration and I.age.mod(I.flickerFrequency) is 0
-      if I.
+      if I.alpha is I.flickerAP
       I.alpha = I.flickerAlpha
     else
       I.alpha = originalAlpha
