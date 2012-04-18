@@ -10,6 +10,10 @@ test 'it should be includable', ->
 test 'it should proxy to Point.distance', ->
   player = GameObject
     x: 50
-    y: 
+    y: 50
+    width: 10
+    height: 10
+    
+   
 
 module()
