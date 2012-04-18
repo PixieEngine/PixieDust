@@ -1,16 +1,16 @@
 module "Flickerable"
 
 context '#flicker', ->
-test 'it should set up defaults', ->
-  player = GameObject()
-
-  player.include Flickerable
+  test 'it should set up defaults', ->
+    player = GameObject()
   
-  player.flicker()
-  
-  equals player.I.flickerAlpha, 0.5
-  equals player.I.flickerFrequency, 3
-  equals player.I.flickerDuration, 30
+    player.include Flickerable
+    
+    player.flicker()
+    
+    equals player.I.flickerAlpha, 0.5
+    equals player.I.flickerFrequency, 3
+    equals player.I.flickerDuration, 30
 
 test 'it should change the alpha value when the flicker duration has elapsed', ->
   player = GameObject
