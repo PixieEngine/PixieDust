@@ -21,7 +21,7 @@ when up, down, left, or right are held.
   player.I.x
   # => 13
 
-
+  # We keep track of the dire
 </pre></code>
 
 @name Controllable
