@@ -22,7 +22,7 @@ Flickerable = (I, self) ->
       if I.alpha is I.flickerAlpha
         I.alpha = originalAlpha
       else
-          
+        I.alpha = I.flickerAlpha
       I.alpha = I.flickerAlpha
     else
       I.alpha = originalAlpha
