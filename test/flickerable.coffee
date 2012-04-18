@@ -10,6 +10,8 @@ test 'it should set up defaults', ->
   equals player.I.flickerAlpha, 0.5
   equals player.I.flickerFrequency, 3
   equals player.I.flickerDuration, 30
+  
+test 'it should '
 
 test 'it should change the alpha value when the flicker duration has elapsed', ->
   player = GameObject
