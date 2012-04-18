@@ -29,7 +29,7 @@ when up, down, left, or right are held.
 ###
 Controllable = (I={}, self) ->
   Object.reverseMerge I,
-    facing: 
+    facing: Point(1, 0)
     speed: 1
     velocity: Point(0, 0)
 
