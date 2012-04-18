@@ -24,7 +24,7 @@ when up, down, left, or right are held.
   # We keep track of the direction the object is
   # facing in case you need that (eg. for attack direction)
   player.I.facing
-  #
+  # => player.I.
 </pre></code>
 
 @name Controllable
