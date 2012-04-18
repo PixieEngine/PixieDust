@@ -66,6 +66,8 @@ test "should move player down while key is pressed", ->
 
   equals player.I.velocity.y, 0
   
+test   
+  
 test "should correctly track facing direction", ->
   ok player.I.facing.equal(Point(1, 0))
   
@@ -80,7 +82,5 @@ test "should correctly track facing direction", ->
   player.update()
   
   ok player.I.facing.equal(Point(-1, 0))
-  
-
 
 module()
