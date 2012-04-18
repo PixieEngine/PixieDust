@@ -12,5 +12,6 @@ test 'it should change the alpha value when the flicker duration has elapsed', -
     duration: 20
     frequency: 5
     alpha: 0.2
+    
   
 module()
