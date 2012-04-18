@@ -39,11 +39,30 @@ Bounded = (I={}, self) ->
     width: 8
     height: 8
     collisionMargin: Point(0, 0)
-    
+  
+  ###*
+  The position of this game object. By default it is the top left point.
+  Redefining the center method will change the relative position.
+
+  <code><pre>
+  player = Core
+    x: 50
+    y: 40
+
+  player.include(Bounded)      
+
+  player.position()
+  # => {x: 50, y: 40}
+  </pre></code>
+
+  @name position
+  @methodOf Bounded#
+  @returns {Point} The position of this object
+  ###  
   distance: (otherObj) ->
     Point.distance(self.position(), otherObj.position())  
 
-    ###*
+  ###*
   The position of this game object. By default it is the top left point.
   Redefining the center method will change the relative position.
 
