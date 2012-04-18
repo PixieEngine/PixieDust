@@ -11,4 +11,6 @@ QUnit.testStart = ->
 
   player.include Flickerable   
 
+
+  
 module()
