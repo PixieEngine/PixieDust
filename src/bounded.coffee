@@ -60,7 +60,7 @@ Bounded = (I={}, self) ->
     width: 7
     height: 20
     
-  equals player.distance(enemy)
+  player.distance(enemy)
   # => 92.19544457292888
   </pre></code>
 
