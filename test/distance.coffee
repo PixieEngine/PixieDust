@@ -5,5 +5,6 @@ test 'it should be includable', ->
   
   player.include Distance
   
+  ok player.distance
 
 module()
