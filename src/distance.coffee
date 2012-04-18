@@ -1,2 +1,2 @@
 Distance = (I={}, self) ->
-  distance:
+  distance: (otherObj) ->
