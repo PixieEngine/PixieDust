@@ -23,6 +23,8 @@ Flickerable = (I, self) ->
         I.alpha = originalAlpha
       else
         I.alpha = I.flickerAlpha
+    else
+      I.alpha = origin
 
   ###*
   A convenient way to set the flicker instance variables on a sprite. You can modify the
