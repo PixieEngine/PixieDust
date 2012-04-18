@@ -21,7 +21,8 @@ when up, down, left, or right are held.
   player.I.x
   # => 13
 
-  # We keep track of the dire
+  # We keep track of the direction the object is
+
 </pre></code>
 
 @name Controllable
