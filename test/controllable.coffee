@@ -77,6 +77,8 @@ test "should correctly track facing direction", ->
   
   window.keydown.left = false
   
+  player.update()
   
+  window.k
 
 module()
