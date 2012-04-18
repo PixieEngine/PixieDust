@@ -55,7 +55,7 @@ Bounded = (I={}, self) ->
   # => {x: 50, y: 40}
   </pre></code>
 
-  @name position
+  @name distance
   @methodOf Bounded#
   @returns {Point} The position of this object
   ###  
