@@ -4631,6 +4631,38 @@ Bounded = function(I, self) {
   });
   return {
     /**
+    Distance between two objects. Proxies to Point.distance.
+    In order for this to work, `otherObj` must have a 
+    position method.
+    
+    <code><pre>
+    player = GameObject
+      x: 50
+      y: 50
+      width: 10
+      height: 10
+    
+    player.include Bounded
+    
+    enemy = GameObject
+      x: 110
+      y: 120
+      width: 7
+      height: 20
+      
+    player.distance(enemy)
+    # => 92.19544457292888
+    </pre></code>
+    
+    @name distance
+    @methodOf Bounded#
+    @see Point.distance
+    @returns {Number} Distance between the two objects
+    */
+    distance: function(otherObj) {
+      return Point.distance(self.position(), otherObj.position());
+    },
+    /**
     The position of this game object. By default it is the top left point.
     Redefining the center method will change the relative position.
     
@@ -7049,17 +7081,6 @@ DebugVelocity = function(I, self) {
       });
     }
   });
-};
-;
-var Distance;
-
-Distance = function(I, self) {
-  if (I == null) I = {};
-  return {
-    distance: function(otherObj) {
-      return Point.distance(self.position(), otherObj.position());
-    }
-  };
 };
 ;
 /**
