@@ -1,7 +1,9 @@
 module "Flickerable"
 
 test 'it should set up defaults', ->
-  
+  player = GameObject
+
+  player.include Flickerable    
 
 test 'it should change the alpha value when the flicker duration has elapsed', ->
   player = GameObject
