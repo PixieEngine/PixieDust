@@ -7051,6 +7051,17 @@ DebugVelocity = function(I, self) {
   });
 };
 ;
+var Distance;
+
+Distance = function(I, self) {
+  if (I == null) I = {};
+  return {
+    distance: function(otherObj) {
+      return Point.distance(self.position(), otherObj.position());
+    }
+  };
+};
+;
 /**
 The Drawable module is used to provide a simple draw method to the including
 object.
@@ -8484,6 +8495,7 @@ var Flickerable;
 
 Flickerable = function(I, self) {
   var originalAlpha;
+  if (I == null) I = {};
   Object.reverseMerge(I, {
     flickerAlpha: 0.5,
     flickerDuration: 30,
