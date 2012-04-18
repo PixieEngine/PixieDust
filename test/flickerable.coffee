@@ -1,5 +1,6 @@
 module "Flickerable"
 
+context '#flicker', ->
 test 'it should set up defaults', ->
   player = GameObject()
 
