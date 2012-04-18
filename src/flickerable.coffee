@@ -56,5 +56,5 @@ Flickerable = (I, self) ->
     
     I.flickerDuration = duration if duration?
     I.flickerFrequency = frequency if frequency?
-    I.flickerAlpha = alpha i
+    I.flickerAlpha = alpha if alpha?
 
