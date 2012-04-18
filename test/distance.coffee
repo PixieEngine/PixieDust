@@ -22,6 +22,6 @@ test 'it should proxy to Point.distance', ->
     width: 7
     height: 20
     
-  equals, 
+  equals, player.distance(enemy), Point.distance()
 
 module()
