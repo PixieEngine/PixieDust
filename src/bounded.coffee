@@ -41,8 +41,7 @@ Bounded = (I={}, self) ->
     collisionMargin: Point(0, 0)
   
   ###*
-  The position of this game object. By default it is the top left point.
-  Redefining the center method will change the relative position.
+  Distance between two objects. Proxies 
 
   <code><pre>
   player = Core
