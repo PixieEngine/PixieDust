@@ -1,5 +1,6 @@
 module "Distance"
 
-test 'it should be includa'
+test 'it should be includable', ->
+  player = 
 
 module()
