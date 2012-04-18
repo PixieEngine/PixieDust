@@ -5,14 +5,13 @@ when up, down, left, or right are held.
 <code><pre>
   # create a player and include Controllable
   player = GameObject
-    includedModules: ["Controllable"]
     width: 5
     height: 17
     x: 15
     y: 30
     speed:  2
 
-  player.include Contro
+  player.include Controllable
 
   # hold the left arrow key, then
   # update the player
