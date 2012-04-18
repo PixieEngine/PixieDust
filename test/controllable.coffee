@@ -69,6 +69,6 @@ test "should move player down while key is pressed", ->
 test "should correctly track facing direction", ->
   ok player.I.facing.equal(Point(1, 0))
   
-  window.keydow.left
+  window.keydown.
 
 module()
