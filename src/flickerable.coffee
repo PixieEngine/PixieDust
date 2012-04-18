@@ -48,7 +48,7 @@ Flickerable = (I, self) ->
   @param {Number} [frequency=3] The number of frames in between opacity changes
   @param {Number} [alpha=0.5] The alpha value to flicker to
   ###
-  flicker: ({duration = 30, frequency = 3, alpha = 0.5}) ->
+  flicker: ({duration: 30, frequency: 3, alpha: 0.5}) ->
     I.flickerDuration = duration
     I.flickerFrequency = frequency
     I.flickerAlpha = alpha
