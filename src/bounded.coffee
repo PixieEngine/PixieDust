@@ -61,7 +61,7 @@ Bounded = (I={}, self) ->
     height: 20
     
   equals player.distance(enemy), Point.distance(player.position(), enemy.position())
-  # =>
+  # => 92.19544457292888
   </pre></code>
 
   @name distance
