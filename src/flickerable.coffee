@@ -49,7 +49,8 @@ Flickerable = (I, self) ->
   @param {Number} [alpha=0.5] The alpha value to flicker to
   ###
   flicker: ({duration: 30, frequency: 3, alpha: 0.5}) ->
-    Object.reverse
+    Object.reverseMerge I,
+      duratio
     
     I.flickerDuration = duration
     I.flickerFrequency = frequency
