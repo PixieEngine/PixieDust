@@ -1,7 +1,11 @@
 module "Bounds"
 
 test 'should include Distance module', ->
-  obj = Game
+  obj = GameObject
+  
+  obj.include Bounded
+  
+  
 
 test "#bounds returns correct x, y, width, height", ->
   x = 5
