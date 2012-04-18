@@ -65,5 +65,7 @@ test "should move player down while key is pressed", ->
   player.update()
 
   equals player.I.velocity.y, 0
+  
+test "should "
 
 module()
