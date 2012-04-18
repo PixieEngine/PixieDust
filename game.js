@@ -8486,14 +8486,20 @@ Flickerable = function(I, self) {
   var originalAlpha;
   Object.reverseMerge(I, {
     flickerAlpha: 0.5,
-    flickerDuration: 0,
+    flickerDuration: 30,
     flickerFrequency: 3
   });
   originalAlpha = I.alpha;
   self.bind('update', function() {
     I.flickerDuration = I.flickerDuration.approach(0, 1);
-    if (I.flickerDuration > 0 && (I.age / I.flickerFrequency).floor() % 2) {
-      return I.alpha = I.flickerAlpha;
+    if (I.flickerDuration > 0) {
+      if (I.age.mod(I.flickerFrequency) === 0) {
+        if (I.alpha === I.flickerAlpha) {
+          return I.alpha = originalAlpha;
+        } else {
+          return I.alpha = I.flickerAlpha;
+        }
+      }
     } else {
       return I.alpha = originalAlpha;
     }
@@ -8523,13 +8529,12 @@ Flickerable = function(I, self) {
     @param {Number} [frequency=3] The number of frames in between opacity changes
     @param {Number} [alpha=0.5] The alpha value to flicker to
     */
-    flicker: function(duration, frequency, alpha) {
-      if (duration == null) duration = 30;
-      if (frequency == null) frequency = 3;
-      if (alpha == null) alpha = 0.5;
-      I.flickerDuration = duration;
-      I.flickerFrequency = frequency;
-      return I.flickerAlpha = alpha;
+    flicker: function(_arg) {
+      var alpha, duration, frequency, _ref;
+      _ref = _arg != null ? _arg : {}, duration = _ref.duration, frequency = _ref.frequency, alpha = _ref.alpha;
+      if (duration != null) I.flickerDuration = duration;
+      if (frequency != null) I.flickerFrequency = frequency;
+      if (alpha != null) return I.flickerAlpha = alpha;
     }
   };
 };
