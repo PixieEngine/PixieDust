@@ -20,6 +20,8 @@ when up, down, left, or right are held.
   # the player is moved left according to his speed
   player.I.x
   # => 13
+
+
 </pre></code>
 
 @name Controllable
