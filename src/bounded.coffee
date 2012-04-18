@@ -39,6 +39,8 @@ Bounded = (I={}, self) ->
     width: 8
     height: 8
     collisionMargin: Point(0, 0)
+    
+  self.include Distance
 
   ###*
   The position of this game object. By default it is the top left point.
