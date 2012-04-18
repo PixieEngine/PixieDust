@@ -6,5 +6,7 @@ test 'it should be includable', ->
   player.include Distance
   
   ok player.distance
+  
+test 'it should proxy to Point.distanc'
 
 module()
