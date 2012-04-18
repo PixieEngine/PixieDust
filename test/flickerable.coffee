@@ -5,6 +5,8 @@ test 'it should set up defaults', ->
 
   player.include Flickerable
   
+  player.flicker()
+  
   equals player.I.flickerAlpha, 0.5
   equals player.I.flickerFrequency, 3
   equals player.I.flickerDuration, 30
