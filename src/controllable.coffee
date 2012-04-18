@@ -51,9 +51,9 @@ Controllable = (I={}, self) ->
       
     I.velocity = I.velocity.scale(I.speed)
 
-  movement: () ->
+  movement: ->
     I.velocity.x = 0
-    I.velocity.y 
+    I.velocity.y = 0
 
     if keydown.left
       p.x = -1
