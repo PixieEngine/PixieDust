@@ -46,7 +46,7 @@ Bounded = (I={}, self) ->
   position method.
 
   <code><pre>
-    player = GameObject
+  player = GameObject
     x: 50
     y: 50
     width: 10
