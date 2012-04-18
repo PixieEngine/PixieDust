@@ -66,7 +66,8 @@ test "should move player down while key is pressed", ->
 
   equals player.I.velocity.y, 0
   
-test "should handle moving diagonally  
+test "should handle moving diagonally", ->
+  window
   
 test "should correctly track facing direction", ->
   ok player.I.facing.equal(Point(1, 0))
