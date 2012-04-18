@@ -68,7 +68,7 @@ test "should move player down while key is pressed", ->
   
 test "should handle moving diagonally", ->
   window.keydown.left = true
-  window.
+  window.keydown.up = true
   
 test "should correctly track facing direction", ->
   ok player.I.facing.equal(Point(1, 0))
