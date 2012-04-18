@@ -41,7 +41,8 @@ Bounded = (I={}, self) ->
     collisionMargin: Point(0, 0)
   
   ###*
-  Distance between two objects. Proxies to Point.distance. B
+  Distance between two objects. Proxies to Point.distance.
+  In order 
 
   <code><pre>
   player = Core
