@@ -75,6 +75,8 @@ test "should correctly track facing direction", ->
   
   ok player.I.facing.equal(Point(-1, 0))
   
-  window.keydown.
+  window.keydown.left = false
+  
+  
 
 module()
