@@ -13,11 +13,15 @@ test 'it should proxy to Point.distance', ->
     y: 50
     width: 10
     height: 10
-    
+  
+  
+  
   enemy = GameObject
     x: 110
     y: 120
     width: 7
-    hei
+    height: 20
+    
+  
 
 module()
