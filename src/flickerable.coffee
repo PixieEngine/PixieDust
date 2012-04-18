@@ -50,10 +50,9 @@ Flickerable = (I, self) ->
   ###
   flicker: ({duration: 30, frequency: 3, alpha: 0.5}) ->
     Object.reverseMerge I,
-      flickerAlpha
+      flickerAlpha: 0.5
       flickerDuration: 30
-      flickerFrequency: 3
-      
+      flickerFrequency: 3      
     
     I.flickerDuration = duration
     I.flickerFrequency = frequency
