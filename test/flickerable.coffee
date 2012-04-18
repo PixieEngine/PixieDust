@@ -30,7 +30,9 @@ test 'it should be able to set one param at a time', ->
   enemy.flicker
     alpha: 0.4
     
-  
+  equals player.I.flickerAlpha, 0.4
+  equals player.I.flickerFrequency, 3
+  equals player.I.flickerDuration, 30  
   
 test 'it should change the alpha value when the flicker duration has elapsed', ->
   player = GameObject
