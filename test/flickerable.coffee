@@ -27,7 +27,8 @@ test 'it should be able to set one param at a time', ->
   
   enemy.include Flickerable
   
-  enemy.flicker()
+  enemy.flicker
+    
   
 test 'it should change the alpha value when the flicker duration has elapsed', ->
   player = GameObject
