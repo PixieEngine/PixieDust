@@ -5,7 +5,7 @@ test 'should include Distance module', ->
   
   obj.include Bounded
   
-  
+  ok obj.distance
 
 test "#bounds returns correct x, y, width, height", ->
   x = 5
