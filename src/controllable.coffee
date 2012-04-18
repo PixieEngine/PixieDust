@@ -70,5 +70,6 @@ Controllable = (I={}, self) ->
     I.velocity = I.velocity.norm()
 
     I.velocity = I.velocity.scale(I.speed)
-    unless p.equal(Point.ZERO)
-      I.facing = p
+    
+    unless I.velocity.equal(Point.ZERO)
+      I.facing = IU.
