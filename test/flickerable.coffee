@@ -13,8 +13,11 @@ test 'it should set up defaults', ->
   
 test 'it should be able to set one param at a time', ->
   player = GameObject()
-  player.include F
+  
+  player.include Flickerable
 
+  
+  
 test 'it should change the alpha value when the flicker duration has elapsed', ->
   player = GameObject
     alpha: 0.9
