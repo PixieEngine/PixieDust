@@ -9,7 +9,8 @@ The <code>Tilemap</code> module provides a way to load tilemaps in the engine.
 @param {Object} self Reference to the engine
 ###
 Engine.Tilemap = (I, self) ->
-  Object.extend I
+  Object.extend I,
+    map: null
   
   map = null
   updating = false
