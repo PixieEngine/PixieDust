@@ -8405,8 +8405,10 @@ The <code>Tilemap</code> module provides a way to load tilemaps in the engine.
 @param {Object} self Reference to the engine
 */
 Engine.Tilemap = function(I, self) {
-  var clearObjects, map, updating;
-  map = null;
+  var clearObjects, updating;
+  Object.extend(I, {
+    map: null
+  });
   updating = false;
   clearObjects = false;
   self.bind("update", function() {
@@ -8428,7 +8430,7 @@ Engine.Tilemap = function(I, self) {
     */
     loadMap: function(name, complete) {
       clearObjects = updating;
-      return map = Tilemap.load({
+      return I.map = Tilemap.load({
         name: name,
         complete: complete,
         entity: self.add
