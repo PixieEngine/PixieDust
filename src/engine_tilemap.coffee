@@ -35,7 +35,7 @@ Engine.Tilemap = (I, self) ->
   loadMap: (name, complete) ->
     clearObjects = updating
 
-    map = Tilemap.load
+    I.map = Tilemap.load
       name: name
       complete: complete
       entity: self.add
