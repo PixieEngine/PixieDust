@@ -11,8 +11,7 @@ The <code>Tilemap</code> module provides a way to load tilemaps in the engine.
 Engine.Tilemap = (I, self) ->
   Object.extend I,
     map: null
-  
-  map = null
+
   updating = false
   clearObjects = false
 
