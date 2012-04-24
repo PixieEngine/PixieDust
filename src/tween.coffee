@@ -23,4 +23,5 @@ Tween = (I={}, self) ->
         target: target
         start: I[property]
         easing: "linear"
-        startTime: 
+        startTime: I.age
+        endTime: I.age + 
