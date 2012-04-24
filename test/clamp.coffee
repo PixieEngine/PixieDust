@@ -13,6 +13,6 @@ test 'it should clamp value between its provided min and max', ->
     
   obj.incude Clamp
   
-  
+  obj.clamp()
 
 module()
