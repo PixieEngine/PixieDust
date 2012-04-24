@@ -13,10 +13,11 @@ test 'it should clamp value between its provided min and max', ->
     
   obj.include Clamp
   
-  obj.clamp
+  obj.I.clamps = [
     x: 
       min: 0
       max: 100
+  ]
       
   obj.update()
   
