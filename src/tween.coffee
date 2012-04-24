@@ -14,7 +14,7 @@ Tween = (I={}, self) ->
   # Add events and methods here
   self.bind "update", ->
     for property, data of I.activeTweens
-      if I.ag
+      if I.age >= 
       f = Easing[data.easing](data.start, data.end)
       I[property] = f()
 
