@@ -5,6 +5,7 @@ test "testing for equality", ->
   
   o.clamp
     x:
+      min: 0
       
 
   # Test for equality of two objects
