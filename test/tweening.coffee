@@ -7,7 +7,8 @@ test "should allow for simple tweening", ->
   o.tween 10,
     x: 10
     
-  
+  10.times ->
+    o.
 
   # Test for equality of two objects
   equals one, 1
