@@ -38,6 +38,8 @@ test "[event] step", 2, ->
 
   gameObject.update()
 
+test
+  
 test "[event] destroy", 2, ->
   GameObject
     destroy: ->
