@@ -23,6 +23,7 @@ Tween = (I={}, self) ->
         I[property] = f(t)
 
   tween: (duration, properties) ->
+    
     # TODO Extract special properties
     easing = properties.easing || "linear"
     
