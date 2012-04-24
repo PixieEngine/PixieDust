@@ -6,4 +6,5 @@ Clampable = (I={}, self) ->
   # Add events and methods here
   self.bind "afterUpdate", ->
 
-  clamp: 
+  clamp: ->
+    
