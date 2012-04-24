@@ -9,6 +9,6 @@ test 'it should exist', ->
   
   ok obj.clamp
   
-test 'it should clamp value between', ->
+test 'it should clamp value between its provid', ->
 
 module()
