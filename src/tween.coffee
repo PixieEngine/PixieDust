@@ -32,12 +32,7 @@ Tween = (I={}, self) ->
     x: 50
     y: 50
     easing: "quadratic"
-  
-  
 
-  player.flicker(90, 5, 0.3)
-  # => This causes the sprite to flicker between full opacity
-  # => and 30% opacity every 5 frames for 90 frames
   </pre></code>
 
   @name flicker
