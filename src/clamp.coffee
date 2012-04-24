@@ -3,7 +3,7 @@ Clamp = (I={}, self) ->
     clamps: {}
     
   self.bind "update", ->
-    for name, cooldownOptions of I.cooldowns
+    for name, cooldownOptions of I.clamps
       {approachBy, target} = cooldownOptions
 
       I[name] = I[name].approach(target, approachBy)
