@@ -1,6 +1,6 @@
 module "Tweening"
 
-test "should allow for simple tweening", ->
+test "should allow for simple linear tweening", ->
   o = GameObject
     x: 0
     
