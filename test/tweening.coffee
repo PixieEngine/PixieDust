@@ -1,7 +1,10 @@
 module "Tweening"
 
 test "should allow for simple tweening", ->
-  o = GameObject()
+  o = GameObject
+    x: 0
+    
+  o
 
   # Test for equality of two objects
   equals one, 1
