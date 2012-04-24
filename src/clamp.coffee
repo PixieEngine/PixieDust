@@ -7,4 +7,4 @@ Clamp = (I={}, self) ->
       property.name = property.name.clamp(property.min, property.max)
 
   clamp: (properties) ->
-    
+    ;
