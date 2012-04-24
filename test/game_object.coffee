@@ -42,7 +42,7 @@ test "elapsedTime", ->
   gameObject = GameObject()
   
   gameObject.bind "update", (t) ->
-    equals t
+    equals t, 
   
 test "[event] destroy", 2, ->
   GameObject
