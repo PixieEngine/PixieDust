@@ -17,7 +17,7 @@ Tween = (I={}, self) ->
   # Add events and methods here
   self.bind "update", ->
     for property, data of I.activeTweens
-      I
+      I[property] = 10
 
   # We must always return self as the last line
   return self
