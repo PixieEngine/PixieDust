@@ -35,7 +35,7 @@ Tween = (I={}, self) ->
   </pre></code>
 
   @name tween
-  @methodOf Flickerable#
+  @methodOf Tween#
   @param {Number} [duration=30] How long the effect lasts
   @param {Number} [frequency=3] The number of frames in between opacity changes
   @param {Number} [alpha=0.5] The alpha value to flicker to
