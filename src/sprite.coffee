@@ -56,6 +56,7 @@ draw anything to the screen until the image has been loaded.
     @param {Number} x Position on the x axis to draw the sprite
     @param {Number} y Position on the y axis to draw the sprite
     @param {Number} width 
+    @param {Number} height
     ###      
     fill: (canvas, x, y, width, height, repeat="repeat") ->
       pattern = canvas.createPattern(image, repeat)
