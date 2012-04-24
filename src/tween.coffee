@@ -28,7 +28,7 @@ Tween = (I={}, self) ->
   <code><pre>
   player = GameObject()
 
-  player.tween ,
+  player.tween 30,
     x: 50
     y: 50
   
