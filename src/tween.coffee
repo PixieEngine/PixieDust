@@ -19,7 +19,7 @@ Tween = (I={}, self) ->
 
       else
         f = Easing[data.easing](data.start, data.end)
-        t = (I.age - data.startTime) / 
+        t = (I.age - data.startTime) / data.duration
         I[property] = f()
 
   tween: (duration, properties) ->
