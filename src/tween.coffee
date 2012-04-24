@@ -20,3 +20,5 @@ Tween = (I={}, self) ->
   tween: (duration, properties) ->
     for property, target of properties
       activeTweens[property] =
+        target: target
+        
