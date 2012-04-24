@@ -23,12 +23,10 @@ Tween = (I={}, self) ->
         I[property] = f(t)
 
   ###*
-  Modify the objects properties over time
+  Modify the objects properties over time.
 
   <code><pre>
   player = GameObject()
-
-  player.include(Flickerable)
 
   player.flicker()
   # => This causes the sprite to flicker between full opacity 
