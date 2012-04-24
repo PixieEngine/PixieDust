@@ -7,7 +7,7 @@ The <code>Flickerable</code> module provides a method to flicker a sprite betwee
 @param {Object} I Instance variables
 @param {Core} self Reference to including object
 ###
-Tween = (I={}, ) ->
+Tween = (I={}, self) ->
   # Set some default properties
   Object.reverseMerge I,
     color: "blue"
