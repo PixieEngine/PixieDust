@@ -7078,33 +7078,287 @@ Cooldown = function(I, self) {
   };
 };
 ;
-var DebugVelocity;
+/**
+The Debuggable Module provides a simple API to easily display
+an object's properties onscreen. This mixin comes with predefined
+attribute filters so that you can exclude irrelevant data.
 
-DebugVelocity = function(I, self) {
+<code><pre>
+player = GameObject
+  x: 40
+  y: 14
+  spriteName: null
+  numericErrorProperty: NaN
+
+player.include Debuggable
+
+# sets up debug output for all player's properties
+# at the starting position (0, 0)
+player.debug
+  filter: 'all'
+</pre></code>
+
+Debuggable module
+@name Debuggable
+@module
+@constructor
+@param {Object} I Instance variables
+@param {Core} self Reference to including object
+*/
+var Debuggable;
+
+Debuggable = function(I, self) {
+  var COL_HEIGHT, FONT_SIZE, ROW_HEIGHT, debugBounds, debugVelocity, debugX, debugY, drawDebugLine, filterProperties, getPropertyRow, initialI, nan, processValue, sortedKeys;
   if (I == null) I = {};
+  COL_HEIGHT = 175;
+  ROW_HEIGHT = 9;
+  FONT_SIZE = 9;
+  debugX = 0;
+  debugY = 0;
   Object.reverseMerge(I, {
-    velocity: Point(0, 0)
+    debug: {
+      enabled: false,
+      color: 'black',
+      filter: 'all',
+      bounds: true,
+      velocity: true,
+      position: {
+        x: 0,
+        y: 0
+      }
+    }
   });
-  return self.bind('afterTransform', function(canvas) {
-    if (engine.I.debugEnabled) {
+  initialI = Object.extend({}, I);
+  debugBounds = function(canvas) {
+    return canvas.drawRect({
+      color: 'rgba(255, 0, 255, 0.4)',
+      bounds: self.bounds()
+    });
+  };
+  debugVelocity = function(canvas) {
+    if (I.velocity != null) {
       return canvas.withTransform(Matrix.translation(I.x, I.y), function(canvas) {
+        var color, length, thickness;
+        thickness = 4;
+        length = 10;
+        color = 'rgba(255, 0, 0, 0.5)';
         canvas.drawRect({
           x: 0,
-          y: -2,
-          width: I.velocity.x * 10,
-          height: 4,
-          color: 'rgba(255, 255, 255, 0.75)'
+          y: -thickness / 2,
+          width: I.velocity.x * length,
+          height: thickness,
+          color: color
         });
         return canvas.drawRect({
-          x: -2,
+          x: -thickness / 2,
           y: 0,
-          width: 4,
-          height: I.velocity.y * 10,
-          color: 'rgba(255, 255, 255, 0.75)'
+          width: thickness,
+          height: I.velocity.y * length,
+          color: color
         });
       });
     }
+  };
+  filterProperties = function(properties) {
+    var key, results, value;
+    results = {};
+    switch (I.debug.filter) {
+      case 'all':
+        results = properties;
+        break;
+      case 'undefined':
+        for (key in properties) {
+          value = properties[key];
+          if (!(value != null) || nan(value)) results[key] = value;
+        }
+        break;
+      case 'changed':
+        for (key in properties) {
+          value = properties[key];
+          if (initialI[key] !== value) results[key] = value;
+        }
+    }
+    return results;
+  };
+  sortedKeys = function() {
+    var key, keys, value, _ref;
+    keys = [];
+    _ref = filterProperties(I);
+    for (key in _ref) {
+      value = _ref[key];
+      keys.push(key);
+    }
+    return keys.sort();
+  };
+  nan = function(value) {
+    return typeof value === 'number' && isNaN(value);
+  };
+  drawDebugLine = function(text, canvas, x, y) {
+    canvas.drawText({
+      color: I.debug.color,
+      x: x + I.debug.position.x,
+      y: y + I.debug.position.y,
+      text: text
+    });
+    return debugY += ROW_HEIGHT;
+  };
+  getPropertyRow = function(key, value, canvas) {
+    var k, toStringArray, v;
+    if (typeof value === 'function') {} else if (Object.isObject(value)) {
+      drawDebugLine(key, canvas, debugX, debugY);
+      debugX += 8;
+      for (k in value) {
+        v = value[k];
+        getPropertyRow(k, v, canvas);
+      }
+      return debugX -= 8;
+    } else if (Object.isArray(value)) {
+      toStringArray = (function() {
+        var _i, _len, _results;
+        _results = [];
+        for (_i = 0, _len = value.length; _i < _len; _i++) {
+          v = value[_i];
+          if (Object.isObject(v)) {
+            _results.push(v.I["class"] || v.toString());
+          } else {
+            _results.push(v);
+          }
+        }
+        return _results;
+      })();
+      return drawDebugLine("" + key + "(" + value.length + "): " + toStringArray, canvas, debugX, debugY);
+    } else {
+      value = processValue(value);
+      return drawDebugLine("" + key + ": " + value, canvas, debugX, debugY);
+    }
+  };
+  processValue = function(value) {
+    var output, parsedNumber;
+    output = value;
+    try {
+      parsedNumber = parseFloat(value);
+    } catch (_error) {}
+    if (parsedNumber) {
+      if (typeof value !== 'string' && parsedNumber !== parseInt(value)) {
+        output = value.toFixed(3);
+      }
+    }
+    return output;
+  };
+  self.bind("update", function() {
+    if (justPressed['0']) return self.toggleDebug();
   });
+  self.bind("overlay", function(canvas) {
+    var key, _i, _len, _ref;
+    if (I.debug.enabled) {
+      canvas.font("" + FONT_SIZE + "px Monaco");
+      debugX = 0;
+      debugY = ROW_HEIGHT;
+      _ref = sortedKeys();
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        key = _ref[_i];
+        getPropertyRow(key, I[key], canvas);
+      }
+      debugX += COL_HEIGHT;
+      debugY = ROW_HEIGHT;
+      if (I.debug.bounds) debugBounds(canvas);
+      if (I.debug.velocity) return debugVelocity(canvas);
+    }
+  });
+  return {
+    /**
+    Enable debugging display for the calling GameObject.
+    
+    <code><pre>
+    player = GameObject
+      x: 40
+      y: 14
+      spriteName: null
+      numericErrorProperty: NaN
+    
+    player.include Debuggable
+    
+    # sets up debug output for all player's properties
+    # at the starting position (0, 0)
+    player.debug
+      filter: 'all'
+    
+    player.I.y = 45
+    
+    # sets up debug output for only properties that have
+    # changed since initialization. In this case only y
+    # would be displayed.
+    player.debug
+      filter: 'changed'
+    
+    # sets up debug output for properties that are <code>undefined</code>, 
+    # <code>null</code>, or <code>NaN</code>. In this case spriteName and
+    # numericErrorProperty would be displayed.
+    player.debug
+      filter: 'undefined'
+    
+    # sets up debug output using all possible configuration options
+    player.debug
+      bounds: true # set this to false to disable visual debugging of the object's bounding box
+      color: 'red' # color of debug text
+      filter: 'all'
+      x: 30 # x position to start printing debug information
+      y: 50 # y position to start printing debug information
+      velocity: true # set this to false to disable visual debugging of the object's velocity
+    </pre></code>
+    
+    @name debug
+    @methodOf Debuggable#
+    @param {Object} Options to configure debug output
+    @param {Boolean} bounds Whether or not to visually debug the object's bounds
+    @param {Color|String} color The color of the debug text
+    @param {String} filter Choices include 'all', 'changed', and 'undefined'
+    @param {Number} x The x position to start drawing the debug information
+    @param {Number} y The y position to start drawing the debug information
+    @param {Boolean} velocity Whether or not to visually debug the object's velocity
+    */
+    debug: function(options) {
+      var x, y;
+      if (options == null) options = {};
+      x = options.x, y = options.y;
+      if (x != null) I.debug.position.x = x;
+      if (y != null) I.debug.position.y = y;
+      Object.extend(I.debug, options);
+      return I.debug.enabled = true;
+    },
+    /**
+    Toggle display of debug information.
+    
+    <code><pre>
+    player = GameObject()
+    
+    player.include Debuggable
+    
+    # enables debug display
+    player.debug()
+    
+    # disables debug display
+    player.toggleDisable()
+    
+    # if false is passed to toggleDisplay, then debugging is disabled.  
+    player.toggleDisplay(false)
+    
+    # if true is passed to toggleDisplay, then debugging is enabled.
+    player.toggleDisplay(true)
+    </pre></code>
+    
+    @name toggleDebug
+    @methodOf Debuggable#
+    @param {Boolean} If true is passed then debugging is enabled, if false is passed then debugging is disabled, if nothing is passed, then debug state is toggled.
+    */
+    toggleDebug: function(newVal) {
+      if (newVal != null) {
+        return I.debug.enabled = newVal;
+      } else {
+        return I.debug.enabled = !I.debug.enabled;
+      }
+    }
+  };
 };
 ;
 /**
@@ -7853,127 +8107,6 @@ Engine.Collision = function(I, self) {
         }
       });
       return nearestHit;
-    }
-  };
-};
-;
-
-Engine.Debug = function(I, self) {
-  var COL_HEIGHT, FONT_SIZE, ROW_HEIGHT, debugX, debugY, drawDebugLine, getPropertyRow, processValue;
-  COL_HEIGHT = 175;
-  ROW_HEIGHT = 9;
-  FONT_SIZE = 9;
-  debugX = 0;
-  debugY = 0;
-  Object.reverseMerge(I, {
-    debuggedObjects: [],
-    debugEnabled: false,
-    debugColor: 'white'
-  });
-  drawDebugLine = function(text, canvas, x, y) {
-    canvas.drawText({
-      color: I.debugColor,
-      x: x,
-      y: y,
-      text: text
-    });
-    return debugY += ROW_HEIGHT;
-  };
-  getPropertyRow = function(key, value, canvas) {
-    var k, toStringArray, v;
-    if (typeof value === 'function') {} else if (Object.isObject(value)) {
-      drawDebugLine(key, canvas, debugX, debugY);
-      debugX += 8;
-      for (k in value) {
-        v = value[k];
-        getPropertyRow(k, v, canvas);
-      }
-      return debugX -= 8;
-    } else if (Object.isArray(value)) {
-      toStringArray = (function() {
-        var _i, _len, _results;
-        _results = [];
-        for (_i = 0, _len = value.length; _i < _len; _i++) {
-          v = value[_i];
-          if (Object.isObject(v)) {
-            _results.push(v.I["class"] || v.toString());
-          } else {
-            _results.push(v);
-          }
-        }
-        return _results;
-      })();
-      return drawDebugLine("" + key + "(" + value.length + "): " + toStringArray, canvas, debugX, debugY);
-    } else {
-      value = processValue(value);
-      return drawDebugLine("" + key + ": " + value, canvas, debugX, debugY);
-    }
-  };
-  processValue = function(value) {
-    var output, parsedNumber;
-    output = value;
-    try {
-      parsedNumber = parseFloat(value);
-    } catch (_error) {}
-    if (parsedNumber) {
-      if (typeof value !== 'string' && parsedNumber !== parseInt(value)) {
-        output = value.toFixed(3);
-      }
-    }
-    return output;
-  };
-  self.bind("update", function() {
-    if (justPressed['0']) return I.debugEnabled = !I.debugEnabled;
-  });
-  self.bind("draw", function(canvas) {
-    var obj, _i, _len, _ref, _results;
-    if (I.debugEnabled) {
-      _ref = I.debuggedObjects;
-      _results = [];
-      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-        obj = _ref[_i];
-        _results.push(canvas.drawRect({
-          color: 'rgba(255, 0, 255, 0.4)',
-          x: obj.I.x - obj.I.width / 2,
-          y: obj.I.y - obj.I.height / 2,
-          width: obj.I.width,
-          height: obj.I.height
-        }));
-      }
-      return _results;
-    }
-  });
-  self.bind("overlay", function(canvas) {
-    var key, obj, value, _i, _len, _ref, _ref2, _results;
-    if (I.debugEnabled) {
-      canvas.font("" + FONT_SIZE + "px Monaco");
-      debugX = 0;
-      debugY = ROW_HEIGHT;
-      _ref = I.debuggedObjects;
-      _results = [];
-      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-        obj = _ref[_i];
-        _ref2 = obj.I;
-        for (key in _ref2) {
-          value = _ref2[key];
-          getPropertyRow(key, value, canvas);
-        }
-        debugX += COL_HEIGHT;
-        _results.push(debugY = ROW_HEIGHT);
-      }
-      return _results;
-    }
-  });
-  return {
-    addDebug: function(obj) {
-      return I.debuggedObjects.push(obj);
-    },
-    debugBySelector: function(selector) {
-      I.debuggedObjects.clear();
-      return I.debuggedObjects = engine.find(selector);
-    },
-    removeDebug: function(obj) {
-      return I.debuggedObjects.remove(obj);
     }
   };
 };
