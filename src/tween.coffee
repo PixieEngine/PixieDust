@@ -23,3 +23,4 @@ Tween = (I={}, self) ->
         target: target
         start: I[property]
         easing: "linear"
+        s
