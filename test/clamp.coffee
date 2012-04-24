@@ -1,5 +1,6 @@
 module "Clamp"
 
-test 'it should ', ->
+test 'it should exist', ->
+  
 
 module()
