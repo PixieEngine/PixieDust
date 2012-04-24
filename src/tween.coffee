@@ -23,7 +23,9 @@ Tween = (I={}, self) ->
         I[property] = f(t)
 
   tween: (duration, properties) ->
-    # TODO Extract special propertie
+    # TODO Extract special properties
+    eas
+    
     for property, target of properties
       I.activeTweens[property] =
         end: target
