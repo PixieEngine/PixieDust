@@ -5,12 +5,8 @@ Clamp = (I={}, self) ->
   self.bind "update", ->
     for property in I.clamps
       property.value = property.value.clamp(property.min, property.max)
-      
-      {approachBy, target} = cooldownOptions
 
-      I[name] = I[name].approach(target, approachBy)
-
-  cooldown: (name, options={}) ->
+  clamp: (name, options={}) ->
     {target, approachBy, value} = options
 
     target ||= 0
