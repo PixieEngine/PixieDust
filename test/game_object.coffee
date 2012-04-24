@@ -39,7 +39,7 @@ test "[event] step", 2, ->
   gameObject.update()
 
 test "elapsedTime", ->
-  
+  gameObject = GameObje
   
 test "[event] destroy", 2, ->
   GameObject
