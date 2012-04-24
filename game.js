@@ -5303,6 +5303,30 @@ ClampBounds = function(I, self) {
   });
 };
 ;
+var Clampable;
+
+Clampable = function(I, self) {
+  if (I == null) I = {};
+  Object.reverseMerge(I, {
+    clampData: {}
+  });
+  self.bind("afterUpdate", function() {
+    var data, property, _ref, _results;
+    _ref = I.clampData;
+    _results = [];
+    for (property in _ref) {
+      data = _ref[property];
+      _results.push(I[property] = I[property].clamp(data.min, data.max));
+    }
+    return _results;
+  });
+  return {
+    clamp: function(data) {
+      return Object.extend(I.clampData, data);
+    }
+  };
+};
+;
 
 (function() {
   /**
@@ -8839,7 +8863,7 @@ GameObject = function(I) {
       return I.active = false;
     }
   });
-  defaultModules = [Bindable, Bounded, Cooldown, Drawable, Durable, Metered, TimedEvents, Tween];
+  defaultModules = [Bindable, Bounded, Clampable, Cooldown, Drawable, Durable, Metered, TimedEvents, Tween];
   modules = defaultModules.concat(I.includedModules.invoke('constantize'));
   modules = modules.without(I.excludedModules.invoke('constantize'));
   modules.each(function(Module) {
@@ -8948,13 +8972,15 @@ GameState = function(I) {
   });
   self.include(Bindable);
   self.bind("update", function(elapsedTime) {
-    var toRemove, _ref;
+    var toKeep, toRemove, _ref;
     I.updating = true;
+    I.objects.invoke("trigger", "beforeUpdate");
     _ref = I.objects.partition(function(object) {
-      return object.update();
-    }), I.objects = _ref[0], toRemove = _ref[1];
+      return object.update(elapsedTime);
+    }), toKeep = _ref[0], toRemove = _ref[1];
+    I.objects.invoke("trigger", "afterUpdate");
     toRemove.invoke("trigger", "remove");
-    I.objects = I.objects.concat(queuedObjects);
+    I.objects = toKeep.concat(queuedObjects);
     queuedObjects = [];
     return I.updating = false;
   });

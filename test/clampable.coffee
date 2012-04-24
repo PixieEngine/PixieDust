@@ -1,6 +1,6 @@
 module "Clampable"
 
-test "testing for equality", ->
+test "#clamp", ->
   o = GameObject
     x: 1500
 
@@ -11,7 +11,7 @@ test "testing for equality", ->
       min: 0
       max: max
 
-  o.update()
+  o.trigger "afterUpdate"
 
   equals o.I.x, max
 

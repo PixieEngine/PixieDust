@@ -52,12 +52,16 @@ GameState = (I={}) ->
   self.bind "update", (elapsedTime) ->
     I.updating = true
 
-    [I.objects, toRemove] = I.objects.partition (object) ->
-      object.update()
+    I.objects.invoke "trigger", "beforeUpdate"
+
+    [toKeep, toRemove] = I.objects.partition (object) ->
+      object.update(elapsedTime)
+
+    I.objects.invoke "trigger", "afterUpdate"
 
     toRemove.invoke "trigger", "remove"
 
-    I.objects = I.objects.concat(queuedObjects)
+    I.objects = toKeep.concat(queuedObjects)
     queuedObjects = []
 
     I.updating = false

@@ -51,6 +51,7 @@ Metered = (I={}, self) ->
   self.bind 'overlay', (canvas) ->
     for name, meterData of I.meters
       {
+        backgroundColor,
         borderColor,
         borderWidth,
         color,
@@ -76,6 +77,13 @@ Metered = (I={}, self) ->
           x: x
           y: y + 10
           text: text || name.capitalize()     
+      
+      canvas.drawRect
+        color: backgroundColor
+        x: x
+        y: y + 15
+        width: width
+        height: height       
       
       canvas.drawRect
         color: color
@@ -138,6 +146,7 @@ Metered = (I={}, self) ->
   ###          
   meter: (name, options={}) ->
     Object.reverseMerge options,
+      backgroundColor: 'black'
       borderColor: 'white'
       borderWidth: 1.5
       color: 'green'
