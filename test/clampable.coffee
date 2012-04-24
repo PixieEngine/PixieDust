@@ -8,8 +8,9 @@ test "testing for equality", ->
       min: 0
       max: 100
 
-  # Test for equality of two objects
-  equals one, 1
+  o.update()
+  
+  o
 
 # Clear out the module
 module()
