@@ -10,9 +10,7 @@ The <code>Tween</code> module provides a method to tween object properties.
 Tween = (I={}, self) ->
   # Set some default properties
   Object.reverseMerge I,
-    color: "blue"
-    height: 32
-    width: 32
+    activeTweens: ->
     # spriteName: "block" # Use the name of a sprite in the images folder
 
   # Inherit from game object
