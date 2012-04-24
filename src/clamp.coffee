@@ -2,7 +2,7 @@ Clamp = (I={}, self) ->
   Object.reverseMerge I,
     clamps: {}
     
-      self.bind "update", ->
+  self.bind "update", ->
     for name, cooldownOptions of I.cooldowns
       {approachBy, target} = cooldownOptions
 
