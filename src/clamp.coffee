@@ -1,6 +1,6 @@
 Clamp = (I={}, self) ->
   Object.reverseMerge I,
-    clamps: []
+    clamps: {}
     
   self.bind "update", ->
     for property in I.clamps
