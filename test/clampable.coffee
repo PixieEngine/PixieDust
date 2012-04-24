@@ -10,7 +10,7 @@ test "testing for equality", ->
 
   o.update()
   
-  equals o.I.x
+  equals o.I.x, max
 
 # Clear out the module
 module()
