@@ -49,7 +49,7 @@ GameState = (I={}) ->
   self.include Bindable
 
   # Add events and methods here
-  self.bind "update", ->
+  self.bind "update", () ->
     I.updating = true
 
     [I.objects, toRemove] = I.objects.partition (object) ->
