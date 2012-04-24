@@ -12,6 +12,5 @@ test "should allow for simple linear tweening", ->
 
     equals o.I.x, i
 
-
 # Clear out the module
 module()
