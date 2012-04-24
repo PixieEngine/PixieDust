@@ -23,8 +23,7 @@ Tween = (I={}, self) ->
         I[property] = f(t)
 
   ###*
-  A convenient way to set the flicker instance variables on a sprite. You can modify the
-  instance variables by hand but the suggested way to do it is through this method.
+  Mod
 
   <code><pre>
   player = GameObject()
