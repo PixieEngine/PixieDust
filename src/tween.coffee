@@ -18,4 +18,5 @@ Tween = (I={}, self) ->
 
       
   tween: (duration, properties) ->
-    for property, tar
+    for property, target of properties
+      
