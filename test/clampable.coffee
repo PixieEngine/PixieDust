@@ -6,7 +6,7 @@ test "testing for equality", ->
   o.clamp
     x:
       min: 0
-      
+      max: 100
 
   # Test for equality of two objects
   equals one, 1
