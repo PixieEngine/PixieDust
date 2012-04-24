@@ -8,7 +8,6 @@ The <code>Tween</code> module provides a method to tween object properties.
 @param {Core} self Reference to including object
 ###
 Tween = (I={}, self) ->
-  # Set some default properties
   Object.reverseMerge I,
     activeTweens: {}
 
