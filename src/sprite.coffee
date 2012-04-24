@@ -47,8 +47,9 @@ draw anything to the screen until the image has been loaded.
       )
 
     ###*
-    Draw this sprite on the given canvas tiled to the x, y, width, and height 
-.
+    Draw this sprite on the given canvas tiled to the x, y, 
+width, and height 
+    dimensions specified.
 
     @name fill
     @methodOf Sprite#
