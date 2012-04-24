@@ -14,9 +14,8 @@ Tween = (I={}, self) ->
   # Add events and methods here
   self.bind "update", ->
     for property, data of I.activeTweens
-      I[property] = 10
+      I[property] = E
 
-      
   tween: (duration, properties) ->
     for property, target of properties
       activeTweens[property] =
