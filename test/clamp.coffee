@@ -11,15 +11,15 @@ test 'it should clamp value between its provided min and max', ->
   obj = GameObject
     x: 105
     
-  obj.incude Clamp
+  obj.include Clamp
   
   obj.clamp
     x: 
       min: 0
       max: 100
       
-  obj.update
+  obj.update()
   
-  equals obj.I.x, 10
+  equals obj.I.x, 100
 
 module()
