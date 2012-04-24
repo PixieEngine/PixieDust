@@ -150,7 +150,7 @@
     step = ->
       if !I.paused || frameAdvance
         msPerFrame = (1000 / I.FPS)
-        update()
+        update((1000 / I.FPS))
         I.age += 1
 
       draw()
