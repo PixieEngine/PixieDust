@@ -36,7 +36,7 @@ Tween = (I={}, self) ->
 
   @name tween
   @methodOf Tween#
-  @param {Number} duration How long (in frames) until the object reaches 
+  @param {Number} duration How long (in frames) until the object's properties reache
   @param {Number} [frequency=3] The number of frames in between opacity changes
   @param {Number} [alpha=0.5] The alpha value to flicker to
   ###
