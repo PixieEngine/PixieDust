@@ -18,6 +18,8 @@ test 'it should clamp value between its provided min and max', ->
       min: 0
       max: 100
       
+  obj.update
   
+  equals obj.I.x, 10
 
 module()
