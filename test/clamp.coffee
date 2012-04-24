@@ -8,5 +8,7 @@ test 'it should exist', ->
   obj.include Clamp
   
   ok obj.clamp
+  
+test 'it should clam'
 
 module()
