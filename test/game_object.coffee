@@ -41,7 +41,8 @@ test "[event] step", 2, ->
 test "elapsedTime", ->
   gameObject = GameObject()
   
-  gameObject.bind "update" ()->
+  gameObject.bind "update", (t) ->
+    
   
 test "[event] destroy", 2, ->
   GameObject
