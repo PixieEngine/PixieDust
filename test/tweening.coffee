@@ -10,6 +10,7 @@ test "should allow for simple tweening", ->
   10.times (i) ->
     o.update()
 
+    equals o.I.x
   
 
 test "testing boolean values", ->
