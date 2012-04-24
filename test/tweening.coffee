@@ -5,6 +5,8 @@ test "should allow for simple tweening", ->
     x: 0
     
   o.tween 10,
+    x: 10
+    
   
 
   # Test for equality of two objects
