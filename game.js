@@ -7569,10 +7569,10 @@ Emitterable = function(I, self) {
       }
       if (running) return window.requestAnimationFrame(animLoop);
     };
-    update = function() {
-      self.trigger("beforeUpdate");
-      self.trigger("update");
-      return self.trigger("afterUpdate");
+    update = function(elapsedTime) {
+      self.trigger("beforeUpdate", elapsedTime);
+      self.trigger("update", elapsedTime);
+      return self.trigger("afterUpdate", elapsedTime);
     };
     draw = function() {
       var canvas;
@@ -7582,8 +7582,10 @@ Emitterable = function(I, self) {
       return self.trigger("overlay", I.canvas);
     };
     step = function() {
+      var msPerFrame;
       if (!I.paused || frameAdvance) {
-        update();
+        msPerFrame = 1000 / I.FPS;
+        update(msPerFrame);
         I.age += 1;
       }
       return draw();
@@ -8807,10 +8809,10 @@ GameObject = function(I) {
     @name update
     @methodOf GameObject#
     */
-    update: function() {
+    update: function(elapsedTime) {
       if (I.active) {
-        self.trigger('step');
-        self.trigger('update');
+        self.trigger('step', elapsedTime);
+        self.trigger('update', elapsedTime);
         I.age += 1;
       }
       return I.active;
@@ -8945,7 +8947,7 @@ GameState = function(I) {
     }
   });
   self.include(Bindable);
-  self.bind("update", function() {
+  self.bind("update", function(elapsedTime) {
     var toRemove, _ref;
     I.updating = true;
     _ref = I.objects.partition(function(object) {
