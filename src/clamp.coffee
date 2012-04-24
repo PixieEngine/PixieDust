@@ -6,7 +6,7 @@ Clamp = (I={}, self) ->
     for property in I.clamps
       property.value = property.value.clamp(property.min, property.max)
 
-  clamp: (property) ->
+  clamp: (properties) ->
     {target, approachBy, value} = options
 
     target ||= 0
