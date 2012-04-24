@@ -136,7 +136,7 @@
         window.requestAnimationFrame(animLoop)
 
     update = (elapsedTime) ->
-      self.trigger "beforeUpdate"
+      self.trigger "beforeUpdate", ela
       self.trigger "update"
       self.trigger "afterUpdate"
 
