@@ -4,7 +4,7 @@ Clamp = (I={}, self) ->
     
   self.bind "update", ->
     for property in I.clamps
-      property
+      property.value = property.value.cl
       
       {approachBy, target} = cooldownOptions
 
