@@ -130,7 +130,7 @@ GameObject = (I) ->
     @name update
     @methodOf GameObject#
     ###
-    update: (elapsedTi) ->
+    update: (elapsedTime) ->
       if I.active
         self.trigger('step')
         self.trigger('update')
