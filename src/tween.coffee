@@ -16,7 +16,7 @@ Tween = (I={}, self) ->
 
   # Add events and methods here
   self.bind "update", ->
-    for property, data of
+    for property, data of I.activeTweens
 
   # We must always return self as the last line
   return self
