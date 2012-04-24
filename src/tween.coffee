@@ -37,8 +37,7 @@ Tween = (I={}, self) ->
   @name tween
   @methodOf Tween#
   @param {Number} duration How long (in frames) until the object's properties reach their final values.
-  @param {Number} [frequency=3] The number of frames in between opacity changes
-  @param {Number} [alpha=0.5] The alpha value to flicker to
+  @param {Object} 
   ###
   tween: (duration, properties) ->
     properties = Object.extend({}, properties) # Make a local copy
