@@ -13,12 +13,6 @@ test "should allow for simple tweening", ->
     equals o.I.x, i
 
 
-test "testing boolean values", ->
-  someFunction = ->
-    return true
-
-  # Test if someFunction returns true
-  ok someFunction()
 
 # Clear out the module
 module()
