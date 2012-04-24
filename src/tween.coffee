@@ -15,7 +15,7 @@ Tween = (I={}, self) ->
   self.bind "update", ->
     for property, data of I.activeTweens
       f = Easing[data.easing]()
-      I[property] = 
+      I[property] = f
 
   tween: (duration, properties) ->
     for property, target of properties
