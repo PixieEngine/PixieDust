@@ -15,5 +15,4 @@ test "testing for equality", ->
 
   equals o.I.x, max
 
-# Clear out the module
 module()
