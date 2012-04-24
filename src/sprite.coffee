@@ -46,6 +46,15 @@ draw anything to the screen until the image has been loaded.
         height
       )
 
+    ###*
+    Draw this sprite on the given canvas at the given position.
+
+    @name draw
+    @methodOf Sprite#
+    @param {PowerCanvas} canvas Reference to the canvas to draw the sprite on
+    @param {Number} x Position on the x axis to draw the sprite
+    @param {Number} y Position on the y axis to draw the sprite
+    ###      
     fill: (canvas, x, y, width, height, repeat="repeat") ->
       pattern = canvas.createPattern(image, repeat)
       canvas.drawRect({x, y, width, height, color: pattern})

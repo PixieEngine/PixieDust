@@ -9229,11 +9229,11 @@ Metered = function(I, self) {
     return _results;
   };
   self.bind('overlay', function(canvas) {
-    var borderColor, borderWidth, color, font, height, meterData, name, nameColor, radius, ratio, show, showName, text, width, x, y, _ref, _ref2;
+    var backgroundColor, borderColor, borderWidth, color, font, height, meterData, name, nameColor, radius, ratio, show, showName, text, width, x, y, _ref, _ref2;
     _ref = I.meters;
     for (name in _ref) {
       meterData = _ref[name];
-      borderColor = meterData.borderColor, borderWidth = meterData.borderWidth, color = meterData.color, font = meterData.font, height = meterData.height, nameColor = meterData.nameColor, (_ref2 = meterData.position, x = _ref2.x, y = _ref2.y), radius = meterData.radius, show = meterData.show, showName = meterData.showName, text = meterData.text, width = meterData.width;
+      backgroundColor = meterData.backgroundColor, borderColor = meterData.borderColor, borderWidth = meterData.borderWidth, color = meterData.color, font = meterData.font, height = meterData.height, nameColor = meterData.nameColor, (_ref2 = meterData.position, x = _ref2.x, y = _ref2.y), radius = meterData.radius, show = meterData.show, showName = meterData.showName, text = meterData.text, width = meterData.width;
       if (!show) return;
       ratio = I[name] / I["max" + (name.capitalize())];
       if (showName || text) {
@@ -9245,6 +9245,13 @@ Metered = function(I, self) {
           text: text || name.capitalize()
         });
       }
+      canvas.drawRect({
+        color: backgroundColor,
+        x: x,
+        y: y + 15,
+        width: width,
+        height: height
+      });
       canvas.drawRect({
         color: color,
         x: x,
@@ -9311,6 +9318,7 @@ Metered = function(I, self) {
     meter: function(name, options) {
       if (options == null) options = {};
       Object.reverseMerge(options, {
+        backgroundColor: 'black',
         borderColor: 'white',
         borderWidth: 1.5,
         color: 'green',
