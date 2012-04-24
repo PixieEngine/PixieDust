@@ -7,10 +7,10 @@ test "should allow for simple linear tweening", ->
   o.tween 10,
     x: 10
     
-  10.times (i) ->
+  11.times (i) ->
     o.update()
 
-    equals o.I.x, i + 1
+    equals o.I.x, i
 
 
 # Clear out the module
