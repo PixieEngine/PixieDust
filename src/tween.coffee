@@ -14,7 +14,7 @@ Tween = (I={}, self) ->
   # Add events and methods here
   self.bind "update", ->
     for property, data of I.activeTweens
-      I[property] = E
+      I[property] = Easing[]
 
   tween: (duration, properties) ->
     for property, target of properties
