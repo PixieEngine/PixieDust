@@ -22,4 +22,4 @@ Tween = (I={}, self) ->
       activeTweens[property] =
         target: target
         start: I[property]
-        
+        easing: ""
