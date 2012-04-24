@@ -138,7 +138,7 @@
     update = (elapsedTime) ->
       self.trigger "beforeUpdate", elapsedTime
       self.trigger "update", elapsedTime
-      self.trigger "afterUpdate"
+      self.trigger "afterUpdate", elapsedTime
 
     draw = ->
       return unless canvas = I.canvas
