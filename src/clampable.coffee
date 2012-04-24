@@ -8,7 +8,6 @@ Clampable = (I={}, self) ->
 
   # Add events and methods here
   self.bind "afterUpdate", ->
-    ; # Add update method behavior
 
   # We must always return self as the last line
   return self
