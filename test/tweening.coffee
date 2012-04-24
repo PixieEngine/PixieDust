@@ -10,8 +10,8 @@ test "should allow for simple tweening", ->
   10.times (i) ->
     o.update()
 
-    equals o.I.x
-  
+    equals o.I.x, i
+
 
 test "testing boolean values", ->
   someFunction = ->
