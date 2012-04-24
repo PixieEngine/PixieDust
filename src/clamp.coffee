@@ -4,7 +4,7 @@ Clamp = (I={}, self) ->
     
   self.bind "update", ->
     for property in I.clamps
-      property.name = property.value.clamp(property.min, property.max)
+      property.name = property.name.clamp(property.min, property.max)
 
   clamp: (properties) ->
     
