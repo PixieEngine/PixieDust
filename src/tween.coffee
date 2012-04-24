@@ -27,12 +27,12 @@ Tween = (I={}, self) ->
 
     easing = properties.easing || "linear"
     delete properties.easing
-    
+
     for property, target of properties
       I.activeTweens[property] =
         end: target
         start: I[property]
-        easing: "linear"
+        easing: easing
         duration: duration
         startTime: I.age
         endTime: I.age + duration
