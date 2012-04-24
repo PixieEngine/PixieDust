@@ -27,7 +27,7 @@ Tween = (I={}, self) ->
 
     # TODO Extract special properties
     easing = properties.easing || "linear"
-    
+    delete pro
     
     for property, target of properties
       I.activeTweens[property] =
