@@ -1,7 +1,11 @@
 module "Clampable"
 
 test "testing for equality", ->
-  o = Gam
+  o = GameObject()
+  
+  o.clamp
+    x:
+      
 
   # Test for equality of two objects
   equals one, 1
