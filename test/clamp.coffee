@@ -9,6 +9,6 @@ test 'it should exist', ->
   
   ok obj.clamp
   
-test 'it should clam'
+test 'it should clamp value '
 
 module()
