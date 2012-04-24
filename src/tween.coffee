@@ -28,7 +28,9 @@ Tween = (I={}, self) ->
   <code><pre>
   player = GameObject()
 
-  player.flicker()
+  player.tween
+    x: 
+
   # => This causes the sprite to flicker between full opacity 
   # => and 50% opacity every 3 frames for 30 frames
 
