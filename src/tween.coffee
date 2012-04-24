@@ -23,7 +23,7 @@ Tween = (I={}, self) ->
         I[property] = f(t)
 
   tween: (duration, properties) ->
-    properties = Object.extend({}, properties) # Make a local com
+    properties = Object.extend({}, properties) # Make a local copy
     # TODO Extract special properties
     easing = properties.easing || "linear"
     
