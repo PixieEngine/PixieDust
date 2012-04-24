@@ -31,8 +31,9 @@ Tween = (I={}, self) ->
   player.tween 30,
     x: 50
     y: 50
-    easing: ";"
+    easing: "quadratic"
   
+
 
   player.flicker(90, 5, 0.3)
   # => This causes the sprite to flicker between full opacity
