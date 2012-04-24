@@ -1,5 +1,5 @@
 ###*
-The <code>Tween</code> module provides a method to flicker a sprite between solid and 50% opacity. 
+The <code>Tween</code> module provides a method to tween objec. 
 
 @name Flickerable
 @module
