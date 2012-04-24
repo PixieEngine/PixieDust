@@ -16,7 +16,7 @@ Tween = (I={}, self) ->
     for property, data of I.activeTweens
       if I.age >= data.endTime
         I[property] = data.end
-        delete activeTweens[property]
+        delete I.activeTweens[property]
       else
         f = Easing[data.easing](data.start, data.end)
         t = (I.age - data.startTime) / data.duration
