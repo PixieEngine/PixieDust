@@ -16,11 +16,10 @@ Tween = (I={}, self) ->
     for property, data of I.activeTweens
       if I.age >= data.endTime
         I[property] = data.end
-
       else
         f = Easing[data.easing](data.start, data.end)
         t = (I.age - data.startTime) / data.duration
-        I[property] = f()
+        I[property] = f(t)
 
   tween: (duration, properties) ->
     for property, target of properties
