@@ -16,7 +16,7 @@ Tween = (I={}, self) ->
 
   # Add events and methods here
   self.bind "update", ->
-    ; # Add update method behavior
+    for 
 
   # We must always return self as the last line
   return self
