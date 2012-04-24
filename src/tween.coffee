@@ -31,7 +31,7 @@ Tween = (I={}, self) ->
   player.tween 30,
     x: 50
     y: 50
-  
+    easing: 
   
 
   player.flicker(90, 5, 0.3)
