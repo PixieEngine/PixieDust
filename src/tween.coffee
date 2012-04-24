@@ -23,6 +23,7 @@ Tween = (I={}, self) ->
         I[property] = f(t)
 
   tween: (duration, properties) ->
+    # T
     for property, target of properties
       I.activeTweens[property] =
         end: target
