@@ -6,7 +6,7 @@ test "should allow for simple linear tweening", ->
     
   o.tween 10,
     x: 10
-    easing: "sinusoidal"
+    easing: "quadratic"
     
   11.times (i) ->
     o.update()
