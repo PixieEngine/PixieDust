@@ -7,7 +7,7 @@ Clampable = (I={}, self) ->
   self = GameObject(I)
 
   # Add events and methods here
-  self.bind "update", ->
+  self.bind "afterUpdate", ->
     ; # Add update method behavior
 
   # We must always return self as the last line
