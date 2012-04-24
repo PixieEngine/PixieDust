@@ -1,4 +1,4 @@
-Clam = (I={}, self) ->
+Clamp = (I={}, self) ->
   Object.reverseMerge I,
     x: 0
     y: 0
