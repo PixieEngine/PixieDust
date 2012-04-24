@@ -2,7 +2,7 @@ module "Clampable"
 
 test "testing for equality", ->
   o = GameObject
-    x: 
+    x: 1500
   
   max = 100
   
