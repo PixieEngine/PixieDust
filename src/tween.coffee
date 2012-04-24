@@ -25,9 +25,8 @@ Tween = (I={}, self) ->
   tween: (duration, properties) ->
     properties = Object.extend({}, properties) # Make a local copy
 
-    # TODO Extract special properties
     easing = properties.easing || "linear"
-    delete pro
+    delete properties.easing
     
     for property, target of properties
       I.activeTweens[property] =
