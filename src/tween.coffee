@@ -17,4 +17,5 @@ Tween = (I={}, self) ->
       I[property] = 10
 
       
-  tween: (t, properties) ->
+  tween: (duration, properties) ->
+    
