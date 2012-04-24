@@ -3,6 +3,8 @@ module "Clampable"
 test "testing for equality", ->
   o = GameObject()
   
+  max = 100
+  
   o.clamp
     x:
       min: 0
