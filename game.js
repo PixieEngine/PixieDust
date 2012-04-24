@@ -9612,6 +9612,19 @@ draw anything to the screen until the image has been loaded.
       draw: function(canvas, x, y) {
         return canvas.drawImage(image, sourceX, sourceY, width, height, x, y, width, height);
       },
+      /**
+      Draw this sprite on the given canvas tiled to the x, y, 
+      width, and height dimensions specified.
+      
+      @name fill
+      @methodOf Sprite#
+      @param {PowerCanvas} canvas Reference to the canvas to draw the sprite on
+      @param {Number} x Position on the x axis to draw the sprite
+      @param {Number} y Position on the y axis to draw the sprite
+      @param {Number} width How far to tile the sprite on the x-axis
+      @param {Number} height How far to tile the sprite on the y-axis
+      @param {String} repeat Repeat options. Can be `repeat-x`, `repeat-y`, `no-repeat`, or `repeat`. Defaults to `repeat`
+      */
       fill: function(canvas, x, y, width, height, repeat) {
         var pattern;
         if (repeat == null) repeat = "repeat";

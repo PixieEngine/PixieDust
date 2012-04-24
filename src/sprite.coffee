@@ -57,7 +57,7 @@ draw anything to the screen until the image has been loaded.
     @param {Number} y Position on the y axis to draw the sprite
     @param {Number} width How far to tile the sprite on the x-axis
     @param {Number} height How far to tile the sprite on the y-axis
-    @param {String} repeat Repeat options. Can be `repeat-x`, `repeat-y`, `no-repeat`
+    @param {String} repeat Repeat options. Can be `repeat-x`, `repeat-y`, `no-repeat`, or `repeat`. Defaults to `repeat`
     ###      
     fill: (canvas, x, y, width, height, repeat="repeat") ->
       pattern = canvas.createPattern(image, repeat)
