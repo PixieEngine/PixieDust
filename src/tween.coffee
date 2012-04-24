@@ -19,5 +19,5 @@ Tween = (I={}, self) ->
     for property, data of I.activeTweens
       I[property] = 10
 
-  # We must always return self as the last line
-  return self
+      
+  
