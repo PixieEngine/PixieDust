@@ -1,5 +1,5 @@
 module "Clamp"
 
-test ''
+test 'it should ', ->
 
 module()
