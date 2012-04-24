@@ -18,4 +18,4 @@ Tween = (I={}, self) ->
 
       
   tween: (duration, properties) ->
-    for prope
+    for property, tar
