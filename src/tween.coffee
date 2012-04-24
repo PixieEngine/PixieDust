@@ -23,7 +23,7 @@ Tween = (I={}, self) ->
 
   tween: (duration, properties) ->
     for property, target of properties
-      activeTweens[property] =
+      I.activeTweens[property] =
         end: target
         start: I[property]
         easing: "linear"
