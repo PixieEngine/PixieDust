@@ -21,4 +21,5 @@ Tween = (I={}, self) ->
     for property, target of properties
       activeTweens[property] =
         target: target
-        start: I[p]
+        start: I[property]
+        
