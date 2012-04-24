@@ -32,10 +32,9 @@ Tween = (I={}, self) ->
     x: 50
     y: 50
     easing: "quadratic"
-
   </pre></code>
 
-  @name flicker
+  @name tween
   @methodOf Flickerable#
   @param {Number} [duration=30] How long the effect lasts
   @param {Number} [frequency=3] The number of frames in between opacity changes
