@@ -37,7 +37,7 @@ Tween = (I={}, self) ->
   @name tween
   @methodOf Tween#
   @param {Number} duration How long (in frames) until the object's properties reach their final values.
-  @param {Object} properties Which properties to tween.  
+  @param {Object} properties Which properties to tween. Set the `easing` 
   ###
   tween: (duration, properties) ->
     properties = Object.extend({}, properties) # Make a local copy
