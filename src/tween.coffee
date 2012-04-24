@@ -16,6 +16,8 @@ Tween = (I={}, self) ->
     for property, data of I.activeTweens
       if I.age >= data.endTime
         I[property] = data.end
+
+        
       f = Easing[data.easing](data.start, data.end)
       I[property] = f()
 
