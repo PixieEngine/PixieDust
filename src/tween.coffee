@@ -19,7 +19,7 @@ Tween = (I={}, self) ->
 
       else
         f = Easing[data.easing](data.start, data.end)
-        I[property] = f()
+        I[property] = f(I.age - data.star)
 
   tween: (duration, properties) ->
     for property, target of properties
