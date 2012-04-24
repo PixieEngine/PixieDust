@@ -1,7 +1,7 @@
 ###*
-The <code>Tween</code> module provides a method to tween objec. 
+The <code>Tween</code> module provides a method to tween object properties. 
 
-@name Flickerable
+@name Tween
 @module
 @constructor
 @param {Object} I Instance variables
