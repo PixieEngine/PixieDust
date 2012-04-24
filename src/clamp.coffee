@@ -1,2 +1,2 @@
 Clamp = (I={}, self) ->
-  
+  Object.
