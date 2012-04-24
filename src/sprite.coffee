@@ -47,9 +47,10 @@ draw anything to the screen until the image has been loaded.
       )
 
     ###*
-    Draw this sprite on the given canvas at the given position.
+    Draw this sprite on the given canvas tiled to the x, y, width, and height 
+.
 
-    @name draw
+    @name fill
     @methodOf Sprite#
     @param {PowerCanvas} canvas Reference to the canvas to draw the sprite on
     @param {Number} x Position on the x axis to draw the sprite
