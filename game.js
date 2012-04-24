@@ -8837,7 +8837,7 @@ GameObject = function(I) {
       return I.active = false;
     }
   });
-  defaultModules = [Bindable, Bounded, Cooldown, Drawable, Durable, Metered, TimedEvents];
+  defaultModules = [Bindable, Bounded, Cooldown, Drawable, Durable, Metered, TimedEvents, Tween];
   modules = defaultModules.concat(I.includedModules.invoke('constantize'));
   modules = modules.without(I.excludedModules.invoke('constantize'));
   modules.each(function(Module) {
@@ -9848,6 +9848,62 @@ TitleScreen = function(I) {
     });
   });
   return self;
+};
+;
+/**
+The <code>Tween</code> module provides a method to tween object properties. 
+
+@name Tween
+@module
+@constructor
+@param {Object} I Instance variables
+@param {Core} self Reference to including object
+*/
+var Tween;
+
+Tween = function(I, self) {
+  if (I == null) I = {};
+  Object.reverseMerge(I, {
+    activeTweens: {}
+  });
+  self.bind("update", function() {
+    var data, f, property, t, _ref, _results;
+    _ref = I.activeTweens;
+    _results = [];
+    for (property in _ref) {
+      data = _ref[property];
+      if (I.age >= data.endTime) {
+        I[property] = data.end;
+        _results.push(delete I.activeTweens[property]);
+      } else {
+        f = Easing[data.easing](data.start, data.end);
+        t = (I.age - data.startTime) / data.duration;
+        _results.push(I[property] = f(t));
+      }
+    }
+    return _results;
+  });
+  return {
+    tween: function(duration, properties) {
+      var easing, property, target, _results;
+      properties = Object.extend({}, properties);
+      easing = properties.easing || "linear";
+      delete properties.easing;
+      _results = [];
+      for (property in properties) {
+        target = properties[property];
+        _results.push(I.activeTweens[property] = {
+          end: target,
+          start: I[property],
+          easing: easing,
+          duration: duration,
+          startTime: I.age,
+          endTime: I.age + duration
+        });
+      }
+      return _results;
+    }
+  };
 };
 ;
 ;
