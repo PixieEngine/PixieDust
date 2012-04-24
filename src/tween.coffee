@@ -17,4 +17,4 @@ Tween = (I={}, self) ->
       I[property] = 10
 
       
-  
+  tween: () ->
