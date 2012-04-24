@@ -4,7 +4,8 @@ test "should allow for simple tweening", ->
   o = GameObject
     x: 0
     
-  o
+  o.tween 10,
+  
 
   # Test for equality of two objects
   equals one, 1
