@@ -1,2 +1,3 @@
 Clamp = (I={}, self) ->
-  Object.
+  Object.reverseMerge I,
+  
