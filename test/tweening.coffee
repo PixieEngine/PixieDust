@@ -8,7 +8,7 @@ test "should allow for simple tweening", ->
     x: 10
     
   10.times ->
-    o.
+    o.update()
 
   # Test for equality of two objects
   equals one, 1
