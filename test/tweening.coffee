@@ -10,8 +10,7 @@ test "should allow for simple tweening", ->
   10.times (i) ->
     o.update()
 
-  # Test for equality of two objects
-  equals one, 1
+  
 
 test "testing boolean values", ->
   someFunction = ->
