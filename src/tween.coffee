@@ -14,13 +14,13 @@ Tween = (I={}, self) ->
   # Add events and methods here
   self.bind "update", ->
     for property, data of I.activeTweens
-      f = Easing[data.easing](data.start, data.)
+      f = Easing[data.easing](data.start, data.end)
       I[property] = f()
 
   tween: (duration, properties) ->
     for property, target of properties
       activeTweens[property] =
-        target: target
+        end: target
         start: I[property]
         easing: "linear"
         startTime: I.age
