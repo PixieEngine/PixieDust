@@ -9884,6 +9884,23 @@ Tween = function(I, self) {
     return _results;
   });
   return {
+    /**
+    Modify the objects properties over time.
+    
+    <code><pre>
+    player = GameObject()
+    
+    player.tween 30,
+      x: 50
+      y: 50
+      easing: "quadratic"
+    </pre></code>
+    
+    @name tween
+    @methodOf Tween#
+    @param {Number} duration How long (in frames) until the object's properties reach their final values.
+    @param {Object} properties Which properties to tween. Set the `easing` property to specify the easing function.
+    */
     tween: function(duration, properties) {
       var easing, property, target, _results;
       properties = Object.extend({}, properties);
