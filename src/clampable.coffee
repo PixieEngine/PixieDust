@@ -1,7 +1,7 @@
 ###*
 The <code>Tween</code> module provides a method to tween object properties. 
 
-@name Tween
+@name Clampable
 @module
 @constructor
 @param {Object} I Instance variables
