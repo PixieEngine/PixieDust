@@ -16,7 +16,7 @@ Clampable = (I={}, self) ->
       I[property] = I[property].clamp(data.min, data.max)
 
   ###
-  Keep an objects 
+  Keep an objects attribute within a given range.
 
   @name clamp
   @methodOf Clampable#
