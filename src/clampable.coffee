@@ -21,7 +21,7 @@ Clampable = (I={}, self) ->
   <code><pre>
   player = GameObject()
 
-  player.tween 30,
+  player.cla 30,
     x: 50
     y: 50
     easing: "quadratic"
