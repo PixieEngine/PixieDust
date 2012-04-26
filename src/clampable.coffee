@@ -24,7 +24,7 @@ Clampable = (I={}, self) ->
     Object.extend(I.clampData, data)
 
   ###*
-  Helper to clamp the `x` and `y` properties of the oboj
+  Helper to clamp the `x` and `y` properties of the object to be within a r
 
   @name clampToBounds
   @methodOf Clampable#
