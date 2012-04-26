@@ -10,4 +10,4 @@ Clampable = (I={}, self) ->
     Object.extend(I.clampData, data)
 
   clampToBounds: (bounds) ->
-    bounds ||= Rectangle x: 0, 0, 
+    bounds ||= Rectangle x: 0, y: 0, A
