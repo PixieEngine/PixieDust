@@ -8,7 +8,7 @@ Clampable = (I={}, self) ->
 
   ###
   @name clamp
-  @methodOf Cla
+  @methodOf Clampable#
   ###
   clamp: (data) ->
     Object.extend(I.clampData, data)
