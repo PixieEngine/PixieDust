@@ -1,3 +1,4 @@
+
 Clampable = (I={}, self) ->
   Object.reverseMerge I,
     clampData: {}
