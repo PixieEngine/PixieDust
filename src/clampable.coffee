@@ -8,3 +8,5 @@ Clampable = (I={}, self) ->
 
   clamp: (data) ->
     Object.extend(I.clampData, data)
+
+  clampToBounds: ()->
