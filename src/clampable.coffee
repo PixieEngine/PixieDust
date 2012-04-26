@@ -6,6 +6,8 @@ Clampable = (I={}, self) ->
     for property, data of I.clampData
       I[property] = I[property].clamp(data.min, data.max)
 
+  ###
+
   clamp: (data) ->
     Object.extend(I.clampData, data)
 
