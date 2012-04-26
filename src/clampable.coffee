@@ -25,9 +25,6 @@ Clampable = (I={}, self) ->
     health:
       min: 0
       max: 100
-    x: 50
-    y: 50
-    easing: "quadratic"
   </pre></code>
 
   @name clamp
