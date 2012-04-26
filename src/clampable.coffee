@@ -12,8 +12,9 @@ Clampable = (I={}, self) ->
   clampToBounds: (bounds) ->
     bounds ||= Rectangle x: 0, y: 0, width: App.width, height: App.height
     
-    self.clamp "x",
-      min: bounds.x + I.width/2
-      max: bounds.width - I.width/2
+    self.clamp
+      x:
+        min: bounds.x + I.width/2
+        max: bounds.width - I.width/2
       
       
