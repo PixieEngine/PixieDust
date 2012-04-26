@@ -27,7 +27,7 @@ Clampable = (I={}, self) ->
 
   player.clamp
     score:
-    
+      
   </pre></code>
 
   @name clamp
