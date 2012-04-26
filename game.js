@@ -5252,57 +5252,14 @@ Camera.ZSort = function(I, self) {
 };
 ;
 /**
-The ClampBounds module adds a check to make sure
-that the including GameObject doesn't move outside
-the viewport.
+The <code>Clampable</code> module provides helper methods to clamp object properties. 
 
-<code><pre>
-  # create a player and include ClampBounds
-  player = GameObject
-    includedModules: ["ClampBounds"]
-    width: 5
-    height: 17
-
-  # put the player outside the viewport
-  player.I.x = -400
-  player.I.y = 1000
-
-  # update the player so ClampBounds can set 
-  # his position back inside the viewport.
-  player.update()
-
-  # x, y position is based on the center point so
-  # the position the player is set to is based on
-  # half their width and height
-  player.I.x
-  # => 2.5 # half the player's width
-
-  player.I.y
-  # => 311.5 # The default App.height (320) - half the player's height
-</pre></code>
-
-@name Cooldown
+@name Clampable
 @module
 @constructor
 @param {Object} I Instance variables
 @param {Core} self Reference to including object
 */
-var ClampBounds;
-
-ClampBounds = function(I, self) {
-  if (I == null) I = {};
-  Object.reverseMerge(I, {
-    x: 0,
-    y: 0,
-    width: 32,
-    height: 32
-  });
-  return self.bind("update", function() {
-    I.x = I.x.clamp(I.width / 2, App.width - I.width / 2);
-    return I.y = I.y.clamp(I.height / 2, App.height - I.height / 2);
-  });
-};
-;
 var Clampable;
 
 Clampable = function(I, self) {
@@ -5321,8 +5278,53 @@ Clampable = function(I, self) {
     return _results;
   });
   return {
+    /*
+      Keep an objects attributes within a given range.
+    
+      <code><pre>
+      # Player's health will be within [0, 100] at the end of every update
+      player.clamp
+        health:
+          min: 0
+          max: 100
+    
+      # Score can only be positive
+      player.clamp
+        score:
+          min: 0
+      </pre></code>
+    
+      @name clamp
+      @methodOf Clampable#
+      @param {Object} data
+    */
     clamp: function(data) {
       return Object.extend(I.clampData, data);
+    },
+    /**
+    Helper to clamp the `x` and `y` properties of the object to be within a given bounds.
+    
+    @name clampToBounds
+    @methodOf Clampable#
+    @param {Rectangle} [bounds] The bounds to clamp the object's position within. Defaults to the app size if none given.
+    */
+    clampToBounds: function(bounds) {
+      bounds || (bounds = Rectangle({
+        x: 0,
+        y: 0,
+        width: App.width,
+        height: App.height
+      }));
+      return self.clamp({
+        x: {
+          min: bounds.x + I.width / 2,
+          max: bounds.width - I.width / 2
+        },
+        y: {
+          min: bounds.y + I.height / 2,
+          max: bounds.height - I.height / 2
+        }
+      });
     }
   };
 };
