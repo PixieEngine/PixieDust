@@ -10,4 +10,4 @@ Clampable = (I={}, self) ->
     Object.extend(I.clampData, data)
 
   clampToBounds: (bounds) ->
-    bou
+    bounds ||=
