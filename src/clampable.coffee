@@ -14,4 +14,4 @@ Clampable = (I={}, self) ->
     
     self.clamp "x",
       min: bounds.x + I.width/2
-      max:
+      max: bounds.width - I
