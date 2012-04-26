@@ -24,6 +24,8 @@ Clampable = (I={}, self) ->
     health:
       min: 0
       max: 100
+
+  
   </pre></code>
 
   @name clamp
