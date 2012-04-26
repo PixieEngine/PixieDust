@@ -16,6 +16,7 @@ Clampable = (I={}, self) ->
       I[property] = I[property].clamp(data.min, data.max)
 
   ###
+  Kee
   @name clamp
   @methodOf Clampable#
   @param {Object} data
