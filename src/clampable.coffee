@@ -25,9 +25,10 @@ Clampable = (I={}, self) ->
       min: 0
       max: 100
 
+  # Score 
   player.clamp
     score:
-      min: 
+      min: 0
   </pre></code>
 
   @name clamp
