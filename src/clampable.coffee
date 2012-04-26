@@ -1,5 +1,5 @@
 ###*
-The <code>Clampable</code> module provides helper methods to tween object properties. 
+The <code>Clampable</code> module provides helper methods to clamp object properties. 
 
 @name Clampable
 @module
