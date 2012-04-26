@@ -22,7 +22,9 @@ Clampable = (I={}, self) ->
   player = GameObject()
 
   player.clamp
-    health
+    health:
+      min: 0
+  
     x: 50
     y: 50
     easing: "quadratic"
