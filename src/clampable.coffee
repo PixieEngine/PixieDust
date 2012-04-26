@@ -9,6 +9,7 @@ Clampable = (I={}, self) ->
   clamp: (data) ->
     Object.extend(I.clampData, data)
 
+   
   clampToBounds: (bounds) ->
     bounds ||= Rectangle x: 0, y: 0, width: App.width, height: App.height
     
@@ -19,4 +20,3 @@ Clampable = (I={}, self) ->
       y:
         min: bounds.y + I.height/2
         max: bounds.height - I.height/2
-  
