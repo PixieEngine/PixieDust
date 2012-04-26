@@ -25,7 +25,7 @@ Clampable = (I={}, self) ->
       min: 0
       max: 100
 
-  
+  player.cl
   </pre></code>
 
   @name clamp
