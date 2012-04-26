@@ -19,7 +19,7 @@ Clampable = (I={}, self) ->
   Keep an objects attributes within a given range.
 
   <code><pre>
-  # Player's health 
+  # Player's health will be within [
   player.clamp
     health:
       min: 0
