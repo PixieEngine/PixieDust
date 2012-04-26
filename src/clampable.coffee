@@ -25,7 +25,7 @@ Clampable = (I={}, self) ->
       min: 0
       max: 100
 
-  # Score 
+  # Score can only be positive
   player.clamp
     score:
       min: 0
