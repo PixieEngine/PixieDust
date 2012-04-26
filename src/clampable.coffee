@@ -10,7 +10,8 @@ Clampable = (I={}, self) ->
     Object.extend(I.clampData, data)
 
   ###*
-  
+  @name clampToBounds
+  @methodOf Clamp
   ###
   clampToBounds: (bounds) ->
     bounds ||= Rectangle x: 0, y: 0, width: App.width, height: App.height
