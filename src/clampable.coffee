@@ -7,7 +7,8 @@ Clampable = (I={}, self) ->
       I[property] = I[property].clamp(data.min, data.max)
 
   ###
-  @name 
+  @name clamp
+  @methodOf Cla
   ###
   clamp: (data) ->
     Object.extend(I.clampData, data)
