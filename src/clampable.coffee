@@ -26,7 +26,7 @@ Clampable = (I={}, self) ->
   ###*
   @name clampToBounds
   @methodOf Clampable#
-  @param {Rectangle} [bounds] The bounds to clamp the object's position within. Defaults to the sc 
+  @param {Rectangle} [bounds] The bounds to clamp the object's position within. Defaults to the app siv 
   ###
   clampToBounds: (bounds) ->
     bounds ||= Rectangle x: 0, y: 0, width: App.width, height: App.height
