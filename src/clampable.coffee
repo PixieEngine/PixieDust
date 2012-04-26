@@ -24,7 +24,7 @@ Clampable = (I={}, self) ->
   player.clamp
     health:
       min: 0
-  
+      max: 100
     x: 50
     y: 50
     easing: "quadratic"
