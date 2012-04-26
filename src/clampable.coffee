@@ -18,6 +18,15 @@ Clampable = (I={}, self) ->
   ###
   Keep an objects attributes within a given range.
 
+  <code><pre>
+  player = GameObject()
+
+  player.tween 30,
+    x: 50
+    y: 50
+    easing: "quadratic"
+  </pre></code>
+
   @name clamp
   @methodOf Clampable#
   @param {Object} data
