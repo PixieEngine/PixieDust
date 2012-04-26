@@ -1,5 +1,5 @@
 ###*
-The <code>Tween</code> module provides a method to tween object properties. 
+The <code>Clampable</code> module provides a method to tween object properties. 
 
 @name Clampable
 @module
