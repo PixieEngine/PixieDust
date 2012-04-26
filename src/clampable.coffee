@@ -24,7 +24,7 @@ Clampable = (I={}, self) ->
     Object.extend(I.clampData, data)
 
   ###*
-  Helper t
+  Helper to clamp the x and `y
 
   @name clampToBounds
   @methodOf Clampable#
