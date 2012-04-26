@@ -21,7 +21,8 @@ Clampable = (I={}, self) ->
   <code><pre>
   player = GameObject()
 
-  player.cla 30,
+  player.clamp
+    health
     x: 50
     y: 50
     easing: "quadratic"
