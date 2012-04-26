@@ -18,6 +18,7 @@ Clampable = (I={}, self) ->
   ###
   @name clamp
   @methodOf Clampable#
+  @param
   ###
   clamp: (data) ->
     Object.extend(I.clampData, data)
