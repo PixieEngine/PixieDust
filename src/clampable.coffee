@@ -12,4 +12,5 @@ Clampable = (I={}, self) ->
   clampToBounds: (bounds) ->
     bounds ||= Rectangle x: 0, y: 0, width: App.width, height: App.height
     
-    self.clamp
+    self.clamp "x",
+    
