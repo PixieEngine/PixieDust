@@ -24,6 +24,8 @@ Clampable = (I={}, self) ->
     Object.extend(I.clampData, data)
 
   ###*
+
+
   @name clampToBounds
   @methodOf Clampable#
   @param {Rectangle} [bounds] The bounds to clamp the object's position within. Defaults to the app size if none given. 
