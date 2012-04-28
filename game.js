@@ -6832,7 +6832,7 @@ player.cooldown "shootTimer"
 
 player.I.shootTimer = 10 # => Pew! Pew!
 
-player.I.update()
+player.update()
 
 player.I.shootTimer # => 9
 </pre></code>
