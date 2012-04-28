@@ -15,7 +15,7 @@ Clampable = (I={}, self) ->
     for property, data of I.clampData
       I[property] = I[property].clamp(data.min, data.max)
 
-  ###
+  ###*
   Keep an objects attributes within a given range.
 
   <code><pre>
