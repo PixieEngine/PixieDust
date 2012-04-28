@@ -63,8 +63,8 @@ Follow = (I={}, self) ->
   
   </pre></code>
 
-  @name clamp
-  @methodOf Clampable#
+  @name follow
+  @methodOf Follow#
   @param {Object} data
   ###    
   follow: (obj) ->
