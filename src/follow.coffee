@@ -56,7 +56,7 @@ Follow = (I={}, self) ->
   enemy.follow(player)
 
   # => The enemy now has it's velocity attribute set in
-  # the direction of the 
+  # the direction of the player, with 
 
   enemy.I.velocity = enemy.I.direction.scale(4)
   # now the enemy has a velocity, pointing toward player, 
