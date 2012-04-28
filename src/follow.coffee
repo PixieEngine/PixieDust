@@ -6,7 +6,8 @@ The calculated direction is based on the center point of
 each object.
 
 This method relies on both objects having <code>position</code> methods. 
-All GameObjects have this method by default.
+
+include
 
 <code><pre>
 player = GameObject
