@@ -16,7 +16,7 @@ test "should set the correct direction", ->
   enemy.include(Follow)
   enemy.follow(player)
 
-  ok enemy.I.velocity.equal(Point(1, 0)), 'enemy should head toward player with velocity Point(1, 0)'
+  ok enemy.I.direction.equal(Point(1, 0)), 'enemy should head toward player with velocity Point(1, 0)'
 
   fastEnemy = GameObject
     x: 50
