@@ -50,7 +50,7 @@ Follow = (I={}, self) ->
     speed: 1
 
   ###*
-  Set your veloc to face another object.
+  Set your velocity to follow another object.
 
   <code><pre>
   enemy.follow(player)
