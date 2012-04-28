@@ -65,6 +65,5 @@ Follow = (I={}, self) ->
   @param {GameObject} obj The object you want to follow
   ###    
   follow: (obj) ->
-    # 
     if obj
       I.velocity = obj.position().subtract(self.position()).norm(I.speed)
