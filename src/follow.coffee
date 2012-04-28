@@ -2,7 +2,7 @@
 The Follow module provides a simple method to set an object's
 direction so that it is pointed at another object.
 
-The calculated velocity is based on the center point of 
+The calculated direction is based on the center point of 
 each object.
 
 This method relies on both objects having `position` methods. 
