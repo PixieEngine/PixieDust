@@ -7,7 +7,7 @@ each object.
 
 This method relies on both objects having <code>position</code> methods. 
 
-include
+include this module by calling 
 
 <code><pre>
 player = GameObject
