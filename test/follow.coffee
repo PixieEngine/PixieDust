@@ -12,7 +12,7 @@ test "should set the correct velocity", ->
     y: 50
     widht: 10
     height: 10
-    speed: 
+    speed: 1
 
   enemy.include(Follow)
   enemy.follow(player)
