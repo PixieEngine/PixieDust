@@ -48,7 +48,7 @@ Follow = (I={}, self) ->
     direction: Point(0, 0) 
 
   ###
-  Keep an objects attributes within a given range.
+  Set your direction 
 
   <code><pre>
   # Player's health will be within [0, 100] at the end of every update
