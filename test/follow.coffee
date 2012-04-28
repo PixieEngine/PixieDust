@@ -29,6 +29,6 @@ test "should set the correct velocity", ->
   rightEnemy.include(Follow)
   rightEnemy.follow(player)
 
-  ok rightEnemy.I.ve.equal(Point(-1, 0)), 'rightEnemy should head toward player with a velocity Point(-1, 0)'
+  ok rightEnemy.I.velocity.equal(Point(-1, 0)), 'rightEnemy should head toward player with a velocity Point(-1, 0)'
 
 module()
