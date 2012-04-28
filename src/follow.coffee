@@ -47,7 +47,7 @@ Follow = (I={}, self) ->
   Object.reverseMerge I,
     direction: Point(0, 0) 
 
-  ###
+  ###*
   Set your direction to face another object.
 
   <code><pre>
