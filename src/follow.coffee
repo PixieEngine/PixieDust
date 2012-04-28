@@ -35,10 +35,6 @@ enemy.I.direction
 # you can use this direction to set a velocity for your object.
 enemy.I.velocity = enemy.I.direction.scale(I.speed)
 
-enemy.update()
-
-enemy.I.x
-# => 99
 </pre></code>
 
 @name Follow
