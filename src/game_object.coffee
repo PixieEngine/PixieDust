@@ -178,7 +178,7 @@ GameObject = (I) ->
       else
         self.bind(eventName, eval( "(function() {#{event}})" ))
 
-  self.
+  self
 
 ###*
 Construct an object instance from the given entity data.
