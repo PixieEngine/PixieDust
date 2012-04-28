@@ -59,7 +59,7 @@ Follow = (I={}, self) ->
 
   enemy.I.velocity = enemy.I.direction.scale(4)
   # now the enemy has a velocity with 4 times the magnitude 
-  # of its directionin the direction of the player
+  # of its direction
   
   </pre></code>
 
