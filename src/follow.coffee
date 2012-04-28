@@ -34,8 +34,6 @@ enemy.I.direction
 
 
 
-enemy.update()
-
 enemy.I.x
 # => 99
 </pre></code>
