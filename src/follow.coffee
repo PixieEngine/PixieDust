@@ -53,6 +53,7 @@ Follow = (I={}, self) ->
   <code><pre>
   enemy.follow(player)
 
+  # =>
   
   </pre></code>
 
