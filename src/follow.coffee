@@ -51,7 +51,7 @@ Follow = (I={}, self) ->
   Set your direction to face another object.
 
   <code><pre>
-  play
+  enemy.follow()
 
   # Score can only be positive
   player.clamp
