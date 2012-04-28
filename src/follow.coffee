@@ -22,6 +22,7 @@ enemy = GameObject
   width: 10
   height: 10
   velocity: Point(0, 0)
+  speed: 2
 
 enemy.include Follow
 
