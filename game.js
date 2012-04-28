@@ -5078,25 +5078,25 @@ Clampable = function(I, self) {
     return _results;
   });
   return {
-    /*
-      Keep an objects attributes within a given range.
+    /**
+    Keep an objects attributes within a given range.
     
-      <code><pre>
-      # Player's health will be within [0, 100] at the end of every update
-      player.clamp
-        health:
-          min: 0
-          max: 100
+    <code><pre>
+    # Player's health will be within [0, 100] at the end of every update
+    player.clamp
+      health:
+        min: 0
+        max: 100
     
-      # Score can only be positive
-      player.clamp
-        score:
-          min: 0
-      </pre></code>
+    # Score can only be positive
+    player.clamp
+      score:
+        min: 0
+    </pre></code>
     
-      @name clamp
-      @methodOf Clampable#
-      @param {Object} data
+    @name clamp
+    @methodOf Clampable#
+    @param {Object} data
     */
     clamp: function(data) {
       return Object.extend(I.clampData, data);
@@ -8606,7 +8606,9 @@ Follow = function(I, self) {
     @param {GameObject} obj The object you want to follow
     */
     follow: function(obj) {
-      return I.velocity = obj.position().subtract(self.position()).norm(I.speed);
+      if (obj) {
+        return I.velocity = obj.position().subtract(self.position()).norm(I.speed);
+      }
     }
   };
 };
