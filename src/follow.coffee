@@ -45,7 +45,7 @@ enemy.I.velocity = enemy.I.direction.scale(I.speed)
 ###
 Follow = (I={}, self) ->
   Object.reverseMerge I,
-    direction: Point(0, 0) 
+    velocity: Point(0, 0) 
 
   ###*
   Set your direction to face another object.
