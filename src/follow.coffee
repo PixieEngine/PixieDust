@@ -1,6 +1,6 @@
 ###*
 The Follow module provides a simple method to set an object's
-direc so that it will approach another object. 
+direction so that it will approach another object. 
 
 The calculated velocity is based on the center point of 
 each object.
