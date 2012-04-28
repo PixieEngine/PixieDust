@@ -58,7 +58,6 @@ Follow = (I={}, self) ->
   # => The enemy now has it's velocity attribute set in
   # the direction of the player, with magnitude equal to
   # the enemy's speed
-
   </pre></code>
 
   @name follow
