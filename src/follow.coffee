@@ -53,10 +53,7 @@ Follow = (I={}, self) ->
   <code><pre>
   enemy.follow(player)
 
-  # Score can only be positive
-  player.clamp
-    score:
-      min: 0
+  
   </pre></code>
 
   @name clamp
