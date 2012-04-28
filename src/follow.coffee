@@ -65,7 +65,7 @@ Follow = (I={}, self) ->
 
   @name follow
   @methodOf Follow#
-  @param {Object} data
+  @param {GameObject} obj
   ###    
   follow: (obj) ->
     I.direction = obj.position().subtract(self.position()).norm()
