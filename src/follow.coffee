@@ -33,7 +33,7 @@ enemy.I.direction
 # => Point(-1, 0)
 
 # you can use this direction to set a velocity for your object.
-engine
+enemy.I.vel
 
 enemy.I.x
 # => 99
