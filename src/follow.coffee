@@ -51,11 +51,7 @@ Follow = (I={}, self) ->
   Set your direction to face another object.
 
   <code><pre>
-  # Player's health will be within [0, 100] at the end of every update
-  player.clamp
-    health:
-      min: 0
-      max: 100
+  play
 
   # Score can only be positive
   player.clamp
