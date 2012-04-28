@@ -8588,25 +8588,25 @@ Follow = function(I, self) {
     direction: Point(0, 0)
   });
   return {
-    /*
-      Set your direction to face another object.
+    /**
+    Set your direction to face another object.
     
-      <code><pre>
-      enemy.follow(player)
+    <code><pre>
+    enemy.follow(player)
     
-      # => The enemy now has it's direction attribute set to face
-      # the player object. From here you can use the direction and
-      # calculate a velocity.
+    # => The enemy now has it's direction attribute set to face
+    # the player object. From here you can use the direction and
+    # calculate a velocity.
     
-      enemy.I.velocity = enemy.I.direction.scale(4)
-      # now the enemy has a velocity, pointing toward player, 
-      # with 4 times the magnitude of its direction
-      
-      </pre></code>
+    enemy.I.velocity = enemy.I.direction.scale(4)
+    # now the enemy has a velocity, pointing toward player, 
+    # with 4 times the magnitude of its direction
     
-      @name follow
-      @methodOf Follow#
-      @param {GameObject} obj
+    </pre></code>
+    
+    @name follow
+    @methodOf Follow#
+    @param {GameObject} obj The object you want to follow
     */
     follow: function(obj) {
       return I.direction = obj.position().subtract(self.position()).norm();
