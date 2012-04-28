@@ -32,6 +32,8 @@ enemy.follow(player)
 enemy.I.direction
 # => Point(-1, 0)
 
+
+
 enemy.update()
 
 enemy.I.x
