@@ -55,9 +55,8 @@ Follow = (I={}, self) ->
   <code><pre>
   enemy.follow(player)
 
-  # => The enemy now has it's velocity attribute set to face
-  # the player object. From here you can use the direction and
-  # calculate a velocity.
+  # => The enemy now has it's velocity attribute set in
+  # the dire
 
   enemy.I.velocity = enemy.I.direction.scale(4)
   # now the enemy has a velocity, pointing toward player, 
