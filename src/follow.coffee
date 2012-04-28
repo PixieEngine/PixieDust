@@ -55,6 +55,7 @@ Follow = (I={}, self) ->
 
   # => The enemy now has it's direction attribute set to face
   # the player object. From here you can use the direction and
+  # calculate a velocity
   
   </pre></code>
 
