@@ -47,5 +47,6 @@ Follow = (I={}, self) ->
   Object.reverseMerge I,
     direction: Point(0, 0) 
 
+    
   follow: (obj) ->
     I.direction = obj.position().subtract(self.position()).norm()
