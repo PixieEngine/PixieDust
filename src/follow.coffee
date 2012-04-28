@@ -54,7 +54,7 @@ Follow = (I={}, self) ->
   enemy.follow(player)
 
   # => The enemy now has it's direction attribute set to face
-  # the player object. From here you can 
+  # the player object. From here you can use the direction and
   
   </pre></code>
 
