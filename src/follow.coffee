@@ -47,6 +47,25 @@ Follow = (I={}, self) ->
   Object.reverseMerge I,
     direction: Point(0, 0) 
 
-    
+  ###
+  Keep an objects attributes within a given range.
+
+  <code><pre>
+  # Player's health will be within [0, 100] at the end of every update
+  player.clamp
+    health:
+      min: 0
+      max: 100
+
+  # Score can only be positive
+  player.clamp
+    score:
+      min: 0
+  </pre></code>
+
+  @name clamp
+  @methodOf Clampable#
+  @param {Object} data
+  ###    
   follow: (obj) ->
     I.direction = obj.position().subtract(self.position()).norm()
