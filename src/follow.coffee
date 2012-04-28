@@ -57,7 +57,7 @@ Follow = (I={}, self) ->
   # the player object. From here you can use the direction and
   # calculate a velocity.
 
-  enemy.I.v
+  enemy.I.velocity = enemy.I.
   
   </pre></code>
 
