@@ -32,7 +32,7 @@ enemy.follow(player)
 enemy.I.direction
 # => Point(-1, 0)
 
-
+# you can use this direction
 
 enemy.I.x
 # => 99
