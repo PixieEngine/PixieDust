@@ -28,8 +28,8 @@ enemy.include Follow
 # Make an enemy follow the player
 enemy.follow(player)
 
-# now the enemy's velocity will point toward the player
-enemy.I.velocity
+# now the enemy's direction will point toward the player
+enemy.I.direction
 # => Point(-1, 0)
 
 enemy.update()
