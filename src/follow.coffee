@@ -45,8 +45,7 @@ enemy.I.x
 ###
 Follow = (I={}, self) ->
   Object.reverseMerge I,
-    followSpeed: 1
     direction: Point(0, 0) 
 
   follow: (obj) ->
-    I.velocity = obj.position().subtract(self.position()).norm().scale(I.followSpeed)
+    I.direction = obj.position().subtract(self.position()).norm()
