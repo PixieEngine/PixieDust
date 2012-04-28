@@ -1,6 +1,6 @@
 module "Follow"
 
-test "should set the correct direction", ->
+test "should set the correct velocity", ->
   player = GameObject
     x: 50
     y: 50
