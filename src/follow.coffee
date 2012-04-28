@@ -7,7 +7,7 @@ each object.
 
 This method relies on both objects having <code>position</code> methods. 
 
-include this module by calling <code>self.include Follow</code>
+Include this module by calling <code>self.include Follow</code>
 
 <code><pre>
 player = GameObject
