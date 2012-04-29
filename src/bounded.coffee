@@ -169,7 +169,7 @@ Bounded = (I={}, self) ->
     return bounds
 
   ###*
-  The bounds method returns infomation about the location 
+  Returns infomation about the location 
   of the object and its dimensions with optional offsets.
 
   <code><pre>
