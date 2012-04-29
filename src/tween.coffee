@@ -23,7 +23,7 @@ Tween = (I={}, self) ->
         I[property] = f(t)
 
   ###*
-  Modify the objects properties over time.
+  Modify the object's properties over time.
 
   <code><pre>
   player = GameObject()
