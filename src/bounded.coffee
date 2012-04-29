@@ -169,8 +169,7 @@ Bounded = (I={}, self) ->
     return bounds
 
   ###*
-  Returns infomation about the location 
-  of the object and its dimensions with optional offsets.
+  Returns infomation about the location of the object and its dimensions with optional offsets.
 
   <code><pre>
   player = Core
