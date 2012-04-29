@@ -971,8 +971,7 @@ Core = function(I) {
       });
     },
     /**
-    Extends this object with methods from the passed in object. A shortcut for
-    <code>Object.extend(self, methods)</code>
+    Extends this object with methods from the passed in object. A shortcut for Object.extend(self, methods)
     
     <code><pre>
     I =
