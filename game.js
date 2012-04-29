@@ -741,7 +741,7 @@ Bindable = function() {
   eventCallbacks = {};
   return {
     /**
-    The bind method adds a function as an event listener.
+    Adds a function as an event listener.
     
     <code><pre>
     # this will call coolEventHandler after
@@ -764,7 +764,7 @@ Bindable = function() {
       return eventCallbacks[event].push(callback);
     },
     /**
-    The unbind method removes a specific event listener, or all event listeners if
+    Removes a specific event listener, or all event listeners if
     no specific listener is given.
     
     <code><pre>
@@ -790,7 +790,7 @@ Bindable = function() {
       }
     },
     /**
-    The trigger method calls all listeners attached to the specified event.
+    Calls all listeners attached to the specified event.
     
     <code><pre>
     # calls each event handler bound to "someCustomEvent"
