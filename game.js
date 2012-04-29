@@ -4558,8 +4558,7 @@ Bounded = function(I, self) {
       return bounds;
     },
     /**
-    The bounds method returns infomation about the location 
-    of the object and its dimensions with optional offsets.
+    Returns infomation about the location of the object and its dimensions with optional offsets.
     
     <code><pre>
     player = Core
@@ -9889,7 +9888,7 @@ Tween = function(I, self) {
   });
   return {
     /**
-    Modify the objects properties over time.
+    Modify the object's properties over time.
     
     <code><pre>
     player = GameObject()
