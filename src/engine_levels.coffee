@@ -59,7 +59,7 @@ Engine.Levels = (I, self) ->
     loadLevel level
 
   ###*
-  Load map named <code>level</code>
+  Reload the 
 
   <code><pre>
   engine.goToLevel 'bossFight'
