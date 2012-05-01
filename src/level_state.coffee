@@ -4,8 +4,7 @@
 @name LevelState
 @constructor
 @param {Number} duration Amount of time in frames it takes to fade into the level
-@param {St} level How fast the osciallator function repeats
-@param {Number} offset How much to offset the created osciallator function. Useful for translating between sin and cosine functions.
+@param {String} level The level to 
 ###
 LevelState = (I={}) ->
   Object.reverseMerge I,
