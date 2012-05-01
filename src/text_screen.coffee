@@ -13,7 +13,7 @@ TextScreen = (I={}) ->
 
   self = GameState(I).extend
     ###*
-    Set your velocity to follow another object.
+    Draw tex
   
     <code><pre>
     enemy.follow(player)
