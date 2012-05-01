@@ -1,5 +1,5 @@
 ###*
-The TimedEvents module allows arbitrary code to be executed at set int
+The TimedEvents module allows arbitrary code to be executed at set intervals.
 
 <code><pre>
 player = Core
