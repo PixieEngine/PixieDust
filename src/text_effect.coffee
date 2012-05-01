@@ -1,5 +1,5 @@
 ###*
-The Text Effect class provides a method to display
+The Text Effect class provides a method to display 
 
 By default, images are loaded asynchronously. A proxy object is 
 returned immediately. Even though it has a draw method it will not
