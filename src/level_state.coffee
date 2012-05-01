@@ -11,8 +11,8 @@ A Game State that loads the map for a given level and transitions into the level
 ###*
 Goes to the next level on any user input.
 
-@name update
-@methodOf TitleScreen#
+@name enter
+@methodOf LevelState#
 @event
 ###
 LevelState = (I={}) ->
