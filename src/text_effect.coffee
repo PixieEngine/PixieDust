@@ -10,7 +10,7 @@ draw anything to the screen until the image has been loaded.
 ###
 
 ###*
-updates the 
+updates the position of the text based on t
 Observe or configure a <code>gameObject</code> that has been added 
 to the engine.
 @name update
