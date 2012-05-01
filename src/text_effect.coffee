@@ -1,29 +1,47 @@
 TextEffect = (I={}) ->
   Object.reverseMerge I,
+    color: Color('green')
     duration: 40
-    font: 'VT323'
-    points: 500
+    font: '20px Helvetica'
+    text: '100'
+    textShadow: Color('black')
     alpha: 1
-
+    rotation: 0
+    rotationalVelocity: 0
+    velocity: Point(0, -1)
+    
   self = GameObject(I)
 
-  self.bind "update", ->
-    I.y -= 1
+  self.bind "update", ->    
+    I.rotation += I.rotationalVelocity
+  
+    I.x += I.velocity.x
+    I.y += I.velocity.y
+    
     I.alpha = 1 - (I.age / I.duration)
 
   self.unbind "draw"
-  self.bind "afterTransform", (canvas) ->
-    canvas.font "20px #{I.font}"
+  self.bind "draw", (canvas) ->    
+    unless I.color.channels
+      I.color = Color(I.color)
+    
+    unless I.textShadow.channels
+      I.textShadow = Color(I.textShadow)
+      
+    I.color.a = I.alpha
+    I.textShadow.a = I.alpha
+        
+    canvas.font I.font
     canvas.drawText
-      color: "rgba(0, 0, 0, #{I.alpha})"
-      x: I.x + 1
-      y: I.y + 1
-      text: I.points    
+      color: I.textShadow
+      x: 1
+      y: 1
+      text: I.text    
 
     canvas.drawText
-      color: "rgba(255, 255, 255, #{I.alpha})"
-      x: I.x
-      y: I.y
-      text: I.points
+      color: I.color
+      x: 0
+      y: 0
+      text: I.text
 
   return self
