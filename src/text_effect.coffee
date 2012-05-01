@@ -15,8 +15,6 @@ to the engine.
 @name update
 @methodOf TextEffect#
 @event
-@param {GameObject} object The object that has just been added to the
-engine.
 ###
 TextEffect = (I={}) ->
   Object.reverseMerge I,
