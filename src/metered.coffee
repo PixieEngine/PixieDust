@@ -42,66 +42,51 @@ Metered module
 Metered = (I={}, self) ->
   Object.reverseMerge I,
     meters: {}
-    
-  setMeter = (name, value) ->
-    for meterName, meterData of I.meters
-      if meterName is name
-        meterData.show = value    
-    
+        
   self.bind 'overlay', (canvas) ->
     for name, meterData of I.meters
       {
         backgroundColor,
-        borderColor,
-        borderWidth,
+        border: {color:borderColor, radius:borderRadius, width:borderWidth}
         color,
-        font, 
         height, 
-        nameColor, 
-        position: {x, y}
-        radius,
         show,
-        showName,
-        text,
-        width
+        width,
+        x,
+        y
       } = meterData
+      
+      {x, y} = meterData.position if meterData.position?
       
       return unless show
           
       ratio = I[name] / I["max#{name.capitalize()}"]
-      
-      if showName || text
-        canvas.font(font)    
-        canvas.drawText
-          color: nameColor
-          x: x
-          y: y + 10
-          text: text || name.capitalize()     
-      
-      canvas.drawRect
+                  
+      canvas.drawRoundRect
         color: backgroundColor
+        radius: borderRadius
         x: x
-        y: y + 15
+        y: y
         width: width
         height: height       
       
-      canvas.drawRect
+      canvas.drawRoundRect
         color: color
         x: x
-        y: y + 15
+        y: y
+        radius: borderRadius
         width: width * ratio
         height: height      
-          
+        
       canvas.drawRoundRect
         x: x
-        y: y + 15
+        y: y
         width: width
         height: height
-        radius: radius
+        radius: borderRadius
         stroke:
           color: borderColor
-          width: borderWidth 
-
+          width: borderWidth
   ###*
   Configures a meter to be drawn each overlay event.
 
@@ -111,17 +96,14 @@ Metered = (I={}, self) ->
   player.include Metered      
 
   player.meter 'health',
-    borderColor: 'brown'
+    border
+      color: 'brown'
+      radius: 3
     color: 'pink'
-    font: '30px Comic Sans'
     height: 20
-    position: 
-      x: 5
-      y: 5
-    radius: 3
+    x: 5
+    y: 5
     show: true
-    showName: true
-    text: 'Boss Health'
     width: 150
 
   # => Sets up a health meter, using all the configuration options
@@ -131,35 +113,29 @@ Metered = (I={}, self) ->
   @methodOf Metered#
   @param {String} name The name of the property to meter
   @param {Object} options The meter configuration options
-  @param {String} borderColor Color of the meter's border
-  @param {Number} borderWidth Width of the meter's border
+  @param {String} border: color Color of the meter's border
+  @param {Number} border: width Width of the meter's border
   @param {String} color Color of the meter's inner rectangle
-  @param {String} nameColor Color of the property name displayed above the meter
-  @param {String} font Size and style of the meter's font
   @param {Number} height Height of the meter
   @param {Object} position An x, y object representing the position of the meter
-  @param {Number} radius Border radius of the meter
+  @param {Number} x x position of the meter
+  @param {Number} y y position of the meter
+  @param {Number} border: radius Border radius of the meter
   @param {Boolean} show Boolean to toggle whether of not to display the meter
-  @param {Boolean} showName Boolean to toggle whether or not to show the attribute associated with the meter
-  @param {String} text A String to display over the meter. Overrides default name attribute
   @param {Number} width How wide the meter is
   ###          
   meter: (name, options={}) ->
     Object.reverseMerge options,
       backgroundColor: 'black'
-      borderColor: 'white'
-      borderWidth: 1.5
+      border:
+        color: 'white'
+        radius: 2
+        width: 1.5
       color: 'green'
-      nameColor: 'white'
-      font: '14px Helvetica'
       height: 10
-      position: 
-        x: 0
-        y: 0
-      radius: 2
+      x: 0
+      y: 0
       show: true
-      showName: false
-      text: null
       width: 100 
         
     I[name] ?= 100
@@ -188,12 +164,12 @@ Metered = (I={}, self) ->
   player.showMeter 'health'
   </pre></code>
 
-  @name meter
+  @name showMeter
   @methodOf Metered#
-  @param {String} name The name of the meter to toggle
+  @param {String} name The name of the meter to show
   ###      
   showMeter: (name) ->
-    setMeter(name, true)
+    I.meters[name].show = true
  
   ###*
   Hides the named meter
@@ -210,10 +186,32 @@ Metered = (I={}, self) ->
   player.hideMeter 'health'
   </pre></code>
 
-  @name meter
+  @name hideMeter
   @methodOf Metered#
-  @param {String} name The name of the meter to toggle
+  @param {String} name The name of the meter to hide
   ###          
   hideMeter: (name) ->
-    setMeter(name, false)  
+    I.meters[name].show = false
+
+  ###*
+  Toggles visibility of the named meter
+
+  <code><pre>
+  player = GameObject
+
+  player.include Metered      
+
+  # creates a health meter
+  player.meter 'health'
+
+  # toggles visibility for the meter named 'health'
+  player.toggleMeter 'health'
+  </pre></code>
+
+  @name toggleMeter
+  @methodOf Metered#
+  @param {String} name The name of the meter to toggle
+  ###    
+  toggleMeter: (name) ->
+    I.meters[name].show = not I.meters[name].show
     
