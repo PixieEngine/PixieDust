@@ -4,7 +4,7 @@
 @name LevelState
 @constructor
 @param {Number} duration Amount of time in frames it takes to fade into the level
-@param {String} level name of the level to 
+@param {String} level name of the map to load
 ###
 LevelState = (I={}) ->
   Object.reverseMerge I,
