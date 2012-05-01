@@ -9794,6 +9794,12 @@ TextEffect = function(I) {
   return self;
 };
 ;
+/**
+The Text Screen class is a GameState that provides convenience methods for drawing text to screen. 
+
+@name TextScreen
+@constructor
+*/
 var TextScreen;
 
 TextScreen = function(I) {
@@ -9806,6 +9812,20 @@ TextScreen = function(I) {
     yPosition: App.height / 2
   });
   return self = GameState(I).extend({
+    /**
+    Draw center aligned text at the given y position.
+      
+    <code><pre>
+    screen = TextScreen()
+    screen.centerText canvas, 'Centering text is easy'
+    </pre></code>
+      
+    @name centerText
+    @methodOf TextScreen#
+    @param {PixieCanvas} canvas The canvas to draw on    
+    @param {String} text The text to draw
+    @param {Object} options These include font, size, color, and yPosition
+    */
     centerText: function(canvas, text, options) {
       var color, font, size, yPosition;
       if (options == null) options = {};
