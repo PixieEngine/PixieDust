@@ -59,7 +59,7 @@ Engine.Levels = (I, self) ->
     loadLevel level
 
   ###*
-  Reload the current level. Useful for retrying after 
+  Reload the current level. Useful for retrying after a player dies.
 
   <code><pre>
   engine.realodLevel
