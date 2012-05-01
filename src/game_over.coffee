@@ -15,7 +15,7 @@ Transitions to the title state on user input.
 ###
 
 ###*
-Transitions to the title state on user input.
+Draws 
 
 @name overlay
 @methodOf GameOver#
