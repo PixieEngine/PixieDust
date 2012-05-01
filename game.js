@@ -9898,13 +9898,16 @@ Tween = function(I, self) {
     activeTweens: {}
   });
   self.bind("update", function() {
-    var data, f, property, t, _ref, _results;
+    var data, f, property, t, _base, _ref, _results;
     _ref = I.activeTweens;
     _results = [];
     for (property in _ref) {
       data = _ref[property];
       if (I.age >= data.endTime) {
         I[property] = data.end;
+        if (typeof (_base = I.activeTweens[property]).complete === "function") {
+          _base.complete();
+        }
         _results.push(delete I.activeTweens[property]);
       } else {
         f = Easing[data.easing](data.start, data.end);
@@ -9927,20 +9930,33 @@ Tween = function(I, self) {
       easing: "quadratic"
     </pre></code>
     
+    <code><pre>
+    player = GameObject()
+    
+    player.tween 30,
+      x: 150
+      y: 150
+      complete: ->
+        player.dance()
+    </pre></code>
+    
     @name tween
     @methodOf Tween#
     @param {Number} duration How long (in frames) until the object's properties reach their final values.
     @param {Object} properties Which properties to tween. Set the `easing` property to specify the easing function.
     */
     tween: function(duration, properties) {
-      var easing, property, target, _results;
+      var complete, easing, property, target, _results;
       properties = Object.extend({}, properties);
       easing = properties.easing || "linear";
+      complete = properties.complete;
       delete properties.easing;
+      delete properties.complete;
       _results = [];
       for (property in properties) {
         target = properties[property];
         _results.push(I.activeTweens[property] = {
+          complete: complete,
           end: target,
           start: I[property],
           easing: easing,
