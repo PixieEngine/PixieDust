@@ -58,5 +58,15 @@ Engine.Levels = (I, self) ->
     #TODO Handle integer levels?
     loadLevel level
 
+  ###*
+  Load map named <code>level</code>
+
+  <code><pre>
+  engine.goToLevel 'bossFight'
+  </pre></code>
+
+  @name goToLevel
+  @methodOf Engine#
+  ###     
   reloadLevel: ->
     loadLevel I.currentLevelName
