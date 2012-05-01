@@ -23,7 +23,6 @@ LevelState = (I={}) ->
   self = GameState(I)
 
   self.bind "enter", ->
-    # TODO: Adjustable Fade In
     engine.fadeIn
       duration: I.duration
 
