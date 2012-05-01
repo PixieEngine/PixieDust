@@ -42,7 +42,7 @@ Tween = (I={}, self) ->
     x: 50
     y: 50
     complete: ->
-      
+      player.dance()
   </pre></code>
 
   @name tween
