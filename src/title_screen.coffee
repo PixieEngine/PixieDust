@@ -7,7 +7,7 @@ The Title Screen class sets up a simple game title screen using <code>App.name</
 ###
 
 ###*
-Goes to the next level 
+Goes to the next level on any user input.
 
 @name update
 @methodOf TitleScreen#
