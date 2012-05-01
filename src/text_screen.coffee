@@ -1,5 +1,5 @@
 ###*
-The Text Screen class is a GameState that provides convenie 
+The Text Screen class is a GameState that provides convenience methods for drawing text to screen. 
 
 @see TextScreen
 @name TitleScreen
