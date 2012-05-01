@@ -12,7 +12,7 @@ draw anything to the screen until the image has been loaded.
 ###*
 Updates the position of the text based on the effect velocity. Updates the 
 alpha based on the elapsed time since the effect creation. If <code>rotationalVelocity</code>
-is provided then 
+is provided then the text rotation is updated as well.
 
 @name update
 @methodOf TextEffect#
