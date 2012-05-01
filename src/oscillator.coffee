@@ -3,7 +3,7 @@ Creates an oscillator function with the given parameters.
 
 @name Oscillator
 @constructor
-@params {Number}
+@params {Number} amplitude 
 ###
 Oscillator = (options={}) ->
   {amplitude, period, offset} = options
