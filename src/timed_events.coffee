@@ -18,7 +18,6 @@ TimedEvents module
 @module
 @constructor
 @param {Object} I Instance variables
-@param {Core} self Reference to including object
 ###
 TimedEvents = (I={}) ->
   every: (n, fn) ->
