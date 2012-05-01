@@ -10,6 +10,7 @@ draw anything to the screen until the image has been loaded.
 ###
 
 ###*
+
 Observe or configure a <code>gameObject</code> that has been added 
 to the engine.
 @name update
