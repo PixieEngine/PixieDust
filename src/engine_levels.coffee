@@ -65,7 +65,7 @@ Engine.Levels = (I, self) ->
   engine.realodLevel
   </pre></code>
 
-  @name goToLevel
+  @name reloadLevel
   @methodOf Engine#
   ###     
   reloadLevel: ->
