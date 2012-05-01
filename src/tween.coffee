@@ -49,6 +49,7 @@ Tween = (I={}, self) ->
 
     for property, target of properties
       I.activeTweens[property] =
+        complete: compl
         end: target
         start: I[property]
         easing: easing
