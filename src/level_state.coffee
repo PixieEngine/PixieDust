@@ -1,6 +1,6 @@
 ###*
 
-S
+@see GameState
 @name LevelState
 @constructor
 @param {Number} duration Amount of time in frames it takes to fade into the level
