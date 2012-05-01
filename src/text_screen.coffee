@@ -1,5 +1,5 @@
 ###*
-The Text Screen class is a simple GameState that provides 
+The Text Screen class is a GameState that provides convenie 
 
 @see TextScreen
 @name TitleScreen
