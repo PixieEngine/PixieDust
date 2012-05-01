@@ -1,5 +1,5 @@
 ###*
-The Game Over class sets up a simple game stag
+The Game Over class sets up a simple game state
 
 @name update
 @methodOf TitleScreen#
