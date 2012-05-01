@@ -4,7 +4,7 @@ Creates an oscillator function with the given parameters.
 @name Oscillator
 @constructor
 @param {Number} amplitude How much to scale the oscillator function value
-@param {Number} period How fast the osciallator
+@param {Number} period How fast the osciallator function repeats
 ###
 Oscillator = (options={}) ->
   {amplitude, period, offset} = options
