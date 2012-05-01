@@ -13,6 +13,14 @@ Transitions to the title state on user input.
 @methodOf GameOver#
 @event
 ###
+
+###*
+Transitions to the title state on user input.
+
+@name update
+@methodOf GameOver#
+@event
+###
 GameOver = (I={}) ->
   self = TextScreen(I)
 
