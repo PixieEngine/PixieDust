@@ -1,8 +1,6 @@
 ###*
 The TimedEvents module allows arbitrary code to be executed at set intervals. <code>GameObject</code> includes this module by default
 
-@see GameObject
-
 TimedEvents module
 @name TimedEvents
 @module
