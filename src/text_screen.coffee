@@ -13,7 +13,7 @@ TextScreen = (I={}) ->
 
   self = GameState(I).extend
     ###*
-    Draw tex
+    Draw text in the center of th
   
     <code><pre>
     enemy.follow(player)
