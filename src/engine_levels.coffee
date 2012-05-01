@@ -32,7 +32,7 @@ Engine.Levels = (I, self) ->
   engine.nextLevel()
   </pre></code>
 
-  @name ne
+  @name nextLevel
   @methodOf Engine#
   @param {Number} steps The number of steps to wait before executing the callback
   @param {Function} callback The callback to be executed.
