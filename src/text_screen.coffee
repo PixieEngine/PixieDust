@@ -26,7 +26,7 @@ TextScreen = (I={}) ->
     @name centerText
     @methodOf TextScreen#
     @param {PixieCanvas} canvas The canvas to draw on
-
+    
     ###   
     centerText: (canvas, text, options={}) ->
       font = options.font || I.font
