@@ -2,22 +2,8 @@
 The TimedEvents module allows arbitrary code to be executed at set intervals.
 
 <code><pre>
-player = Core
-  x: 10
-  y: 50
-  width: 20
-  height: 20
-  other: "stuff"
-  more: "properties"
+player = GameObject
 
-player.position()
-# => Uncaught TypeError: Object has no method 'position'
-
-player.include(Bounded)
-
-# now player has all the methods provided by this module
-player.position()
-# => {x: 10, y: 50}
 </pre></code>
 
 @see GameObject
