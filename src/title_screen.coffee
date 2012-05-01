@@ -1,3 +1,13 @@
+###*
+The Text Effect class provides a method to display moving text onscreen, fading out the text over the effect duration.
+
+By default, images are loaded asynchronously. A proxy object is 
+returned immediately. Even though it has a draw method it will not
+draw anything to the screen until the image has been loaded.
+
+@name TextEffect
+@constructor
+###
 TitleScreen = (I={}) ->
   self = TextScreen(I)
 
