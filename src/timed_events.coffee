@@ -13,7 +13,7 @@ player.every 4, ->
 
 @see GameObject
 
-Timed module
+TimedEvents module
 @name Bounded
 @module
 @constructor
