@@ -17,7 +17,7 @@ Goes to the next level on any user input.
 ###*
 Overlays the title text in the middle of the screen. Uses <code>App.name</code> 
 
-@name update
+@name overlay
 @methodOf TitleScreen#
 @event
 ###
