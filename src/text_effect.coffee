@@ -12,6 +12,7 @@ draw anything to the screen until the image has been loaded.
 ###*
 Updates the position of the text based on the effect velocity. Updates the 
 alpha based on 
+
 Observe or configure a <code>gameObject</code> that has been added 
 to the engine.
 @name update
