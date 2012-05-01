@@ -17,7 +17,7 @@ TextScreen = (I={}) ->
   
     <code><pre>
     screen = TextScreen()
-    screen.
+    screen.centerText
     enemy.follow(player)
   
     # => The enemy now has it's velocity attribute set in
