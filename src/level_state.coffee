@@ -4,7 +4,7 @@
 @name LevelState
 @constructor
 @param {Number} duration Amount of time in frames it takes to fade into the level
-@param {String} level 
+@param {String} level name of the level to 
 ###
 LevelState = (I={}) ->
   Object.reverseMerge I,
