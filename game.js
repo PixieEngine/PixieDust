@@ -9534,29 +9534,6 @@ Rotatable = function(I, self) {
   return {};
 };
 ;
-var Score;
-
-Score = function(I, self) {
-  if (I == null) I = {};
-  Object.reverseMerge(I, {
-    score: 0,
-    scoreColor: 'black',
-    scorePosition: {
-      x: App.width - 100,
-      y: 20
-    }
-  });
-  return self.bind('overlay', function(canvas) {
-    canvas.font('14px Helvetica');
-    return canvas.drawText({
-      color: I.scoreColor,
-      x: I.scorePosition.x,
-      y: I.scorePosition.y,
-      text: "Score: " + I.score
-    });
-  });
-};
-;
 /**
 The Sprite class provides a way to load images for use in games.
 
