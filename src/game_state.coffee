@@ -65,8 +65,6 @@ GameState = (I={}) ->
 
     I.updating = false
 
-  #TODO Include GameState modules like cameras,
-  # save states, etc.
   self.include GameState.Cameras
   self.include GameState.SaveState
 
