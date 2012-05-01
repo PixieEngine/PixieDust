@@ -44,7 +44,7 @@ Tween = (I={}, self) ->
     properties = Object.extend({}, properties) # Make a local copy
 
     easing = properties.easing || "linear"
-    
+    complete = properties.compl
     delete properties.easing
     delete properties.complete
 
