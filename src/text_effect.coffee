@@ -20,7 +20,7 @@ is provided then the text rotation is updated as well.
 ###
 
 ###*
-The default draw
+The default <code>draw< method
 
 @name update
 @methodOf TextEffect#
