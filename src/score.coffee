@@ -1,5 +1,5 @@
 ###*
-The score module overlays a 
+The score module overlays a score value 
 
 @name Oscillator
 @constructor
