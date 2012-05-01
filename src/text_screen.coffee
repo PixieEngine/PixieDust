@@ -1,5 +1,5 @@
 ###*
-The Text Screen class sets up a simple game title screen using <code>App.name</code>
+The Text Screen class is a simple Gam
 
 @see TextScreen
 @name TitleScreen
