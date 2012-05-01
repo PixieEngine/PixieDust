@@ -1,7 +1,7 @@
 ###*
-This module provides methods for transitioning 
+This module provides methods for transitioning between levels.
 
-@name Clear
+@name Levels
 @fieldOf Engine
 @module
 @param {Object} I Instance variables
