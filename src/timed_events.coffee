@@ -1,5 +1,5 @@
 ###*
-The TimedEvents module allows arbitrary code to be executed at set intervals. <GameObject>
+The TimedEvents module allows arbitrary code to be executed at set intervals. <code></code>
 
 <code><pre>
 player = GameObject()
