@@ -35,6 +35,15 @@ Tween = (I={}, self) ->
     easing: "quadratic"
   </pre></code>
 
+  <code><pre>
+  player = GameObject()
+
+  player.tween 30,
+    x: 50
+    y: 50
+    easing: "quadratic"
+  </pre></code>
+
   @name tween
   @methodOf Tween#
   @param {Number} duration How long (in frames) until the object's properties reach their final values.
