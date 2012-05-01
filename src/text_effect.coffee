@@ -9,15 +9,15 @@ draw anything to the screen until the image has been loaded.
 @constructor
 ###
 
-  ###*
-  Observe or configure a <code>gameObject</code> that has been added 
-  to the engine.
-  @name afterAdd
-  @methodOf Engine#
-  @event
-  @param {GameObject} object The object that has just been added to the
-  engine.
-  ###
+###*
+Observe or configure a <code>gameObject</code> that has been added 
+to the engine.
+@name afterAdd
+@methodOf Engine#
+@event
+@param {GameObject} object The object that has just been added to the
+engine.
+###
 TextEffect = (I={}) ->
   Object.reverseMerge I,
     color: Color('green')
