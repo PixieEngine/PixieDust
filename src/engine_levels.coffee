@@ -62,7 +62,7 @@ Engine.Levels = (I, self) ->
   Reload the current level. Useful for retrying after a player dies.
 
   <code><pre>
-  engine.realodLevel
+  engine.reloadLevel()
   </pre></code>
 
   @name reloadLevel
