@@ -20,10 +20,8 @@ TimedEvents module
 @param {Object} I Instance variables
 ###
 TimedEvents = (I={}) ->
-    ###*
-  Distance between two objects. Proxies to Point.distance.
-  In order for this to work, `otherObj` must have a 
-  position method.
+  ###*
+  E
 
   <code><pre>
   player = GameObject
