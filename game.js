@@ -9128,18 +9128,35 @@ GameState.SingleCamera = function(I, self) {
   return {};
 };
 ;
+/**
+A Game State that loads the map for a given level and transitions into the level.
+
+@see GameState
+@name LevelState
+@constructor
+@param {Number} duration Amount of time in frames it takes to fade into the level
+@param {String} level name of the map to load
+*/
+/**
+Fades in the current level and loads the map.
+
+@name enter
+@methodOf LevelState#
+@event
+*/
 var LevelState;
 
 LevelState = function(I) {
   var self;
   if (I == null) I = {};
   Object.reverseMerge(I, {
+    duration: 10,
     level: 'level1'
   });
   self = GameState(I);
   self.bind("enter", function() {
     engine.fadeIn({
-      duration: 10
+      duration: I.duration
     });
     return engine.loadMap(I.level, function() {
       return engine.I.transitioning = false;
