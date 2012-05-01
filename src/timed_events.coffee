@@ -14,7 +14,7 @@ player.every 4, ->
 @see GameObject
 
 TimedEvents module
-@name Bounded
+@name TimedEvents
 @module
 @constructor
 @param {Object} I Instance variables
