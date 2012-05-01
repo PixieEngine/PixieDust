@@ -12,7 +12,21 @@ TextScreen = (I={}) ->
     yPosition: App.height / 2
 
   self = GameState(I).extend
+    ###*
+    Set your velocity to follow another object.
   
+    <code><pre>
+    enemy.follow(player)
+  
+    # => The enemy now has it's velocity attribute set in
+    # the direction of the player, with magnitude equal to
+    # the enemy's speed
+    </pre></code>
+  
+    @name follow
+    @methodOf Follow#
+    @param {GameObject} obj The object you want to follow
+    ###   
     centerText: (canvas, text, options={}) ->
       font = options.font || I.font
       size = options.size || I.fontSize
