@@ -1,5 +1,5 @@
 ###*
-The Game Over class sets up a simple game state
+The Game Over class sets up a simple game state with re
 
 @name update
 @methodOf TitleScreen#
