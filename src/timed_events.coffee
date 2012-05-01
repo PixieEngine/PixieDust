@@ -6,7 +6,7 @@ player = GameObject()
 
 player.include TimedEvents
 
-# doSomething
+# doSomething is called every 4 frames
 player.every 4, ->
   doSomething()
 </pre></code>
