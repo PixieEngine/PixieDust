@@ -48,7 +48,7 @@ Engine.Levels = (I, self) ->
   Load map named <code>level</code>
 
   <code><pre>
-  engine.goToLevel('')
+  engine.goToLevel 'bossFight'
   </pre></code>
 
   @name nextLevel
