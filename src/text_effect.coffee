@@ -11,7 +11,7 @@ draw anything to the screen until the image has been loaded.
 
 ###*
 Updates the position of the text based on the effect velocity. Updates the 
-alpha based on the elapsed time since the effect creation.
+alpha based on the elapsed time since the effect creation. W
 
 @name update
 @methodOf TextEffect#
