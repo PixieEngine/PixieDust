@@ -11,15 +11,15 @@ TimedEvents = (I={}) ->
   ###*
   Execute <code>fn</code> every <code>n</code> frames.
 
-<code><pre>
-player = GameObject()
-
-player.include TimedEvents
-
-# doSomething is called every 4 frames
-player.every 4, ->
-  doSomething()
-</pre></code>
+  <code><pre>
+  player = GameObject()
+  
+  player.include TimedEvents
+  
+  # doSomething is called every 4 frames
+  player.every 4, ->
+    doSomething()
+  </pre></code>
 
   @name distance
   @methodOf Bounded#
