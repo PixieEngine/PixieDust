@@ -16,7 +16,6 @@ Engine.Levels = (I, self) ->
       I.currentLevelName = level
       engine.setState levelState
 
-  # We must always return self as the last line
   nextLevel: ->
     unless I.transitioning
       I.currentLevel += 1
