@@ -20,7 +20,7 @@ is provided then the text rotation is updated as well.
 ###
 
 ###*
-Game
+The default draw
 
 @name update
 @methodOf TextEffect#
