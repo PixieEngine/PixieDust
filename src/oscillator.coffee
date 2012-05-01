@@ -1,10 +1,6 @@
 ###*
 Creates an oscillator function with the given parameters.
 
-By default, images are loaded asynchronously. A proxy object is 
-returned immediately. Even though it has a draw method it will not
-draw anything to the screen until the image has been loaded.
-
 @name Oscillator
 @constructor
 ###
