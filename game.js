@@ -5520,6 +5520,35 @@ Clampable = function(I, self) {
   return (typeof exports !== "undefined" && exports !== null ? exports : this)["Collision"] = Collision;
 })();
 ;
+var CollisionResponse;
+
+CollisionResponse = function(I, self) {
+  if (I == null) I = {};
+  self.bind('update', function() {
+    I.velocity.x.abs().times(function() {
+      if (self.collide(I.velocity.x.sign(), 0, ".solid")) {
+        return I.velocity.x = 0;
+      } else {
+        return I.x += I.velocity.x.sign();
+      }
+    });
+    return I.velocity.y.abs().times(function() {
+      if (self.collide(0, I.velocity.y.sign(), ".solid")) {
+        return I.velocity.y = 0;
+      } else {
+        return I.y += I.velocity.y.sign();
+      }
+    });
+  });
+  return self.extend({
+    collide: function(xOffset, yOffset, className) {
+      return engine.find(className).inject(false, function(hit, block) {
+        return hit || Collision.rectangular(self.bounds(xOffset, yOffset), block.bounds());
+      });
+    }
+  });
+};
+;
 var __slice = Array.prototype.slice;
 
 (function() {
