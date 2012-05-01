@@ -9903,11 +9903,38 @@ TextScreen = function(I) {
   return (typeof exports !== "undefined" && exports !== null ? exports : this)["Tilemap"] = Tilemap;
 })();
 ;
+/**
+The TimedEvents module allows arbitrary code to be executed at set intervals. <code>GameObject</code> includes this module by default
+
+TimedEvents module
+@name TimedEvents
+@module
+@constructor
+@param {Object} I Instance variables
+*/
 var TimedEvents;
 
 TimedEvents = function(I) {
   if (I == null) I = {};
   return {
+    /**
+    Execute <code>fn</code> every <code>n</code> frames.
+    
+    <code><pre>
+    player = GameObject()
+    
+    player.include TimedEvents
+    
+    # doSomething is called every 4 frames
+    player.every 4, ->
+      doSomething()
+    </pre></code>
+    
+    @name every
+    @methodOf TimedEvents#
+    @param {Number} n Number of frames to wait before executing the callback
+    @param {Function} fn Code to execute after <code>n</code> frames has passed
+    */
     every: function(n, fn) {
       if (I.age.mod(n) === 0) return fn();
     }
