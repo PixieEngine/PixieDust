@@ -18,6 +18,16 @@ is provided then the text rotation is updated as well.
 @methodOf TextEffect#
 @event
 ###
+
+###*
+Updates the position of the text based on the effect velocity. Updates the 
+alpha based on the elapsed time since the effect creation. If <code>rotationalVelocity</code>
+is provided then the text rotation is updated as well.
+
+@name update
+@methodOf TextEffect#
+@event
+###
 TextEffect = (I={}) ->
   Object.reverseMerge I,
     color: Color('green')
