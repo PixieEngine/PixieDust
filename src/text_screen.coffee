@@ -16,7 +16,7 @@ TextScreen = (I={}) ->
     Draw center aligned text at the given y position.
   
     <code><pre>
-    
+    screen = 
     enemy.follow(player)
   
     # => The enemy now has it's velocity attribute set in
