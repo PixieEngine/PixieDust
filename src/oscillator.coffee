@@ -1,5 +1,5 @@
 ###*
-The Sprite class provides a way to load images for use in games.
+Creates an osci
 
 By default, images are loaded asynchronously. A proxy object is 
 returned immediately. Even though it has a draw method it will not
