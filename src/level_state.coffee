@@ -3,7 +3,7 @@
 
 @name LevelState
 @constructor
-@param {Number} amplitude How much to scale the oscillator function value
+@param {Number} duration:
 @param {Number} period How fast the osciallator function repeats
 @param {Number} offset How much to offset the created osciallator function. Useful for translating between sin and cosine functions.
 ###
