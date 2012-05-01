@@ -26,7 +26,7 @@ Engine.Levels = (I, self) ->
       engine.setState levelState
 
   ###*
-  E
+  Load the 
 
   <code><pre>
   engine.delay 5, ->
