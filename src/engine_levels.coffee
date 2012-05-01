@@ -62,7 +62,7 @@ Engine.Levels = (I, self) ->
   Reload the current level.
 
   <code><pre>
-  engine.goToLevel 'bossFight'
+  engine.realodLEvel
   </pre></code>
 
   @name goToLevel
