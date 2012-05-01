@@ -8881,6 +8881,27 @@ GameObject.construct = function(entityData) {
   }
 };
 ;
+/**
+The Game Over class sets up a simple game state with restart instructions.
+
+@see TextScreen
+@name GameOver
+@constructor
+*/
+/**
+Transitions to the title state on user input.
+
+@name update
+@methodOf GameOver#
+@event
+*/
+/**
+Draws Game Over screen and reset instructions.
+
+@name overlay
+@methodOf GameOver#
+@event
+*/
 var GameOver;
 
 GameOver = function(I) {
