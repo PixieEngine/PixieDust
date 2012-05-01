@@ -2,8 +2,8 @@
 The TimedEvents module allows arbitrary code to be executed at set intervals.
 
 <code><pre>
-player = GameObject
-
+player = GameObject()
+player.
 </pre></code>
 
 @see GameObject
