@@ -11,9 +11,7 @@ CollisionResponse = (I={}, self) ->
         I.velocity.y = 0
       else
         I.y += I.velocity.y.sign()  
-                        
-  self.clampToBounds()
-  
+                          
   self.extend
     collide: (xOffset, yOffset, className) ->
       engine.find(className).inject false, (hit, block) ->
