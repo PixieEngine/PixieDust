@@ -19,7 +19,7 @@ Overlays the title text in the middle of the screen. Uses <code>App.name</code>
 
 @name overlay
 @methodOf TitleScreen#
-@param 
+@param {PixieCanvas} canvas
 @event
 ###
 TitleScreen = (I={}) ->
