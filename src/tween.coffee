@@ -45,7 +45,7 @@ Tween = (I={}, self) ->
 
     easing = properties.easing || "linear"
     delete properties.easing
-    delete properties
+    delete properties.complete
 
     for property, target of properties
       I.activeTweens[property] =
