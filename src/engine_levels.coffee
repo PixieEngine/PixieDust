@@ -29,9 +29,7 @@ Engine.Levels = (I, self) ->
   Load the map for the next level.
 
   <code><pre>
-  engine.delay 5, ->
-    engine.add
-      class: "Ghost"
+  engine.
   </pre></code>
 
   @name delay
