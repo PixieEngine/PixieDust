@@ -25,7 +25,22 @@ Engine.Levels = (I, self) ->
       I.currentLevelName = level
       engine.setState levelState
 
-      
+  ###*
+  Execute a callback after a number of steps have passed.
+
+  <code><pre>
+  engine.delay 5, ->
+    engine.add
+      class: "Ghost"
+  </pre></code>
+
+  @name delay
+  @methodOf Engine#
+  @param {Number} steps The number of steps to wait before executing the callback
+  @param {Function} callback The callback to be executed.
+
+  @returns {Engine} self
+  ###      
   nextLevel: ->
     unless I.transitioning
       I.currentLevel += 1
