@@ -9191,62 +9191,43 @@ Metered module
 var Metered;
 
 Metered = function(I, self) {
-  var setMeter;
   if (I == null) I = {};
   Object.reverseMerge(I, {
     meters: {}
   });
-  setMeter = function(name, value) {
-    var meterData, meterName, _ref, _results;
-    _ref = I.meters;
-    _results = [];
-    for (meterName in _ref) {
-      meterData = _ref[meterName];
-      if (meterName === name) {
-        _results.push(meterData.show = value);
-      } else {
-        _results.push(void 0);
-      }
-    }
-    return _results;
-  };
   self.bind('overlay', function(canvas) {
-    var backgroundColor, borderColor, borderWidth, color, font, height, meterData, name, nameColor, radius, ratio, show, showName, text, width, x, y, _ref, _ref2;
+    var backgroundColor, borderColor, borderRadius, borderWidth, color, height, meterData, name, ratio, show, width, x, y, _ref, _ref2, _ref3;
     _ref = I.meters;
     for (name in _ref) {
       meterData = _ref[name];
-      backgroundColor = meterData.backgroundColor, borderColor = meterData.borderColor, borderWidth = meterData.borderWidth, color = meterData.color, font = meterData.font, height = meterData.height, nameColor = meterData.nameColor, (_ref2 = meterData.position, x = _ref2.x, y = _ref2.y), radius = meterData.radius, show = meterData.show, showName = meterData.showName, text = meterData.text, width = meterData.width;
+      backgroundColor = meterData.backgroundColor, (_ref2 = meterData.border, borderColor = _ref2.color, borderRadius = _ref2.radius, borderWidth = _ref2.width), color = meterData.color, height = meterData.height, show = meterData.show, width = meterData.width, x = meterData.x, y = meterData.y;
+      if (meterData.position != null) {
+        _ref3 = meterData.position, x = _ref3.x, y = _ref3.y;
+      }
       if (!show) return;
       ratio = I[name] / I["max" + (name.capitalize())];
-      if (showName || text) {
-        canvas.font(font);
-        canvas.drawText({
-          color: nameColor,
-          x: x,
-          y: y + 10,
-          text: text || name.capitalize()
-        });
-      }
-      canvas.drawRect({
+      canvas.drawRoundRect({
         color: backgroundColor,
+        radius: borderRadius,
         x: x,
-        y: y + 15,
+        y: y,
         width: width,
         height: height
       });
-      canvas.drawRect({
+      canvas.drawRoundRect({
         color: color,
         x: x,
-        y: y + 15,
+        y: y,
+        radius: borderRadius,
         width: width * ratio,
         height: height
       });
       canvas.drawRoundRect({
         x: x,
-        y: y + 15,
+        y: y,
         width: width,
         height: height,
-        radius: radius,
+        radius: borderRadius,
         stroke: {
           color: borderColor,
           width: borderWidth
@@ -9264,17 +9245,14 @@ Metered = function(I, self) {
     player.include Metered      
     
     player.meter 'health',
-      borderColor: 'brown'
+      border
+        color: 'brown'
+        radius: 3
       color: 'pink'
-      font: '30px Comic Sans'
       height: 20
-      position: 
-        x: 5
-        y: 5
-      radius: 3
+      x: 5
+      y: 5
       show: true
-      showName: true
-      text: 'Boss Health'
       width: 150
     
     # => Sets up a health meter, using all the configuration options
@@ -9284,37 +9262,31 @@ Metered = function(I, self) {
     @methodOf Metered#
     @param {String} name The name of the property to meter
     @param {Object} options The meter configuration options
-    @param {String} borderColor Color of the meter's border
-    @param {Number} borderWidth Width of the meter's border
+    @param {String} border: color Color of the meter's border
+    @param {Number} border: width Width of the meter's border
     @param {String} color Color of the meter's inner rectangle
-    @param {String} nameColor Color of the property name displayed above the meter
-    @param {String} font Size and style of the meter's font
     @param {Number} height Height of the meter
     @param {Object} position An x, y object representing the position of the meter
-    @param {Number} radius Border radius of the meter
+    @param {Number} x x position of the meter
+    @param {Number} y y position of the meter
+    @param {Number} border: radius Border radius of the meter
     @param {Boolean} show Boolean to toggle whether of not to display the meter
-    @param {Boolean} showName Boolean to toggle whether or not to show the attribute associated with the meter
-    @param {String} text A String to display over the meter. Overrides default name attribute
     @param {Number} width How wide the meter is
     */
     meter: function(name, options) {
       if (options == null) options = {};
       Object.reverseMerge(options, {
         backgroundColor: 'black',
-        borderColor: 'white',
-        borderWidth: 1.5,
-        color: 'green',
-        nameColor: 'white',
-        font: '14px Helvetica',
-        height: 10,
-        position: {
-          x: 0,
-          y: 0
+        border: {
+          color: 'white',
+          radius: 2,
+          width: 1.5
         },
-        radius: 2,
+        color: 'green',
+        height: 10,
+        x: 0,
+        y: 0,
         show: true,
-        showName: false,
-        text: null,
         width: 100
       });
       if (I[name] == null) I[name] = 100;
@@ -9343,12 +9315,12 @@ Metered = function(I, self) {
     player.showMeter 'health'
     </pre></code>
     
-    @name meter
+    @name showMeter
     @methodOf Metered#
-    @param {String} name The name of the meter to toggle
+    @param {String} name The name of the meter to show
     */
     showMeter: function(name) {
-      return setMeter(name, true);
+      return I.meters[name].show = true;
     },
     /**
     Hides the named meter
@@ -9365,12 +9337,34 @@ Metered = function(I, self) {
     player.hideMeter 'health'
     </pre></code>
     
-    @name meter
+    @name hideMeter
+    @methodOf Metered#
+    @param {String} name The name of the meter to hide
+    */
+    hideMeter: function(name) {
+      return I.meters[name].show = false;
+    },
+    /**
+    Toggles visibility of the named meter
+    
+    <code><pre>
+    player = GameObject
+    
+    player.include Metered      
+    
+    # creates a health meter
+    player.meter 'health'
+    
+    # toggles visibility for the meter named 'health'
+    player.toggleMeter 'health'
+    </pre></code>
+    
+    @name toggleMeter
     @methodOf Metered#
     @param {String} name The name of the meter to toggle
     */
-    hideMeter: function(name) {
-      return setMeter(name, false);
+    toggleMeter: function(name) {
+      return I.meters[name].show = !I.meters[name].show;
     }
   };
 };
