@@ -1,5 +1,5 @@
 ###*
-The TimedEvents module allows arbitrary code to be exe
+The TimedEvents module allows arbitrary code to be executed e
 
 <code><pre>
 player = Core
