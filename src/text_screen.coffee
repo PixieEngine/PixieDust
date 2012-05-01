@@ -13,7 +13,7 @@ TextScreen = (I={}) ->
 
   self = GameState(I).extend
     ###*
-    Draw cente
+    Draw centered text at the given y position.
   
     <code><pre>
     enemy.follow(player)
