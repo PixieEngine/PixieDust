@@ -3,7 +3,7 @@ Creates an oscillator function with the given parameters.
 
 @name Oscillator
 @constructor
-@params {Number} amplitude How much to scale the osci 
+@params {Number} amplitude How much to scale the oscillator function value. 
 ###
 Oscillator = (options={}) ->
   {amplitude, period, offset} = options
