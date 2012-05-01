@@ -59,10 +59,10 @@ Engine.Levels = (I, self) ->
     loadLevel level
 
   ###*
-  Reload the current level.
+  Reload the current level. Great
 
   <code><pre>
-  engine.realodLEvel
+  engine.realodLevel
   </pre></code>
 
   @name goToLevel
