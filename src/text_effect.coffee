@@ -1,3 +1,4 @@
+
 TextEffect = (I={}) ->
   Object.reverseMerge I,
     color: Color('green')
