@@ -1,5 +1,5 @@
 ###*
-The TimedEvents module allows arbitrary code to be executed at set intervals.
+The TimedEvents module allows arbitrary code to be executed at set intervals. 
 
 <code><pre>
 player = GameObject()
@@ -10,8 +10,6 @@ player.include TimedEvents
 player.every 4, ->
   doSomething()
 </pre></code>
-
-
 
 @see GameObject
 
