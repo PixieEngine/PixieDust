@@ -26,7 +26,7 @@ Engine.Levels = (I, self) ->
       engine.setState levelState
 
   ###*
-  Load the map for the 
+  Load the map for the next level.
 
   <code><pre>
   engine.delay 5, ->
