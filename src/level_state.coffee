@@ -1,5 +1,5 @@
 ###*
-A Game State that loads the map for a given 
+A Game State that loads the map for a given level.
 
 @see GameState
 @name LevelState
