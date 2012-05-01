@@ -12,7 +12,7 @@ alpha based on the elapsed time since the effect creation. If <code>rotationalVe
 is provided then the text rotation is updated as well.
 
 @name update
-@methodOf TextEffect#
+@methodOf TitleScreen#
 @event
 ###
 TitleScreen = (I={}) ->
