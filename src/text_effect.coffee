@@ -24,7 +24,7 @@ Draws the <code>textShadow</code> text and the <code>text</code> text.
 
 @name draw
 @methodOf TextEffect#
-@params {Pix}
+@params {PixieCanvas} canvas
 @event
 ###
 TextEffect = (I={}) ->

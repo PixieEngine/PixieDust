@@ -9745,6 +9745,7 @@ Draws the <code>textShadow</code> text and the <code>text</code> text.
 
 @name draw
 @methodOf TextEffect#
+@params {PixieCanvas} canvas
 @event
 */
 var TextEffect;
