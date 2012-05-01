@@ -9,7 +9,7 @@ A Game State that loads the map for a given level and transitions into the level
 ###
 
 ###*
-Goes to the next level on any user input.
+Fades in 
 
 @name enter
 @methodOf LevelState#
