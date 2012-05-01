@@ -1,5 +1,5 @@
 ###*
-Goes to the next level on any user input.
+The Title Screen class sets up a simple game title screen using <code>App.name</code>
 
 @name update
 @methodOf TitleScreen#
