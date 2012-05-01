@@ -24,8 +24,8 @@ TextScreen = (I={}) ->
     </pre></code>
   
     @name centerText
-    @methodOf TextScr#
-    @param {GameObject} obj The object you want to follow
+    @methodOf TextScreen#
+    @param {GameObject} canvas The object you want to follow
     ###   
     centerText: (canvas, text, options={}) ->
       font = options.font || I.font
