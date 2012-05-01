@@ -5,6 +5,8 @@ The Game Over class sets up a simple game state with restart instructions.
 @methodOf TitleScreen#
 @event
 ###
+
+
 GameOver = (I={}) ->
   self = TextScreen(I)
 
