@@ -1,4 +1,4 @@
-module "Text"
+module "TextEf"
 
 test "text moves up vertically", ->
   text = Text()
