@@ -1,5 +1,5 @@
 ###*
-Creates an oscillator 
+Creates an oscillator function with the given 
 
 By default, images are loaded asynchronously. A proxy object is 
 returned immediately. Even though it has a draw method it will not
