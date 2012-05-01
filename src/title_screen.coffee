@@ -1,10 +1,6 @@
 ###*
 The Title Screen class sets up a simple game title screen using <code>App.name</code>
 
-By default, images are loaded asynchronously. A proxy object is 
-returned immediately. Even though it has a draw method it will not
-draw anything to the screen until the image has been loaded.
-
 @see TextScreen
 @name TextEffect
 @constructor
