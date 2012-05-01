@@ -2,7 +2,7 @@
 The Title Screen class sets up a simple game title screen using <code>App.name</code>
 
 @see TextScreen
-@name TextEffect
+@name TitleScreen
 @constructor
 ###
 TitleScreen = (I={}) ->
