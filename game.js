@@ -9894,6 +9894,28 @@ TimedEvents = function(I) {
   };
 };
 ;
+/**
+The Title Screen class sets up a simple game title screen using <code>App.name</code>
+
+@see TextScreen
+@name TitleScreen
+@constructor
+*/
+/**
+Goes to the next level on any user input.
+
+@name update
+@methodOf TitleScreen#
+@event
+*/
+/**
+Overlays the title text in the middle of the screen. Uses <code>App.name</code> 
+
+@name overlay
+@methodOf TitleScreen#
+@param {PixieCanvas} canvas
+@event
+*/
 var TitleScreen;
 
 TitleScreen = function(I) {
