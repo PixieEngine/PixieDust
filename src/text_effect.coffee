@@ -20,7 +20,7 @@ is provided then the text rotation is updated as well.
 ###
 
 ###*
-Draws the <code>textShadow</code> text and the <code> 
+Draws the <code>textShadow</code> text and the <code>text</code> 
 
 @name update
 @methodOf TextEffect#
