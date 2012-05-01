@@ -51,7 +51,7 @@ Engine.Levels = (I, self) ->
   engine.goToLevel 'bossFight'
   </pre></code>
 
-  @name nextLevel
+  @name goToLevel
   @methodOf Engine#
   ###          
   goToLevel: (level) ->
