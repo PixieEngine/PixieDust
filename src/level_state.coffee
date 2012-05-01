@@ -1,5 +1,6 @@
 LevelState = (I={}) ->
   Object.reverseMerge I,
+    duration: 1
     level: 'level1'
 
   self = GameState(I)
