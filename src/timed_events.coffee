@@ -1,16 +1,6 @@
 ###*
 The TimedEvents module allows arbitrary code to be executed at set intervals. <code>GameObject</code> includes this module by default
 
-<code><pre>
-player = GameObject()
-
-player.include TimedEvents
-
-# doSomething is called every 4 frames
-player.every 4, ->
-  doSomething()
-</pre></code>
-
 @see GameObject
 
 TimedEvents module
