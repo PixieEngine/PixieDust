@@ -21,7 +21,7 @@ TimedEvents module
 ###
 TimedEvents = (I={}) ->
   ###*
-  Execute <
+  Execute <code>fn</code>
 
   <code><pre>
   player = GameObject
