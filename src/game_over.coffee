@@ -7,6 +7,8 @@ The Game Over class sets up a simple game state with restart instructions.
 ###
 
 ###*
+Trans
+
 @name update
 @methodOf GameOver#
 @event
