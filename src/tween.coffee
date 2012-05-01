@@ -44,12 +44,13 @@ Tween = (I={}, self) ->
     properties = Object.extend({}, properties) # Make a local copy
 
     easing = properties.easing || "linear"
+    
     delete properties.easing
     delete properties.complete
 
     for property, target of properties
       I.activeTweens[property] =
-        complete: compl
+        complete: complete
         end: target
         start: I[property]
         easing: easing
