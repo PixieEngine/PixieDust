@@ -12,7 +12,7 @@ draw anything to the screen until the image has been loaded.
 ###*
 Observe or configure a <code>gameObject</code> that has been added 
 to the engine.
-@name afterAdd
+@name update
 @methodOf Engine#
 @event
 @param {GameObject} object The object that has just been added to the
