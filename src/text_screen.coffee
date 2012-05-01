@@ -25,7 +25,7 @@ TextScreen = (I={}) ->
   
     @name centerText
     @methodOf TextScreen#
-    @param {Pixie} canvas The object you want to follow
+    @param {PixieCanvas} canvas The cavans
     ###   
     centerText: (canvas, text, options={}) ->
       font = options.font || I.font
