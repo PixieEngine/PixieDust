@@ -1,5 +1,5 @@
 ###*
-The Text Effect class provides a method to display a moving  onscreen.
+The Text Effect class provides a method to display moving text onscreen.
 
 By default, images are loaded asynchronously. A proxy object is 
 returned immediately. Even though it has a draw method it will not
