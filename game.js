@@ -7178,7 +7178,7 @@ Debuggable = function(I, self) {
     
     @name toggleDebug
     @methodOf Debuggable#
-    @param {Boolean} If true is passed then debugging is enabled, if false is passed then debugging is disabled, if nothing is passed, then debug state is toggled.
+    @param {Boolean} newVal If true is passed then debugging is enabled, if false is passed then debugging is disabled, if nothing is passed, then debug state is toggled.
     */
     toggleDebug: function(newVal) {
       if (newVal != null) {
@@ -8241,7 +8241,7 @@ Engine.Levels = function(I, self) {
     Reload the current level. Useful for retrying after a player dies.
     
     <code><pre>
-    engine.realodLevel
+    engine.reloadLevel()
     </pre></code>
     
     @name reloadLevel
@@ -8938,6 +8938,7 @@ Draws Game Over screen and reset instructions.
 
 @name overlay
 @methodOf GameOver#
+@param {PixieCanvas} canvas
 @event
 */
 var GameOver;
