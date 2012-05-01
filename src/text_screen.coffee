@@ -23,8 +23,8 @@ TextScreen = (I={}) ->
     # the enemy's speed
     </pre></code>
   
-    @name cente
-    @methodOf Follow#
+    @name centerText
+    @methodOf TextScr#
     @param {GameObject} obj The object you want to follow
     ###   
     centerText: (canvas, text, options={}) ->
