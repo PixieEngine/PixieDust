@@ -1,5 +1,5 @@
 ###*
-The Ttit class provides a method to display moving text onscreen, fading out the text over the effect duration.
+The Title Screen class provides a method to display moving text onscreen, fading out the text over the effect duration.
 
 By default, images are loaded asynchronously. A proxy object is 
 returned immediately. Even though it has a draw method it will not
