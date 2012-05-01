@@ -44,6 +44,16 @@ Engine.Levels = (I, self) ->
       else
         engine.setState GameOver()
 
+  ###*
+  Load map for the next level.
+
+  <code><pre>
+  engine.nextLevel()
+  </pre></code>
+
+  @name nextLevel
+  @methodOf Engine#
+  ###          
   goToLevel: (level) ->
     #TODO Handle integer levels?
     loadLevel level
