@@ -26,7 +26,7 @@ Engine.Levels = (I, self) ->
       engine.setState levelState
 
   ###*
-  Load the map for the next level.
+  Load map for the next level.
 
   <code><pre>
   engine.nextLevel()
