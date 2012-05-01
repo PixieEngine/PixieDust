@@ -9740,6 +9740,13 @@ is provided then the text rotation is updated as well.
 @methodOf TextEffect#
 @event
 */
+/**
+Draws the <code>textShadow</code> text and the <code>text</code> text.
+
+@name update
+@methodOf TextEffect#
+@event
+*/
 var TextEffect;
 
 TextEffect = function(I) {
