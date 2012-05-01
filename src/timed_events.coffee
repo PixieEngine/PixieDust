@@ -24,7 +24,7 @@ TimedEvents = (I={}) ->
   @name every
   @methodOf TimedEvents#
   @param {Number} n Number of frames to wait before executing the callback
-  @param {Function} fn Code to execute after <code> of frames has passed
+  @param {Function} fn Code to execute after <code>n</code> frames has passed
   ###  
   every: (n, fn) ->
     if I.age.mod(n) is 0
