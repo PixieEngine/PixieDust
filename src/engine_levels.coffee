@@ -26,7 +26,7 @@ Engine.Levels = (I, self) ->
       engine.setState levelState
 
   ###*
-  Execute a callback after a number of steps have passed.
+  E
 
   <code><pre>
   engine.delay 5, ->
