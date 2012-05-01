@@ -6,8 +6,9 @@ player = GameObject()
 
 player.include TimedEvents
 
+# doSomething
 player.every 4, ->
-  doSomething(
+  doSomething()
 </pre></code>
 
 @see GameObject
