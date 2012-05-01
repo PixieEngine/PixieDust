@@ -1,5 +1,5 @@
 ###*
-The Title Screen class sets up a simple game title screen using <code>App.name</code>
+The Game Over class sets up a simple game title screen using <code>App.name</code>
 
 @name update
 @methodOf TitleScreen#
