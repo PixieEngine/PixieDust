@@ -41,7 +41,8 @@ Tween = (I={}, self) ->
   player.tween 30,
     x: 50
     y: 50
-    complete: "quadratic"
+    complete: ->
+      
   </pre></code>
 
   @name tween
