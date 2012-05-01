@@ -7,7 +7,7 @@ The Game Over class sets up a simple game state with restart instructions.
 ###
 
 ###*
-Transitions to the title state 
+Transitions to the title state on user input.
 
 @name update
 @methodOf GameOver#
