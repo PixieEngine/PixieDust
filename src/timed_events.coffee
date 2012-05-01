@@ -23,7 +23,7 @@ TimedEvents = (I={}) ->
 
   @name every
   @methodOf TimedEvents#
-  
+  @param 
   @returns {Number} Distance between the two objects
   ###  
   every: (n, fn) ->
