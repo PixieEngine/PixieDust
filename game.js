@@ -8174,7 +8174,15 @@ Engine.Keyboard = function(I, self) {
   return {};
 };
 ;
+/**
+This module provides methods for transitioning between levels.
 
+@name Levels
+@fieldOf Engine
+@module
+@param {Object} I Instance variables
+@param {Object} self Reference to the engine
+*/
 Engine.Levels = function(I, self) {
   var loadLevel;
   Object.reverseMerge(I, {
@@ -8195,6 +8203,16 @@ Engine.Levels = function(I, self) {
     }
   };
   return {
+    /**
+    Load map for the next level.
+    
+    <code><pre>
+    engine.nextLevel()
+    </pre></code>
+    
+    @name nextLevel
+    @methodOf Engine#
+    */
     nextLevel: function() {
       var level;
       if (!I.transitioning) {
@@ -8206,9 +8224,29 @@ Engine.Levels = function(I, self) {
         }
       }
     },
+    /**
+    Load map named <code>level</code>
+    
+    <code><pre>
+    engine.goToLevel 'bossFight'
+    </pre></code>
+    
+    @name goToLevel
+    @methodOf Engine#
+    */
     goToLevel: function(level) {
       return loadLevel(level);
     },
+    /**
+    Reload the current level. Useful for retrying after a player dies.
+    
+    <code><pre>
+    engine.realodLevel
+    </pre></code>
+    
+    @name reloadLevel
+    @methodOf Engine#
+    */
     reloadLevel: function() {
       return loadLevel(I.currentLevelName);
     }
