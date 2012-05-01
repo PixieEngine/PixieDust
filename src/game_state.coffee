@@ -70,5 +70,4 @@ GameState = (I={}) ->
   self.include GameState.Cameras
   self.include GameState.SaveState
 
-  # We must always return self as the last line
   return self
