@@ -1,5 +1,5 @@
 ###*
-The TimedEvents module allows 
+The TimedEvents module allows arbi
 
 <code><pre>
 player = Core
