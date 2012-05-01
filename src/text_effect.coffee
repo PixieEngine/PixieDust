@@ -20,9 +20,7 @@ is provided then the text rotation is updated as well.
 ###
 
 ###*
-Updates the position of the text based on the effect velocity. Updates the 
-alpha based on the elapsed time since the effect creation. If <code>rotationalVelocity</code>
-is provided then the text rotation is updated as well.
+Game
 
 @name update
 @methodOf TextEffect#
