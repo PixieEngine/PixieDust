@@ -13,6 +13,14 @@ Goes to the next level on any user input.
 @methodOf TitleScreen#
 @event
 ###
+
+###*
+Goes to the next level on any user input.
+
+@name update
+@methodOf TitleScreen#
+@event
+###
 TitleScreen = (I={}) ->
   self = TextScreen(I)
 
