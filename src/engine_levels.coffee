@@ -59,7 +59,7 @@ Engine.Levels = (I, self) ->
     loadLevel level
 
   ###*
-  Reload the current level. Great
+  Reload the current level. Useful for retrying after 
 
   <code><pre>
   engine.realodLevel
