@@ -1,5 +1,5 @@
 ###*
-A Game State that loads the map for a given level and tran.
+A Game State that loads the map for a given level and transitions into the level.
 
 @see GameState
 @name LevelState
