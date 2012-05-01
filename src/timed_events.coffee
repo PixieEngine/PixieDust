@@ -21,8 +21,8 @@ TimedEvents = (I={}) ->
     doSomething()
   </pre></code>
 
-  @name distance
-  @methodOf Bounded#
+  @name every
+  @methodOf TimedEvents#
   @see Point.distance
   @returns {Number} Distance between the two objects
   ###  
