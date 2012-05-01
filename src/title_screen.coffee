@@ -15,7 +15,7 @@ Goes to the next level on any user input.
 ###
 
 ###*
-Overlays the title text in the middle of the screen. Us 
+Overlays the title text in the middle of the screen. Uses <code></code> 
 
 @name update
 @methodOf TitleScreen#
