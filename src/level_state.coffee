@@ -1,5 +1,5 @@
 ###*
-A 
+A Game State
 
 @see GameState
 @name LevelState
