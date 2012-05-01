@@ -45,7 +45,7 @@ Engine.Levels = (I, self) ->
         engine.setState GameOver()
 
   ###*
-  Load map for 
+  Load map named <code>level</code>
 
   <code><pre>
   engine.nextLevel()
