@@ -1,7 +1,7 @@
 module "TextEffect"
 
 test "text moves up vertically", ->
-  text = Text()
+  text = TextEffect()
 
   text.update()
 
@@ -15,7 +15,7 @@ test "text moves up vertically", ->
   equals text.I.y, -5
 
 test "text fades out", ->
-  text = Text()
+  text = TextEffect()
 
   text.update()
 
