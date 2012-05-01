@@ -39,8 +39,8 @@ Tween = (I={}, self) ->
   player = GameObject()
 
   player.tween 30,
-    x: 50
-    y: 50
+    x: 150
+    y: 150
     complete: ->
       player.dance()
   </pre></code>
