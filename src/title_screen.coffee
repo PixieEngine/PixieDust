@@ -1,5 +1,5 @@
 ###*
-The Title Screen class sets up a simple game title screen using the 
+The Title Screen class sets up a simple game title screen using the <code>App
 
 By default, images are loaded asynchronously. A proxy object is 
 returned immediately. Even though it has a draw method it will not
