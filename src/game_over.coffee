@@ -19,7 +19,7 @@ Draws Game Over screen and reset instructions.
 
 @name overlay
 @methodOf GameOver#
-@param {
+@param {PixieCanvas} canvas
 @event
 ###
 GameOver = (I={}) ->
