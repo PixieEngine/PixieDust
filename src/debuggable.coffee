@@ -252,7 +252,7 @@ Debuggable = (I={}, self) ->
 
   @name toggleDebug
   @methodOf Debuggable#
-  @param {Boolean} If true is passed then debugging is enabled, if false is passed then debugging is disabled, if nothing is passed, then debug state is toggled.
+  @param {Boolean} newVal If true is passed then debugging is enabled, if false is passed then debugging is disabled, if nothing is passed, then debug state is toggled.
   ###    
   toggleDebug: (newVal) ->
     if newVal?
