@@ -29,7 +29,7 @@ Engine.Levels = (I, self) ->
   Load the map for the next level.
 
   <code><pre>
-  engine.
+  engine.nextLevel()
   </pre></code>
 
   @name delay
