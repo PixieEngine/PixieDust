@@ -1,3 +1,10 @@
+###*
+Goes to the next level on any user input.
+
+@name update
+@methodOf TitleScreen#
+@event
+###
 GameOver = (I={}) ->
   self = TextScreen(I)
 
