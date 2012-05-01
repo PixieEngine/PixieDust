@@ -4,7 +4,7 @@ The TimedEvents module allows arbitrary code to be executed at set intervals.
 <code><pre>
 player = GameObject()
 
-player.incldue
+player.include Timed
 </pre></code>
 
 @see GameObject
