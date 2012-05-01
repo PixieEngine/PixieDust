@@ -23,7 +23,7 @@ TextScreen = (I={}) ->
     # the enemy's speed
     </pre></code>
   
-    @name follow
+    @name cente
     @methodOf Follow#
     @param {GameObject} obj The object you want to follow
     ###   
