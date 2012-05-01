@@ -48,7 +48,7 @@ Engine.Levels = (I, self) ->
   Load map named <code>level</code>
 
   <code><pre>
-  engine.nextLevel()
+  engine.goToLevel()
   </pre></code>
 
   @name nextLevel
