@@ -1,9 +1,11 @@
 ###*
-The Game Over class sets up a simple game state with restart instructions.
+This module clears or fills the canvas before drawing the scene.
 
-@see TextScreen
-@name GameOver
-@constructor
+@name Clear
+@fieldOf Engine
+@module
+@param {Object} I Instance variables
+@param {Object} self Reference to the engine
 ###
 Engine.Levels = (I, self) ->
   Object.reverseMerge I,
