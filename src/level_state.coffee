@@ -1,6 +1,6 @@
 LevelState = (I={}) ->
   Object.reverseMerge I,
-    duration: 1
+    duration: 10
     level: 'level1'
 
   self = GameState(I)
@@ -8,7 +8,7 @@ LevelState = (I={}) ->
   self.bind "enter", ->
     # TODO: Adjustable Fade In
     engine.fadeIn
-      duration: 10
+      duration: I.duration
 
     engine.loadMap I.level, ->
       engine.I.transitioning = false
