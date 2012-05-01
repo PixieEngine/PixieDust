@@ -19,6 +19,7 @@ Draws Game Over screen and reset instructions.
 
 @name overlay
 @methodOf GameOver#
+@param {
 @event
 ###
 GameOver = (I={}) ->
