@@ -15,7 +15,7 @@ Goes to the next level on any user input.
 ###
 
 ###*
-Goes to the next level on any user input.
+Draws the title text
 
 @name update
 @methodOf TitleScreen#
