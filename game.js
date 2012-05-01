@@ -9721,36 +9721,66 @@ draw anything to the screen until the image has been loaded.
   return (typeof exports !== "undefined" && exports !== null ? exports : this)["Sprite"] = Sprite;
 })();
 ;
-var Text;
+/**
+The Text Effect class provides a method to display moving text onscreen, fading out the text over the effect duration.
 
-Text = function(I) {
+By default, images are loaded asynchronously. A proxy object is 
+returned immediately. Even though it has a draw method it will not
+draw anything to the screen until the image has been loaded.
+
+@name TextEffect
+@constructor
+*/
+/**
+Updates the position of the text based on the effect velocity. Updates the 
+alpha based on the elapsed time since the effect creation. If <code>rotationalVelocity</code>
+is provided then the text rotation is updated as well.
+
+@name update
+@methodOf TextEffect#
+@event
+*/
+var TextEffect;
+
+TextEffect = function(I) {
   var self;
   if (I == null) I = {};
   Object.reverseMerge(I, {
+    color: Color('green'),
     duration: 40,
-    font: 'VT323',
-    points: 500,
-    alpha: 1
+    font: '20px Helvetica',
+    text: '100',
+    textShadow: Color('black'),
+    alpha: 1,
+    rotation: 0,
+    rotationalVelocity: 0,
+    velocity: Point(0, -1)
   });
   self = GameObject(I);
   self.bind("update", function() {
-    I.y -= 1;
+    I.rotation += I.rotationalVelocity;
+    I.x += I.velocity.x;
+    I.y += I.velocity.y;
     return I.alpha = 1 - (I.age / I.duration);
   });
   self.unbind("draw");
-  self.bind("afterTransform", function(canvas) {
-    canvas.font("20px " + I.font);
+  self.bind("draw", function(canvas) {
+    if (!I.color.channels) I.color = Color(I.color);
+    if (!I.textShadow.channels) I.textShadow = Color(I.textShadow);
+    I.color.a = I.alpha;
+    I.textShadow.a = I.alpha;
+    canvas.font(I.font);
     canvas.drawText({
-      color: "rgba(0, 0, 0, " + I.alpha + ")",
-      x: I.x + 1,
-      y: I.y + 1,
-      text: I.points
+      color: I.textShadow,
+      x: 1,
+      y: 1,
+      text: I.text
     });
     return canvas.drawText({
-      color: "rgba(255, 255, 255, " + I.alpha + ")",
-      x: I.x,
-      y: I.y,
-      text: I.points
+      color: I.color,
+      x: 0,
+      y: 0,
+      text: I.text
     });
   });
   return self;
