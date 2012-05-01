@@ -1,9 +1,9 @@
 ###*
 The Game Over class sets up a simple game state with restart instructions.
 
-@name update
-@methodOf TitleScreen#
-@event
+@see GameOVe
+@name TitleScreen
+@constructor
 ###
 
 ###*
