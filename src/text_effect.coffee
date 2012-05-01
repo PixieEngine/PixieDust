@@ -1,5 +1,6 @@
 ###*
-The Text Effect
+The Sprite class provides a way to load images for use in games.
+
 
 By default, images are loaded asynchronously. A proxy object is 
 returned immediately. Even though it has a draw method it will not
