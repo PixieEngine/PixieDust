@@ -14,7 +14,7 @@ Engine.Selector = (I, self) ->
       this.each (item) ->
         item.I[attr] = value
 
-  closest: () ->
+  closest: (selector) ->
         
   ###*
   Get a selection of GameObjects that match the specified selector criteria. The selector language
