@@ -16,6 +16,8 @@ test "#closest", ->
     enemy: true
     x: 0
     y: 15
+    
+  
 
 test "#each", ->
   engine = Engine()
