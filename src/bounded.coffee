@@ -46,7 +46,9 @@ Bounded = (I={}, self) ->
     else
       selector = [].concat(selector)
 
-    
+    sele.sort (a, b) ->
+      Point.distanceSquared(position, a.position()) - Point.distanceSquared(position, b.position())
+    .first()
   ###*
   Distance between two objects. Proxies to Point.distance.
   In order for this to work, `otherObj` must have a 
