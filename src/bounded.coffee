@@ -40,13 +40,14 @@ Bounded = (I={}, self) ->
     height: 8
     collisionMargin: Point(0, 0)
 
+  
   closest: (selector) ->
     if Object.isString(selector)
       selector = engine.find(selector)
     else
       selector = [].concat(selector)
-      
-    po
+
+    position = self.position()
 
     selector.sort (a, b) ->
       Point.distanceSquared(position, a.position()) - Point.distanceSquared(position, b.position())
