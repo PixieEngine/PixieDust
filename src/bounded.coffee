@@ -43,7 +43,7 @@ Bounded = (I={}, self) ->
   ###*
   Get the object closest to this one.
 
-  @param {Object|Array|String} selector An object or set of objects to find
+  @param {Object|Array|String} selector An object or set of objects to find the closest from
   ###
   closest: (selector) ->
     if Object.isString(selector)
