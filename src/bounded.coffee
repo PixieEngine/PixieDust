@@ -46,7 +46,7 @@ Bounded = (I={}, self) ->
     else
       selector = [].concat(selector)
 
-      
+    
   ###*
   Distance between two objects. Proxies to Point.distance.
   In order for this to work, `otherObj` must have a 
