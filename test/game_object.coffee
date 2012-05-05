@@ -20,6 +20,8 @@ test "#closest", ->
   o = GameObject()
 
   equals o.closest([]), null
+  
+  
 
 test "[event] create", 2, ->
   GameObject
