@@ -15,6 +15,8 @@ test "construct invalid object", ->
   raises ->
     GameObject.construct
       class: "aaaaa"
+        
+
 
 test "[event] create", 2, ->
   GameObject
