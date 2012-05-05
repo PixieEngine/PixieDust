@@ -17,7 +17,7 @@ test "#closest", ->
     x: 0
     y: 15
 
-  equals engine.closest(".enemy", player.position())
+  equals engine.closest(".enemy", player.position()), enemy1
 
 test "#each", ->
   engine = Engine()
