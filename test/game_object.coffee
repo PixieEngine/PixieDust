@@ -16,7 +16,8 @@ test "construct invalid object", ->
     GameObject.construct
       class: "aaaaa"
         
-test "#closest", 
+test "#closest", ->
+  
 
 test "[event] create", 2, ->
   GameObject
