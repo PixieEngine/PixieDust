@@ -17,7 +17,7 @@ test "construct invalid object", ->
       class: "aaaaa"
         
 test "#closest", ->
-  GameObject
+  Game
   equals
 
 test "[event] create", 2, ->
