@@ -7,12 +7,12 @@ test "#closest", ->
     x: 0
     y: 0
 
-  engine.add
+  e1engine.add
     rad: "Awesome"
     x: 5
     y: 10
 
-  obj3 = engine.add
+  engine.add
     rad: "Awesome"
     x: 5
     y: 10
