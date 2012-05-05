@@ -4430,6 +4430,25 @@ Bounded = function(I, self) {
   });
   return {
     /**
+    Get the object closest to this one.
+    
+    @name closest
+    @methodOf Bounded#
+    @param {Object|Array|String} selector An object or set of objects to find the closest from.
+    */
+    closest: function(selector) {
+      var position;
+      if (Object.isString(selector)) {
+        selector = engine.find(selector);
+      } else {
+        selector = [].concat(selector);
+      }
+      position = self.position();
+      return selector.sort(function(a, b) {
+        return Point.distanceSquared(position, a.position()) - Point.distanceSquared(position, b.position());
+      }).first();
+    },
+    /**
     Distance between two objects. Proxies to Point.distance.
     In order for this to work, `otherObj` must have a 
     position method.
@@ -8289,6 +8308,40 @@ Engine.Selector = function(I, self) {
   };
   return {
     /**
+    Get the game object matching the given selector that is closest to the given position.
+    
+    <code><pre>
+    player = engine.add
+      x: 0
+      y: 0
+    
+    enemy1 = engine.add
+      enemy: true
+      x: 10
+      y: 0
+    
+    enemy2 = engine.add
+      enemy: true
+      x: 0
+      y: 15
+    
+    player2 = engine.add
+      x: 0
+      y: 10
+    
+    equals engine.closest(".enemy", player.position()), enemy1
+    equals engine.closest(".enemy", player2.position()), enemy2
+    </pre></code>
+    
+    @param {String} selector
+    @param {Point} position
+    */
+    closest: function(selector, position) {
+      return self.find(selector).sort(function(a, b) {
+        return Point.distanceSquared(position, a.position()) - Point.distanceSquared(position, b.position());
+      }).first();
+    },
+    /**
     Get a selection of GameObjects that match the specified selector criteria. The selector language
     can select objects by id, class, or attributes. Note that this method always returns an Array,
     so if you are trying to find only one object you will need something like <code>engine.find("Enemy").first()</code>.
@@ -8883,7 +8936,7 @@ GameObject = function(I) {
       return I.active = false;
     }
   });
-  defaultModules = [Bindable, Bounded, Clampable, Cooldown, Drawable, Durable, Metered, TimedEvents, Tween];
+  defaultModules = [Bindable, Bounded, Clampable, Cooldown, Drawable, Durable, Follow, Metered, TimedEvents, Tween];
   modules = defaultModules.concat(I.includedModules.invoke('constantize'));
   modules = modules.without(I.excludedModules.invoke('constantize'));
   modules.each(function(Module) {
