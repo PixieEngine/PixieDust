@@ -41,7 +41,9 @@ Bounded = (I={}, self) ->
     collisionMargin: Point(0, 0)
 
   ###*
-  
+  Get the object closest to this one.
+
+  @par
   ###
   closest: (selector) ->
     if Object.isString(selector)
