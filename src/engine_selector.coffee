@@ -21,7 +21,7 @@ Engine.Selector = (I, self) ->
   @param {Point} position
   ###
   closest: (selector, position) ->
-
+    se
   ###*
   Get a selection of GameObjects that match the specified selector criteria. The selector language
   can select objects by id, class, or attributes. Note that this method always returns an Array,
