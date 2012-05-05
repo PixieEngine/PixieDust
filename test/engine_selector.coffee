@@ -9,13 +9,13 @@ test "#closest", ->
 
   enemy1 = engine.add
     enemy: true
-    x: 5
+    x: 0
     y: 10
 
   enemy2 = engine.add
     enemy: true
     x: 5
-    y: 10
+    y: 
 
 test "#each", ->
   engine = Engine()
