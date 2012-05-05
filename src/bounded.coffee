@@ -40,7 +40,11 @@ Bounded = (I={}, self) ->
     height: 8
     collisionMargin: Point(0, 0)
 
-  closes
+  closest: ->
+    if Object.isString(groupA)
+        groupA = engine.find(groupA)
+      else
+        groupA = [].concat(groupA)
     
   ###*
   Distance between two objects. Proxies to Point.distance.
