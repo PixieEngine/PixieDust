@@ -45,6 +45,8 @@ Bounded = (I={}, self) ->
       selector = engine.find(selector)
     else
       selector = [].concat(selector)
+      
+    po
 
     selector.sort (a, b) ->
       Point.distanceSquared(position, a.position()) - Point.distanceSquared(position, b.position())
