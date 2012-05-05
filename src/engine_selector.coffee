@@ -15,7 +15,7 @@ Engine.Selector = (I, self) ->
         item.I[attr] = value
 
   ###*
-  Get the closest 
+  Get the game object closest to the 
   ###
   closest: (selector, position) ->
 
