@@ -8,12 +8,12 @@ test "#closest", ->
     y: 0
 
   enemy1 = engine.add
-    rad: "Awesome"
+    enemy: true
     x: 5
     y: 10
 
   enemy2 = engine.add
-    rad: "Awesome"
+
     x: 5
     y: 10
 
