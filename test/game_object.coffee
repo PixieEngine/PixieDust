@@ -17,7 +17,9 @@ test "construct invalid object", ->
       class: "aaaaa"
         
 test "#closest", ->
-  o = GameObject()
+  o = GameObject
+    x: 0
+    y: 0
 
   other = GameObject
     x: 1
