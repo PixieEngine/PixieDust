@@ -1,5 +1,7 @@
 module "Engine"
 
+test "#c"
+
 test "#each", ->
   engine = Engine()
 
