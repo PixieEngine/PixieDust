@@ -22,7 +22,7 @@ test "#closest", ->
   other = GameObject
     x: 1
     y: 1
-    
+
   other2 = GameObject
     x: 10
     y: 10
