@@ -14,8 +14,8 @@ test "#closest", ->
 
   enemy2 = engine.add
     enemy: true
-    x: 5
-    y: 
+    x: 0
+    y: 15
 
 test "#each", ->
   engine = Engine()
