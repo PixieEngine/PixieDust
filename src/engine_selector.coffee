@@ -17,7 +17,8 @@ Engine.Selector = (I, self) ->
   ###*
   Get the game object matching the given selector that is closest to the given position.
 
-    player = engine.add
+  <code
+  player = engine.add
     x: 0
     y: 0
 
