@@ -40,8 +40,8 @@ Bounded = (I={}, self) ->
     height: 8
     collisionMargin: Point(0, 0)
 
-  closest: ->
-    if Object.isString(groupA)
+  closest: (selector) ->
+    if Object.isString(sel)
         groupA = engine.find(groupA)
       else
         groupA = [].concat(groupA)
