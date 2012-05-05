@@ -17,7 +17,7 @@ test "#closest", ->
     x: 0
     y: 15
     
-  equals engine.closest 
+  equals engine.closest ".enemy", pl
 
 test "#each", ->
   engine = Engine()
