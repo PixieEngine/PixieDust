@@ -43,7 +43,7 @@ Bounded = (I={}, self) ->
   ###*
   Get the object closest to this one.
 
-  @par
+  @param 
   ###
   closest: (selector) ->
     if Object.isString(selector)
