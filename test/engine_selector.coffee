@@ -3,9 +3,9 @@ module "Engine"
 test "#closest", ->
   engine = Engine()
   
-  1 = engine.add
+  p = engine.add
     x: 0
-    y: 5
+    y: 0
 
   obj2 = engine.add
     rad: "Awesome"
