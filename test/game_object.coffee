@@ -19,7 +19,8 @@ test "construct invalid object", ->
 test "#closest", ->
   o = GameObject()
   
-  other = 
+  other = GameObject
+    x: 
 
   equals o.closest([]), null
   
