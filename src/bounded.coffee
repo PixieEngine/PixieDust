@@ -41,6 +41,7 @@ Bounded = (I={}, self) ->
     collisionMargin: Point(0, 0)
 
   ###*
+  
   ###
   closest: (selector) ->
     if Object.isString(selector)
