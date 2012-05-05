@@ -3,7 +3,20 @@ module "Engine"
 test "#closest", ->
   engine = Engine()
   
-  
+  obj1 = engine.add
+    rad: "Awesome"
+    x: 0
+    y: 5
+
+  obj2 = engine.add
+    rad: "Awesome"
+    x: 5
+    y: 10
+
+  obj3 = engine.add
+    rad: "Awesome"
+    x: 5
+    y: 10
 
 test "#each", ->
   engine = Engine()
