@@ -24,7 +24,8 @@ test "#closest", ->
     y: 1
     
   other2 = GameObject
-    x
+    x: 10
+    y: 10
 
   equals o.closest([]), null
   
