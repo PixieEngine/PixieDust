@@ -22,7 +22,7 @@ Engine.Selector = (I, self) ->
   ###
   closest: (selector, position) ->
     self.find(selector).sort (a, b) ->
-      Point.distanceSquared(poa.position()
+      Point.distanceSquared(position, a.position()) - Point.d
 
   ###*
   Get a selection of GameObjects that match the specified selector criteria. The selector language
