@@ -17,7 +17,10 @@ test "#closest", ->
     x: 0
     y: 15
     
-  player2
+  player2 = engine.add
+    enemy: true
+    x: 0
+    y: 10
 
   equals engine.closest(".enemy", player.position()), enemy1
 
