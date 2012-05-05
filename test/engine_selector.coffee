@@ -3,11 +3,11 @@ module "Engine"
 test "#closest", ->
   engine = Engine()
   
-  p = engine.add
+  player = engine.add
     x: 0
     y: 0
 
-  obj2 = engine.add
+  engine.add
     rad: "Awesome"
     x: 5
     y: 10
