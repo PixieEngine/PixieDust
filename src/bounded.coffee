@@ -42,9 +42,9 @@ Bounded = (I={}, self) ->
 
   closest: (selector) ->
     if Object.isString(selector)
-        groupA = engine.find(selector)
+        selector = engine.find(selector)
       else
-        groupA = [].concat(groupA)
+        selector = [].concat(groupA)
     
   ###*
   Distance between two objects. Proxies to Point.distance.
