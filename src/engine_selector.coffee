@@ -15,7 +15,10 @@ Engine.Selector = (I, self) ->
         item.I[attr] = value
 
   ###*
-  Get the game object closest to the 
+  Get the game object matching the given selector that is closest to the given position.
+
+  @param selector
+  @param 
   ###
   closest: (selector, position) ->
 
