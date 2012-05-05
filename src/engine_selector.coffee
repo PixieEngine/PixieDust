@@ -21,7 +21,7 @@ Engine.Selector = (I, self) ->
   @param {Point} position
   ###
   closest: (selector, position) ->
-    self.find(selector).sortBy
+    self.find(selector).sort ()
 
   ###*
   Get a selection of GameObjects that match the specified selector criteria. The selector language
