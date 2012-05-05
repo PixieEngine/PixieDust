@@ -40,6 +40,8 @@ Bounded = (I={}, self) ->
     height: 8
     collisionMargin: Point(0, 0)
 
+  closes
+    
   ###*
   Distance between two objects. Proxies to Point.distance.
   In order for this to work, `otherObj` must have a 
