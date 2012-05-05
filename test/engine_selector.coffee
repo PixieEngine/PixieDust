@@ -7,7 +7,7 @@ test "#closest", ->
     x: 0
     y: 0
 
-  e1engine.add
+  enemy1 = engine.add
     rad: "Awesome"
     x: 5
     y: 10
