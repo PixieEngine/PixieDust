@@ -15,7 +15,7 @@ Engine.Selector = (I, self) ->
         item.I[attr] = value
 
   ###*
-  Get
+  Get the closest 
   ###
   closest: (selector, position) ->
 
