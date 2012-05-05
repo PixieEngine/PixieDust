@@ -22,10 +22,12 @@ test "#closest", ->
   other = GameObject
     x: 1
     y: 1
+    
+  oth
 
   equals o.closest([]), null
   
-  equals o.closest([o]), o
+  equals o.closest([other]), other
 
 test "[event] create", 2, ->
   GameObject
