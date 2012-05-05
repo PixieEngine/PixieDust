@@ -18,7 +18,6 @@ test "#closest", ->
     y: 15
     
   player2 = engine.add
-    enemy: true
     x: 0
     y: 10
 
