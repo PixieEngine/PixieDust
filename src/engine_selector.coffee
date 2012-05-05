@@ -17,7 +17,7 @@ Engine.Selector = (I, self) ->
   ###*
   Get the game object matching the given selector that is closest to the given position.
 
-  @param selector
+  @param {String} selector
   @param {Point} position
   ###
   closest: (selector, position) ->
