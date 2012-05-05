@@ -13,7 +13,7 @@ test "#closest", ->
     y: 10
 
   enemy2 = engine.add
-
+    enemy: true
     x: 5
     y: 10
 
