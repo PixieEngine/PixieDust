@@ -17,6 +17,27 @@ Engine.Selector = (I, self) ->
   ###*
   Get the game object matching the given selector that is closest to the given position.
 
+    player = engine.add
+    x: 0
+    y: 0
+
+  enemy1 = engine.add
+    enemy: true
+    x: 10
+    y: 0
+
+  enemy2 = engine.add
+    enemy: true
+    x: 0
+    y: 15
+
+  player2 = engine.add
+    x: 0
+    y: 10
+
+  equals engine.closest(".enemy", player.position()), enemy1
+  equals engine.closest(".enemy", player2.position()), enemy2
+
   @param {String} selector
   @param {Point} position
   ###
