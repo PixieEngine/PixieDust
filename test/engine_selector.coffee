@@ -2,7 +2,7 @@ module "Engine"
 
 test "#closest", ->
   engine = Engine()
-  
+
   player = engine.add
     x: 0
     y: 0
@@ -16,7 +16,7 @@ test "#closest", ->
     enemy: true
     x: 0
     y: 15
-    
+
   player2 = engine.add
     x: 0
     y: 10
