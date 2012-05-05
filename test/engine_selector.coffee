@@ -1,6 +1,7 @@
 module "Engine"
 
-test "#c"
+test "#closest", ->
+  
 
 test "#each", ->
   engine = Engine()
