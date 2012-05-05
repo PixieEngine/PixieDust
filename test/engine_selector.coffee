@@ -9,8 +9,8 @@ test "#closest", ->
 
   enemy1 = engine.add
     enemy: true
-    x: 0
-    y: 10
+    x: 10
+    y: 0
 
   enemy2 = engine.add
     enemy: true
