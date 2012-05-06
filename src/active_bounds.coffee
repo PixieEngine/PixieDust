@@ -12,4 +12,4 @@ ActiveBounds = (I={}, self) ->
 
   self.bind 'update', ->
     self.destroy() unless I.activeBounds.left <= I.x <= I.activeBounds.right
-    self.destroy() unless I.activeBounds.y <= I.y <= I.activeBounds.y + I.activeBounds.height
+    self.destroy() unless I.activeBounds.top <= I.y <= I.activeBounds.bottom
