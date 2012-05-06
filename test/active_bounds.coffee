@@ -5,24 +5,6 @@ App = {}
 App.width = 640
 App.height = 480
 
-test "should not be destroyed when inside activeBounds", ->
-  obj = GameObject
-    x: 50
-    y: 50
-    width: 32
-    height: 32
-    
-  obj.include ActiveBounds
-  
-  destroySpy = false
-  
-  obj.bind 'destroy', ->
-    destroySpy = true
-    
-  obj.update()
-  
-  equals destroySpy, false
-
 test "should remove objects outside of activeBounds", 2, ->
   obj = GameObject
     x: 50
