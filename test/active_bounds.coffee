@@ -1,6 +1,6 @@
 module "ActiveBounds"
 
-window.App = {}
+window.App ||= {}
 
 App.width = 640
 App.height = 480
