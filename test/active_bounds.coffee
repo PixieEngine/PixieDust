@@ -1,5 +1,7 @@
 module "ActiveBounds"
 
+App.
+
 test "should remove objects outside of activeBounds", 2, ->
   obj = GameObject
     x: 50
