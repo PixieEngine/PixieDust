@@ -5,6 +5,8 @@ ActiveBounds = (I={}, self) ->
     width: 8
     height: 8
     activeBounds: Rectangle(0, 0, App.width, App.height)
+    
+  log I.activeBounds
 
   self.bind 'update', ->
     self.destroy() unless I.activeBounds.left <= I.x <= I.activeBounds.right
