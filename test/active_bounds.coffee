@@ -6,6 +6,8 @@ App.width = 640
 App.height = 480
 
 test "shouldn't remove object inside activeBounds", ->
+  log App
+  
   obj = GameObject
     x: 50
     y: 50
