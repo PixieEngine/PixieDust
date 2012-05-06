@@ -1,7 +1,9 @@
 module "ActiveBounds"
 
+App = {}
+
 App.width = 640
-Ap
+App.height = 480
 
 test "should remove objects outside of activeBounds", 2, ->
   obj = GameObject
