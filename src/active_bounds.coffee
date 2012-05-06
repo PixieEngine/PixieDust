@@ -5,7 +5,10 @@ ActiveBounds = (I={}, self) ->
     width: 8
     height: 8
     activeBounds: {
-    
+      x: 0
+      y: 0
+      width: App.width
+      height: App
     }
     
   log I.activeBounds
