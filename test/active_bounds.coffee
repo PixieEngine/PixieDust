@@ -2,9 +2,10 @@ module "ActiveBounds"
 
 App = {}
 
-
-
 test "should not be destroyed when inside activeBounds", ->
+  App.width = 640
+  App.height = 480
+  
   obj = GameObject
     x: 50
     y: 50
