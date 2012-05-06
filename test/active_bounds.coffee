@@ -14,7 +14,9 @@ test "should not be destroyed when inside activeBounds", ->
     
   obj.include ActiveBounds
   
-  obj.bind 'dest'
+  de
+  
+  obj.bind 'destroy'
 
 test "should remove objects outside of activeBounds", 2, ->
   obj = GameObject
