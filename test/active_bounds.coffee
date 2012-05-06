@@ -5,7 +5,9 @@ App = {}
 App.width = 640
 App.height = 480
 
-test "should not be destroyed when inside "
+test "should not be destroyed when inside activeBounds", ->
+  obj = GameObject
+    x
 
 test "should remove objects outside of activeBounds", 2, ->
   obj = GameObject
