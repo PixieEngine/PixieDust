@@ -10,8 +10,6 @@ ActiveBounds = (I={}, self) ->
       width: App.width || 640
       height: App.heigh || 480
     }
-    
-  log I.activeBounds
 
   self.bind 'update', ->
     self.destroy() unless I.activeBounds.x <= I.x <= I.activeBounds.x + I.activeBounds.width
