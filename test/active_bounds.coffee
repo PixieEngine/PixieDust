@@ -19,7 +19,9 @@ test "shouldn't remove object inside activeBounds", ->
   obj.bind 'destroy', ->
     destroySpy = true
     
+  obj.update()
   
+  equals destroySpy, false
 
 test "should remove objects outside of activeBounds", 2, ->
   obj = GameObject
