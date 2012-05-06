@@ -13,6 +13,8 @@ test "should not be destroyed when inside activeBounds", ->
     height: 32
     
   obj.include ActiveBounds
+  
+  obj.bind 'dest'
 
 test "should remove objects outside of activeBounds", 2, ->
   obj = GameObject
