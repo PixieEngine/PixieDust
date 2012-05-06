@@ -4,7 +4,9 @@ ActiveBounds = (I={}, self) ->
     y: 0
     width: 8
     height: 8
-    activeBounds: Re
+    activeBounds: {
+    
+    }
     
   log I.activeBounds
 
