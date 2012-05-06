@@ -9,7 +9,7 @@ test "shouldn't remove object inside activeBounds", ->
   obj = GameObject
     x: 50
     y: 50
-    
+    width: 
 
 test "should remove objects outside of activeBounds", 2, ->
   obj = GameObject
