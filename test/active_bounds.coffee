@@ -2,8 +2,7 @@ module "ActiveBounds"
 
 App = {}
 
-App.width = 640
-App.height = 480
+
 
 test "should not be destroyed when inside activeBounds", ->
   obj = GameObject
