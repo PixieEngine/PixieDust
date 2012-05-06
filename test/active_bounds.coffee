@@ -5,6 +5,8 @@ App = {}
 App.width = 640
 App.height = 480
 
+test "should"
+
 test "should remove objects outside of activeBounds", 2, ->
   obj = GameObject
     x: 50
