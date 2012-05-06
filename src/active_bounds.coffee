@@ -4,7 +4,7 @@ ActiveBounds = (I={}, self) ->
     y: 0
     width: 8
     height: 8
-    activeBounds: {
+    activeBounds: rea
       x: 0
       y: 0
       width: App.width

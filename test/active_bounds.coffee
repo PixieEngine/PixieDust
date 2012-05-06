@@ -5,9 +5,7 @@ window.App = {}
 App.width = 640
 App.height = 480
 
-test "shouldn't remove object inside activeBounds", ->
-  log Rectangle
-  
+test "shouldn't remove object inside activeBounds", ->  
   obj = GameObject
     x: 50
     y: 50
