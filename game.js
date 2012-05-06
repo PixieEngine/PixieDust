@@ -4395,7 +4395,12 @@ ActiveBounds = function(I, self) {
     y: 0,
     width: 8,
     height: 8,
-    activeBounds: Rectangle(0, 0, App.width, App.height)
+    activeBounds: Rectangle({
+      x: 0,
+      y: 0,
+      width: App.width,
+      height: App.height
+    })
   });
   return self.bind('update', function() {
     var _ref, _ref2;
