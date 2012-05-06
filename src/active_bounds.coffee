@@ -4,12 +4,11 @@ ActiveBounds = (I={}, self) ->
     y: 0
     width: 8
     height: 8
-    activeBounds: rea
+    activeBounds: Rectangle
       x: 0
       y: 0
       width: App.width
       height: App.height
-    }
 
   self.bind 'update', ->
     self.destroy() unless I.activeBounds.x <= I.x <= I.activeBounds.x + I.activeBounds.width
