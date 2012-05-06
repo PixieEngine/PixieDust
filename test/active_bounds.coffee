@@ -24,7 +24,6 @@ test "should not be destroyed when inside activeBounds", ->
   equals destroySpy, false
 
 test "should remove objects outside of activeBounds", 2, ->
-  log App.width
   obj = GameObject
     x: 50
     y: 50
