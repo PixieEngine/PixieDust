@@ -7,7 +7,9 @@ App.height = 480
 
 test "should not be destroyed when inside activeBounds", ->
   obj = GameObject
-    x
+    x: 50
+    y: 50
+    
 
 test "should remove objects outside of activeBounds", 2, ->
   obj = GameObject
