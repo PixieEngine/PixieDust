@@ -21,7 +21,7 @@ test "should not be destroyed when inside activeBounds", ->
     
   obj.update()
   
-  ok !o
+  ok !
 
 test "should remove objects outside of activeBounds", 2, ->
   obj = GameObject
