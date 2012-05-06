@@ -12,7 +12,7 @@ test "should not be destroyed when inside activeBounds", ->
     width: 32
     height: 32
     
-  obj.include ActiveBou
+  obj.include ActiveBounds
 
 test "should remove objects outside of activeBounds", 2, ->
   obj = GameObject
@@ -21,7 +21,7 @@ test "should remove objects outside of activeBounds", 2, ->
     width: 32
     height: 32
 
-  obj.include(ActiveBounds)
+  obj.include ActiveBounds
 
   destroySpy = false
 
