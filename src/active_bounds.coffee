@@ -14,5 +14,5 @@ ActiveBounds = (I={}, self) ->
   log I.activeBounds
 
   self.bind 'update', ->
-    self.destroy() unless I.activeBounds.x <= I.x <= I.activeBounds.x
+    self.destroy() unless I.activeBounds.x <= I.x <= I.activeBounds.x + I.activeBounds.width
     self.destroy() unless I.activeBounds.top <= I.y <= I.activeBounds.bottom
