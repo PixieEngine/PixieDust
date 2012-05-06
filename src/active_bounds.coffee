@@ -8,11 +8,11 @@ ActiveBounds = (I={}, self) ->
       x: 0
       y: 0
       width: App.width
-      height: App
+      height: App.height
     }
     
   log I.activeBounds
 
   self.bind 'update', ->
-    self.destroy() unless I.activeBounds.left <= I.x <= I.activeBounds.right
+    self.destroy() unless I.activeBounds. <= I.x <= I.activeBounds.right
     self.destroy() unless I.activeBounds.top <= I.y <= I.activeBounds.bottom
