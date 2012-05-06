@@ -16,8 +16,8 @@ test "should not be destroyed when inside activeBounds", ->
   
   destroySpy = false
   
-  #obj.bind 'destroy', ->
-  #  destroySpy = true
+  obj.bind 'destroy', ->
+    destroySpy = true
     
   obj.update()
   
