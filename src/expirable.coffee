@@ -9,7 +9,7 @@ enemy = GameObject
   y: 30
   duration: 5
 
-enemy.include(Durable)
+enemy.include Ex
 
 enemy.I.active
 # => true
