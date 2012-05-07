@@ -16,6 +16,6 @@ test "objects become inactive after their duration", ->
 
   equals obj.I.active, false, "object is inactive after duration"
   
-tes
+test "should fade out if that op"
 
 module()
