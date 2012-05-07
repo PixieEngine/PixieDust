@@ -1,7 +1,5 @@
 module "Expirable"
 
-module("Durable")
-
 test "objects become inactive after their duration", ->
   obj = GameObject
     duration: 5
