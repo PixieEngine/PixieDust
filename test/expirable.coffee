@@ -4,7 +4,7 @@ test "objects become inactive after their duration", ->
   obj = GameObject
     duration: 5
 
-  obj.include(Durable)
+  obj.include Expirable
 
   5.times ->
     obj.update()
@@ -16,5 +16,4 @@ test "objects become inactive after their duration", ->
 
   equals obj.I.active, false, "object is inactive after duration"
 
-module()
 module()
