@@ -1,5 +1,5 @@
 ###*
-The Expirable module deactives a <code>GameObject</code> after a specified duration.
+The Expirable module deactiva a <code>GameObject</code> after a specified duration.
 If a duration is specified the object will update that many times. If -1 is
 specified the object will have an unlimited duration.
 
