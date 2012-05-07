@@ -7,7 +7,7 @@ Expirable = (I, self) ->
 
   self.bind "update", ->
     if I.fadeOut
-      I.alpha = startingAlpha - (I.age / I.duration) * 
+      I.alpha = startingAlpha - (I.age / I.duration) * startingAlpha
       
     if I.duration != -1 && I.age >= I.duration
       I.active = false
