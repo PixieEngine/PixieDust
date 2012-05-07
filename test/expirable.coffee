@@ -21,6 +21,8 @@ test "should fade out if that option is set", ->
     duration: 10
     alpha: 0.8
     
+  obj.include Expirable
   
+  5.times
 
 module()
