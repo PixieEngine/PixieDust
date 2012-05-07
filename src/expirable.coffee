@@ -3,6 +3,7 @@ Expirable = (I, self) ->
     duration: -1
     alpha: 1
     fadeOut: false
+    age: 0
     
   startingAlpha = I.alpha
 
