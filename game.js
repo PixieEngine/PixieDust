@@ -7424,47 +7424,6 @@ Drawable = function(I, self) {
 
 Drawable.setSizeCallback = function(sprite) {};
 ;
-/**
-The Durable module deactives a <code>GameObject</code> after a specified duration.
-If a duration is specified the object will update that many times. If -1 is
-specified the object will have an unlimited duration.
-
-<code><pre>
-enemy = GameObject
-  x: 50
-  y: 30
-  duration: 5
-
-enemy.include(Durable)
-
-enemy.I.active
-# => true
-
-5.times ->
-  enemy.update()
-
-enemy.I.active
-# => false
-</pre></code>
-
-@name Durable
-@module
-@constructor
-@param {Object} I Instance variables
-@param {Core} self Reference to including object
-*/
-var Durable;
-
-Durable = function(I, self) {
-  Object.reverseMerge(I, {
-    duration: -1
-  });
-  self.bind("update", function() {
-    if (I.duration !== -1 && I.age >= I.duration) return I.active = false;
-  });
-  return {};
-};
-;
 
 (function() {
   var Easing, polynomialEasings;
@@ -8548,6 +8507,54 @@ Engine.Tilemap = function(I, self) {
 };
 ;
 /**
+The Expirable module deactivates a <code>GameObject</code> after a specified duration.
+If a duration is specified the object will update that many times. If -1 is
+specified the object will have an unlimited duration.
+
+This module is included by default in <code>GameObjects</code>
+
+<code><pre>
+enemy = GameObject
+  x: 50
+  y: 30
+  duration: 5
+
+enemy.include Expirable
+
+enemy.I.active
+# => true
+
+5.times ->
+  enemy.update()
+
+enemy.I.active
+# => false
+</pre></code>
+
+@name Expirable
+@module
+@constructor
+@param {Object} I Instance variables
+@param {Core} self Reference to including object
+*/
+var Expirable;
+
+Expirable = function(I, self) {
+  var startingAlpha;
+  Object.reverseMerge(I, {
+    duration: -1,
+    alpha: 1,
+    fadeOut: false
+  });
+  startingAlpha = I.alpha;
+  self.bind("update", function() {
+    if (I.fadeOut) I.alpha = startingAlpha * (1 - ((I.age + 1) / I.duration));
+    if (I.duration !== -1 && I.age + 1 >= I.duration) return I.active = false;
+  });
+  return {};
+};
+;
+/**
 The <code>Fadeable</code> module provides a method to fade a sprite to transparent. 
 You may also provide a callback function that is executed when the sprite has finished fading out.
 
@@ -8965,7 +8972,7 @@ GameObject = function(I) {
       return I.active = false;
     }
   });
-  defaultModules = [Bindable, Bounded, Clampable, Cooldown, Drawable, Durable, Follow, Metered, TimedEvents, Tween];
+  defaultModules = [Bindable, Bounded, Clampable, Cooldown, Drawable, Expirable, Follow, Metered, TimedEvents, Tween];
   modules = defaultModules.concat(I.includedModules.invoke('constantize'));
   modules = modules.without(I.excludedModules.invoke('constantize'));
   modules.each(function(Module) {
