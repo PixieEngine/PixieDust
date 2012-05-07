@@ -8,6 +8,8 @@ Expirable = (I, self) ->
 
   self.bind "afterUpdate", ->
     if I.fadeOut
+      log I.age
+      log I.duration
       I.alpha = (startingAlpha * (1 - (I.age / I.duration))).clamp(0, 1)      
       
     if I.duration != -1 && I.age >= I.duration
