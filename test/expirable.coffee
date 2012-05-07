@@ -16,6 +16,7 @@ test "objects become inactive after their duration", ->
 
   equals obj.I.active, false, "object is inactive after duration"
   
-test "should fade out if that op"
+test "should fade out if that option is set", ->
+  obj = Ga
 
 module()
