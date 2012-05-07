@@ -23,7 +23,7 @@ enemy.I.active
 # => false
 </pre></code>
 
-@name Durable
+@name Expirable
 @module
 @constructor
 @param {Object} I Instance variables
