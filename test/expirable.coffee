@@ -27,6 +27,6 @@ test "should fade out if that option is set", ->
   5.times ->
     obj.update()
     
-  equals obj.I.
+  equals obj.I.alpha 
 
 module()
