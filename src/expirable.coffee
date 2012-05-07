@@ -27,7 +27,7 @@ enemy.I.active
 @param {Object} I Instance variables
 @param {Core} self Reference to including object
 ###
-Durable = (I, self) ->
+Expirable = (I, self) ->
   Object.reverseMerge I,
     duration: -1
 
