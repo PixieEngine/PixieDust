@@ -3,7 +3,7 @@ Expirable = (I, self) ->
     duration: -1
     alpha: 1
     
-  startingAlph
+  startingAlpha = I.alpha
 
   self.bind "update", ->
     if I.fadeOut
