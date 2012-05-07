@@ -3,13 +3,15 @@ The Expirable module deactivates a <code>GameObject</code> after a specified dur
 If a duration is specified the object will update that many times. If -1 is
 specified the object will have an unlimited duration.
 
+This module is 
+
 <code><pre>
 enemy = GameObject
   x: 50
   y: 30
   duration: 5
 
-enemy.include Ex
+enemy.include Expirable
 
 enemy.I.active
 # => true
