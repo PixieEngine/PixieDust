@@ -3,7 +3,7 @@ The Expirable module deactivates a <code>GameObject</code> after a specified dur
 If a duration is specified the object will update that many times. If -1 is
 specified the object will have an unlimited duration.
 
-This module is 
+This module is included by default in a
 
 <code><pre>
 enemy = GameObject
