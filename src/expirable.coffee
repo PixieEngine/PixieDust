@@ -2,6 +2,7 @@ Expirable = (I, self) ->
   Object.reverseMerge I,
     duration: -1
     alpha: 1
+    fadeOut: false
     
   startingAlpha = I.alpha
 
