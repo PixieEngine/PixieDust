@@ -2,7 +2,7 @@ Expirable = (I, self) ->
   Object.reverseMerge I,
     duration: -1
 
-  self.bind "afterUpdate", ->
+  self.bind "update", ->
     if I.duration != -1 && I.age >= I.duration
       I.active = false
 
