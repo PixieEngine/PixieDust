@@ -20,9 +20,13 @@ test "should fade out if that option is set", ->
   obj = GameObject
     duration: 10
     alpha: 0.8
+    fadeOut; 
     
   obj.include Expirable
   
-  5.times
+  5.times ->
+    obj.update()
+    
+    
 
 module()
