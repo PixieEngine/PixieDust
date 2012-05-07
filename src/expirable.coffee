@@ -10,7 +10,7 @@ Expirable = (I, self) ->
     if I.fadeOut
       log I.age
       log I.duration
-      I.alpha = (startingAlpha * (1 - (I.age / I.duration))).clamp(0, 1)      
+      I.alpha = (startingAlpha * (1 - (I.age + 1 / I.duration))).clamp(0, 1)      
       
     if I.duration != -1 && I.age >= I.duration
       I.active = false
