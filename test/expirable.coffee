@@ -19,6 +19,8 @@ test "objects become inactive after their duration", ->
 test "should fade out if that option is set", ->
   obj = GameObject
     duration: 10
+    alpha: 0.8
     
+  
 
 module()
