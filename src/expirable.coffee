@@ -6,7 +6,7 @@ Expirable = (I, self) ->
     
   startingAlpha = I.alpha
 
-  self.bind "afterUpdate", ->
+  self.bind "update", ->
     log I.age
     log I.duration
     if I.fadeOut
