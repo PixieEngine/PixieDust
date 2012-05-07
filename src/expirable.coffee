@@ -12,7 +12,7 @@ Expirable = (I, self) ->
       log I.duration
       I.alpha = 1 - (I.age + 1 / I.duration)  
       
-    if I.duration != -1 && I.age >= I.duration
+    if I.duration != -1 && I.age + 1 >= I.duration
       I.active = false
 
   return {}
