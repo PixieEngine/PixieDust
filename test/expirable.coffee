@@ -15,5 +15,7 @@ test "objects become inactive after their duration", ->
     obj.update()
 
   equals obj.I.active, false, "object is inactive after duration"
+  
+tes
 
 module()
