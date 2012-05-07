@@ -1,3 +1,4 @@
+
 Expirable = (I, self) ->
   Object.reverseMerge I,
     duration: -1
