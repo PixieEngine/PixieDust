@@ -8,7 +8,7 @@ test "should allow for simple linear tweening", ->
     x: 10
     
   11.times (i) ->
-    o.update()
+    o.update(1)
 
     equals o.I.x, i
 
