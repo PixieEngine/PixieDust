@@ -5,7 +5,6 @@ test "objects update their rotation", ->
     rotationalVelocity: Math.PI / 4
     rotation: Math.PI / 6
 
-  obj.include(Rotatable)
 
   equals obj.I.rotation, Math.PI / 6, "Respects default rotation value"
 
