@@ -50,7 +50,7 @@
   @name update
   @methodOf Engine#
   @event
-  @param {Number} elapsed
+  @param {Number} elapsedTime The time in seconds
   ###
 
   ###*
