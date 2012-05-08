@@ -18,11 +18,11 @@ test "text moves up vertically", ->
 test "text fades out", ->
   text = TextEffect()
 
-  text.update()
+  text.update(1)
 
   equals text.I.alpha, 1
 
-  text.update()
+  text.update(1)
 
   equals text.I.alpha, 1 - 1/40
 
