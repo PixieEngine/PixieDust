@@ -10,7 +10,7 @@ test "should allow for simple linear tweening", ->
   11.times (i) ->
     o.update(1)
 
-    equals o.I.x, i +
+    equals o.I.x, i + 1
 
 # Clear out the module
 module()
