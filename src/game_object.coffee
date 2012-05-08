@@ -115,7 +115,6 @@ GameObject = (I) ->
   @memberOf GameObject#
   ###
   Object.reverseMerge I,
-    age: 0
     active: true
     created: false
     destroyed: false
