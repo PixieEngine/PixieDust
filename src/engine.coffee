@@ -150,7 +150,7 @@
 
     step = ->
       if !I.paused || frameAdvance
-        msPerFrame = (1000 / I.FPS)
+        secondsPerFrame = (1000 / I.FPS)
         update(msPerFrame)
         I.age += 1
 
