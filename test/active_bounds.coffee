@@ -19,7 +19,7 @@ test "shouldn't remove object inside activeBounds", ->
   obj.bind 'destroy', ->
     destroySpy = true
     
-  obj.update()
+  obj.update(1)
   
   equals destroySpy, false
 
