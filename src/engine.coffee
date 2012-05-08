@@ -50,7 +50,7 @@
   @name update
   @methodOf Engine#
   @event
-  @param {Number} elapsedTime The time in seconds that has elapsed since the 
+  @param {Number} elapsedTime The time in seconds that has elapsed since the last update.
   ###
 
   ###*
