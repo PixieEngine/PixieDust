@@ -22,7 +22,7 @@ player.I.rotation
 # => 0.09817477042468103 # 2 * (Math.PI / 64)
 </pre></code>
 
-@name Rotatable
+@name Ageable
 @module
 @constructor
 @param {Object} I Instance variables
