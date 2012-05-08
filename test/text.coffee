@@ -1,7 +1,8 @@
 module "TextEffect"
 
 test "text moves up vertically", ->
-  text = TextEffect()
+  text = TextEffect
+    velocity: Point
 
   text.update(1)
 
