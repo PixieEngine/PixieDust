@@ -8,16 +8,15 @@ player = GameObject
   y: 0
   rotationalVelocity: Math.PI / 64
 
-
 player.I.rotation
 # => 0
 
-player.update()
+player.update(1)
 
 player.I.rotation
 # => 0.04908738521234052 # Math.PI / 64
 
-player.update()
+player.update(1)
 
 player.I.rotation
 # => 0.09817477042468103 # 2 * (Math.PI / 64)
