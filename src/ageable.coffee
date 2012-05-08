@@ -33,6 +33,6 @@ Ageable = (I={}, self) ->
     age: 0
 
   self.bind 'update', (dt) ->
-    I.rotation += I.rotationalVelocity * dt
+    I.age += dt
 
   return {}
