@@ -3,13 +3,13 @@ module "TextEffect"
 test "text moves up vertically", ->
   text = TextEffect()
 
-  text.update()
+  text.update(1)
 
   equals text.I.x, 0
   equals text.I.y, -1
 
   4.times ->
-    text.update()
+    text.update(1)
 
   equals text.I.x, 0
   equals text.I.y, -5
