@@ -1,5 +1,5 @@
 ###*
-The Rotatable module rotates the object
+The Ageable module rotates the object
 based on its rotational velocity.
 
 <code><pre>
