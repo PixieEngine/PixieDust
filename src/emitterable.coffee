@@ -49,7 +49,7 @@ Emitterable = (I={}, self) ->
         n += 1
 
     I.particles = I.particles.select (particle) ->
-      particle.update()
+      particle.update(dt)
 
     if n == I.particleCount && !I.particles.length
       I.active = false
