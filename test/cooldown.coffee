@@ -9,7 +9,7 @@ test "objects count down each of their cooldowns", 2, ->
         approachBy: 1
 
   5.times ->
-    obj.update()
+    obj.update(1)
 
   equals obj.I.bullet, 78, "bullet should decrease by 5"
 
