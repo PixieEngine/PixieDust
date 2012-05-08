@@ -7,7 +7,7 @@ player = GameObject()
 
 player.update(1)
 
-p
+player.I.age == 1
 
 </pre></code>
 
