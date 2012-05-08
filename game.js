@@ -759,9 +759,16 @@ Bindable = function() {
     @param {Function} callback The function to be called when the specified event
     is triggered.
     */
-    bind: function(event, callback) {
-      eventCallbacks[event] = eventCallbacks[event] || [];
-      return eventCallbacks[event].push(callback);
+    bind: function(namespacedEvent, callback) {
+      var event, namespace, _ref;
+      _ref = namespacedEvent.split("."), event = _ref[0], namespace = _ref[1];
+      if (namespace) {
+        callback.__PIXIE || (callback.__PIXIE = {});
+        callback.__PIXIE[namespace] = true;
+      }
+      eventCallbacks[event] || (eventCallbacks[event] = []);
+      eventCallbacks[event].push(callback);
+      return this;
     },
     /**
     Removes a specific event listener, or all event listeners if
@@ -781,13 +788,33 @@ Bindable = function() {
     @param {String} event The event to remove the listener from.
     @param {Function} [callback] The listener to remove.
     */
-    unbind: function(event, callback) {
-      eventCallbacks[event] = eventCallbacks[event] || [];
-      if (callback) {
-        return eventCallbacks[event].remove(callback);
-      } else {
-        return eventCallbacks[event] = [];
+    unbind: function(namespacedEvent, callback) {
+      var callbacks, event, key, namespace, _ref;
+      _ref = namespacedEvent.split("."), event = _ref[0], namespace = _ref[1];
+      if (event) {
+        eventCallbacks[event] || (eventCallbacks[event] = []);
+        if (namespace) {
+          eventCallbacks[event] = eventCallbacks.select(function(callback) {
+            var _ref2;
+            return !(((_ref2 = callback.__PIXIE) != null ? _ref2[namespace] : void 0) != null);
+          });
+        } else {
+          if (callback) {
+            eventCallbacks[event].remove(callback);
+          } else {
+            eventCallbacks[event] = [];
+          }
+        }
+      } else if (namespace) {
+        for (key in eventCallbacks) {
+          callbacks = eventCallbacks[key];
+          eventCallbacks[key] = callbacks.select(function(callback) {
+            var _ref2;
+            return !(((_ref2 = callback.__PIXIE) != null ? _ref2[namespace] : void 0) != null);
+          });
+        }
       }
+      return this;
     },
     /**
     Calls all listeners attached to the specified event.
@@ -7526,7 +7553,7 @@ Emitterable = function(I, self) {
   self.bind('draw', function(canvas) {
     return I.particles.invoke("draw", canvas);
   });
-  self.bind('update', function() {
+  self.bind('update', function(dt) {
     I.batchSize.times(function() {
       var key, particleProperties, value, _ref;
       if (n < I.particleCount && rand() < I.emissionRate) {
@@ -7547,7 +7574,7 @@ Emitterable = function(I, self) {
       }
     });
     I.particles = I.particles.select(function(particle) {
-      return particle.update();
+      return particle.update(dt);
     });
     if (n === I.particleCount && !I.particles.length) return I.active = false;
   });
@@ -7605,6 +7632,7 @@ Emitterable = function(I, self) {
   @name update
   @methodOf Engine#
   @event
+  @param {Number} elapsedTime The time in seconds that has elapsed since the last update.
   */
   /**
   Called after the engine completes an update. Here it is 
@@ -7696,10 +7724,10 @@ Emitterable = function(I, self) {
       return self.trigger("overlay", I.canvas);
     };
     step = function() {
-      var msPerFrame;
+      var secondsPerFrame;
       if (!I.paused || frameAdvance) {
-        msPerFrame = 1000 / I.FPS;
-        update(msPerFrame);
+        secondsPerFrame = 1 / I.FPS;
+        update(secondsPerFrame);
         I.age += 1;
       }
       return draw();
@@ -8972,7 +9000,7 @@ GameObject = function(I) {
       return I.active = false;
     }
   });
-  defaultModules = [Bindable, Bounded, Clampable, Cooldown, Drawable, Expirable, Follow, Metered, TimedEvents, Tween];
+  defaultModules = [Bindable, Bounded, Clampable, Cooldown, Drawable, Expirable, Follow, Metered, Movable, Rotatable, TimedEvents, Tween];
   modules = defaultModules.concat(I.includedModules.invoke('constantize'));
   modules = modules.without(I.excludedModules.invoke('constantize'));
   modules.each(function(Module) {
@@ -9552,14 +9580,14 @@ player.include(Movable)
 
 # => `velocity is {x: 0, y: 0} and position is {x: 0, y: 0}`
 
-player.update()
+player.update(1)
 # => `velocity is {x: 1, y: 0} and position is {x: 1, y: 0}` 
 
-player.update()
+player.update(1)
 # => `velocity is {x: 2, y: 0} and position is {x: 3, y: 0}`   
 
 # we've hit our maxSpeed so our velocity won't increase
-player.update()
+player.update(1)
 # => `velocity is {x: 2, y: 0} and position is {x: 5, y: 0}`
 </pre></code>
 
@@ -9579,17 +9607,18 @@ Movable = function(I, self) {
   });
   I.acceleration = Point(I.acceleration.x, I.acceleration.y);
   I.velocity = Point(I.velocity.x, I.velocity.y);
-  return self.bind('update', function() {
+  self.unbind(".Movable");
+  return self.bind('update.Movable', function(dt) {
     var currentSpeed;
-    I.velocity = I.velocity.add(I.acceleration);
+    I.velocity = I.velocity.add(I.acceleration.scale(dt));
     if (I.maxSpeed != null) {
       currentSpeed = I.velocity.magnitude();
       if (currentSpeed > I.maxSpeed) {
         I.velocity = I.velocity.scale(I.maxSpeed / currentSpeed);
       }
     }
-    I.x += I.velocity.x;
-    return I.y += I.velocity.y;
+    I.x += I.velocity.x * dt;
+    return I.y += I.velocity.y * dt;
   });
 };
 ;
@@ -9664,17 +9693,15 @@ player = GameObject
   y: 0
   rotationalVelocity: Math.PI / 64
 
-player.include(Rotatable)
-
 player.I.rotation
 # => 0
 
-player.update()
+player.update(1)
 
 player.I.rotation
 # => 0.04908738521234052 # Math.PI / 64
 
-player.update()
+player.update(1)
 
 player.I.rotation
 # => 0.09817477042468103 # 2 * (Math.PI / 64)
@@ -9694,8 +9721,8 @@ Rotatable = function(I, self) {
     rotation: 0,
     rotationalVelocity: 0
   });
-  self.bind('update', function() {
-    return I.rotation += I.rotationalVelocity;
+  self.bind('update', function(dt) {
+    return I.rotation += I.rotationalVelocity * dt;
   });
   return {};
 };
@@ -9914,13 +9941,10 @@ TextEffect = function(I) {
     alpha: 1,
     rotation: 0,
     rotationalVelocity: 0,
-    velocity: Point(0, -1)
+    velocity: Point(0, 0)
   });
   self = GameObject(I);
   self.bind("update", function() {
-    I.rotation += I.rotationalVelocity;
-    I.x += I.velocity.x;
-    I.y += I.velocity.y;
     return I.alpha = 1 - (I.age / I.duration);
   });
   self.unbind("draw");
