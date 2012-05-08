@@ -134,7 +134,6 @@ GameObject = (I) ->
       if I.active
         self.trigger 'step', elapsedTime
         self.trigger 'update', elapsedTime
-        I.age += 1
 
       I.active
 
