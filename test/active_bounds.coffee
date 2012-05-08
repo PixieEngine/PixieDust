@@ -40,7 +40,7 @@ test "should remove objects outside of activeBounds", 2, ->
   obj.I.x = 10000
   obj.I.y = 50
 
-  obj.update()
+  obj.update(1)
 
   ok destroySpy, 'obj should be destroyed when it goes outside the x bounds'
 
@@ -60,7 +60,7 @@ test "should remove objects outside of activeBounds", 2, ->
   obj2.I.x = 100
   obj2.I.y = 50000
 
-  obj2.update()
+  obj2.update(1)
 
   ok destroySpy, 'obj2 should be destroyed when it goes outside the y bounds'
 
