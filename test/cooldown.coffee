@@ -66,7 +66,7 @@ test "#cooldown", 3, ->
     value: 100
 
   3.times ->
-    obj.update()
+    obj.update(1)
 
   equals obj.I.health, 97, "health cooldown should exist and equal 97"  
 
