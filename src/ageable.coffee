@@ -1,6 +1,5 @@
 ###*
-The Ageable module rotates the object
-based on its rotational velocity.
+The Ageable module handles keeping track of an 
 
 <code><pre>
 player = GameObject()
