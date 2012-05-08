@@ -17,7 +17,7 @@ enemy.I.active
 # => true
 
 5.times ->
-  enemy.update()
+  enemy.update(1)
 
 enemy.I.active
 # => false
