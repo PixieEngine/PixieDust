@@ -30,8 +30,7 @@ player.I.rotation
 ###
 Ageable = (I={}, self) ->
   Object.reverseMerge I,
-    rotation: 0
-    rotationalVelocity: 0
+    age: 0
 
   self.bind 'update', (dt) ->
     I.rotation += I.rotationalVelocity * dt
