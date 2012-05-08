@@ -15,14 +15,14 @@ player.include(Movable)
 
 # => `velocity is {x: 0, y: 0} and position is {x: 0, y: 0}`
 
-player.update()
+player.update(1)
 # => `velocity is {x: 1, y: 0} and position is {x: 1, y: 0}` 
 
-player.update()
+player.update(1)
 # => `velocity is {x: 2, y: 0} and position is {x: 3, y: 0}`   
 
 # we've hit our maxSpeed so our velocity won't increase
-player.update()
+player.update(1)
 # => `velocity is {x: 2, y: 0} and position is {x: 5, y: 0}`
 </pre></code>
 
