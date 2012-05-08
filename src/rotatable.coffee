@@ -8,7 +8,6 @@ player = GameObject
   y: 0
   rotationalVelocity: Math.PI / 64
 
-player.include(Rotatable)
 
 player.I.rotation
 # => 0
