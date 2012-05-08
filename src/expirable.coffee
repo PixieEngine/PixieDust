@@ -41,7 +41,7 @@ Expirable = (I, self) ->
     if I.fadeOut
       I.alpha = startingAlpha * (1 - ((I.age + 1) / I.duration))  
       
-    if I.duration != -1 && I.age + dt >= I.duration
+    if I.duration != -1 && I.age >= I.duration
       I.active = false
 
   return {}
