@@ -158,7 +158,7 @@ GameObject = (I) ->
       I.active = false
   }
 
-  defaultModules = [Bindable, Bounded, Clampable, Cooldown, Drawable, Expirable, Follow, Metered, Movable, Rotatable, TimedEvents, Tween]
+  defaultModules = [ABindable, Bounded, Clampable, Cooldown, Drawable, Expirable, Follow, Metered, Movable, Rotatable, TimedEvents, Tween]
   modules = defaultModules.concat(I.includedModules.invoke('constantize'))
   modules = modules.without(I.excludedModules.invoke('constantize'))
 
