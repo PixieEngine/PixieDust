@@ -42,11 +42,6 @@ TextEffect = (I={}) ->
   self = GameObject(I)
 
   self.bind "update", ->    
-    I.rotation += I.rotationalVelocity
-  
-    I.x += I.velocity.x
-    I.y += I.velocity.y
-    
     I.alpha = 1 - (I.age / I.duration)
 
   self.unbind "draw"
