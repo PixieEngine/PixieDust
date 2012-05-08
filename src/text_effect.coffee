@@ -37,7 +37,7 @@ TextEffect = (I={}) ->
     alpha: 1
     rotation: 0
     rotationalVelocity: 0
-    velocity: Point(0, -1)
+    velocity: Point(0, 0)
     
   self = GameObject(I)
 
