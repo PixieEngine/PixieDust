@@ -42,7 +42,7 @@ Movable = (I={}, self) ->
   I.acceleration = Point(I.acceleration.x, I.acceleration.y)
   I.velocity = Point(I.velocity.x, I.velocity.y)
 
-  self.bind 'update.Movable', ->
+  self.bind 'update.Movable', () ->
     I.velocity = I.velocity.add(I.acceleration)
 
     if I.maxSpeed? 
