@@ -118,7 +118,6 @@ GameObject = (I) ->
     active: true
     created: false
     destroyed: false
-
     includedModules: []
     excludedModules: []
 
