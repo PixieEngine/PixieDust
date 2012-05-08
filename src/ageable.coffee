@@ -3,16 +3,11 @@ The Rotatable module rotates the object
 based on its rotational velocity.
 
 <code><pre>
-player = GameObject
-  x: 0
-  y: 0
-  rotationalVelocity: Math.PI / 64
-
-player.I.rotation
-# => 0
+player = GameObject()
 
 player.update(1)
 
+p
 
 </pre></code>
 
