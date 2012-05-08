@@ -14,7 +14,7 @@ test "objects count down each of their cooldowns", 2, ->
   equals obj.I.bullet, 78, "bullet should decrease by 5"
 
   100.times ->
-    obj.update()
+    obj.update(1)
 
   equals obj.I.bullet, 3, "bullet should not cool down part target value"
 
@@ -27,12 +27,12 @@ test "should handle negative value", ->
         approachBy: 1
 
   11.times ->
-    obj.update()
+    obj.update(1)
 
   equals obj.I.powerup, -59, "powerup should increase by 11"
 
   70.times ->
-    obj.update()
+    obj.update(1)
 
   equals obj.I.powerup, 0, "powerup should not cooldown past target value"
 
