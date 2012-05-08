@@ -50,6 +50,5 @@ Movable = (I={}, self) ->
       if currentSpeed > I.maxSpeed
         I.velocity = I.velocity.scale(I.maxSpeed / currentSpeed)
 
-    I.x += I.velocity.x *
-    I.y += I.velocity.y
-
+    I.x += I.velocity.x * dt
+    I.y += I.velocity.y * dt
