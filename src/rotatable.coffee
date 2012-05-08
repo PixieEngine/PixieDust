@@ -35,7 +35,7 @@ Rotatable = (I={}, self) ->
     rotation: 0
     rotationalVelocity: 0
 
-  self.bind 'update', ->
+  self.bind 'update', (dt) ->
     I.rotation += I.rotationalVelocity
 
   return {}
