@@ -5,7 +5,7 @@ test "Particles should move", ->
 
   xVelocity = e.I.particleData.velocity.x
 
-  e.update()
+  e.update(1)
 
   ok e.I.particles.length
 
