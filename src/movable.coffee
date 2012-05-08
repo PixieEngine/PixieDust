@@ -42,9 +42,9 @@ Movable = (I={}, self) ->
   I.acceleration = Point(I.acceleration.x, I.acceleration.y)
   I.velocity = Point(I.velocity.x, I.velocity.y)
 
-  # Handle multi-in
+  # Handle multi-include
   self.unbind ".Movable"
-  
+
   self.bind 'update.Movable', (dt) ->
     I.velocity = I.velocity.add(I.acceleration.scale(dt))
 
