@@ -6,8 +6,6 @@ test "should update velocity", ->
     x: 50
     y: 50
 
-  particle.include(Movable)
-
   particle.update(1)
 
   equals particle.I.x, 51, "x position updated according to velocity"
