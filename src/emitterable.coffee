@@ -30,7 +30,7 @@ Emitterable = (I={}, self) ->
   self.bind 'draw', (canvas) ->
     I.particles.invoke "draw", canvas
 
-  self.bind 'update', ->
+  self.bind 'update', (dt) ->
     I.batchSize.times ->
       if n < I.particleCount && rand() < I.emissionRate
         particleProperties = Object.extend {}, I.particleData
