@@ -20,7 +20,7 @@ test "should not exceed max speed", ->
     maxSpeed: 10
 
   20.times ->
-    particle.update()
+    particle.update(1)
 
   ok particle.I.velocity.magnitude() <= particle.I.maxSpeed, "magnitude of the velocity should not exceed maxSpeed"
 
