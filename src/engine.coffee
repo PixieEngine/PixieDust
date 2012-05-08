@@ -50,7 +50,7 @@
   @name update
   @methodOf Engine#
   @event
-  @param
+  @param {}
   ###
 
   ###*
