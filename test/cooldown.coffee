@@ -84,7 +84,7 @@ test "#cooldown", 3, ->
 test "should not blow up if cooldowns aren't specified", ->
   obj = GameObject()
 
-  obj.update()
+  obj.update(1)
 
   equals obj.I.age, 1, "should successfully update"
 
@@ -97,7 +97,7 @@ test "use existing value of instance variable as starting value if no value para
     target: 10
 
   5.times ->
-    obj.update()
+    obj.update(1)
 
   equals obj.I.health, 8
 
@@ -108,7 +108,7 @@ test "initialize property to 0 if no current value", ->
     target: 10
 
   5.times ->
-    obj.update()
+    obj.update(1)
 
   equals obj.I.health, 5
 
