@@ -180,6 +180,7 @@ GameObject = (I) ->
 
   self
 
+  
 ###*
 Construct an object instance from the given entity data.
 @name construct
