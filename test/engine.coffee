@@ -185,7 +185,7 @@ test "Integration", ->
 
   object = engine.add
     class: "GameObject"
-    velocity: Point(1, 0)
+    velocity: Point(, 0)
 
   engine.frameAdvance()
 
