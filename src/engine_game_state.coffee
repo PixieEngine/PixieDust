@@ -9,9 +9,9 @@ Engine.GameState = (I, self) ->
   # then the state after update, then the engine after update
   # like a layered cake with states in the middle.
   self.bind "update", (elapsedTime) ->
-    I.currentState.trigger "beforeUpdate"
-    I.currentState.trigger "update"
-    I.currentState.trigger "afterUpdate"
+    I.currentState.trigger "beforeUpdate", elapsedTime
+    I.currentState.trigger "update", elapsedTime
+    I.currentState.trigger "afterUpdate", elapsedTime
 
   self.bind "afterUpdate", ->
     # Handle state change
