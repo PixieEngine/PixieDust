@@ -186,7 +186,7 @@ test "Integration", ->
   object = engine.add
     class: "GameObject"
       
-  engine.
+  engine.s
 
 test "#setState", 3, ->
   engine = Engine()
