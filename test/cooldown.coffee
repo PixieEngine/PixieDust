@@ -85,7 +85,7 @@ test "should not blow up if cooldowns aren't specified", ->
   obj = GameObject()
 
   obj.update(1)
-  obj.t
+  obj.trigger "afterUpdate", 1
 
   equals obj.I.age, 1, "should successfully update"
 
