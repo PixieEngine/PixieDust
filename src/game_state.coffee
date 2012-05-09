@@ -56,7 +56,7 @@ GameState = (I={}) ->
     [toKeep, toRemove] = I.objects.partition (object) ->
       object.update(elapsedTime)
 
-    I.objects.invoke "trigger", "afterUpdate",
+    I.objects.invoke "trigger", "afterUpdate", elapsedTime
 
     toRemove.invoke "trigger", "remove"
 
