@@ -189,7 +189,7 @@ test "Integration", ->
 
   engine.frameAdvance()
   
-  object.I.x 
+  equals object.I.x, 
 
 test "#setState", 3, ->
   engine = Engine()
