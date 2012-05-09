@@ -185,11 +185,11 @@ test "Integration", ->
 
   object = engine.add
     class: "GameObject"
-    velocity: Point(1, 0)
+    velocity: Point(30, 0)
 
   engine.frameAdvance()
-  
-  equals object.I.x, 
+
+  equals object.I.x, 1
 
 test "#setState", 3, ->
   engine = Engine()
