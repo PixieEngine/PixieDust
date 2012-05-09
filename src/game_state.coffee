@@ -51,12 +51,12 @@ GameState = (I={}) ->
   self.bind "update", (elapsedTime) ->
     I.updating = true
 
-    I.objects.invoke "trigger", "beforeUpdate"
+    I.objects.invoke "trigger", "beforeUpdate", elapsedTime
 
     [toKeep, toRemove] = I.objects.partition (object) ->
       object.update(elapsedTime)
 
-    I.objects.invoke "trigger", "afterUpdate"
+    I.objects.invoke "trigger", "afterUpdate",
 
     toRemove.invoke "trigger", "remove"
 
