@@ -37,7 +37,7 @@ Expirable = (I={}, self) ->
 
   startingAlpha = I.alpha
 
-  self.bind "update", (dt) ->
+  self.bind "a", (dt) ->
     if I.fadeOut
       I.alpha = startingAlpha * (1 - (I.age / I.duration))
 
