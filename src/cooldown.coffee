@@ -10,7 +10,7 @@ player = GameObject
 player.cooldown "health",
   target: 100
 
-player.update()
+player.update(1)
 </pre></code>
 
 <code><pre>
