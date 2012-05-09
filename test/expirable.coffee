@@ -7,7 +7,7 @@ test "objects become inactive after their duration", ->
   obj.include Expirable
 
   4.times ->
-    obj.trigger(1)
+    obj.trigger "afterUpdate", 1
 
   equals obj.I.active, true, "object is active until duration is exceeded"
 
