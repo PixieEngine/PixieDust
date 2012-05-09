@@ -36,7 +36,7 @@ Cooldown = (I, self) ->
   Object.reverseMerge I,
     cooldowns: {}
 
-  self.bind "update", ->
+  self.bind "update", (dt) ->
     for name, cooldownOptions of I.cooldowns
       {approachBy, target} = cooldownOptions
 
