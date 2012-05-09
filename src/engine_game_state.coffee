@@ -8,7 +8,7 @@ Engine.GameState = (I, self) ->
   # before the state beforeUpdate triggers, then the state update
   # then the state after update, then the engine after update
   # like a layered cake with states in the middle.
-  self.bind "update", ->
+  self.bind "update", () ->
     I.currentState.trigger "beforeUpdate"
     I.currentState.trigger "update"
     I.currentState.trigger "afterUpdate"
