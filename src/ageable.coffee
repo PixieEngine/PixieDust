@@ -20,7 +20,7 @@ Ageable = (I={}, self) ->
   Object.reverseMerge I,
     age: 0
 
-  self.bind 'apdate', (dt) ->
+  self.bind 'afterUpdate', (dt) ->
     I.age += dt
 
   return {}
