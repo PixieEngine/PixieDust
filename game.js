@@ -4441,6 +4441,37 @@ ActiveBounds = function(I, self) {
 };
 ;
 /**
+The Ageable module handles keeping track of an object's age.
+
+<code><pre>
+player = GameObject()
+
+player.update(1)
+
+#=> player.I.age == 1
+
+</pre></code>
+
+@name Ageable
+@module
+@constructor
+@param {Object} I Instance variables
+@param {Core} self Reference to including object
+*/
+var Ageable;
+
+Ageable = function(I, self) {
+  if (I == null) I = {};
+  Object.reverseMerge(I, {
+    age: 0
+  });
+  self.bind('afterUpdate', function(dt) {
+    return I.age += dt;
+  });
+  return {};
+};
+;
+/**
 The Bounded module is used to provide basic data about the
 location and dimensions of the including object. This module is included
 by default in <code>GameObject</code>.
@@ -6923,7 +6954,7 @@ player = GameObject
 player.cooldown "health",
   target: 100
 
-player.update()
+player.update(1)
 </pre></code>
 
 <code><pre>
@@ -6934,7 +6965,7 @@ player.cooldown "shootTimer"
 
 player.I.shootTimer = 10 # => Pew! Pew!
 
-player.update()
+player.update(1)
 
 player.I.shootTimer # => 9
 </pre></code>
@@ -6951,14 +6982,14 @@ Cooldown = function(I, self) {
   Object.reverseMerge(I, {
     cooldowns: {}
   });
-  self.bind("update", function() {
+  self.bind("update", function(dt) {
     var approachBy, cooldownOptions, name, target, _ref, _results;
     _ref = I.cooldowns;
     _results = [];
     for (name in _ref) {
       cooldownOptions = _ref[name];
       approachBy = cooldownOptions.approachBy, target = cooldownOptions.target;
-      _results.push(I[name] = I[name].approach(target, approachBy));
+      _results.push(I[name] = I[name].approach(target, approachBy * dt));
     }
     return _results;
   });
@@ -8553,7 +8584,7 @@ enemy.I.active
 # => true
 
 5.times ->
-  enemy.update()
+  enemy.update(1)
 
 enemy.I.active
 # => false
@@ -8569,15 +8600,16 @@ var Expirable;
 
 Expirable = function(I, self) {
   var startingAlpha;
+  if (I == null) I = {};
   Object.reverseMerge(I, {
     duration: -1,
     alpha: 1,
     fadeOut: false
   });
   startingAlpha = I.alpha;
-  self.bind("update", function() {
-    if (I.fadeOut) I.alpha = startingAlpha * (1 - ((I.age + 1) / I.duration));
-    if (I.duration !== -1 && I.age + 1 >= I.duration) return I.active = false;
+  self.bind("afterUpdate", function(dt) {
+    if (I.fadeOut) I.alpha = startingAlpha * (1 - (I.age / I.duration));
+    if (I.duration !== -1 && I.age >= I.duration) return I.active = false;
   });
   return {};
 };
@@ -8955,11 +8987,9 @@ GameObject = function(I) {
   @memberOf GameObject#
   */
   Object.reverseMerge(I, {
-    age: 0,
     active: true,
     created: false,
     destroyed: false,
-    solid: false,
     includedModules: [],
     excludedModules: []
   });
@@ -8974,7 +9004,6 @@ GameObject = function(I) {
       if (I.active) {
         self.trigger('step', elapsedTime);
         self.trigger('update', elapsedTime);
-        I.age += 1;
       }
       return I.active;
     },
@@ -9000,7 +9029,7 @@ GameObject = function(I) {
       return I.active = false;
     }
   });
-  defaultModules = [Bindable, Bounded, Clampable, Cooldown, Drawable, Expirable, Follow, Metered, Movable, Rotatable, TimedEvents, Tween];
+  defaultModules = [Bindable, Ageable, Bounded, Clampable, Cooldown, Drawable, Expirable, Follow, Metered, Movable, Rotatable, TimedEvents, Tween];
   modules = defaultModules.concat(I.includedModules.invoke('constantize'));
   modules = modules.without(I.excludedModules.invoke('constantize'));
   modules.each(function(Module) {
@@ -9133,11 +9162,11 @@ GameState = function(I) {
   self.bind("update", function(elapsedTime) {
     var toKeep, toRemove, _ref;
     I.updating = true;
-    I.objects.invoke("trigger", "beforeUpdate");
+    I.objects.invoke("trigger", "beforeUpdate", elapsedTime);
     _ref = I.objects.partition(function(object) {
       return object.update(elapsedTime);
     }), toKeep = _ref[0], toRemove = _ref[1];
-    I.objects.invoke("trigger", "afterUpdate");
+    I.objects.invoke("trigger", "afterUpdate", elapsedTime);
     toRemove.invoke("trigger", "remove");
     I.objects = toKeep.concat(queuedObjects);
     queuedObjects = [];
