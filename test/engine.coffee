@@ -188,6 +188,8 @@ test "Integration", ->
     velocity: Point(1, 0)
 
   engine.frameAdvance()
+  
+  object.I.x 
 
 test "#setState", 3, ->
   engine = Engine()
