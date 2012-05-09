@@ -190,7 +190,7 @@ test "Integration", ->
   engine.frameAdvance()
 
   equals object.I.x, 1
-  equals object.I.age 1
+  equals object.I.age, 1/30
 
 test "#setState", 3, ->
   engine = Engine()
