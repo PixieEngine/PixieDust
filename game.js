@@ -7465,7 +7465,7 @@ Drawable = function(I, self) {
     transform: function() {
       var center, transform;
       center = self.center();
-      transform = Matrix.translation(center.x, center.y);
+      transform = Matrix.translation(center.x.floor(), center.y.floor());
       if ((I.scale != null) && I.scale !== 1) {
         transform = transform.concat(Matrix.scale(I.scale));
       }
