@@ -9,6 +9,7 @@ test "should allow for simple linear tweening", ->
     
   11.times (i) ->
     o.update(1)
+    o.trigge
 
     equals o.I.x, i
 
