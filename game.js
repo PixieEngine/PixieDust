@@ -8098,10 +8098,10 @@ Engine.GameState = function(I, self) {
     currentState: GameState()
   });
   requestedState = null;
-  self.bind("update", function() {
-    I.currentState.trigger("beforeUpdate");
-    I.currentState.trigger("update");
-    return I.currentState.trigger("afterUpdate");
+  self.bind("update", function(elapsedTime) {
+    I.currentState.trigger("beforeUpdate", elapsedTime);
+    I.currentState.trigger("update", elapsedTime);
+    return I.currentState.trigger("afterUpdate", elapsedTime);
   });
   self.bind("afterUpdate", function() {
     var previousState;
