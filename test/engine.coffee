@@ -181,7 +181,7 @@ test "#collides", ->
   engine.collides(Rectangle(0, 0, 10, 10), null)
 
 test "Integration", ->
-  engine = Engin
+  engine = Engine()
 test "#setState", 3, ->
   engine = Engine()
 
