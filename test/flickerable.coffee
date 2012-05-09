@@ -65,9 +65,11 @@ test 'it should change the alpha value when the flicker duration has elapsed', -
     
   5.times ->
     player.update(1)
+    player.trigger "afterUpdate", 1
     equals player.I.alpha, 0.9
     
   player.update(1)
+  player.trigger "afterUpdate", 1
   equals player.I.alpha, 0.2
   
   # returns to original alpha when flicker duration hits 0
