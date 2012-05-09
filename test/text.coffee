@@ -19,6 +19,7 @@ test "text fades out", ->
   text = TextEffect()
 
   text.update(1)
+  text.t
 
   equals text.I.alpha, 1
 
