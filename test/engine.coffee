@@ -183,7 +183,8 @@ test "#collides", ->
 test "Integration", ->
   engine = Engine()
   
-  object =
+  object = engine.add
+    class
 
 test "#setState", 3, ->
   engine = Engine()
