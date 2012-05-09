@@ -21,7 +21,7 @@ player.cooldown "shootTimer"
 
 player.I.shootTimer = 10 # => Pew! Pew!
 
-player.update()
+player.update(1)
 
 player.I.shootTimer # => 9
 </pre></code>
