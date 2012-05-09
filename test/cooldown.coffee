@@ -53,7 +53,7 @@ test "adding many cooldowns to default instance variables", 3, ->
         target: 1000
 
   4.times ->
-    obj.update()
+    obj.update(1)
 
   equals obj.I.cool, 0
   equals obj.I.rad, 1.5
