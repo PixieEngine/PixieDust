@@ -40,7 +40,7 @@ Cooldown = (I, self) ->
     for name, cooldownOptions of I.cooldowns
       {approachBy, target} = cooldownOptions
 
-      I[name] = I[name].approach(target, approachBy)
+      I[name] = I[name].approach(target, approachBy * dt)
 
   cooldown: (name, options={}) ->
     {target, approachBy, value} = options
