@@ -9,9 +9,7 @@ TiledBackground = (I={}) ->
   # Inherit from game object
   self = GameObject(I)
 
-  # Add events and methods here
-  self.bind "update", ->
-    # Add update method behavior
-
-  # We must always return self as the last line
+ self.unbind 'draw'
+  self.bind 'draw', (canvas) ->
+  I.sprite.fill(canvas, -16, -16, App.width, App.height)
   return self
