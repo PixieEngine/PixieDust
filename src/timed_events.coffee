@@ -28,7 +28,7 @@ TimedEvents = (I={}) ->
   @methodOf TimedEvents#
   @param {Number} n Number of frames to wait before executing the callback
   @param {Function} fn Code to execute after <code>n</code> frames has passed
-  ###  
+  ###
   every: (n, fn) ->
     while I.everyEventLastFired
       fn()
