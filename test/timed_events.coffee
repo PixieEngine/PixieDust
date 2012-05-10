@@ -3,8 +3,8 @@ module "TimedEvents"
 test "#every", ->
   gameObject = GameObject()
   
-  gameObject.every
-    
+  gameObject.every ->
+    ok true
 
 # Clear out the module
 module()
