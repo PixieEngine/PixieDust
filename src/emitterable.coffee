@@ -9,6 +9,8 @@ Emitterable = (I={}, self) ->
     generator: {}
     particles: []
     particleCount: Infinity
+    x: I.x
+    y: I.y
     particleData:
       acceleration: Point(0, 0.1)
       age: 0
