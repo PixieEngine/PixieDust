@@ -35,7 +35,8 @@ Emitterable = (I={}, self) ->
   self.bind 'overlay', (canvas) ->
     I.particles.invoke "trigger", "overlay", canvas
     
-  self.bind
+  self.bind 'beforeUpdate', (dt) ->
+    
 
   self.bind 'update', (dt) ->
     I.batchSize.times ->
