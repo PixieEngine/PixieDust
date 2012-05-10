@@ -38,4 +38,4 @@ TimedEvents = (I={}) ->
   every: (period, fn) ->
     I.everyEvents.push
       fn: fn
-      every: pe
+      every: period
