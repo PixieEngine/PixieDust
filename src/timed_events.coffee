@@ -15,7 +15,7 @@ TimedEvents = (I={}) ->
     for event in I.everyEvents
       while event.lastFired < I.age
         event.fn()
-        event.lastFired += event.ever
+        event.lastFired += event.every
 
   ###*
   Execute <code>fn</code> every <code>n</code> frames.
