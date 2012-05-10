@@ -10,8 +10,9 @@ TimedEvents module
 TimedEvents = (I={}) ->
   Object.reverseMerge I,
     everyEvents: []
+
+  self.bind "update", ->
     
-  self.bind ""
 
   ###*
   Execute <code>fn</code> every <code>n</code> frames.
