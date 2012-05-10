@@ -39,4 +39,4 @@ TimedEvents = (I={}) ->
     I.everyEvents.push
       fn: fn
       every: period
-      lastFired: I
+      lastFired: I.age
