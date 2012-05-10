@@ -3,9 +3,9 @@ Emitterable = (I={}, self) ->
   Object.reverseMerge I,
     batchSize: 1
     emissionRate: 1
-    color: "blue"
     width: 0
     height: 0
+    sprite: Sprite.EMPTY
     generator: {}
     particles: []
     particleCount: Infinity
