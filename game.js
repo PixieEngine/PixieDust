@@ -7557,9 +7557,9 @@ Emitterable = function(I, self) {
   Object.reverseMerge(I, {
     batchSize: 1,
     emissionRate: 1,
-    color: "blue",
     width: 0,
     height: 0,
+    sprite: Sprite.EMPTY,
     generator: {},
     particles: [],
     particleCount: Infinity,
@@ -10046,22 +10046,6 @@ TextScreen = function(I) {
       });
     }
   });
-};
-;
-var TiledBackground;
-
-TiledBackground = function(I) {
-  var self;
-  if (I == null) I = {};
-  Object.reverseMerge(I, {
-    sprite: Sprite.EMPTY
-  });
-  self = GameObject(I);
-  self.unbind('draw');
-  self.bind('draw', function(canvas) {
-    return I.sprite.fill(canvas, -16, -16, App.width, App.height);
-  });
-  return self;
 };
 ;
 
