@@ -15,7 +15,7 @@ Emitterable = (I={}, self) ->
       acceleration: Point(0, 0.1)
       age: 0
       color: "blue"
-      duration: 30
+      duration: 1.5
       includedModules: ["Movable"]
       height: 2
       maxSpeed: 120
