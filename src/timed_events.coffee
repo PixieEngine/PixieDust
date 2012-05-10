@@ -15,7 +15,7 @@ TimedEvents = (I={}) ->
     for event in I.everyEvents
       while (event.lastFired + event.period) < I.age
         event.fn()
-        event.lastFired += event.every
+        event.lastFired += event.period
 
   ###*
   Execute <code>fn</code> every <code>n</code> frames.
@@ -40,5 +40,5 @@ TimedEvents = (I={}) ->
 
     I.everyEvents.push
       fn: fn
-      every: period
+      period: period
       lastFired: I.age
