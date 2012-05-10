@@ -8,7 +8,7 @@ test "#every", ->
     
   4.times ->
     gameObject.trigger "update", 1
-    gameObject.trigger ""
+    gameObject.trigger "after"
 
 # Clear out the module
 module()
