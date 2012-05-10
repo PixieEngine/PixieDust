@@ -1,6 +1,6 @@
 module "TimedEvents"
 
-test "#every", ->
+test "#every", 4, ->
   gameObject = GameObject()
   
   gameObject.every 1, ->
@@ -8,7 +8,7 @@ test "#every", ->
     
   4.times ->
     gameObject.trigger "update", 1
-    gameObject.trigger "after"
+    gameObject.trigger "afterUpate", 1
 
 # Clear out the module
 module()
