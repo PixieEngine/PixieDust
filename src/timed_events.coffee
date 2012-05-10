@@ -13,6 +13,7 @@ TimedEvents = (I={}) ->
 
   self.bind "update", (elapsedTime) ->
     for event in I.everyEvents
+      
 
   ###*
   Execute <code>fn</code> every <code>n</code> frames.
