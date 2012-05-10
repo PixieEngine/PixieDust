@@ -7,7 +7,7 @@ TimedEvents module
 @constructor
 @param {Object} I Instance variables
 ###
-TimedEvents = (I={}) ->
+TimedEvents = (I={}, self) ->
   Object.reverseMerge I,
     everyEvents: []
 
