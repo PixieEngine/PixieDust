@@ -1,4 +1,4 @@
-Tilebackground = (I={}) ->
+TiledBackground = (I={}) ->
   # Set some default properties
   Object.reverseMerge I,
     color: "blue"
