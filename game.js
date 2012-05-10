@@ -7569,10 +7569,10 @@ Emitterable = function(I, self) {
       acceleration: Point(0, 0.1),
       age: 0,
       color: "blue",
-      duration: 30,
+      duration: 1.5,
       includedModules: ["Movable"],
       height: 2,
-      maxSpeed: 2,
+      maxSpeed: 120,
       offset: Point(0, 0),
       sprite: false,
       spriteName: false,
@@ -7585,6 +7585,15 @@ Emitterable = function(I, self) {
   n = 0;
   self.bind('draw', function(canvas) {
     return I.particles.invoke("draw", canvas);
+  });
+  self.bind('overlay', function(canvas) {
+    return I.particles.invoke("trigger", "overlay", canvas);
+  });
+  self.bind('beforeUpdate', function(dt) {
+    return I.particles.invoke("trigger", "beforeUpdate", dt);
+  });
+  self.bind('afterUpdate', function(dt) {
+    return I.particles.invoke("trigger", "afterUpdate", dt);
   });
   self.bind('update', function(dt) {
     I.batchSize.times(function() {
