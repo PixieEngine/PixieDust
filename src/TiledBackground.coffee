@@ -4,7 +4,7 @@ TiledBackground = (I={}) ->
     color: "blue"
     height: 32
     width: 32
-    sprite: Sprite.
+    sprite: Sprite.EMPTY
     # spriteName: "block" # Use the name of a sprite in the images folder
 
   # Inherit from game object
