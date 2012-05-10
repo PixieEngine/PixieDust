@@ -38,6 +38,8 @@ Emitterable = (I={}, self) ->
   self.bind 'beforeUpdate', (dt) ->
     I.particles.invoke "trigger", "beforeUpdate", dt
     
+  self.bind 'afterUpdate', (dt) ->
+    I.particles.invoke "trigger", "beforeUpdate", dt
 
   self.bind 'update', (dt) ->
     I.batchSize.times ->
