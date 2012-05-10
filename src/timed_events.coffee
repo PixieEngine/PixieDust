@@ -8,7 +8,7 @@ TimedEvents module
 @param {Object} I Instance variables
 ###
 TimedEvents = (I={}) ->
-  O
+  Object.reverseMerge I,
   ###*
   Execute <code>fn</code> every <code>n</code> frames.
 
