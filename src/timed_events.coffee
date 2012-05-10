@@ -37,3 +37,4 @@ TimedEvents = (I={}) ->
   ###
   every: (n, fn) ->
     I.everyEvents.push
+      fn: 
