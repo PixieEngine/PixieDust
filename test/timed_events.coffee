@@ -1,6 +1,6 @@
 module "TimedEvents"
 
-test "testing for equality", ->
+test "#every", ->
   one = 1
 
   # Test for equality of two objects
