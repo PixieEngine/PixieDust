@@ -6,7 +6,7 @@ test "#every", ->
   gameObject.every 1, ->
     ok true
     
-  gameObject
+  4.times ->
 
 # Clear out the module
 module()
