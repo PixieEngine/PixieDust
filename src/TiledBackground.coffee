@@ -1,9 +1,7 @@
 TiledBackground = (I={}) ->
-  # Set some default properties
   Object.reverseMerge I,
     sprite: Sprite.EMPTY
    
-  # Inherit from game object
   self = GameObject(I)
 
   self.unbind 'draw'
