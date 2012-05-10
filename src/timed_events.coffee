@@ -11,7 +11,7 @@ TimedEvents = (I={}) ->
   Object.reverseMerge I,
     everyEvents: []
 
-  self.bind "update", ->
+  self.bind "update", (e) ->
     
 
   ###*
