@@ -1,7 +1,7 @@
 module "TimedEvents"
 
 test "#every", ->
-  gameObject = 
+  gameObject = GameObject
 
 # Clear out the module
 module()
