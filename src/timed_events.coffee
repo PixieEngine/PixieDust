@@ -36,6 +36,7 @@ TimedEvents = (I={}) ->
   @param {Function} fn Code to execute after <code>n</code> frames has passed
   ###
   every: (period, fn) ->
+    return unless period > 0
     I.everyEvents.push
       fn: fn
       every: period
