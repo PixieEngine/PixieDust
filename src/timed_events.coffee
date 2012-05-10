@@ -35,6 +35,6 @@ TimedEvents = (I={}) ->
   @param {Number} n Number of frames to wait before executing the callback
   @param {Function} fn Code to execute after <code>n</code> frames has passed
   ###
-  every: (n, fn) ->
+  every: (period, fn) ->
     I.everyEvents.push
-      fn: 
+      fn: fn
