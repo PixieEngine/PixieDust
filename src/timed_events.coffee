@@ -9,6 +9,7 @@ TimedEvents module
 ###
 TimedEvents = (I={}) ->
   Object.reverseMerge I,
+    
   ###*
   Execute <code>fn</code> every <code>n</code> frames.
 
