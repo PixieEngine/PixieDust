@@ -18,7 +18,7 @@ Emitterable = (I={}, self) ->
       duration: 30
       includedModules: ["Movable"]
       height: 2
-      maxSpeed: 2
+      maxSpeed: 60
       offset: Point(0, 0)
       sprite: false
       spriteName: false
