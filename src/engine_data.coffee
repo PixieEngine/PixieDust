@@ -10,6 +10,6 @@ The <code>Delay</code> module provides methods to trigger events after a number 
 Engine.Data = (I, self) ->
   Object.reverseMerge I,
     data: {}
-  
+
   get: ->
   set: ->
