@@ -1,5 +1,5 @@
 ###*
-The <code>Data</code> module provides methods to trigger events after a number of steps have passed.
+The <code>Data</code> module provides methods to store global and persistent .
 
 @name Delay
 @fieldOf Engine
