@@ -1,5 +1,5 @@
 ###*
-The <code>Delay</code> module provides methods to trigger events after a number of steps have passed.
+The <code>Data</code> module provides methods to trigger events after a number of steps have passed.
 
 @name Delay
 @fieldOf Engine
