@@ -1,6 +1,6 @@
 module "Engine"
 
-test "#data", 1, ->
+test "#data", ->
   engine = Engine
     backgroundColor: false
 
