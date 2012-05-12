@@ -30,6 +30,6 @@ test "should fade out if that option is set", ->
     obj.update(1)
     obj.trigger "afterUpdate", 1
     
-  equals obj.I.alpha, 0.8 * (1 - (obj.I.age / obj.I.duration))
+  equals obj.I.alpha, 0.48
 
 module()

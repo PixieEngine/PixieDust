@@ -5630,19 +5630,24 @@ var CollisionResponse;
 
 CollisionResponse = function(I, self) {
   if (I == null) I = {};
-  self.bind('update', function() {
-    I.velocity.x.abs().times(function() {
-      if (self.collide(I.velocity.x.sign(), 0, ".solid")) {
+  self.bind('update', function(elapsedTime) {
+    var t, unit;
+    t = (elapsedTime * I.velocity.x).abs();
+    unit = I.velocity.x.sign();
+    t.times(function() {
+      if (self.collide(unit, 0, ".solid")) {
         return I.velocity.x = 0;
       } else {
-        return I.x += I.velocity.x.sign();
+        return I.x += unit;
       }
     });
-    return I.velocity.y.abs().times(function() {
-      if (self.collide(0, I.velocity.y.sign(), ".solid")) {
+    t = (elapsedTime * I.velocity.y).abs();
+    unit = I.velocity.y.sign();
+    return t.times(function() {
+      if (self.collide(0, unit, ".solid")) {
         return I.velocity.y = 0;
       } else {
-        return I.y += I.velocity.y.sign();
+        return I.y += unit;
       }
     });
   });
@@ -8618,9 +8623,10 @@ Expirable = function(I, self) {
     fadeOut: false
   });
   startingAlpha = I.alpha;
-  self.bind("afterUpdate", function(dt) {
+  self.bind("update", function(dt) {
     if (I.fadeOut) I.alpha = startingAlpha * (1 - (I.age / I.duration));
-    if (I.duration !== -1 && I.age >= I.duration) return I.active = false;
+    if (I.duration !== -1 && I.age >= I.duration) I.active = false;
+    return I.alpha = I.alpha.clamp(0, 1);
   });
   return {};
 };
@@ -10130,8 +10136,29 @@ TimedEvents module
 */
 var TimedEvents;
 
-TimedEvents = function(I) {
+TimedEvents = function(I, self) {
   if (I == null) I = {};
+  Object.reverseMerge(I, {
+    everyEvents: []
+  });
+  self.bind("update", function(elapsedTime) {
+    var event, _i, _len, _ref, _results;
+    _ref = I.everyEvents;
+    _results = [];
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      event = _ref[_i];
+      _results.push((function() {
+        var _results2;
+        _results2 = [];
+        while (event.lastFired < I.age + elapsedTime) {
+          event.fn();
+          _results2.push(event.lastFired += event.period);
+        }
+        return _results2;
+      })());
+    }
+    return _results;
+  });
   return {
     /**
     Execute <code>fn</code> every <code>n</code> frames.
@@ -10141,7 +10168,7 @@ TimedEvents = function(I) {
     
     player.include TimedEvents
     
-    # doSomething is called every 4 frames
+    # doSomething is called every 4 seconds
     player.every 4, ->
       doSomething()
     </pre></code>
@@ -10151,8 +10178,13 @@ TimedEvents = function(I) {
     @param {Number} n Number of frames to wait before executing the callback
     @param {Function} fn Code to execute after <code>n</code> frames has passed
     */
-    every: function(n, fn) {
-      if (I.age.mod(n) === 0) return fn();
+    every: function(period, fn) {
+      if (!(period > 0)) return;
+      return I.everyEvents.push({
+        fn: fn,
+        period: period,
+        lastFired: I.age
+      });
     }
   };
 };

@@ -1,17 +1,24 @@
 CollisionResponse = (I={}, self) ->
-  self.bind 'update', ->   
-    I.velocity.x.abs().times ->
-      if self.collide(I.velocity.x.sign(), 0, ".solid")
+  self.bind 'update', (elapsedTime) ->
+    t = (elapsedTime * I.velocity.x).abs()
+    unit = I.velocity.x.sign()
+
+    # x dimension
+    t.times ->
+      if self.collide(unit, 0, ".solid")
         I.velocity.x = 0
       else
-        I.x += I.velocity.x.sign()
-  
-    I.velocity.y.abs().times ->   
-      if self.collide(0, I.velocity.y.sign(), ".solid")          
+        I.x += unit
+
+    t = (elapsedTime * I.velocity.y).abs()
+    unit = I.velocity.y.sign()
+    # y dimension
+    t.times ->
+      if self.collide(0, unit, ".solid")
         I.velocity.y = 0
       else
-        I.y += I.velocity.y.sign()  
-                          
+        I.y += unit
+
   self.extend
     collide: (xOffset, yOffset, className) ->
       engine.find(className).inject false, (hit, block) ->
