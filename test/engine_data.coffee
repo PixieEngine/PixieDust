@@ -4,6 +4,8 @@ test "#data", 1, ->
   engine = Engine
     backgroundColor: false
 
-  engine.data.score = 
+  engine.data.score = 0
+  
+  engine.data.score 
 
 module()
