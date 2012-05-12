@@ -1,7 +1,8 @@
 ###*
 The <code>Data</code> module provides methods to store global and persistent data in the engine.
 
-    engine.data
+    engine.data.score = 0
+    
 
 @name Data
 @fieldOf Engine
