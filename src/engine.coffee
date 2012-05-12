@@ -294,6 +294,7 @@
     "GameState"
     "Selector"
     "Collision"
+    "Tilemap"
   ]
 
   (exports ? this)["Engine"] = Engine
