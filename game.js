@@ -7907,7 +7907,7 @@ Emitterable = function(I, self) {
     self.trigger("init");
     return self;
   };
-  Engine.defaultModules = ["Keyboard", "Mouse", "Background", "Delay", "GameState", "Selector", "Collision", "Tilemap", "Levels"];
+  Engine.defaultModules = ["Data", "Keyboard", "Mouse", "Background", "Delay", "GameState", "Selector", "Collision", "Tilemap", "Levels"];
   return (typeof exports !== "undefined" && exports !== null ? exports : this)["Engine"] = Engine;
 })();
 ;
@@ -8020,6 +8020,33 @@ Engine.Collision = function(I, self) {
       return nearestHit;
     }
   };
+};
+;
+/**
+The <code>Data</code> module provides methods to store global and persistent data in the engine.
+
+    engine.data.score = 0
+    engine.data.score += 10
+    
+    engine.data.score # => 10
+
+@name Data
+@fieldOf Engine
+@module
+@param {Object} I Instance variables
+@param {Object} self Reference to the engine
+*/
+Engine.Data = function(I, self) {
+  if (I == null) I = {};
+  Object.reverseMerge(I, {
+    data: {}
+  });
+  Object.defineProperty(self, 'data', {
+    get: function() {
+      return I.data;
+    }
+  });
+  return {};
 };
 ;
 /**
