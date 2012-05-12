@@ -273,7 +273,7 @@
 
     self.include Bindable
 
-    defaultModules = ["Keyboard", "Mouse", "Background", "Delay", "GameState", "Selector", "Collision"]
+    
     modules = defaultModules.concat(I.includedModules)
     modules = modules.without([].concat(I.excludedModules))
 
