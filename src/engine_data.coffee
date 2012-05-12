@@ -13,7 +13,7 @@ Engine.Data = (I={}, self) ->
     
   Object.defineProperty self, 'data',
     get: -> 
-      this * Math.TAU / 360
+      I.data
 
   get: (key) ->
     I.data[key]
