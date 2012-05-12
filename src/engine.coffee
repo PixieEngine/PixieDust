@@ -294,6 +294,7 @@
     "GameState"
     "Selector"
     "Collision"
-    ]
+  ]
+
   (exports ? this)["Engine"] = Engine
 )()
