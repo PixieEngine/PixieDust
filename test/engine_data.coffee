@@ -7,6 +7,6 @@ test "#data", 1, ->
   engine.data.score = 0
   engine.data.score += 50
   
-  equals engine.data.score, 
+  equals engine.data.score, 50
 
 module()
