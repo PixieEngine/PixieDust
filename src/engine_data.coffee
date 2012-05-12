@@ -11,6 +11,6 @@ Engine.Data = (I={}, self) ->
   Object.reverseMerge I,
     data: {}
 
-  get: (k) ->
-
+  get: (key) ->
+    data[]
   set: ->
