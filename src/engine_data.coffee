@@ -13,5 +13,5 @@ Engine.Data = (I={}, self) ->
 
   get: (key) ->
     I.data[key]
-  
-  set: ->
+
+  set: (key, value) ->
