@@ -286,6 +286,7 @@
     return self
 
   Engine.defaultModules = [
+    "Data"
     "Keyboard"
     "Mouse"
     "Background"
