@@ -4,7 +4,7 @@ The <code>Data</code> module provides methods to store global and persistent dat
     engine.data.score = 0
     engine.data.score += 10
     
-    
+    engine.data.sc
 
 @name Data
 @fieldOf Engine
