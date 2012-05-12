@@ -1,7 +1,7 @@
 ###*
 The <code>Data</code> module provides methods to store global and persistent data in the engine.
 
-@name Delay
+@name Data
 @fieldOf Engine
 @module
 @param {Object} I Instance variables
