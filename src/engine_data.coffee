@@ -15,3 +15,4 @@ Engine.Data = (I={}, self) ->
     I.data[key]
 
   set: (key, value) ->
+    I.data
