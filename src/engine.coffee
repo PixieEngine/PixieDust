@@ -286,6 +286,7 @@
 
     return self
 
-  Engine.defaultModules = ["Keyboard", "Mouse", "Background", "Delay", "GameState", "Selector", "Collision"]
+  Engine.defaultModules = [
+    "Keyboard", "Mouse", "Background", "Delay", "GameState", "Selector", "Collision"]
   (exports ? this)["Engine"] = Engine
 )()
