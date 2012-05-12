@@ -11,7 +11,7 @@ Engine.Data = (I={}, self) ->
   Object.reverseMerge I,
     data: {}
     
-  Object.defineProperty Number::, 'degrees',
+  Object.defineProperty self, 'data',
     get: -> 
       this * Math.TAU / 360
 
