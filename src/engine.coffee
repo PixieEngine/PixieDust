@@ -291,6 +291,9 @@
     "Mouse"
     "Background"
     "Delay"
-    "GameState", "Selector", "Collision"]
+    "GameState"
+    "Selector"
+    "Collision"
+    ]
   (exports ? this)["Engine"] = Engine
 )()
