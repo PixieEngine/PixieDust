@@ -12,4 +12,5 @@ Engine.Data = (I, self) ->
     data: {}
 
   get: ->
+
   set: ->
