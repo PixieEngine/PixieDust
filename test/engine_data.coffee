@@ -5,7 +5,6 @@ test "#data", 1, ->
     backgroundColor: false
 
   engine.data.score = 0
-  
-  engine.data.score 
+  engine.data.score += 50
 
 module()
