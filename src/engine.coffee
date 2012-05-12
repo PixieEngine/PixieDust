@@ -295,6 +295,7 @@
     "Selector"
     "Collision"
     "Tilemap"
+    "Levels"
   ]
 
   (exports ? this)["Engine"] = Engine
