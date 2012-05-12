@@ -10,6 +10,8 @@ The <code>Data</code> module provides methods to store global and persistent dat
 Engine.Data = (I={}, self) ->
   Object.reverseMerge I,
     data: {}
+    
+    
 
   get: (key) ->
     I.data[key]
