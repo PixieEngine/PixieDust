@@ -274,7 +274,7 @@
     self.include Bindable
 
     
-    modules = defaultModules.concat(I.includedModules)
+    modules = Engine.defaultModules.concat(I.includedModules)
     modules = modules.without([].concat(I.excludedModules))
 
     modules.each (moduleName) ->
