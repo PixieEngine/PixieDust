@@ -1,5 +1,5 @@
 ###*
-The <code>Data</code> module provides methods to store global and persistent .
+The <code>Data</code> module provides methods to store global and persistent data in the engine.
 
 @name Delay
 @fieldOf Engine
