@@ -8,7 +8,8 @@ The <code>Delay</code> module provides methods to trigger events after a number 
 @param {Object} self Reference to the engine
 ###
 Engine.Data = (I, self) ->
-  Object.reverse
+  Object.reverseMerge I,
+    data: {}
   
   get: ->
   set: ->
