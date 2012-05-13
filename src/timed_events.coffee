@@ -44,6 +44,7 @@ TimedEvents = (I={}, self) ->
       period: period
       lastFired: I.age
 
+  
   sendOrApply: (fn) ->
     if typeof fn is "function"
       fn.apply(self)
