@@ -43,4 +43,4 @@ TimedEvents = (I={}, self) ->
       period: period
       lastFired: I.age
 
-  sendOrApply: () ->
+  sendOrApply: (fn) ->
