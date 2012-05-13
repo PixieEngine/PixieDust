@@ -45,4 +45,4 @@ TimedEvents = (I={}, self) ->
 
   sendOrApply: (fn) ->
     if typeof fn is "function"
-      fn.ap()
+      fn.apply(self)
