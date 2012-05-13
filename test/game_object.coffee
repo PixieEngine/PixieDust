@@ -49,11 +49,6 @@ test "[event] update", 2, ->
 
   gameObject.trigger "update", 1
 
-  gameObject = GameObject
-    step: ->
-      ok true, 'Step event is called'
-
-  gameObject.update()
 
 test "elapsedTime", 1, ->
   gameObject = GameObject()
