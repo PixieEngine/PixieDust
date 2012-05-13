@@ -35,11 +35,11 @@ test "#closest", ->
 
 test "#sendOrApply", ->
   o = GameObject()
-  
+
   p = o.sendOrApply "position"
-  
+
   equals p.x, o.I.x
-  
+
 test "[event] create", 2, ->
   GameObject
     create: ->
