@@ -33,6 +33,8 @@ test "#closest", ->
 
   equals o.closest([other, other2]), other
 
+test "#"
+  
 test "[event] create", 2, ->
   GameObject
     create: ->
