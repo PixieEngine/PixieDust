@@ -14,7 +14,7 @@ TimedEvents = (I={}, self) ->
   self.bind "update", (elapsedTime) ->
     for event in I.everyEvents
       while (event.lastFired) < I.age + elapsedTime
-        event.fn()
+        sendOrApply(fn)
         event.lastFired += event.period
 
   ###*
