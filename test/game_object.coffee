@@ -43,7 +43,7 @@ test "[event] create", 2, ->
     create: 'ok(true, "created event is fired on create")'
   .create()
 
-test "[event] update", 2, ->
+test "[event] update", 1, ->
   gameObject = GameObject()
 
   gameObject.bind "update", ->
