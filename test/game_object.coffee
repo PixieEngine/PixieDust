@@ -43,7 +43,7 @@ test "[event] create", 2, ->
     create: 'ok(true, "created event is fired on create")'
   .create()
 
-test "[event] step", 2, ->
+test "[event] update", 2, ->
   gameObject = GameObject
     step: "equals(I.age, 0, 'Age should be 0 on first step')"
 
