@@ -33,7 +33,8 @@ test "#closest", ->
 
   equals o.closest([other, other2]), other
 
-test "#"
+test "#sendOrApply", ->
+  
   
 test "[event] create", 2, ->
   GameObject
