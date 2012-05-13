@@ -47,7 +47,7 @@ test "[event] update", 2, ->
   gameObject = GameObject()
   
   gameObject.bind "step", ->
-    equals(I.age, 0, 'Age should be 0 on first step')
+    equals(I.age, 0, 'Age should be 0 on first up')
 
   gameObject.trigger "update", 1
 
