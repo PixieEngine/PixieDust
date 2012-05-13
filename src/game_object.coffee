@@ -129,7 +129,7 @@ GameObject = (I) ->
     @methodOf GameObject#
     ###
     update: (elapsedTime) ->
-      #TODO Extract this I.active check out into an engine gameO
+      #TODO Extract this I.active check out into an engine gameObject remove processor or something
       if I.active
         self.trigger 'update', elapsedTime
 
