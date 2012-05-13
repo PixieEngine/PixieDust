@@ -46,3 +46,5 @@ TimedEvents = (I={}, self) ->
   sendOrApply: (fn) ->
     if typeof fn is "function"
       fn.apply(self)
+    else
+      sel
