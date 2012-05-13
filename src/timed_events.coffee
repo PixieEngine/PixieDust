@@ -16,7 +16,7 @@ TimedEvents = (I={}, self) ->
       {fn, period} = event
       while (event.lastFired) < I.age + elapsedTime
         sendOrApply(fn)
-        event.lastFired += event.period
+        event.lastFired += period
 
   ###*
   Execute <code>fn</code> every <code>n</code> frames.
