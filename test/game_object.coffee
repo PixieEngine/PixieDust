@@ -34,6 +34,7 @@ test "#closest", ->
   equals o.closest([other, other2]), other
 
 test "#sendOrApply", ->
+  o = GameObject()
   
   
 test "[event] create", 2, ->
