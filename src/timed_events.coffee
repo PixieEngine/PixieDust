@@ -46,7 +46,6 @@ TimedEvents = (I={}, self) ->
 
   # TODO: Move this into a more core module
   sendOrApply: (fn, args...) ->
-    debugger
     if typeof fn is "function"
       fn.apply(self, args)
     else
