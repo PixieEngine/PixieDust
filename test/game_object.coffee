@@ -44,11 +44,12 @@ test "[event] create", 2, ->
   .create()
 
 test "[event] update", 2, ->
-  gameObject = GameObject
+  gameObject = GameObject()
+  
+  
     update: "equals(I.age, 0, 'Age should be 0 on first step')"
 
   gameObject.trigger "update", 1
-
 
 test "elapsedTime", 1, ->
   gameObject = GameObject()
