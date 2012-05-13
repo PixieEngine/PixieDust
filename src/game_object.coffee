@@ -129,6 +129,7 @@ GameObject = (I) ->
     @methodOf GameObject#
     ###
     update: (elapsedTime) ->
+      #TODO Extract this I.actie
       if I.active
         self.trigger 'update', elapsedTime
 
