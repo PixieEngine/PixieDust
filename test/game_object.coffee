@@ -45,7 +45,7 @@ test "[event] create", 2, ->
 
 test "[event] update", 2, ->
   gameObject = GameObject
-    step: "equals(I.age, 0, 'Age should be 0 on first step')"
+    update: "equals(I.age, 0, 'Age should be 0 on first step')"
 
   gameObject.update()
 
