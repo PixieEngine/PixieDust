@@ -1051,9 +1051,17 @@ Core = function(I) {
       modules = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
       for (_i = 0, _len = modules.length; _i < _len; _i++) {
         Module = modules[_i];
+        if (typeof Module.isString === "function" ? Module.isString() : void 0) {
+          Module = Module.constantize();
+        }
         self.extend(Module(I, self));
       }
       return self;
+    },
+    send: function() {
+      var args, name;
+      name = arguments[0], args = 2 <= arguments.length ? __slice.call(arguments, 1) : [];
+      return self[name].apply(self, args);
     }
   };
 };
@@ -3093,12 +3101,14 @@ Return the class or constant named in this string.
 */
 
 String.prototype.constantize = function() {
-  if (this.match(/[A-Z][A-Za-z0-9]*/)) {
-    eval("var that = " + this);
-    return that;
-  } else {
-    throw "String#constantize: '" + this + "' is not a valid constant name.";
+  var item, target, _i, _len, _ref;
+  target = typeof exports !== "undefined" && exports !== null ? exports : window;
+  _ref = this.split('.');
+  for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+    item = _ref[_i];
+    target = target[item];
   }
+  return target;
 };
 
 /**
@@ -9045,10 +9055,7 @@ GameObject = function(I) {
     @methodOf GameObject#
     */
     update: function(elapsedTime) {
-      if (I.active) {
-        self.trigger('step', elapsedTime);
-        self.trigger('update', elapsedTime);
-      }
+      if (I.active) self.trigger('update', elapsedTime);
       return I.active;
     },
     /**
@@ -10161,7 +10168,8 @@ TimedEvents module
 @constructor
 @param {Object} I Instance variables
 */
-var TimedEvents;
+var TimedEvents,
+  __slice = Array.prototype.slice;
 
 TimedEvents = function(I, self) {
   if (I == null) I = {};
@@ -10169,17 +10177,18 @@ TimedEvents = function(I, self) {
     everyEvents: []
   });
   self.bind("update", function(elapsedTime) {
-    var event, _i, _len, _ref, _results;
+    var event, fn, period, _i, _len, _ref, _results;
     _ref = I.everyEvents;
     _results = [];
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
       event = _ref[_i];
+      fn = event.fn, period = event.period;
       _results.push((function() {
         var _results2;
         _results2 = [];
         while (event.lastFired < I.age + elapsedTime) {
-          event.fn();
-          _results2.push(event.lastFired += event.period);
+          self.sendOrApply(fn);
+          _results2.push(event.lastFired += period);
         }
         return _results2;
       })());
@@ -10212,6 +10221,15 @@ TimedEvents = function(I, self) {
         period: period,
         lastFired: I.age
       });
+    },
+    sendOrApply: function() {
+      var args, fn;
+      fn = arguments[0], args = 2 <= arguments.length ? __slice.call(arguments, 1) : [];
+      if (typeof fn === "function") {
+        return fn.apply(self, args);
+      } else {
+        return self.send.apply(self, [fn].concat(__slice.call(args)));
+      }
     }
   };
 };
