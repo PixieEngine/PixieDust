@@ -38,7 +38,7 @@ test "#sendOrApply", ->
   
   p = o.sendOrApply "position"
   
-  equals p.x
+  equals p.x, o.I.x
   
 test "[event] create", 2, ->
   GameObject
