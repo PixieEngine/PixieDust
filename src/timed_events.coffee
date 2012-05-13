@@ -45,7 +45,7 @@ TimedEvents = (I={}, self) ->
       lastFired: I.age
 
   # TODO: Move this into a more core module
-  sendOrApply: (fn) ->
+  sendOrApply: (fn, args...) ->
     if typeof fn is "function"
       fn.apply(self)
     else
