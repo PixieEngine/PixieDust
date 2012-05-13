@@ -38,6 +38,8 @@ test "#sendOrApply", ->
   
   p = o.sendOrApply "position"
   
+  equals p.x
+  
 test "[event] create", 2, ->
   GameObject
     create: ->
