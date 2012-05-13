@@ -47,4 +47,4 @@ TimedEvents = (I={}, self) ->
     if typeof fn is "function"
       fn.apply(self)
     else
-      self.send()
+      self.send(fn)
