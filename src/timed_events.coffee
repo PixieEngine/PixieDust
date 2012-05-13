@@ -44,4 +44,4 @@ TimedEvents = (I={}, self) ->
       lastFired: I.age
 
   sendOrApply: (fn) ->
-    if t
+    if typeof fn is 
