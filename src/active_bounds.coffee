@@ -1,9 +1,5 @@
 ActiveBounds = (I={}, self) ->
   Object.reverseMerge I,
-    x: 0
-    y: 0
-    width: 8
-    height: 8
     activeBounds: Rectangle
       x: 0
       y: 0
