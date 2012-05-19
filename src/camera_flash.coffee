@@ -35,21 +35,19 @@ Camera.Flash = (I, self) ->
   A convenient way to set the flash effect instance variables. Alternatively, you can modify them by hand, but
   using Camera#flash is the suggested approach.
 
-  <code><pre>
-  camera.flash()
-  # => Sets the flash effect variables to their default state. This will cause a white flash that will turn transparent in the next 12 frames.
-
-  camera.flash
-    color: 'green'
-    duration: 30
-  # => This flash effect will start off green and fade to transparent over 30 frames.
-
-  camera.flash
-    color: Color(255, 0, 0, 0)
-    duration: 20
-    targetAlpha: 1
-  # => This flash effect will start off transparent and move toward red over 20 frames 
-  </pre></code>  
+      camera.flash()
+      # => Sets the flash effect variables to their default state. This will cause a white flash that will turn transparent in the next 12 frames.
+    
+      camera.flash
+        color: 'green'
+        duration: 30
+      # => This flash effect will start off green and fade to transparent over 30 frames.
+    
+      camera.flash
+        color: Color(255, 0, 0, 0)
+        duration: 20
+        targetAlpha: 1
+      # => This flash effect will start off transparent and move toward red over 20 frames 
 
   @name flash
   @methodOf Camera#

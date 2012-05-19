@@ -15,10 +15,8 @@ TextScreen = (I={}) ->
     ###*
     Draw center aligned text at the given y position.
   
-    <code><pre>
-    screen = TextScreen()
-    screen.centerText canvas, 'Centering text is easy'
-    </pre></code>
+        screen = TextScreen()
+        screen.centerText canvas, 'Centering text is easy'
   
     @name centerText
     @methodOf TextScreen#

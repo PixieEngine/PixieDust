@@ -18,18 +18,16 @@ Clampable = (I={}, self) ->
   ###*
   Keep an objects attributes within a given range.
 
-  <code><pre>
-  # Player's health will be within [0, 100] at the end of every update
-  player.clamp
-    health:
-      min: 0
-      max: 100
-
-  # Score can only be positive
-  player.clamp
-    score:
-      min: 0
-  </pre></code>
+      # Player's health will be within [0, 100] at the end of every update
+      player.clamp
+        health:
+          min: 0
+          max: 100
+    
+      # Score can only be positive
+      player.clamp
+        score:
+          min: 0
 
   @name clamp
   @methodOf Clampable#

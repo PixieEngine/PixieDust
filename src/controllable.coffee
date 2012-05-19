@@ -2,31 +2,29 @@
 The Controllable module adds simple movement
 when up, down, left, or right are held.
 
-<code><pre>
-  # create a player and include Controllable
-  player = GameObject
-    width: 5
-    height: 17
-    x: 15
-    y: 30
-    speed:  2
-
-  player.include Controllable
-
-  # hold the left arrow key, then
-  # update the player
-  player.update()
-
-  # the player is moved left according to his speed
-  player.I.x
-  # => 13
-
-  # We keep track of the direction the object is
-  # facing in case you need that (eg. for attack direction)
-  player.I.facing
-  # => player.I.facing 
-  # => Point(-1, 0)
-</pre></code>
+      # create a player and include Controllable
+      player = GameObject
+        width: 5
+        height: 17
+        x: 15
+        y: 30
+        speed:  2
+    
+      player.include Controllable
+    
+      # hold the left arrow key, then
+      # update the player
+      player.update()
+    
+      # the player is moved left according to his speed
+      player.I.x
+      # => 13
+    
+      # We keep track of the direction the object is
+      # facing in case you need that (eg. for attack direction)
+      player.I.facing
+      # => player.I.facing 
+      # => Point(-1, 0)
 
 @name Controllable
 @module

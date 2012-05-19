@@ -28,9 +28,7 @@ Engine.Levels = (I, self) ->
   ###*
   Load map for the next level.
 
-  <code><pre>
-  engine.nextLevel()
-  </pre></code>
+      engine.nextLevel()
 
   @name nextLevel
   @methodOf Engine#
@@ -47,9 +45,7 @@ Engine.Levels = (I, self) ->
   ###*
   Load map named <code>level</code>
 
-  <code><pre>
-  engine.goToLevel 'bossFight'
-  </pre></code>
+      engine.goToLevel 'bossFight'
 
   @name goToLevel
   @methodOf Engine#
@@ -61,9 +57,7 @@ Engine.Levels = (I, self) ->
   ###*
   Reload the current level. Useful for retrying after a player dies.
 
-  <code><pre>
-  engine.reloadLevel()
-  </pre></code>
+      engine.reloadLevel()
 
   @name reloadLevel
   @methodOf Engine#

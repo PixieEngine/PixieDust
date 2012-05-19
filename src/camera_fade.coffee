@@ -29,13 +29,11 @@ Camera.Fade = (I, self) ->
   A convenient way to set the flash effect instance variables. This provides a shorthand for fading the screen in 
   from a given color over a specified duration.
 
-  <code><pre>
-  engine.fadeIn()
-  # => Sets the effect variables to their default state. This will the screen to go from black to transparent over the next 30 frames.
-
-  engine.fadeIn('blue', 50)
-  # => This effect will start off blue and fade to transparent over 50 frames.
-  </pre></code>  
+      engine.fadeIn()
+      # => Sets the effect variables to their default state. This will the screen to go from black to transparent over the next 30 frames.
+    
+      engine.fadeIn('blue', 50)
+      # => This effect will start off blue and fade to transparent over 50 frames.
 
   @name fadeIn
   @methodOf Camera#
@@ -51,13 +49,11 @@ Camera.Fade = (I, self) ->
   A convenient way to set the flash effect instance variables. This provides a shorthand for fading 
   the screen to a given color over a specified duration.
 
-  <code><pre>
-  camera.fadeOut()
-  # => Sets the effect variables to their default state. This will the screen to fade from ransparent to black over the next 30 frames.
-
-  camera.fadeOut('blue', 50)
-  # => This effect will start off transparent and change to blue over 50 frames.
-  </pre></code>  
+      camera.fadeOut()
+      # => Sets the effect variables to their default state. This will the screen to fade from ransparent to black over the next 30 frames.
+    
+      camera.fadeOut('blue', 50)
+      # => This effect will start off transparent and change to blue over 50 frames.
 
   @name fadeOut
   @methodOf Camera#

@@ -2,34 +2,32 @@
 The Metered module provides a simple drop-in
 meter ui to track arbitrary numeric attributes.
 
-<code><pre>
-player = GameObject
-  health: 100
-  maxHealth: 100
-
-player.include Metered
-
-enemy = GameObject
-  health: 500
-
-enemy.include Metered
-
-someOtherObject = GameObject
-
-someOtherObject.include Metered
-
-player.meter 'health'
-# => Sets up a health meter that will be drawn during the player overlay event
-
-enemy.meter 'health'
-# => Sets up a health meter that will be drawn during the enemy overlay event. 
-# Since maxHealth wasn't provided, it is set to the value of I.health (500)
-
-someOtherObject.meter 'turbo'
-# => Sets up a turbo meter that will be drawn during the someOtherObject overlay event. 
-# Since neither turbo maxTurbo were provided, they are both set to 100.
-
-</pre></code>
+    player = GameObject
+      health: 100
+      maxHealth: 100
+    
+    player.include Metered
+    
+    enemy = GameObject
+      health: 500
+    
+    enemy.include Metered
+    
+    someOtherObject = GameObject
+    
+    someOtherObject.include Metered
+    
+    player.meter 'health'
+    # => Sets up a health meter that will be drawn during the player overlay event
+    
+    enemy.meter 'health'
+    # => Sets up a health meter that will be drawn during the enemy overlay event. 
+    # Since maxHealth wasn't provided, it is set to the value of I.health (500)
+    
+    someOtherObject.meter 'turbo'
+    # => Sets up a turbo meter that will be drawn during the someOtherObject overlay event. 
+    # Since neither turbo maxTurbo were provided, they are both set to 100.
+    
 
 Metered module
 @name Metered
@@ -90,24 +88,22 @@ Metered = (I={}, self) ->
   ###*
   Configures a meter to be drawn each overlay event.
 
-  <code><pre>
-  player = GameObject
-
-  player.include Metered      
-
-  player.meter 'health',
-    border
-      color: 'brown'
-      radius: 3
-    color: 'pink'
-    height: 20
-    x: 5
-    y: 5
-    show: true
-    width: 150
-
-  # => Sets up a health meter, using all the configuration options
-  </pre></code>
+      player = GameObject
+    
+      player.include Metered      
+    
+      player.meter 'health',
+        border
+          color: 'brown'
+          radius: 3
+        color: 'pink'
+        height: 20
+        x: 5
+        y: 5
+        show: true
+        width: 150
+    
+      # => Sets up a health meter, using all the configuration options
 
   @name meter
   @methodOf Metered#
@@ -151,18 +147,16 @@ Metered = (I={}, self) ->
   ###*
   Shows the named meter
 
-  <code><pre>
-  player = GameObject
-
-  player.include Metered      
-
-  # creates a health meter but disables visibility
-  player.meter 'health'
-    show: false
-
-  # enables visibility for the meter named 'health'
-  player.showMeter 'health'
-  </pre></code>
+      player = GameObject
+    
+      player.include Metered      
+    
+      # creates a health meter but disables visibility
+      player.meter 'health'
+        show: false
+    
+      # enables visibility for the meter named 'health'
+      player.showMeter 'health'
 
   @name showMeter
   @methodOf Metered#
@@ -174,17 +168,15 @@ Metered = (I={}, self) ->
   ###*
   Hides the named meter
 
-  <code><pre>
-  player = GameObject
-
-  player.include Metered      
-
-  # creates a health meter
-  player.meter 'health'
-
-  # disables visibility for the meter named 'health'
-  player.hideMeter 'health'
-  </pre></code>
+      player = GameObject
+    
+      player.include Metered      
+    
+      # creates a health meter
+      player.meter 'health'
+    
+      # disables visibility for the meter named 'health'
+      player.hideMeter 'health'
 
   @name hideMeter
   @methodOf Metered#
@@ -196,17 +188,15 @@ Metered = (I={}, self) ->
   ###*
   Toggles visibility of the named meter
 
-  <code><pre>
-  player = GameObject
-
-  player.include Metered      
-
-  # creates a health meter
-  player.meter 'health'
-
-  # toggles visibility for the meter named 'health'
-  player.toggleMeter 'health'
-  </pre></code>
+      player = GameObject
+    
+      player.include Metered      
+    
+      # creates a health meter
+      player.meter 'health'
+    
+      # toggles visibility for the meter named 'health'
+      player.toggleMeter 'health'
 
   @name toggleMeter
   @methodOf Metered#

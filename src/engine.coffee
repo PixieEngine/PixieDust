@@ -74,14 +74,12 @@
   ###*
   Called after the engine draws on the canvas. The current camera transform is applied.
 
-  <code><pre>
-  engine.bind "draw", (canvas) ->
-    # print some directions for the player
-    canvas.drawText
-      text: "Go this way =>"
-      x: 200
-      y: 200 
-  </pre></code>
+      engine.bind "draw", (canvas) ->
+        # print some directions for the player
+        canvas.drawText
+          text: "Go this way =>"
+          x: 200
+          y: 200 
 
   @name draw
   @methodOf Engine#
@@ -95,18 +93,16 @@
   The current camera transform is not applied. This is great for
   adding overlays.
 
-  <code><pre>
-  engine.bind "overlay", (canvas) ->
-    # print the player's health. This will be
-    # positioned absolutely according to the viewport.
-    canvas.drawText
-      text: "HEALTH:"
-      position: Point(20, 20)
-
-    canvas.drawText
-      text: player.health()
-      position: Point(50, 20)
-  </pre></code>
+      engine.bind "overlay", (canvas) ->
+        # print the player's health. This will be
+        # positioned absolutely according to the viewport.
+        canvas.drawText
+          text: "HEALTH:"
+          position: Point(20, 20)
+    
+        canvas.drawText
+          text: player.health()
+          position: Point(50, 20)
 
   @name overlay
   @methodOf Engine#
@@ -160,9 +156,7 @@
       ###*
       Start the game simulation.
 
-      <code><pre>
-      engine.start()
-      </pre></code>
+          engine.start()
 
       @methodOf Engine#
       @name start
@@ -175,9 +169,7 @@
       ###*
       Stop the simulation.
 
-      <code><pre>
-      engine.stop()
-      </pre></code>
+          engine.stop()
 
       @methodOf Engine#
       @name stop
@@ -188,9 +180,7 @@
       ###*
       Pause the game and step through 1 update of the engine.
 
-      <code><pre>
-      engine.frameAdvance()
-      </pre></code>
+          engine.frameAdvance()
 
       @methodOf Engine#
       @name frameAdvance
@@ -204,9 +194,7 @@
       ###*
       Resume the game.
 
-      <code><pre>
-      engine.play()
-      </pre></code>
+          engine.play()
 
       @methodOf Engine#
       @name play
@@ -217,9 +205,7 @@
       ###*
       Toggle the paused state of the simulation.
 
-      <code><pre>
-      engine.pause()
-      </pre></code>
+          engine.pause()
 
       @methodOf Engine#
       @name pause
@@ -234,17 +220,15 @@
       ###*
       Query the engine to see if it is paused.
 
-      <code><pre>
-      engine.pause()
-
-      engine.paused()
-      # true
-
-      engine.play()
-
-      engine.paused()
-      # false
-      </pre></code>
+          engine.pause()
+    
+          engine.paused()
+          # true
+    
+          engine.play()
+    
+          engine.paused()
+          # false
 
       @methodOf Engine#
       @name paused
@@ -255,9 +239,7 @@
       ###*
       Change the framerate of the game. The default framerate is 30 fps.
 
-      <code><pre>
-      engine.setFramerate(60)
-      </pre></code>
+          engine.setFramerate(60)
 
       @methodOf Engine#
       @name setFramerate

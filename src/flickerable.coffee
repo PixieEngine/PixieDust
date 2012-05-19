@@ -31,19 +31,17 @@ Flickerable = (I={}, self) ->
   A convenient way to set the flicker instance variables on a sprite. You can modify the
   instance variables by hand but the suggested way to do it is through this method.
 
-  <code><pre>
-  player = GameObject()
-
-  player.include(Flickerable)
-
-  player.flicker()
-  # => This causes the sprite to flicker between full opacity 
-  # => and 50% opacity every 3 frames for 30 frames
-
-  player.flicker(90, 5, 0.3)
-  # => This causes the sprite to flicker between full opacity
-  # => and 30% opacity every 5 frames for 90 frames
-  </pre></code>
+      player = GameObject()
+    
+      player.include(Flickerable)
+    
+      player.flicker()
+      # => This causes the sprite to flicker between full opacity 
+      # => and 50% opacity every 3 frames for 30 frames
+    
+      player.flicker(90, 5, 0.3)
+      # => This causes the sprite to flicker between full opacity
+      # => and 30% opacity every 5 frames for 90 frames
 
   @name flicker
   @methodOf Flickerable#

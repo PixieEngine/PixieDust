@@ -3,24 +3,22 @@ The Bounded module is used to provide basic data about the
 location and dimensions of the including object. This module is included
 by default in <code>GameObject</code>.
 
-<code><pre>
-player = Core
-  x: 10
-  y: 50
-  width: 20
-  height: 20
-  other: "stuff"
-  more: "properties"
-
-player.position()
-# => Uncaught TypeError: Object has no method 'position'
-
-player.include(Bounded)
-
-# now player has all the methods provided by this module
-player.position()
-# => {x: 10, y: 50}
-</pre></code>
+    player = Core
+      x: 10
+      y: 50
+      width: 20
+      height: 20
+      other: "stuff"
+      more: "properties"
+    
+    player.position()
+    # => Uncaught TypeError: Object has no method 'position'
+    
+    player.include(Bounded)
+    
+    # now player has all the methods provided by this module
+    player.position()
+    # => {x: 10, y: 50}
 
 @see GameObject
 
@@ -64,24 +62,22 @@ Bounded = (I={}, self) ->
   In order for this to work, `otherObj` must have a 
   position method.
 
-  <code><pre>
-  player = GameObject
-    x: 50
-    y: 50
-    width: 10
-    height: 10
-  
-  player.include Bounded
-  
-  enemy = GameObject
-    x: 110
-    y: 120
-    width: 7
-    height: 20
-    
-  player.distance(enemy)
-  # => 92.19544457292888
-  </pre></code>
+      player = GameObject
+        x: 50
+        y: 50
+        width: 10
+        height: 10
+      
+      player.include Bounded
+      
+      enemy = GameObject
+        x: 110
+        y: 120
+        width: 7
+        height: 20
+        
+      player.distance(enemy)
+      # => 92.19544457292888
 
   @name distance
   @methodOf Bounded#
@@ -95,16 +91,14 @@ Bounded = (I={}, self) ->
   The position of this game object. By default it is the top left point.
   Redefining the center method will change the relative position.
 
-  <code><pre>
-  player = Core
-    x: 50
-    y: 40
-
-  player.include(Bounded)      
-
-  player.position()
-  # => {x: 50, y: 40}
-  </pre></code>
+      player = Core
+        x: 50
+        y: 40
+    
+      player.include(Bounded)      
+    
+      player.position()
+      # => {x: 50, y: 40}
 
   @name position
   @methodOf Bounded#
@@ -127,18 +121,16 @@ Bounded = (I={}, self) ->
   Does a check to see if this object is overlapping
   with the bounds passed in.
 
-  <code><pre>
-  player = Core
-    x: 4
-    y: 6
-    width: 20
-    height: 20
-
-  player.include(Bounded)  
-
-  player.collides({x: 5, y: 7, width: 20, height: 20})
-  # => true
-  </pre></code>
+      player = Core
+        x: 4
+        y: 6
+        width: 20
+        height: 20
+    
+      player.include(Bounded)  
+    
+      player.collides({x: 5, y: 7, width: 20, height: 20})
+      # => true
 
   @name collides
   @methodOf Bounded#
@@ -152,24 +144,22 @@ Bounded = (I={}, self) ->
   The area of the bounds is reduced if collision margin is positive
   and increased if collision margin is negative.
 
-  <code><pre>
-  player = Core
-    collisionMargin: 
-      x: -2
-      y: -4
-    x: 50
-    y: 50
-    width: 20
-    height: 20
-
-  player.include(Bounded)
-
-  player.collisionBounds()
-  # => {x: 38, y: 36, height: 28, width: 24}
-
-  player.collisionBounds(10, 10)
-  # => {x: 48, y: 46, height: 28, width: 24}
-  </pre></code>
+      player = Core
+        collisionMargin: 
+          x: -2
+          y: -4
+        x: 50
+        y: 50
+        width: 20
+        height: 20
+    
+      player.include(Bounded)
+    
+      player.collisionBounds()
+      # => {x: 38, y: 36, height: 28, width: 24}
+    
+      player.collisionBounds(10, 10)
+      # => {x: 48, y: 46, height: 28, width: 24}
 
   @name collisionBounds
   @methodOf Bounded#
@@ -190,21 +180,19 @@ Bounded = (I={}, self) ->
   ###*
   Returns infomation about the location of the object and its dimensions with optional offsets.
 
-  <code><pre>
-  player = Core
-    x: 3
-    y: 6
-    width: 2
-    height: 2
-
-  player.include(Bounded)
-
-  player.bounds()
-  # => {x: 3, y: 6, width: 2, height: 2}
-
-  player.bounds(7, 4)
-  # => {x: 10, y: 10, width: 2, height: 2}   
-  </pre></code>
+      player = Core
+        x: 3
+        y: 6
+        width: 2
+        height: 2
+    
+      player.include(Bounded)
+    
+      player.bounds()
+      # => {x: 3, y: 6, width: 2, height: 2}
+    
+      player.bounds(7, 4)
+      # => {x: 10, y: 10, width: 2, height: 2}   
 
   @name bounds
   @methodOf Bounded#
@@ -223,18 +211,16 @@ Bounded = (I={}, self) ->
   The centeredBounds method returns infomation about the center
   of the object along with the midpoint of the width and height.
 
-  <code><pre>
-  player = Core
-    x: 3
-    y: 6
-    width: 2
-    height: 2
-
-  player.include(Bounded)
-
-  player.centeredBounds()
-  # => {x: 4, y: 7, xw: 1, yw: 1}
-  </pre></code>
+      player = Core
+        x: 3
+        y: 6
+        width: 2
+        height: 2
+    
+      player.include(Bounded)
+    
+      player.centeredBounds()
+      # => {x: 4, y: 7, xw: 1, yw: 1}
 
   @name centeredBounds
   @methodOf Bounded#
@@ -251,18 +237,16 @@ Bounded = (I={}, self) ->
   The center method returns the {@link Point} that is
   the center of the object.
 
-  <code><pre>
-  player = Core
-    x: 50
-    y: 40
-    width: 10
-    height: 30
-
-  player.include(Bounded)  
-
-  player.center()
-  # => {x: 30, y: 35}
-  </pre></code>
+      player = Core
+        x: 50
+        y: 40
+        width: 10
+        height: 30
+    
+      player.include(Bounded)  
+    
+      player.center()
+      # => {x: 30, y: 35}
 
   @name center
   @methodOf Bounded#
@@ -275,18 +259,16 @@ Bounded = (I={}, self) ->
   Return the circular bounds of the object. The circle is
   centered at the midpoint of the object.
 
-  <code><pre>
-  player = Core
-    radius: 5
-    x: 50
-    y: 50
-    other: "stuff"
-
-  player.include(Bounded)
-
-  player.circle()
-  # => {radius: 5, x: 50, y: 50}
-  </pre></code>
+      player = Core
+        radius: 5
+        x: 50
+        y: 50
+        other: "stuff"
+    
+      player.include(Bounded)
+    
+      player.circle()
+      # => {radius: 5, x: 50, y: 50}
 
   @name circle
   @methodOf Bounded#

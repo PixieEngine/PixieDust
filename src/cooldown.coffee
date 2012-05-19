@@ -2,29 +2,25 @@
 The Cooldown module provides a declarative way to manage cooldowns on
 GameObject's properties.
 
-<code><pre>
-# Health regeneration
-player = GameObject
-  health: 50
+    # Health regeneration
+    player = GameObject
+      health: 50
+    
+    player.cooldown "health",
+      target: 100
+    
+    player.update(1)
 
-player.cooldown "health",
-  target: 100
-
-player.update(1)
-</pre></code>
-
-<code><pre>
-# Shoot Timeout
-player = GameObject()
-
-player.cooldown "shootTimer"
-
-player.I.shootTimer = 10 # => Pew! Pew!
-
-player.update(1)
-
-player.I.shootTimer # => 9
-</pre></code>
+    # Shoot Timeout
+    player = GameObject()
+    
+    player.cooldown "shootTimer"
+    
+    player.I.shootTimer = 10 # => Pew! Pew!
+    
+    player.update(1)
+    
+    player.I.shootTimer # => 9
 
 @name Cooldown
 @module

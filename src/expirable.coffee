@@ -5,23 +5,21 @@ specified the object will have an unlimited duration.
 
 This module is included by default in <code>GameObjects</code>
 
-<code><pre>
-enemy = GameObject
-  x: 50
-  y: 30
-  duration: 5
-
-enemy.include Expirable
-
-enemy.I.active
-# => true
-
-5.times ->
-  enemy.update(1)
-
-enemy.I.active
-# => false
-</pre></code>
+    enemy = GameObject
+      x: 50
+      y: 30
+      duration: 5
+    
+    enemy.include Expirable
+    
+    enemy.I.active
+    # => true
+    
+    5.times ->
+      enemy.update(1)
+    
+    enemy.I.active
+    # => false
 
 @name Expirable
 @module

@@ -14,37 +14,35 @@
     ###*
     Collision holds many useful class methods for checking geometric overlap of various objects.
 
-    <code><pre>
-    player = engine.add
-      class: "Player"
-      x: 0
-      y: 0
-      width: 10
-      height: 10
-
-    enemy = engine.add
-      class: "Enemy"
-      x: 5
-      y: 5
-      width: 10
-      height: 10
-
-    enemy2 = engine.add
-      class: "Enemy"
-      x: -5
-      y: -5
-      width: 10
-      height: 10
-
-    Collision.collide(player, enemy, (p, e) -> ...)
-    # => callback is called once
-
-    Collision.collide(player, [enemy, enemy2], (p, e) -> ...)
-    # => callback is called twice
-
-    Collision.collide("Player", "Enemy", (p, e) -> ...)
-    # => callback is also called twice
-    </pre></code>
+        player = engine.add
+          class: "Player"
+          x: 0
+          y: 0
+          width: 10
+          height: 10
+    
+        enemy = engine.add
+          class: "Enemy"
+          x: 5
+          y: 5
+          width: 10
+          height: 10
+    
+        enemy2 = engine.add
+          class: "Enemy"
+          x: -5
+          y: -5
+          width: 10
+          height: 10
+    
+        Collision.collide(player, enemy, (p, e) -> ...)
+        # => callback is called once
+    
+        Collision.collide(player, [enemy, enemy2], (p, e) -> ...)
+        # => callback is called twice
+    
+        Collision.collide("Player", "Enemy", (p, e) -> ...)
+        # => callback is also called twice
 
     @name collide
     @methodOf Collision
@@ -74,25 +72,23 @@
     Takes two bounds objects and returns true if they collide (overlap), false otherwise.
     Bounds objects have x, y, width and height properties.
 
-    <code><pre>
-    player = GameObject
-      x: 0
-      y: 0
-      width: 10
-      height: 10
-
-    enemy = GameObject
-      x: 5
-      y: 5
-      width: 10
-      height: 10
-
-    Collision.rectangular(player, enemy)
-    # => true
-
-    Collision.rectangular(player, {x: 50, y: 40, width: 30, height: 30})
-    # => false
-    </pre></code>
+        player = GameObject
+          x: 0
+          y: 0
+          width: 10
+          height: 10
+    
+        enemy = GameObject
+          x: 5
+          y: 5
+          width: 10
+          height: 10
+    
+        Collision.rectangular(player, enemy)
+        # => true
+    
+        Collision.rectangular(player, {x: 50, y: 40, width: 30, height: 30})
+        # => false
 
     @name rectangular
     @methodOf Collision
@@ -110,28 +106,26 @@
     Takes two circle objects and returns true if they collide (overlap), false otherwise.
     Circle objects have x, y, and radius.
 
-    <code><pre>
-    player = GameObject
-      x: 5
-      y: 5
-      radius: 10
-
-    enemy = GameObject
-      x: 10
-      y: 10
-      radius: 10
-
-    farEnemy = GameObject
-      x: 500
-      y: 500
-      radius: 30
-
-    Collision.circular(player, enemy)
-    # => true
-
-    Collision.circular(player, farEnemy)
-    # => false
-    </pre></code>
+        player = GameObject
+          x: 5
+          y: 5
+          radius: 10
+    
+        enemy = GameObject
+          x: 10
+          y: 10
+          radius: 10
+    
+        farEnemy = GameObject
+          x: 500
+          y: 500
+          radius: 30
+    
+        Collision.circular(player, enemy)
+        # => true
+    
+        Collision.circular(player, farEnemy)
+        # => false
 
     @name circular
     @methodOf Collision
@@ -149,16 +143,14 @@
     ###*
     Detects whether a line intersects a circle.
 
-    <code><pre>
-    circle = engine.add
-      class: "circle"
-      x: 50
-      y: 50
-      radius: 10
-
-    Collision.rayCircle(Point(0, 0), Point(1, 0), circle)
-    # => true
-    </pre></code>
+        circle = engine.add
+          class: "circle"
+          x: 50
+          y: 50
+          radius: 10
+    
+        Collision.rayCircle(Point(0, 0), Point(1, 0), circle)
+        # => true
 
     @name rayCircle
     @methodOf Collision
@@ -195,17 +187,15 @@
     ###*
     Detects whether a line intersects a rectangle.
 
-    <code><pre>
-    rect = engine.add
-      class: "circle"
-      x: 50
-      y: 50
-      width: 20
-      height: 20
-
-    Collision.rayRectangle(Point(0, 0), Point(1, 0), rect)
-    # => true
-    </pre></code>
+        rect = engine.add
+          class: "circle"
+          x: 50
+          y: 50
+          width: 20
+          height: 20
+    
+        Collision.rayRectangle(Point(0, 0), Point(1, 0), rect)
+        # => true
 
     @name rayRectangle
     @methodOf Collision

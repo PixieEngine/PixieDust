@@ -14,10 +14,8 @@ Helps access the assets in your game.
     ###*
     Return the url for a particular asset.
 
-    <code><pre>
-    ResourceLoader.urlFor("images", "player")
-    # => This returns the url for the file "player.png" in your images directory.
-    </pre></code>
+        ResourceLoader.urlFor("images", "player")
+        # => This returns the url for the file "player.png" in your images directory.
 
     @name urlFor
     @methodOf ResourceLoader#

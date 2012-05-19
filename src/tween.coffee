@@ -26,24 +26,20 @@ Tween = (I={}, self) ->
   ###*
   Modify the object's properties over time.
 
-  <code><pre>
-  player = GameObject()
+      player = GameObject()
+    
+      player.tween 30,
+        x: 50
+        y: 50
+        easing: "quadratic"
 
-  player.tween 30,
-    x: 50
-    y: 50
-    easing: "quadratic"
-  </pre></code>
-
-  <code><pre>
-  player = GameObject()
-
-  player.tween 30,
-    x: 150
-    y: 150
-    complete: ->
-      player.dance()
-  </pre></code>
+      player = GameObject()
+    
+      player.tween 30,
+        x: 150
+        y: 150
+        complete: ->
+          player.dance()
 
   @name tween
   @methodOf Tween#

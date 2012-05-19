@@ -1,9 +1,9 @@
-JavaScript utilities for developing games
-=========================================
+Modular JavaScript Framework HTML5 Game Development
+===================================================
 
 Provides important libraries for developing JavaScript games in the browser.
 
-Defines the main PixieEngine GameObject and includes a variety of mixins to easily augment them with behaviors.
+Defines the main PixieEngine GameObject and includes mixins to easily augment their behavior.
 
 Mixins
 - Bounded: access the GameObject's bounding box. Useful to pass into collision code.
