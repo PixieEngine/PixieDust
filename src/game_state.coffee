@@ -9,17 +9,15 @@ GameState = (I={}) ->
     The add method creates and adds an object to the game world. Two
     other events are triggered around this one: beforeAdd and afterAdd.
 
-    <code><pre>
-    # you can add arbitrary entityData and
-    # the engine will make it into a GameObject
-    engine.add 
-      x: 50
-      y: 30
-      color: "red"
-
-    player = engine.add
-      class: "Player"
-    </pre></code>
+        # you can add arbitrary entityData and
+        # the engine will make it into a GameObject
+        engine.add 
+          x: 50
+          y: 30
+          color: "red"
+    
+        player = engine.add
+          class: "Player"
 
     @name add
     @methodOf Engine#

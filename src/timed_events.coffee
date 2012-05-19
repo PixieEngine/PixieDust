@@ -21,15 +21,13 @@ TimedEvents = (I={}, self) ->
   ###*
   Execute <code>fn</code> every <code>n</code> frames.
 
-  <code><pre>
-  player = GameObject()
-  
-  player.include TimedEvents
-  
-  # doSomething is called every 4 seconds
-  player.every 4, ->
-    doSomething()
-  </pre></code>
+      player = GameObject()
+      
+      player.include TimedEvents
+      
+      # doSomething is called every 4 seconds
+      player.every 4, ->
+        doSomething()
 
   @name every
   @methodOf TimedEvents#

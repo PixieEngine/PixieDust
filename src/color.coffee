@@ -156,7 +156,6 @@
       color: eval(color)
       text: color
       y: 20 * (index + 1)  
-  </pre></code>
 
   @name Color
   @param {Array|Number|String|Color} args... An Array, r, g, b values, 
@@ -187,22 +186,20 @@
     ###*
     Returns the rgba color channels in an array.
 
-    <code><pre>
-    transparent =  Color()
-
-    transparent.channels()
-    # => [0, 0, 0, 0]
-
-    red = Color("#FF0000")
-
-    red.channels()
-    # => [255, 0, 0, 1]
-
-    rgb = Color(200, 34, 2)
-
-    rgb.channels()
-    # => [200, 34, 2, 1]
-    </pre></code>
+        transparent =  Color()
+    
+        transparent.channels()
+        # => [0, 0, 0, 0]
+    
+        red = Color("#FF0000")
+    
+        red.channels()
+        # => [255, 0, 0, 1]
+    
+        rgb = Color(200, 34, 2)
+    
+        rgb.channels()
+        # => [200, 34, 2, 1]
 
     @name channels
     @methodOf Color#
@@ -228,7 +225,6 @@
         y: 20 + (60 * index)
         width: 60
         height: 60         
-    </pre></code>
 
     @name complement
     @methodOf Color#
@@ -241,15 +237,13 @@
     ###*
     Modifies the calling color to make it the complement of its previous value.
 
-    <code><pre>
-    red = Color(255, 0, 0)
-
-    # modifies red in place to make it into cyan
-    red.complement$()
-
-    red.toString()
-    # => 'rgba(0, 255, 255, 1)'
-    </pre></code>
+        red = Color(255, 0, 0)
+    
+        # modifies red in place to make it into cyan
+        red.complement$()
+    
+        red.toString()
+        # => 'rgba(0, 255, 255, 1)'
 
     @name complement$
     @methodOf Color#
@@ -262,17 +256,15 @@
     ###*
     A copy of the calling color.
 
-    <code><pre>
-    color = Color(0, 100, 200)
-
-    copy = color.copy()
-
-    color == copy
-    # => false
-
-    color.equal(copy)
-    # => true
-    </pre></code>
+        color = Color(0, 100, 200)
+    
+        copy = color.copy()
+    
+        color == copy
+        # => false
+    
+        color.equal(copy)
+        # => true
 
     @name copy
     @methodOf Color#
@@ -298,7 +290,6 @@
         y: 20 + (60 * index)
         width: 60
         height: 60         
-    </pre></code>
 
     @name darken
     @methodOf Color#
@@ -312,15 +303,13 @@
     ###*
     Modifies the color so that it is darkened by `amount` (Lightness of the color ranges from 0 to 1).
 
-    <code><pre>
-    green = Color(0, 255, 0)
-
-    # Modifies green to be darkGreen
-    green.darken$(0.3)
-
-    green.toString()
-    # => 'rgba(0, 102, 0, 1)'
-    </pre></code>
+        green = Color(0, 255, 0)
+    
+        # Modifies green to be darkGreen
+        green.darken$(0.3)
+    
+        green.toString()
+        # => 'rgba(0, 102, 0, 1)'
 
     @name darken$
     @methodOf Color#
@@ -352,7 +341,6 @@
         y: 20 + (60 * index)
         width: 60
         height: 60  
-    </pre></code>
 
     @name desaturate
     @methodOf Color#
@@ -366,15 +354,13 @@
     ###*
     The modified color with its saturation reduced by `amount`.
 
-    <code><pre>
-    blue = Color(0, 0, 255)
-
-    # modifies blue to be desaturatedBlue
-    blue.desaturate$(0.4)
-
-    blue.toString()
-    # => 'rgba(38, 38, 217, 1)'
-    </pre></code>
+        blue = Color(0, 0, 255)
+    
+        # modifies blue to be desaturatedBlue
+        blue.desaturate$(0.4)
+    
+        blue.toString()
+        # => 'rgba(38, 38, 217, 1)'
 
     @name desaturate$
     @methodOf Color#
@@ -393,16 +379,14 @@
     ###*
     Determine whether two colors are equal. Compares their r, g, b, and alpha values.
 
-    <code><pre>
-    hex = Color('#ffff00')
-    rgb = Color(255, 255, 0)
-
-    hex == rgb
-    # => false
-
-    hex.equal(rgb)
-    # => true
-    </pre></code>
+        hex = Color('#ffff00')
+        rgb = Color(255, 255, 0)
+    
+        hex == rgb
+        # => false
+    
+        hex.equal(rgb)
+        # => true
 
     @name equal
     @methodOf Color#
@@ -432,7 +416,6 @@
         y: 20 + (60 * index)
         width: 60
         height: 60 
-    </pre></code>    
 
     @name grayscale
     @methodOf Color#
@@ -445,15 +428,13 @@
     ###*
     The calling color converted to grayscale.
 
-    <code><pre>
-    color = Color(255, 255, 0)
-
-    # modifies color into gray
-    color.grayscale$()
-
-    color.toString()
-    # => 'rgba(128, 128, 128, 1)'
-    </pre></code>  
+        color = Color(255, 255, 0)
+    
+        # modifies color into gray
+        color.grayscale$()
+    
+        color.toString()
+        # => 'rgba(128, 128, 128, 1)'
 
     @name grayscale$
     @methodOf Color#
@@ -489,7 +470,6 @@
       y: 30 
       width: 80
       height: 80 
-    </pre></code>  
 
     @name hue
     @methodOf Color#
@@ -528,7 +508,6 @@
       y: 30 
       width: 80
       height: 80 
-    </pre></code>  
 
     @name lightness
     @methodOf Color#
@@ -583,7 +562,6 @@
         y: 20 + (60 * index)
         width: 60
         height: 60 
-    </pre></code>
 
     @name shiftHue
     @methodOf Color#
@@ -597,23 +575,21 @@
     ###*
     The calling color with its hue shifted by `degrees`. This differs from the hue setter in that it adds to the existing hue value and will wrap around 0 and 360.
 
-    <code><pre>
-    magenta = Color(255, 0, 255)
-
-    magenta.hue()
-    # => 300
-
-    magenta.shiftHue$(120)
-
-    # since magenta's hue is 300 we have wrapped
-    # around 360 to end up at 60. Also we have 
-    # modified magenta in place to become yellow
-    magenta.hue()
-    # => 60
-
-    magenta.toString()
-    # => 'rgba(255, 255, 0, 1)'
-    </pre></code>
+        magenta = Color(255, 0, 255)
+    
+        magenta.hue()
+        # => 300
+    
+        magenta.shiftHue$(120)
+    
+        # since magenta's hue is 300 we have wrapped
+        # around 360 to end up at 60. Also we have 
+        # modified magenta in place to become yellow
+        magenta.hue()
+        # => 60
+    
+        magenta.toString()
+        # => 'rgba(255, 255, 0, 1)'
 
     @name shiftHue$
     @methodOf Color#
@@ -646,7 +622,6 @@
         y: 20 + (60 * index)
         width: 60
         height: 60 
-    </pre></code>
 
     @name lighten
     @methodOf Color#
@@ -660,16 +635,14 @@
     ###*
     The calling color lightened by `amount` (Lightness of the color ranges from 0 to 1).
 
-    <code><pre>
-    green = Color(0, 255, 0)
-
-    green.lighten$(0.2)
-
-    # we have modified green in place
-    # to become lightGreen
-    green.toString()
-    # => 'rgba(102, 255, 102, 1)'
-    </pre></code>
+        green = Color(0, 255, 0)
+    
+        green.lighten$(0.2)
+    
+        # we have modified green in place
+        # to become lightGreen
+        green.toString()
+        # => 'rgba(102, 255, 102, 1)'
 
     @name lighten$
     @methodOf Color#
@@ -707,7 +680,6 @@
         y: 20 + (60 * (if index > 1 then 1 else 0))
         width: 60
         height: 60 
-    </pre></code>
 
     @name mixWith
     @methodOf Color#
@@ -723,25 +695,23 @@
     A copy of the calling color mixed with `other` using `amount` as the 
     mixing ratio. If amount is not passed, then the colors are mixed evenly.
 
-    <code><pre>
-    red = Color(255, 0, 0)
-    yellow = Color(255, 255, 0)
-    anotherRed = Color(255, 0, 0)
-
-    # With no amount argument the colors are mixed evenly
-    red.mixWith$(yellow)
-
-    # We have modified red in place to be orange 
-    red.toString()
-    # => 'rgba(255, 128, 0, 1)'    
-
-    # With an amount of 0.3 we are mixing the color 30% red and 70% yellow
-    anotherRed.mixWith$(yellow, 0.3)
-
-    # We have modified `anotherRed` in place to be somethingCloseToOrange 
-    anotherRed.toString()
-    # => rgba(255, 179, 0, 1)
-    </pre></code>
+        red = Color(255, 0, 0)
+        yellow = Color(255, 255, 0)
+        anotherRed = Color(255, 0, 0)
+    
+        # With no amount argument the colors are mixed evenly
+        red.mixWith$(yellow)
+    
+        # We have modified red in place to be orange 
+        red.toString()
+        # => 'rgba(255, 128, 0, 1)'    
+    
+        # With an amount of 0.3 we are mixing the color 30% red and 70% yellow
+        anotherRed.mixWith$(yellow, 0.3)
+    
+        # We have modified `anotherRed` in place to be somethingCloseToOrange 
+        anotherRed.toString()
+        # => rgba(255, 179, 0, 1)
 
     @name mixWith$
     @methodOf Color#
@@ -783,7 +753,6 @@
         y: 20 + (60 * index)
         width: 60
         height: 60 
-    </pre></code>
 
     @name saturate
     @methodOf Color#
@@ -797,21 +766,19 @@
     ###*
     The calling color with its saturation increased by `amount`.
 
-    <code><pre>
-    color = Color(50, 50, 200)
-
-    color.saturation()
-    # => 0.6
-
-    color.saturate$(0.2)
-
-    # We have modified color in place and increased its saturation to 0.8
-    color.saturation()
-    # => 0.8
-
-    color.toString()
-    # => rgba(25, 25, 225, 1)
-    </pre></code>
+        color = Color(50, 50, 200)
+    
+        color.saturation()
+        # => 0.6
+    
+        color.saturate$(0.2)
+    
+        # We have modified color in place and increased its saturation to 0.8
+        color.saturation()
+        # => 0.8
+    
+        color.toString()
+        # => rgba(25, 25, 225, 1)
 
     @name saturate$
     @methodOf Color#
@@ -846,7 +813,6 @@
       y: 30 
       width: 80
       height: 80     
-    </pre></code>
 
     @name saturation
     @methodOf Color#
@@ -880,17 +846,15 @@
     ###*
     returns the Hex representation of the color. Exclude the leading `#` by passing false. 
 
-    <code><pre>
-    color = Color('hsl(60, 1, 0.5)')
-
-    # passing nothing will leave the `#` intact
-    color.toHex()
-    # => '#ffff00'
-
-    # passing false will remove the `#`
-    color.toHex(false)
-    # => 'ffff00'
-    </pre></code>
+        color = Color('hsl(60, 1, 0.5)')
+    
+        # passing nothing will leave the `#` intact
+        color.toHex()
+        # => '#ffff00'
+    
+        # passing false will remove the `#`
+        color.toHex(false)
+        # => 'ffff00'
 
     @name toHex
     @methodOf Color#
@@ -915,12 +879,10 @@
     ###*
     returns an array of the hue, saturation, lightness, and alpha values of the color. 
 
-    <code><pre>
-    magenta = Color(255, 0, 255)
-
-    magenta.toHsl()
-    # => [300, 1, 0.5, 1]
-    </pre></code>  
+        magenta = Color(255, 0, 255)
+    
+        magenta.toHsl()
+        # => [300, 1, 0.5, 1]
 
     @name toHsl
     @methodOf Color#
@@ -985,12 +947,10 @@
     ###*
     returns string rgba representation of the color. 
 
-    <code><pre>
-    red = Color('#ff0000')
-
-    red.toString()
-    # => 'rgba(255, 0, 0, 1)'
-    </pre></code>
+        red = Color('#ff0000')
+    
+        red.toString()
+        # => 'rgba(255, 0, 0, 1)'
 
     @name toString
     @methodOf Color#
@@ -1022,7 +982,6 @@
         y: 20 + (60 * index)
         width: 60
         height: 60     
-    </pre></code>
 
     @name transparentize
     @methodOf Color#
@@ -1035,18 +994,16 @@
     ###*
     The calling color with its alpha reduced by `amount`.
 
-    <code><pre>
-    color = Color(0, 0, 0, 1)
-
-    color.a
-    # => 1
-
-    # We modify color in place
-    color.transparentize$(0.5)
-
-    color.a
-    # => 0.5
-    </pre></code>
+        color = Color(0, 0, 0, 1)
+    
+        color.a
+        # => 1
+    
+        # We modify color in place
+        color.transparentize$(0.5)
+    
+        color.a
+        # => 0.5
 
     @name transparentize$
     @methodOf Color#
@@ -1080,7 +1037,6 @@
         y: 20 + (60 * index)
         width: 60
         height: 60     
-    </pre></code>
 
     @name opacify
     @methodOf Color#
@@ -1093,18 +1049,16 @@
     ###*
     The calling color with its alpha increased by `amount`.
 
-    <code><pre>
-    color = Color(0, 0, 0, 0)
-
-    color.a
-    # => 0
-
-    # We modify color in place
-    color.opacify$(0.25)
-
-    color.a
-    # => 0.25
-    </pre></code>
+        color = Color(0, 0, 0, 0)
+    
+        color.a
+        # => 0
+    
+        # We modify color in place
+        color.opacify$(0.25)
+    
+        color.a
+        # => 0.25
 
     @name opacify$
     @methodOf Color#
@@ -1119,13 +1073,11 @@
   ###*
   returns a random color.
 
-  <code><pre>
-  Color.random().toString()
-  # => 'rgba(213, 144, 202, 1)'
-
-  Color.random().toString()
-  # => 'rgba(1, 211, 24, 1)'
-  </pre></code>
+      Color.random().toString()
+      # => 'rgba(213, 144, 202, 1)'
+    
+      Color.random().toString()
+      # => 'rgba(1, 211, 24, 1)'
 
   @name random
   @methodOf Color
@@ -1138,22 +1090,20 @@
   ###*
   Mix two colors. Behaves just like `#mixWith` except that you are passing two colors.
 
-  <code><pre>
-  red = Color(255, 0, 0)
-  yellow = Color(255, 255, 0)
-
-  # With no amount argument the colors are mixed evenly
-  orange = Color.mix(red, yellow)
-
-  orange.toString()
-  # => 'rgba(255, 128, 0, 1)'    
-
-  # With an amount of 0.3 we are mixing the color 30% red and 70% yellow
-  somethingCloseToOrange = Color.mix(red, yellow, 0.3)
-
-  somethingCloseToOrange.toString()
-  # => rgba(255, 179, 0, 1)
-  </pre></code>
+      red = Color(255, 0, 0)
+      yellow = Color(255, 255, 0)
+    
+      # With no amount argument the colors are mixed evenly
+      orange = Color.mix(red, yellow)
+    
+      orange.toString()
+      # => 'rgba(255, 128, 0, 1)'    
+    
+      # With an amount of 0.3 we are mixing the color 30% red and 70% yellow
+      somethingCloseToOrange = Color.mix(red, yellow, 0.3)
+    
+      somethingCloseToOrange.toString()
+      # => rgba(255, 179, 0, 1)
 
   @name mix
   @methodOf Color

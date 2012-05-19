@@ -22,11 +22,9 @@ Engine.Delay = (I, self) ->
   ###*
   Execute a callback after a number of steps have passed.
 
-  <code><pre>
-  engine.delay 5, ->
-    engine.add
-      class: "Ghost"
-  </pre></code>
+      engine.delay 5, ->
+        engine.add
+          class: "Ghost"
 
   @name delay
   @methodOf Engine#

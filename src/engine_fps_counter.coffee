@@ -1,12 +1,10 @@
 ###*
 The <code>FPSCounter</code> module tracks and displays the framerate.
 
-<code><pre>
-window.engine = Engine
-  ...
-  includedModules: ["FPSCounter"]
-  FPSColor: "#080"
-</pre></code>
+    window.engine = Engine
+      ...
+      includedModules: ["FPSCounter"]
+      FPSColor: "#080"
 
 @name FPSCounter
 @fieldOf Engine

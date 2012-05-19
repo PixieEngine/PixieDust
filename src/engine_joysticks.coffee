@@ -1,24 +1,22 @@
 ###*
 The <code>Joysticks</code> module gives the engine access to joysticks.
 
-<code><pre>
-# First you need to add the joysticks module to the engine
-window.engine = Engine
-  ...
-  includedModules: ["Joysticks"]
-# Then you need to get a controller reference
-# id = 0 for player 1, etc.
-controller = engine.controller(id)
-
-# Point indicating direction primary axis is held
-direction = controller.position()
-
-# Check if buttons are held
-controller.actionDown("A")
-controller.actionDown("B")
-controller.actionDown("X")
-controller.actionDown("Y")
-</pre></code>
+    # First you need to add the joysticks module to the engine
+    window.engine = Engine
+      ...
+      includedModules: ["Joysticks"]
+    # Then you need to get a controller reference
+    # id = 0 for player 1, etc.
+    controller = engine.controller(id)
+    
+    # Point indicating direction primary axis is held
+    direction = controller.position()
+    
+    # Check if buttons are held
+    controller.actionDown("A")
+    controller.actionDown("B")
+    controller.actionDown("X")
+    controller.actionDown("Y")
 
 @name Joysticks
 @fieldOf Engine

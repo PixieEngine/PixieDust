@@ -1,14 +1,12 @@
 ###*
 The Ageable module handles keeping track of an object's age.
 
-<code><pre>
-player = GameObject()
-
-player.update(1)
-
-#=> player.I.age == 1
-
-</pre></code>
+    player = GameObject()
+    
+    player.update(1)
+    
+    #=> player.I.age == 1
+    
 
 @name Ageable
 @module

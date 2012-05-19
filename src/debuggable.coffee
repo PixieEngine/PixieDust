@@ -3,20 +3,18 @@ The Debuggable Module provides a simple API to easily display
 an object's properties onscreen. This mixin comes with predefined
 attribute filters so that you can exclude irrelevant data.
 
-<code><pre>
-player = GameObject
-  x: 40
-  y: 14
-  spriteName: null
-  numericErrorProperty: NaN
-
-player.include Debuggable
-
-# sets up debug output for all player's properties
-# at the starting position (0, 0)
-player.debug
-  filter: 'all'
-</pre></code>
+    player = GameObject
+      x: 40
+      y: 14
+      spriteName: null
+      numericErrorProperty: NaN
+    
+    player.include Debuggable
+    
+    # sets up debug output for all player's properties
+    # at the starting position (0, 0)
+    player.debug
+      filter: 'all'
 
 Debuggable module
 @name Debuggable
@@ -171,43 +169,41 @@ Debuggable = (I={}, self) ->
   ###*
   Enable debugging display for the calling GameObject.
 
-  <code><pre>
-  player = GameObject
-    x: 40
-    y: 14
-    spriteName: null
-    numericErrorProperty: NaN
-  
-  player.include Debuggable
-
-  # sets up debug output for all player's properties
-  # at the starting position (0, 0)
-  player.debug
-    filter: 'all'
-  
-  player.I.y = 45
-  
-  # sets up debug output for only properties that have
-  # changed since initialization. In this case only y
-  # would be displayed.
-  player.debug
-    filter: 'changed'
-  
-  # sets up debug output for properties that are <code>undefined</code>, 
-  # <code>null</code>, or <code>NaN</code>. In this case spriteName and
-  # numericErrorProperty would be displayed.
-  player.debug
-    filter: 'undefined'
-  
-  # sets up debug output using all possible configuration options
-  player.debug
-    bounds: true # set this to false to disable visual debugging of the object's bounding box
-    color: 'red' # color of debug text
-    filter: 'all'
-    x: 30 # x position to start printing debug information
-    y: 50 # y position to start printing debug information
-    velocity: true # set this to false to disable visual debugging of the object's velocity
-  </pre></code>
+      player = GameObject
+        x: 40
+        y: 14
+        spriteName: null
+        numericErrorProperty: NaN
+      
+      player.include Debuggable
+    
+      # sets up debug output for all player's properties
+      # at the starting position (0, 0)
+      player.debug
+        filter: 'all'
+      
+      player.I.y = 45
+      
+      # sets up debug output for only properties that have
+      # changed since initialization. In this case only y
+      # would be displayed.
+      player.debug
+        filter: 'changed'
+      
+      # sets up debug output for properties that are <code>undefined</code>, 
+      # <code>null</code>, or <code>NaN</code>. In this case spriteName and
+      # numericErrorProperty would be displayed.
+      player.debug
+        filter: 'undefined'
+      
+      # sets up debug output using all possible configuration options
+      player.debug
+        bounds: true # set this to false to disable visual debugging of the object's bounding box
+        color: 'red' # color of debug text
+        filter: 'all'
+        x: 30 # x position to start printing debug information
+        y: 50 # y position to start printing debug information
+        velocity: true # set this to false to disable visual debugging of the object's velocity
 
   @name debug
   @methodOf Debuggable#
@@ -232,23 +228,21 @@ Debuggable = (I={}, self) ->
   ###*
   Toggle display of debug information.
 
-  <code><pre>
-  player = GameObject()
-
-  player.include Debuggable
-
-  # enables debug display
-  player.debug()
-  
-  # disables debug display
-  player.toggleDisable()
-  
-  # if false is passed to toggleDisplay, then debugging is disabled.  
-  player.toggleDisplay(false)
-
-  # if true is passed to toggleDisplay, then debugging is enabled.
-  player.toggleDisplay(true)
-  </pre></code>
+      player = GameObject()
+    
+      player.include Debuggable
+    
+      # enables debug display
+      player.debug()
+      
+      # disables debug display
+      player.toggleDisable()
+      
+      # if false is passed to toggleDisplay, then debugging is disabled.  
+      player.toggleDisplay(false)
+    
+      # if true is passed to toggleDisplay, then debugging is enabled.
+      player.toggleDisplay(true)
 
   @name toggleDebug
   @methodOf Debuggable#

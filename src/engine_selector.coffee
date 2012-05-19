@@ -17,28 +17,26 @@ Engine.Selector = (I, self) ->
   ###*
   Get the game object matching the given selector that is closest to the given position.
 
-  <code><pre>
-  player = engine.add
-    x: 0
-    y: 0
-
-  enemy1 = engine.add
-    enemy: true
-    x: 10
-    y: 0
-
-  enemy2 = engine.add
-    enemy: true
-    x: 0
-    y: 15
-
-  player2 = engine.add
-    x: 0
-    y: 10
-
-  equals engine.closest(".enemy", player.position()), enemy1
-  equals engine.closest(".enemy", player2.position()), enemy2
-  </pre></code>
+      player = engine.add
+        x: 0
+        y: 0
+    
+      enemy1 = engine.add
+        enemy: true
+        x: 10
+        y: 0
+    
+      enemy2 = engine.add
+        enemy: true
+        x: 0
+        y: 15
+    
+      player2 = engine.add
+        x: 0
+        y: 10
+    
+      equals engine.closest(".enemy", player.position()), enemy1
+      equals engine.closest(".enemy", player2.position()), enemy2
 
   @param {String} selector
   @param {Point} position
@@ -53,40 +51,38 @@ Engine.Selector = (I, self) ->
   can select objects by id, class, or attributes. Note that this method always returns an Array,
   so if you are trying to find only one object you will need something like <code>engine.find("Enemy").first()</code>.
 
-  <code><pre>
-  player = engine.add
-    class: "Player"
-
-  enemy = engine.add
-    class: "Enemy"
-    speed: 5
-    x: 0
-
-  distantEnemy = engine.add
-    class "Enemy"
-    x: 500
-
-  boss = engine.add
-    class: "Enemy"
-    id: "Boss"
-    x: 0
-
-  # to select an object by id use "#anId"
-  engine.find "#Boss"
-  # => [boss]
-
-  # to select an object by class use "MyClass"
-  engine.find "Enemy"
-  # => [enemy, distantEnemy, boss]
-
-  # to select an object by properties use ".someProperty" or ".someProperty=someValue"
-  engine.find ".speed=5"
-  # => [enemy]
-
-  # You may mix and match selectors.
-  engine.find "Enemy.x=0"
-  # => [enemy, boss] # doesn't return distantEnemy
-  </pre></code>
+      player = engine.add
+        class: "Player"
+    
+      enemy = engine.add
+        class: "Enemy"
+        speed: 5
+        x: 0
+    
+      distantEnemy = engine.add
+        class "Enemy"
+        x: 500
+    
+      boss = engine.add
+        class: "Enemy"
+        id: "Boss"
+        x: 0
+    
+      # to select an object by id use "#anId"
+      engine.find "#Boss"
+      # => [boss]
+    
+      # to select an object by class use "MyClass"
+      engine.find "Enemy"
+      # => [enemy, distantEnemy, boss]
+    
+      # to select an object by properties use ".someProperty" or ".someProperty=someValue"
+      engine.find ".speed=5"
+      # => [enemy]
+    
+      # You may mix and match selectors.
+      engine.find "Enemy.x=0"
+      # => [enemy, boss] # doesn't return distantEnemy
 
   @name find
   @methodOf Engine#

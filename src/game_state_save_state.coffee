@@ -13,11 +13,9 @@ GameState.SaveState = (I, self) ->
   ###*
   Save the current game state and returns a JSON object representing that state.
 
-  <code><pre>
-  engine.bind 'update', ->
-    if justPressed.s
-      engine.saveState()
-  </pre></code>
+      engine.bind 'update', ->
+        if justPressed.s
+          engine.saveState()
 
   @name saveState
   @methodOf GameState#
@@ -30,17 +28,15 @@ GameState.SaveState = (I, self) ->
   ###*
   Loads the game state passed in, or the last saved state, if any.
 
-  <code><pre>
-  engine.bind 'update', ->
-    if justPressed.l
-      # loads the last saved state
-      engine.loadState()
-
-    if justPressed.o
-      # removes all game objects, then reinstantiates 
-      # them with the entityData passed in
-      engine.loadState([{x: 40, y: 50, class: "Player"}, {x: 0, y: 0, class: "Enemy"}, {x: 500, y: 400, class: "Boss"}])
-  </pre></code>
+      engine.bind 'update', ->
+        if justPressed.l
+          # loads the last saved state
+          engine.loadState()
+    
+        if justPressed.o
+          # removes all game objects, then reinstantiates 
+          # them with the entityData passed in
+          engine.loadState([{x: 40, y: 50, class: "Player"}, {x: 0, y: 0, class: "Enemy"}, {x: 500, y: 400, class: "Boss"}])
 
   @name loadState
   @methodOf GameState#
@@ -57,16 +53,14 @@ GameState.SaveState = (I, self) ->
   ###*
   Reloads the current game state, useful for hotswapping code.
 
-  <code><pre>
-  engine.I.objects.each (object) ->
-    # bring all objects to (0, 0) for some reason
-    object.I.x = 0
-    object.I.y = 0
-
-  # reload all objects to make sure
-  # they are at (0, 0)  
-  engine.reload()
-  </pre></code>
+      engine.I.objects.each (object) ->
+        # bring all objects to (0, 0) for some reason
+        object.I.x = 0
+        object.I.y = 0
+    
+      # reload all objects to make sure
+      # they are at (0, 0)  
+      engine.reload()
 
   @name reload
   @methodOf GameState#

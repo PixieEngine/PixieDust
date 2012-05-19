@@ -9,34 +9,32 @@ This method relies on both objects having <code>position</code> methods.
 
 Include this module by calling <code>self.include Follow</code>
 
-<code><pre>
-player = GameObject
-  x: 50
-  y: 50
-  width: 10
-  height: 10
-
-enemy = GameObject
-  x: 100
-  y: 50
-  width: 10
-  height: 10
-  velocity: Point(0, 0)
-  speed: 2
-
-enemy.include Follow
-
-# Make an enemy follow the player
-enemy.follow(player)
-
-# now the enemy's direction will point toward the player
-enemy.I.direction
-# => Point(-1, 0)
-
-# you can use this direction to set a velocity for your object.
-enemy.I.velocity = enemy.I.direction.scale(I.speed)
-
-</pre></code>
+    player = GameObject
+      x: 50
+      y: 50
+      width: 10
+      height: 10
+    
+    enemy = GameObject
+      x: 100
+      y: 50
+      width: 10
+      height: 10
+      velocity: Point(0, 0)
+      speed: 2
+    
+    enemy.include Follow
+    
+    # Make an enemy follow the player
+    enemy.follow(player)
+    
+    # now the enemy's direction will point toward the player
+    enemy.I.direction
+    # => Point(-1, 0)
+    
+    # you can use this direction to set a velocity for your object.
+    enemy.I.velocity = enemy.I.direction.scale(I.speed)
+    
 
 @name Follow
 @module
@@ -52,13 +50,11 @@ Follow = (I={}, self) ->
   ###*
   Set your velocity to follow another object.
 
-  <code><pre>
-  enemy.follow(player)
-
-  # => The enemy now has it's velocity attribute set in
-  # the direction of the player, with magnitude equal to
-  # the enemy's speed
-  </pre></code>
+      enemy.follow(player)
+    
+      # => The enemy now has it's velocity attribute set in
+      # the direction of the player, with magnitude equal to
+      # the enemy's speed
 
   @name follow
   @methodOf Follow#

@@ -13,15 +13,13 @@ may be bound with <code>object.bind(eventName, callback)</code>
 ###*
 Triggered when the object is created.
 
-<code><pre>
-enemyCount = 0
-
-enemy = engine.add
-  class: "Enemy"
-
-enemy.bind 'create', ->
-  enemyCount++
-</pre></code>
+    enemyCount = 0
+    
+    enemy = engine.add
+      class: "Enemy"
+    
+    enemy.bind 'create', ->
+      enemyCount++
 
 @name create
 @methodOf GameObject#
@@ -32,13 +30,11 @@ enemy.bind 'create', ->
 Triggered when object is destroyed. Use 
 the destroy event to add particle effects, play sounds, etc.
 
-<code><pre>
-bomb = GameObject()
-
-bomb.bind 'destroy', ->
-  bomb.explode()
-  Sound.play "Kaboom"
-</pre></code>
+    bomb = GameObject()
+    
+    bomb.bind 'destroy', ->
+      bomb.explode()
+      Sound.play "Kaboom"
 
 @name destroy
 @methodOf GameObject#
@@ -48,19 +44,17 @@ bomb.bind 'destroy', ->
 ###*
 Triggered during every update step.
 
-<code><pre>
-player = GameObject()
-
-player.bind 'step', ->
-  # check to see if keys are being pressed and 
-  # change the player's velocity
-  if keydown.left
-    player.velocity(Point(-1, 0))
-  else if keydown.right
-    player.velocity(Point(1, 0))
-  else
-    player.velocity(Point(0, 0))
-</pre></code>
+    player = GameObject()
+    
+    player.bind 'step', ->
+      # check to see if keys are being pressed and 
+      # change the player's velocity
+      if keydown.left
+        player.velocity(Point(-1, 0))
+      else if keydown.right
+        player.velocity(Point(1, 0))
+      else
+        player.velocity(Point(0, 0))
 
 @name step
 @methodOf GameObject#
@@ -70,21 +64,19 @@ player.bind 'step', ->
 ###*
 Triggered every update after the <code>step</code> event is triggered.
 
-<code><pre>
-player = GameObject()
-
-# we can really use the update and 
-# step events almost interchangebly
-player.bind 'update', ->
-  # check to see if keys are being pressed and 
-  # change the player's velocity
-  if keydown.left
-    player.velocity(Point(-1, 0))
-  else if keydown.right
-    player.velocity(Point(1, 0))
-  else
-    player.velocity(Point(0, 0))
-</pre></code>
+    player = GameObject()
+    
+    # we can really use the update and 
+    # step events almost interchangebly
+    player.bind 'update', ->
+      # check to see if keys are being pressed and 
+      # change the player's velocity
+      if keydown.left
+        player.velocity(Point(-1, 0))
+      else if keydown.right
+        player.velocity(Point(1, 0))
+      else
+        player.velocity(Point(0, 0))
 
 @name update
 @methodOf GameObject#
@@ -95,12 +87,10 @@ player.bind 'update', ->
 Triggered when the object is removed from
 the engine. Use the remove event to handle any clean up.
 
-<code><pre>
-boss = GameObject()
-
-boss.bind 'remove', ->
-  unlockDoorToLevel2()
-</pre></code>
+    boss = GameObject()
+    
+    boss.bind 'remove', ->
+      unlockDoorToLevel2()
 
 @name remove
 @methodOf GameObject#
