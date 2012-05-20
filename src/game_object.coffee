@@ -166,7 +166,10 @@ GameObject.defaultModules = [
   "Expirable"
   "Follow"
   "Metered"
-  "Movable",Rotatable, TimedEvents, Tween]
+  "Movable"
+  "Rotatable"
+  "TimedEvents"
+  Tween]
 
 ###*
 Construct an object instance from the given entity data.
