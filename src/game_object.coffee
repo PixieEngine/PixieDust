@@ -155,7 +155,7 @@ GameObject = (I) ->
     self.include Module
 
   self
-  
+
 GameObject.defaultModules = [
   "Bindable"
   "Ageable"
