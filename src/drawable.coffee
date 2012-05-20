@@ -86,6 +86,7 @@ Drawable = (I, self) ->
     color: "#196"
     hflip: false
     vflip: false
+    scale: 1
     spriteName: null
     zIndex: 0
 
