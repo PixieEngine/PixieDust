@@ -162,7 +162,9 @@ GameObject.defaultModules = [
   "Bounded"
   "Clampable"
   "Cooldown"
-  "Drawable", Expirable, Follow, Metered, Movable, Rotatable, TimedEvents, Tween]
+  "Drawable"
+  "Expirable"
+  "Follow, Metered, Movable, Rotatable, TimedEvents, Tween]
 
 ###*
 Construct an object instance from the given entity data.
