@@ -4273,14 +4273,12 @@ ActiveBounds = function(I, self) {
 /**
 The Ageable module handles keeping track of an object's age.
 
-<code><pre>
-player = GameObject()
-
-player.update(1)
-
-#=> player.I.age == 1
-
-</pre></code>
+    player = GameObject()
+    
+    player.update(1)
+    
+    #=> player.I.age == 1
+    
 
 @name Ageable
 @module
@@ -4306,24 +4304,22 @@ The Bounded module is used to provide basic data about the
 location and dimensions of the including object. This module is included
 by default in <code>GameObject</code>.
 
-<code><pre>
-player = Core
-  x: 10
-  y: 50
-  width: 20
-  height: 20
-  other: "stuff"
-  more: "properties"
-
-player.position()
-# => Uncaught TypeError: Object has no method 'position'
-
-player.include(Bounded)
-
-# now player has all the methods provided by this module
-player.position()
-# => {x: 10, y: 50}
-</pre></code>
+    player = Core
+      x: 10
+      y: 50
+      width: 20
+      height: 20
+      other: "stuff"
+      more: "properties"
+    
+    player.position()
+    # => Uncaught TypeError: Object has no method 'position'
+    
+    player.include(Bounded)
+    
+    # now player has all the methods provided by this module
+    player.position()
+    # => {x: 10, y: 50}
 
 @see GameObject
 
@@ -4370,24 +4366,22 @@ Bounded = function(I, self) {
     In order for this to work, `otherObj` must have a 
     position method.
     
-    <code><pre>
-    player = GameObject
-      x: 50
-      y: 50
-      width: 10
-      height: 10
-    
-    player.include Bounded
-    
-    enemy = GameObject
-      x: 110
-      y: 120
-      width: 7
-      height: 20
-      
-    player.distance(enemy)
-    # => 92.19544457292888
-    </pre></code>
+        player = GameObject
+          x: 50
+          y: 50
+          width: 10
+          height: 10
+        
+        player.include Bounded
+        
+        enemy = GameObject
+          x: 110
+          y: 120
+          width: 7
+          height: 20
+          
+        player.distance(enemy)
+        # => 92.19544457292888
     
     @name distance
     @methodOf Bounded#
@@ -4401,16 +4395,14 @@ Bounded = function(I, self) {
     The position of this game object. By default it is the top left point.
     Redefining the center method will change the relative position.
     
-    <code><pre>
-    player = Core
-      x: 50
-      y: 40
-    
-    player.include(Bounded)      
-    
-    player.position()
-    # => {x: 50, y: 40}
-    </pre></code>
+        player = Core
+          x: 50
+          y: 40
+      
+        player.include(Bounded)      
+      
+        player.position()
+        # => {x: 50, y: 40}
     
     @name position
     @methodOf Bounded#
@@ -4433,18 +4425,16 @@ Bounded = function(I, self) {
     Does a check to see if this object is overlapping
     with the bounds passed in.
     
-    <code><pre>
-    player = Core
-      x: 4
-      y: 6
-      width: 20
-      height: 20
-    
-    player.include(Bounded)  
-    
-    player.collides({x: 5, y: 7, width: 20, height: 20})
-    # => true
-    </pre></code>
+        player = Core
+          x: 4
+          y: 6
+          width: 20
+          height: 20
+      
+        player.include(Bounded)  
+      
+        player.collides({x: 5, y: 7, width: 20, height: 20})
+        # => true
     
     @name collides
     @methodOf Bounded#
@@ -4458,24 +4448,22 @@ Bounded = function(I, self) {
     The area of the bounds is reduced if collision margin is positive
     and increased if collision margin is negative.
     
-    <code><pre>
-    player = Core
-      collisionMargin: 
-        x: -2
-        y: -4
-      x: 50
-      y: 50
-      width: 20
-      height: 20
-    
-    player.include(Bounded)
-    
-    player.collisionBounds()
-    # => {x: 38, y: 36, height: 28, width: 24}
-    
-    player.collisionBounds(10, 10)
-    # => {x: 48, y: 46, height: 28, width: 24}
-    </pre></code>
+        player = Core
+          collisionMargin: 
+            x: -2
+            y: -4
+          x: 50
+          y: 50
+          width: 20
+          height: 20
+      
+        player.include(Bounded)
+      
+        player.collisionBounds()
+        # => {x: 38, y: 36, height: 28, width: 24}
+      
+        player.collisionBounds(10, 10)
+        # => {x: 48, y: 46, height: 28, width: 24}
     
     @name collisionBounds
     @methodOf Bounded#
@@ -4495,21 +4483,19 @@ Bounded = function(I, self) {
     /**
     Returns infomation about the location of the object and its dimensions with optional offsets.
     
-    <code><pre>
-    player = Core
-      x: 3
-      y: 6
-      width: 2
-      height: 2
-    
-    player.include(Bounded)
-    
-    player.bounds()
-    # => {x: 3, y: 6, width: 2, height: 2}
-    
-    player.bounds(7, 4)
-    # => {x: 10, y: 10, width: 2, height: 2}   
-    </pre></code>
+        player = Core
+          x: 3
+          y: 6
+          width: 2
+          height: 2
+      
+        player.include(Bounded)
+      
+        player.bounds()
+        # => {x: 3, y: 6, width: 2, height: 2}
+      
+        player.bounds(7, 4)
+        # => {x: 10, y: 10, width: 2, height: 2}   
     
     @name bounds
     @methodOf Bounded#
@@ -4530,18 +4516,16 @@ Bounded = function(I, self) {
     The centeredBounds method returns infomation about the center
     of the object along with the midpoint of the width and height.
     
-    <code><pre>
-    player = Core
-      x: 3
-      y: 6
-      width: 2
-      height: 2
-    
-    player.include(Bounded)
-    
-    player.centeredBounds()
-    # => {x: 4, y: 7, xw: 1, yw: 1}
-    </pre></code>
+        player = Core
+          x: 3
+          y: 6
+          width: 2
+          height: 2
+      
+        player.include(Bounded)
+      
+        player.centeredBounds()
+        # => {x: 4, y: 7, xw: 1, yw: 1}
     
     @name centeredBounds
     @methodOf Bounded#
@@ -4560,18 +4544,16 @@ Bounded = function(I, self) {
     The center method returns the {@link Point} that is
     the center of the object.
     
-    <code><pre>
-    player = Core
-      x: 50
-      y: 40
-      width: 10
-      height: 30
-    
-    player.include(Bounded)  
-    
-    player.center()
-    # => {x: 30, y: 35}
-    </pre></code>
+        player = Core
+          x: 50
+          y: 40
+          width: 10
+          height: 30
+      
+        player.include(Bounded)  
+      
+        player.center()
+        # => {x: 30, y: 35}
     
     @name center
     @methodOf Bounded#
@@ -4584,18 +4566,16 @@ Bounded = function(I, self) {
     Return the circular bounds of the object. The circle is
     centered at the midpoint of the object.
     
-    <code><pre>
-    player = Core
-      radius: 5
-      x: 50
-      y: 50
-      other: "stuff"
-    
-    player.include(Bounded)
-    
-    player.circle()
-    # => {radius: 5, x: 50, y: 50}
-    </pre></code>
+        player = Core
+          radius: 5
+          x: 50
+          y: 50
+          other: "stuff"
+      
+        player.include(Bounded)
+      
+        player.circle()
+        # => {radius: 5, x: 50, y: 50}
     
     @name circle
     @methodOf Bounded#
@@ -4768,13 +4748,11 @@ Camera.Fade = function(I, self) {
     A convenient way to set the flash effect instance variables. This provides a shorthand for fading the screen in 
     from a given color over a specified duration.
     
-    <code><pre>
-    engine.fadeIn()
-    # => Sets the effect variables to their default state. This will the screen to go from black to transparent over the next 30 frames.
-    
-    engine.fadeIn('blue', 50)
-    # => This effect will start off blue and fade to transparent over 50 frames.
-    </pre></code>  
+        engine.fadeIn()
+        # => Sets the effect variables to their default state. This will the screen to go from black to transparent over the next 30 frames.
+      
+        engine.fadeIn('blue', 50)
+        # => This effect will start off blue and fade to transparent over 50 frames.
     
     @name fadeIn
     @methodOf Camera#
@@ -4791,13 +4769,11 @@ Camera.Fade = function(I, self) {
     A convenient way to set the flash effect instance variables. This provides a shorthand for fading 
     the screen to a given color over a specified duration.
     
-    <code><pre>
-    camera.fadeOut()
-    # => Sets the effect variables to their default state. This will the screen to fade from ransparent to black over the next 30 frames.
-    
-    camera.fadeOut('blue', 50)
-    # => This effect will start off transparent and change to blue over 50 frames.
-    </pre></code>  
+        camera.fadeOut()
+        # => Sets the effect variables to their default state. This will the screen to fade from ransparent to black over the next 30 frames.
+      
+        camera.fadeOut('blue', 50)
+        # => This effect will start off transparent and change to blue over 50 frames.
     
     @name fadeOut
     @methodOf Camera#
@@ -4852,21 +4828,19 @@ Camera.Flash = function(I, self) {
     A convenient way to set the flash effect instance variables. Alternatively, you can modify them by hand, but
     using Camera#flash is the suggested approach.
     
-    <code><pre>
-    camera.flash()
-    # => Sets the flash effect variables to their default state. This will cause a white flash that will turn transparent in the next 12 frames.
-    
-    camera.flash
-      color: 'green'
-      duration: 30
-    # => This flash effect will start off green and fade to transparent over 30 frames.
-    
-    camera.flash
-      color: Color(255, 0, 0, 0)
-      duration: 20
-      targetAlpha: 1
-    # => This flash effect will start off transparent and move toward red over 20 frames 
-    </pre></code>  
+        camera.flash()
+        # => Sets the flash effect variables to their default state. This will cause a white flash that will turn transparent in the next 12 frames.
+      
+        camera.flash
+          color: 'green'
+          duration: 30
+        # => This flash effect will start off green and fade to transparent over 30 frames.
+      
+        camera.flash
+          color: Color(255, 0, 0, 0)
+          duration: 20
+          targetAlpha: 1
+        # => This flash effect will start off transparent and move toward red over 20 frames 
     
     @name flash
     @methodOf Camera#
@@ -5015,18 +4989,16 @@ Clampable = function(I, self) {
     /**
     Keep an objects attributes within a given range.
     
-    <code><pre>
-    # Player's health will be within [0, 100] at the end of every update
-    player.clamp
-      health:
-        min: 0
-        max: 100
-    
-    # Score can only be positive
-    player.clamp
-      score:
-        min: 0
-    </pre></code>
+        # Player's health will be within [0, 100] at the end of every update
+        player.clamp
+          health:
+            min: 0
+            max: 100
+      
+        # Score can only be positive
+        player.clamp
+          score:
+            min: 0
     
     @name clamp
     @methodOf Clampable#
@@ -5204,37 +5176,35 @@ Clampable = function(I, self) {
     /**
     Collision holds many useful class methods for checking geometric overlap of various objects.
     
-    <code><pre>
-    player = engine.add
-      class: "Player"
-      x: 0
-      y: 0
-      width: 10
-      height: 10
+        player = engine.add
+          class: "Player"
+          x: 0
+          y: 0
+          width: 10
+          height: 10
     
-    enemy = engine.add
-      class: "Enemy"
-      x: 5
-      y: 5
-      width: 10
-      height: 10
+        enemy = engine.add
+          class: "Enemy"
+          x: 5
+          y: 5
+          width: 10
+          height: 10
     
-    enemy2 = engine.add
-      class: "Enemy"
-      x: -5
-      y: -5
-      width: 10
-      height: 10
+        enemy2 = engine.add
+          class: "Enemy"
+          x: -5
+          y: -5
+          width: 10
+          height: 10
     
-    Collision.collide(player, enemy, (p, e) -> ...)
-    # => callback is called once
+        Collision.collide(player, enemy, (p, e) -> ...)
+        # => callback is called once
     
-    Collision.collide(player, [enemy, enemy2], (p, e) -> ...)
-    # => callback is called twice
+        Collision.collide(player, [enemy, enemy2], (p, e) -> ...)
+        # => callback is called twice
     
-    Collision.collide("Player", "Enemy", (p, e) -> ...)
-    # => callback is also called twice
-    </pre></code>
+        Collision.collide("Player", "Enemy", (p, e) -> ...)
+        # => callback is also called twice
     
     @name collide
     @methodOf Collision
@@ -5267,25 +5237,23 @@ Clampable = function(I, self) {
     Takes two bounds objects and returns true if they collide (overlap), false otherwise.
     Bounds objects have x, y, width and height properties.
     
-    <code><pre>
-    player = GameObject
-      x: 0
-      y: 0
-      width: 10
-      height: 10
+        player = GameObject
+          x: 0
+          y: 0
+          width: 10
+          height: 10
     
-    enemy = GameObject
-      x: 5
-      y: 5
-      width: 10
-      height: 10
+        enemy = GameObject
+          x: 5
+          y: 5
+          width: 10
+          height: 10
     
-    Collision.rectangular(player, enemy)
-    # => true
+        Collision.rectangular(player, enemy)
+        # => true
     
-    Collision.rectangular(player, {x: 50, y: 40, width: 30, height: 30})
-    # => false
-    </pre></code>
+        Collision.rectangular(player, {x: 50, y: 40, width: 30, height: 30})
+        # => false
     
     @name rectangular
     @methodOf Collision
@@ -5300,28 +5268,26 @@ Clampable = function(I, self) {
     Takes two circle objects and returns true if they collide (overlap), false otherwise.
     Circle objects have x, y, and radius.
     
-    <code><pre>
-    player = GameObject
-      x: 5
-      y: 5
-      radius: 10
+        player = GameObject
+          x: 5
+          y: 5
+          radius: 10
     
-    enemy = GameObject
-      x: 10
-      y: 10
-      radius: 10
+        enemy = GameObject
+          x: 10
+          y: 10
+          radius: 10
     
-    farEnemy = GameObject
-      x: 500
-      y: 500
-      radius: 30
+        farEnemy = GameObject
+          x: 500
+          y: 500
+          radius: 30
     
-    Collision.circular(player, enemy)
-    # => true
+        Collision.circular(player, enemy)
+        # => true
     
-    Collision.circular(player, farEnemy)
-    # => false
-    </pre></code>
+        Collision.circular(player, farEnemy)
+        # => false
     
     @name circular
     @methodOf Collision
@@ -5339,16 +5305,14 @@ Clampable = function(I, self) {
     /**
     Detects whether a line intersects a circle.
     
-    <code><pre>
-    circle = engine.add
-      class: "circle"
-      x: 50
-      y: 50
-      radius: 10
+        circle = engine.add
+          class: "circle"
+          x: 50
+          y: 50
+          radius: 10
     
-    Collision.rayCircle(Point(0, 0), Point(1, 0), circle)
-    # => true
-    </pre></code>
+        Collision.rayCircle(Point(0, 0), Point(1, 0), circle)
+        # => true
     
     @name rayCircle
     @methodOf Collision
@@ -5377,17 +5341,15 @@ Clampable = function(I, self) {
     /**
     Detects whether a line intersects a rectangle.
     
-    <code><pre>
-    rect = engine.add
-      class: "circle"
-      x: 50
-      y: 50
-      width: 20
-      height: 20
+        rect = engine.add
+          class: "circle"
+          x: 50
+          y: 50
+          width: 20
+          height: 20
     
-    Collision.rayRectangle(Point(0, 0), Point(1, 0), rect)
-    # => true
-    </pre></code>
+        Collision.rayRectangle(Point(0, 0), Point(1, 0), rect)
+        # => true
     
     @name rayRectangle
     @methodOf Collision
@@ -5678,7 +5640,6 @@ var __slice = Array.prototype.slice;
       color: eval(color)
       text: color
       y: 20 * (index + 1)  
-  </pre></code>
   
   @name Color
   @param {Array|Number|String|Color} args... An Array, r, g, b values, 
@@ -5713,22 +5674,20 @@ var __slice = Array.prototype.slice;
     /**
     Returns the rgba color channels in an array.
     
-    <code><pre>
-    transparent =  Color()
+        transparent =  Color()
     
-    transparent.channels()
-    # => [0, 0, 0, 0]
+        transparent.channels()
+        # => [0, 0, 0, 0]
     
-    red = Color("#FF0000")
+        red = Color("#FF0000")
     
-    red.channels()
-    # => [255, 0, 0, 1]
+        red.channels()
+        # => [255, 0, 0, 1]
     
-    rgb = Color(200, 34, 2)
+        rgb = Color(200, 34, 2)
     
-    rgb.channels()
-    # => [200, 34, 2, 1]
-    </pre></code>
+        rgb.channels()
+        # => [200, 34, 2, 1]
     
     @name channels
     @methodOf Color#
@@ -5754,7 +5713,6 @@ var __slice = Array.prototype.slice;
         y: 20 + (60 * index)
         width: 60
         height: 60         
-    </pre></code>
     
     @name complement
     @methodOf Color#
@@ -5767,15 +5725,13 @@ var __slice = Array.prototype.slice;
     /**
     Modifies the calling color to make it the complement of its previous value.
     
-    <code><pre>
-    red = Color(255, 0, 0)
+        red = Color(255, 0, 0)
     
-    # modifies red in place to make it into cyan
-    red.complement$()
+        # modifies red in place to make it into cyan
+        red.complement$()
     
-    red.toString()
-    # => 'rgba(0, 255, 255, 1)'
-    </pre></code>
+        red.toString()
+        # => 'rgba(0, 255, 255, 1)'
     
     @name complement$
     @methodOf Color#
@@ -5788,17 +5744,15 @@ var __slice = Array.prototype.slice;
     /**
     A copy of the calling color.
     
-    <code><pre>
-    color = Color(0, 100, 200)
+        color = Color(0, 100, 200)
     
-    copy = color.copy()
+        copy = color.copy()
     
-    color == copy
-    # => false
+        color == copy
+        # => false
     
-    color.equal(copy)
-    # => true
-    </pre></code>
+        color.equal(copy)
+        # => true
     
     @name copy
     @methodOf Color#
@@ -5824,7 +5778,6 @@ var __slice = Array.prototype.slice;
         y: 20 + (60 * index)
         width: 60
         height: 60         
-    </pre></code>
     
     @name darken
     @methodOf Color#
@@ -5838,15 +5791,13 @@ var __slice = Array.prototype.slice;
     /**
     Modifies the color so that it is darkened by `amount` (Lightness of the color ranges from 0 to 1).
     
-    <code><pre>
-    green = Color(0, 255, 0)
+        green = Color(0, 255, 0)
     
-    # Modifies green to be darkGreen
-    green.darken$(0.3)
+        # Modifies green to be darkGreen
+        green.darken$(0.3)
     
-    green.toString()
-    # => 'rgba(0, 102, 0, 1)'
-    </pre></code>
+        green.toString()
+        # => 'rgba(0, 102, 0, 1)'
     
     @name darken$
     @methodOf Color#
@@ -5877,7 +5828,6 @@ var __slice = Array.prototype.slice;
         y: 20 + (60 * index)
         width: 60
         height: 60  
-    </pre></code>
     
     @name desaturate
     @methodOf Color#
@@ -5891,15 +5841,13 @@ var __slice = Array.prototype.slice;
     /**
     The modified color with its saturation reduced by `amount`.
     
-    <code><pre>
-    blue = Color(0, 0, 255)
+        blue = Color(0, 0, 255)
     
-    # modifies blue to be desaturatedBlue
-    blue.desaturate$(0.4)
+        # modifies blue to be desaturatedBlue
+        blue.desaturate$(0.4)
     
-    blue.toString()
-    # => 'rgba(38, 38, 217, 1)'
-    </pre></code>
+        blue.toString()
+        # => 'rgba(38, 38, 217, 1)'
     
     @name desaturate$
     @methodOf Color#
@@ -5917,16 +5865,14 @@ var __slice = Array.prototype.slice;
     /**
     Determine whether two colors are equal. Compares their r, g, b, and alpha values.
     
-    <code><pre>
-    hex = Color('#ffff00')
-    rgb = Color(255, 255, 0)
+        hex = Color('#ffff00')
+        rgb = Color(255, 255, 0)
     
-    hex == rgb
-    # => false
+        hex == rgb
+        # => false
     
-    hex.equal(rgb)
-    # => true
-    </pre></code>
+        hex.equal(rgb)
+        # => true
     
     @name equal
     @methodOf Color#
@@ -5953,7 +5899,6 @@ var __slice = Array.prototype.slice;
         y: 20 + (60 * index)
         width: 60
         height: 60 
-    </pre></code>    
     
     @name grayscale
     @methodOf Color#
@@ -5966,15 +5911,13 @@ var __slice = Array.prototype.slice;
     /**
     The calling color converted to grayscale.
     
-    <code><pre>
-    color = Color(255, 255, 0)
+        color = Color(255, 255, 0)
     
-    # modifies color into gray
-    color.grayscale$()
+        # modifies color into gray
+        color.grayscale$()
     
-    color.toString()
-    # => 'rgba(128, 128, 128, 1)'
-    </pre></code>  
+        color.toString()
+        # => 'rgba(128, 128, 128, 1)'
     
     @name grayscale$
     @methodOf Color#
@@ -6008,7 +5951,6 @@ var __slice = Array.prototype.slice;
       y: 30 
       width: 80
       height: 80 
-    </pre></code>  
     
     @name hue
     @methodOf Color#
@@ -6047,7 +5989,6 @@ var __slice = Array.prototype.slice;
       y: 30 
       width: 80
       height: 80 
-    </pre></code>  
     
     @name lightness
     @methodOf Color#
@@ -6101,7 +6042,6 @@ var __slice = Array.prototype.slice;
         y: 20 + (60 * index)
         width: 60
         height: 60 
-    </pre></code>
     
     @name shiftHue
     @methodOf Color#
@@ -6115,23 +6055,21 @@ var __slice = Array.prototype.slice;
     /**
     The calling color with its hue shifted by `degrees`. This differs from the hue setter in that it adds to the existing hue value and will wrap around 0 and 360.
     
-    <code><pre>
-    magenta = Color(255, 0, 255)
+        magenta = Color(255, 0, 255)
     
-    magenta.hue()
-    # => 300
+        magenta.hue()
+        # => 300
     
-    magenta.shiftHue$(120)
+        magenta.shiftHue$(120)
     
-    # since magenta's hue is 300 we have wrapped
-    # around 360 to end up at 60. Also we have 
-    # modified magenta in place to become yellow
-    magenta.hue()
-    # => 60
+        # since magenta's hue is 300 we have wrapped
+        # around 360 to end up at 60. Also we have 
+        # modified magenta in place to become yellow
+        magenta.hue()
+        # => 60
     
-    magenta.toString()
-    # => 'rgba(255, 255, 0, 1)'
-    </pre></code>
+        magenta.toString()
+        # => 'rgba(255, 255, 0, 1)'
     
     @name shiftHue$
     @methodOf Color#
@@ -6162,7 +6100,6 @@ var __slice = Array.prototype.slice;
         y: 20 + (60 * index)
         width: 60
         height: 60 
-    </pre></code>
     
     @name lighten
     @methodOf Color#
@@ -6176,16 +6113,14 @@ var __slice = Array.prototype.slice;
     /**
     The calling color lightened by `amount` (Lightness of the color ranges from 0 to 1).
     
-    <code><pre>
-    green = Color(0, 255, 0)
+        green = Color(0, 255, 0)
     
-    green.lighten$(0.2)
+        green.lighten$(0.2)
     
-    # we have modified green in place
-    # to become lightGreen
-    green.toString()
-    # => 'rgba(102, 255, 102, 1)'
-    </pre></code>
+        # we have modified green in place
+        # to become lightGreen
+        green.toString()
+        # => 'rgba(102, 255, 102, 1)'
     
     @name lighten$
     @methodOf Color#
@@ -6222,7 +6157,6 @@ var __slice = Array.prototype.slice;
         y: 20 + (60 * (if index > 1 then 1 else 0))
         width: 60
         height: 60 
-    </pre></code>
     
     @name mixWith
     @methodOf Color#
@@ -6238,25 +6172,23 @@ var __slice = Array.prototype.slice;
     A copy of the calling color mixed with `other` using `amount` as the 
     mixing ratio. If amount is not passed, then the colors are mixed evenly.
     
-    <code><pre>
-    red = Color(255, 0, 0)
-    yellow = Color(255, 255, 0)
-    anotherRed = Color(255, 0, 0)
+        red = Color(255, 0, 0)
+        yellow = Color(255, 255, 0)
+        anotherRed = Color(255, 0, 0)
     
-    # With no amount argument the colors are mixed evenly
-    red.mixWith$(yellow)
+        # With no amount argument the colors are mixed evenly
+        red.mixWith$(yellow)
     
-    # We have modified red in place to be orange 
-    red.toString()
-    # => 'rgba(255, 128, 0, 1)'    
+        # We have modified red in place to be orange 
+        red.toString()
+        # => 'rgba(255, 128, 0, 1)'    
     
-    # With an amount of 0.3 we are mixing the color 30% red and 70% yellow
-    anotherRed.mixWith$(yellow, 0.3)
+        # With an amount of 0.3 we are mixing the color 30% red and 70% yellow
+        anotherRed.mixWith$(yellow, 0.3)
     
-    # We have modified `anotherRed` in place to be somethingCloseToOrange 
-    anotherRed.toString()
-    # => rgba(255, 179, 0, 1)
-    </pre></code>
+        # We have modified `anotherRed` in place to be somethingCloseToOrange 
+        anotherRed.toString()
+        # => rgba(255, 179, 0, 1)
     
     @name mixWith$
     @methodOf Color#
@@ -6298,7 +6230,6 @@ var __slice = Array.prototype.slice;
         y: 20 + (60 * index)
         width: 60
         height: 60 
-    </pre></code>
     
     @name saturate
     @methodOf Color#
@@ -6312,21 +6243,19 @@ var __slice = Array.prototype.slice;
     /**
     The calling color with its saturation increased by `amount`.
     
-    <code><pre>
-    color = Color(50, 50, 200)
+        color = Color(50, 50, 200)
     
-    color.saturation()
-    # => 0.6
+        color.saturation()
+        # => 0.6
     
-    color.saturate$(0.2)
+        color.saturate$(0.2)
     
-    # We have modified color in place and increased its saturation to 0.8
-    color.saturation()
-    # => 0.8
+        # We have modified color in place and increased its saturation to 0.8
+        color.saturation()
+        # => 0.8
     
-    color.toString()
-    # => rgba(25, 25, 225, 1)
-    </pre></code>
+        color.toString()
+        # => rgba(25, 25, 225, 1)
     
     @name saturate$
     @methodOf Color#
@@ -6360,7 +6289,6 @@ var __slice = Array.prototype.slice;
       y: 30 
       width: 80
       height: 80     
-    </pre></code>
     
     @name saturation
     @methodOf Color#
@@ -6393,17 +6321,15 @@ var __slice = Array.prototype.slice;
     /**
     returns the Hex representation of the color. Exclude the leading `#` by passing false. 
     
-    <code><pre>
-    color = Color('hsl(60, 1, 0.5)')
+        color = Color('hsl(60, 1, 0.5)')
     
-    # passing nothing will leave the `#` intact
-    color.toHex()
-    # => '#ffff00'
+        # passing nothing will leave the `#` intact
+        color.toHex()
+        # => '#ffff00'
     
-    # passing false will remove the `#`
-    color.toHex(false)
-    # => 'ffff00'
-    </pre></code>
+        # passing false will remove the `#`
+        color.toHex(false)
+        # => 'ffff00'
     
     @name toHex
     @methodOf Color#
@@ -6434,12 +6360,10 @@ var __slice = Array.prototype.slice;
     /**
     returns an array of the hue, saturation, lightness, and alpha values of the color. 
     
-    <code><pre>
-    magenta = Color(255, 0, 255)
+        magenta = Color(255, 0, 255)
     
-    magenta.toHsl()
-    # => [300, 1, 0.5, 1]
-    </pre></code>  
+        magenta.toHsl()
+        # => [300, 1, 0.5, 1]
     
     @name toHsl
     @methodOf Color#
@@ -6509,12 +6433,10 @@ var __slice = Array.prototype.slice;
     /**
     returns string rgba representation of the color. 
     
-    <code><pre>
-    red = Color('#ff0000')
+        red = Color('#ff0000')
     
-    red.toString()
-    # => 'rgba(255, 0, 0, 1)'
-    </pre></code>
+        red.toString()
+        # => 'rgba(255, 0, 0, 1)'
     
     @name toString
     @methodOf Color#
@@ -6546,7 +6468,6 @@ var __slice = Array.prototype.slice;
         y: 20 + (60 * index)
         width: 60
         height: 60     
-    </pre></code>
     
     @name transparentize
     @methodOf Color#
@@ -6559,18 +6480,16 @@ var __slice = Array.prototype.slice;
     /**
     The calling color with its alpha reduced by `amount`.
     
-    <code><pre>
-    color = Color(0, 0, 0, 1)
+        color = Color(0, 0, 0, 1)
     
-    color.a
-    # => 1
+        color.a
+        # => 1
     
-    # We modify color in place
-    color.transparentize$(0.5)
+        # We modify color in place
+        color.transparentize$(0.5)
     
-    color.a
-    # => 0.5
-    </pre></code>
+        color.a
+        # => 0.5
     
     @name transparentize$
     @methodOf Color#
@@ -6603,7 +6522,6 @@ var __slice = Array.prototype.slice;
         y: 20 + (60 * index)
         width: 60
         height: 60     
-    </pre></code>
     
     @name opacify
     @methodOf Color#
@@ -6616,18 +6534,16 @@ var __slice = Array.prototype.slice;
     /**
     The calling color with its alpha increased by `amount`.
     
-    <code><pre>
-    color = Color(0, 0, 0, 0)
+        color = Color(0, 0, 0, 0)
     
-    color.a
-    # => 0
+        color.a
+        # => 0
     
-    # We modify color in place
-    color.opacify$(0.25)
+        # We modify color in place
+        color.opacify$(0.25)
     
-    color.a
-    # => 0.25
-    </pre></code>
+        color.a
+        # => 0.25
     
     @name opacify$
     @methodOf Color#
@@ -6642,13 +6558,11 @@ var __slice = Array.prototype.slice;
   /**
   returns a random color.
   
-  <code><pre>
-  Color.random().toString()
-  # => 'rgba(213, 144, 202, 1)'
-  
-  Color.random().toString()
-  # => 'rgba(1, 211, 24, 1)'
-  </pre></code>
+      Color.random().toString()
+      # => 'rgba(213, 144, 202, 1)'
+    
+      Color.random().toString()
+      # => 'rgba(1, 211, 24, 1)'
   
   @name random
   @methodOf Color
@@ -6661,22 +6575,20 @@ var __slice = Array.prototype.slice;
   /**
   Mix two colors. Behaves just like `#mixWith` except that you are passing two colors.
   
-  <code><pre>
-  red = Color(255, 0, 0)
-  yellow = Color(255, 255, 0)
-  
-  # With no amount argument the colors are mixed evenly
-  orange = Color.mix(red, yellow)
-  
-  orange.toString()
-  # => 'rgba(255, 128, 0, 1)'    
-  
-  # With an amount of 0.3 we are mixing the color 30% red and 70% yellow
-  somethingCloseToOrange = Color.mix(red, yellow, 0.3)
-  
-  somethingCloseToOrange.toString()
-  # => rgba(255, 179, 0, 1)
-  </pre></code>
+      red = Color(255, 0, 0)
+      yellow = Color(255, 255, 0)
+    
+      # With no amount argument the colors are mixed evenly
+      orange = Color.mix(red, yellow)
+    
+      orange.toString()
+      # => 'rgba(255, 128, 0, 1)'    
+    
+      # With an amount of 0.3 we are mixing the color 30% red and 70% yellow
+      somethingCloseToOrange = Color.mix(red, yellow, 0.3)
+    
+      somethingCloseToOrange.toString()
+      # => rgba(255, 179, 0, 1)
   
   @name mix
   @methodOf Color
@@ -6718,31 +6630,29 @@ var __slice = Array.prototype.slice;
 The Controllable module adds simple movement
 when up, down, left, or right are held.
 
-<code><pre>
-  # create a player and include Controllable
-  player = GameObject
-    width: 5
-    height: 17
-    x: 15
-    y: 30
-    speed:  2
-
-  player.include Controllable
-
-  # hold the left arrow key, then
-  # update the player
-  player.update()
-
-  # the player is moved left according to his speed
-  player.I.x
-  # => 13
-
-  # We keep track of the direction the object is
-  # facing in case you need that (eg. for attack direction)
-  player.I.facing
-  # => player.I.facing 
-  # => Point(-1, 0)
-</pre></code>
+      # create a player and include Controllable
+      player = GameObject
+        width: 5
+        height: 17
+        x: 15
+        y: 30
+        speed:  2
+    
+      player.include Controllable
+    
+      # hold the left arrow key, then
+      # update the player
+      player.update()
+    
+      # the player is moved left according to his speed
+      player.I.x
+      # => 13
+    
+      # We keep track of the direction the object is
+      # facing in case you need that (eg. for attack direction)
+      player.I.facing
+      # => player.I.facing 
+      # => Point(-1, 0)
 
 @name Controllable
 @module
@@ -6781,29 +6691,25 @@ Controllable = function(I, self) {
 The Cooldown module provides a declarative way to manage cooldowns on
 GameObject's properties.
 
-<code><pre>
-# Health regeneration
-player = GameObject
-  health: 50
+    # Health regeneration
+    player = GameObject
+      health: 50
+    
+    player.cooldown "health",
+      target: 100
+    
+    player.update(1)
 
-player.cooldown "health",
-  target: 100
-
-player.update(1)
-</pre></code>
-
-<code><pre>
-# Shoot Timeout
-player = GameObject()
-
-player.cooldown "shootTimer"
-
-player.I.shootTimer = 10 # => Pew! Pew!
-
-player.update(1)
-
-player.I.shootTimer # => 9
-</pre></code>
+    # Shoot Timeout
+    player = GameObject()
+    
+    player.cooldown "shootTimer"
+    
+    player.I.shootTimer = 10 # => Pew! Pew!
+    
+    player.update(1)
+    
+    player.I.shootTimer # => 9
 
 @name Cooldown
 @module
@@ -6853,20 +6759,18 @@ The Debuggable Module provides a simple API to easily display
 an object's properties onscreen. This mixin comes with predefined
 attribute filters so that you can exclude irrelevant data.
 
-<code><pre>
-player = GameObject
-  x: 40
-  y: 14
-  spriteName: null
-  numericErrorProperty: NaN
-
-player.include Debuggable
-
-# sets up debug output for all player's properties
-# at the starting position (0, 0)
-player.debug
-  filter: 'all'
-</pre></code>
+    player = GameObject
+      x: 40
+      y: 14
+      spriteName: null
+      numericErrorProperty: NaN
+    
+    player.include Debuggable
+    
+    # sets up debug output for all player's properties
+    # at the starting position (0, 0)
+    player.debug
+      filter: 'all'
 
 Debuggable module
 @name Debuggable
@@ -7039,43 +6943,41 @@ Debuggable = function(I, self) {
     /**
     Enable debugging display for the calling GameObject.
     
-    <code><pre>
-    player = GameObject
-      x: 40
-      y: 14
-      spriteName: null
-      numericErrorProperty: NaN
-    
-    player.include Debuggable
-    
-    # sets up debug output for all player's properties
-    # at the starting position (0, 0)
-    player.debug
-      filter: 'all'
-    
-    player.I.y = 45
-    
-    # sets up debug output for only properties that have
-    # changed since initialization. In this case only y
-    # would be displayed.
-    player.debug
-      filter: 'changed'
-    
-    # sets up debug output for properties that are <code>undefined</code>, 
-    # <code>null</code>, or <code>NaN</code>. In this case spriteName and
-    # numericErrorProperty would be displayed.
-    player.debug
-      filter: 'undefined'
-    
-    # sets up debug output using all possible configuration options
-    player.debug
-      bounds: true # set this to false to disable visual debugging of the object's bounding box
-      color: 'red' # color of debug text
-      filter: 'all'
-      x: 30 # x position to start printing debug information
-      y: 50 # y position to start printing debug information
-      velocity: true # set this to false to disable visual debugging of the object's velocity
-    </pre></code>
+        player = GameObject
+          x: 40
+          y: 14
+          spriteName: null
+          numericErrorProperty: NaN
+        
+        player.include Debuggable
+      
+        # sets up debug output for all player's properties
+        # at the starting position (0, 0)
+        player.debug
+          filter: 'all'
+        
+        player.I.y = 45
+        
+        # sets up debug output for only properties that have
+        # changed since initialization. In this case only y
+        # would be displayed.
+        player.debug
+          filter: 'changed'
+        
+        # sets up debug output for properties that are <code>undefined</code>, 
+        # <code>null</code>, or <code>NaN</code>. In this case spriteName and
+        # numericErrorProperty would be displayed.
+        player.debug
+          filter: 'undefined'
+        
+        # sets up debug output using all possible configuration options
+        player.debug
+          bounds: true # set this to false to disable visual debugging of the object's bounding box
+          color: 'red' # color of debug text
+          filter: 'all'
+          x: 30 # x position to start printing debug information
+          y: 50 # y position to start printing debug information
+          velocity: true # set this to false to disable visual debugging of the object's velocity
     
     @name debug
     @methodOf Debuggable#
@@ -7099,23 +7001,21 @@ Debuggable = function(I, self) {
     /**
     Toggle display of debug information.
     
-    <code><pre>
-    player = GameObject()
-    
-    player.include Debuggable
-    
-    # enables debug display
-    player.debug()
-    
-    # disables debug display
-    player.toggleDisable()
-    
-    # if false is passed to toggleDisplay, then debugging is disabled.  
-    player.toggleDisplay(false)
-    
-    # if true is passed to toggleDisplay, then debugging is enabled.
-    player.toggleDisplay(true)
-    </pre></code>
+        player = GameObject()
+      
+        player.include Debuggable
+      
+        # enables debug display
+        player.debug()
+        
+        # disables debug display
+        player.toggleDisable()
+        
+        # if false is passed to toggleDisplay, then debugging is disabled.  
+        player.toggleDisplay(false)
+      
+        # if true is passed to toggleDisplay, then debugging is enabled.
+        player.toggleDisplay(true)
     
     @name toggleDebug
     @methodOf Debuggable#
@@ -7141,26 +7041,24 @@ Binds a step listener to update the transform of the object.
 
 Autoloads the sprite specified in I.spriteName, if any.
 
-<code><pre>
-player = Core
-  x: 15
-  y: 30
-  width: 5
-  height: 5
-  sprite: "my_cool_sprite"
-
-engine.bind 'draw', (canvas) ->
-  player.draw(canvas) 
-# => Uncaught TypeError: Object has no method 'draw'
-
-player.include(Drawable)
-
-engine.bind 'draw', (canvas) ->
-  player.draw(canvas)
-# => if you have a sprite named "my_cool_sprite" in your images folder
-# then it will be drawn. Otherwise, a rectangle positioned at x: 15 and
-# y: 30 with width and height 5 will be drawn.
-</pre></code>
+    player = Core
+      x: 15
+      y: 30
+      width: 5
+      height: 5
+      sprite: "my_cool_sprite"
+    
+    engine.bind 'draw', (canvas) ->
+      player.draw(canvas) 
+    # => Uncaught TypeError: Object has no method 'draw'
+    
+    player.include(Drawable)
+    
+    engine.bind 'draw', (canvas) ->
+      player.draw(canvas)
+    # => if you have a sprite named "my_cool_sprite" in your images folder
+    # then it will be drawn. Otherwise, a rectangle positioned at x: 15 and
+    # y: 30 with width and height 5 will be drawn.
 
 @name Drawable
 @module
@@ -7172,21 +7070,19 @@ engine.bind 'draw', (canvas) ->
 Triggered every time the object should be drawn. A canvas is passed as
 the first argument. 
 
-<code><pre>
-player = Core
-  x: 0
-  y: 10
-  width: 5
-  height: 5
-
-player.bind "draw", (canvas) ->
-  # Text will be drawn positioned relatively to the object.
-  canvas.drawText
-    text: "Hey, drawing stuff is pretty easy."
-    color: "white"
-    x: 5
-    y: 5
-</pre></code>
+    player = Core
+      x: 0
+      y: 10
+      width: 5
+      height: 5
+    
+    player.bind "draw", (canvas) ->
+      # Text will be drawn positioned relatively to the object.
+      canvas.drawText
+        text: "Hey, drawing stuff is pretty easy."
+        color: "white"
+        x: 5
+        y: 5
 
 @name draw
 @methodOf Drawable#
@@ -7530,14 +7426,12 @@ Emitterable = function(I, self) {
   /**
   Called after the engine draws on the canvas. The current camera transform is applied.
   
-  <code><pre>
-  engine.bind "draw", (canvas) ->
-    # print some directions for the player
-    canvas.drawText
-      text: "Go this way =>"
-      x: 200
-      y: 200 
-  </pre></code>
+      engine.bind "draw", (canvas) ->
+        # print some directions for the player
+        canvas.drawText
+          text: "Go this way =>"
+          x: 200
+          y: 200 
   
   @name draw
   @methodOf Engine#
@@ -7550,18 +7444,16 @@ Emitterable = function(I, self) {
   The current camera transform is not applied. This is great for
   adding overlays.
   
-  <code><pre>
-  engine.bind "overlay", (canvas) ->
-    # print the player's health. This will be
-    # positioned absolutely according to the viewport.
-    canvas.drawText
-      text: "HEALTH:"
-      position: Point(20, 20)
-  
-    canvas.drawText
-      text: player.health()
-      position: Point(50, 20)
-  </pre></code>
+      engine.bind "overlay", (canvas) ->
+        # print the player's health. This will be
+        # positioned absolutely according to the viewport.
+        canvas.drawText
+          text: "HEALTH:"
+          position: Point(20, 20)
+    
+        canvas.drawText
+          text: player.health()
+          position: Point(50, 20)
   
   @name overlay
   @methodOf Engine#
@@ -7613,9 +7505,7 @@ Emitterable = function(I, self) {
       /**
       Start the game simulation.
       
-      <code><pre>
-      engine.start()
-      </pre></code>
+          engine.start()
       
       @methodOf Engine#
       @name start
@@ -7629,9 +7519,7 @@ Emitterable = function(I, self) {
       /**
       Stop the simulation.
       
-      <code><pre>
-      engine.stop()
-      </pre></code>
+          engine.stop()
       
       @methodOf Engine#
       @name stop
@@ -7642,9 +7530,7 @@ Emitterable = function(I, self) {
       /**
       Pause the game and step through 1 update of the engine.
       
-      <code><pre>
-      engine.frameAdvance()
-      </pre></code>
+          engine.frameAdvance()
       
       @methodOf Engine#
       @name frameAdvance
@@ -7658,9 +7544,7 @@ Emitterable = function(I, self) {
       /**
       Resume the game.
       
-      <code><pre>
-      engine.play()
-      </pre></code>
+          engine.play()
       
       @methodOf Engine#
       @name play
@@ -7671,9 +7555,7 @@ Emitterable = function(I, self) {
       /**
       Toggle the paused state of the simulation.
       
-      <code><pre>
-      engine.pause()
-      </pre></code>
+          engine.pause()
       
       @methodOf Engine#
       @name pause
@@ -7689,17 +7571,15 @@ Emitterable = function(I, self) {
       /**
       Query the engine to see if it is paused.
       
-      <code><pre>
-      engine.pause()
-      
-      engine.paused()
-      # true
-      
-      engine.play()
-      
-      engine.paused()
-      # false
-      </pre></code>
+          engine.pause()
+          
+          engine.paused()
+          # true
+          
+          engine.play()
+          
+          engine.paused()
+          # false
       
       @methodOf Engine#
       @name paused
@@ -7710,9 +7590,7 @@ Emitterable = function(I, self) {
       /**
       Change the framerate of the game. The default framerate is 30 fps.
       
-      <code><pre>
-      engine.setFramerate(60)
-      </pre></code>
+          engine.setFramerate(60)
       
       @methodOf Engine#
       @name setFramerate
@@ -7904,11 +7782,9 @@ Engine.Delay = function(I, self) {
     /**
     Execute a callback after a number of steps have passed.
     
-    <code><pre>
-    engine.delay 5, ->
-      engine.add
-        class: "Ghost"
-    </pre></code>
+        engine.delay 5, ->
+          engine.add
+            class: "Ghost"
     
     @name delay
     @methodOf Engine#
@@ -7930,12 +7806,10 @@ Engine.Delay = function(I, self) {
 /**
 The <code>FPSCounter</code> module tracks and displays the framerate.
 
-<code><pre>
-window.engine = Engine
-  ...
-  includedModules: ["FPSCounter"]
-  FPSColor: "#080"
-</pre></code>
+    window.engine = Engine
+      ...
+      includedModules: ["FPSCounter"]
+      FPSColor: "#080"
 
 @name FPSCounter
 @fieldOf Engine
@@ -8050,24 +7924,22 @@ Engine.GameState = function(I, self) {
 /**
 The <code>Joysticks</code> module gives the engine access to joysticks.
 
-<code><pre>
-# First you need to add the joysticks module to the engine
-window.engine = Engine
-  ...
-  includedModules: ["Joysticks"]
-# Then you need to get a controller reference
-# id = 0 for player 1, etc.
-controller = engine.controller(id)
-
-# Point indicating direction primary axis is held
-direction = controller.position()
-
-# Check if buttons are held
-controller.actionDown("A")
-controller.actionDown("B")
-controller.actionDown("X")
-controller.actionDown("Y")
-</pre></code>
+    # First you need to add the joysticks module to the engine
+    window.engine = Engine
+      ...
+      includedModules: ["Joysticks"]
+    # Then you need to get a controller reference
+    # id = 0 for player 1, etc.
+    controller = engine.controller(id)
+    
+    # Point indicating direction primary axis is held
+    direction = controller.position()
+    
+    # Check if buttons are held
+    controller.actionDown("A")
+    controller.actionDown("B")
+    controller.actionDown("X")
+    controller.actionDown("Y")
 
 @name Joysticks
 @fieldOf Engine
@@ -8145,9 +8017,7 @@ Engine.Levels = function(I, self) {
     /**
     Load map for the next level.
     
-    <code><pre>
-    engine.nextLevel()
-    </pre></code>
+        engine.nextLevel()
     
     @name nextLevel
     @methodOf Engine#
@@ -8166,9 +8036,7 @@ Engine.Levels = function(I, self) {
     /**
     Load map named <code>level</code>
     
-    <code><pre>
-    engine.goToLevel 'bossFight'
-    </pre></code>
+        engine.goToLevel 'bossFight'
     
     @name goToLevel
     @methodOf Engine#
@@ -8179,9 +8047,7 @@ Engine.Levels = function(I, self) {
     /**
     Reload the current level. Useful for retrying after a player dies.
     
-    <code><pre>
-    engine.reloadLevel()
-    </pre></code>
+        engine.reloadLevel()
     
     @name reloadLevel
     @methodOf Engine#
@@ -8230,28 +8096,26 @@ Engine.Selector = function(I, self) {
     /**
     Get the game object matching the given selector that is closest to the given position.
     
-    <code><pre>
-    player = engine.add
-      x: 0
-      y: 0
-    
-    enemy1 = engine.add
-      enemy: true
-      x: 10
-      y: 0
-    
-    enemy2 = engine.add
-      enemy: true
-      x: 0
-      y: 15
-    
-    player2 = engine.add
-      x: 0
-      y: 10
-    
-    equals engine.closest(".enemy", player.position()), enemy1
-    equals engine.closest(".enemy", player2.position()), enemy2
-    </pre></code>
+        player = engine.add
+          x: 0
+          y: 0
+      
+        enemy1 = engine.add
+          enemy: true
+          x: 10
+          y: 0
+      
+        enemy2 = engine.add
+          enemy: true
+          x: 0
+          y: 15
+      
+        player2 = engine.add
+          x: 0
+          y: 10
+      
+        equals engine.closest(".enemy", player.position()), enemy1
+        equals engine.closest(".enemy", player2.position()), enemy2
     
     @param {String} selector
     @param {Point} position
@@ -8266,40 +8130,38 @@ Engine.Selector = function(I, self) {
     can select objects by id, class, or attributes. Note that this method always returns an Array,
     so if you are trying to find only one object you will need something like <code>engine.find("Enemy").first()</code>.
     
-    <code><pre>
-    player = engine.add
-      class: "Player"
-    
-    enemy = engine.add
-      class: "Enemy"
-      speed: 5
-      x: 0
-    
-    distantEnemy = engine.add
-      class "Enemy"
-      x: 500
-    
-    boss = engine.add
-      class: "Enemy"
-      id: "Boss"
-      x: 0
-    
-    # to select an object by id use "#anId"
-    engine.find "#Boss"
-    # => [boss]
-    
-    # to select an object by class use "MyClass"
-    engine.find "Enemy"
-    # => [enemy, distantEnemy, boss]
-    
-    # to select an object by properties use ".someProperty" or ".someProperty=someValue"
-    engine.find ".speed=5"
-    # => [enemy]
-    
-    # You may mix and match selectors.
-    engine.find "Enemy.x=0"
-    # => [enemy, boss] # doesn't return distantEnemy
-    </pre></code>
+        player = engine.add
+          class: "Player"
+      
+        enemy = engine.add
+          class: "Enemy"
+          speed: 5
+          x: 0
+      
+        distantEnemy = engine.add
+          class "Enemy"
+          x: 500
+      
+        boss = engine.add
+          class: "Enemy"
+          id: "Boss"
+          x: 0
+      
+        # to select an object by id use "#anId"
+        engine.find "#Boss"
+        # => [boss]
+      
+        # to select an object by class use "MyClass"
+        engine.find "Enemy"
+        # => [enemy, distantEnemy, boss]
+      
+        # to select an object by properties use ".someProperty" or ".someProperty=someValue"
+        engine.find ".speed=5"
+        # => [enemy]
+      
+        # You may mix and match selectors.
+        engine.find "Enemy.x=0"
+        # => [enemy, boss] # doesn't return distantEnemy
     
     @name find
     @methodOf Engine#
@@ -8445,23 +8307,21 @@ specified the object will have an unlimited duration.
 
 This module is included by default in <code>GameObjects</code>
 
-<code><pre>
-enemy = GameObject
-  x: 50
-  y: 30
-  duration: 5
-
-enemy.include Expirable
-
-enemy.I.active
-# => true
-
-5.times ->
-  enemy.update(1)
-
-enemy.I.active
-# => false
-</pre></code>
+    enemy = GameObject
+      x: 50
+      y: 30
+      duration: 5
+    
+    enemy.include Expirable
+    
+    enemy.I.active
+    # => true
+    
+    5.times ->
+      enemy.update(1)
+    
+    enemy.I.active
+    # => false
 
 @name Expirable
 @module
@@ -8521,24 +8381,22 @@ Fadeable = function(I, self) {
     A convenient way to set the fade instance variables on a sprite. You can modify the
     instance variables by hand but the suggested way to do it is through this method.
     
-    <code><pre>
-    player = GameObject()
-    
-    player.include(Fadeable)
-    
-    fadedOut = false
-    
-    # this will fade the player object out over the next 30 frames. 
-    # once the player is faded out the fadedOut variable will be set to true.
-    player.fadeOut 30, (player) ->
-      fadedOut = true
-    
-    30.times ->
-      player.update()
-    
-    fadedOut
-    # => true
-    </pre></code>
+        player = GameObject()
+      
+        player.include(Fadeable)
+      
+        fadedOut = false
+      
+        # this will fade the player object out over the next 30 frames. 
+        # once the player is faded out the fadedOut variable will be set to true.
+        player.fadeOut 30, (player) ->
+          fadedOut = true
+      
+        30.times ->
+          player.update()
+      
+        fadedOut
+        # => true
     
     @name fadeOut
     @methodOf Fadeable#
@@ -8593,19 +8451,17 @@ Flickerable = function(I, self) {
     A convenient way to set the flicker instance variables on a sprite. You can modify the
     instance variables by hand but the suggested way to do it is through this method.
     
-    <code><pre>
-    player = GameObject()
-    
-    player.include(Flickerable)
-    
-    player.flicker()
-    # => This causes the sprite to flicker between full opacity 
-    # => and 50% opacity every 3 frames for 30 frames
-    
-    player.flicker(90, 5, 0.3)
-    # => This causes the sprite to flicker between full opacity
-    # => and 30% opacity every 5 frames for 90 frames
-    </pre></code>
+        player = GameObject()
+      
+        player.include(Flickerable)
+      
+        player.flicker()
+        # => This causes the sprite to flicker between full opacity 
+        # => and 50% opacity every 3 frames for 30 frames
+      
+        player.flicker(90, 5, 0.3)
+        # => This causes the sprite to flicker between full opacity
+        # => and 30% opacity every 5 frames for 90 frames
     
     @name flicker
     @methodOf Flickerable#
@@ -8634,34 +8490,32 @@ This method relies on both objects having <code>position</code> methods.
 
 Include this module by calling <code>self.include Follow</code>
 
-<code><pre>
-player = GameObject
-  x: 50
-  y: 50
-  width: 10
-  height: 10
-
-enemy = GameObject
-  x: 100
-  y: 50
-  width: 10
-  height: 10
-  velocity: Point(0, 0)
-  speed: 2
-
-enemy.include Follow
-
-# Make an enemy follow the player
-enemy.follow(player)
-
-# now the enemy's direction will point toward the player
-enemy.I.direction
-# => Point(-1, 0)
-
-# you can use this direction to set a velocity for your object.
-enemy.I.velocity = enemy.I.direction.scale(I.speed)
-
-</pre></code>
+    player = GameObject
+      x: 50
+      y: 50
+      width: 10
+      height: 10
+    
+    enemy = GameObject
+      x: 100
+      y: 50
+      width: 10
+      height: 10
+      velocity: Point(0, 0)
+      speed: 2
+    
+    enemy.include Follow
+    
+    # Make an enemy follow the player
+    enemy.follow(player)
+    
+    # now the enemy's direction will point toward the player
+    enemy.I.direction
+    # => Point(-1, 0)
+    
+    # you can use this direction to set a velocity for your object.
+    enemy.I.velocity = enemy.I.direction.scale(I.speed)
+    
 
 @name Follow
 @module
@@ -8681,13 +8535,11 @@ Follow = function(I, self) {
     /**
     Set your velocity to follow another object.
     
-    <code><pre>
-    enemy.follow(player)
-    
-    # => The enemy now has it's velocity attribute set in
-    # the direction of the player, with magnitude equal to
-    # the enemy's speed
-    </pre></code>
+        enemy.follow(player)
+      
+        # => The enemy now has it's velocity attribute set in
+        # the direction of the player, with magnitude equal to
+        # the enemy's speed
     
     @name follow
     @methodOf Follow#
@@ -8762,15 +8614,13 @@ may be bound with <code>object.bind(eventName, callback)</code>
 /**
 Triggered when the object is created.
 
-<code><pre>
-enemyCount = 0
-
-enemy = engine.add
-  class: "Enemy"
-
-enemy.bind 'create', ->
-  enemyCount++
-</pre></code>
+    enemyCount = 0
+    
+    enemy = engine.add
+      class: "Enemy"
+    
+    enemy.bind 'create', ->
+      enemyCount++
 
 @name create
 @methodOf GameObject#
@@ -8780,13 +8630,11 @@ enemy.bind 'create', ->
 Triggered when object is destroyed. Use 
 the destroy event to add particle effects, play sounds, etc.
 
-<code><pre>
-bomb = GameObject()
-
-bomb.bind 'destroy', ->
-  bomb.explode()
-  Sound.play "Kaboom"
-</pre></code>
+    bomb = GameObject()
+    
+    bomb.bind 'destroy', ->
+      bomb.explode()
+      Sound.play "Kaboom"
 
 @name destroy
 @methodOf GameObject#
@@ -8795,19 +8643,17 @@ bomb.bind 'destroy', ->
 /**
 Triggered during every update step.
 
-<code><pre>
-player = GameObject()
-
-player.bind 'step', ->
-  # check to see if keys are being pressed and 
-  # change the player's velocity
-  if keydown.left
-    player.velocity(Point(-1, 0))
-  else if keydown.right
-    player.velocity(Point(1, 0))
-  else
-    player.velocity(Point(0, 0))
-</pre></code>
+    player = GameObject()
+    
+    player.bind 'step', ->
+      # check to see if keys are being pressed and 
+      # change the player's velocity
+      if keydown.left
+        player.velocity(Point(-1, 0))
+      else if keydown.right
+        player.velocity(Point(1, 0))
+      else
+        player.velocity(Point(0, 0))
 
 @name step
 @methodOf GameObject#
@@ -8816,21 +8662,19 @@ player.bind 'step', ->
 /**
 Triggered every update after the <code>step</code> event is triggered.
 
-<code><pre>
-player = GameObject()
-
-# we can really use the update and 
-# step events almost interchangebly
-player.bind 'update', ->
-  # check to see if keys are being pressed and 
-  # change the player's velocity
-  if keydown.left
-    player.velocity(Point(-1, 0))
-  else if keydown.right
-    player.velocity(Point(1, 0))
-  else
-    player.velocity(Point(0, 0))
-</pre></code>
+    player = GameObject()
+    
+    # we can really use the update and 
+    # step events almost interchangebly
+    player.bind 'update', ->
+      # check to see if keys are being pressed and 
+      # change the player's velocity
+      if keydown.left
+        player.velocity(Point(-1, 0))
+      else if keydown.right
+        player.velocity(Point(1, 0))
+      else
+        player.velocity(Point(0, 0))
 
 @name update
 @methodOf GameObject#
@@ -8840,12 +8684,10 @@ player.bind 'update', ->
 Triggered when the object is removed from
 the engine. Use the remove event to handle any clean up.
 
-<code><pre>
-boss = GameObject()
-
-boss.bind 'remove', ->
-  unlockDoorToLevel2()
-</pre></code>
+    boss = GameObject()
+    
+    boss.bind 'remove', ->
+      unlockDoorToLevel2()
 
 @name remove
 @methodOf GameObject#
@@ -8854,7 +8696,7 @@ boss.bind 'remove', ->
 var GameObject;
 
 GameObject = function(I) {
-  var autobindEvents, defaultModules, modules, self;
+  var defaultModules, modules, self;
   I || (I = {});
   /**
   @name {Object} I Instance variables 
@@ -8905,18 +8747,6 @@ GameObject = function(I) {
   modules = modules.without(I.excludedModules.invoke('constantize'));
   modules.each(function(Module) {
     return self.include(Module);
-  });
-  self.attrAccessor("solid");
-  autobindEvents = ['create', 'destroy', 'step'];
-  autobindEvents.each(function(eventName) {
-    var event;
-    if (event = I[eventName]) {
-      if (typeof event === "function") {
-        return self.bind(eventName, event);
-      } else {
-        return self.bind(eventName, eval("(function() {" + event + "})"));
-      }
-    }
   });
   return self;
 };
@@ -8995,17 +8825,15 @@ GameState = function(I) {
     The add method creates and adds an object to the game world. Two
     other events are triggered around this one: beforeAdd and afterAdd.
     
-    <code><pre>
-    # you can add arbitrary entityData and
-    # the engine will make it into a GameObject
-    engine.add 
-      x: 50
-      y: 30
-      color: "red"
+        # you can add arbitrary entityData and
+        # the engine will make it into a GameObject
+        engine.add 
+          x: 50
+          y: 30
+          color: "red"
     
-    player = engine.add
-      class: "Player"
-    </pre></code>
+        player = engine.add
+          class: "Player"
     
     @name add
     @methodOf Engine#
@@ -9102,11 +8930,9 @@ GameState.SaveState = function(I, self) {
     /**
     Save the current game state and returns a JSON object representing that state.
     
-    <code><pre>
-    engine.bind 'update', ->
-      if justPressed.s
-        engine.saveState()
-    </pre></code>
+        engine.bind 'update', ->
+          if justPressed.s
+            engine.saveState()
     
     @name saveState
     @methodOf GameState#
@@ -9120,17 +8946,15 @@ GameState.SaveState = function(I, self) {
     /**
     Loads the game state passed in, or the last saved state, if any.
     
-    <code><pre>
-    engine.bind 'update', ->
-      if justPressed.l
-        # loads the last saved state
-        engine.loadState()
-    
-      if justPressed.o
-        # removes all game objects, then reinstantiates 
-        # them with the entityData passed in
-        engine.loadState([{x: 40, y: 50, class: "Player"}, {x: 0, y: 0, class: "Enemy"}, {x: 500, y: 400, class: "Boss"}])
-    </pre></code>
+        engine.bind 'update', ->
+          if justPressed.l
+            # loads the last saved state
+            engine.loadState()
+      
+          if justPressed.o
+            # removes all game objects, then reinstantiates 
+            # them with the entityData passed in
+            engine.loadState([{x: 40, y: 50, class: "Player"}, {x: 0, y: 0, class: "Enemy"}, {x: 500, y: 400, class: "Boss"}])
     
     @name loadState
     @methodOf GameState#
@@ -9148,16 +8972,14 @@ GameState.SaveState = function(I, self) {
     /**
     Reloads the current game state, useful for hotswapping code.
     
-    <code><pre>
-    engine.I.objects.each (object) ->
-      # bring all objects to (0, 0) for some reason
-      object.I.x = 0
-      object.I.y = 0
-    
-    # reload all objects to make sure
-    # they are at (0, 0)  
-    engine.reload()
-    </pre></code>
+        engine.I.objects.each (object) ->
+          # bring all objects to (0, 0) for some reason
+          object.I.x = 0
+          object.I.y = 0
+      
+        # reload all objects to make sure
+        # they are at (0, 0)  
+        engine.reload()
     
     @name reload
     @methodOf GameState#
@@ -9246,34 +9068,32 @@ LevelState = function(I) {
 The Metered module provides a simple drop-in
 meter ui to track arbitrary numeric attributes.
 
-<code><pre>
-player = GameObject
-  health: 100
-  maxHealth: 100
-
-player.include Metered
-
-enemy = GameObject
-  health: 500
-
-enemy.include Metered
-
-someOtherObject = GameObject
-
-someOtherObject.include Metered
-
-player.meter 'health'
-# => Sets up a health meter that will be drawn during the player overlay event
-
-enemy.meter 'health'
-# => Sets up a health meter that will be drawn during the enemy overlay event. 
-# Since maxHealth wasn't provided, it is set to the value of I.health (500)
-
-someOtherObject.meter 'turbo'
-# => Sets up a turbo meter that will be drawn during the someOtherObject overlay event. 
-# Since neither turbo maxTurbo were provided, they are both set to 100.
-
-</pre></code>
+    player = GameObject
+      health: 100
+      maxHealth: 100
+    
+    player.include Metered
+    
+    enemy = GameObject
+      health: 500
+    
+    enemy.include Metered
+    
+    someOtherObject = GameObject
+    
+    someOtherObject.include Metered
+    
+    player.meter 'health'
+    # => Sets up a health meter that will be drawn during the player overlay event
+    
+    enemy.meter 'health'
+    # => Sets up a health meter that will be drawn during the enemy overlay event. 
+    # Since maxHealth wasn't provided, it is set to the value of I.health (500)
+    
+    someOtherObject.meter 'turbo'
+    # => Sets up a turbo meter that will be drawn during the someOtherObject overlay event. 
+    # Since neither turbo maxTurbo were provided, they are both set to 100.
+    
 
 Metered module
 @name Metered
@@ -9333,24 +9153,22 @@ Metered = function(I, self) {
     /**
     Configures a meter to be drawn each overlay event.
     
-    <code><pre>
-    player = GameObject
-    
-    player.include Metered      
-    
-    player.meter 'health',
-      border
-        color: 'brown'
-        radius: 3
-      color: 'pink'
-      height: 20
-      x: 5
-      y: 5
-      show: true
-      width: 150
-    
-    # => Sets up a health meter, using all the configuration options
-    </pre></code>
+        player = GameObject
+      
+        player.include Metered      
+      
+        player.meter 'health',
+          border
+            color: 'brown'
+            radius: 3
+          color: 'pink'
+          height: 20
+          x: 5
+          y: 5
+          show: true
+          width: 150
+      
+        # => Sets up a health meter, using all the configuration options
     
     @name meter
     @methodOf Metered#
@@ -9396,18 +9214,16 @@ Metered = function(I, self) {
     /**
     Shows the named meter
     
-    <code><pre>
-    player = GameObject
-    
-    player.include Metered      
-    
-    # creates a health meter but disables visibility
-    player.meter 'health'
-      show: false
-    
-    # enables visibility for the meter named 'health'
-    player.showMeter 'health'
-    </pre></code>
+        player = GameObject
+      
+        player.include Metered      
+      
+        # creates a health meter but disables visibility
+        player.meter 'health'
+          show: false
+      
+        # enables visibility for the meter named 'health'
+        player.showMeter 'health'
     
     @name showMeter
     @methodOf Metered#
@@ -9419,17 +9235,15 @@ Metered = function(I, self) {
     /**
     Hides the named meter
     
-    <code><pre>
-    player = GameObject
-    
-    player.include Metered      
-    
-    # creates a health meter
-    player.meter 'health'
-    
-    # disables visibility for the meter named 'health'
-    player.hideMeter 'health'
-    </pre></code>
+        player = GameObject
+      
+        player.include Metered      
+      
+        # creates a health meter
+        player.meter 'health'
+      
+        # disables visibility for the meter named 'health'
+        player.hideMeter 'health'
     
     @name hideMeter
     @methodOf Metered#
@@ -9441,17 +9255,15 @@ Metered = function(I, self) {
     /**
     Toggles visibility of the named meter
     
-    <code><pre>
-    player = GameObject
-    
-    player.include Metered      
-    
-    # creates a health meter
-    player.meter 'health'
-    
-    # toggles visibility for the meter named 'health'
-    player.toggleMeter 'health'
-    </pre></code>
+        player = GameObject
+      
+        player.include Metered      
+      
+        # creates a health meter
+        player.meter 'health'
+      
+        # toggles visibility for the meter named 'health'
+        player.toggleMeter 'health'
     
     @name toggleMeter
     @methodOf Metered#
@@ -9468,28 +9280,26 @@ The Movable module automatically updates the position and velocity of
 GameObjects based on the velocity and acceleration. It does not check
 collisions so is probably best suited to particle effect like things.
 
-<code><pre>
-player = GameObject
-  x: 0
-  y: 0
-  velocity: Point(0, 0)
-  acceleration: Point(1, 0)
-  maxSpeed: 2
-
-player.include(Movable)
-
-# => `velocity is {x: 0, y: 0} and position is {x: 0, y: 0}`
-
-player.update(1)
-# => `velocity is {x: 1, y: 0} and position is {x: 1, y: 0}` 
-
-player.update(1)
-# => `velocity is {x: 2, y: 0} and position is {x: 3, y: 0}`   
-
-# we've hit our maxSpeed so our velocity won't increase
-player.update(1)
-# => `velocity is {x: 2, y: 0} and position is {x: 5, y: 0}`
-</pre></code>
+    player = GameObject
+      x: 0
+      y: 0
+      velocity: Point(0, 0)
+      acceleration: Point(1, 0)
+      maxSpeed: 2
+    
+    player.include(Movable)
+    
+    # => `velocity is {x: 0, y: 0} and position is {x: 0, y: 0}`
+    
+    player.update(1)
+    # => `velocity is {x: 1, y: 0} and position is {x: 1, y: 0}` 
+    
+    player.update(1)
+    # => `velocity is {x: 2, y: 0} and position is {x: 3, y: 0}`   
+    
+    # we've hit our maxSpeed so our velocity won't increase
+    player.update(1)
+    # => `velocity is {x: 2, y: 0} and position is {x: 5, y: 0}`
 
 @name Movable
 @module
@@ -9562,10 +9372,8 @@ Helps access the assets in your game.
     /**
     Return the url for a particular asset.
     
-    <code><pre>
-    ResourceLoader.urlFor("images", "player")
-    # => This returns the url for the file "player.png" in your images directory.
-    </pre></code>
+        ResourceLoader.urlFor("images", "player")
+        # => This returns the url for the file "player.png" in your images directory.
     
     @name urlFor
     @methodOf ResourceLoader#
@@ -9587,25 +9395,23 @@ Helps access the assets in your game.
 The Rotatable module rotates the object
 based on its rotational velocity.
 
-<code><pre>
-player = GameObject
-  x: 0
-  y: 0
-  rotationalVelocity: Math.PI / 64
-
-player.I.rotation
-# => 0
-
-player.update(1)
-
-player.I.rotation
-# => 0.04908738521234052 # Math.PI / 64
-
-player.update(1)
-
-player.I.rotation
-# => 0.09817477042468103 # 2 * (Math.PI / 64)
-</pre></code>
+    player = GameObject
+      x: 0
+      y: 0
+      rotationalVelocity: Math.PI / 64
+    
+    player.I.rotation
+    # => 0
+    
+    player.update(1)
+    
+    player.I.rotation
+    # => 0.04908738521234052 # Math.PI / 64
+    
+    player.update(1)
+    
+    player.I.rotation
+    # => 0.09817477042468103 # 2 * (Math.PI / 64)
 
 @name Rotatable
 @module
@@ -9891,10 +9697,8 @@ TextScreen = function(I) {
     /**
     Draw center aligned text at the given y position.
       
-    <code><pre>
-    screen = TextScreen()
-    screen.centerText canvas, 'Centering text is easy'
-    </pre></code>
+        screen = TextScreen()
+        screen.centerText canvas, 'Centering text is easy'
       
     @name centerText
     @methodOf TextScreen#
@@ -10019,15 +9823,13 @@ TimedEvents = function(I, self) {
     /**
     Execute <code>fn</code> every <code>n</code> frames.
     
-    <code><pre>
-    player = GameObject()
-    
-    player.include TimedEvents
-    
-    # doSomething is called every 4 seconds
-    player.every 4, ->
-      doSomething()
-    </pre></code>
+        player = GameObject()
+        
+        player.include TimedEvents
+        
+        # doSomething is called every 4 seconds
+        player.every 4, ->
+          doSomething()
     
     @name every
     @methodOf TimedEvents#
@@ -10135,24 +9937,20 @@ Tween = function(I, self) {
     /**
     Modify the object's properties over time.
     
-    <code><pre>
-    player = GameObject()
+        player = GameObject()
+      
+        player.tween 30,
+          x: 50
+          y: 50
+          easing: "quadratic"
     
-    player.tween 30,
-      x: 50
-      y: 50
-      easing: "quadratic"
-    </pre></code>
-    
-    <code><pre>
-    player = GameObject()
-    
-    player.tween 30,
-      x: 150
-      y: 150
-      complete: ->
-        player.dance()
-    </pre></code>
+        player = GameObject()
+      
+        player.tween 30,
+          x: 150
+          y: 150
+          complete: ->
+            player.dance()
     
     @name tween
     @methodOf Tween#
