@@ -7117,6 +7117,7 @@ Drawable = function(I, self) {
     color: "#196",
     hflip: false,
     vflip: false,
+    scale: 1,
     spriteName: null,
     zIndex: 0
   });
@@ -8696,7 +8697,7 @@ the engine. Use the remove event to handle any clean up.
 var GameObject;
 
 GameObject = function(I) {
-  var defaultModules, modules, self;
+  var modules, self;
   I || (I = {});
   /**
   @name {Object} I Instance variables 
@@ -8742,14 +8743,15 @@ GameObject = function(I) {
       return I.active = false;
     }
   });
-  defaultModules = [Bindable, Ageable, Bounded, Clampable, Cooldown, Drawable, Expirable, Follow, Metered, Movable, Rotatable, TimedEvents, Tween];
-  modules = defaultModules.concat(I.includedModules.invoke('constantize'));
-  modules = modules.without(I.excludedModules.invoke('constantize'));
+  modules = GameObject.defaultModules.concat(I.includedModules);
+  modules = modules.without(I.excludedModules);
   modules.each(function(Module) {
     return self.include(Module);
   });
   return self;
 };
+
+GameObject.defaultModules = ["Bindable", "Ageable", "Bounded", "Clampable", "Cooldown", "Drawable", "Expirable", "Follow", "Metered", "Movable", "Rotatable", "TimedEvents", "Tween"];
 
 /**
 Construct an object instance from the given entity data.
