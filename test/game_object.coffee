@@ -44,7 +44,7 @@ test "[event] create", 2, ->
   o = GameObject()
   o.bind "create", ->
       ok true, "created event is fired on create"
-  .create()
+  o.create()
 
   GameObject
     create: 'ok(true, "created event is fired on create")'
