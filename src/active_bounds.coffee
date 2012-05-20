@@ -1,6 +1,4 @@
 ActiveBounds = (I={}, self) ->
-  x = 3
- \\\
   Object.reverseMerge I,
     activeBounds: Rectangle
       x: 0
