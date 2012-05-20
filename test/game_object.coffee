@@ -42,7 +42,7 @@ test "#sendOrApply", ->
 
 test "[event] create", 2, ->
   o = GameObject()
-  o.bind "create": ->
+  o.bind "create", ->
       ok true, "created event is fired on create"
   .create()
 
