@@ -156,6 +156,8 @@ GameObject = (I) ->
     self.include Module
 
   self
+  
+
 
 ###*
 Construct an object instance from the given entity data.
