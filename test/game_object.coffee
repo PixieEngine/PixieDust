@@ -72,7 +72,7 @@ test "[event] destroy", 2, ->
   o = GameObject
   o.bind "destroy", ->
     ok true, "destroyed event is fired on destroy"
-  .destroy()
+  o.destroy()
 
   GameObject
     destroy: 'ok(true, "destroyed event is fired on destroy")'
