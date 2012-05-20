@@ -149,7 +149,7 @@ GameObject = (I) ->
   }
 
   modules = GameObject.defaultModules.concat(I.includedModules)
-  modules = modules.without(I.excludedModules.invoke('constantize'))
+  modules = modules.without(I.excludedModules)
 
   modules.each (Module) ->
     self.include Module
