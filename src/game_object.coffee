@@ -155,16 +155,6 @@ GameObject = (I) ->
   modules.each (Module) ->
     self.include Module
 
-  self.attrAccessor "solid"
-
-  autobindEvents = ['create', 'destroy', 'step']
-  autobindEvents.each (eventName) ->
-    if event = I[eventName]
-      if typeof event == "function"
-        self.bind(eventName, event)
-      else
-        self.bind(eventName, eval( "(function() {#{event}})" ))
-
   self
 
 ###*
