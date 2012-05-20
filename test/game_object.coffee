@@ -74,9 +74,4 @@ test "[event] destroy", 2, ->
     ok true, "destroyed event is fired on destroy"
   o.destroy()
 
-  GameObject
-    destroy: 'ok(true, "destroyed event is fired on destroy")'
-  .destroy()
-
 module()
-
