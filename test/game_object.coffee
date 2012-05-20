@@ -69,7 +69,8 @@ test "elapsedTime", 1, ->
   gameObject.update(timeStep)
 
 test "[event] destroy", 2, ->
-  oGameObject
+  o = GameObject
+  o.
     destroy: ->
       ok true, "destroyed event is fired on destroy"
   .destroy()
