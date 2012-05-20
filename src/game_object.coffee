@@ -157,7 +157,7 @@ GameObject = (I) ->
 
   self
   
-
+GameObject.
 
 ###*
 Construct an object instance from the given entity data.
