@@ -40,14 +40,13 @@ test "#sendOrApply", ->
 
   equals p.x, o.I.x
 
-test "[event] create", 2, ->
+test "[event] create", 1, ->
   o = GameObject()
   o.bind "create", ->
       ok true, "created event is fired on create"
 
   o.create()
-
-  o.create()
+  o.create() # Make sure only fired once
 
 test "[event] update", 1, ->
   gameObject = GameObject()
