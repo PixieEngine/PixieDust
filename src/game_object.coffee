@@ -148,7 +148,7 @@ GameObject = (I) ->
       I.active = false
   }
 
-  defaultModules = [Bindable, Ageable, Bounded, Clampable, Cooldown, Drawable, Expirable, Follow, Metered, Movable, Rotatable, TimedEvents, Tween]
+   = [Bindable, Ageable, Bounded, Clampable, Cooldown, Drawable, Expirable, Follow, Metered, Movable, Rotatable, TimedEvents, Tween]
   modules = defaultModules.concat(I.includedModules.invoke('constantize'))
   modules = modules.without(I.excludedModules.invoke('constantize'))
 
@@ -157,7 +157,7 @@ GameObject = (I) ->
 
   self
   
-GameObject.
+GameObject.defaultModules
 
 ###*
 Construct an object instance from the given entity data.
