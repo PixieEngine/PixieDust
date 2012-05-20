@@ -75,6 +75,6 @@ test "[event] destroy", 1, ->
     ok true, "destroyed event is fired on destroy"
 
   o.destroy()
-  o.destroy() # 
+  o.destroy() # Make sure it's not called twice
 
 module()
