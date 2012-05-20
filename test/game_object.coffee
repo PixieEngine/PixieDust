@@ -41,7 +41,7 @@ test "#sendOrApply", ->
   equals p.x, o.I.x
 
 test "[event] create", 2, ->
-  GameObject
+  GameObject()
     create: ->
       ok true, "created event is fired on create"
   .create()
