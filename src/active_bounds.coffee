@@ -1,5 +1,5 @@
 ###*
-The ActiveBounds module automatc
+The ActiveBounds module automatically de
 
     player = Core
       x: 10
