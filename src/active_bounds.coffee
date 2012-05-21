@@ -3,7 +3,7 @@ The ActiveBounds module automatically destroys objects that
 are outside of the specified bounds. The default bounds are
 the dimensions of your game. Useful for bullet type objects.
 
-    player = GameObject
+    bullet = GameObject
       x: 10
       y: 50
       width: 20
