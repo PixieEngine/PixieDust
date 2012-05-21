@@ -1,7 +1,7 @@
 ###*
 The ActiveBounds module automatically destroys objects that
 are outside of the specified bounds. The default bounds are
-the dimension
+the dimensions of your game. 
 
     player = Core
       x: 10
