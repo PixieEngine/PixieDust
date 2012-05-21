@@ -16,7 +16,6 @@ attribute filters so that you can exclude irrelevant data.
     player.debug
       filter: 'all'
 
-Debuggable module
 @name Debuggable
 @module
 @constructor
