@@ -1,7 +1,5 @@
 ###*
-The ActiveBounds module is used to provide basic data about the
-location and dimensions of the including object. This module is included
-by default in <code>GameObject</code>.
+The ActiveBounds
 
     player = Core
       x: 10
