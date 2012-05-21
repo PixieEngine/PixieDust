@@ -1,11 +1,4 @@
 ( ->
-  ###*!
-  Use this to handle generic rectangular collisions among game object a-la Flixel.
-
-  @name Collidable
-  @module
-  @constructor
-  ###
   Collidable = (I, self) ->
     # Set some default properties
     Object.reverseMerge I,
