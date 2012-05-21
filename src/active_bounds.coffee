@@ -13,7 +13,7 @@ the dimensions of your game. Useful for bullet type objects.
     bullet.include ActiveBounds
     
 ActiveBounds module
-@name Bounded
+@name ActiveBounds
 @module
 @constructor
 @param {Object} I Instance variables
