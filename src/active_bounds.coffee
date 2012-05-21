@@ -18,7 +18,9 @@ the dimensions of your game. Useful for bullet type objects.
     bullet2 = GameObject
       x: 50
       y: 50
-      width: 
+      width: 30
+      height: 20
+
 
 ActiveBounds module
 @name ActiveBounds
