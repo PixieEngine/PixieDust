@@ -211,18 +211,18 @@
     ###*
     A copy of the calling color that is its complementary color on the color wheel.
 
-    red = Color(255, 0, 0)
-
-    cyan = red.complement()
-
-    # to see what they look like
-    for color, index in [red, cyan]
-      canvas.drawRect
-        color: color
-        x: 20 + (60 * index)
-        y: 20 + (60 * index)
-        width: 60
-        height: 60         
+        red = Color(255, 0, 0)
+    
+        cyan = red.complement()
+    
+        # to see what they look like
+        for color, index in [red, cyan]
+          canvas.drawRect
+            color: color
+            x: 20 + (60 * index)
+            y: 20 + (60 * index)
+            width: 60
+            height: 60         
 
     @name complement
     @methodOf Color#
