@@ -1,8 +1,6 @@
 CollisionResponse = (I={}, self) ->
     # Handle multi-include
   self.unbind ".Movable"
-
-  self.bind 'update.Movable', (dt) ->
     
   self.bind 'update', (elapsedTime) ->
     t = (elapsedTime * I.velocity.x).abs()
