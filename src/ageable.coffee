@@ -7,7 +7,6 @@ The Ageable module handles keeping track of an object's age.
     
     #=> player.I.age == 1   
 
-Ageable module
 @name Ageable
 @module
 @constructor
