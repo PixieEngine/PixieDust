@@ -1,5 +1,6 @@
 ###*
-The ActiveBounds module automatically de
+The ActiveBounds module automatically destroys objects that
+are
 
     player = Core
       x: 10
