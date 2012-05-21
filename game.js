@@ -5073,13 +5073,6 @@ Clampable = function(I, self) {
 ;
 
 (function() {
-  /**!
-  Use this to handle generic rectangular collisions among game object a-la Flixel.
-  
-  @name Collidable
-  @module
-  @constructor
-  */
   var ANY, CEILING, Collidable, DOWN, FLOOR, LEFT, NONE, RIGHT, UP, WALL, _ref, _ref2;
   Collidable = function(I, self) {
     Object.reverseMerge(I, {
@@ -5106,8 +5099,6 @@ Clampable = function(I, self) {
     };
   };
   (typeof exports !== "undefined" && exports !== null ? exports : this)["Collidable"] = Collidable;
-  /**
-  */
   _ref = Object.extend(Collidable, {
     NONE: 0x0000,
     LEFT: 0x0001,
