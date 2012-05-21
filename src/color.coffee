@@ -534,26 +534,26 @@
     ###*
     A copy of the calling color with its hue shifted by `degrees`. This differs from the hue setter in that it adds to the existing hue value and will wrap around 0 and 360.
 
-    magenta = Color(255, 0, 255)
-
-    magenta.hue()
-    # => 300
-
-    yellow = magenta.shiftHue(120)
-
-    # since magenta's hue is 300 we have wrapped
-    # around 360 to end up at 60
-    yellow.hue()
-    # => 60
-
-    # to see what they look like
-    for color, index in [magenta, yellow]
-      canvas.drawRect
-        color: color
-        x: 20 + (60 * index)
-        y: 20 + (60 * index)
-        width: 60
-        height: 60 
+        magenta = Color(255, 0, 255)
+    
+        magenta.hue()
+        # => 300
+    
+        yellow = magenta.shiftHue(120)
+    
+        # since magenta's hue is 300 we have wrapped
+        # around 360 to end up at 60
+        yellow.hue()
+        # => 60
+    
+        # to see what they look like
+        for color, index in [magenta, yellow]
+          canvas.drawRect
+            color: color
+            x: 20 + (60 * index)
+            y: 20 + (60 * index)
+            width: 60
+            height: 60 
 
     @name shiftHue
     @methodOf Color#
