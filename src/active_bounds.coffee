@@ -1,6 +1,6 @@
 ###*
 The ActiveBounds module automatically destroys objects that
-are
+are outside of the specified bou
 
     player = Core
       x: 10
