@@ -1,5 +1,5 @@
 ###*
-The `Clampable` module provides helper methods to clamp object properties. This mod
+The `Clampable` module provides helper methods to clamp object properties. This module is included 
 
     player = GameObject
       x: 40
