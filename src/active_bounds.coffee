@@ -16,7 +16,9 @@ the dimensions of your game. Useful for bullet type objects.
          goes outside of the game bounds.
     
     bullet2 = GameObject
-
+      x: 50
+      y: 50
+      width: 
 
 ActiveBounds module
 @name ActiveBounds
