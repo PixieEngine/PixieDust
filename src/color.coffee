@@ -325,18 +325,18 @@
     ###*
     A copy of the calling color with its saturation reduced by `amount`.
 
-    blue = Color(0, 0, 255)
-
-    desaturatedBlue = blue.desaturate(0.4)
-
-    # to see what they look like
-    for color, index in [blue, desaturatedBlue]
-      canvas.drawRect
-        color: color
-        x: 20 + (60 * index)
-        y: 20 + (60 * index)
-        width: 60
-        height: 60  
+        blue = Color(0, 0, 255)
+    
+        desaturatedBlue = blue.desaturate(0.4)
+    
+        # to see what they look like
+        for color, index in [blue, desaturatedBlue]
+          canvas.drawRect
+            color: color
+            x: 20 + (60 * index)
+            y: 20 + (60 * index)
+            width: 60
+            height: 60  
 
     @name desaturate
     @methodOf Color#
