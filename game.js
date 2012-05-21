@@ -4996,7 +4996,13 @@ Camera.ZSort = function(I, self) {
 };
 ;
 /**
-The <code>Clampable</code> module provides helper methods to clamp object properties. 
+The `Clampable` module provides helper methods to clamp object properties. This module is included by default in `GameObject`
+
+    player = GameObject
+      x: 40
+      y: 30
+
+    player.include Clampable
 
 @name Clampable
 @module
