@@ -724,25 +724,24 @@
     ###*
     A copy of the calling color with its saturation increased by `amount`.
 
-    <code class="run"><pre>
-    color = Color(50, 50, 200)
-
-    color.saturation()
-    # => 0.6
-
-    saturatedColor = color.saturate(0.2)
-
-    saturatedColor.saturation()
-    # => 0.8
-
-    # to see what they look like
-    for color, index in [color, saturatedColor]
-      canvas.drawRect
-        color: color
-        x: 20 + (60 * index)
-        y: 20 + (60 * index)
-        width: 60
-        height: 60 
+        color = Color(50, 50, 200)
+    
+        color.saturation()
+        # => 0.6
+    
+        saturatedColor = color.saturate(0.2)
+    
+        saturatedColor.saturation()
+        # => 0.8
+    
+        # to see what they look like
+        for color, index in [color, saturatedColor]
+          canvas.drawRect
+            color: color
+            x: 20 + (60 * index)
+            y: 20 + (60 * index)
+            width: 60
+            height: 60 
 
     @name saturate
     @methodOf Color#
