@@ -5602,45 +5602,44 @@ var __slice = Array.prototype.slice;
   and even the named colors from the xkcd survey: http://blog.xkcd.com/2010/05/03/color-survey-results/. 
   If no arguments are given, defaults to transparent.
   
-  <code class="run"><pre>
-  individualRgb = Color(23, 56, 49, 0.4)
-  
-  arrayRgb = Color([59, 100, 230])
-  
-  hex = Color('#ff0000')
-  
-  rgb = Color('rgb(0, 255, 0)')
-  
-  hsl = Color('hsl(180, 1, 0.5)')
-  
-  anotherColor = Color('blue')
-  
-  Color(anotherColor)
-  # => a new color with the same r, g, b, and alpha values as `anotherColor`
-  
-  # You have access to all sorts of weird colors.
-  # We give you all the named colors the browser recognizes
-  # and the ones from this survey 
-  # http://blog.xkcd.com/2010/05/03/color-survey-results/
-  namedBrown = Color('Fuzzy Wuzzy Brown')
-  
-  # Uutput color in Hex format 
-  namedBrown.toHex()
-  # => '#c45655'
-  
-  # Default behavior
-  transparent = Color()
-  
-  transparent.toString()
-  # => 'rgba(0, 0, 0, 0)' 
-  
-  # let's print out the colors on a canvas to see what they look like
-  canvas.font('14px Helvetica')
-  for color, index in ['individualRgb', 'arrayRgb', 'hex', 'rgb', 'hsl', 'anotherColor', 'namedBrown']
-    canvas.centerText
-      color: eval(color)
-      text: color
-      y: 20 * (index + 1)  
+      individualRgb = Color(23, 56, 49, 0.4)
+    
+      arrayRgb = Color([59, 100, 230])
+    
+      hex = Color('#ff0000')
+    
+      rgb = Color('rgb(0, 255, 0)')
+    
+      hsl = Color('hsl(180, 1, 0.5)')
+    
+      anotherColor = Color('blue')
+    
+      Color(anotherColor)
+      # => a new color with the same r, g, b, and alpha values as `anotherColor`
+    
+      # You have access to all sorts of weird colors.
+      # We give you all the named colors the browser recognizes
+      # and the ones from this survey 
+      # http://blog.xkcd.com/2010/05/03/color-survey-results/
+      namedBrown = Color('Fuzzy Wuzzy Brown')
+    
+      # Uutput color in Hex format 
+      namedBrown.toHex()
+      # => '#c45655'
+    
+      # Default behavior
+      transparent = Color()
+    
+      transparent.toString()
+      # => 'rgba(0, 0, 0, 0)' 
+    
+      # let's print out the colors on a canvas to see what they look like
+      canvas.font('14px Helvetica')
+      for color, index in ['individualRgb', 'arrayRgb', 'hex', 'rgb', 'hsl', 'anotherColor', 'namedBrown']
+        canvas.centerText
+          color: eval(color)
+          text: color
+          y: 20 * (index + 1)  
   
   @name Color
   @param {Array|Number|String|Color} args... An Array, r, g, b values, 
@@ -5701,19 +5700,18 @@ var __slice = Array.prototype.slice;
     /**
     A copy of the calling color that is its complementary color on the color wheel.
     
-    <code class="run"><pre>
-    red = Color(255, 0, 0)
+        red = Color(255, 0, 0)
     
-    cyan = red.complement()
+        cyan = red.complement()
     
-    # to see what they look like
-    for color, index in [red, cyan]
-      canvas.drawRect
-        color: color
-        x: 20 + (60 * index)
-        y: 20 + (60 * index)
-        width: 60
-        height: 60         
+        # to see what they look like
+        for color, index in [red, cyan]
+          canvas.drawRect
+            color: color
+            x: 20 + (60 * index)
+            y: 20 + (60 * index)
+            width: 60
+            height: 60         
     
     @name complement
     @methodOf Color#
@@ -5766,19 +5764,18 @@ var __slice = Array.prototype.slice;
     /**
     Returns a copy of the calling color darkened by `amount` (Lightness of the color ranges from 0 to 1).
     
-    <code class="run"><pre>
-    green = Color(0, 255, 0)
+        green = Color(0, 255, 0)
     
-    darkGreen = green.darken(0.3)
+        darkGreen = green.darken(0.3)
     
-    # to see what they look like
-    for color, index in [green, darkGreen]
-      canvas.drawRect
-        color: color
-        x: 20 + (60 * index)
-        y: 20 + (60 * index)
-        width: 60
-        height: 60         
+        # to see what they look like
+        for color, index in [green, darkGreen]
+          canvas.drawRect
+            color: color
+            x: 20 + (60 * index)
+            y: 20 + (60 * index)
+            width: 60
+            height: 60         
     
     @name darken
     @methodOf Color#
@@ -5816,19 +5813,18 @@ var __slice = Array.prototype.slice;
     /**
     A copy of the calling color with its saturation reduced by `amount`.
     
-    <code class="run"><pre>
-    blue = Color(0, 0, 255)
+        blue = Color(0, 0, 255)
     
-    desaturatedBlue = blue.desaturate(0.4)
+        desaturatedBlue = blue.desaturate(0.4)
     
-    # to see what they look like
-    for color, index in [blue, desaturatedBlue]
-      canvas.drawRect
-        color: color
-        x: 20 + (60 * index)
-        y: 20 + (60 * index)
-        width: 60
-        height: 60  
+        # to see what they look like
+        for color, index in [blue, desaturatedBlue]
+          canvas.drawRect
+            color: color
+            x: 20 + (60 * index)
+            y: 20 + (60 * index)
+            width: 60
+            height: 60  
     
     @name desaturate
     @methodOf Color#
@@ -5887,19 +5883,18 @@ var __slice = Array.prototype.slice;
     /**
     A copy of the calling color converted to grayscale.
     
-    <code class="run"><pre>
-    yellow = Color(255, 255, 0)
+        yellow = Color(255, 255, 0)
     
-    gray = yellow.grayscale()
+        gray = yellow.grayscale()
     
-    # to see what they look like
-    for color, index in [yellow, gray]
-      canvas.drawRect
-        color: color
-        x: 20 + (60 * index)
-        y: 20 + (60 * index)
-        width: 60
-        height: 60 
+        # to see what they look like
+        for color, index in [yellow, gray]
+          canvas.drawRect
+            color: color
+            x: 20 + (60 * index)
+            y: 20 + (60 * index)
+            width: 60
+            height: 60 
     
     @name grayscale
     @methodOf Color#
@@ -5936,22 +5931,21 @@ var __slice = Array.prototype.slice;
     A getter / setter for the hue value of the color. Passing no argument returns the 
     current hue value. Passing a value will set the hue to that value and return the color.
     
-    <code class="run"><pre>
-    magenta = Color(255, 0, 255)
+        magenta = Color(255, 0, 255)
     
-    magenta.hue()
-    # => 300
+        magenta.hue()
+        # => 300
     
-    # modifies the color to be yellow
-    magenta.hue(60)
+        # modifies the color to be yellow
+        magenta.hue(60)
     
-    # to see what it looks like
-    canvas.drawRect
-      color: magenta
-      x: 50 
-      y: 30 
-      width: 80
-      height: 80 
+        # to see what it looks like
+        canvas.drawRect
+          color: magenta
+          x: 50 
+          y: 30 
+          width: 80
+          height: 80 
     
     @name hue
     @methodOf Color#
@@ -5974,22 +5968,21 @@ var __slice = Array.prototype.slice;
     A getter / setter for the lightness value of the color. Passing no argument returns the 
     current lightness value. Passing a value will set the lightness to that value and return the color.
     
-    <code class="run"><pre>
-    magenta = Color(255, 0, 255)
+        magenta = Color(255, 0, 255)
     
-    magenta.lightness()
-    # => 0.9
+        magenta.lightness()
+        # => 0.9
     
-    # modifies magenta in place to be lighter
-    magenta.lightness(0.75)
+        # modifies magenta in place to be lighter
+        magenta.lightness(0.75)
     
-    # to see what it looks like
-    canvas.drawRect
-      color: magenta
-      x: 50 
-      y: 30 
-      width: 80
-      height: 80 
+        # to see what it looks like
+        canvas.drawRect
+          color: magenta
+          x: 50 
+          y: 30 
+          width: 80
+          height: 80 
     
     @name lightness
     @methodOf Color#
@@ -6022,27 +6015,26 @@ var __slice = Array.prototype.slice;
     /**
     A copy of the calling color with its hue shifted by `degrees`. This differs from the hue setter in that it adds to the existing hue value and will wrap around 0 and 360.
     
-    <code class="run"><pre>
-    magenta = Color(255, 0, 255)
+        magenta = Color(255, 0, 255)
     
-    magenta.hue()
-    # => 300
+        magenta.hue()
+        # => 300
     
-    yellow = magenta.shiftHue(120)
+        yellow = magenta.shiftHue(120)
     
-    # since magenta's hue is 300 we have wrapped
-    # around 360 to end up at 60
-    yellow.hue()
-    # => 60
+        # since magenta's hue is 300 we have wrapped
+        # around 360 to end up at 60
+        yellow.hue()
+        # => 60
     
-    # to see what they look like
-    for color, index in [magenta, yellow]
-      canvas.drawRect
-        color: color
-        x: 20 + (60 * index)
-        y: 20 + (60 * index)
-        width: 60
-        height: 60 
+        # to see what they look like
+        for color, index in [magenta, yellow]
+          canvas.drawRect
+            color: color
+            x: 20 + (60 * index)
+            y: 20 + (60 * index)
+            width: 60
+            height: 60 
     
     @name shiftHue
     @methodOf Color#
@@ -6088,19 +6080,18 @@ var __slice = Array.prototype.slice;
     /**
     Returns a copy of the calling color lightened by `amount` (Lightness of the color ranges from 0 to 1).
     
-    <code class="run"><pre>
-    green = Color(0, 255, 0)
+        green = Color(0, 255, 0)
     
-    lightGreen = green.lighten(0.3)
+        lightGreen = green.lighten(0.3)
     
-    # to see what they look like
-    for color, index in [green, lightGreen]
-      canvas.drawRect
-        color: color
-        x: 20 + (60 * index)
-        y: 20 + (60 * index)
-        width: 60
-        height: 60 
+        # to see what they look like
+        for color, index in [green, lightGreen]
+          canvas.drawRect
+            color: color
+            x: 20 + (60 * index)
+            y: 20 + (60 * index)
+            width: 60
+            height: 60 
     
     @name lighten
     @methodOf Color#
@@ -6140,24 +6131,23 @@ var __slice = Array.prototype.slice;
     A copy of the calling color mixed with `other` using `amount` as the 
     mixing ratio. If amount is not passed, then the colors are mixed evenly.
     
-    <code class="run"><pre>
-    red = Color(255, 0, 0)
-    yellow = Color(255, 255, 0)
+        red = Color(255, 0, 0)
+        yellow = Color(255, 255, 0)
     
-    # With no amount argument the colors are mixed evenly
-    orange = red.mixWith(yellow)
+        # With no amount argument the colors are mixed evenly
+        orange = red.mixWith(yellow)
     
-    # With an amount of 0.3 we are mixing the color 30% red and 70% yellow
-    somethingCloseToOrange = red.mixWith(yellow, 0.3)
+        # With an amount of 0.3 we are mixing the color 30% red and 70% yellow
+        somethingCloseToOrange = red.mixWith(yellow, 0.3)
     
-    # to see what they look like
-    for color, index in [red, yellow, orange, somethingCloseToOrange]
-      canvas.drawRect
-        color: color
-        x: 20 + (60 * (index % 2))
-        y: 20 + (60 * (if index > 1 then 1 else 0))
-        width: 60
-        height: 60 
+        # to see what they look like
+        for color, index in [red, yellow, orange, somethingCloseToOrange]
+          canvas.drawRect
+            color: color
+            x: 20 + (60 * (index % 2))
+            y: 20 + (60 * (if index > 1 then 1 else 0))
+            width: 60
+            height: 60 
     
     @name mixWith
     @methodOf Color#
@@ -6212,25 +6202,24 @@ var __slice = Array.prototype.slice;
     /**
     A copy of the calling color with its saturation increased by `amount`.
     
-    <code class="run"><pre>
-    color = Color(50, 50, 200)
+        color = Color(50, 50, 200)
     
-    color.saturation()
-    # => 0.6
+        color.saturation()
+        # => 0.6
     
-    saturatedColor = color.saturate(0.2)
+        saturatedColor = color.saturate(0.2)
     
-    saturatedColor.saturation()
-    # => 0.8
+        saturatedColor.saturation()
+        # => 0.8
     
-    # to see what they look like
-    for color, index in [color, saturatedColor]
-      canvas.drawRect
-        color: color
-        x: 20 + (60 * index)
-        y: 20 + (60 * index)
-        width: 60
-        height: 60 
+        # to see what they look like
+        for color, index in [color, saturatedColor]
+          canvas.drawRect
+            color: color
+            x: 20 + (60 * index)
+            y: 20 + (60 * index)
+            width: 60
+            height: 60 
     
     @name saturate
     @methodOf Color#
@@ -6275,21 +6264,20 @@ var __slice = Array.prototype.slice;
     A getter / setter for the saturation value of the color. Passing no argument returns the 
     current saturation value. Passing a value will set the saturation to that value and return the color.
     
-    <code class="run"><pre>
-    yellow = Color('hsl(60, 0.5, 0.5)')
+        yellow = Color('hsl(60, 0.5, 0.5)')
     
-    yellow.saturation()
-    # => 0.5
+        yellow.saturation()
+        # => 0.5
     
-    yellow.saturation(0.8)
+        yellow.saturation(0.8)
     
-    # to see what it looks like
-    canvas.drawRect
-      color: yellow
-      x: 50 
-      y: 30 
-      width: 80
-      height: 80     
+        # to see what it looks like
+        canvas.drawRect
+          color: yellow
+          x: 50 
+          y: 30 
+          width: 80
+          height: 80     
     
     @name saturation
     @methodOf Color#
@@ -6450,25 +6438,24 @@ var __slice = Array.prototype.slice;
     /**
     A copy of the calling color with its alpha reduced by `amount`.
     
-    <code class="run"><pre>
-    color = Color(0, 0, 0, 1)
+        color = Color(0, 0, 0, 1)
     
-    color.a
-    # => 1
+        color.a
+        # => 1
     
-    transparentColor = color.transparentize(0.5)
+        transparentColor = color.transparentize(0.5)
     
-    transparentColor.a
-    # => 0.5
+        transparentColor.a
+        # => 0.5
     
-    # to see what they look like
-    for color, index in [color, transparentColor]
-      canvas.drawRect
-        color: color
-        x: 20 + (60 * index)
-        y: 20 + (60 * index)
-        width: 60
-        height: 60     
+        # to see what they look like
+        for color, index in [color, transparentColor]
+          canvas.drawRect
+            color: color
+            x: 20 + (60 * index)
+            y: 20 + (60 * index)
+            width: 60
+            height: 60     
     
     @name transparentize
     @methodOf Color#
@@ -6504,25 +6491,24 @@ var __slice = Array.prototype.slice;
     /**
     A copy of the calling color with its alpha increased by `amount`.
     
-    <code class="run"><pre>
-    color = Color(0, 0, 0, 0.25)
+        color = Color(0, 0, 0, 0.25)
     
-    color.a
-    # => 0.25
+        color.a
+        # => 0.25
     
-    opaqueColor = color.opacify(0.5)
+        opaqueColor = color.opacify(0.5)
     
-    opaqueColor.a
-    # => 0.75
+        opaqueColor.a
+        # => 0.75
     
-    # to see what they look like
-    for color, index in [color, opaqueColor]
-      canvas.drawRect
-        color: color
-        x: 20 + (60 * index)
-        y: 20 + (60 * index)
-        width: 60
-        height: 60     
+        # to see what they look like
+        for color, index in [color, opaqueColor]
+          canvas.drawRect
+            color: color
+            x: 20 + (60 * index)
+            y: 20 + (60 * index)
+            width: 60
+            height: 60     
     
     @name opacify
     @methodOf Color#
