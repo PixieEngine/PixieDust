@@ -486,22 +486,21 @@
     A getter / setter for the lightness value of the color. Passing no argument returns the 
     current lightness value. Passing a value will set the lightness to that value and return the color.
 
-    <code class="run"><pre>
-    magenta = Color(255, 0, 255)
-
-    magenta.lightness()
-    # => 0.9
-
-    # modifies magenta in place to be lighter
-    magenta.lightness(0.75)
-
-    # to see what it looks like
-    canvas.drawRect
-      color: magenta
-      x: 50 
-      y: 30 
-      width: 80
-      height: 80 
+        magenta = Color(255, 0, 255)
+    
+        magenta.lightness()
+        # => 0.9
+    
+        # modifies magenta in place to be lighter
+        magenta.lightness(0.75)
+    
+        # to see what it looks like
+        canvas.drawRect
+          color: magenta
+          x: 50 
+          y: 30 
+          width: 80
+          height: 80 
 
     @name lightness
     @methodOf Color#
