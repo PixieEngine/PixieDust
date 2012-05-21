@@ -8,9 +8,9 @@ the dimensions of your game. Useful for bullet type objects.
       y: 50
       width: 20
       height: 20
-      velocity: Point()
+      velocity: Point(120, 0)
 
-    player.include ActiveBounds
+    bullet.include ActiveBounds
     
 @see GameObject
 
