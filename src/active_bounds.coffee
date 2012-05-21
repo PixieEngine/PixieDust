@@ -22,6 +22,7 @@ the dimensions of your game. Useful for bullet type objects.
       height: 20
       activeBounds: Rectangle
         x: 30
+        y: 20
         
 
 ActiveBounds module
