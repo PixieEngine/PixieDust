@@ -1,6 +1,6 @@
 ###*
 The ActiveBounds module automatically destroys objects that
-are outside of the specified bou
+are outside of the specified bounds. The defa
 
     player = Core
       x: 10
