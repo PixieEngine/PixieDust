@@ -24,7 +24,7 @@ the dimensions of your game. Useful for bullet type objects.
         x: 30
         y: 20
         width: 0
-  
+        height
 
 ActiveBounds module
 @name ActiveBounds
