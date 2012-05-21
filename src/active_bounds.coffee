@@ -27,7 +27,7 @@ the dimensions of your game. Useful for bullet type objects.
         height 100
 
     # => bullet2 will be removed when it
-         goes outside the bou
+         goes outside unless 
 
 ActiveBounds module
 @name ActiveBounds
