@@ -26,7 +26,7 @@ the dimensions of your game. Useful for bullet type objects.
         width: 100
         height 100
 
-        
+    # => bullet2 will n    
 
 ActiveBounds module
 @name ActiveBounds
