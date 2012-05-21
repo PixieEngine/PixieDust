@@ -1,5 +1,5 @@
 ###*
-The ActiveBounds
+ActiveBounds
 
     player = Core
       x: 10
