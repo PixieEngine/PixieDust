@@ -1,6 +1,7 @@
 ###*
 The <code>Clampable</code> module provides helper methods to clamp object properties. 
 
+    player = 
 
 @name Clampable
 @module
