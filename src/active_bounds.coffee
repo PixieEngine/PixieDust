@@ -1,5 +1,5 @@
 ###*
-ActiveBounds
+The ActiveBounds module 
 
     player = Core
       x: 10
