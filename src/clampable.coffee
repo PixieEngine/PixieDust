@@ -5,7 +5,7 @@ The <code>Clampable</code> module provides helper methods to clamp object proper
       x: 40
       y: 30
 
-    
+    player.include Clampable
 
 @name Clampable
 @module
