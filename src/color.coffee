@@ -211,7 +211,6 @@
     ###*
     A copy of the calling color that is its complementary color on the color wheel.
 
-    <code class="run"><pre>
     red = Color(255, 0, 0)
 
     cyan = red.complement()
