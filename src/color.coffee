@@ -448,23 +448,22 @@
     ###*
     A getter / setter for the hue value of the color. Passing no argument returns the 
     current hue value. Passing a value will set the hue to that value and return the color.
-
-    <code class="run"><pre>
-    magenta = Color(255, 0, 255)
-
-    magenta.hue()
-    # => 300
-
-    # modifies the color to be yellow
-    magenta.hue(60)
-
-    # to see what it looks like
-    canvas.drawRect
-      color: magenta
-      x: 50 
-      y: 30 
-      width: 80
-      height: 80 
+    
+        magenta = Color(255, 0, 255)
+    
+        magenta.hue()
+        # => 300
+    
+        # modifies the color to be yellow
+        magenta.hue(60)
+    
+        # to see what it looks like
+        canvas.drawRect
+          color: magenta
+          x: 50 
+          y: 30 
+          width: 80
+          height: 80 
 
     @name hue
     @methodOf Color#
