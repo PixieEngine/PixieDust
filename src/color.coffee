@@ -951,25 +951,24 @@
     ###*
     A copy of the calling color with its alpha reduced by `amount`.
 
-    <code class="run"><pre>
-    color = Color(0, 0, 0, 1)
-
-    color.a
-    # => 1
-
-    transparentColor = color.transparentize(0.5)
-
-    transparentColor.a
-    # => 0.5
-
-    # to see what they look like
-    for color, index in [color, transparentColor]
-      canvas.drawRect
-        color: color
-        x: 20 + (60 * index)
-        y: 20 + (60 * index)
-        width: 60
-        height: 60     
+        color = Color(0, 0, 0, 1)
+    
+        color.a
+        # => 1
+    
+        transparentColor = color.transparentize(0.5)
+    
+        transparentColor.a
+        # => 0.5
+    
+        # to see what they look like
+        for color, index in [color, transparentColor]
+          canvas.drawRect
+            color: color
+            x: 20 + (60 * index)
+            y: 20 + (60 * index)
+            width: 60
+            height: 60     
 
     @name transparentize
     @methodOf Color#
