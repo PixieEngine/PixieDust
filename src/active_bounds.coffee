@@ -9,7 +9,7 @@ the dimensions of your game. Useful for bullet type objects.
       width: 20
       height: 20
 
-    s
+    player.include ActiveBounds
     
 @see GameObject
 
