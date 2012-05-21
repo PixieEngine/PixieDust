@@ -1,6 +1,7 @@
 ###*
 The ActiveBounds module automatically destroys objects that
-are outside of the specified bounds. The defa
+are outside of the specified bounds. The default bounds are
+the dimension
 
     player = Core
       x: 10
