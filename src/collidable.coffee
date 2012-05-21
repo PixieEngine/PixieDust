@@ -1,5 +1,5 @@
 ( ->
-  ###*
+  ###*!
   Use this to handle generic rectangular collisions among game object a-la Flixel.
 
   @name Collidable
