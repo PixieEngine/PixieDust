@@ -1,5 +1,5 @@
 ###*
-The <code>Clampable</code> module provides helper methods to clamp object properties. 
+The `Clampable` module provides helper methods to clamp object properties. 
 
     player = GameObject
       x: 40
