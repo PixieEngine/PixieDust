@@ -12,7 +12,8 @@ the dimensions of your game. Useful for bullet type objects.
 
     bullet.include ActiveBounds
 
-    # => Now the bullet will be removed when it 
+    # => Now the bullet will be removed when it goes outside of the
+
     
 ActiveBounds module
 @name ActiveBounds
