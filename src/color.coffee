@@ -275,19 +275,18 @@
     ###*
     Returns a copy of the calling color darkened by `amount` (Lightness of the color ranges from 0 to 1).
 
-    <code class="run"><pre>
-    green = Color(0, 255, 0)
-
-    darkGreen = green.darken(0.3)
-
-    # to see what they look like
-    for color, index in [green, darkGreen]
-      canvas.drawRect
-        color: color
-        x: 20 + (60 * index)
-        y: 20 + (60 * index)
-        width: 60
-        height: 60         
+        green = Color(0, 255, 0)
+    
+        darkGreen = green.darken(0.3)
+    
+        # to see what they look like
+        for color, index in [green, darkGreen]
+          canvas.drawRect
+            color: color
+            x: 20 + (60 * index)
+            y: 20 + (60 * index)
+            width: 60
+            height: 60         
 
     @name darken
     @methodOf Color#
