@@ -5422,7 +5422,8 @@ var CollisionResponse;
 
 CollisionResponse = function(I, self) {
   if (I == null) I = {};
-  self.bind('update', function(elapsedTime) {
+  self.unbind(".Movable");
+  self.bind('update.Movable', function(elapsedTime) {
     var t, unit;
     t = (elapsedTime * I.velocity.x).abs();
     unit = I.velocity.x.sign();
