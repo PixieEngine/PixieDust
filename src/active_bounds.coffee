@@ -11,6 +11,8 @@ the dimensions of your game. Useful for bullet type objects.
       velocity: Point(120, 0)
 
     bullet.include ActiveBounds
+
+    # =
     
 ActiveBounds module
 @name ActiveBounds
