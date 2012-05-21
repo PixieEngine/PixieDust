@@ -27,9 +27,7 @@
 
   (exports ? this)["Collidable"] = Collidable
 
-  ###*
 
-  ###
   {NONE, LEFT, RIGHT, UP, DOWN} = Object.extend Collidable,
     NONE:  0x0000
     LEFT:  0x0001
