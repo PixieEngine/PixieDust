@@ -5,8 +5,7 @@ The Ageable module handles keeping track of an object's age.
     
     player.update(1)
     
-    #=> player.I.age == 1
-    
+    #=> player.I.age == 1   
 
 @name Ageable
 @module
@@ -22,3 +21,11 @@ Ageable = (I={}, self) ->
     I.age += dt
 
   return {}
+
+
+Bounded module
+@name Bounded
+@module
+@constructor
+@param {Object} I Instance variables
+@param {Core} self Reference to including object
