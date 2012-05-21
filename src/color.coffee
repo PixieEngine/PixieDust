@@ -325,7 +325,6 @@
     ###*
     A copy of the calling color with its saturation reduced by `amount`.
 
-    <code class="run"><pre>
     blue = Color(0, 0, 255)
 
     desaturatedBlue = blue.desaturate(0.4)
