@@ -787,21 +787,20 @@
     A getter / setter for the saturation value of the color. Passing no argument returns the 
     current saturation value. Passing a value will set the saturation to that value and return the color.
 
-    <code class="run"><pre>
-    yellow = Color('hsl(60, 0.5, 0.5)')
-
-    yellow.saturation()
-    # => 0.5
-
-    yellow.saturation(0.8)
-
-    # to see what it looks like
-    canvas.drawRect
-      color: yellow
-      x: 50 
-      y: 30 
-      width: 80
-      height: 80     
+        yellow = Color('hsl(60, 0.5, 0.5)')
+    
+        yellow.saturation()
+        # => 0.5
+    
+        yellow.saturation(0.8)
+    
+        # to see what it looks like
+        canvas.drawRect
+          color: yellow
+          x: 50 
+          y: 30 
+          width: 80
+          height: 80     
 
     @name saturation
     @methodOf Color#
