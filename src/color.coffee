@@ -534,7 +534,6 @@
     ###*
     A copy of the calling color with its hue shifted by `degrees`. This differs from the hue setter in that it adds to the existing hue value and will wrap around 0 and 360.
 
-    <code class="run"><pre>
     magenta = Color(255, 0, 255)
 
     magenta.hue()
