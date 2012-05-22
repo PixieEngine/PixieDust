@@ -19,7 +19,7 @@ TimedEvents = (I={}, self) ->
         self.sendOrApply(fn)
         event.lastFired += period
         
-  self
+  self.bind ""
 
   ###*
   Execute <code>fn</code> every <code>n</code> frames.
