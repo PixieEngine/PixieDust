@@ -26,14 +26,14 @@ test "#separate", ->
 
 test "conservation of momentum", ->
   leftObject = GameObject
-    includedModules: ["Collidable"]
+    includedModules:
     x: 50
     y: 50
     width: 20
     height: 20
     mass: 5
     velocity: Point(1, 0)
-    
+  .include "Collidable"
 
   rightObject = GameObject
     includedModules: ["Collidable"]
