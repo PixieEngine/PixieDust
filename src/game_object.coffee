@@ -108,8 +108,6 @@ GameObject = (I) ->
     active: true
     created: false
     destroyed: false
-    
-    excludedModules: []
 
   self = Core(I).extend {
     ###*
