@@ -62,7 +62,7 @@ test "before add event", 1, ->
 test "#add", ->
   engine = Engine()
   
-  en
+  engine.add "GameObject"
 
 test "zSort", ->
   engine = Engine
