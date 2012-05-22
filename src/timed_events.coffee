@@ -23,7 +23,7 @@ TimedEvents = (I={}, self) ->
       (event.delay -= elapsedTime) >= 0
 
     firingEvents.each (event) ->
-      event.callback()
+      self.sendOrApplyevent.callback()
 
   ###*
   Execute <code>fn</code> every <code>n</code> frames.
