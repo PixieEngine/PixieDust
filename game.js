@@ -8721,7 +8721,7 @@ the engine. Use the remove event to handle any clean up.
 var GameObject;
 
 GameObject = function(I) {
-  var modules, self;
+  var self;
   I || (I = {});
   /**
   @name {Object} I Instance variables 
@@ -8730,9 +8730,7 @@ GameObject = function(I) {
   Object.reverseMerge(I, {
     active: true,
     created: false,
-    destroyed: false,
-    includedModules: [],
-    excludedModules: []
+    destroyed: false
   });
   self = Core(I).extend({
     /**
@@ -8767,10 +8765,8 @@ GameObject = function(I) {
       return I.active = false;
     }
   });
-  modules = GameObject.defaultModules.concat(I.includedModules);
-  modules = modules.without(I.excludedModules);
-  modules.each(function(Module) {
-    return self.include(Module);
+  GameObject.defaultModules.each(function(moduleName) {
+    return self.include(moduleName);
   });
   return self;
 };
