@@ -146,9 +146,7 @@ GameObject = (I) ->
       I.active = false
   }
 
-  modules = .concat(I.includedModules)
-
-  modules.each (Module) ->
+  GameObject.defaultModules.each (Module) ->
     self.include Module
 
   self
