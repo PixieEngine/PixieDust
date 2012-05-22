@@ -11,13 +11,13 @@ test "#every", 4, ->
     o.trigger "afterUpdate", 1
 
 test "#delay", 1, ->
-  o = GameObject
+  o = GameObject()
 
   3.times (n) ->
-    engine.delay n, ->
+    o.delay n, ->
       ok(true)
 
-  engine.frameAdvance()
+  o.update(0.)
 
 # Clear out the module
 module()
