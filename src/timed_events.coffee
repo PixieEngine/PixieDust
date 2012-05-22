@@ -18,7 +18,7 @@ TimedEvents = (I={}, self) ->
       while event.lastFired < I.age + elapsedTime
         self.sendOrApply(fn)
         event.lastFired += period
-        
+
     [I.delayedEvents, firingEvents] = I.delayedEvents.partition (event) ->
       (event.delay -= elapsedTime) >= 0
 
