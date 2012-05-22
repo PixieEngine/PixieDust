@@ -60,7 +60,9 @@ test "before add event", 1, ->
     test: "test"
 
 test "#add", ->
-  engine
+  engine = Engine()
+  
+  en
 
 test "zSort", ->
   engine = Engine
