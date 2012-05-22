@@ -6792,7 +6792,6 @@ attribute filters so that you can exclude irrelevant data.
     player.debug
       filter: 'all'
 
-Debuggable module
 @name Debuggable
 @module
 @constructor
@@ -7790,10 +7789,10 @@ The <code>Delay</code> module provides methods to trigger events after a number 
 Engine.Delay = function(I, self) {
   var delayedEvents;
   delayedEvents = [];
-  self.bind('afterUpdate', function() {
+  self.bind('afterUpdate', function(elapsedTime) {
     var firingEvents, _ref;
     _ref = delayedEvents.partition(function(event) {
-      return (event.delay -= 1) >= 0;
+      return (event.delay -= elapsedTime) >= 0;
     }), delayedEvents = _ref[0], firingEvents = _ref[1];
     firingEvents.each(function(event) {
       return event.callback();
