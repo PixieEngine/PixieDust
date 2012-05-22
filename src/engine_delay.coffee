@@ -10,7 +10,7 @@ The <code>Delay</code> module provides methods to trigger events after a number 
 Engine.Delay = (I, self) ->
   delayedEvents = []
 
-  self.bind 'afterUpdate', ->
+  self.bind 'afterUpdate', (elapsedTime) ->
     [delayedEvents, firingEvents] = delayedEvents.partition (event) ->
       (event.delay -= 1) >= 0
 
