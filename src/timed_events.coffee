@@ -19,7 +19,7 @@ TimedEvents = (I={}, self) ->
         self.sendOrApply(fn)
         event.lastFired += period
         
-    [I.delayedEvents, firingEvents] = delayedEvents.partition (event) ->
+    [I.delayedEvents, firingEvents] = I.delayedEvents.partition (event) ->
       (event.delay -= elapsedTime) >= 0
 
     firingEvents.each (event) ->
