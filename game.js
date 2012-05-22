@@ -7888,8 +7888,13 @@ Engine.GameState = function(I, self) {
     return I.currentState.trigger("overlay", canvas);
   });
   return {
-    add: function(entityData) {
+    add: function(className, entityData) {
       var object;
+      if (entityData != null) {
+        entityData["class"] = className;
+      } else {
+        entityData = className;
+      }
       self.trigger("beforeAdd", entityData);
       object = I.currentState.add(entityData);
       self.trigger("afterAdd", object);
