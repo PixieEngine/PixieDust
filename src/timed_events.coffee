@@ -66,7 +66,7 @@ TimedEvents = (I={}, self) ->
   delay: (seconds, fn) ->
     delayedEvents.push
       delay: seconds
-      fn: callback
+      fn: fn
 
     return self
 
