@@ -60,10 +60,13 @@ Engine.GameState = (I, self) ->
 
   fadeIn: (options={}) ->
     self.cameras().invoke('fadeIn', options)
+
   fadeOut: (options={}) ->
     self.cameras().invoke('fadeOut', options)
+
   flash: (options={}) ->
     self.camera(options.camera).flash(options)
+    
   objects: ->
     I.currentState.objects()
   setState: (newState) ->
