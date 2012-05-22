@@ -33,7 +33,7 @@ Engine.GameState = (I, self) ->
     I.currentState.trigger "overlay", canvas
 
   # We must always return self as the last line
-  return {
+  return
     # Just pass through to the current state
     add: (className, entityData) ->
       # 
@@ -77,5 +77,4 @@ Engine.GameState = (I, self) ->
       I.currentState.loadState(newState)
     reload: ->
       I.currentState.reload()
-  }
 
