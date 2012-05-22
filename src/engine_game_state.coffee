@@ -32,8 +32,7 @@ Engine.GameState = (I, self) ->
     I.currentState.trigger "draw", canvas
     I.currentState.trigger "overlay", canvas
 
-  # We must always return self as the last line
-  return
+
     # Just pass through to the current state
     add: (className, entityData) ->
       # Allow optional add "Class", data form
