@@ -61,7 +61,7 @@ test "before add event", 1, ->
 
 test "#add", ->
   engine = Engine()
-  
+
   engine.add "GameObject",
     test: true
 
