@@ -41,8 +41,10 @@ Engine.GameState = (I, self) ->
       self.trigger "afterAdd", object
 
       return object
+
     camera: (n=0) ->
       self.cameras()[n]
+
     cameras: (newCameras) ->
       if newCameras?
         I.currentState.cameras(newCameras)
