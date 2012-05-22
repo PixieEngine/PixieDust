@@ -10,7 +10,7 @@ TimedEvents module
 TimedEvents = (I={}, self) ->
   Object.reverseMerge I,
     everyEvents: []
-    delayEvents: 
+    delayEvents: []
 
   self.bind "update", (elapsedTime) ->
     for event in I.everyEvents
