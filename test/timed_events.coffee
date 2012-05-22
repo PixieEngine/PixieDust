@@ -11,6 +11,7 @@ test "#every", 4, ->
     o.trigger "afterUpdate", 1
 
 test "#delay", 1, ->
+  o = GameObject
 
   3.times (n) ->
     engine.delay n, ->
