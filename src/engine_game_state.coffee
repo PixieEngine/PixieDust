@@ -66,11 +66,13 @@ Engine.GameState = (I, self) ->
 
   flash: (options={}) ->
     self.camera(options.camera).flash(options)
-    
+
   objects: ->
     I.currentState.objects()
+
   setState: (newState) ->
     requestedState = newState
+
   shake: (options={}) ->
     self.camera(options.camera).shake(options)
   saveState: ->
