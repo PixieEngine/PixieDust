@@ -20,7 +20,7 @@ Engine.Delay = (I, self) ->
     return
 
   ###*
-  Execute a callback after a number of s have passed.
+  Execute a callback after a number of seconds have passed.
 
       engine.delay 5, ->
         engine.add
