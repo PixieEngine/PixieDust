@@ -37,7 +37,7 @@ Engine.GameState = (I, self) ->
     # Just pass through to the current state
     add: (className, entityData) ->
       if entityData?
-        entityData.class
+        entityData.class = className
       else
         
       self.trigger "beforeAdd", entityData
