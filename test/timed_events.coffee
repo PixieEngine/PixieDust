@@ -17,7 +17,7 @@ test "#delay", 1, ->
     o.delay n, ->
       ok(true)
 
-  o.update(0.)
+  o.update(0.5)
 
 # Clear out the module
 module()
