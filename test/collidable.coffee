@@ -10,12 +10,12 @@ test "#separate", ->
   .include "Collidable"
 
   rightObject = GameObject
-    includedModules: [
     x: 60
     y: 50
     width: 20
     height: 20  
     velocity: Point(0, 0)
+  .include "Collidable"
 
   Collidable.separate(leftObject, rightObject)
 
@@ -33,6 +33,7 @@ test "conservation of momentum", ->
     height: 20
     mass: 5
     velocity: Point(1, 0)
+    
 
   rightObject = GameObject
     includedModules: ["Collidable"]
