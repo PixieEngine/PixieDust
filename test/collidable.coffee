@@ -7,10 +7,10 @@ test "#separate", ->
     width: 20
     height: 20
     velocity: Point(1, 0)
-  .include "Col"
+  .include "Collidable"
 
   rightObject = GameObject
-    includedModules: ["Collidable"]
+    includedModules: [
     x: 60
     y: 50
     width: 20
