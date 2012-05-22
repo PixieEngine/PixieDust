@@ -7800,7 +7800,7 @@ Engine.Delay = function(I, self) {
   });
   return {
     /**
-    Execute a callback after a number of steps have passed.
+    Execute a callback after a number of seconds have passed.
     
         engine.delay 5, ->
           engine.add
@@ -7808,14 +7808,14 @@ Engine.Delay = function(I, self) {
     
     @name delay
     @methodOf Engine#
-    @param {Number} steps The number of steps to wait before executing the callback
+    @param {Number} seconds The number of steps to wait before executing the callback
     @param {Function} callback The callback to be executed.
     
     @returns {Engine} self
     */
-    delay: function(steps, callback) {
+    delay: function(seconds, callback) {
       delayedEvents.push({
-        delay: steps,
+        delay: seconds,
         callback: callback
       });
       return self;
@@ -9819,26 +9819,26 @@ var TimedEvents,
 TimedEvents = function(I, self) {
   if (I == null) I = {};
   Object.reverseMerge(I, {
-    everyEvents: []
+    everyEvents: [],
+    delayEvents: []
   });
   self.bind("update", function(elapsedTime) {
-    var event, fn, period, _i, _len, _ref, _results;
+    var event, firingEvents, fn, period, _i, _len, _ref, _ref2;
     _ref = I.everyEvents;
-    _results = [];
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
       event = _ref[_i];
       fn = event.fn, period = event.period;
-      _results.push((function() {
-        var _results2;
-        _results2 = [];
-        while (event.lastFired < I.age + elapsedTime) {
-          self.sendOrApply(fn);
-          _results2.push(event.lastFired += period);
-        }
-        return _results2;
-      })());
+      while (event.lastFired < I.age + elapsedTime) {
+        self.sendOrApply(fn);
+        event.lastFired += period;
+      }
     }
-    return _results;
+    _ref2 = I.delayEvents.partition(function(event) {
+      return (event.delay -= elapsedTime) >= 0;
+    }), I.delayEvents = _ref2[0], firingEvents = _ref2[1];
+    return firingEvents.each(function(event) {
+      return self.sendOrApply(event.fn);
+    });
   });
   return {
     /**
@@ -9864,6 +9864,27 @@ TimedEvents = function(I, self) {
         period: period,
         lastFired: I.age
       });
+      /**
+        Execute a callback after a number of seconds have passed.
+      
+        self.delay 5, ->
+          engine.add
+            class: "Ghost"
+      
+        @name delay
+        @methodOf TimedEvents#
+        @param {Number} steps The number of steps to wait before executing the callback
+        @param {Function} callback The callback to be executed.
+      
+        @returns {Engine} self
+      */
+    },
+    delay: function(seconds, fn) {
+      I.delayEvents.push({
+        delay: seconds,
+        fn: fn
+      });
+      return self;
     },
     sendOrApply: function() {
       var args, fn;
