@@ -49,7 +49,26 @@ TimedEvents = (I={}, self) ->
       period: period
       lastFired: I.age
       
-      
+    ###*
+  Execute a callback after a number of steps have passed.
+
+      engine.delay 5, ->
+        engine.add
+          class: "Ghost"
+
+  @name delay
+  @methodOf Engine#
+  @param {Number} steps The number of steps to wait before executing the callback
+  @param {Function} callback The callback to be executed.
+
+  @returns {Engine} self
+  ###
+  delay: (steps, callback) ->
+    delayedEvents.push
+      delay: steps
+      callback: callback
+
+    return self
 
   # TODO: Move this into a more core module
   sendOrApply: (fn, args...) ->
