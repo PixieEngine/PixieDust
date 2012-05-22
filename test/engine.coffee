@@ -63,7 +63,9 @@ test "#add", ->
   engine = Engine()
   
   engine.add "GameObject",
-    test
+    test: true
+
+  
 
 test "zSort", ->
   engine = Engine
