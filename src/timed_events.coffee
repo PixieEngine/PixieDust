@@ -64,7 +64,7 @@ TimedEvents = (I={}, self) ->
   @returns {Engine} self
   ###
   delay: (seconds, fn) ->
-    delayEvents.push
+    I.delayEvents.push
       delay: seconds
       fn: fn
 
