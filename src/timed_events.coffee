@@ -63,7 +63,7 @@ TimedEvents = (I={}, self) ->
 
   @returns {Engine} self
   ###
-  delay: (steps, callback) ->
+  delay: (seconds, callback) ->
     delayedEvents.push
       delay: steps
       callback: callback
