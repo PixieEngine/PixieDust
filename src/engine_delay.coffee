@@ -39,4 +39,3 @@ Engine.Delay = (I, self) ->
       callback: callback
 
     return self
-
