@@ -19,8 +19,11 @@ TimedEvents = (I={}, self) ->
         self.sendOrApply(fn)
         event.lastFired += period
         
-    for event in I.delayEvents
-      
+    [I.delayedEvents, firingEvents] = delayedEvents.partition (event) ->
+      (event.delay -= elapsedTime) >= 0
+
+    firingEvents.each (event) ->
+      event.callback()
 
   ###*
   Execute <code>fn</code> every <code>n</code> frames.
