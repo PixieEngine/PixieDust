@@ -146,7 +146,7 @@ GameObject = (I) ->
       I.active = false
   }
 
-  GameObject.defaultModules.each (Module) ->
+  GameObject.defaultModules.each (moduleName) ->
     self.include Module
 
   self
