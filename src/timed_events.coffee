@@ -50,9 +50,9 @@ TimedEvents = (I={}, self) ->
       lastFired: I.age
       
     ###*
-  Execute a callback after a number of steps have passed.
+  Execute a callback after a number of seconds have passed.
 
-      engine.delay 5, ->
+      self.delay 5, ->
         engine.add
           class: "Ghost"
 
