@@ -33,47 +33,47 @@ Engine.GameState = (I, self) ->
     I.currentState.trigger "overlay", canvas
 
 
-    # Just pass through to the current state
-    add: (className, entityData) ->
-      # Allow optional add "Class", data form
-      if entityData?
-        entityData.class = className
-      else
-        entityData = className
+  # Just pass through to the current state
+  add: (className, entityData) ->
+    # Allow optional add "Class", data form
+    if entityData?
+      entityData.class = className
+    else
+      entityData = className
 
-      self.trigger "beforeAdd", entityData
-      object = I.currentState.add(entityData)
-      self.trigger "afterAdd", object
+    self.trigger "beforeAdd", entityData
+    object = I.currentState.add(entityData)
+    self.trigger "afterAdd", object
 
-      return object
+    return object
 
-    camera: (n=0) ->
-      self.cameras()[n]
+  camera: (n=0) ->
+    self.cameras()[n]
 
-    cameras: (newCameras) ->
-      if newCameras?
-        I.currentState.cameras(newCameras)
+  cameras: (newCameras) ->
+    if newCameras?
+      I.currentState.cameras(newCameras)
 
-        return self
-      else
-        I.currentState.cameras()
+      return self
+    else
+      I.currentState.cameras()
 
-    fadeIn: (options={}) ->
-      self.cameras().invoke('fadeIn', options)
-    fadeOut: (options={}) ->
-      self.cameras().invoke('fadeOut', options)
-    flash: (options={}) ->
-      self.camera(options.camera).flash(options)
-    objects: ->
-      I.currentState.objects()
-    setState: (newState) ->
-      requestedState = newState
-    shake: (options={}) ->
-      self.camera(options.camera).shake(options)
-    saveState: ->
-      I.currentState.saveState()
-    loadState: (newState) ->
-      I.currentState.loadState(newState)
-    reload: ->
-      I.currentState.reload()
+  fadeIn: (options={}) ->
+    self.cameras().invoke('fadeIn', options)
+  fadeOut: (options={}) ->
+    self.cameras().invoke('fadeOut', options)
+  flash: (options={}) ->
+    self.camera(options.camera).flash(options)
+  objects: ->
+    I.currentState.objects()
+  setState: (newState) ->
+    requestedState = newState
+  shake: (options={}) ->
+    self.camera(options.camera).shake(options)
+  saveState: ->
+    I.currentState.saveState()
+  loadState: (newState) ->
+    I.currentState.loadState(newState)
+  reload: ->
+    I.currentState.reload()
 
