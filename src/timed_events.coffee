@@ -57,7 +57,7 @@ TimedEvents = (I={}, self) ->
           class: "Ghost"
 
   @name delay
-  @methodOf Engine#
+  @methodOf TimedEvents#
   @param {Number} steps The number of steps to wait before executing the callback
   @param {Function} callback The callback to be executed.
 
