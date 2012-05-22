@@ -28,14 +28,14 @@ Engine.Delay = (I, self) ->
 
   @name delay
   @methodOf Engine#
-  @param {Number} steps The number of steps to wait before executing the callback
+  @param {Number} seconds The number of steps to wait before executing the callback
   @param {Function} callback The callback to be executed.
 
   @returns {Engine} self
   ###
-  delay: (steps, callback) ->
+  delay: (seconds, callback) ->
     delayedEvents.push
-      delay: steps
+      delay: seconds
       callback: callback
 
     return self
