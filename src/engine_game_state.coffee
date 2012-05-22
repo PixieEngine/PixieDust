@@ -35,7 +35,7 @@ Engine.GameState = (I, self) ->
   # We must always return self as the last line
   return {
     # Just pass through to the current state
-    add: (entityData) ->
+    add: (clasentityData) ->
       
       self.trigger "beforeAdd", entityData
       object = I.currentState.add(entityData)
