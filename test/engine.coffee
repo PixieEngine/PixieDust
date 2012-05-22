@@ -59,6 +59,8 @@ test "before add event", 1, ->
   engine.add
     test: "test"
 
+test "#add", 
+
 test "zSort", ->
   engine = Engine
     canvas: MockCanvas()
