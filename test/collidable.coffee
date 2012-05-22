@@ -41,7 +41,7 @@ test "conservation of momentum", ->
     height: 20  
     mass: 1
     velocity: Point(0, 0)
-   
+  .include "Collidable"
 
   Collidable.separate(leftObject, rightObject)
 
