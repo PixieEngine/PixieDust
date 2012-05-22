@@ -12,7 +12,7 @@ Engine.Delay = (I, self) ->
 
   self.bind 'afterUpdate', (elapsedTime) ->
     [delayedEvents, firingEvents] = delayedEvents.partition (event) ->
-      (event.delay -= 1) >= 0
+      (event.delay -= elapsedTime) >= 0
 
     firingEvents.each (event) ->
       event.callback()
