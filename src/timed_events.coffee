@@ -48,6 +48,8 @@ TimedEvents = (I={}, self) ->
       fn: fn
       period: period
       lastFired: I.age
+      
+      
 
   # TODO: Move this into a more core module
   sendOrApply: (fn, args...) ->
