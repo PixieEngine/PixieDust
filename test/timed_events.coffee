@@ -10,8 +10,8 @@ test "#every", 4, ->
     o.update(1)
     o.trigger "afterUpdate", 1
 
-test "#delay", 1 ->
+test "#delay", 1, ->
   
-  
+
 # Clear out the module
 module()
