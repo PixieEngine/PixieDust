@@ -12,6 +12,6 @@ test "#every", 4, ->
 
 test "#delay", 1 ->
   
- 
+  
 # Clear out the module
 module()
