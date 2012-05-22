@@ -75,10 +75,12 @@ Engine.GameState = (I, self) ->
 
   shake: (options={}) ->
     self.camera(options.camera).shake(options)
+
   saveState: ->
     I.currentState.saveState()
+
   loadState: (newState) ->
     I.currentState.loadState(newState)
+
   reload: ->
     I.currentState.reload()
-
