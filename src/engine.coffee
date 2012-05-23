@@ -251,8 +251,6 @@
       draw: draw
     }
 
-    self.include "Bindable"
-
     Engine.defaultModules.each (moduleName) ->
       fullModuleName = "Engine.#{moduleName}"
       throw "##{fullModuleName} is not a valid engine module" unless Engine[moduleName]
