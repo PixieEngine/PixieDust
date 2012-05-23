@@ -2,8 +2,6 @@
   defaults =
     FPS: 30
     age: 0
-    excludedModules: []
-    includedModules: []
     paused: false
     showFPS: false
     zSort: false
