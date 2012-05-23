@@ -260,7 +260,7 @@
 
     Engine.defaultModules.each (moduleName) ->
       moduleName = "Engine.#{moduleName}"
-      throw "#Engine.#{moduleName} is not a valid engine module" unless Engine[moduleName]
+      throw "##{moduleName} is not a valid engine module" unless Engine[moduleName]
 
       self.include Engine[moduleName]
 
