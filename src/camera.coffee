@@ -119,7 +119,7 @@ Camera = (I={}) ->
 
       objects.invoke "trigger", "overlay", canvas
 
-  self.include(Bounded)
+  self.include "Bounded"
 
   # The order of theses includes is important for
   # the way in wich they modify the camera view transform
