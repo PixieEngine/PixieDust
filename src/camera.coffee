@@ -123,7 +123,8 @@ Camera = (I={}) ->
 
   # The order of theses includes is important for
   # the way in wich they modify the camera view transform
-  self.include(Camera.ZSort)
+  
+  f
   self.include(Camera.Zoom)
   self.include(Camera.Rotate)
   self.include(Camera.Shake)
@@ -133,5 +134,5 @@ Camera = (I={}) ->
   return self
 
 Camera.defaultModules = [
-  ""
+  "ZSort"
 ]
