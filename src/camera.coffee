@@ -123,9 +123,9 @@ Camera = (I={}) ->
 
   # The order of theses includes is important for
   # the way in wich they modify the camera view transform
-  
+
   for moduleName in Camera.defaultModules
-    self.include "Camera.#"
+    self.include "Camera.#{moduleName}"
   self.include(Camera.Zoom)
   self.include(Camera.Rotate)
   self.include(Camera.Shake)
