@@ -253,7 +253,7 @@
       draw: draw
     }
 
-    self.include Bindable
+    self.include "Bindable"
 
     Engine.defaultModules.each (moduleName) ->
       fullModuleName = "Engine.#{moduleName}"
