@@ -814,28 +814,39 @@ Bindable module.
 var Bindable,
   __slice = Array.prototype.slice;
 
-Bindable = function() {
+Bindable = function(I, self) {
   var eventCallbacks;
+  if (I == null) I = {};
   eventCallbacks = {};
   return {
+    bind: function() {
+      var args;
+      args = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
+      return self.on.apply(self, args);
+    },
+    unbind: function() {
+      var args;
+      args = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
+      return self.off.apply(self, args);
+    },
     /**
     Adds a function as an event listener.
     
         # this will call coolEventHandler after
         # yourObject.trigger "someCustomEvent" is called.
-        yourObject.bind "someCustomEvent", coolEventHandler
+        yourObject.on "someCustomEvent", coolEventHandler
       
         #or
-        yourObject.bind "anotherCustomEvent", ->
+        yourObject.on "anotherCustomEvent", ->
           doSomething()
     
-    @name bind
+    @name on
     @methodOf Bindable#
     @param {String} event The event to listen to.
     @param {Function} callback The function to be called when the specified event
     is triggered.
     */
-    bind: function(namespacedEvent, callback) {
+    on: function(namespacedEvent, callback) {
       var event, namespace, _ref;
       _ref = namespacedEvent.split("."), event = _ref[0], namespace = _ref[1];
       if (namespace) {
@@ -852,17 +863,17 @@ Bindable = function() {
     
         #  removes the handler coolEventHandler from the event
         # "someCustomEvent" while leaving the other events intact.
-        yourObject.unbind "someCustomEvent", coolEventHandler
+        yourObject.off "someCustomEvent", coolEventHandler
       
         # removes all handlers attached to "anotherCustomEvent" 
-        yourObject.unbind "anotherCustomEvent"
+        yourObject.off "anotherCustomEvent"
     
-    @name unbind
+    @name off
     @methodOf Bindable#
     @param {String} event The event to remove the listener from.
     @param {Function} [callback] The listener to remove.
     */
-    unbind: function(namespacedEvent, callback) {
+    off: function(namespacedEvent, callback) {
       var callbacks, event, key, namespace, _ref;
       _ref = namespacedEvent.split("."), event = _ref[0], namespace = _ref[1];
       if (event) {
@@ -902,7 +913,7 @@ Bindable = function() {
     @param {Array} [parameters] Additional parameters to pass to the event listener.
     */
     trigger: function() {
-      var callbacks, event, parameters, self;
+      var callbacks, event, parameters;
       event = arguments[0], parameters = 2 <= arguments.length ? __slice.call(arguments, 1) : [];
       callbacks = eventCallbacks[event];
       if (callbacks && callbacks.length) {
@@ -966,167 +977,194 @@ methods.
 
 @param {Object} I Instance variables
 */
-var Core,
-  __slice = Array.prototype.slice;
+var __slice = Array.prototype.slice;
 
-Core = function(I) {
-  var self;
-  if (I == null) I = {};
-  return self = {
-    /**
-    External access to instance variables. Use of this property should be avoided
-    in general, but can come in handy from time to time.
-    
-        I =
-          r: 255
-          g: 0
-          b: 100
-    
-        myObject = Core(I)
-    
-        # a bad idea most of the time, but it's 
-        # pretty convenient to have available.
-        myObject.I.r
-        # => 255
-    
-        myObject.I.g
-        # => 0
-    
-        myObject.I.b
-        # => 100
-    
-    @name I
-    @fieldOf Core#
-    */
-    I: I,
-    /**
-    Generates a public jQuery style getter / setter method for each 
-    String argument.
-    
-        myObject = Core
-          r: 255
-          g: 0
-          b: 100
-    
-        myObject.attrAccessor "r", "g", "b"
-    
-        myObject.r(254)
-        myObject.r()
-    
-        => 254
-    
-    @name attrAccessor
-    @methodOf Core#
-    */
-    attrAccessor: function() {
-      var attrNames;
-      attrNames = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
-      return attrNames.each(function(attrName) {
-        return self[attrName] = function(newValue) {
-          if (newValue != null) {
-            I[attrName] = newValue;
-            return self;
-          } else {
+(function() {
+  var root;
+  root = typeof exports !== "undefined" && exports !== null ? exports : this;
+  return root.Core = function(I) {
+    var Module, moduleName, self, _i, _len, _ref;
+    if (I == null) I = {};
+    Object.reverseMerge(I, {
+      includedModules: []
+    });
+    self = {
+      /**
+      External access to instance variables. Use of this property should be avoided
+      in general, but can come in handy from time to time.
+        
+          I =
+            r: 255
+            g: 0
+            b: 100
+      
+          myObject = Core(I)
+      
+          # a bad idea most of the time, but it's 
+          # pretty convenient to have available.
+          myObject.I.r
+          # => 255
+      
+          myObject.I.g
+          # => 0
+      
+          myObject.I.b
+          # => 100
+        
+      @name I
+      @fieldOf Core#
+      */
+      I: I,
+      /**
+      Generates a public jQuery style getter / setter method for each 
+      String argument.
+        
+          myObject = Core
+            r: 255
+            g: 0
+            b: 100
+      
+          myObject.attrAccessor "r", "g", "b"
+      
+          myObject.r(254)
+          myObject.r()
+      
+          => 254
+        
+      @name attrAccessor
+      @methodOf Core#
+      */
+      attrAccessor: function() {
+        var attrNames;
+        attrNames = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
+        return attrNames.each(function(attrName) {
+          return self[attrName] = function(newValue) {
+            if (newValue != null) {
+              I[attrName] = newValue;
+              return self;
+            } else {
+              return I[attrName];
+            }
+          };
+        });
+      },
+      /**
+      Generates a public jQuery style getter method for each String argument.
+        
+          myObject = Core
+            r: 255
+            g: 0
+            b: 100
+      
+          myObject.attrReader "r", "g", "b"
+      
+          myObject.r()
+          => 255
+      
+          myObject.g()
+          => 0
+      
+          myObject.b()
+          => 100
+        
+      @name attrReader
+      @methodOf Core#
+      */
+      attrReader: function() {
+        var attrNames;
+        attrNames = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
+        return attrNames.each(function(attrName) {
+          return self[attrName] = function() {
             return I[attrName];
+          };
+        });
+      },
+      /**
+      Extends this object with methods from the passed in object. A shortcut for Object.extend(self, methods)
+        
+          I =
+            x: 30
+            y: 40
+            maxSpeed: 5
+      
+          # we are using extend to give player
+          # additional methods that Core doesn't have
+          player = Core(I).extend
+            increaseSpeed: ->
+              I.maxSpeed += 1
+      
+          player.I.maxSpeed
+          => 5
+      
+          player.increaseSpeed()
+      
+          player.I.maxSpeed
+          => 6
+        
+      @name extend
+      @methodOf Core#
+      @see Object.extend
+      @returns self
+      */
+      extend: function(options) {
+        Object.extend(self, options);
+        return self;
+      },
+      /**
+      Includes a module in this object.
+        
+          myObject = Core()
+          myObject.include(Bindable)
+      
+          # now you can bind handlers to functions
+          myObject.bind "someEvent", ->
+            alert("wow. that was easy.")
+        
+      @name include
+      @methodOf Core#
+      @param {String} Module the module to include. A module is a constructor that takes two parameters, I and self, and returns an object containing the public methods to extend the including object with.
+      */
+      include: function() {
+        var Module, key, moduleName, modules, value, _i, _len;
+        modules = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
+        for (_i = 0, _len = modules.length; _i < _len; _i++) {
+          Module = modules[_i];
+          if (typeof Module.isString === "function" ? Module.isString() : void 0) {
+            moduleName = Module;
+            Module = Module.constantize();
+          } else if (moduleName = Module._name) {} else {
+            for (key in root) {
+              value = root[key];
+              if (value === Module) Module._name = moduleName = key;
+            }
           }
-        };
-      });
-    },
-    /**
-    Generates a public jQuery style getter method for each String argument.
-    
-        myObject = Core
-          r: 255
-          g: 0
-          b: 100
-    
-        myObject.attrReader "r", "g", "b"
-    
-        myObject.r()
-        => 255
-    
-        myObject.g()
-        => 0
-    
-        myObject.b()
-        => 100
-    
-    @name attrReader
-    @methodOf Core#
-    */
-    attrReader: function() {
-      var attrNames;
-      attrNames = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
-      return attrNames.each(function(attrName) {
-        return self[attrName] = function() {
-          return I[attrName];
-        };
-      });
-    },
-    /**
-    Extends this object with methods from the passed in object. A shortcut for Object.extend(self, methods)
-    
-        I =
-          x: 30
-          y: 40
-          maxSpeed: 5
-    
-        # we are using extend to give player
-        # additional methods that Core doesn't have
-        player = Core(I).extend
-          increaseSpeed: ->
-            I.maxSpeed += 1
-    
-        player.I.maxSpeed
-        => 5
-    
-        player.increaseSpeed()
-    
-        player.I.maxSpeed
-        => 6
-    
-    @name extend
-    @methodOf Core#
-    @see Object.extend
-    @returns self
-    */
-    extend: function(options) {
-      Object.extend(self, options);
-      return self;
-    },
-    /**
-    Includes a module in this object.
-    
-        myObject = Core()
-        myObject.include(Bindable)
-    
-        # now you can bind handlers to functions
-        myObject.bind "someEvent", ->
-          alert("wow. that was easy.")
-    
-    @name include
-    @methodOf Core#
-    @param {Module} Module the module to include. A module is a constructor that takes two parameters, I and self, and returns an object containing the public methods to extend the including object with.
-    */
-    include: function() {
-      var Module, modules, _i, _len;
-      modules = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
-      for (_i = 0, _len = modules.length; _i < _len; _i++) {
-        Module = modules[_i];
-        if (typeof Module.isString === "function" ? Module.isString() : void 0) {
-          Module = Module.constantize();
+          if (moduleName) {
+            if (!I.includedModules.include(moduleName)) {
+              I.includedModules.push(moduleName);
+              self.extend(Module(I, self));
+            }
+          } else {
+            warn("Unable to discover name for module: ", Module, "\nSerialization issues may occur.");
+            self.extend(Module(I, self));
+          }
         }
-        self.extend(Module(I, self));
+        return self;
+      },
+      send: function() {
+        var args, name;
+        name = arguments[0], args = 2 <= arguments.length ? __slice.call(arguments, 1) : [];
+        return self[name].apply(self, args);
       }
-      return self;
-    },
-    send: function() {
-      var args, name;
-      name = arguments[0], args = 2 <= arguments.length ? __slice.call(arguments, 1) : [];
-      return self[name].apply(self, args);
+    };
+    _ref = I.includedModules;
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      moduleName = _ref[_i];
+      Module = moduleName.constantize();
+      self.extend(Module(I, self));
     }
+    return self;
   };
-};
+})();
 ;
 var __slice = Array.prototype.slice;
 
@@ -1139,26 +1177,6 @@ Function.prototype.once = function() {
     if (ran) return memo;
     ran = true;
     return memo = func.apply(this, arguments);
-  };
-};
-
-Function.prototype.withBefore = function(interception) {
-  var method;
-  method = this;
-  return function() {
-    interception.apply(this, arguments);
-    return method.apply(this, arguments);
-  };
-};
-
-Function.prototype.withAfter = function(interception) {
-  var method;
-  method = this;
-  return function() {
-    var result;
-    result = method.apply(this, arguments);
-    interception.apply(this, arguments);
-    return result;
   };
 };
 
@@ -1230,10 +1248,14 @@ Gives you some convenience methods for outputting data while developing.
       warn "Be careful, this might be a problem"
       error "Kaboom!"
 */
+var __slice = Array.prototype.slice;
+
 ["log", "info", "warn", "error"].each(function(name) {
   if (typeof console !== "undefined") {
-    return (typeof exports !== "undefined" && exports !== null ? exports : this)[name] = function(message) {
-      if (console[name]) return console[name](message);
+    return (typeof exports !== "undefined" && exports !== null ? exports : this)[name] = function() {
+      var args;
+      args = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
+      if (console[name]) return console[name].apply(console, args);
     };
   } else {
     return (typeof exports !== "undefined" && exports !== null ? exports : this)[name] = function() {};
@@ -4629,7 +4651,7 @@ Bounded = function(I, self) {
 var Camera;
 
 Camera = function(I) {
-  var currentObject, currentType, focusOn, followTypes, objectFilters, self, transformFilters;
+  var currentObject, currentType, focusOn, followTypes, moduleName, objectFilters, self, transformFilters, _i, _len, _ref;
   if (I == null) I = {};
   Object.reverseMerge(I, {
     cameraBounds: Rectangle({
@@ -4741,15 +4763,16 @@ Camera = function(I) {
       return objects.invoke("trigger", "overlay", canvas);
     });
   });
-  self.include(Bounded);
-  self.include(Camera.ZSort);
-  self.include(Camera.Zoom);
-  self.include(Camera.Rotate);
-  self.include(Camera.Shake);
-  self.include(Camera.Flash);
-  self.include(Camera.Fade);
+  self.include("Bounded");
+  _ref = Camera.defaultModules;
+  for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+    moduleName = _ref[_i];
+    self.include("Camera." + moduleName);
+  }
   return self;
 };
+
+Camera.defaultModules = ["ZSort", "Zoom", "Rotate", "Shake", "Flash", "Fade"];
 ;
 /**
 The <code>Fade</code> module provides convenience methods for accessing common Engine.Flash presets.
@@ -7296,7 +7319,7 @@ Emitter = function(I) {
   var self;
   if (I == null) I = {};
   self = GameObject(I);
-  self.include(Emitterable);
+  self.include("Emitterable");
   return self;
 };
 ;
@@ -7321,7 +7344,6 @@ Emitterable = function(I, self) {
       age: 0,
       color: "blue",
       duration: 1.5,
-      includedModules: ["Movable"],
       height: 2,
       maxSpeed: 120,
       offset: Point(0, 0),
@@ -7481,7 +7503,7 @@ Emitterable = function(I, self) {
   @params {PixieCanvas} canvas A reference to the canvas to draw on.
   */
   Engine = function(I) {
-    var animLoop, draw, frameAdvance, lastStepTime, modules, running, self, startTime, step, update;
+    var animLoop, draw, frameAdvance, lastStepTime, running, self, startTime, step, update;
     if (I == null) I = {};
     Object.reverseMerge(I, defaults);
     frameAdvance = false;
@@ -7623,14 +7645,14 @@ Emitterable = function(I, self) {
       update: update,
       draw: draw
     });
-    self.include(Bindable);
-    modules = Engine.defaultModules.concat(I.includedModules);
-    modules = modules.without([].concat(I.excludedModules));
-    modules.each(function(moduleName) {
+    self.include("Bindable");
+    Engine.defaultModules.each(function(moduleName) {
+      var fullModuleName;
+      fullModuleName = "Engine." + moduleName;
       if (!Engine[moduleName]) {
-        throw "#Engine." + moduleName + " is not a valid engine module";
+        throw "#" + fullModuleName + " is not a valid engine module";
       }
-      return self.include(Engine[moduleName]);
+      return self.include(fullModuleName);
     });
     self.trigger("init");
     return self;
@@ -8879,7 +8901,7 @@ GameState = function(I) {
       return I.objects.copy();
     }
   });
-  self.include(Bindable);
+  self.include("Bindable");
   self.bind("update", function(elapsedTime) {
     var toKeep, toRemove, _ref;
     I.updating = true;
@@ -8893,8 +8915,8 @@ GameState = function(I) {
     queuedObjects = [];
     return I.updating = false;
   });
-  self.include(GameState.Cameras);
-  self.include(GameState.SaveState);
+  self.include("GameState.Cameras");
+  self.include("GameState.SaveState");
   return self;
 };
 ;
