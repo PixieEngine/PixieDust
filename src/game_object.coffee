@@ -152,7 +152,6 @@ GameObject = (I) ->
   self
 
 GameObject.defaultModules = [
-  "Bindable"
   "Ageable"
   "Bounded"
   "Clampable"
