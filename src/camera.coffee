@@ -127,8 +127,8 @@ Camera = (I={}) ->
   for moduleName in Camera.defaultModules
     self.include "Camera.#{moduleName}"
 
-  self.include(Camera.Rotate)
-  self.include(Camera.Shake)
+
+
   self.include(Camera.Flash)
   self.include(Camera.Fade)
 
@@ -139,4 +139,5 @@ Camera.defaultModules = [
   "Zoom"
   "Rotate"
   "Shake"
+  "
 ]
