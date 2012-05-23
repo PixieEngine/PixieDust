@@ -66,4 +66,4 @@ Engine.Levels = (I, self) ->
     loadLevel I.currentLevelName
 
   reloadLevel: ->
-    self.restartLevel
+    self.restartLevel()
