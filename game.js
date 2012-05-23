@@ -7907,12 +7907,13 @@ Engine.GameState = function(I, self) {
     return I.currentState.trigger("overlay", canvas);
   });
   return {
-    add: function(className, entityData) {
+    add: function(classNameOrEntityData, entityData) {
       var object;
-      if (entityData != null) {
-        entityData["class"] = className;
+      if (entityData == null) entityData = {};
+      if (typeof classNameOrEntityData.isString === "function" ? classNameOrEntityData.isString() : void 0) {
+        entityData["class"] = classNameOrEntityData;
       } else {
-        entityData = className;
+        entityData = classNameOrEntityData;
       }
       self.trigger("beforeAdd", entityData);
       object = I.currentState.add(entityData);
