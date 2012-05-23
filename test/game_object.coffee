@@ -4,7 +4,7 @@ test "()", ->
   gameObject = GameObject()
   ok gameObject
 
-test "construct", ->
+test ".construct", ->
   gameObject = GameObject.construct
     x: 20
     y: 20
