@@ -1156,6 +1156,7 @@ var __slice = Array.prototype.slice;
         return self[name].apply(self, args);
       }
     };
+    self.include("Bindable");
     _ref = I.includedModules;
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
       moduleName = _ref[_i];
@@ -4733,7 +4734,6 @@ Camera = function(I) {
       return transformFilters.push(fn);
     }
   });
-  self.include(Bindable);
   self.attrAccessor("transform");
   self.bind("afterUpdate", function() {
     if (currentObject) followTypes[currentType](currentObject);
@@ -7402,8 +7402,6 @@ Emitterable = function(I, self) {
   defaults = {
     FPS: 30,
     age: 0,
-    excludedModules: [],
-    includedModules: [],
     paused: false,
     showFPS: false,
     zSort: false
@@ -7645,7 +7643,6 @@ Emitterable = function(I, self) {
       update: update,
       draw: draw
     });
-    self.include("Bindable");
     Engine.defaultModules.each(function(moduleName) {
       var fullModuleName;
       fullModuleName = "Engine." + moduleName;
@@ -8793,7 +8790,7 @@ GameObject = function(I) {
   return self;
 };
 
-GameObject.defaultModules = ["Bindable", "Ageable", "Bounded", "Clampable", "Cooldown", "Drawable", "Expirable", "Follow", "Metered", "Movable", "Rotatable", "TimedEvents", "Tween"];
+GameObject.defaultModules = ["Ageable", "Bounded", "Clampable", "Cooldown", "Drawable", "Expirable", "Follow", "Metered", "Movable", "Rotatable", "TimedEvents", "Tween"];
 
 /**
 Construct an object instance from the given entity data.
@@ -8901,7 +8898,6 @@ GameState = function(I) {
       return I.objects.copy();
     }
   });
-  self.include("Bindable");
   self.bind("update", function(elapsedTime) {
     var toKeep, toRemove, _ref;
     I.updating = true;
