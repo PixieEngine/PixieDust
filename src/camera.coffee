@@ -83,8 +83,6 @@ Camera = (I={}) ->
     transformFilterChain: (fn) ->
       transformFilters.push fn
 
-  self.include(Bindable)
-
   self.attrAccessor "transform"
 
   self.bind "afterUpdate", ->
