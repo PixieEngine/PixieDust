@@ -67,7 +67,7 @@ test "#add", ->
 
   ok engine.first("GameObject")
   
-test "#add ", ->
+test "#add class name only", ->
   engine = Engine()
 
   engine.add "GameObject",
