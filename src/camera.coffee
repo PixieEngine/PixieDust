@@ -131,3 +131,5 @@ Camera = (I={}) ->
   self.include(Camera.Fade)
 
   return self
+
+gine.defaultModules = [
