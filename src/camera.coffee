@@ -137,5 +137,6 @@ Camera = (I={}) ->
 Camera.defaultModules = [
   "ZSort"
   "Zoom"
-  "R"
+  "Rotate"
+  "Shake"
 ]
