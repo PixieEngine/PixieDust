@@ -125,7 +125,7 @@ Camera = (I={}) ->
   # the way in wich they modify the camera view transform
   
   for moduleName in Camera.defaultModules
-    self.incl
+    self.include "Camera.#"
   self.include(Camera.Zoom)
   self.include(Camera.Rotate)
   self.include(Camera.Shake)
