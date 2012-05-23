@@ -62,5 +62,5 @@ Engine.Levels = (I, self) ->
   @name reloadLevel
   @methodOf Engine#
   ###     
-  reloadLevel: ->
+  re: ->
     loadLevel I.currentLevelName
