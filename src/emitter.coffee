@@ -2,6 +2,6 @@
 Emitter = (I={}) ->
   self = GameObject(I)
   
-  self.include Emitterable
+  self.include "Emitterable"
 
   return self
