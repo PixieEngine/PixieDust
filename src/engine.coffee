@@ -259,7 +259,7 @@
       fullModuleName = "Engine.#{moduleName}"
       throw "##{fullModuleName} is not a valid engine module" unless Engine[moduleName]
 
-      self.include Engine[moduleName]
+      self.include fullModuleName
 
     self.trigger "init"
 
