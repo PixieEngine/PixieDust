@@ -16,7 +16,6 @@ Emitterable = (I={}, self) ->
       age: 0
       color: "blue"
       duration: 1.5
-      includedModules: ["Movable"]
       height: 2
       maxSpeed: 120
       offset: Point(0, 0)
