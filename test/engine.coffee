@@ -66,12 +66,11 @@ test "#add", ->
     test: true
 
   ok engine.first("GameObject")
-  
+
 test "#add class name only", ->
   engine = Engine()
 
-  engine.add "GameObject",
-    test: true
+  engine.add "GameObject"
 
   ok engine.first("GameObject")
 
