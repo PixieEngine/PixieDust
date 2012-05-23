@@ -132,4 +132,5 @@ Camera = (I={}) ->
 
   return self
 
-gine.defaultModules = [
+Camera.defaultModules = [
+ 
