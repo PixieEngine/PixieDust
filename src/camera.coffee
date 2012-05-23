@@ -133,4 +133,5 @@ Camera = (I={}) ->
   return self
 
 Camera.defaultModules = [
- 
+  ""
+]
