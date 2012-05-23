@@ -259,8 +259,8 @@
     modules = modules.without([].concat(I.excludedModules))
 
     Engine.defaultModules.each (moduleName) ->
-      fulloduleName = "Engine.#{moduleName}"
-      throw "##{moduleName} is not a valid engine module" unless Engine[moduleName]
+      fullModuleName = "Engine.#{moduleName}"
+      throw "##{foduleName} is not a valid engine module" unless Engine[moduleName]
 
       self.include Engine[moduleName]
 
