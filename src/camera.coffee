@@ -139,5 +139,6 @@ Camera.defaultModules = [
   "Zoom"
   "Rotate"
   "Shake"
-  "
+  "Flash"
+  "Fade"
 ]
