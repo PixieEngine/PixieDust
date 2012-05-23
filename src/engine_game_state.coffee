@@ -37,7 +37,7 @@ Engine.GameState = (I, self) ->
   add: (classNameOrEntityData, entityData={}) ->
     # Allow optional add "Class", data form
     if classNameOrEntityData.isString?()
-      entityData.class = className
+      entityData.class = classNameOrEntityData
     else
       entityData = className
 
