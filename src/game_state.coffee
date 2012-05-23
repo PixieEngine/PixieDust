@@ -63,7 +63,7 @@ GameState = (I={}) ->
 
     I.updating = false
 
-  self.include GameState.Cameras
-  self.include GameState.SaveState
+  self.include "GameState.Cameras"
+  self.include "GameState.SaveState"
 
   return self
