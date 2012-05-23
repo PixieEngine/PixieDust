@@ -255,9 +255,6 @@
 
     self.include Bindable
 
-    modules = Engine.defaultModules.concat(I.includedModules)
-    modules = modules.without([].concat(I.excludedModules))
-
     Engine.defaultModules.each (moduleName) ->
       fullModuleName = "Engine.#{moduleName}"
       throw "##{fullModuleName} is not a valid engine module" unless Engine[moduleName]
