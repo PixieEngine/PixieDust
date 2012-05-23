@@ -64,8 +64,6 @@ test "#add", ->
 
   engine.add "GameObject",
     test: true
-    
-    
 
   ok engine.first("GameObject")
 
