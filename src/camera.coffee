@@ -136,4 +136,6 @@ Camera = (I={}) ->
 
 Camera.defaultModules = [
   "ZSort"
+  "Zoom"
+  
 ]
