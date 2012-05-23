@@ -43,8 +43,6 @@ GameState = (I={}) ->
       I.objects.copy()
   }
 
-  self.include "Bindable"
-
   # Add events and methods here
   self.bind "update", (elapsedTime) ->
     I.updating = true
