@@ -33,7 +33,7 @@ Engine.Levels = (I, self) ->
   @name nextLevel
   @methodOf Engine#
   ###      
-  nextLevel: ->
+  nextLevel: (offset) ->
     unless I.transitioning
       I.currentLevel += 1
 
