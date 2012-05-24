@@ -4,7 +4,7 @@ to move the text upward and fade it out over 0.5 seconds.
 
     # adds a FloatingTextEffect to the engine
     # at (50, 50). This effect will float upward
-
+    # at 90 pixels/se
     engine.add 'FloatingTextEffect'
       x: 50
       y: 50
