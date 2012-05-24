@@ -38,7 +38,7 @@ Engine.Levels = (I, self) ->
       I.currentLevel += 1
 
       if level = I.levels[I.currentLevel]
-        loadLevel level
+        loadLevel level, offset
       else
         engine.setState GameOver()
 
