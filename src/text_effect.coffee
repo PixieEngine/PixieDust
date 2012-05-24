@@ -1,18 +1,13 @@
 ###*
 The Text Effect class provides a method to display moving text onscreen, fading out the text over the effect duration.
 
-By default, images are loaded asynchronously. A proxy object is 
-returned immediately. Even though it has a draw method it will not
-draw anything to the screen until the image has been loaded.
-
 @name TextEffect
 @constructor
 ###
 
 ###*
 Updates the position of the text based on the effect velocity. Updates the 
-alpha based on the elapsed time since the effect creation. If <code>rotationalVelocity</code>
-is provided then the text rotation is updated as well.
+alpha based on the elapsed time since the effect creation.
 
 @name update
 @methodOf TextEffect#
@@ -20,7 +15,7 @@ is provided then the text rotation is updated as well.
 ###
 
 ###*
-Draws the <code>textShadow</code> text and the <code>text</code> text.
+Draws text from `I.textShadow` `I.text`.
 
 @name draw
 @methodOf TextEffect#
@@ -36,16 +31,15 @@ TextEffect = (I={}) ->
     textShadow: Color('black')
     alpha: 1
     rotation: 0
-    rotationalVelocity: 0
     velocity: Point(0, 0)
     
   self = GameObject(I)
 
   self.bind "update", ->    
     I.alpha = 1 - (I.age / I.duration)
-
+        
   self.unbind "draw"
-  self.bind "draw", (canvas) ->    
+  self.bind "draw", (canvas) ->      
     unless I.color.channels
       I.color = Color(I.color)
     
@@ -54,17 +48,19 @@ TextEffect = (I={}) ->
       
     I.color.a = I.alpha
     I.textShadow.a = I.alpha
+    
+    width = canvas.measureText()
         
     canvas.font I.font
     canvas.drawText
       color: I.textShadow
-      x: 1
+      x: 1 - width / 2
       y: 1
       text: I.text    
 
     canvas.drawText
       color: I.color
-      x: 0
+      x: 0 - width / 2
       y: 0
       text: I.text
 
