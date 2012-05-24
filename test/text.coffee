@@ -22,8 +22,8 @@ test "text fades out", ->
 
   equals text.I.alpha, 1
 
-  text.update(0.5)
-  text.trigger "afterUpdate", 1
+  text.update(0.25)
+  text.trigger "afterUpdate", 0.25
 
   equals text.I.alpha, 0.5
 
