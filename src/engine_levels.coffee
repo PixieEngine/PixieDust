@@ -15,13 +15,12 @@ Engine.Levels = (I, self) ->
 
   I.transitioning = false
 
-  loadLevel = (level, offset) ->
+  loadLevel = (level) ->
     unless I.transitioning
       I.transitioning = true
 
       levelState = LevelState
         level: level
-        offset: offset
 
       I.currentLevelName = level
       engine.setState levelState
@@ -34,12 +33,12 @@ Engine.Levels = (I, self) ->
   @name nextLevel
   @methodOf Engine#
   ###      
-  nextLevel: (offset) ->
+  nextLevel: ->
     unless I.transitioning
       I.currentLevel += 1
 
       if level = I.levels[I.currentLevel]
-        loadLevel level, offset
+        loadLevel level
       else
         engine.setState GameOver()
 
