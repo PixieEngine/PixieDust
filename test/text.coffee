@@ -20,10 +20,13 @@ module "FloatingTextEffect"
 test "text fades out", ->
   text = FloatingTextEffect()
 
+  text.update(1)
+  text.trigger "afterUpdate", 1
+
   equals text.I.alpha, 1
 
-  text.update(30)
-  text.trigger "afterUpdate", 30
+  text.update(0.25)
+  text.trigger "afterUpdate", 1
 
   equals text.I.alpha, 0.5
 
