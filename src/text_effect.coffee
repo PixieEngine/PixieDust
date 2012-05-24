@@ -3,10 +3,8 @@ The Text Effect class provides a method to display moving text onscreen, fading 
 
     # adds a TextEffect to the engine
     engine.add 'TextEffect'
-      x: 50
-      y: 50
- 
-
+      x: 60
+      y: 100
 
 @name TextEffect
 @constructor
