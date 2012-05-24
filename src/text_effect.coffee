@@ -1,6 +1,14 @@
 ###*
 The Text Effect class provides a method to display moving text onscreen, fading out the text over the effect duration.
 
+    # adds a FloatingTextEffect to the engine
+    # at (50, 50). This effect will float upward
+    # at 90 pixels/sec and will fadeOut over 0.5 seconds
+    engine.add 'FloatingTextEffect'
+      x: 50
+      y: 50
+
+
 @name TextEffect
 @constructor
 ###
