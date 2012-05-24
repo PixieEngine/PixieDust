@@ -28,6 +28,6 @@ test "text fades out", ->
   text.update(0.25)
   text.trigger "afterUpdate", 1
 
-  equals text.I.alpha, 1 - 1/40
+  equals text.I.alpha, 0.5
 
 module()
