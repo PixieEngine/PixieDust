@@ -30,7 +30,7 @@ Draws the <code>textShadow</code> text and the <code>text</code> text.
 TextEffect = (I={}) ->
   Object.reverseMerge I,
     color: Color('green')
-    duration: 40
+    duration: -1
     font: '20px Helvetica'
     text: '100'
     textShadow: Color('black')
