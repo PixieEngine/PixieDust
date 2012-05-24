@@ -3,7 +3,7 @@ FloatingTextEffect is a simple subclass of `TextEffect`. It provides some defaul
 to move the text upward and fade it out over 0.5 seconds.
 
     # adds a 
-    engine.add 'FlTextEffect'
+    engine.add 'FloatingTextEffect'
       x: 50
       y: 50
 
