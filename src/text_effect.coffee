@@ -1,7 +1,7 @@
 ###*
 The Text Effect class provides a method to display moving text onscreen, fading out the text over the effect duration.
 
-    TextEffect
+    engine.add 'TextEffect'
 
 @name TextEffect
 @constructor
