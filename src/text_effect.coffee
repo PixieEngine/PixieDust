@@ -5,6 +5,7 @@ The Text Effect class provides a method to display moving text onscreen, fading 
     engine.add 'TextEffect'
       x: 50
       y: 50
+      velocity:
 
 
 @name TextEffect
