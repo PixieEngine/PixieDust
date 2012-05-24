@@ -15,12 +15,13 @@ Engine.Levels = (I, self) ->
 
   I.transitioning = false
 
-  loadLevel = (level) ->
+  loadLevel = (level, offset) ->
     unless I.transitioning
       I.transitioning = true
 
       levelState = LevelState
         level: level
+        offset: offset
 
       I.currentLevelName = level
       engine.setState levelState
