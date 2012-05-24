@@ -85,7 +85,7 @@ Bounded = (I={}, self) ->
   @returns {Number} Distance between the two objects
   ###  
   distance: (otherObj) ->
-    Point.distance(self.position(), otherObj.position())  
+    Point.distance(self.position(), otherObj.position())
 
   ###*
   The position of this game object. By default it is the top left point.
