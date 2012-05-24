@@ -36,7 +36,7 @@ TextEffect = (I={}) ->
   self = GameObject(I)
 
   self.bind "update", ->    
-    I.alpha = 1 - (I.age / I.duration)
+    I.alpha = (1 - (I.age / I.duration)).clamp(0, 1)
         
   self.unbind "draw"
   self.bind "draw", (canvas) ->      
