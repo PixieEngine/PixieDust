@@ -18,7 +18,7 @@ test "text moves up vertically", ->
 module "FloatingTextEffect"
 
 test "text fades out", ->
-  text = FloatingT()
+  text = FloatingTextEffect()
 
   text.update(1)
   text.trigger "afterUpdate", 1
