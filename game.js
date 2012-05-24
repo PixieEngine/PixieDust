@@ -8097,8 +8097,11 @@ Engine.Levels = function(I, self) {
     @name reloadLevel
     @methodOf Engine#
     */
-    reloadLevel: function() {
+    restartLevel: function() {
       return loadLevel(I.currentLevelName);
+    },
+    reloadLevel: function() {
+      return self.restartLevel();
     }
   };
 };
@@ -8522,6 +8525,27 @@ Flickerable = function(I, self) {
       if (alpha != null) return I.flickerAlpha = alpha;
     }
   };
+};
+;
+/**
+FloatingTextEffect is a simple subclass of `TextEffect`. It provides some defaults
+to move the text upward and fade it out over 0.5 seconds
+
+@see TextEffect
+@name FloatingTextEffect
+@constructor
+*/
+var FloatingTextEffect;
+
+FloatingTextEffect = function(I) {
+  var self;
+  if (I == null) I = {};
+  Object.reverseMerge(I, {
+    duration: 0.5,
+    velocity: Point(0, -90)
+  });
+  self = TextEffect(I);
+  return self;
 };
 ;
 /**
@@ -9650,24 +9674,19 @@ draw anything to the screen until the image has been loaded.
 /**
 The Text Effect class provides a method to display moving text onscreen, fading out the text over the effect duration.
 
-By default, images are loaded asynchronously. A proxy object is 
-returned immediately. Even though it has a draw method it will not
-draw anything to the screen until the image has been loaded.
-
 @name TextEffect
 @constructor
 */
 /**
 Updates the position of the text based on the effect velocity. Updates the 
-alpha based on the elapsed time since the effect creation. If <code>rotationalVelocity</code>
-is provided then the text rotation is updated as well.
+alpha based on the elapsed time since the effect creation.
 
 @name update
 @methodOf TextEffect#
 @event
 */
 /**
-Draws the <code>textShadow</code> text and the <code>text</code> text.
+Draws text from `I.textShadow` `I.text`.
 
 @name draw
 @methodOf TextEffect#
@@ -9681,35 +9700,36 @@ TextEffect = function(I) {
   if (I == null) I = {};
   Object.reverseMerge(I, {
     color: Color('green'),
-    duration: 40,
+    duration: -1,
     font: '20px Helvetica',
     text: '100',
     textShadow: Color('black'),
     alpha: 1,
     rotation: 0,
-    rotationalVelocity: 0,
     velocity: Point(0, 0)
   });
   self = GameObject(I);
   self.bind("update", function() {
-    return I.alpha = 1 - (I.age / I.duration);
+    return I.alpha = (1 - (I.age / I.duration)).clamp(0, 1);
   });
   self.unbind("draw");
   self.bind("draw", function(canvas) {
+    var width;
     if (!I.color.channels) I.color = Color(I.color);
     if (!I.textShadow.channels) I.textShadow = Color(I.textShadow);
     I.color.a = I.alpha;
     I.textShadow.a = I.alpha;
+    width = canvas.measureText();
     canvas.font(I.font);
     canvas.drawText({
       color: I.textShadow,
-      x: 1,
+      x: 1 - width / 2,
       y: 1,
       text: I.text
     });
     return canvas.drawText({
       color: I.color,
-      x: 0,
+      x: 0 - width / 2,
       y: 0,
       text: I.text
     });
