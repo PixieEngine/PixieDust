@@ -23,8 +23,7 @@ DustEmitter = (I={}) ->
     duration: 3
     particleCount: 20
     batchSize: 5
-    x: I.x
-    y: I.y + I.height / 2
+    x: 0
     zIndex: 50
     generator:
       includedModules: ["DustParticle"]
