@@ -1,7 +1,7 @@
 ###*
 The Text Effect class provides a method to display moving text onscreen, fading out the text over the effect duration.
 
-    Tex
+    TextEffect
 
 @name TextEffect
 @constructor
