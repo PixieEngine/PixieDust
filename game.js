@@ -9681,6 +9681,11 @@ draw anything to the screen until the image has been loaded.
 /**
 The Text Effect class provides a method to display moving text onscreen, fading out the text over the effect duration.
 
+    # adds a TextEffect to the engine at (60, 100)
+    engine.add 'TextEffect'
+      x: 60
+      y: 100
+
 @name TextEffect
 @constructor
 */
