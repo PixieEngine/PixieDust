@@ -65,7 +65,7 @@ Flickerable = (I={}, self) ->
   flicker: (options={}) ->
     Object.reverseMerge options, 
       duration: 2
-      frequency:0.1
+      frequency: 0.1
       alpha: 0.5
     
     I.flickerDuration = options.duration
