@@ -52,14 +52,13 @@ Debuggable = (I={}, self) ->
     if I.velocity?
       canvas.withTransform Matrix.translation(I.x, I.y), (canvas) ->  
         thickness = 4
-        length = 10
         
         color = 'rgba(255, 0, 0, 0.5)'
         
         canvas.drawRect
           x: 0
           y: -thickness / 2
-          width: I.velocity.x * length
+          width: I.velocity.x 
           height: thickness
           color: color
 
