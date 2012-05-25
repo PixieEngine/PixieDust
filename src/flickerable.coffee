@@ -1,6 +1,8 @@
 ###*
 The `Flickerable` module provides a method to flicker a sprite between solid and a given opacity (alpha value). 
 
+    
+
 @name Flickerable
 @module
 @constructor
