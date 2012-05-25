@@ -1,5 +1,5 @@
 ###*
-The `Flickerable` module provides a method to flicker a sprite between its curre and a given opacity (alpha value). 
+The `Flickerable` module provides a method to flicker a sprite between its current opacity (alpha) and a given opacity. 
 
     player = GameObject
       alpha: 0.9
