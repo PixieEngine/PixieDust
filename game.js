@@ -8496,7 +8496,17 @@ Fadeable = function(I, self) {
 };
 ;
 /**
-The <code>Flickerable</code> module provides a method to flicker a sprite between solid and 50% opacity. 
+The `Flickerable` module provides a method to flicker a sprite between solid and a given opacity (alpha value). 
+
+    player = GameObject
+      alpha: 0.9
+
+    player.include 'Flickerable'
+
+    # called with no arguments, flicker will toggle the player's alpha 
+    # value between 0.9 (value provided above) and 0.5 (flickerable default) 
+    # every 0.1 second, for a total of 2 seconds
+    player.flicker()
 
 @name Flickerable
 @module
@@ -8507,18 +8517,21 @@ The <code>Flickerable</code> module provides a method to flicker a sprite betwee
 var Flickerable;
 
 Flickerable = function(I, self) {
-  var originalAlpha;
+  var frequencyLength, originalAlpha;
   if (I == null) I = {};
   Object.reverseMerge(I, {
     flickerAlpha: 0.5,
-    flickerDuration: 30,
-    flickerFrequency: 3
+    flickerDuration: 0,
+    flickerFrequency: 0.1
   });
   originalAlpha = I.alpha;
-  self.bind('update', function() {
-    I.flickerDuration = I.flickerDuration.approach(0, 1);
+  frequencyLength = 0;
+  self.bind('update', function(elapsedTime) {
+    I.flickerDuration = I.flickerDuration.approach(0, elapsedTime);
+    frequencyLength += elapsedTime;
     if (I.flickerDuration > 0) {
-      if (I.age.mod(I.flickerFrequency) === 0) {
+      if (frequencyLength >= I.flickerFrequency) {
+        frequencyLength = 0;
         if (I.alpha === I.flickerAlpha) {
           return I.alpha = originalAlpha;
         } else {
@@ -8537,27 +8550,31 @@ Flickerable = function(I, self) {
         player = GameObject()
       
         player.include(Flickerable)
-      
-        player.flicker()
-        # => This causes the sprite to flicker between full opacity 
-        # => and 50% opacity every 3 frames for 30 frames
-      
-        player.flicker(90, 5, 0.3)
+          
+        player.flicker
+          duration: 5
+          frequency: 0.2
+          alpha: 0.3
+    
         # => This causes the sprite to flicker between full opacity
-        # => and 30% opacity every 5 frames for 90 frames
+        # => and 30% opacity every 0.2 seconds for 5 seconds
     
     @name flicker
     @methodOf Flickerable#
-    @param {Number} [duration=30] How long the effect lasts
-    @param {Number} [frequency=3] The number of frames in between opacity changes
-    @param {Number} [alpha=0.5] The alpha value to flicker to
+    @param {Number} [duration=2] How long the effect lasts in seconds
+    @param {Number} [frequency=0.1] Number of seconds in between opacity changes
+    @param {Number} [alpha=0.5] Alpha value to toggle between
     */
-    flicker: function(_arg) {
-      var alpha, duration, frequency, _ref;
-      _ref = _arg != null ? _arg : {}, duration = _ref.duration, frequency = _ref.frequency, alpha = _ref.alpha;
-      if (duration != null) I.flickerDuration = duration;
-      if (frequency != null) I.flickerFrequency = frequency;
-      if (alpha != null) return I.flickerAlpha = alpha;
+    flicker: function(options) {
+      if (options == null) options = {};
+      Object.reverseMerge(options, {
+        duration: 2,
+        frequency: 0.1,
+        alpha: 0.5
+      });
+      I.flickerDuration = options.duration;
+      I.flickerFrequency = options.frequency;
+      return I.flickerAlpha = options.alpha;
     }
   };
 };
