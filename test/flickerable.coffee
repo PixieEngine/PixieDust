@@ -8,8 +8,8 @@ test 'it should set up defaults', ->
   player.flicker()
   
   equals player.I.flickerAlpha, 0.5
-  equals player.I.flickerFrequency, 3
-  equals player.I.flickerDuration, 30
+  equals player.I.flickerFrequency, 0.1
+  equals player.I.flickerDuration, 2
   
 test 'it should be able to set one param at a time', ->
   player = GameObject()
