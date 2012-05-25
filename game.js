@@ -6854,14 +6854,13 @@ Debuggable = function(I, self) {
   debugVelocity = function(canvas) {
     if (I.velocity != null) {
       return canvas.withTransform(Matrix.translation(I.x, I.y), function(canvas) {
-        var color, length, thickness;
+        var color, thickness;
         thickness = 4;
-        length = 10;
         color = 'rgba(255, 0, 0, 0.5)';
         canvas.drawRect({
           x: 0,
           y: -thickness / 2,
-          width: I.velocity.x * length,
+          width: I.velocity.x,
           height: thickness,
           color: color
         });
@@ -6869,7 +6868,7 @@ Debuggable = function(I, self) {
           x: -thickness / 2,
           y: 0,
           width: thickness,
-          height: I.velocity.y * length,
+          height: I.velocity.y,
           color: color
         });
       });
