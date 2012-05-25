@@ -7,7 +7,8 @@ The `Flickerable` module provides a method to flicker a sprite between solid and
     player.include 'Flickerable'
 
     # => called with no arguments, flicker will
-    # toggle the player's alpha value between 0.9 (value provided a)
+    # toggle the player's alpha value between 0.9 (value provided above)
+    # and 
     player.flicker()
 
 @name Flickerable
