@@ -10,16 +10,21 @@ The <code>Flickerable</code> module provides a method to flicker a sprite betwee
 Flickerable = (I={}, self) ->
   Object.reverseMerge I,
     flickerAlpha: 0.5
-    flickerDuration: 30
-    flickerFrequency: 3
+    flickerDuration: 0
+    flickerFrequency: 0.1
 
   originalAlpha = I.alpha
+  frequencyLength = 0
 
-  self.bind 'update', ->
-    I.flickerDuration = I.flickerDuration.approach(0, 1)
+  self.bind 'update', (elapsedTime) ->
+    I.flickerDuration = I.flickerDuration.approach(0, elapsedTime)
 
+    frequencyLength += elapsedTime
+    
     if I.flickerDuration > 0
-      if I.age.mod(I.flickerFrequency) is 0
+      if frequencyLength >= I.flickerFrequency
+        frequencyLength = 0
+        
         if I.alpha is I.flickerAlpha
           I.alpha = originalAlpha
         else
