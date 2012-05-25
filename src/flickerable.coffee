@@ -54,6 +54,7 @@ Flickerable = (I={}, self) ->
         duration: 5
         frequency: 0.2
         alpha: 0.3
+
       # => This causes the sprite to flicker between full opacity
       # => and 30% opacity every 5 frames for 90 frames
 
