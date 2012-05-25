@@ -21,7 +21,7 @@ test 'it should be able to set one param at a time', ->
     
   equals player.I.flickerAlpha, 0.5
   equals player.I.flickerFrequency, 20
-  equals player.I.flickerDuration, 30
+  equals player.I.flickerDuration, 2
   
   enemy = GameObject()
   
