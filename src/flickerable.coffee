@@ -6,7 +6,7 @@ The `Flickerable` module provides a method to flicker a sprite between solid and
 
     player.include 'Flickerable'
 
-    #
+    # => 
     player.flicker()
 
 @name Flickerable
