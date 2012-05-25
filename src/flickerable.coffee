@@ -56,7 +56,7 @@ Flickerable = (I={}, self) ->
         alpha: 0.3
 
       # => This causes the sprite to flicker between full opacity
-      # => and 30% opacity every 5 frames for 90 frames
+      # => and 30% opacity every 0.2 seconds for 5 seconds
 
   @name flicker
   @methodOf Flickerable#
