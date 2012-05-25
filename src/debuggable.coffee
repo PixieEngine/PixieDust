@@ -58,7 +58,7 @@ Debuggable = (I={}, self) ->
         canvas.drawRect
           x: 0
           y: -thickness / 2
-          width: I.velocity.x 
+          width: I.velocity.x
           height: thickness
           color: color
 
@@ -66,7 +66,7 @@ Debuggable = (I={}, self) ->
           x: -thickness / 2
           y: 0
           width: thickness
-          height: I.velocity.y * length
+          height: I.velocity.y
           color: color
 
   filterProperties = (properties) ->
