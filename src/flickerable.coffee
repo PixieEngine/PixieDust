@@ -63,7 +63,7 @@ Flickerable = (I={}, self) ->
   @param {Number} [duration=2] How long the effect lasts in seconds
   @param {Number} [frequency=0.1] Number of seconds in between opacity changes
   @param {Number} [alpha=0.5] Alpha value to toggle between
-  @returns {GameObject} self 
+  @returns {GameObject} The calling object
   ###
   flicker: (options={}) ->
     Object.reverseMerge options, 
