@@ -1,7 +1,8 @@
 ###*
 The `Flickerable` module provides a method to flicker a sprite between solid and a given opacity (alpha value). 
 
-    player = GameOb
+    player = GameObject
+      x: 
 
 @name Flickerable
 @module
