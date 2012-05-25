@@ -73,3 +73,5 @@ Flickerable = (I={}, self) ->
     I.flickerDuration = options.duration
     I.flickerFrequency = options.frequency
     I.flickerAlpha = options.alpha
+
+    return self
