@@ -61,7 +61,7 @@ Flickerable = (I={}, self) ->
   @name flicker
   @methodOf Flickerable#
   @param {Number} [duration=2] How long the effect lasts in seconds
-  @param {Number} [frequency=0.1] The number of frames in between opacity changes
+  @param {Number} [frequency=0.1] The number of seconds in between opacity changes
   @param {Number} [alpha=0.5] The alpha value to flicker to
   ###
   flicker: (options={}) ->
