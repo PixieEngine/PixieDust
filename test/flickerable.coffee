@@ -39,11 +39,11 @@ test 'it should be able to set one param at a time', ->
   boss.include Flickerable
   
   boss.flicker
-    duration: 2
+    duration: 3
  
   equals boss.I.flickerAlpha, 0.5
   equals boss.I.flickerFrequency, 0.1
-  equals boss.I.flickerDuration, 2 
+  equals boss.I.flickerDuration, 3 
  
 test 'it should change the alpha value when the flicker duration has elapsed', ->
   player = GameObject
