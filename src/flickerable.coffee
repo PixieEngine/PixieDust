@@ -1,5 +1,5 @@
 ###*
-`Flickerable` module provides a method to flicker a sprite between solid and 50% opacity. 
+The `Flickerable` module provides a method to flicker a sprite between solid and 50% opacity. 
 
 @name Flickerable
 @module
