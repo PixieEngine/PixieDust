@@ -8564,6 +8564,7 @@ Flickerable = function(I, self) {
     @param {Number} [duration=2] How long the effect lasts in seconds
     @param {Number} [frequency=0.1] Number of seconds in between opacity changes
     @param {Number} [alpha=0.5] Alpha value to toggle between
+    @returns {GameObject} The calling object
     */
     flicker: function(options) {
       if (options == null) options = {};
@@ -8574,7 +8575,8 @@ Flickerable = function(I, self) {
       });
       I.flickerDuration = options.duration;
       I.flickerFrequency = options.frequency;
-      return I.flickerAlpha = options.alpha;
+      I.flickerAlpha = options.alpha;
+      return self;
     }
   };
 };
