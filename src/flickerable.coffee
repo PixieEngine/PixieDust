@@ -6,6 +6,8 @@ The `Flickerable` module provides a method to flicker a sprite between solid and
       y: 60
       alpha: 0.9
 
+    player
+
 @name Flickerable
 @module
 @constructor
