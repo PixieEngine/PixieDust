@@ -4,7 +4,7 @@ The `Flickerable` module provides a method to flicker a sprite between solid and
     player = GameObject
       x: 40
       y: 60
-
+      alpha: 0.9
 
 @name Flickerable
 @module
