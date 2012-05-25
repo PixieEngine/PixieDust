@@ -45,7 +45,7 @@ test 'it should be able to set one param at a time', ->
   equals boss.I.flickerFrequency, 0.1
   equals boss.I.flickerDuration, 3 
  
-#TODO test this 
+#TODO test this with new time step stuff
 test 'it should change the alpha value when the flicker duration has elapsed', ->
   player = GameObject
     alpha: 0.9
