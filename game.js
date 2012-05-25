@@ -8496,7 +8496,7 @@ Fadeable = function(I, self) {
 };
 ;
 /**
-The `Flickerable` module provides a method to flicker a sprite between solid and a given opacity (alpha value). 
+The `Flickerable` module provides a method to flicker a sprite between its current opacity (alpha) and a given opacity. 
 
     player = GameObject
       alpha: 0.9
