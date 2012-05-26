@@ -4649,7 +4649,9 @@ Bounded = function(I, self) {
   };
 };
 ;
-var Camera;
+var Camera, oldCamera;
+
+oldCamera = Camera;
 
 Camera = function(I) {
   var currentObject, currentType, focusOn, followTypes, moduleName, objectFilters, self, transformFilters, _i, _len, _ref;
@@ -4680,22 +4682,16 @@ Camera = function(I) {
   currentObject = null;
   objectFilters = [];
   transformFilters = [];
-  focusOn = function(object) {
-    var c, dampingFactor, delta, dt, force, objectCenter, objectVelocity, target;
-    dt = 1 / 30;
+  focusOn = function(object, elapsedTime) {
+    var c, dampingFactor, delta, force, objectCenter, target;
     dampingFactor = 2;
-    c = dt * 3.75 / I.t90;
+    c = elapsedTime * 3.75 / I.t90;
     if (c >= 1) {
       self.position(target);
       return I.velocity = Point.ZERO;
     } else {
       objectCenter = object.center();
-      objectVelocity = object.I.velocity;
-      if (objectVelocity) {
-        target = objectCenter.add(objectVelocity.scale(5));
-      } else {
-        target = objectCenter;
-      }
+      target = objectCenter;
       delta = target.subtract(self.position());
       force = delta.subtract(I.velocity.scale(dampingFactor));
       self.changePosition(I.velocity.scale(c).clamp(I.maxSpeed));
@@ -4703,22 +4699,22 @@ Camera = function(I) {
     }
   };
   followTypes = {
-    centered: function(object) {
+    centered: function(object, elapsedTime) {
       I.deadzone = Point(0, 0);
-      return focusOn(object);
+      return focusOn(object, elapsedTime);
     },
-    topdown: function(object) {
+    topdown: function(object, elapsedTime) {
       var helper;
       helper = Math.max(I.screen.width, I.screen.height) / 4;
       I.deadzone = Point(helper, helper);
-      return focusOn(object);
+      return focusOn(object, elapsedTime);
     },
-    platformer: function(object) {
+    platformer: function(object, elapsedTime) {
       var height, width;
       width = I.screen.width / 8;
       height = I.screen.height / 3;
       I.deadzone = Point(width, height);
-      return focusOn(object);
+      return focusOn(object, elapsedTime);
     }
   };
   self = Core(I).extend({
@@ -4735,8 +4731,8 @@ Camera = function(I) {
     }
   });
   self.attrAccessor("transform");
-  self.bind("afterUpdate", function() {
-    if (currentObject) followTypes[currentType](currentObject);
+  self.bind("afterUpdate", function(elapsedTime) {
+    if (currentObject) followTypes[currentType](currentObject, elapsedTime);
     I.x = I.x.clamp(I.cameraBounds.left + I.screen.width / 2, I.cameraBounds.right - I.screen.width / 2);
     I.y = I.y.clamp(I.cameraBounds.top + I.screen.height / 2, I.cameraBounds.bottom - I.screen.height / 2);
     return I.transform = Matrix.translate(-I.x, -I.y);
@@ -4773,6 +4769,8 @@ Camera = function(I) {
 };
 
 Camera.defaultModules = ["ZSort", "Zoom", "Rotate", "Shake", "Flash", "Fade"];
+
+Object.extend(Camera, oldCamera);
 ;
 /**
 The <code>Fade</code> module provides convenience methods for accessing common Engine.Flash presets.
@@ -9006,11 +9004,11 @@ GameState = function(I) {
 GameState.Cameras = function(I, self) {
   var cameras;
   cameras = [Camera()];
-  self.bind('update', function() {
-    return self.cameras().invoke('trigger', 'update');
+  self.bind('update', function(elapsedTime) {
+    return self.cameras().invoke('trigger', 'update', elapsedTime);
   });
-  self.bind('afterUpdate', function() {
-    return self.cameras().invoke('trigger', 'afterUpdate');
+  self.bind('afterUpdate', function(elapsedTime) {
+    return self.cameras().invoke('trigger', 'afterUpdate', elapsedTime);
   });
   self.bind('draw', function(canvas) {
     return self.cameras().invoke('trigger', 'draw', canvas, self.objects());
