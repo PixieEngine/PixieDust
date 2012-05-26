@@ -2,7 +2,7 @@ GameState.Cameras = (I, self) ->
   cameras = [Camera()]
 
   self.bind 'update', (elapsedTime) ->
-    self.cameras().invoke 'trigger', 'update', 
+    self.cameras().invoke 'trigger', 'update', elapsedTime
 
   self.bind 'afterUpdate', ->
     self.cameras().invoke 'trigger', 'afterUpdate'
