@@ -40,10 +40,7 @@ Camera = (I={}) ->
       objectCenter = object.center()
       objectVelocity = object.I.velocity
   
-      if objectVelocity
-        target = objectCenter.add(objectVelocity.scale(1/6))
-      else
-        target = objectCenter
+      target = objectCenter
 
       delta = target.subtract(self.position())
 
