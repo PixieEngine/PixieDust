@@ -81,7 +81,7 @@ Camera = (I={}) ->
 
   self.attrAccessor "transform"
 
-  self.bind "afterUpdate", ->
+  self.bind "afterUpdate", () ->
     if currentObject
       followTypes[currentType](currentObject)
 
