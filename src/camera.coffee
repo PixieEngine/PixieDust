@@ -38,7 +38,6 @@ Camera = (I={}) ->
       I.velocity = Point.ZERO
     else
       objectCenter = object.center()
-      objectVelocity = object.I.velocity
   
       target = objectCenter
 
