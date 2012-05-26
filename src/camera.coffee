@@ -41,7 +41,7 @@ Camera = (I={}) ->
       objectVelocity = object.I.velocity
   
       if objectVelocity
-        target = objectCenter.add(objectVelocity.scale(5))
+        target = objectCenter.add(objectVelocity.scale(1/6))
       else
         target = objectCenter
 
