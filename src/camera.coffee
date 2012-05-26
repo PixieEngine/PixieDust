@@ -28,7 +28,6 @@ Camera = (I={}) ->
   transformFilters = []
 
   focusOn = (object, elapsedTime) ->
-    debugger unless elapsedTime
     dampingFactor = 2
 
     #TODO: Different t90 value inside deadzone?
