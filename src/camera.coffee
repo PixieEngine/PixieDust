@@ -83,7 +83,7 @@ Camera = (I={}) ->
 
   self.bind "afterUpdate", (elapsedTime) ->
     if currentObject
-      followTypes[currentType](currentObject, elap)
+      followTypes[currentType](currentObject, elapsedTime)
 
     # Hard clamp camera to world bounds
     I.x = I.x.clamp(I.cameraBounds.left + I.screen.width/2, I.cameraBounds.right - I.screen.width/2)
