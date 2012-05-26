@@ -26,6 +26,7 @@ Camera = (I={}) ->
   transformFilters = []
 
   focusOn = (object, dt) ->
+    dt = 1 / 30 # TODO: Use engine FPS
     dampingFactor = 2
 
     #TODO: Different t90 value inside deadzone?
