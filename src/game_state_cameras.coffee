@@ -4,8 +4,8 @@ GameState.Cameras = (I, self) ->
   self.bind 'update', (elapsedTime) ->
     self.cameras().invoke 'trigger', 'update', elapsedTime
 
-  self.bind 'afterUpdate', ->
-    self.cameras().invoke 'trigger', 'afterUpdate'
+  self.bind 'afterUpdate', (elapsedTime) ->
+    self.cameras().invoke 'trigger', 'afterUpdate', elapsedT
 
   self.bind 'draw', (canvas) ->
     self.cameras().invoke 'trigger', 'draw', canvas, self.objects()
