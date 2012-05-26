@@ -25,7 +25,7 @@ Camera = (I={}) ->
   objectFilters = []
   transformFilters = []
 
-  focusOn = (object, dt) ->
+  focusOn = (object) ->
     dt = 1 / 30 # TODO: Use engine FPS
     dampingFactor = 2
 
@@ -38,8 +38,12 @@ Camera = (I={}) ->
       I.velocity = Point.ZERO
     else
       objectCenter = object.center()
+      objectVelocity = object.I.velocity
   
-      target = objectCenter
+      if objectVelocity
+        target = objectCenter.add(objectVelocity.scale(5))
+      else
+        target = objectCenter
 
       delta = target.subtract(self.position())
 
@@ -81,9 +85,9 @@ Camera = (I={}) ->
 
   self.attrAccessor "transform"
 
-  self.bind "afterUpdate", (elapsedTime) ->
+  self.bind "afterUpdate", ->
     if currentObject
-      followTypes[currentType](currentObject, elapsedTime)
+      followTypes[currentType](currentObject)
 
     # Hard clamp camera to world bounds
     I.x = I.x.clamp(I.cameraBounds.left + I.screen.width/2, I.cameraBounds.right - I.screen.width/2)
