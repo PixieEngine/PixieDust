@@ -25,7 +25,7 @@ Camera = (I={}) ->
   objectFilters = []
   transformFilters = []
 
-  focusOn = (object) ->
+  focusOn = (object, d) ->
     dt = 1 / 30 # TODO: Use engine FPS
     dampingFactor = 2
 
