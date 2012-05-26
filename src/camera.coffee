@@ -1,3 +1,5 @@
+oldCamera = Camera
+
 Camera = (I={}) ->
   Object.reverseMerge I,
     cameraBounds: Rectangle # World Coordinates
@@ -25,25 +27,21 @@ Camera = (I={}) ->
   objectFilters = []
   transformFilters = []
 
-  focusOn = (object) ->
-    dt = 1 / 30 # TODO: Use engine FPS
+  focusOn = (object, elapsedTime) ->
+    debugger unless elapsedTime
     dampingFactor = 2
 
     #TODO: Different t90 value inside deadzone?
 
-    c = dt * 3.75 / I.t90
+    c = elapsedTime * 3.75 / I.t90
     if c >= 1
       # Spring is configured to be too intense, just snap to target
       self.position(target)
       I.velocity = Point.ZERO
     else
       objectCenter = object.center()
-      objectVelocity = object.I.velocity
-  
-      if objectVelocity
-        target = objectCenter.add(objectVelocity.scale(5))
-      else
-        target = objectCenter
+
+      target = objectCenter
 
       delta = target.subtract(self.position())
 
@@ -52,25 +50,25 @@ Camera = (I={}) ->
       I.velocity = I.velocity.add(force.scale(c))
 
   followTypes =
-    centered: (object) ->              
+    centered: (object, elapsedTime) ->              
       I.deadzone = Point(0, 0)
 
-      focusOn(object)
+      focusOn(object, elapsedTime)
 
-    topdown: (object) ->
+    topdown: (object, elapsedTime) ->
       helper = Math.max(I.screen.width, I.screen.height) / 4
 
       I.deadzone = Point(helper, helper) 
 
-      focusOn(object)
+      focusOn(object, elapsedTime)
 
-    platformer: (object) ->
+    platformer: (object, elapsedTime) ->
       width = I.screen.width / 8
       height = I.screen.height / 3
 
       I.deadzone = Point(width, height)
 
-      focusOn(object)
+      focusOn(object, elapsedTime)
 
   self = Core(I).extend
     follow: (object, type="centered") ->
@@ -85,9 +83,9 @@ Camera = (I={}) ->
 
   self.attrAccessor "transform"
 
-  self.bind "afterUpdate", ->
+  self.bind "afterUpdate", (elapsedTime) ->
     if currentObject
-      followTypes[currentType](currentObject)
+      followTypes[currentType](currentObject, elapsedTime)
 
     # Hard clamp camera to world bounds
     I.x = I.x.clamp(I.cameraBounds.left + I.screen.width/2, I.cameraBounds.right - I.screen.width/2)
@@ -135,3 +133,5 @@ Camera.defaultModules = [
   "Flash"
   "Fade"
 ]
+
+Object.extend Camera, oldCamera
