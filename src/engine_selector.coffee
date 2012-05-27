@@ -96,7 +96,8 @@ Engine.Selector = (I, self) ->
       fn(obj, index)
 
   ###*
-  Find all game objects that match the give
+  Find all game objects that match the given selector.
+
   @name find
   @methodOf Engine.selector
   ###
