@@ -96,6 +96,7 @@ Engine.Selector = (I, self) ->
       fn(obj, index)
 
   ###*
+  F
   @name find
   @methodOf Engine.selector
   ###
