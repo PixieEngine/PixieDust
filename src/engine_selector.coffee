@@ -114,7 +114,7 @@ Engine.Selector = (I, self) ->
     Object.extend results, instanceMethods
 
   ###*
-  Find the first game object that match the given selector.
+  Find the first game object that matches the given selector.
 
   @name find
   @methodOf Engine.selector
