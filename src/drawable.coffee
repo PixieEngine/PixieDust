@@ -87,7 +87,6 @@ Drawable = (I, self) ->
     hflip: false
     vflip: false
     scale: 1
-    spriteName: null
     zIndex: 0
 
   setSizeCallback = (sprite) ->
@@ -99,8 +98,6 @@ Drawable = (I, self) ->
       I.sprite = Sprite.fromURL(I.sprite, setSizeCallback)
     else
       I.sprite = Sprite.loadByName(I.sprite, setSizeCallback)
-  else if I.spriteName
-    I.sprite = Sprite.loadByName(I.spriteName, setSizeCallback)
 
   self.bind 'draw', (canvas) ->
     if I.alpha? and I.alpha != 1
