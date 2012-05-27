@@ -39,6 +39,7 @@ Engine.Selector = (I, self) ->
       equals engine.closest(".enemy", player2.position()), enemy2
 
   @name closest
+
   @param {String} selector
   @param {Point} position
   ###
