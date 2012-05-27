@@ -101,7 +101,7 @@ Engine.Selector = (I, self) ->
   @name find
   @methodOf Engine.selector
 
-  @param
+  @param {String}
   ###
   find: (selector) ->
     results = []
