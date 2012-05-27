@@ -113,6 +113,14 @@ Engine.Selector = (I, self) ->
 
     Object.extend results, instanceMethods
 
+   ###*
+  Find all game objects that match the given selector.
+
+  @name find
+  @methodOf Engine.selector
+
+  @param {String} selector
+  ###
   first: (selector) ->
     self.find(selector).first()
 
