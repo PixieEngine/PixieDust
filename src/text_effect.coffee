@@ -72,4 +72,3 @@ TextEffect = (I={}) ->
       text: I.text
 
   return self
-
