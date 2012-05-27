@@ -7157,7 +7157,6 @@ Drawable = function(I, self) {
     hflip: false,
     vflip: false,
     scale: 1,
-    spriteName: null,
     zIndex: 0
   });
   setSizeCallback = function(sprite) {
@@ -7170,8 +7169,6 @@ Drawable = function(I, self) {
     } else {
       I.sprite = Sprite.loadByName(I.sprite, setSizeCallback);
     }
-  } else if (I.spriteName) {
-    I.sprite = Sprite.loadByName(I.spriteName, setSizeCallback);
   }
   self.bind('draw', function(canvas) {
     var previousAlpha, sprite;
