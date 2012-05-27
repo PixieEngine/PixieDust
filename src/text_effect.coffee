@@ -40,7 +40,9 @@ TextEffect = (I={}) ->
     
   self = GameObject(I)
 
-  self.bind "update", ->    
+  self.bind "update", ->  
+    I.rotation += I.rotationalVelocity if I.rotationalVelocity?
+  
     I.alpha = (1 - (I.age / I.duration)).clamp(0, 1)
         
   self.unbind "draw"
@@ -54,19 +56,20 @@ TextEffect = (I={}) ->
     I.color.a = I.alpha
     I.textShadow.a = I.alpha
     
-    width = canvas.measureText()
+    I.width = canvas.measureText(I.text)
         
     canvas.font I.font
     canvas.drawText
       color: I.textShadow
-      x: 1 - width / 2
+      x: 1 - I.width
       y: 1
       text: I.text    
 
     canvas.drawText
       color: I.color
-      x: 0 - width / 2
+      x: 0 - I.width
       y: 0
       text: I.text
 
   return self
+
