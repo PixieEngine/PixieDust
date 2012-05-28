@@ -3,8 +3,6 @@ module "GameObject.Effect"
 test "fadeOut", ->
   player = GameObject()
 
-  player.include(Fadeable)
-
   fadedOut = false
 
   player.fadeOut 30, (player) ->
