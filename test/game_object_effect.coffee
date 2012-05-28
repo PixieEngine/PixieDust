@@ -8,7 +8,7 @@ test "fadeOut", ->
   player.fadeOut 1, ->
     fadedOut = true
 
-  player.trigger ""
+  player.trigger "update", 
   player.update(1)
   player.update(1)
   player.update(1)
