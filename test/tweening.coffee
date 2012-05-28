@@ -5,9 +5,9 @@ test "should allow for simple linear tweening", ->
     x: 0
     
     
-    
+  target = 10
   o.tween 10,
-    x: 10
+    x: tar
     
   11.times (i) ->
     o.update(1)
