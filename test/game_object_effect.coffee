@@ -5,7 +5,7 @@ test "fadeOut", ->
 
   fadedOut = false
 
-  player.fadeOut 30, (player) ->
+  player.fadeOut 1, (player) ->
     fadedOut = true
 
   30.times ->
