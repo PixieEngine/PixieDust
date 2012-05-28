@@ -164,6 +164,7 @@ GameObject.defaultModules = [
   "Rotatable"
   "TimedEvents"
   "Tween"
+  "GameObject"
 ]
 
 ###*
