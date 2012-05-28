@@ -12,7 +12,7 @@ test "fadeOut", ->
   player.update(1)
   player.update(1)
 
-  ok player.I.a
+  equals player.I.alpha
   ok fadedOut, "callback was called"
 
 module()
