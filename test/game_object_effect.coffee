@@ -1,4 +1,4 @@
-module "Fadeable"
+module "GameObject.Effect"
 
 test "fadeOut", ->
   player = GameObject()
