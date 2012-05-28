@@ -8,8 +8,7 @@ test "fadeOut", ->
   player.fadeOut 1, (player) ->
     fadedOut = true
 
-  30.times ->
-    player.update()
+  player.update(1)
 
   ok fadedOut
 
