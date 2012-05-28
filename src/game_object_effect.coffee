@@ -8,7 +8,7 @@ GameObject.Effect = (I={}, self) ->
       # this will fade the player object out over the next 2 seconds. 
       player.fadeOut 2
 
-  
+      # 
 
   @name fadeOut
   @methodOf GameObject#
