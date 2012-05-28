@@ -23,7 +23,7 @@ GameObject.Effect = (I={}, self) ->
 
   @name fadeOut
   @methodOf GameObject#
-  @param {Number} [duration=30] How m
+  @param {Number} [duration=30] Time to fade out in
   @param {Function} [callback=null] The function to execute when the sprite has finished fading.
   ###
   fadeOut: (duration, callback) ->
