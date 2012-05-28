@@ -3,7 +3,7 @@ The <code>Fadeable</code> module provides a method to fade a sprite to transpare
 You may also provide a callback function that is executed when the sprite has finished fading out.
 
 @name Effect
-@field
+@fieldOf GameObject
 @module
 @constructor
 @param {Object} I Instance variables
