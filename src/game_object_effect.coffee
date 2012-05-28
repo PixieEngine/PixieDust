@@ -1,5 +1,5 @@
 ###*
-H
+A collection of effects to 
 
 @name Effect
 @fieldOf GameObject
