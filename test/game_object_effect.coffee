@@ -10,6 +10,7 @@ test "fadeOut", ->
 
   player.update(1)
   player.update(1)
+  player.update(1)
 
   ok fadedOut
 
