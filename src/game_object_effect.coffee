@@ -1,3 +1,13 @@
+###*
+The <code>Fadeable</code> module provides a method to fade a sprite to transparent. 
+You may also provide a callback function that is executed when the sprite has finished fading out.
+
+@name Ef
+@module
+@constructor
+@param {Object} I Instance variables
+@param {Core} self Reference to including object
+###
 GameObject.Effect = (I={}, self) ->
 
   ###*
