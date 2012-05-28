@@ -8195,6 +8195,8 @@ Engine.Selector = function(I, self) {
         equals engine.closest(".enemy", player.position()), enemy1
         equals engine.closest(".enemy", player2.position()), enemy2
     
+    @name closest
+    @methodOf Engine.selector
     @param {String} selector
     @param {Point} position
     */
@@ -8251,6 +8253,14 @@ Engine.Selector = function(I, self) {
         return fn(obj, index);
       });
     },
+    /**
+    Find all game objects that match the given selector.
+    
+    @name find
+    @methodOf Engine.selector
+    
+    @param {String} selector
+    */
     find: function(selector) {
       var matcher, results;
       results = [];
@@ -8260,6 +8270,14 @@ Engine.Selector = function(I, self) {
       });
       return Object.extend(results, instanceMethods);
     },
+    /**
+    Find the first game object that matches the given selector.
+    
+    @name find
+    @methodOf Engine.selector
+    
+    @param {String} selector
+    */
     first: function(selector) {
       return self.find(selector).first();
     }
@@ -8427,70 +8445,6 @@ Expirable = function(I, self) {
 };
 ;
 /**
-The <code>Fadeable</code> module provides a method to fade a sprite to transparent. 
-You may also provide a callback function that is executed when the sprite has finished fading out.
-
-@name Fadeable
-@module
-@constructor
-@param {Object} I Instance variables
-@param {Core} self Reference to including object
-*/
-var Fadeable;
-
-Fadeable = function(I, self) {
-  Object.reverseMerge(I, {
-    fadeDuration: 30,
-    fadeCooldown: null,
-    fadeCallback: null
-  });
-  self.bind("update", function() {
-    if (I.fadeCooldown != null) {
-      I.fadeCooldown = I.fadeCooldown.approach(0, 1);
-      I.alpha = I.fadeCooldown / I.fadeDuration;
-    }
-    if (I.fadeCooldown === 0) {
-      I.fadeCooldown = null;
-      return typeof I.fadeCallback === "function" ? I.fadeCallback(self) : void 0;
-    }
-  });
-  return {
-    /**
-    A convenient way to set the fade instance variables on a sprite. You can modify the
-    instance variables by hand but the suggested way to do it is through this method.
-    
-        player = GameObject()
-      
-        player.include(Fadeable)
-      
-        fadedOut = false
-      
-        # this will fade the player object out over the next 30 frames. 
-        # once the player is faded out the fadedOut variable will be set to true.
-        player.fadeOut 30, (player) ->
-          fadedOut = true
-      
-        30.times ->
-          player.update()
-      
-        fadedOut
-        # => true
-    
-    @name fadeOut
-    @methodOf Fadeable#
-    @param {Number} [duration=30] How long the effect lasts
-    @param {Function} [callback=null] The function to execute when the sprite has finished fading.
-    */
-    fadeOut: function(duration, callback) {
-      if (duration == null) duration = 30;
-      I.fadeDuration = duration;
-      I.fadeCooldown = duration;
-      return I.fadeCallback = callback;
-    }
-  };
-};
-;
-/**
 The `Flickerable` module provides a method to flicker a sprite between its current opacity (alpha) and a given opacity. 
 
     player = GameObject
@@ -8574,34 +8528,6 @@ Flickerable = function(I, self) {
       return self;
     }
   };
-};
-;
-/**
-FloatingTextEffect is a simple subclass of `TextEffect`. It provides some defaults
-to move the text upward and fade it out over 0.5 seconds.
-
-    # adds a FloatingTextEffect to the engine
-    # at (50, 50). This effect will float upward
-    # at 90 pixels/sec and will fadeOut over 0.5 seconds
-    engine.add 'FloatingTextEffect'
-      x: 50
-      y: 50
-
-@see TextEffect
-@name FloatingTextEffect
-@constructor
-*/
-var FloatingTextEffect;
-
-FloatingTextEffect = function(I) {
-  var self;
-  if (I == null) I = {};
-  Object.reverseMerge(I, {
-    duration: 0.5,
-    velocity: Point(0, -90)
-  });
-  self = TextEffect(I);
-  return self;
 };
 ;
 /**
@@ -8871,7 +8797,7 @@ GameObject = function(I) {
   return self;
 };
 
-GameObject.defaultModules = ["Ageable", "Bounded", "Clampable", "Cooldown", "Drawable", "Expirable", "Follow", "Metered", "Movable", "Rotatable", "TimedEvents", "Tween"];
+GameObject.defaultModules = ["Ageable", "Bounded", "Clampable", "Cooldown", "Drawable", "Expirable", "Follow", "Metered", "Movable", "Rotatable", "TimedEvents", "Tween", "GameObject.Effect"];
 
 /**
 Construct an object instance from the given entity data.
@@ -8886,6 +8812,46 @@ GameObject.construct = function(entityData) {
   } else {
     return GameObject(entityData);
   }
+};
+;
+/**
+A collection of effects to make your game juicy.
+
+@name Effect
+@fieldOf GameObject
+@module
+@constructor
+@param {Object} I Instance variables
+@param {Core} self Reference to including object
+*/
+GameObject.Effect = function(I, self) {
+  if (I == null) I = {};
+  return {
+    /**
+    A convenient way to fade out this object over time.
+    
+        player = GameObject()
+    
+        # Fade the player object out over the next 2 seconds. 
+        player.fadeOut 2
+    
+        # Fade out and then destroy
+        player.fadeOut, 0.25, ->
+          self.destroy()
+    
+    @name fadeOut
+    @methodOf GameObject#
+    @param {Number} [duration=1] Time to fade out in seconds
+    @param {Function} [complete=null] The function to execute when fade out completes.
+    */
+    fadeOut: function(duration, complete) {
+      if (duration == null) duration = 1;
+      return self.tween(duration, {
+        alpha: 0,
+        complete: complete
+      });
+    }
+  };
 };
 ;
 /**
@@ -9799,6 +9765,31 @@ TextEffect = function(I) {
 };
 ;
 /**
+`TextEffect.Floating` is a simple subclass of `TextEffect`. It provides some defaults
+to move the text upward and fade it out over 0.5 seconds.
+
+    # adds a FloatingTextEffect to the engine
+    # at (50, 50). This effect will float upward
+    # at 90 pixels/sec and will fadeOut over 0.5 seconds
+    engine.add 'FloatingTextEffect'
+      x: 50
+      y: 50
+
+@see TextEffect
+@name Floating
+@fieldOf TextEffect
+@constructor
+*/
+TextEffect.Floating = function(I) {
+  if (I == null) I = {};
+  Object.reverseMerge(I, {
+    duration: 0.5,
+    velocity: Point(0, -90)
+  });
+  return TextEffect(I);
+};
+;
+/**
 The Text Screen class is a GameState that provides convenience methods for drawing text to screen. 
 
 @name TextScreen
@@ -10056,13 +10047,14 @@ Tween = function(I, self) {
   Object.reverseMerge(I, {
     activeTweens: {}
   });
-  self.bind("update", function() {
+  self.bind("update", function(elapsedTime) {
     var data, f, property, t, _base, _ref, _results;
+    t = I.age + elapsedTime;
     _ref = I.activeTweens;
     _results = [];
     for (property in _ref) {
       data = _ref[property];
-      if (I.age >= data.endTime) {
+      if (t >= data.endTime) {
         I[property] = data.end;
         if (typeof (_base = I.activeTweens[property]).complete === "function") {
           _base.complete();
@@ -10070,8 +10062,7 @@ Tween = function(I, self) {
         _results.push(delete I.activeTweens[property]);
       } else {
         f = Easing[data.easing](data.start, data.end);
-        t = (I.age - data.startTime) / data.duration;
-        _results.push(I[property] = f(t));
+        _results.push(I[property] = f((t - data.startTime) / data.duration));
       }
     }
     return _results;
