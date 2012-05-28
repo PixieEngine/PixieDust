@@ -8,7 +8,7 @@ GameObject.Effect = (I={}, self) ->
     
       fadedOut = false
     
-      # this will fade the player object out over the next 30 frames. 
+      # this will fade the player object out over the next 2 seconds. 
       # once the player is faded out the fadedOut variable will be set to true.
       player.fadeOut 2, (player) ->
         fadedOut = true
