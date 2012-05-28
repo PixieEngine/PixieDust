@@ -27,4 +27,5 @@ GameObject.Effect = (I={}, self) ->
   @param {Function} [callback=null] The function to execute when fade out completes.
   ###
   fadeOut: (duration=1, callback) ->
+    self.tween duration,
     
