@@ -11,7 +11,7 @@ to move the text upward and fade it out over 0.5 seconds.
 
 @see TextEffect
 @name Floating
-@fieldOf 
+@fieldOf TextEffect
 @constructor
 ###
 TextEffect.Floating = (I={}) ->
