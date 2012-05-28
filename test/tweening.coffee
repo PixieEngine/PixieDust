@@ -8,7 +8,7 @@ test "should allow for simple linear tweening", ->
   o.tween 10,
     x: targetValue
 
-  11.times (i) ->
+  12.times (i) ->
     o.update(1)
     o.trigger "afterUpdate", 1
 
