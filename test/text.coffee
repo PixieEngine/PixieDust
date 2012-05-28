@@ -17,4 +17,6 @@ test "text moves up vertically", ->
   
 module "TextEffect.Floating"
 
+test "add to engine"
+
 module()
