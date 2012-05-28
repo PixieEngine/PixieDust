@@ -1,5 +1,5 @@
 GameObject.Effect = (I={}, self) ->
   
 
-  fadeOut: ->
+  fadeOut: () ->
     
