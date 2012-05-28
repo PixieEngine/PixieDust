@@ -6,8 +6,6 @@ GameObject.Effect = (I={}, self) ->
 
       player = GameObject()
     
-      player.include(Fadeable)
-    
       fadedOut = false
     
       # this will fade the player object out over the next 30 frames. 
