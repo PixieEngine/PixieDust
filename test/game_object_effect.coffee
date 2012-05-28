@@ -12,6 +12,7 @@ test "fadeOut", ->
   player.update(1)
   player.update(1)
 
+  ok player.I.a
   ok fadedOut, "callback was called"
 
 module()
