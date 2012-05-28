@@ -1,5 +1,5 @@
 GameObject.Effect = (I={}, self) ->
-  
+
   ###*
   A convenient way to fade out this object over time.
 
