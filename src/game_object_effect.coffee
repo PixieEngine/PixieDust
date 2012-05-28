@@ -6,11 +6,8 @@ GameObject.Effect = (I={}, self) ->
 
       player = GameObject()
     
-      fadedOut = false
-    
       # this will fade the player object out over the next 2 seconds. 
-      player.fadeOut 2, (player) ->
-        fadedOut = true
+      player.fadeOut 2
     
       30.times ->
         player.update()
