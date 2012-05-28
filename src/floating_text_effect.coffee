@@ -18,6 +18,4 @@ TextEffect.Floating = (I={}) ->
     duration: 0.5
     velocity: Point(0, -90)
     
-  self = TextEffect(I)
-  
-  return self
+  return TextEffect(I)
