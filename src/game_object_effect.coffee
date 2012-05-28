@@ -9,6 +9,7 @@ GameObject.Effect = (I={}, self) ->
       player.fadeOut 2
 
       # Fade out and then destroy
+      player.fade
 
   @name fadeOut
   @methodOf GameObject#
