@@ -1,5 +1,5 @@
 ###*
-A collection of effects to 
+A collection of effects to make you game jui
 
 @name Effect
 @fieldOf GameObject
