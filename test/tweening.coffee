@@ -11,7 +11,7 @@ test "should allow for simple linear tweening", ->
     o.update(1)
     o.trigger "afterUpdate", 1
 
-    equals o.I.x, i +
+    equals o.I.x, i + 1
 
 # Clear out the module
 module()
