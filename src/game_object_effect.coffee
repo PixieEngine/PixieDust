@@ -1,6 +1,5 @@
 ###*
-`Effect` module provides a method to fade a sprite to transparent. 
-You may also provide a callback function that is executed when the sprite has finished fading out.
+H
 
 @name Effect
 @fieldOf GameObject
