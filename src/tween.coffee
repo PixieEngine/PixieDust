@@ -12,7 +12,7 @@ Tween = (I={}, self) ->
     activeTweens: {}
 
   # Add events and methods here
-  self.bind "update", (elaps) ->
+  self.bind "update", (elapsedTime) ->
     for property, data of I.activeTweens
       if I.age >= data.endTime
         I[property] = data.end
