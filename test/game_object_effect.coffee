@@ -8,7 +8,7 @@ test "fadeOut", ->
   player.fadeOut 1, (player) ->
     fadedOut = true
 
-  player.update(1)
+  player.update(2)
 
   ok fadedOut
 
