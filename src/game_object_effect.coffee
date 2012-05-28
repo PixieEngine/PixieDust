@@ -28,4 +28,5 @@ GameObject.Effect = (I={}, self) ->
   ###
   fadeOut: (duration=1, callback) ->
     self.tween duration,
-    
+      alpha: 0
+      callback
