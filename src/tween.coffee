@@ -21,8 +21,8 @@ Tween = (I={}, self) ->
         delete I.activeTweens[property]
       else
         f = Easing[data.easing](data.start, data.end)
-        t = (I.age + elapsedTime 
-        I[property] = f((t- data.startTime) / data.duration)
+
+        I[property] = f((t - data.startTime) / data.duration)
 
   ###*
   Modify the object's properties over time.
