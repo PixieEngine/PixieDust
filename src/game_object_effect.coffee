@@ -1,8 +1,7 @@
 GameObject.Effect = (I={}, self) ->
   
   ###*
-  A convenient way to set the fade instance variables on a sprite. You can modify the
-  instance variables by hand but the suggested way to do it is through this method.
+  A convenient way to fade out this obje
 
       player = GameObject()
       # this will fade the player object out over the next 2 seconds. 
