@@ -8,8 +8,8 @@ test "fadeOut", ->
   player.fadeOut 1, ->
     fadedOut = true
 
-  player.trigger "update", 0.5
-  player.trigger "afterUpdate", 
+  player.trigger "update", 1
+  player.trigger "afterUpdate", 1
 
   equals player.I.alpha, 0, "Player has faded out"
   ok fadedOut, "callback was called"
