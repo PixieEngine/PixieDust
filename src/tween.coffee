@@ -14,7 +14,7 @@ Tween = (I={}, self) ->
   # Add events and methods here
   self.bind "update", (elapsedTime) ->
     for property, data of I.activeTweens
-      if I.age + elapse >= data.endTime
+      if I.age + elapsedTime >= data.endTime
         I[property] = data.end
         I.activeTweens[property].complete?()
         delete I.activeTweens[property]
