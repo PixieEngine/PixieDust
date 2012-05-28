@@ -1,4 +1,4 @@
-GameObject.Effect = (I={}) ->
+GameObject.Effect = (I={}, self) ->
   # Set some default properties
   Object.reverseMerge I,
     color: "blue"
