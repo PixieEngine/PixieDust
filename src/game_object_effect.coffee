@@ -5,10 +5,10 @@ GameObject.Effect = (I={}, self) ->
 
       player = GameObject()
 
-      # this will fade the player object out over the next 2 seconds. 
+      # Fade the player object out over the next 2 seconds. 
       player.fadeOut 2
 
-      # 
+      # Fade 
 
   @name fadeOut
   @methodOf GameObject#
