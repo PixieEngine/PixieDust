@@ -5,7 +5,7 @@ test "fadeOut", ->
 
   fadedOut = false
 
-  player.fadeOut 1, (player) ->
+  player.fadeOut 1,  ->
     fadedOut = true
 
   player.update(2)
