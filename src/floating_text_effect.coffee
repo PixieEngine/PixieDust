@@ -1,5 +1,5 @@
 ###*
-TextEffect.Floa is a simple subclass of `TextEffect`. It provides some defaults
+`TextEffect.Floating` is a simple subclass of `TextEffect`. It provides some defaults
 to move the text upward and fade it out over 0.5 seconds.
 
     # adds a FloatingTextEffect to the engine
