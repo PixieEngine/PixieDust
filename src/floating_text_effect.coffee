@@ -13,7 +13,7 @@ to move the text upward and fade it out over 0.5 seconds.
 @name FloatingTextEffect
 @constructor
 ###
-FloatingTextEffect = (I={}) ->
+TextEffect.Floating = (I={}) ->
   Object.reverseMerge I,
     duration: 0.5
     velocity: Point(0, -90)
