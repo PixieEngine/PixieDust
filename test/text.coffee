@@ -19,7 +19,7 @@ module "TextEffect.Floating"
 
 test "add to engine", ->
   engine = Engine()
-  
+
   engine.add "TextEffect.Floating"
 
 module()
