@@ -15,6 +15,6 @@ test "text moves up vertically", ->
   equals text.I.x, 0
   equals text.I.y, -5
   
-module "FloatingTextEffect"
+module "TextEffect.Floating"
 
 module()
