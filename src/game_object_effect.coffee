@@ -5,7 +5,6 @@ GameObject.Effect = (I={}, self) ->
   instance variables by hand but the suggested way to do it is through this method.
 
       player = GameObject()
-    
       # this will fade the player object out over the next 2 seconds. 
       player.fadeOut 2
     
