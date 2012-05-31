@@ -21,7 +21,7 @@ meter ui to track arbitrary numeric attributes.
     someOtherObject.meter 'turbo'
     # => Sets up a turbo meter that will be drawn during the someOtherObject overlay event. 
     # Since neither turbo or turboMax were provided, they are both set to 100.
-    
+ 
 
 Metered module
 @name Metered
