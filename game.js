@@ -8797,7 +8797,7 @@ GameObject = function(I) {
   return self;
 };
 
-GameObject.defaultModules = ["Ageable", "Bounded", "Clampable", "Cooldown", "Drawable", "Expirable", "Follow", "Metered", "Movable", "Rotatable", "TimedEvents", "Tween", "GameObject.Effect"];
+GameObject.defaultModules = ["Ageable", "Bounded", "Clampable", "Cooldown", "Drawable", "Expirable", "Follow", "GameObject.Meter", "Movable", "Rotatable", "TimedEvents", "Tween", "GameObject.Effect"];
 
 /**
 Construct an object instance from the given entity data.
@@ -8850,6 +8850,208 @@ GameObject.Effect = function(I, self) {
         alpha: 0,
         complete: complete
       });
+    }
+  };
+};
+;
+/**
+The Metered module provides a simple drop-in
+meter ui to track arbitrary numeric attributes.
+
+    player = GameObject
+      health: 100
+      heathMax: 100
+    
+    enemy = GameObject
+      health: 500
+    
+    someOtherObject = GameObject
+    
+    player.meter 'health'
+    # => Sets up a health meter that will be drawn during the player overlay event
+    
+    enemy.meter 'health'
+    # => Sets up a health meter that will be drawn during the enemy overlay event. 
+    # Since healthMax wasn't provided, it is set to the value of I.health (500)
+    
+    someOtherObject.meter 'turbo'
+    # => Sets up a turbo meter that will be drawn during the someOtherObject overlay event. 
+    # Since neither turbo or turboMax were provided, they are both set to 100.
+
+Metered module
+@name Metered
+@module
+@constructor
+@param {Object} I Instance variables
+@param {GameObject} self Reference to including object
+*/
+GameObject.Meter = function(I, self) {
+  if (I == null) I = {};
+  Object.reverseMerge(I, {
+    meters: {}
+  });
+  self.bind('overlay', function(canvas) {
+    var backgroundColor, borderColor, borderRadius, borderWidth, color, height, meterData, name, ratio, show, width, x, y, _ref, _ref2, _ref3;
+    _ref = I.meters;
+    for (name in _ref) {
+      meterData = _ref[name];
+      backgroundColor = meterData.backgroundColor, (_ref2 = meterData.border, borderColor = _ref2.color, borderRadius = _ref2.radius, borderWidth = _ref2.width), color = meterData.color, height = meterData.height, show = meterData.show, width = meterData.width, x = meterData.x, y = meterData.y;
+      if (meterData.position != null) {
+        _ref3 = meterData.position, x = _ref3.x, y = _ref3.y;
+      }
+      if (!show) return;
+      ratio = (I[name] / I["" + name + "Max"]).clamp(0, 1);
+      canvas.drawRoundRect({
+        color: backgroundColor,
+        radius: borderRadius,
+        x: x,
+        y: y,
+        width: width,
+        height: height
+      });
+      canvas.drawRoundRect({
+        color: color,
+        x: x,
+        y: y,
+        radius: borderRadius,
+        width: width * ratio,
+        height: height
+      });
+      canvas.drawRoundRect({
+        x: x,
+        y: y,
+        width: width,
+        height: height,
+        radius: borderRadius,
+        stroke: {
+          color: borderColor,
+          width: borderWidth
+        }
+      });
+    }
+  });
+  return {
+    /**
+    Configures a meter to be drawn each overlay event.
+    
+        player = GameObject
+      
+        player.include Metered      
+      
+        player.meter 'health',
+          border
+            color: 'brown'
+            radius: 3
+          color: 'pink'
+          height: 20
+          x: 5
+          y: 5
+          show: true
+          width: 150
+      
+        # => Sets up a health meter, using all the configuration options
+    
+    @name meter
+    @methodOf Metered#
+    @param {String} name The name of the property to meter
+    @param {Object} options The meter configuration options
+    @param {String} border: color Color of the meter's border
+    @param {Number} border: width Width of the meter's border
+    @param {String} color Color of the meter's inner rectangle
+    @param {Number} height Height of the meter
+    @param {Object} position An x, y object representing the position of the meter
+    @param {Number} x x position of the meter
+    @param {Number} y y position of the meter
+    @param {Number} border: radius Border radius of the meter
+    @param {Boolean} show Boolean to toggle whether of not to display the meter
+    @param {Number} width How wide the meter is
+    */
+    meter: function(name, options) {
+      if (options == null) options = {};
+      Object.reverseMerge(options, {
+        backgroundColor: 'black',
+        border: {
+          color: 'white',
+          radius: 2,
+          width: 1.5
+        },
+        color: 'green',
+        height: 10,
+        x: 0,
+        y: 0,
+        show: true,
+        width: 100
+      });
+      if (I[name] == null) I[name] = 100;
+      if (!I["" + name + "Max"]) {
+        if (I[name]) {
+          I["" + name + "Max"] = I[name];
+        } else {
+          I["" + name + "Max"] = 100;
+        }
+      }
+      return I.meters[name] = options;
+    },
+    /**
+    Shows the named meter
+    
+        player = GameObject
+      
+        player.include Metered      
+      
+        # creates a health meter but disables visibility
+        player.meter 'health'
+          show: false
+      
+        # enables visibility for the meter named 'health'
+        player.showMeter 'health'
+    
+    @name showMeter
+    @methodOf Metered#
+    @param {String} name The name of the meter to show
+    */
+    showMeter: function(name) {
+      return I.meters[name].show = true;
+    },
+    /**
+    Hides the named meter
+    
+        player = GameObject
+      
+        player.include Metered      
+      
+        # creates a health meter
+        player.meter 'health'
+      
+        # disables visibility for the meter named 'health'
+        player.hideMeter 'health'
+    
+    @name hideMeter
+    @methodOf Metered#
+    @param {String} name The name of the meter to hide
+    */
+    hideMeter: function(name) {
+      return I.meters[name].show = false;
+    },
+    /**
+    Toggles visibility of the named meter
+    
+        player = GameObject
+      
+        player.include Metered      
+      
+        # creates a health meter
+        player.meter 'health'
+      
+        # toggles visibility for the meter named 'health'
+        player.toggleMeter 'health'
+    
+    @name toggleMeter
+    @methodOf Metered#
+    @param {String} name The name of the meter to toggle
+    */
+    toggleMeter: function(name) {
+      return I.meters[name].show = !I.meters[name].show;
     }
   };
 };
@@ -9149,210 +9351,6 @@ LevelState = function(I) {
     });
   });
   return self;
-};
-;
-/**
-The Metered module provides a simple drop-in
-meter ui to track arbitrary numeric attributes.
-
-    player = GameObject
-      health: 100
-      heathMax: 100
-    
-    enemy = GameObject
-      health: 500
-    
-    someOtherObject = GameObject
-    
-    player.meter 'health'
-    # => Sets up a health meter that will be drawn during the player overlay event
-    
-    enemy.meter 'health'
-    # => Sets up a health meter that will be drawn during the enemy overlay event. 
-    # Since healthMax wasn't provided, it is set to the value of I.health (500)
-    
-    someOtherObject.meter 'turbo'
-    # => Sets up a turbo meter that will be drawn during the someOtherObject overlay event. 
-    # Since neither turbo or turboMax were provided, they are both set to 100.
-
-Metered module
-@name Metered
-@module
-@constructor
-@param {Object} I Instance variables
-@param {GameObject} self Reference to including object
-*/
-var Metered;
-
-Metered = function(I, self) {
-  if (I == null) I = {};
-  Object.reverseMerge(I, {
-    meters: {}
-  });
-  self.bind('overlay', function(canvas) {
-    var backgroundColor, borderColor, borderRadius, borderWidth, color, height, meterData, name, ratio, show, width, x, y, _ref, _ref2, _ref3;
-    _ref = I.meters;
-    for (name in _ref) {
-      meterData = _ref[name];
-      backgroundColor = meterData.backgroundColor, (_ref2 = meterData.border, borderColor = _ref2.color, borderRadius = _ref2.radius, borderWidth = _ref2.width), color = meterData.color, height = meterData.height, show = meterData.show, width = meterData.width, x = meterData.x, y = meterData.y;
-      if (meterData.position != null) {
-        _ref3 = meterData.position, x = _ref3.x, y = _ref3.y;
-      }
-      if (!show) return;
-      ratio = (I[name] / I["" + name + "Max"]).clamp(0, 1);
-      canvas.drawRoundRect({
-        color: backgroundColor,
-        radius: borderRadius,
-        x: x,
-        y: y,
-        width: width,
-        height: height
-      });
-      canvas.drawRoundRect({
-        color: color,
-        x: x,
-        y: y,
-        radius: borderRadius,
-        width: width * ratio,
-        height: height
-      });
-      canvas.drawRoundRect({
-        x: x,
-        y: y,
-        width: width,
-        height: height,
-        radius: borderRadius,
-        stroke: {
-          color: borderColor,
-          width: borderWidth
-        }
-      });
-    }
-  });
-  return {
-    /**
-    Configures a meter to be drawn each overlay event.
-    
-        player = GameObject
-      
-        player.include Metered      
-      
-        player.meter 'health',
-          border
-            color: 'brown'
-            radius: 3
-          color: 'pink'
-          height: 20
-          x: 5
-          y: 5
-          show: true
-          width: 150
-      
-        # => Sets up a health meter, using all the configuration options
-    
-    @name meter
-    @methodOf Metered#
-    @param {String} name The name of the property to meter
-    @param {Object} options The meter configuration options
-    @param {String} border: color Color of the meter's border
-    @param {Number} border: width Width of the meter's border
-    @param {String} color Color of the meter's inner rectangle
-    @param {Number} height Height of the meter
-    @param {Object} position An x, y object representing the position of the meter
-    @param {Number} x x position of the meter
-    @param {Number} y y position of the meter
-    @param {Number} border: radius Border radius of the meter
-    @param {Boolean} show Boolean to toggle whether of not to display the meter
-    @param {Number} width How wide the meter is
-    */
-    meter: function(name, options) {
-      if (options == null) options = {};
-      Object.reverseMerge(options, {
-        backgroundColor: 'black',
-        border: {
-          color: 'white',
-          radius: 2,
-          width: 1.5
-        },
-        color: 'green',
-        height: 10,
-        x: 0,
-        y: 0,
-        show: true,
-        width: 100
-      });
-      if (I[name] == null) I[name] = 100;
-      if (!I["" + name + "Max"]) {
-        if (I[name]) {
-          I["" + name + "Max"] = I[name];
-        } else {
-          I["" + name + "Max"] = 100;
-        }
-      }
-      return I.meters[name] = options;
-    },
-    /**
-    Shows the named meter
-    
-        player = GameObject
-      
-        player.include Metered      
-      
-        # creates a health meter but disables visibility
-        player.meter 'health'
-          show: false
-      
-        # enables visibility for the meter named 'health'
-        player.showMeter 'health'
-    
-    @name showMeter
-    @methodOf Metered#
-    @param {String} name The name of the meter to show
-    */
-    showMeter: function(name) {
-      return I.meters[name].show = true;
-    },
-    /**
-    Hides the named meter
-    
-        player = GameObject
-      
-        player.include Metered      
-      
-        # creates a health meter
-        player.meter 'health'
-      
-        # disables visibility for the meter named 'health'
-        player.hideMeter 'health'
-    
-    @name hideMeter
-    @methodOf Metered#
-    @param {String} name The name of the meter to hide
-    */
-    hideMeter: function(name) {
-      return I.meters[name].show = false;
-    },
-    /**
-    Toggles visibility of the named meter
-    
-        player = GameObject
-      
-        player.include Metered      
-      
-        # creates a health meter
-        player.meter 'health'
-      
-        # toggles visibility for the meter named 'health'
-        player.toggleMeter 'health'
-    
-    @name toggleMeter
-    @methodOf Metered#
-    @param {String} name The name of the meter to toggle
-    */
-    toggleMeter: function(name) {
-      return I.meters[name].show = !I.meters[name].show;
-    }
-  };
 };
 ;
 /**
