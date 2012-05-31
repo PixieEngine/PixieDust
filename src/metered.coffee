@@ -5,7 +5,7 @@ meter ui to track arbitrary numeric attributes.
     player = GameObject
       health: 100
       heathMax: 100
-    
+
     enemy = GameObject
       health: 500
     
