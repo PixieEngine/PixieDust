@@ -8936,8 +8936,6 @@ GameObject.Meter = function(I, self) {
     
         player = GameObject
       
-        player.include Metered      
-      
         player.meter 'health',
           border
             color: 'brown'
@@ -8997,8 +8995,6 @@ GameObject.Meter = function(I, self) {
     
         player = GameObject
       
-        player.include Metered      
-      
         # creates a health meter but disables visibility
         player.meter 'health'
           show: false
@@ -9018,8 +9014,6 @@ GameObject.Meter = function(I, self) {
     
         player = GameObject
       
-        player.include Metered      
-      
         # creates a health meter
         player.meter 'health'
       
@@ -9037,8 +9031,6 @@ GameObject.Meter = function(I, self) {
     Toggles visibility of the named meter
     
         player = GameObject
-      
-        player.include Metered      
       
         # creates a health meter
         player.meter 'health'
