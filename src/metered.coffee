@@ -30,7 +30,7 @@ Metered module
 @param {GameObject} self Reference to including object
 ###
 
-GameObject.Metered = (I={}, self) ->
+GameObject.Meter = (I={}, self) ->
   Object.reverseMerge I,
     meters: {}
         
