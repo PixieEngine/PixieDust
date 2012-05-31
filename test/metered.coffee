@@ -10,7 +10,7 @@ test "should exist", ->
 test "should respect 0 being set as the meter attribute", ->
   obj = GameObject
     health: 0
-    maxHealth: 110
+    healthMax: 110
     
   obj.include Metered
   
