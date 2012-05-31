@@ -36,6 +36,6 @@ test "should set both <attribute> and max<attribute> if they aren't present in t
   obj.meter 'turbo'
     
   equals obj.I.turbo, 100
-  equals obj.I.maxTurbo, 100
+  equals obj.I.turboMax, 100
   
 module()
