@@ -163,7 +163,6 @@ GameObject.Meter = (I={}, self) ->
 
       player = GameObject
     
-      player.include Metered      
     
       # creates a health meter
       player.meter 'health'
