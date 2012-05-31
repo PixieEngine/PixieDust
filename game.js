@@ -9157,30 +9157,23 @@ meter ui to track arbitrary numeric attributes.
 
     player = GameObject
       health: 100
-      maxHealth: 100
-    
-    player.include Metered
+      heathMax: 100
     
     enemy = GameObject
       health: 500
     
-    enemy.include Metered
-    
     someOtherObject = GameObject
-    
-    someOtherObject.include Metered
     
     player.meter 'health'
     # => Sets up a health meter that will be drawn during the player overlay event
     
     enemy.meter 'health'
     # => Sets up a health meter that will be drawn during the enemy overlay event. 
-    # Since maxHealth wasn't provided, it is set to the value of I.health (500)
+    # Since healthMax wasn't provided, it is set to the value of I.health (500)
     
     someOtherObject.meter 'turbo'
     # => Sets up a turbo meter that will be drawn during the someOtherObject overlay event. 
-    # Since neither turbo maxTurbo were provided, they are both set to 100.
-    
+    # Since neither turbo or turboMax were provided, they are both set to 100.
 
 Metered module
 @name Metered
@@ -9206,7 +9199,7 @@ Metered = function(I, self) {
         _ref3 = meterData.position, x = _ref3.x, y = _ref3.y;
       }
       if (!show) return;
-      ratio = I[name] / I["max" + (name.capitalize())];
+      ratio = (I[name] / I["" + name + "Max"]).clamp(0, 1);
       canvas.drawRoundRect({
         color: backgroundColor,
         radius: borderRadius,
@@ -9289,11 +9282,11 @@ Metered = function(I, self) {
         width: 100
       });
       if (I[name] == null) I[name] = 100;
-      if (!I["max" + (name.capitalize())]) {
+      if (!I["" + name + "Max"]) {
         if (I[name]) {
-          I["max" + (name.capitalize())] = I[name];
+          I["" + name + "Max"] = I[name];
         } else {
-          I["max" + (name.capitalize())] = 100;
+          I["" + name + "Max"] = 100;
         }
       }
       return I.meters[name] = options;
@@ -9771,7 +9764,7 @@ to move the text upward and fade it out over 0.5 seconds.
     # adds a FloatingTextEffect to the engine
     # at (50, 50). This effect will float upward
     # at 90 pixels/sec and will fadeOut over 0.5 seconds
-    engine.add 'FloatingTextEffect'
+    engine.add 'TextEffect.Floating'
       x: 50
       y: 50
 
