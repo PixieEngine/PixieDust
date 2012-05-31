@@ -83,7 +83,7 @@ GameObject.Meter = (I={}, self) ->
 
       player = GameObject
     
-      player.include Metered      
+
     
       player.meter 'health',
         border
@@ -141,7 +141,6 @@ GameObject.Meter = (I={}, self) ->
   Shows the named meter
 
       player = GameObject
-
     
       # creates a health meter but disables visibility
       player.meter 'health'
