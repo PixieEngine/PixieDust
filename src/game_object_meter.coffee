@@ -83,8 +83,6 @@ GameObject.Meter = (I={}, self) ->
 
       player = GameObject
     
-
-    
       player.meter 'health',
         border
           color: 'brown'
