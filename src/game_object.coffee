@@ -159,7 +159,7 @@ GameObject.defaultModules = [
   "Drawable"
   "Expirable"
   "Follow"
-  "Metered"
+  "GameObject.Metered"
   "Movable"
   "Rotatable"
   "TimedEvents"
