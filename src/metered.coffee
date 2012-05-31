@@ -198,4 +198,3 @@ Metered = (I={}, self) ->
   ###    
   toggleMeter: (name) ->
     I.meters[name].show = not I.meters[name].show
-    
