@@ -4,29 +4,23 @@ meter ui to track arbitrary numeric attributes.
 
     player = GameObject
       health: 100
-      maxHealth: 100
-    
-    player.include Metered
+      heathMax: 100
     
     enemy = GameObject
       health: 500
     
-    enemy.include Metered
-    
     someOtherObject = GameObject
-    
-    someOtherObject.include Metered
     
     player.meter 'health'
     # => Sets up a health meter that will be drawn during the player overlay event
     
     enemy.meter 'health'
     # => Sets up a health meter that will be drawn during the enemy overlay event. 
-    # Since maxHealth wasn't provided, it is set to the value of I.health (500)
+    # Since healthMax wasn't provided, it is set to the value of I.health (500)
     
     someOtherObject.meter 'turbo'
     # => Sets up a turbo meter that will be drawn during the someOtherObject overlay event. 
-    # Since neither turbo maxTurbo were provided, they are both set to 100.
+    # Since neither turbo or turboMax were provided, they are both set to 100.
     
 
 Metered module
@@ -55,18 +49,18 @@ Metered = (I={}, self) ->
       } = meterData
       
       {x, y} = meterData.position if meterData.position?
-      
+
       return unless show
-          
-      ratio = I[name] / I["max#{name.capitalize()}"]
-                  
+
+      ratio = (I[name] / I["#{name}Max"]).clamp(0, 1)
+
       canvas.drawRoundRect
         color: backgroundColor
         radius: borderRadius
         x: x
         y: y
         width: width
-        height: height       
+        height: height
       
       canvas.drawRoundRect
         color: color
@@ -74,7 +68,7 @@ Metered = (I={}, self) ->
         y: y
         radius: borderRadius
         width: width * ratio
-        height: height      
+        height: height
         
       canvas.drawRoundRect
         x: x
@@ -136,11 +130,11 @@ Metered = (I={}, self) ->
         
     I[name] ?= 100
     
-    if not I["max#{name.capitalize()}"]
+    if not I["#{name}Max"]
       if I[name]
-        I["max#{name.capitalize()}"] = I[name]
+        I["#{name}Max"] = I[name]
       else
-        I["max#{name.capitalize()}"] = 100
+        I["#{name}Max"] = 100
     
     I.meters[name] = options
     
