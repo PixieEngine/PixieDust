@@ -12,8 +12,6 @@ test "should respect 0 being set as the meter attribute", ->
     health: 0
     healthMax: 110
     
-  obj.include Metered
-  
   obj.meter 'health'
   
   equals obj.I.health, 0
