@@ -12,6 +12,8 @@ asyncTest "callback and cache", ->
       ok s.width isnt null
       ok s.width is sprite2.width
 
+      start()
+
   sprite = Sprite.load spriteUrl, callback
 
   ok sprite.width is null
