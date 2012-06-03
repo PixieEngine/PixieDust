@@ -37,7 +37,7 @@ test "scale", ->
   transform = object.transform()
   
   equal transform.a 1
-  
+  equal transform.
 
   object = GameObject
     scale: 2
