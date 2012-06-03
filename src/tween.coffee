@@ -23,9 +23,9 @@ Tween = (I={}, self) ->
         if data.easing.isString?()
           easingFunction = Easing[data.easing](data.start, data.end)
         else
-          easingFunction = data.e
+          easingFunction = data.easing
 
-        I[property] = f((t - data.startTime) / data.duration)
+        I[property] = easing((t - data.startTime) / data.duration)
 
   ###*
   Modify the object's properties over time.
