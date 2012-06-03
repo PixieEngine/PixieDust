@@ -33,6 +33,7 @@ test "alpha", ->
 
 test "scale", ->
   object = GameObject
+
   transform = object.transform()
   
 module()
