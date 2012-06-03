@@ -6,7 +6,7 @@ test "EMPTY and NONE", ->
 
 asyncTest "callback and cache", ->
   spriteUrl = "http://images.pixie.strd6.com/avatars/1/thumb.png"
-  
+
   callback = ->
     sprite2 = Sprite.load spriteUrl, (s) ->
       ok s.width isnt null
