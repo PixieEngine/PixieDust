@@ -8,7 +8,7 @@ asyncTest "callback and cache", ->
   callback = (s) ->
     sprite = Sprite.load 
     
-  sprite = Sprite.load "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAIAAAACDbGyAAAAAXNSR0IArs4c6QAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9oMCRUiMrIBQVkAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAADElEQVQI12NgoC4AAABQAAEiE+h1AAAAAElFTkSuQmCC"
+  sprite = Sprite.load "http://images.pixie.strd6.com/avatars/1/thumb.png?1316033907"
   
   
 module()
