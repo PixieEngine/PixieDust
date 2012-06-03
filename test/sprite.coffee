@@ -11,7 +11,7 @@ asyncTest "callback and cache", ->
     sprite2 = Sprite.load spriteUrl
 
   sprite = Sprite.load spriteUrl, callback
-  
-  ok sprite
+
+  ok sprite.width is null
   
 module()
