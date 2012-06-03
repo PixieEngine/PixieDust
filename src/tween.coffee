@@ -23,7 +23,7 @@ Tween = (I={}, self) ->
         if data.easing.isString?()
           easingFunction = Easing[data.easing](data.start, data.end)
         else
-          easingFunction
+          easingFunction = data.e
 
         I[property] = f((t - data.startTime) / data.duration)
 
