@@ -8,7 +8,8 @@ asyncTest "callback and cache", ->
   spriteUrl = "http://images.pixie.strd6.com/avatars/1/thumb.png"
   
   callback = ->
-    sprite2 = Sprite.load spriteUrl, () ->
+    sprite2 = Sprite.load spriteUrl, (s) ->
+      
 
   sprite = Sprite.load spriteUrl, callback
 
