@@ -41,4 +41,6 @@ test "scale", ->
     scaleX: -1
     scaleY: 0.5
 
+  transform = object.transform()
+
 module()
