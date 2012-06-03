@@ -11,4 +11,3 @@ asyncTest "callback and cache", ->
   
   
 module()
-
