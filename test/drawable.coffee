@@ -35,7 +35,7 @@ test "scale", ->
   object = GameObject()
 
   transform = object.transform()
-  
+
   object = GameObject()
   
 module()
