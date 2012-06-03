@@ -7172,13 +7172,13 @@ var Drawable;
 
 Drawable = function(I, self) {
   var setSizeCallback, _ref;
-  I || (I = {});
+  if (I == null) I = {};
   Object.reverseMerge(I, {
     alpha: 1,
     color: "#196",
-    hflip: false,
-    vflip: false,
     scale: 1,
+    scaleX: 1,
+    scaleY: 1,
     zIndex: 0
   });
   setSizeCallback = function(sprite) {
@@ -7256,12 +7256,8 @@ Drawable = function(I, self) {
       var center, transform;
       center = self.center();
       transform = Matrix.translation(center.x.floor(), center.y.floor());
-      if ((I.scale != null) && I.scale !== 1) {
-        transform = transform.concat(Matrix.scale(I.scale));
-      }
+      transform = transform.concat(Matrix.scale(I.scale * I.scaleX, I.scale * I.scaleY));
       if (I.rotation) transform = transform.concat(Matrix.rotation(I.rotation));
-      if (I.hflip) transform = transform.concat(Matrix.HORIZONTAL_FLIP);
-      if (I.vflip) transform = transform.concat(Matrix.VERTICAL_FLIP);
       if (I.spriteOffset) {
         transform = transform.concat(Matrix.translation(I.spriteOffset.x, I.spriteOffset.y));
       }
