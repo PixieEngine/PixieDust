@@ -39,4 +39,3 @@ test "scale", ->
   object = GameObject()
 
 module()
-
