@@ -106,6 +106,7 @@ draw anything to the screen until the image has been loaded.
   @returns {Sprite} A sprite object
   ###
   Sprite.load = (url, loadedCallback) ->
+    
     img = new Image()
     proxy = LoaderProxy()
 
