@@ -7192,7 +7192,7 @@ Drawable = function(I, self) {
       I.sprite = Sprite.loadByName(I.sprite, setSizeCallback);
     }
   }
-  self.bind('draw', function(canvas) {
+  self.bind('draw.Drawable', function(canvas) {
     var previousAlpha, sprite;
     if ((I.alpha != null) && I.alpha !== 1) {
       previousAlpha = canvas.context().globalAlpha;
@@ -9532,7 +9532,7 @@ draw anything to the screen until the image has been loaded.
 @constructor
 */
 (function() {
-  var LoaderProxy, Sprite;
+  var LoaderProxy, Sprite, spriteCache;
   LoaderProxy = function() {
     return {
       draw: function() {},
@@ -9543,6 +9543,7 @@ draw anything to the screen until the image has been loaded.
       height: null
     };
   };
+  spriteCache = {};
   Sprite = function(image, sourceX, sourceY, width, height) {
     sourceX || (sourceX = 0);
     sourceY || (sourceY = 0);
@@ -9628,14 +9629,16 @@ draw anything to the screen until the image has been loaded.
   @returns {Sprite} A sprite object
   */
   Sprite.load = function(url, loadedCallback) {
-    var img, proxy;
+    var img, proxy, sprite;
+    if (sprite = spriteCache[url]) {
+      if (loadedCallback != null) loadedCallback.defer(sprite);
+      return sprite;
+    }
     img = new Image();
     proxy = LoaderProxy();
     img.onload = function() {
-      var tile;
-      tile = Sprite(this);
-      Object.extend(proxy, tile);
-      if (loadedCallback) return loadedCallback(proxy);
+      spriteCache[url] = Object.extend(proxy, Sprite(this));
+      return typeof loadedCallback === "function" ? loadedCallback(proxy) : void 0;
     };
     img.src = url;
     return proxy;
