@@ -4,7 +4,7 @@ test "EMPTY and NONE", ->
   ok Sprite.EMPTY
   ok Sprite.NONE
 
-async "callback and cache", ->
+asyncTest "callback and cache", ->
   
   
 module()
