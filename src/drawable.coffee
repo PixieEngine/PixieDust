@@ -159,8 +159,6 @@ Drawable = (I={}, self) ->
 
     transform = transform.concat(Matrix.scale(I.scale * I.scaleX, I.scale * I.scaleY))
     transform = transform.concat(Matrix.rotation(I.rotation)) if I.rotation
-    transform = transform.concat(Matrix.HORIZONTAL_FLIP) if I.hflip
-    transform = transform.concat(Matrix.VERTICAL_FLIP) if I.vflip
 
     if I.spriteOffset
       transform = transform.concat(Matrix.translation(I.spriteOffset.x, I.spriteOffset.y))
