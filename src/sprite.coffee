@@ -116,8 +116,7 @@ draw anything to the screen until the image has been loaded.
     img.onload = ->
       spriteCache[url] = Object.extend(proxy, Sprite(this))
 
-      if loadedCallback
-        loadedCallback(proxy)
+      loadedCallback?(proxy)
 
     img.src = url
 
