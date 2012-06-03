@@ -32,6 +32,7 @@ test "alpha", ->
   equal object2.I.alpha, 0.5
 
 test "scale", ->
+  object = GameObject
   transform = object.transform()
   
 module()
