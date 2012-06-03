@@ -36,8 +36,8 @@ test "scale", ->
 
   transform = object.transform()
   
-  equal transform.a 1
-  equal transform.d 1
+  equal transform.a, 1
+  equal transform.d, 1
 
   object = GameObject
     scale: 2
@@ -46,7 +46,7 @@ test "scale", ->
 
   transform = object.transform()
   
-  equal transform.a -2
-  equal transform.d 1
+  equal transform.a, -2
+  equal transform.d, 1
 
 module()
