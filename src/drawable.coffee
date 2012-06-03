@@ -97,7 +97,7 @@ Drawable = (I={}, self) ->
     else
       I.sprite = Sprite.loadByName(I.sprite, setSizeCallback)
 
-  self.bind 'draw', (canvas) ->
+  self.bind 'draw.Drawable', (canvas) ->
     if I.alpha? and I.alpha != 1
       previousAlpha = canvas.context().globalAlpha
       canvas.context().globalAlpha = I.alpha
