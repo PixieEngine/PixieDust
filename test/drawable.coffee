@@ -37,7 +37,7 @@ test "scale", ->
   transform = object.transform()
   
   equal transform.a 1
-  equal transform.
+  equal transform.d 1
 
   object = GameObject
     scale: 2
@@ -45,5 +45,7 @@ test "scale", ->
     scaleY: 0.5
 
   transform = object.transform()
+  
+  
 
 module()
