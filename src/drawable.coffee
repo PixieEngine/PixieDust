@@ -82,8 +82,6 @@ Drawable = (I={}, self) ->
   Object.reverseMerge I,
     alpha: 1
     color: "#196"
-    hflip: false
-    vflip: false
     scale: 1
     scaleX: 1
     scaleY: 1
