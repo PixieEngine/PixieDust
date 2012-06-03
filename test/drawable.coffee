@@ -38,6 +38,7 @@ test "scale", ->
 
   object = GameObject
     scale: 2
-    sca
+    scaleX: -1
+    scale
 
 module()
