@@ -9,7 +9,7 @@ asyncTest "callback and cache", ->
   
   callback = ->
     sprite2 = Sprite.load spriteUrl, (s) ->
-      
+      s
 
   sprite = Sprite.load spriteUrl, callback
 
