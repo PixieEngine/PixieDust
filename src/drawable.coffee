@@ -87,6 +87,8 @@ Drawable = (I, self) ->
     hflip: false
     vflip: false
     scale: 1
+    scaleX: 1
+    scaleY: 1
     zIndex: 0
 
   setSizeCallback = (sprite) ->
