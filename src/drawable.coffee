@@ -78,9 +78,7 @@ the first argument. This applies the current transform.
 @param {PowerCanvas} canvas A reference to the canvas to draw on.
 ###
 
-Drawable = (I, self) ->
-  I ||= {}
-
+Drawable = (I={}, self) ->
   Object.reverseMerge I,
     alpha: 1
     color: "#196"
