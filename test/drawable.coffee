@@ -46,6 +46,7 @@ test "scale", ->
 
   transform = object.transform()
   
-  
+  equal transform.a -2
+  equal transform.d 1
 
 module()
