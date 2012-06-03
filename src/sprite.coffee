@@ -108,7 +108,7 @@ draw anything to the screen until the image has been loaded.
   Sprite.load = (url, loadedCallback) ->
     if spriteCache[url]
       loadedCallback.defer()
-      return spriteCache[url]
+      return 
 
     img = new Image()
     proxy = LoaderProxy()
