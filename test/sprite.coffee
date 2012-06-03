@@ -5,7 +5,7 @@ test "EMPTY and NONE", ->
   ok Sprite.NONE
 
 asyncTest "callback and cache", ->
-  sprite = Sprite.load
+  sprite = Sprite.load 
   
 module()
 
