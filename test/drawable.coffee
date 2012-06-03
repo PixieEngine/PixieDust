@@ -32,7 +32,7 @@ test "alpha", ->
   equal object2.I.alpha, 0.5
 
 test "scale", ->
-  tr
+  transform = object.transform()
   
 module()
 
