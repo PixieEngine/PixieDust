@@ -31,7 +31,7 @@ test "alpha", ->
 
   equal object2.I.alpha, 0.5
 
-  
+test "scale"
   
 module()
 
