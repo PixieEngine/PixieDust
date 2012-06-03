@@ -20,6 +20,7 @@ Tween = (I={}, self) ->
         I.activeTweens[property].complete?()
         delete I.activeTweens[property]
       else
+        
         f = Easing[data.easing](data.start, data.end)
         I[property] = f((t - data.startTime) / data.duration)
 
