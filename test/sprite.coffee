@@ -7,8 +7,8 @@ test "EMPTY and NONE", ->
 asyncTest "callback and cache", ->
   spriteUrl = "http://images.pixie.strd6.com/avatars/1/thumb.png"
   
-  callback = (s) ->
-    sprite2 = Sprite.load spriteUrl, ){->
+  callback = ->
+    sprite2 = Sprite.load spriteUrl, () ->
 
   sprite = Sprite.load spriteUrl, callback
 
