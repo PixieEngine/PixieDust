@@ -18,6 +18,7 @@ draw anything to the screen until the image has been loaded.
     width: null
     height: null
 
+  # Hold 
   spriteCache = {}
 
   Sprite = (image, sourceX, sourceY, width, height) ->
