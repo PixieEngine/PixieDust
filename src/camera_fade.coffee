@@ -53,7 +53,8 @@ Camera.Fade = (I, self) ->
       # => Sets the effect variables to their default state. This will the screen to fade from ransparent to black over the next 30 frames.
     
       camera.fadeOut
-     
+        color: blue
+       
       # => This effect will start off transparent and change to blue over 50 frames.
 
   @name fadeOut
