@@ -54,7 +54,7 @@ Camera.Fade = (I, self) ->
     
       camera.fadeOut
         color: blue
-       
+        duration: 
       # => This effect will start off transparent and change to blue over 50 frames.
 
   @name fadeOut
