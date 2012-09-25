@@ -5,9 +5,9 @@ Test = (I={}) ->
   Object.reverseMerge I, {
     "class": "Test",
     "parentClass": "GameObject",
-    "inclued": "Drawable",
     "__CODE": "",
-    "uuid": "test"
+    "uuid": "test",
+    "color": "white"
   }
 
   self = GameObject(I)
