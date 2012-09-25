@@ -140,7 +140,7 @@
 
       self.trigger "beforeDraw", canvas
       self.trigger "draw", canvas
-      self.trigger "overlay", I.canvas
+      self.trigger "overlay", canvas
 
     step = ->
       if !I.paused || frameAdvance
