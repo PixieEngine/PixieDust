@@ -1,0 +1,7 @@
+{
+  "class": "Test",
+  "parentClass": "GameObject",
+  "inclued": "Drawable",
+  "__CODE": "",
+  "uuid": "test"
+}
