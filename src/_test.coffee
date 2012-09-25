@@ -7,7 +7,7 @@ Test = (I={}) ->
     "parentClass": "GameObject",
     "__CODE": "",
     "uuid": "test",
-    "color": "white"
+    "color": "#E08B8B"
   }
 
   self = GameObject(I)
