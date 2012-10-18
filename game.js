@@ -1,12 +1,12 @@
 
-;
-;
+
+
 /**
 Checks whether an object is an array.
 
     Object.isArray([1, 2, 4])
     # => true
-    
+
     Object.isArray({key: "value"})
     # => false
 
@@ -26,10 +26,10 @@ Checks whether an object is a string.
 
     Object.isString("a string")
     # => true
-    
+
     Object.isString([1, 2, 4])
     # => false
-    
+
     Object.isString({key: "value"})
     # => false
 
@@ -51,11 +51,11 @@ First come, first served.
         a: 1
         b: 2
         c: 3
-    
+
       Object.reverseMerge I,
         c: 6
-        d: 4   
-    
+        d: 4
+
       I # => {a: 1, b:2, c:3, d: 4}
 
 @name reverseMerge
@@ -64,7 +64,7 @@ First come, first served.
 @returns {Object} target
 */
 
-Object.reverseMerge = function() {
+Object.defaults = Object.reverseMerge = function() {
   var name, object, objects, target, _i, _len;
   target = arguments[0], objects = 2 <= arguments.length ? __slice.call(arguments, 1) : [];
   for (_i = 0, _len = objects.length; _i < _len; _i++) {
@@ -84,11 +84,11 @@ Last in covers earlier properties.
         a: 1
         b: 2
         c: 3
-    
+
       Object.extend I,
         c: 6
         d: 4
-    
+
       I # => {a: 1, b:2, c:6, d: 4}
 
 @name extend
@@ -113,7 +113,7 @@ Object.extend = function() {
 Helper method that tells you if something is an object.
 
     object = {a: 1}
-    
+
     Object.isObject(object)
     # => true
 
@@ -126,7 +126,7 @@ Helper method that tells you if something is an object.
 Object.isObject = function(object) {
   return Object.prototype.toString.call(object) === '[object Object]';
 };
-;
+
 /**
 Calculate the average value of an array. Returns undefined if some elements
 are not numbers.
@@ -789,7 +789,7 @@ Array.prototype.zip = function() {
     return output;
   });
 };
-;
+
 /**
 Bindable module.
 
@@ -927,7 +927,7 @@ Bindable = function(I, self) {
 };
 
 (typeof exports !== "undefined" && exports !== null ? exports : this)["Bindable"] = Bindable;
-;
+
 var CommandStack;
 
 CommandStack = function() {
@@ -958,6 +958,9 @@ CommandStack = function() {
         return command;
       }
     },
+    current: function() {
+      return stack[index - 1];
+    },
     canUndo: function() {
       return index > 0;
     },
@@ -968,7 +971,7 @@ CommandStack = function() {
 };
 
 (typeof exports !== "undefined" && exports !== null ? exports : this)["CommandStack"] = CommandStack;
-;
+
 /**
 The Core class is used to add extended functionality to objects without
 extending the object class directly. Inherit from Core to gain its utility
@@ -1168,7 +1171,7 @@ var __slice = Array.prototype.slice;
     return self;
   };
 })();
-;
+
 var __slice = Array.prototype.slice;
 
 Function.prototype.once = function() {
@@ -1239,7 +1242,7 @@ Function.prototype.defer = function() {
   args = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
   return this.delay.apply(this, [1].concat(args));
 };
-;
+
 /**
 @name Logging
 @namespace
@@ -1264,7 +1267,7 @@ var __slice = Array.prototype.slice;
     return (typeof exports !== "undefined" && exports !== null ? exports : this)[name] = function() {};
   }
 });
-;
+
 /**
 * Matrix.js v1.3.0pre
 * 
@@ -1561,7 +1564,7 @@ var __slice = Array.prototype.slice;
   }
   return (typeof exports !== "undefined" && exports !== null ? exports : this)["Matrix"] = Matrix;
 })();
-;
+
 /** 
 Returns the absolute value of this number.
 
@@ -2114,7 +2117,7 @@ The mathematical circle constant of 1 turn.
 */
 
 Math.TAU = 2 * Math.PI;
-;
+
 var __slice = Array.prototype.slice;
 
 (function() {
@@ -2756,7 +2759,7 @@ var __slice = Array.prototype.slice;
   }
   return (typeof exports !== "undefined" && exports !== null ? exports : this)["Point"] = Point;
 })();
-;
+
 
 (function() {
   /**
@@ -2845,7 +2848,7 @@ var __slice = Array.prototype.slice;
     }
   };
 })();
-;
+
 
 (function() {
   var Rectangle;
@@ -2882,7 +2885,7 @@ var __slice = Array.prototype.slice;
   });
   return (typeof exports !== "undefined" && exports !== null ? exports : this)["Rectangle"] = Rectangle;
 })();
-;
+
 /**
 Returns true if this string only contains whitespace characters.
 
@@ -3157,7 +3160,7 @@ String.prototype.parseHex = function() {
       return rgb;
   }
 };
-;
+
 /**
 Returns a string representing the specified Boolean object.
 
@@ -4193,7 +4196,7 @@ Converts a date to a string, using the universal time convention.
 @methodOf Date#
 */
 
-;
+
 /*!
 Math.uuid.js (v1.4)
 http://www.broofa.com
@@ -4289,8 +4292,8 @@ Generate a random uuid.
       return v.toString(16);
     }).toUpperCase();
   };
-})();;
-;
+})();
+
 
 /**
 The ActiveBounds module automatically destroys objects that
@@ -4850,8 +4853,10 @@ Camera.Fade = function(I, self) {
     
         camera.fadeOut()
         # => Sets the effect variables to their default state. This will the screen to fade from ransparent to black over the next 30 frames.
-      
-        camera.fadeOut('blue', 50)
+        
+        camera.fadeOut
+          color: blue
+          duration: 30
         # => This effect will start off transparent and change to blue over 50 frames.
     
     @name fadeOut
@@ -7578,7 +7583,7 @@ Emitterable = function(I, self) {
       if (!(canvas = I.canvas)) return;
       self.trigger("beforeDraw", canvas);
       self.trigger("draw", canvas);
-      return self.trigger("overlay", I.canvas);
+      return self.trigger("overlay", canvas);
     };
     step = function() {
       var secondsPerFrame;
@@ -7705,40 +7710,6 @@ Emitterable = function(I, self) {
   Engine.defaultModules = ["Data", "Keyboard", "Mouse", "Background", "Delay", "GameState", "Selector", "Collision", "Tilemap", "Levels"];
   return (typeof exports !== "undefined" && exports !== null ? exports : this)["Engine"] = Engine;
 })();
-
-/**
-This module clears or fills the canvas before drawing the scene.
-
-@name Clear
-@fieldOf Engine
-@module
-@param {Object} I Instance variables
-@param {Object} self Reference to the engine
-*/
-Engine.Background = function(I, self) {
-  Object.reverseMerge(I, {
-    background: null,
-    backgroundColor: "#00010D",
-    clear: false
-  });
-  self.attrAccessor("clear", "backgroundColor");
-  self.bind("init", function() {
-    var _ref;
-    if ((_ref = I.background) != null ? typeof _ref.isString === "function" ? _ref.isString() : void 0 : void 0) {
-      return I.background = Sprite.loadByName(I.background);
-    }
-  });
-  self.bind("beforeDraw", function() {
-    if (I.clear) {
-      return I.canvas.clear();
-    } else if (I.background) {
-      return I.background.fill(I.canvas, 0, 0, App.width, App.height);
-    } else if (I.backgroundColor) {
-      return I.canvas.fill(I.backgroundColor);
-    }
-  });
-  return {};
-};
 
 /**
 The <code>Collision</code> module provides some simple collision detection methods to engine.
@@ -8412,6 +8383,40 @@ Engine.Tilemap = function(I, self) {
       });
     }
   };
+};
+
+/**
+This module clears or fills the canvas before drawing the scene.
+
+@name Clear
+@fieldOf Engine
+@module
+@param {Object} I Instance variables
+@param {Object} self Reference to the engine
+*/
+Engine.Background = function(I, self) {
+  Object.reverseMerge(I, {
+    background: null,
+    backgroundColor: "#00010D",
+    clear: false
+  });
+  self.attrAccessor("clear", "backgroundColor");
+  self.bind("init", function() {
+    var _ref;
+    if ((_ref = I.background) != null ? typeof _ref.isString === "function" ? _ref.isString() : void 0 : void 0) {
+      return I.background = Sprite.loadByName(I.background);
+    }
+  });
+  self.bind("beforeDraw", function() {
+    if (I.clear) {
+      return I.canvas.clear();
+    } else if (I.background) {
+      return I.background.fill(I.canvas, 0, 0, App.width, App.height);
+    } else if (I.backgroundColor) {
+      return I.canvas.fill(I.backgroundColor);
+    }
+  });
+  return {};
 };
 
 /**
@@ -9175,44 +9180,6 @@ GameState = function(I) {
   return self;
 };
 
-
-GameState.Cameras = function(I, self) {
-  var cameras;
-  cameras = [Camera()];
-  self.bind('update', function(elapsedTime) {
-    return self.cameras().invoke('trigger', 'update', elapsedTime);
-  });
-  self.bind('afterUpdate', function(elapsedTime) {
-    return self.cameras().invoke('trigger', 'afterUpdate', elapsedTime);
-  });
-  self.bind('draw', function(canvas) {
-    return self.cameras().invoke('trigger', 'draw', canvas, self.objects());
-  });
-  self.bind('overlay', function(canvas) {
-    return self.cameras().invoke('trigger', 'overlay', canvas, self.objects());
-  });
-  return {
-    addCamera: function(data) {
-      return cameras.push(Camera(data));
-    },
-    /**
-    Returns the array of camera objects.
-    
-    @name cameras
-    @methodOf Engine#
-    @returns {Array}
-    */
-    cameras: function(newCameras) {
-      if (newCameras) {
-        cameras = newCameras;
-        return self;
-      } else {
-        return cameras;
-      }
-    }
-  };
-};
-
 /**
 The <code>SaveState</code> module provides methods to save and restore the current game state.
 
@@ -9324,6 +9291,44 @@ GameState.SingleCamera = function(I, self) {
     });
   });
   return {};
+};
+
+
+GameState.Cameras = function(I, self) {
+  var cameras;
+  cameras = [Camera()];
+  self.bind('update', function(elapsedTime) {
+    return self.cameras().invoke('trigger', 'update', elapsedTime);
+  });
+  self.bind('afterUpdate', function(elapsedTime) {
+    return self.cameras().invoke('trigger', 'afterUpdate', elapsedTime);
+  });
+  self.bind('draw', function(canvas) {
+    return self.cameras().invoke('trigger', 'draw', canvas, self.objects());
+  });
+  self.bind('overlay', function(canvas) {
+    return self.cameras().invoke('trigger', 'overlay', canvas, self.objects());
+  });
+  return {
+    addCamera: function(data) {
+      return cameras.push(Camera(data));
+    },
+    /**
+    Returns the array of camera objects.
+    
+    @name cameras
+    @methodOf Engine#
+    @returns {Array}
+    */
+    cameras: function(newCameras) {
+      if (newCameras) {
+        cameras = newCameras;
+        return self;
+      } else {
+        return cameras;
+      }
+    }
+  };
 };
 
 /**
