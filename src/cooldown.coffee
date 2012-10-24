@@ -32,8 +32,8 @@ GameObject's properties.
     # Turbo Cooldown
     player = GameObject()
     
-    # turboTimer starts at 1000 and approaches
-    # 12 by 5 each update
+    # turboTimer starts at 1000 
+    # and approaches 12 by 5 each update
     player.cooldown "turboTimer",
       approachBy: 5
       value: 1000
