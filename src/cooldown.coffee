@@ -41,7 +41,7 @@ GameObject's properties.
     
     player.update(1)
     
-    player.I.shootTimer # => 99
+    player.I.turboTimer # => 995
 
 @name Cooldown
 @module
