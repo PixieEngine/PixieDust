@@ -32,7 +32,7 @@ GameObject's properties.
     # Turbo Cooldown
     player = GameObject()
     
-    # 
+    # turboTimer 
     player.cooldown "turboTimer",
       approachBy: 5
       value: 1000
