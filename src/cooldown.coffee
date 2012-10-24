@@ -37,7 +37,7 @@ GameObject's properties.
       approachBy: 5
       value: 1000
     
-    player.I.turboTimer = 10 # => Pew! Pew!
+    player.I.turboTimer = 1000
     
     player.update(1)
     
