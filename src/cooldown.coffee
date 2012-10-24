@@ -33,11 +33,11 @@ GameObject's properties.
     player = GameObject()
     
     # turboTimer starts at 1000 and approaches
-    #
+    # 
     player.cooldown "turboTimer",
       approachBy: 5
       value: 1000
-      targ
+      target: 12
     
     player.I.turboTimer = 1000
     
