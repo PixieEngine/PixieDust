@@ -6763,14 +6763,21 @@ GameObject's properties.
     player = GameObject
       health: 50
     
+    # health will approach 
+    # 100 by 1 each update
     player.cooldown "health",
       target: 100
     
     player.update(1)
+    
+    player.I.health
+    # => 51
 
     # Shoot Timeout
     player = GameObject()
     
+    # by default the cooldown 
+    # approaches 0 by 1 each update
     player.cooldown "shootTimer"
     
     player.I.shootTimer = 10 # => Pew! Pew!
@@ -6778,6 +6785,22 @@ GameObject's properties.
     player.update(1)
     
     player.I.shootTimer # => 9
+    
+    # Turbo Cooldown
+    player = GameObject()
+    
+    # turboTimer starts at 1000 
+    # and approaches 12 by 5 each update
+    player.cooldown "turboTimer",
+      approachBy: 5
+      value: 1000
+      target: 12
+    
+    player.I.turboTimer = 1000
+    
+    player.update(1)
+    
+    player.I.turboTimer # => 995
 
 @name Cooldown
 @module
