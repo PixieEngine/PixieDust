@@ -10,6 +10,9 @@ GameObject's properties.
       target: 100
     
     player.update(1)
+    
+    player.I.health
+    
 
     # Shoot Timeout
     player = GameObject()
