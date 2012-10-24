@@ -6,8 +6,8 @@ GameObject's properties.
     player = GameObject
       health: 50
     
-    # health will approach 100 by 1 
-    # each 
+    # health will approach 100 
+    # by 1 each update
     player.cooldown "health",
       target: 100
     
