@@ -19,7 +19,8 @@ GameObject's properties.
     # Shoot Timeout
     player = GameObject()
     
-    # by default the cooldown approached
+    # by default the cooldown approaches
+    # 0 by 1 
     player.cooldown "shootTimer"
     
     player.I.shootTimer = 10 # => Pew! Pew!
