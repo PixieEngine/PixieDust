@@ -33,7 +33,8 @@ GameObject's properties.
     player = GameObject()
     
     player.cooldown "turboTimer",
-      
+      approachBy: 5
+      value: 
     
     player.I.shootTimer = 10 # => Pew! Pew!
     
