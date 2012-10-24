@@ -32,9 +32,7 @@ GameObject's properties.
     # Turbo Cooldown
     player = GameObject()
     
-    # by default the cooldown 
-    # approaches 0 by 1 each update
-    player.cooldown "shootTimer"
+    player.cooldown "turboTimer"
     
     player.I.shootTimer = 10 # => Pew! Pew!
     
