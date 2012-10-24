@@ -28,6 +28,19 @@ GameObject's properties.
     player.update(1)
     
     player.I.shootTimer # => 9
+    
+      # 
+    player = GameObject()
+    
+    # by default the cooldown 
+    # approaches 0 by 1 each update
+    player.cooldown "shootTimer"
+    
+    player.I.shootTimer = 10 # => Pew! Pew!
+    
+    player.update(1)
+    
+    player.I.shootTimer # => 9
 
 @name Cooldown
 @module
