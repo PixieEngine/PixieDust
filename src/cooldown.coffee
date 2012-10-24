@@ -12,7 +12,7 @@ GameObject's properties.
     player.update(1)
     
     player.I.health
-    
+    # => 
 
     # Shoot Timeout
     player = GameObject()
