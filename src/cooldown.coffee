@@ -20,8 +20,7 @@ GameObject's properties.
     player = GameObject()
     
     # by default the cooldown 
-    approaches
-    # 0 by 1 each update
+    # approaches 0 by 1 each update
     player.cooldown "shootTimer"
     
     player.I.shootTimer = 10 # => Pew! Pew!
