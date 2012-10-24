@@ -29,7 +29,7 @@ GameObject's properties.
     
     player.I.shootTimer # => 9
     
-    # Turbo 
+    # Turbo Cooldown
     player = GameObject()
     
     # by default the cooldown 
