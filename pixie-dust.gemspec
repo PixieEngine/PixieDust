@@ -6,20 +6,14 @@ Gem::Specification.new do |s|
   s.version     = PixieDust::VERSION
   s.authors     = ["Matt Diebolt", "Daniel X. Moore"]
   s.email       = ["pixie@pixieengine.com"]
-  s.homepage    = ""
+  s.homepage    = "https://github.com/PixieEngine/PixieDust"
   s.summary     = %q{CoffeeScript based HTML5 game engine}
   s.description = %q{Make browser games}
 
-  # Manifest
   s.files         = `git ls-files`.split("\n")
-  s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
-  s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
 
-  %w[
-    cornerstone-source
-    rake
-  ].each do |name|
-    gem.add_dependency name
-  end
+  s.add_development_dependency 'rake'
+
+  s.add_dependency 'cornerstone-source'
 end
