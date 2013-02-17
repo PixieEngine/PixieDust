@@ -16,4 +16,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rake'
 
   s.add_dependency 'cornerstone-source'
+  s.add_dependency 'sprockets'
 end
