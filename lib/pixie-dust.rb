@@ -1,8 +1,10 @@
-require "pixie-dust/version"
+module PixieDust
+  if defined? ::Rails::Engine
+    class Rails < Rails::Engine
+    end
+  elsif defined? ::Sprockets
+    root_dir = File.expand_path(File.dirname(File.dirname(__FILE__)))
 
-# Sneaky require for Rails engine environment
-if defined? ::Rails::Engine
-  require "pixie-dust/rails"
-elsif defined? ::Sprockets
-  require "pixie-dust/sprockets"
+    Sprockets.append_path File.join(root_dir, "lib", "assets", "javascripts")
+  end
 end
