@@ -7,7 +7,7 @@ The <code>Delay</code> module provides methods to trigger events after a number 
 @param {Object} I Instance variables
 @param {Object} self Reference to the engine
 ###
-Engine.Delay = (I, self) ->
+window.Engine.Delay = (I, self) ->
   delayedEvents = []
 
   self.bind 'afterUpdate', (elapsedTime) ->

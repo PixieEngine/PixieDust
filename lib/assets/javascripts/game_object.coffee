@@ -1,7 +1,7 @@
 ###*
 The default base class for all objects you can add to the engine.
 
-GameObjects fire events that you may bind listeners to. Event listeners 
+GameObjects fire events that you may bind listeners to. Event listeners
 may be bound with <code>object.bind(eventName, callback)</code>
 
 @name GameObject
@@ -14,10 +14,10 @@ may be bound with <code>object.bind(eventName, callback)</code>
 Triggered when the object is created.
 
     enemyCount = 0
-    
+
     enemy = engine.add
       class: "Enemy"
-    
+
     enemy.bind 'create', ->
       enemyCount++
 
@@ -27,11 +27,11 @@ Triggered when the object is created.
 ###
 
 ###*
-Triggered when object is destroyed. Use 
+Triggered when object is destroyed. Use
 the destroy event to add particle effects, play sounds, etc.
 
     bomb = GameObject()
-    
+
     bomb.bind 'destroy', ->
       bomb.explode()
       Sound.play "Kaboom"
@@ -45,9 +45,9 @@ the destroy event to add particle effects, play sounds, etc.
 Triggered during every update step.
 
     player = GameObject()
-    
+
     player.bind 'step', ->
-      # check to see if keys are being pressed and 
+      # check to see if keys are being pressed and
       # change the player's velocity
       if keydown.left
         player.velocity(Point(-1, 0))
@@ -65,11 +65,11 @@ Triggered during every update step.
 Triggered every update after the <code>step</code> event is triggered.
 
     player = GameObject()
-    
-    # we can really use the update and 
+
+    # we can really use the update and
     # step events almost interchangebly
     player.bind 'update', ->
-      # check to see if keys are being pressed and 
+      # check to see if keys are being pressed and
       # change the player's velocity
       if keydown.left
         player.velocity(Point(-1, 0))
@@ -88,7 +88,7 @@ Triggered when the object is removed from
 the engine. Use the remove event to handle any clean up.
 
     boss = GameObject()
-    
+
     boss.bind 'remove', ->
       unlockDoorToLevel2()
 
@@ -97,11 +97,11 @@ the engine. Use the remove event to handle any clean up.
 @event
 ###
 
-GameObject = (I) ->
+window.GameObject = (I) ->
   I ||= {}
 
   ###*
-  @name {Object} I Instance variables 
+  @name {Object} I Instance variables
   @memberOf GameObject#
   ###
   Object.reverseMerge I,

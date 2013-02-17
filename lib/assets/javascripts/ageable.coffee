@@ -2,10 +2,10 @@
 The Ageable module handles keeping track of an object's age.
 
     player = GameObject()
-    
+
     player.update(1)
-    
-    #=> player.I.age == 1   
+
+    #=> player.I.age == 1
 
 @name Ageable
 @module
@@ -13,7 +13,7 @@ The Ageable module handles keeping track of an object's age.
 @param {Object} I Instance variables
 @param {Core} self Reference to including object
 ###
-Ageable = (I={}, self) ->
+window.Ageable = (I={}, self) ->
   Object.reverseMerge I,
     age: 0
 

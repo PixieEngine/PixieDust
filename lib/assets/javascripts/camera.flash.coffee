@@ -1,5 +1,5 @@
 ###*
-The <code>Flash</code> module allows you to flash a color onscreen and then fade to transparent over a time period. 
+The <code>Flash</code> module allows you to flash a color onscreen and then fade to transparent over a time period.
 This is nice for lightning type effects or to accentuate major game events.
 
 @name Flash
@@ -8,7 +8,7 @@ This is nice for lightning type effects or to accentuate major game events.
 @param {Object} I Instance variables
 @param {Object} self Reference to the camera
 ###
-Camera.Flash = (I, self) ->
+window.Camera.Flash = (I, self) ->
   Object.reverseMerge I,
     flashColor: Color(0, 0, 0, 0)
     flashDuration: 12
@@ -22,14 +22,14 @@ Camera.Flash = (I, self) ->
 
   self.bind 'afterUpdate', ->
     if I.flashCooldown > 0
-      I.flashColor.a = I.flashColor.a.approach(I.flashTargetAlpha, 1 / I.flashDuration).clamp(0, 1)      
+      I.flashColor.a = I.flashColor.a.approach(I.flashTargetAlpha, 1 / I.flashDuration).clamp(0, 1)
       I.flashColor.a = 0 if I.flashColor.a < 0.00001
       I.flashColor.a = 1 if I.flashColor.a > 0.9999
 
       I.flashCooldown = I.flashCooldown.approach(0, 1)
 
   self.bind 'flash', (canvas) ->
-    canvas.fill I.flashColor      
+    canvas.fill I.flashColor
 
   ###*
   A convenient way to set the flash effect instance variables. Alternatively, you can modify them by hand, but
@@ -37,17 +37,17 @@ Camera.Flash = (I, self) ->
 
       camera.flash()
       # => Sets the flash effect variables to their default state. This will cause a white flash that will turn transparent in the next 12 frames.
-    
+
       camera.flash
         color: 'green'
         duration: 30
       # => This flash effect will start off green and fade to transparent over 30 frames.
-    
+
       camera.flash
         color: Color(255, 0, 0, 0)
         duration: 20
         targetAlpha: 1
-      # => This flash effect will start off transparent and move toward red over 20 frames 
+      # => This flash effect will start off transparent and move toward red over 20 frames
 
   @name flash
   @methodOf Camera#
@@ -60,7 +60,7 @@ Camera.Flash = (I, self) ->
 
     {color, duration, targetAlpha} = options
 
-    I.flashColor = Color(color) 
+    I.flashColor = Color(color)
     I.flashTargetAlpha = targetAlpha
     I.flashCooldown = duration
     I.flashDuration = duration

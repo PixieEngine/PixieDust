@@ -1,4 +1,4 @@
-Camera.ZSort = (I, self) ->
+window.Camera.ZSort = (I, self) ->
   Object.reverseMerge I,
     zSort: true
 

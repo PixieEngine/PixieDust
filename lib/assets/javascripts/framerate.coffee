@@ -7,7 +7,7 @@ Once created you call snapshot at the end of every rendering cycle.
 @name Framerate
 @constructor
 ###
-Framerate = (options={}) ->
+window.Framerate = (options={}) ->
   numFramerates = 15
   framerateUpdateInterval = 250
 

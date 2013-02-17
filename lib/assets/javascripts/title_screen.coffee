@@ -15,14 +15,14 @@ Goes to the next level on any user input.
 ###
 
 ###*
-Overlays the title text in the middle of the screen. Uses <code>App.name</code> 
+Overlays the title text in the middle of the screen. Uses <code>App.name</code>
 
 @name overlay
 @methodOf TitleScreen#
 @param {PixieCanvas} canvas
 @event
 ###
-TitleScreen = (I={}) ->
+window.TitleScreen = (I={}) ->
   self = TextScreen(I)
 
   self.bind 'update', ->

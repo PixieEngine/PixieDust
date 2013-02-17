@@ -1,5 +1,5 @@
 ###*
-The <code>Tween</code> module provides a method to tween object properties. 
+The <code>Tween</code> module provides a method to tween object properties.
 
 @name Tween
 @module
@@ -7,7 +7,7 @@ The <code>Tween</code> module provides a method to tween object properties.
 @param {Object} I Instance variables
 @param {Core} self Reference to including object
 ###
-Tween = (I={}, self) ->
+window.Tween = (I={}, self) ->
   Object.reverseMerge I,
     activeTweens: {}
 
@@ -31,14 +31,14 @@ Tween = (I={}, self) ->
   Modify the object's properties over time.
 
       player = GameObject()
-    
+
       player.tween 30,
         x: 50
         y: 50
         easing: "quadratic"
 
       player = GameObject()
-    
+
       player.tween 30,
         x: 150
         y: 150

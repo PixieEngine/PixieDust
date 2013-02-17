@@ -9,21 +9,21 @@ when up, down, left, or right are held.
         x: 15
         y: 30
         speed:  2
-    
+
       player.include Controllable
-    
+
       # hold the left arrow key, then
       # update the player
       player.update()
-    
+
       # the player is moved left according to his speed
       player.I.x
       # => 13
-    
+
       # We keep track of the direction the object is
       # facing in case you need that (eg. for attack direction)
       player.I.facing
-      # => player.I.facing 
+      # => player.I.facing
       # => Point(-1, 0)
 
 @name Controllable
@@ -32,7 +32,7 @@ when up, down, left, or right are held.
 @param {Object} I Instance variables
 @param {Core} self Reference to including object
 ###
-Controllable = (I={}, self) ->
+window.Controllable = (I={}, self) ->
   Object.reverseMerge I,
     facing: Point(1, 0)
     speed: 1
@@ -60,7 +60,7 @@ Controllable = (I={}, self) ->
     I.velocity = I.velocity.norm()
 
     unless I.velocity.equal(Point.ZERO)
-      I.facing = I.velocity    
-    
+      I.facing = I.velocity
+
     I.velocity = I.velocity.scale(I.speed)
-    
+

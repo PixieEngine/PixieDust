@@ -5,21 +5,21 @@ meter ui to track arbitrary numeric attributes.
     player = GameObject
       health: 100
       heathMax: 100
-    
+
     enemy = GameObject
       health: 500
-    
+
     someOtherObject = GameObject
-    
+
     player.meter 'health'
     # => Sets up a health meter that will be drawn during the player overlay event
-    
+
     enemy.meter 'health'
-    # => Sets up a health meter that will be drawn during the enemy overlay event. 
+    # => Sets up a health meter that will be drawn during the enemy overlay event.
     # Since healthMax wasn't provided, it is set to the value of I.health (500)
-    
+
     someOtherObject.meter 'turbo'
-    # => Sets up a turbo meter that will be drawn during the someOtherObject overlay event. 
+    # => Sets up a turbo meter that will be drawn during the someOtherObject overlay event.
     # Since neither turbo or turboMax were provided, they are both set to 100.
 
 Metered module
@@ -30,23 +30,23 @@ Metered module
 @param {GameObject} self Reference to including object
 ###
 
-GameObject.Meter = (I={}, self) ->
+window.GameObject.Meter = (I={}, self) ->
   Object.reverseMerge I,
     meters: {}
-        
+
   self.bind 'overlay', (canvas) ->
     for name, meterData of I.meters
       {
         backgroundColor,
         border: {color:borderColor, radius:borderRadius, width:borderWidth}
         color,
-        height, 
+        height,
         show,
         width,
         x,
         y
       } = meterData
-      
+
       {x, y} = meterData.position if meterData.position?
 
       return unless show
@@ -60,7 +60,7 @@ GameObject.Meter = (I={}, self) ->
         y: y
         width: width
         height: height
-      
+
       canvas.drawRoundRect
         color: color
         x: x
@@ -68,7 +68,7 @@ GameObject.Meter = (I={}, self) ->
         radius: borderRadius
         width: width * ratio
         height: height
-        
+
       canvas.drawRoundRect
         x: x
         y: y
@@ -82,7 +82,7 @@ GameObject.Meter = (I={}, self) ->
   Configures a meter to be drawn each overlay event.
 
       player = GameObject
-    
+
       player.meter 'health',
         border
           color: 'brown'
@@ -93,7 +93,7 @@ GameObject.Meter = (I={}, self) ->
         y: 5
         show: true
         width: 150
-    
+
       # => Sets up a health meter, using all the configuration options
 
   @name meter
@@ -110,7 +110,7 @@ GameObject.Meter = (I={}, self) ->
   @param {Number} border: radius Border radius of the meter
   @param {Boolean} show Boolean to toggle whether of not to display the meter
   @param {Number} width How wide the meter is
-  ###          
+  ###
   meter: (name, options={}) ->
     Object.reverseMerge options,
       backgroundColor: 'black'
@@ -123,52 +123,52 @@ GameObject.Meter = (I={}, self) ->
       x: 0
       y: 0
       show: true
-      width: 100 
-        
+      width: 100
+
     I[name] ?= 100
-    
+
     if not I["#{name}Max"]
       if I[name]
         I["#{name}Max"] = I[name]
       else
         I["#{name}Max"] = 100
-    
+
     I.meters[name] = options
-    
+
   ###*
   Shows the named meter
 
       player = GameObject
-    
+
       # creates a health meter but disables visibility
       player.meter 'health'
         show: false
-    
+
       # enables visibility for the meter named 'health'
       player.showMeter 'health'
 
   @name showMeter
   @methodOf Metered#
   @param {String} name The name of the meter to show
-  ###      
+  ###
   showMeter: (name) ->
     I.meters[name].show = true
- 
+
   ###*
   Hides the named meter
 
       player = GameObject
-    
+
       # creates a health meter
       player.meter 'health'
-    
+
       # disables visibility for the meter named 'health'
       player.hideMeter 'health'
 
   @name hideMeter
   @methodOf Metered#
   @param {String} name The name of the meter to hide
-  ###          
+  ###
   hideMeter: (name) ->
     I.meters[name].show = false
 
@@ -176,16 +176,16 @@ GameObject.Meter = (I={}, self) ->
   Toggles visibility of the named meter
 
       player = GameObject
-    
+
       # creates a health meter
       player.meter 'health'
-    
+
       # toggles visibility for the meter named 'health'
       player.toggleMeter 'health'
 
   @name toggleMeter
   @methodOf Metered#
   @param {String} name The name of the meter to toggle
-  ###    
+  ###
   toggleMeter: (name) ->
     I.meters[name].show = not I.meters[name].show

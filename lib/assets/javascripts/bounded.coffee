@@ -10,12 +10,12 @@ by default in `GameObject`.
       height: 20
       other: "stuff"
       more: "properties"
-    
+
     player.position()
     # => Uncaught TypeError: Object has no method 'position'
-    
+
     player.include(Bounded)
-    
+
     # now player has all the methods provided by this module
     player.position()
     # => {x: 10, y: 50}
@@ -30,7 +30,7 @@ Bounded module
 @param {Core} self Reference to including object
 ###
 
-Bounded = (I={}, self) ->
+window.Bounded = (I={}, self) ->
   Object.reverseMerge I,
     x: 0
     y: 0
@@ -59,7 +59,7 @@ Bounded = (I={}, self) ->
 
   ###*
   Distance between two objects. Proxies to Point.distance.
-  In order for this to work, `otherObj` must have a 
+  In order for this to work, `otherObj` must have a
   position method.
 
       player = GameObject
@@ -67,15 +67,15 @@ Bounded = (I={}, self) ->
         y: 50
         width: 10
         height: 10
-      
+
       player.include Bounded
-      
+
       enemy = GameObject
         x: 110
         y: 120
         width: 7
         height: 20
-        
+
       player.distance(enemy)
       # => 92.19544457292888
 
@@ -83,7 +83,7 @@ Bounded = (I={}, self) ->
   @methodOf Bounded#
   @see Point.distance
   @returns {Number} Distance between the two objects
-  ###  
+  ###
   distance: (otherObj) ->
     Point.distance(self.position(), otherObj.position())
 
@@ -94,9 +94,9 @@ Bounded = (I={}, self) ->
       player = Core
         x: 50
         y: 40
-    
-      player.include(Bounded)      
-    
+
+      player.include(Bounded)
+
       player.position()
       # => {x: 50, y: 40}
 
@@ -126,9 +126,9 @@ Bounded = (I={}, self) ->
         y: 6
         width: 20
         height: 20
-    
-      player.include(Bounded)  
-    
+
+      player.include(Bounded)
+
       player.collides({x: 5, y: 7, width: 20, height: 20})
       # => true
 
@@ -145,25 +145,25 @@ Bounded = (I={}, self) ->
   and increased if collision margin is negative.
 
       player = Core
-        collisionMargin: 
+        collisionMargin:
           x: -2
           y: -4
         x: 50
         y: 50
         width: 20
         height: 20
-    
+
       player.include(Bounded)
-    
+
       player.collisionBounds()
       # => {x: 38, y: 36, height: 28, width: 24}
-    
+
       player.collisionBounds(10, 10)
       # => {x: 48, y: 46, height: 28, width: 24}
 
   @name collisionBounds
   @methodOf Bounded#
-  @param {Number} xOffset the amount to shift the x position 
+  @param {Number} xOffset the amount to shift the x position
   @param {Number} yOffset the amount to shift the y position
   @returns {Object} The collision bounds
   ###
@@ -185,20 +185,20 @@ Bounded = (I={}, self) ->
         y: 6
         width: 2
         height: 2
-    
+
       player.include(Bounded)
-    
+
       player.bounds()
       # => {x: 3, y: 6, width: 2, height: 2}
-    
+
       player.bounds(7, 4)
-      # => {x: 10, y: 10, width: 2, height: 2}   
+      # => {x: 10, y: 10, width: 2, height: 2}
 
   @name bounds
   @methodOf Bounded#
-  @param {Number} xOffset the amount to shift the x position 
+  @param {Number} xOffset the amount to shift the x position
   @param {Number} yOffset the amount to shift the y position
-  ### 
+  ###
   bounds: (xOffset, yOffset) ->
     center = self.center()
 
@@ -216,15 +216,15 @@ Bounded = (I={}, self) ->
         y: 6
         width: 2
         height: 2
-    
+
       player.include(Bounded)
-    
+
       player.centeredBounds()
       # => {x: 4, y: 7, xw: 1, yw: 1}
 
   @name centeredBounds
   @methodOf Bounded#
-  ###  
+  ###
   centeredBounds: () ->
     center = self.center()
 
@@ -242,16 +242,16 @@ Bounded = (I={}, self) ->
         y: 40
         width: 10
         height: 30
-    
-      player.include(Bounded)  
-    
+
+      player.include(Bounded)
+
       player.center()
       # => {x: 30, y: 35}
 
   @name center
   @methodOf Bounded#
   @returns {Point} The middle of the calling object
-  ###  
+  ###
   center: (newCenter) ->
     self.position(newCenter)
 
@@ -264,9 +264,9 @@ Bounded = (I={}, self) ->
         x: 50
         y: 50
         other: "stuff"
-    
+
       player.include(Bounded)
-    
+
       player.circle()
       # => {radius: 5, x: 50, y: 50}
 

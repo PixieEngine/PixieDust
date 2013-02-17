@@ -5,44 +5,44 @@ GameObject's properties.
     # Health regeneration
     player = GameObject
       health: 50
-    
-    # health will approach 
+
+    # health will approach
     # 100 by 1 each update
     player.cooldown "health",
       target: 100
-    
+
     player.update(1)
-    
+
     player.I.health
     # => 51
 
     # Shoot Timeout
     player = GameObject()
-    
-    # by default the cooldown 
+
+    # by default the cooldown
     # approaches 0 by 1 each update
     player.cooldown "shootTimer"
-    
+
     player.I.shootTimer = 10 # => Pew! Pew!
-    
+
     player.update(1)
-    
+
     player.I.shootTimer # => 9
-    
+
     # Turbo Cooldown
     player = GameObject()
-    
-    # turboTimer starts at 1000 
+
+    # turboTimer starts at 1000
     # and approaches 12 by 5 each update
     player.cooldown "turboTimer",
       approachBy: 5
       value: 1000
       target: 12
-    
+
     player.I.turboTimer = 1000
-    
+
     player.update(1)
-    
+
     player.I.turboTimer # => 995
 
 @name Cooldown
@@ -51,7 +51,7 @@ GameObject's properties.
 @param {Object} I Instance variables
 @param {Core} self Reference to including object
 ###
-Cooldown = (I, self) ->
+window.Cooldown = (I, self) ->
   Object.reverseMerge I,
     cooldowns: {}
 

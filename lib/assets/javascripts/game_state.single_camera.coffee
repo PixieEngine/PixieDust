@@ -8,7 +8,7 @@ Its transform can be adjusted to view different areas and provide various camera
 @param {Object} I Instance variables
 @param {Object} self Reference to the game state
 ###
-GameState.SingleCamera = (I, self) ->
+window.GameState.SingleCamera = (I, self) ->
   # Set some default properties
   Object.reverseMerge I,
     cameraTransform: Matrix.IDENTITY
@@ -32,7 +32,7 @@ GameState.SingleCamera = (I, self) ->
       # TODO This should be triggering a camera draw
       # camera.trigger "draw", I.canvas
       # possibly even with before and after.
-      # This is where per camera effects like shake, 
+      # This is where per camera effects like shake,
       # flash and fade will come in.
 
   # No public methods

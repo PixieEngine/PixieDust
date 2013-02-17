@@ -7,7 +7,7 @@ Creates an oscillator function with the given parameters.
 @param {Number} period How fast the osciallator function repeats
 @param {Number} offset How much to offset the created oscillator function. Useful for translating between sin and cosine functions.
 ###
-Oscillator = (options={}) ->
+window.Oscillator = (options={}) ->
   {amplitude, period, offset} = options
 
   amplitude = 1 unless amplitude?

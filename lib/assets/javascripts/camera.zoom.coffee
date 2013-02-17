@@ -1,4 +1,4 @@
-Camera.Zoom = (I, self) ->
+window.Camera.Zoom = (I, self) ->
   Object.reverseMerge I,
     maxZoom: 10
     minZoom: 0.1
@@ -8,10 +8,10 @@ Camera.Zoom = (I, self) ->
     transform.scale(I.zoom, I.zoom, self.position())
 
   clampZoom = (value) ->
-    value.clamp(I.minZoom, I.maxZoom) 
+    value.clamp(I.minZoom, I.maxZoom)
 
   zoomIn: (percentage) ->
-    self.zoom clampZoom(I.zoom * (1 + percentage)) 
+    self.zoom clampZoom(I.zoom * (1 + percentage))
 
   zoomOut: (percentage) ->
     self.zoom clampZoom(I.zoom * (1 - percentage))

@@ -1,4 +1,4 @@
-GameState = (I={}) ->
+window.GameState = (I={}) ->
   Object.reverseMerge I,
     objects: []
 
@@ -11,11 +11,11 @@ GameState = (I={}) ->
 
         # you can add arbitrary entityData and
         # the engine will make it into a GameObject
-        engine.add 
+        engine.add
           x: 50
           y: 30
           color: "red"
-    
+
         player = engine.add
           class: "Player"
 

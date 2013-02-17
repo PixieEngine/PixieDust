@@ -1,4 +1,4 @@
-Engine.GameState = (I, self) ->
+window.Engine.GameState = (I, self) ->
   Object.reverseMerge I,
     currentState: GameState()
 

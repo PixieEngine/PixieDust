@@ -7,7 +7,7 @@ The <code>Selector</code> module provides methods to query the engine to find ga
 @param {Object} I Instance variables
 @param {Object} self Reference to the engine
 ###
-Engine.Selector = (I, self) ->
+window.Engine.Selector = (I, self) ->
 
   instanceMethods =
     set: (attr, value) ->
@@ -20,21 +20,21 @@ Engine.Selector = (I, self) ->
       player = engine.add
         x: 0
         y: 0
-    
+
       enemy1 = engine.add
         enemy: true
         x: 10
         y: 0
-    
+
       enemy2 = engine.add
         enemy: true
         x: 0
         y: 15
-    
+
       player2 = engine.add
         x: 0
         y: 10
-    
+
       equals engine.closest(".enemy", player.position()), enemy1
       equals engine.closest(".enemy", player2.position()), enemy2
 
@@ -55,33 +55,33 @@ Engine.Selector = (I, self) ->
 
       player = engine.add
         class: "Player"
-    
+
       enemy = engine.add
         class: "Enemy"
         speed: 5
         x: 0
-    
+
       distantEnemy = engine.add
         class "Enemy"
         x: 500
-    
+
       boss = engine.add
         class: "Enemy"
         id: "Boss"
         x: 0
-    
+
       # to select an object by id use "#anId"
       engine.find "#Boss"
       # => [boss]
-    
+
       # to select an object by class use "MyClass"
       engine.find "Enemy"
       # => [enemy, distantEnemy, boss]
-    
+
       # to select an object by properties use ".someProperty" or ".someProperty=someValue"
       engine.find ".speed=5"
       # => [enemy]
-    
+
       # You may mix and match selectors.
       engine.find "Enemy.x=0"
       # => [enemy, boss] # doesn't return distantEnemy
@@ -90,7 +90,7 @@ Engine.Selector = (I, self) ->
   @methodOf Engine#
   @param {String} selector
   @returns {Array} An array of the objects found
-  ### 
+  ###
   each: (selector, fn) ->
     self.find(selector).each (obj, index) ->
       fn(obj, index)
@@ -153,7 +153,7 @@ Object.extend Engine.Selector,
         typeMatch = (component[TYPE] == object.I.class) || !component[TYPE]
 
         if attr = component[ATTR]
-          if (value = component[ATTR_VALUE])? 
+          if (value = component[ATTR_VALUE])?
             attrMatch = (object.I[attr] == value)
           else
             attrMatch = object.I[attr]

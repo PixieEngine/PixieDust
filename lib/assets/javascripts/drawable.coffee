@@ -14,13 +14,13 @@ Autoloads the sprite specified in I.spriteName, if any.
       width: 5
       height: 5
       sprite: "my_cool_sprite"
-    
+
     engine.bind 'draw', (canvas) ->
-      player.draw(canvas) 
+      player.draw(canvas)
     # => Uncaught TypeError: Object has no method 'draw'
-    
+
     player.include(Drawable)
-    
+
     engine.bind 'draw', (canvas) ->
       player.draw(canvas)
     # => if you have a sprite named "my_cool_sprite" in your images folder
@@ -36,14 +36,14 @@ Autoloads the sprite specified in I.spriteName, if any.
 
 ###*
 Triggered every time the object should be drawn. A canvas is passed as
-the first argument. 
+the first argument.
 
     player = Core
       x: 0
       y: 10
       width: 5
       height: 5
-    
+
     player.bind "draw", (canvas) ->
       # Text will be drawn positioned relatively to the object.
       canvas.drawText
@@ -78,7 +78,7 @@ the first argument. This applies the current transform.
 @param {PowerCanvas} canvas A reference to the canvas to draw on.
 ###
 
-Drawable = (I={}, self) ->
+window.Drawable = (I={}, self) ->
   Object.reverseMerge I,
     alpha: 1
     color: "#196"
@@ -103,7 +103,7 @@ Drawable = (I={}, self) ->
       canvas.context().globalAlpha = I.alpha
 
     if sprite = I.sprite
-      if sprite.draw? 
+      if sprite.draw?
         sprite.draw(canvas, -sprite.width / 2, -sprite.height / 2)
       else
         warn?("Sprite has no draw method!")

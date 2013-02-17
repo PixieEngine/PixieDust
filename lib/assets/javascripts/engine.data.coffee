@@ -3,7 +3,7 @@ The <code>Data</code> module provides methods to store global and persistent dat
 
     engine.data.score = 0
     engine.data.score += 10
-    
+
     engine.data.score # => 10
 
 @name Data
@@ -12,7 +12,7 @@ The <code>Data</code> module provides methods to store global and persistent dat
 @param {Object} I Instance variables
 @param {Object} self Reference to the engine
 ###
-Engine.Data = (I={}, self) ->
+window.Engine.Data = (I={}, self) ->
   Object.reverseMerge I,
     data: {}
 

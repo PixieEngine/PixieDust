@@ -7,7 +7,7 @@ The <code>SaveState</code> module provides methods to save and restore the curre
 @param {Object} I Instance variables
 @param {Object} self Reference to the game state
 ###
-GameState.SaveState = (I, self) ->
+window.GameState.SaveState = (I, self) ->
   savedState = null
 
   ###*
@@ -32,9 +32,9 @@ GameState.SaveState = (I, self) ->
         if justPressed.l
           # loads the last saved state
           engine.loadState()
-    
+
         if justPressed.o
-          # removes all game objects, then reinstantiates 
+          # removes all game objects, then reinstantiates
           # them with the entityData passed in
           engine.loadState([{x: 40, y: 50, class: "Player"}, {x: 0, y: 0, class: "Enemy"}, {x: 500, y: 400, class: "Boss"}])
 
@@ -57,9 +57,9 @@ GameState.SaveState = (I, self) ->
         # bring all objects to (0, 0) for some reason
         object.I.x = 0
         object.I.y = 0
-    
+
       # reload all objects to make sure
-      # they are at (0, 0)  
+      # they are at (0, 0)
       engine.reload()
 
   @name reload

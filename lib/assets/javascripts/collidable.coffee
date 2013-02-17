@@ -1,5 +1,5 @@
 ( ->
-  Collidable = (I, self) ->
+  window.Collidable = (I, self) ->
     # Set some default properties
     Object.reverseMerge I,
       allowCollisions: ANY

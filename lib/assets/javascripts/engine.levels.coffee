@@ -7,7 +7,7 @@ This module provides methods for transitioning between levels.
 @param {Object} I Instance variables
 @param {Object} self Reference to the engine
 ###
-Engine.Levels = (I, self) ->
+window.Engine.Levels = (I, self) ->
   Object.reverseMerge I,
     levels: []
     currentLevel: -1
@@ -32,7 +32,7 @@ Engine.Levels = (I, self) ->
 
   @name nextLevel
   @methodOf Engine#
-  ###      
+  ###
   nextLevel: ->
     unless I.transitioning
       I.currentLevel += 1
@@ -49,7 +49,7 @@ Engine.Levels = (I, self) ->
 
   @name goToLevel
   @methodOf Engine#
-  ###          
+  ###
   goToLevel: (level) ->
     #TODO Handle integer levels?
     loadLevel level
@@ -61,7 +61,7 @@ Engine.Levels = (I, self) ->
 
   @name reloadLevel
   @methodOf Engine#
-  ###     
+  ###
   restartLevel: ->
     loadLevel I.currentLevelName
 

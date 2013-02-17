@@ -13,7 +13,7 @@ The <code>FPSCounter</code> module tracks and displays the framerate.
 @param {Object} I Instance variables
 @param {Object} self Reference to the engine
 ###
-Engine.FPSCounter = (I, self) ->
+window.Engine.FPSCounter = (I, self) ->
   Object.reverseMerge I,
     showFPS: true
     FPSColor: "#FFF"

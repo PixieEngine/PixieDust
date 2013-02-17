@@ -8,7 +8,7 @@ The <code>Fade</code> module provides convenience methods for accessing common E
 @param {Object} self Reference to the engine
 @see Camera.Flash
 ###
-Camera.Fade = (I, self) ->  
+window.Camera.Fade = (I, self) ->
   fadeInDefaults =
     alpha: 0
     color: 'black'
@@ -26,12 +26,12 @@ Camera.Fade = (I, self) ->
     I.flashTargetAlpha = alpha
 
   ###*
-  A convenient way to set the flash effect instance variables. This provides a shorthand for fading the screen in 
+  A convenient way to set the flash effect instance variables. This provides a shorthand for fading the screen in
   from a given color over a specified duration.
 
       engine.fadeIn()
       # => Sets the effect variables to their default state. This will the screen to go from black to transparent over the next 30 frames.
-    
+
       engine.fadeIn('blue', 50)
       # => This effect will start off blue and fade to transparent over 50 frames.
 
@@ -46,12 +46,12 @@ Camera.Fade = (I, self) ->
     configureFade(duration, color, alpha)
 
   ###*
-  A convenient way to set the flash effect instance variables. This provides a shorthand for fading 
+  A convenient way to set the flash effect instance variables. This provides a shorthand for fading
   the screen to a given color over a specified duration.
 
       camera.fadeOut()
       # => Sets the effect variables to their default state. This will the screen to fade from ransparent to black over the next 30 frames.
-      
+
       camera.fadeOut
         color: blue
         duration: 30

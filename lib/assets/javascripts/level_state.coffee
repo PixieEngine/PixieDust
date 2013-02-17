@@ -15,7 +15,7 @@ Fades in the current level and loads the map.
 @methodOf LevelState#
 @event
 ###
-LevelState = (I={}) ->
+window.LevelState = (I={}) ->
   Object.reverseMerge I,
     duration: 10
     level: 'level1'

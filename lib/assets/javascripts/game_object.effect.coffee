@@ -8,14 +8,14 @@ A collection of effects to make your game juicy.
 @param {Object} I Instance variables
 @param {Core} self Reference to including object
 ###
-GameObject.Effect = (I={}, self) ->
+window.GameObject.Effect = (I={}, self) ->
 
   ###*
   A convenient way to fade out this object over time.
 
       player = GameObject()
 
-      # Fade the player object out over the next 2 seconds. 
+      # Fade the player object out over the next 2 seconds.
       player.fadeOut 2
 
       # Fade out and then destroy

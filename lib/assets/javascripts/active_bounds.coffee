@@ -14,7 +14,7 @@ the dimensions of your game. Useful for bullet type objects.
 
     # => bullet will be removed when it
          goes outside of the game bounds.
-    
+
     bullet2 = GameObject
       x: 50
       y: 50
@@ -35,7 +35,7 @@ the dimensions of your game. Useful for bullet type objects.
 @param {Object} I Instance variables
 @param {Core} self Reference to including object
 ###
-ActiveBounds = (I={}, self) ->
+window.ActiveBounds = (I={}, self) ->
   Object.reverseMerge I,
     activeBounds: Rectangle
       x: 0

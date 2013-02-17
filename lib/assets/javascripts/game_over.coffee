@@ -22,7 +22,7 @@ Draws Game Over screen and reset instructions.
 @param {PixieCanvas} canvas
 @event
 ###
-GameOver = (I={}) ->
+window.GameOver = (I={}) ->
   self = TextScreen(I)
 
   self.bind 'update', ->

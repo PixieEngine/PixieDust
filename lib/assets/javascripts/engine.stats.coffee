@@ -7,7 +7,7 @@ The <code>Stats</code> module provides methods to query the engine to find game 
 @param {Object} I Instance variables
 @param {Object} self Reference to the engine
 ###
-Engine.Stats = (I, self) ->
+window.Engine.Stats = (I, self) ->
   measure: (objects, field, frequency=30) ->
     ; #TODO
 

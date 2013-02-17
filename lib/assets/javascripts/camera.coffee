@@ -1,6 +1,6 @@
-oldCamera = Camera
+oldCamera = Camera if Camera?
 
-Camera = (I={}) ->
+window.Camera = (I={}) ->
   Object.reverseMerge I,
     cameraBounds: Rectangle # World Coordinates
       x: 0
@@ -49,7 +49,7 @@ Camera = (I={}) ->
       I.velocity = I.velocity.add(force.scale(c))
 
   followTypes =
-    centered: (object, elapsedTime) ->              
+    centered: (object, elapsedTime) ->
       I.deadzone = Point(0, 0)
 
       focusOn(object, elapsedTime)
@@ -57,7 +57,7 @@ Camera = (I={}) ->
     topdown: (object, elapsedTime) ->
       helper = Math.max(I.screen.width, I.screen.height) / 4
 
-      I.deadzone = Point(helper, helper) 
+      I.deadzone = Point(helper, helper)
 
       focusOn(object, elapsedTime)
 

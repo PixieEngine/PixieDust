@@ -1,5 +1,5 @@
 # TODO: LOL at name
-Emitterable = (I={}, self) ->
+window.Emitterable = (I={}, self) ->
   Object.reverseMerge I,
     batchSize: 1
     emissionRate: 1

@@ -7,7 +7,7 @@ The <code>Collision</code> module provides some simple collision detection metho
 @param {Object} I Instance variables
 @param {Object} self Reference to the engine
 ###
-Engine.Collision = (I, self) ->
+window.Engine.Collision = (I, self) ->
   ###*
   Detects collisions between a bounds and the game objects.
 
@@ -22,7 +22,7 @@ Engine.Collision = (I, self) ->
       collided || (object.solid() && (object != sourceObject) && object.collides(bounds))
 
   ###*
-  Detects collisions between a bounds and the game objects. 
+  Detects collisions between a bounds and the game objects.
   Returns an array of objects colliding with the bounds provided.
 
   @name collidesWith

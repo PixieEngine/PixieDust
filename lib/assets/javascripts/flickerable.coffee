@@ -1,13 +1,13 @@
 ###*
-The `Flickerable` module provides a method to flicker a sprite between its current opacity (alpha) and a given opacity. 
+The `Flickerable` module provides a method to flicker a sprite between its current opacity (alpha) and a given opacity.
 
     player = GameObject
       alpha: 0.9
 
     player.include 'Flickerable'
 
-    # called with no arguments, flicker will toggle the player's alpha 
-    # value between 0.9 (value provided above) and 0.5 (flickerable default) 
+    # called with no arguments, flicker will toggle the player's alpha
+    # value between 0.9 (value provided above) and 0.5 (flickerable default)
     # every 0.1 second, for a total of 2 seconds
     player.flicker()
 
@@ -17,7 +17,7 @@ The `Flickerable` module provides a method to flicker a sprite between its curre
 @param {Object} I Instance variables
 @param {Core} self Reference to including object
 ###
-Flickerable = (I={}, self) ->
+window.Flickerable = (I={}, self) ->
   Object.reverseMerge I,
     flickerAlpha: 0.5
     flickerDuration: 0
@@ -30,11 +30,11 @@ Flickerable = (I={}, self) ->
     I.flickerDuration = I.flickerDuration.approach(0, elapsedTime)
 
     frequencyLength += elapsedTime
-    
+
     if I.flickerDuration > 0
       if frequencyLength >= I.flickerFrequency
         frequencyLength = 0
-        
+
         if I.alpha is I.flickerAlpha
           I.alpha = originalAlpha
         else
@@ -47,9 +47,9 @@ Flickerable = (I={}, self) ->
   instance variables by hand but the suggested way to do it is through this method.
 
       player = GameObject()
-    
+
       player.include(Flickerable)
-        
+
       player.flicker
         duration: 5
         frequency: 0.2
@@ -66,11 +66,11 @@ Flickerable = (I={}, self) ->
   @returns {GameObject} The calling object
   ###
   flicker: (options={}) ->
-    Object.reverseMerge options, 
+    Object.reverseMerge options,
       duration: 2
       frequency: 0.1
       alpha: 0.5
-    
+
     I.flickerDuration = options.duration
     I.flickerFrequency = options.frequency
     I.flickerAlpha = options.alpha

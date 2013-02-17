@@ -11,7 +11,7 @@ The Text Effect class provides a method to display moving text onscreen, fading 
 ###
 
 ###*
-Updates the position of the text based on the effect velocity. Updates the 
+Updates the position of the text based on the effect velocity. Updates the
 alpha based on the elapsed time since the effect creation.
 
 @name update
@@ -27,7 +27,7 @@ Draws text from `I.textShadow` `I.text`.
 @param {PixieCanvas} canvas
 @event
 ###
-TextEffect = (I={}) ->
+window.TextEffect = (I={}) ->
   Object.reverseMerge I,
     color: Color('green')
     duration: -1
@@ -37,33 +37,33 @@ TextEffect = (I={}) ->
     alpha: 1
     rotation: 0
     velocity: Point(0, 0)
-    
+
   self = GameObject(I)
 
-  self.bind "update", ->  
+  self.bind "update", ->
     I.rotation += I.rotationalVelocity if I.rotationalVelocity?
-  
+
     I.alpha = (1 - (I.age / I.duration)).clamp(0, 1)
-        
+
   self.unbind "draw"
-  self.bind "draw", (canvas) ->      
+  self.bind "draw", (canvas) ->
     unless I.color.channels
       I.color = Color(I.color)
-    
+
     unless I.textShadow.channels
       I.textShadow = Color(I.textShadow)
-      
+
     I.color.a = I.alpha
     I.textShadow.a = I.alpha
-    
+
     I.width = canvas.measureText(I.text)
-        
+
     canvas.font I.font
     canvas.drawText
       color: I.textShadow
       x: 1 - I.width
       y: 1
-      text: I.text    
+      text: I.text
 
     canvas.drawText
       color: I.color

@@ -1,4 +1,4 @@
-GameState.Cameras = (I, self) ->
+window.GameState.Cameras = (I, self) ->
   cameras = [Camera()]
 
   self.bind 'update', (elapsedTime) ->

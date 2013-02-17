@@ -13,7 +13,7 @@ The `Clampable` module provides helper methods to clamp object properties. This 
 @param {Object} I Instance variables
 @param {Core} self Reference to including object
 ###
-Clampable = (I={}, self) ->
+window.Clampable = (I={}, self) ->
   Object.reverseMerge I,
     clampData: {}
 
@@ -29,7 +29,7 @@ Clampable = (I={}, self) ->
         health:
           min: 0
           max: 100
-    
+
       # Score can only be positive
       player.clamp
         score:
@@ -47,11 +47,11 @@ Clampable = (I={}, self) ->
 
   @name clampToBounds
   @methodOf Clampable#
-  @param {Rectangle} [bounds] The bounds to clamp the object's position within. Defaults to the app size if none given. 
+  @param {Rectangle} [bounds] The bounds to clamp the object's position within. Defaults to the app size if none given.
   ###
   clampToBounds: (bounds) ->
     bounds ||= Rectangle x: 0, y: 0, width: App.width, height: App.height
-    
+
     self.clamp
       x:
         min: bounds.x + I.width/2

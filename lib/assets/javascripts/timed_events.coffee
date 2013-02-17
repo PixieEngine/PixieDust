@@ -7,7 +7,7 @@ TimedEvents module
 @constructor
 @param {Object} I Instance variables
 ###
-TimedEvents = (I={}, self) ->
+window.TimedEvents = (I={}, self) ->
   Object.reverseMerge I,
     everyEvents: []
     delayEvents: []
@@ -29,9 +29,9 @@ TimedEvents = (I={}, self) ->
   Execute <code>fn</code> every <code>n</code> frames.
 
       player = GameObject()
-      
+
       player.include TimedEvents
-      
+
       # doSomething is called every 4 seconds
       player.every 4, ->
         doSomething()
@@ -48,7 +48,7 @@ TimedEvents = (I={}, self) ->
       fn: fn
       period: period
       lastFired: I.age
-      
+
     ###*
   Execute a callback after a number of seconds have passed.
 

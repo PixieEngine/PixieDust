@@ -8,10 +8,10 @@ The <code>Joysticks</code> module gives the engine access to joysticks.
     # Then you need to get a controller reference
     # id = 0 for player 1, etc.
     controller = engine.controller(id)
-    
+
     # Point indicating direction primary axis is held
     direction = controller.position()
-    
+
     # Check if buttons are held
     controller.actionDown("A")
     controller.actionDown("B")
@@ -25,7 +25,7 @@ The <code>Joysticks</code> module gives the engine access to joysticks.
 @param {Object} I Instance variables
 @param {Object} self Reference to the engine
 ###
-Engine.Joysticks = (I, self) ->
+window.Engine.Joysticks = (I, self) ->
   Joysticks.init()
 
   self.bind "update", ->

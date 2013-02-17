@@ -1,4 +1,4 @@
-Camera.Shake = (I, self) ->
+window.Camera.Shake = (I, self) ->
   Object.reverseMerge I,
     shakeIntensity: 20
     shakeCooldown: 0

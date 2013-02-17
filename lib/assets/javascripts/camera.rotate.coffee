@@ -1,4 +1,4 @@
-Camera.Rotate = (I, self) ->
+window.Camera.Rotate = (I, self) ->
   Object.reverseMerge I,
     rotation: 0
 
