@@ -1,3 +1,3 @@
-#= require cornerstone
+#= require cornerstone-source
 
 #= require_tree .
