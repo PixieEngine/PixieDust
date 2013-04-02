@@ -7,24 +7,24 @@
     zSort: false
 
   ###*
-  The Engine controls the game world and manages game state. Once you 
+  The Engine controls the game world and manages game state. Once you
   set it up and let it run it pretty much takes care of itself.
 
   You can use the engine to add or remove objects from the game world.
 
-  There are several modules that can include to add additional capabilities 
+  There are several modules that can include to add additional capabilities
   to the engine.
 
-  The engine fires events that you  may bind listeners to. Event listeners 
+  The engine fires events that you  may bind listeners to. Event listeners
   may be bound with <code>engine.bind(eventName, callback)</code>
 
   @name Engine
   @constructor
-  @param {Object} I Instance variables of the engine 
+  @param {Object} I Instance variables of the engine
   ###
 
   ###*
-  Observe or modify the 
+  Observe or modify the
   entity data before it is added to the engine.
   @name beforeAdd
   @methodOf Engine#
@@ -33,7 +33,7 @@
   ###
 
   ###*
-  Observe or configure a <code>gameObject</code> that has been added 
+  Observe or configure a <code>gameObject</code> that has been added
   to the engine.
   @name afterAdd
   @methodOf Engine#
@@ -52,7 +52,7 @@
   ###
 
   ###*
-  Called after the engine completes an update. Here it is 
+  Called after the engine completes an update. Here it is
   safe to modify the game objects array.
 
   @name afterUpdate
@@ -77,7 +77,7 @@
         canvas.drawText
           text: "Go this way =>"
           x: 200
-          y: 200 
+          y: 200
 
   @name draw
   @methodOf Engine#
@@ -97,7 +97,7 @@
         canvas.drawText
           text: "HEALTH:"
           position: Point(20, 20)
-    
+
         canvas.drawText
           text: player.health()
           position: Point(50, 20)
@@ -105,7 +105,7 @@
   @name overlay
   @methodOf Engine#
   @event
-  @params {PixieCanvas} canvas A reference to the canvas to draw on. 
+  @params {PixieCanvas} canvas A reference to the canvas to draw on.
   ###
 
   Engine = (I={}) ->
@@ -144,6 +144,7 @@
 
     step = ->
       if !I.paused || frameAdvance
+        elapsedTime =
         secondsPerFrame = (1 / I.FPS)
         update(secondsPerFrame)
         I.age += 1
@@ -219,12 +220,12 @@
       Query the engine to see if it is paused.
 
           engine.pause()
-    
+
           engine.paused()
           # true
-    
+
           engine.play()
-    
+
           engine.paused()
           # false
 
