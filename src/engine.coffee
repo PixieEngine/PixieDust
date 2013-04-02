@@ -144,7 +144,7 @@
 
     step = ->
       if !I.paused || frameAdvance
-        elapsedTime =
+         =
         secondsPerFrame = (1 / I.FPS)
         update(secondsPerFrame)
         I.age += 1
