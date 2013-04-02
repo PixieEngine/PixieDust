@@ -105,7 +105,6 @@
     Object.reverseMerge I,
       FPS: 60
       paused: false
-      showFPS: false
 
     frameAdvance = false
 
