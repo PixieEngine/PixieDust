@@ -197,7 +197,7 @@ test "#collides", ->
 
 test "Integration", ->
   engine = Engine
-    fps: 30
+    FPS: 30
 
   object = engine.add
     class: "GameObject"
