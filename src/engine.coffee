@@ -146,7 +146,7 @@
       if !I.paused || frameAdvance
         elapsedTime = (1 / I.FPS)
         update(elapsedTime)
-        I.age += 1
+        I.age += elapsedTime
 
       draw()
 
