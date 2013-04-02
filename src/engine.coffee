@@ -103,8 +103,7 @@
 
   Engine = (I={}) ->
     Object.reverseMerge I,
-      FPS:
-      age: 0
+      FPS: 60
       paused: false
       showFPS: false
       zSort: false
