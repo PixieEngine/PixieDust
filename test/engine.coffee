@@ -196,7 +196,8 @@ test "#collides", ->
   engine.collides(Rectangle(0, 0, 10, 10), null)
 
 test "Integration", ->
-  engine = Engine()
+  engine = Engine
+    fps: 30
 
   object = engine.add
     class: "GameObject"
