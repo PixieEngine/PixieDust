@@ -7,11 +7,12 @@ GameObject's properties.
       health: 50
     
     # health will approach 
-    # 100 by 1 each update
+    # 100 by 1 every second
     player.cooldown "health",
       target: 100
     
-    player.update(1)
+    elapsedTime = 1
+    player.update(elapsedTime)
     
     player.I.health
     # => 51
@@ -20,12 +21,12 @@ GameObject's properties.
     player = GameObject()
     
     # by default the cooldown 
-    # approaches 0 by 1 each update
+    # approaches 0 by 1 each second
     player.cooldown "shootTimer"
     
     player.I.shootTimer = 10 # => Pew! Pew!
     
-    player.update(1)
+    player.update(elapsedTime)
     
     player.I.shootTimer # => 9
     
@@ -33,7 +34,7 @@ GameObject's properties.
     player = GameObject()
     
     # turboTimer starts at 1000 
-    # and approaches 12 by 5 each update
+    # and approaches 12 by 5 each second
     player.cooldown "turboTimer",
       approachBy: 5
       value: 1000
@@ -41,7 +42,7 @@ GameObject's properties.
     
     player.I.turboTimer = 1000
     
-    player.update(1)
+    player.update(elapsedTime)
     
     player.I.turboTimer # => 995
 
