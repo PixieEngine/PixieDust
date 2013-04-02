@@ -106,7 +106,6 @@
       FPS: 60
       paused: false
       showFPS: false
-      zSort: true
 
     frameAdvance = false
 
