@@ -1,10 +1,4 @@
 ( ->
-  defaults =
-    FPS: 30
-    age: 0
-    paused: false
-    showFPS: false
-    zSort: false
 
   ###*
   The Engine controls the game world and manages game state. Once you
