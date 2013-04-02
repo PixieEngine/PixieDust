@@ -145,7 +145,7 @@
     step = ->
       if !I.paused || frameAdvance
         elapsedTime = (1 / I.FPS)
-        update(secondsPerFrame)
+        update(elapsedTime)
         I.age += 1
 
       draw()
