@@ -27,6 +27,11 @@ test "should be able to get velocity", ->
 
   ok object.velocity()
 
+test "should be able to get velocity", ->
+  object = GameObject()
+
+  ok object.velocity()
+
 # TODO fix me
 #test "should increase velocity according to acceleration", ->
 #  particle = GameObject
