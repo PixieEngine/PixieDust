@@ -1,7 +1,7 @@
 ###*
 The Sprite class provides a way to load images for use in games.
 
-By default, images are loaded asynchronously. A proxy object is 
+By default, images are loaded asynchronously. A proxy object is
 returned immediately. Even though it has a draw method it will not
 draw anything to the screen until the image has been loaded.
 
@@ -17,6 +17,7 @@ draw anything to the screen until the image has been loaded.
     update: ->
     width: null
     height: null
+    image: null
 
   # Cache loaded images
   spriteCache = {}
@@ -50,7 +51,7 @@ draw anything to the screen until the image has been loaded.
       )
 
     ###*
-    Draw this sprite on the given canvas tiled to the x, y, 
+    Draw this sprite on the given canvas tiled to the x, y,
     width, and height dimensions specified.
 
     @name fill
@@ -61,13 +62,14 @@ draw anything to the screen until the image has been loaded.
     @param {Number} width How far to tile the sprite on the x-axis
     @param {Number} height How far to tile the sprite on the y-axis
     @param {String} repeat Repeat options. Can be `repeat-x`, `repeat-y`, `no-repeat`, or `repeat`. Defaults to `repeat`
-    ###      
+    ###
     fill: (canvas, x, y, width, height, repeat="repeat") ->
       pattern = canvas.createPattern(image, repeat)
       canvas.drawRect({x, y, width, height, color: pattern})
 
     width: width
     height: height
+    image: image
 
   ###*
   Loads all sprites from a sprite sheet found in
@@ -177,4 +179,3 @@ draw anything to the screen until the image has been loaded.
 
   (exports ? this)["Sprite"] = Sprite
 )()
-
