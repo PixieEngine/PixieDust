@@ -22,15 +22,17 @@ test "should not exceed max speed", ->
 
   ok particle.I.velocity.magnitude() <= particle.I.maxSpeed, "magnitude of the velocity should not exceed maxSpeed"
 
-# TODO fix me  
+test "should be able "
+
+# TODO fix me
 #test "should increase velocity according to acceleration", ->
 #  particle = GameObject
 #    velocity: Point(7, 4)
 #    acceleration: Point(1, -0.3)
-#    
+#
 #  4.times ->
 #    particle.update()
-#    
+#
 #  equals particle.I.velocity.x, 11
 #  equals particle.I.velocity.y, 2.8
 
