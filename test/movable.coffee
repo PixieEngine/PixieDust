@@ -32,7 +32,6 @@ test "should be able to get acceleration", ->
 
   ok object.acceleration()
 
-# TODO fix me
 test "should increase velocity according to acceleration", ->
   particle = GameObject
     velocity: Point(7, 4)
