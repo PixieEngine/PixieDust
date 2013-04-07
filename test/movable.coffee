@@ -30,7 +30,7 @@ test "should be able to get velocity", ->
 test "should be able to get acceleration", ->
   object = GameObject()
 
-  ok object.velocity()
+  ok object.acceleration()
 
 # TODO fix me
 #test "should increase velocity according to acceleration", ->
