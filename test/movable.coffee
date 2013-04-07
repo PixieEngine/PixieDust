@@ -38,7 +38,7 @@ test "should be able to get acceleration", ->
 #    velocity: Point(7, 4)
 #    acceleration: Point(1, -0.3)
 #
-#    particle.update()
+#  particle.update(1)
 #
 #  equals particle.I.velocity.x, 11
 #  equals particle.I.velocity.y, 2.8
