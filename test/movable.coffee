@@ -40,7 +40,7 @@ test "should increase velocity according to acceleration", ->
   60.times ->
     particle.update(1/60)
 
-  equals particle.I.velocity.x, 11
-  equals particle.I.velocity.y,
+  equals particle.I.velocity.x, 0
+  equals particle.I.velocity.y, 30
 
 module()
