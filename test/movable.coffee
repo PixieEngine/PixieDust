@@ -25,6 +25,8 @@ test "should not exceed max speed", ->
 test "should be able to get velocity", ->
   object = GameObject
 
+  ok object.velocity()
+
 # TODO fix me
 #test "should increase velocity according to acceleration", ->
 #  particle = GameObject
