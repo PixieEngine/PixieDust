@@ -27,7 +27,7 @@ test "should be able to get velocity", ->
 
   ok object.velocity()
 
-test "should be able to get velocity", ->
+test "should be able to get acceleration", ->
   object = GameObject()
 
   ok object.velocity()
