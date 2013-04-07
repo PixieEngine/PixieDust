@@ -6770,11 +6770,12 @@ GameObject's properties.
       health: 50
     
     # health will approach 
-    # 100 by 1 each update
+    # 100 by 1 every second
     player.cooldown "health",
       target: 100
     
-    player.update(1)
+    elapsedTime = 1
+    player.update(elapsedTime)
     
     player.I.health
     # => 51
@@ -6783,12 +6784,12 @@ GameObject's properties.
     player = GameObject()
     
     # by default the cooldown 
-    # approaches 0 by 1 each update
+    # approaches 0 by 1 each second
     player.cooldown "shootTimer"
     
     player.I.shootTimer = 10 # => Pew! Pew!
     
-    player.update(1)
+    player.update(elapsedTime)
     
     player.I.shootTimer # => 9
     
@@ -6796,7 +6797,7 @@ GameObject's properties.
     player = GameObject()
     
     # turboTimer starts at 1000 
-    # and approaches 12 by 5 each update
+    # and approaches 12 by 5 each second
     player.cooldown "turboTimer",
       approachBy: 5
       value: 1000
@@ -6804,7 +6805,7 @@ GameObject's properties.
     
     player.I.turboTimer = 1000
     
-    player.update(1)
+    player.update(elapsedTime)
     
     player.I.turboTimer # => 995
 
@@ -7480,24 +7481,16 @@ Emitterable = function(I, self) {
 
 
 (function() {
-  var Engine, defaults;
-  defaults = {
-    FPS: 30,
-    age: 0,
-    paused: false,
-    showFPS: false,
-    zSort: false
-  };
   /**
-  The Engine controls the game world and manages game state. Once you 
+  The Engine controls the game world and manages game state. Once you
   set it up and let it run it pretty much takes care of itself.
   
   You can use the engine to add or remove objects from the game world.
   
-  There are several modules that can include to add additional capabilities 
+  There are several modules that can include to add additional capabilities
   to the engine.
   
-  The engine fires events that you  may bind listeners to. Event listeners 
+  The engine fires events that you  may bind listeners to. Event listeners
   may be bound with <code>engine.bind(eventName, callback)</code>
   
   @name Engine
@@ -7505,7 +7498,7 @@ Emitterable = function(I, self) {
   @param {Object} I Instance variables of the engine
   */
   /**
-  Observe or modify the 
+  Observe or modify the
   entity data before it is added to the engine.
   @name beforeAdd
   @methodOf Engine#
@@ -7513,7 +7506,7 @@ Emitterable = function(I, self) {
   @param {Object} entityData
   */
   /**
-  Observe or configure a <code>gameObject</code> that has been added 
+  Observe or configure a <code>gameObject</code> that has been added
   to the engine.
   @name afterAdd
   @methodOf Engine#
@@ -7530,7 +7523,7 @@ Emitterable = function(I, self) {
   @param {Number} elapsedTime The time in seconds that has elapsed since the last update.
   */
   /**
-  Called after the engine completes an update. Here it is 
+  Called after the engine completes an update. Here it is
   safe to modify the game objects array.
   
   @name afterUpdate
@@ -7553,7 +7546,7 @@ Emitterable = function(I, self) {
         canvas.drawText
           text: "Go this way =>"
           x: 200
-          y: 200 
+          y: 200
   
   @name draw
   @methodOf Engine#
@@ -7572,7 +7565,7 @@ Emitterable = function(I, self) {
         canvas.drawText
           text: "HEALTH:"
           position: Point(20, 20)
-    
+  
         canvas.drawText
           text: player.health()
           position: Point(50, 20)
@@ -7582,10 +7575,14 @@ Emitterable = function(I, self) {
   @event
   @params {PixieCanvas} canvas A reference to the canvas to draw on.
   */
+  var Engine;
   Engine = function(I) {
     var animLoop, draw, frameAdvance, lastStepTime, running, self, startTime, step, update;
     if (I == null) I = {};
-    Object.reverseMerge(I, defaults);
+    Object.reverseMerge(I, {
+      FPS: 60,
+      paused: false
+    });
     frameAdvance = false;
     running = false;
     startTime = +new Date();
@@ -7615,11 +7612,10 @@ Emitterable = function(I, self) {
       return self.trigger("overlay", canvas);
     };
     step = function() {
-      var secondsPerFrame;
+      var elapsedTime;
       if (!I.paused || frameAdvance) {
-        secondsPerFrame = 1 / I.FPS;
-        update(secondsPerFrame);
-        I.age += 1;
+        elapsedTime = 1 / I.FPS;
+        update(elapsedTime);
       }
       return draw();
     };
@@ -7694,12 +7690,12 @@ Emitterable = function(I, self) {
       Query the engine to see if it is paused.
       
           engine.pause()
-          
+      
           engine.paused()
           # true
-          
+      
           engine.play()
-          
+      
           engine.paused()
           # false
       
@@ -7725,6 +7721,7 @@ Emitterable = function(I, self) {
       update: update,
       draw: draw
     });
+    self.include(Ageable);
     Engine.defaultModules.each(function(moduleName) {
       var fullModuleName;
       fullModuleName = "Engine." + moduleName;
@@ -9558,7 +9555,7 @@ Rotatable = function(I, self) {
 /**
 The Sprite class provides a way to load images for use in games.
 
-By default, images are loaded asynchronously. A proxy object is 
+By default, images are loaded asynchronously. A proxy object is
 returned immediately. Even though it has a draw method it will not
 draw anything to the screen until the image has been loaded.
 
@@ -9574,7 +9571,8 @@ draw anything to the screen until the image has been loaded.
       frame: function() {},
       update: function() {},
       width: null,
-      height: null
+      height: null,
+      image: null
     };
   };
   spriteCache = {};
@@ -9597,7 +9595,7 @@ draw anything to the screen until the image has been loaded.
         return canvas.drawImage(image, sourceX, sourceY, width, height, x, y, width, height);
       },
       /**
-      Draw this sprite on the given canvas tiled to the x, y, 
+      Draw this sprite on the given canvas tiled to the x, y,
       width, and height dimensions specified.
       
       @name fill
@@ -9622,7 +9620,8 @@ draw anything to the screen until the image has been loaded.
         });
       },
       width: width,
-      height: height
+      height: height,
+      image: image
     };
   };
   /**
