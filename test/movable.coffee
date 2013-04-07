@@ -37,6 +37,7 @@ test "should increase velocity according to acceleration", ->
     velocity: Point(7, 4)
     acceleration: Point(1, -0.3)
 
+
   particle.update(4)
 
   equals particle.I.velocity.x, 11
