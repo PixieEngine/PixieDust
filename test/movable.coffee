@@ -35,7 +35,7 @@ test "should be able to get acceleration", ->
 test "should increase velocity according to acceleration", ->
   particle = GameObject
     velocity: Point(7, 4)
-    acceleration: Point(1, -0.3)
+    acceleration: Point(0, -0.3)
 
   60.times ->
     particle.update(1/60)
