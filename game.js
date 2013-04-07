@@ -7143,13 +7143,13 @@ Autoloads the sprite specified in I.spriteName, if any.
       width: 5
       height: 5
       sprite: "my_cool_sprite"
-    
+
     engine.bind 'draw', (canvas) ->
-      player.draw(canvas) 
+      player.draw(canvas)
     # => Uncaught TypeError: Object has no method 'draw'
-    
+
     player.include(Drawable)
-    
+
     engine.bind 'draw', (canvas) ->
       player.draw(canvas)
     # => if you have a sprite named "my_cool_sprite" in your images folder
@@ -7164,14 +7164,14 @@ Autoloads the sprite specified in I.spriteName, if any.
 */
 /**
 Triggered every time the object should be drawn. A canvas is passed as
-the first argument. 
+the first argument.
 
     player = Core
       x: 0
       y: 10
       width: 5
       height: 5
-    
+
     player.bind "draw", (canvas) ->
       # Text will be drawn positioned relatively to the object.
       canvas.drawText
@@ -7206,7 +7206,7 @@ the first argument. This applies the current transform.
 var Drawable;
 
 Drawable = function(I, self) {
-  var setSizeCallback, _ref;
+  var _ref;
   if (I == null) I = {};
   Object.reverseMerge(I, {
     alpha: 1,
@@ -7216,15 +7216,11 @@ Drawable = function(I, self) {
     scaleY: 1,
     zIndex: 0
   });
-  setSizeCallback = function(sprite) {
-    I.width = sprite.width;
-    return I.height = sprite.height;
-  };
   if ((_ref = I.sprite) != null ? typeof _ref.isString === "function" ? _ref.isString() : void 0 : void 0) {
     if (I.sprite.indexOf("data:") === 0) {
-      I.sprite = Sprite.fromURL(I.sprite, setSizeCallback);
+      I.sprite = Sprite.fromURL(I.sprite);
     } else {
-      I.sprite = Sprite.loadByName(I.sprite, setSizeCallback);
+      I.sprite = Sprite.loadByName(I.sprite);
     }
   }
   self.bind('draw.Drawable', function(canvas) {
@@ -7300,8 +7296,6 @@ Drawable = function(I, self) {
     }
   };
 };
-
-Drawable.setSizeCallback = function(sprite) {};
 
 var DustEmitter, DustParticle;
 
