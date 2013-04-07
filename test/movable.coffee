@@ -23,7 +23,7 @@ test "should not exceed max speed", ->
   ok particle.I.velocity.magnitude() <= particle.I.maxSpeed, "magnitude of the velocity should not exceed maxSpeed"
 
 test "should be able to get velocity", ->
-  object = GameObject
+  object = GameObject()
 
   ok object.velocity()
 
