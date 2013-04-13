@@ -49,7 +49,7 @@ Camera = (I={}) ->
       I.velocity = I.velocity.add(force.scale(c))
 
   followTypes =
-    centered: (object, elapsedTime) ->              
+    centered: (object, elapsedTime) ->
       I.deadzone = Point(0, 0)
 
       focusOn(object, elapsedTime)
@@ -57,7 +57,7 @@ Camera = (I={}) ->
     topdown: (object, elapsedTime) ->
       helper = Math.max(I.screen.width, I.screen.height) / 4
 
-      I.deadzone = Point(helper, helper) 
+      I.deadzone = Point(helper, helper)
 
       focusOn(object, elapsedTime)
 
@@ -80,6 +80,9 @@ Camera = (I={}) ->
     transformFilterChain: (fn) ->
       transformFilters.push fn
 
+    screenToWorld: (point) ->
+      self.transform().inverse().transformPoint(point)
+
   self.attrAccessor "transform"
 
   self.bind "afterUpdate", (elapsedTime) ->
@@ -90,7 +93,7 @@ Camera = (I={}) ->
     I.x = I.x.clamp(I.cameraBounds.left + I.screen.width/2, I.cameraBounds.right - I.screen.width/2)
     I.y = I.y.clamp(I.cameraBounds.top + I.screen.height/2, I.cameraBounds.bottom - I.screen.height/2)
 
-    I.transform = Matrix.translate(-I.x, -I.y)
+    I.transform = Matrix.translate(I.screen.width/2 - I.x.floor(), I.screen.height/2 - I.y.floor())
 
   self.bind "draw", (canvas, objects) ->
     # Move to correct screen coordinates
@@ -100,10 +103,9 @@ Camera = (I={}) ->
       objects = objectFilters.pipeline(objects)
       transform = transformFilters.pipeline(self.transform().copy())
 
-      canvas.withTransform Matrix.translation(I.screen.width/2, I.screen.height/2), (canvas) ->
-        canvas.withTransform transform, (canvas) ->
-          self.trigger "beforeDraw", canvas
-          objects.invoke "draw", canvas
+      canvas.withTransform transform, (canvas) ->
+        self.trigger "beforeDraw", canvas
+        objects.invoke "draw", canvas
 
       self.trigger 'flash', canvas
 
