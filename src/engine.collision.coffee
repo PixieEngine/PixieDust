@@ -17,12 +17,12 @@ Engine.Collision = (I, self) ->
   @param [sourceObject] An object to exclude from the results.
   @returns {Boolean} true if the bounds object collides with any of the game objects, false otherwise.
   ###
-  collides: (bounds, sourceObject) ->
-    self.objects().inject false, (collided, object) ->
-      collided || (object.solid() && (object != sourceObject) && object.collides(bounds))
+  collides: (bounds, sourceObject, selector=".solid") ->
+    self.find(selector).inject false, (collided, object) ->
+      collided or (object != sourceObject) and object.collides(bounds)
 
   ###*
-  Detects collisions between a bounds and the game objects. 
+  Detects collisions between a bounds and the game objects.
   Returns an array of objects colliding with the bounds provided.
 
   @name collidesWith
@@ -31,15 +31,9 @@ Engine.Collision = (I, self) ->
   @param [sourceObject] An object to exclude from the results.
   @returns {Array} An array of objects that collide with the given bounds.
   ###
-  collidesWith: (bounds, sourceObject) ->
-    collided = []
-
-    self.objects().each (object) ->
-      return unless object.solid()
-      if object != sourceObject && object.collides(bounds)
-        collided.push(object)
-
-    return collided if collided.length
+  collidesWith: (bounds, sourceObject, selector=".solid") ->
+    self.find(selector).select (object) ->
+      object != sourceObject and object.collides(bounds)
 
   ###*
   Detects collisions between a ray and the game objects.
@@ -49,10 +43,13 @@ Engine.Collision = (I, self) ->
   @param source The origin point
   @param direction A point representing the direction of the ray
   @param [sourceObject] An object to exclude from the results.
+  @param [selector] A selector to choos which objects in the engine to collide with
   ###
-  rayCollides: (source, direction, sourceObject) ->
-    hits = self.objects().map (object) ->
-      hit = object.solid() && (object != sourceObject) && Collision.rayRectangle(source, direction, object.centeredBounds())
+  rayCollides: ({source, direction, sourceObject, selector}) ->
+    selector ?= ""
+
+    hits = self.find(selector).map (object) ->
+      hit = (object != sourceObject) and Collision.rayRectangle(source, direction, object.centeredBounds())
       hit.object = object if hit
 
       hit
@@ -66,3 +63,15 @@ Engine.Collision = (I, self) ->
         nearestHit = hit
 
     nearestHit
+
+  # TODO Allow specification of collision type (i.e. circular)
+  objectsUnderPoint: (point, selector="") ->
+    bounds = {
+      x: point.x
+      y: point.y
+      width: 0
+      height: 0
+    }
+
+    self.find(selector).select (object) ->
+      object.collides(bounds)
