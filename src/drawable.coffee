@@ -6,7 +6,7 @@ Binds a default draw listener to draw a rectangle or a sprite, if one exists.
 
 Binds a step listener to update the transform of the object.
 
-Autoloads the sprite specified in I.spriteName, if any.
+Autoloads the sprite specified in I.sprite, if any.
 
     player = Core
       x: 15
@@ -87,18 +87,16 @@ Drawable = (I={}, self) ->
     scaleY: 1
     zIndex: 0
 
-  if I.sprite?.isString?()
-    if I.sprite.indexOf("data:") is 0
-      I.sprite = Sprite.fromURL(I.sprite)
-    else
-      I.sprite = Sprite.loadByName(I.sprite)
+  cachedSprite = null
+
+  self.unbind ".Drawable"
 
   self.bind 'draw.Drawable', (canvas) ->
     if I.alpha? and I.alpha != 1
       previousAlpha = canvas.context().globalAlpha
       canvas.context().globalAlpha = I.alpha
 
-    if sprite = I.sprite
+    if sprite = self.sprite()
       if sprite.draw?
         sprite.draw(canvas, -sprite.width / 2, -sprite.height / 2)
       else
@@ -140,6 +138,13 @@ Drawable = (I={}, self) ->
     self.trigger 'afterTransform', canvas
 
     return self
+
+  sprite: (newSprite) ->
+    if newSprite?
+      cachedSprite = newSprite
+    else
+      if I.sprite
+        Sprite.loadByName(I.sprite)
 
   ###*
   Returns the current transform, with translation, rotation, and flipping applied.
