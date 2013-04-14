@@ -3789,6 +3789,9 @@ Camera = function(I) {
     },
     transformFilterChain: function(fn) {
       return transformFilters.push(fn);
+    },
+    screenToWorld: function(point) {
+      return self.transform().inverse().transformPoint(point);
     }
   });
   self.attrAccessor("transform");
@@ -3796,7 +3799,7 @@ Camera = function(I) {
     if (currentObject) followTypes[currentType](currentObject, elapsedTime);
     I.x = I.x.clamp(I.cameraBounds.left + I.screen.width / 2, I.cameraBounds.right - I.screen.width / 2);
     I.y = I.y.clamp(I.cameraBounds.top + I.screen.height / 2, I.cameraBounds.bottom - I.screen.height / 2);
-    return I.transform = Matrix.translate(-I.x, -I.y);
+    return I.transform = Matrix.translate(I.screen.width / 2 - I.x.floor(), I.screen.height / 2 - I.y.floor());
   });
   self.bind("draw", function(canvas, objects) {
     return canvas.withTransform(Matrix.translate(I.screen.x, I.screen.y), function(canvas) {
@@ -3804,11 +3807,9 @@ Camera = function(I) {
       canvas.clip(0, 0, I.screen.width, I.screen.height);
       objects = objectFilters.pipeline(objects);
       transform = transformFilters.pipeline(self.transform().copy());
-      canvas.withTransform(Matrix.translation(I.screen.width / 2, I.screen.height / 2), function(canvas) {
-        return canvas.withTransform(transform, function(canvas) {
-          self.trigger("beforeDraw", canvas);
-          return objects.invoke("draw", canvas);
-        });
+      canvas.withTransform(transform, function(canvas) {
+        self.trigger("beforeDraw", canvas);
+        return objects.invoke("draw", canvas);
       });
       return self.trigger('flash', canvas);
     });
@@ -6165,7 +6166,7 @@ Binds a default draw listener to draw a rectangle or a sprite, if one exists.
 
 Binds a step listener to update the transform of the object.
 
-Autoloads the sprite specified in I.spriteName, if any.
+Autoloads the sprite specified in I.sprite, if any.
 
     player = Core
       x: 15
@@ -6236,7 +6237,7 @@ the first argument. This applies the current transform.
 var Drawable;
 
 Drawable = function(I, self) {
-  var _ref;
+  var cachedSprite;
   if (I == null) I = {};
   Object.reverseMerge(I, {
     alpha: 1,
@@ -6246,20 +6247,15 @@ Drawable = function(I, self) {
     scaleY: 1,
     zIndex: 0
   });
-  if ((_ref = I.sprite) != null ? typeof _ref.isString === "function" ? _ref.isString() : void 0 : void 0) {
-    if (I.sprite.indexOf("data:") === 0) {
-      I.sprite = Sprite.fromURL(I.sprite);
-    } else {
-      I.sprite = Sprite.loadByName(I.sprite);
-    }
-  }
+  cachedSprite = null;
+  self.unbind(".Drawable");
   self.bind('draw.Drawable', function(canvas) {
     var previousAlpha, sprite;
     if ((I.alpha != null) && I.alpha !== 1) {
       previousAlpha = canvas.context().globalAlpha;
       canvas.context().globalAlpha = I.alpha;
     }
-    if (sprite = I.sprite) {
+    if (sprite = self.sprite()) {
       if (sprite.draw != null) {
         sprite.draw(canvas, -sprite.width / 2, -sprite.height / 2);
       } else {
@@ -6305,6 +6301,13 @@ Drawable = function(I, self) {
       });
       self.trigger('afterTransform', canvas);
       return self;
+    },
+    sprite: function(newSprite) {
+      if (newSprite != null) {
+        return cachedSprite = newSprite;
+      } else {
+        if (I.sprite) return Sprite.loadByName(I.sprite);
+      }
     },
     /**
     Returns the current transform, with translation, rotation, and flipping applied.
@@ -6781,13 +6784,14 @@ Engine.Collision = function(I, self) {
     @param [sourceObject] An object to exclude from the results.
     @returns {Boolean} true if the bounds object collides with any of the game objects, false otherwise.
     */
-    collides: function(bounds, sourceObject) {
-      return self.objects().inject(false, function(collided, object) {
-        return collided || (object.solid() && (object !== sourceObject) && object.collides(bounds));
+    collides: function(bounds, sourceObject, selector) {
+      if (selector == null) selector = ".solid";
+      return self.find(selector).inject(false, function(collided, object) {
+        return collided || (object !== sourceObject) && object.collides(bounds);
       });
     },
     /**
-    Detects collisions between a bounds and the game objects. 
+    Detects collisions between a bounds and the game objects.
     Returns an array of objects colliding with the bounds provided.
     
     @name collidesWith
@@ -6796,16 +6800,11 @@ Engine.Collision = function(I, self) {
     @param [sourceObject] An object to exclude from the results.
     @returns {Array} An array of objects that collide with the given bounds.
     */
-    collidesWith: function(bounds, sourceObject) {
-      var collided;
-      collided = [];
-      self.objects().each(function(object) {
-        if (!object.solid()) return;
-        if (object !== sourceObject && object.collides(bounds)) {
-          return collided.push(object);
-        }
+    collidesWith: function(bounds, sourceObject, selector) {
+      if (selector == null) selector = ".solid";
+      return self.find(selector).select(function(object) {
+        return object !== sourceObject && object.collides(bounds);
       });
-      if (collided.length) return collided;
     },
     /**
     Detects collisions between a ray and the game objects.
@@ -6815,12 +6814,15 @@ Engine.Collision = function(I, self) {
     @param source The origin point
     @param direction A point representing the direction of the ray
     @param [sourceObject] An object to exclude from the results.
+    @param [selector] A selector to choos which objects in the engine to collide with
     */
-    rayCollides: function(source, direction, sourceObject) {
-      var hits, nearestDistance, nearestHit;
-      hits = self.objects().map(function(object) {
+    rayCollides: function(_arg) {
+      var direction, hits, nearestDistance, nearestHit, selector, source, sourceObject;
+      source = _arg.source, direction = _arg.direction, sourceObject = _arg.sourceObject, selector = _arg.selector;
+      if (selector == null) selector = "";
+      hits = self.find(selector).map(function(object) {
         var hit;
-        hit = object.solid() && (object !== sourceObject) && Collision.rayRectangle(source, direction, object.centeredBounds());
+        hit = (object !== sourceObject) && Collision.rayRectangle(source, direction, object.centeredBounds());
         if (hit) hit.object = object;
         return hit;
       });
@@ -6834,6 +6836,19 @@ Engine.Collision = function(I, self) {
         }
       });
       return nearestHit;
+    },
+    objectsUnderPoint: function(point, selector) {
+      var bounds;
+      if (selector == null) selector = "";
+      bounds = {
+        x: point.x,
+        y: point.y,
+        width: 0,
+        height: 0
+      };
+      return self.find(selector).select(function(object) {
+        return object.collides(bounds);
+      });
     }
   };
 };
