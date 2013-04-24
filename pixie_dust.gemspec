@@ -8,8 +8,12 @@ Gem::Specification.new do |spec|
   spec.version       = PixieDust::VERSION
   spec.authors       = ["Daniel Moore"]
   spec.email         = ["yahivin@gmail.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
+  spec.description   = %q{
+    Amazing libraries for developing games.
+    Defines the main PixieEngine GameObject and includes mixins to easily augment their behavior.
+  }
+
+  spec.summary       = %q{Amazing libraries for developing games}
   spec.homepage      = ""
   spec.license       = "MIT"
 
