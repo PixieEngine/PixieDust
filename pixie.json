@@ -8,7 +8,7 @@
   },
   "directories": {
     "lib": "lib",
-    "source": "src",
+    "source": "source",
     "test": "test"
   },
   "autosave": true
