@@ -18,7 +18,7 @@ Camera = (I={}) ->
     x: App.width/2 # World Coordinates
     y: App.height/2 # World Coordinates
     velocity: Point.ZERO
-    maxSpeed: 25
+    maxSpeed: 750
     t90: 2 # Time in seconds for camera to move 90% of the way to the target
 
   currentType = "centered"
@@ -116,7 +116,7 @@ Camera = (I={}) ->
 
       objects.invoke "trigger", "overlay", canvas
 
-  self.include "Bounded"
+  self.include "Ageable", "Bounded"
 
   # The order of theses includes is important for
   # the way in wich they modify the camera view transform
@@ -126,6 +126,8 @@ Camera = (I={}) ->
 
   return self
 
+Object.extend Camera, oldCamera
+
 Camera.defaultModules = [
   "ZSort"
   "Zoom"
@@ -133,6 +135,5 @@ Camera.defaultModules = [
   "Shake"
   "Flash"
   "Fade"
+  "Transition"
 ]
-
-Object.extend Camera, oldCamera
