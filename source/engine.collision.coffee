@@ -19,7 +19,7 @@ Engine.Collision = (I, self) ->
   ###
   collides: (bounds, sourceObject, selector=".solid") ->
     self.find(selector).inject false, (collided, object) ->
-      collided or (object != sourceObject) and object.collides(bounds)
+      collided or (object != sourceObject) and object.collides(bounds) and object
 
   ###*
   Detects collisions between a bounds and the game objects.
