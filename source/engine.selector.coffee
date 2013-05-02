@@ -163,5 +163,3 @@ Object.extend Engine.Selector,
         return true if idMatch && typeMatch && attrMatch
 
       return false
-
-y
